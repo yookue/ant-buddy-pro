@@ -35,21 +35,21 @@ export default defineConfig({
             null,
             {
                 title: 'GitHub',
-                path: `https://github.com${globalSettings?.rootContext}`,
+                path: `https://github.com/yookue${globalSettings?.rootContext}`,
             }
         ],
         'zh-CN': [
             null,
             {
                 title: 'GitHub',
-                path: `https://github.com${globalSettings?.rootContext}`,
+                path: `https://github.com/yookue${globalSettings?.rootContext}`,
             }
         ],
         'zh-TW': [
             null,
             {
                 title: 'GitHub',
-                path: `https://github.com${globalSettings?.rootContext}`,
+                path: `https://github.com/yookue${globalSettings?.rootContext}`,
             }
         ]
     },
