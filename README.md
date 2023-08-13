@@ -31,8 +31,9 @@ Enjoy your journey in coding your projects with ant-buddy-pro. ✌️
 
 ## License
 
-This code is under the [MIT](https://mit-license.org/)
+This project is under the [MIT](https://mit-license.org/) License (MIT)
 
 ## Website
 
 - Yookue: https://yookue.com
+- GitHub pages: https://yookue.github.io/ant-buddy-pro
