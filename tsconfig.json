@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "declaration": true,
+        "esModuleInterop": true,
+        "jsx": "react-jsx",
+        "moduleResolution": "node",
+        "target": "es6",
+        "lib": ["dom", "es2017"],
+        "skipLibCheck": true,
+        "strict": true,
+        "paths": {
+            "@@/*": [
+                "src/.umi/*"
+            ],
+            "@yookue/ant-buddy-pro": [
+                "src"
+            ],
+            "@yookue/ant-buddy-pro/*": [
+                "src/*",
+                "*"
+            ]
+        }
+    },
+    "include": [
+        ".dumi/**/*",
+        ".umirc.ts",
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "docs-dist",
+    ]
+}
