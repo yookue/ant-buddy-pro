@@ -20,9 +20,8 @@ export default () => {
             links={[
                 {
                     key: 'ant-buddy-pro',
-                    title: 'Ant Buddy Pro',
+                    text: 'Ant Buddy Pro',
                     href: 'https://github.com/yookue/ant-buddy-pro',
-                    blankTarget: true,
                     style: {
                         color: '#eba77a',
                     }

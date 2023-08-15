@@ -13,10 +13,11 @@ export type PageFooterProps = {
      * @description.zh-TW 超鏈接數組
      */
     links?: {
-        key?: string;
-        title: React.ReactNode;
-        href: string;
-        blankTarget?: boolean;
+        key: string;
+        text?: React.ReactNode;
+        title?: string;
+        href?: string;
+        target?: string;
         clazz?: string;
         style?: React.CSSProperties;
     }[] | false;
@@ -112,14 +113,14 @@ const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
                             props?.links.map((item) => (
                                 <a
                                     key={item.key}
-                                    className={item.clazz}
-                                    href={item.href}
-                                    title={item.key}
-                                    target={item.blankTarget ? '_blank' : '_self'}
+                                    className={item?.clazz}
+                                    href={item?.href}
+                                    title={item?.title}
+                                    target={item?.target || '_blank'}
                                     rel='noopener noreferrer'
-                                    style={item.style}
+                                    style={item?.style}
                                 >
-                                    {item.title}
+                                    {item?.text}
                                 </a>
                             ))
                         }
