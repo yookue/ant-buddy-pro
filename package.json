@@ -1,8 +1,8 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "title": "Ant Buddy Pro",
-    "description": "Ant Buddy Pro is an awesome collection of components based on Ant Design Pro",
+    "description": "Awesome components based on React & Ant Design Pro",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
     "organization": "Yookue Ltd",
     "private": false,
@@ -24,6 +24,7 @@
     "unpkg": "dist/umd/ant-buddy-pro.min.js",
     "types": "dist/esm/index.d.ts",
     "sideEffects": [
+        "dist/umd/*",
         "**/*.less"
     ],
     "scripts": {
@@ -43,8 +44,9 @@
         "test:coverage": "father test --coverage"
     },
     "dependencies": {
-        "@ant-design/icons": "^4.8.1",
-        "@ant-design/pro-components": "^1.1.25"
+        "@ant-design/pro-components": "^1.1.25",
+        "@babel/runtime": "^7.22.10",
+        "screenfull": "^6.0.2"
     },
     "devDependencies": {
         "@commitlint/cli": "^17.1.2",
@@ -69,7 +71,7 @@
         "typescript": "^5.1.6"
     },
     "optionalDependencies": {
-        "@babel/runtime": "^7.22.10"
+        "@ant-design/icons": "^4.8.1"
     },
     "peerDependencies": {
         "react": ">=16.9.0",

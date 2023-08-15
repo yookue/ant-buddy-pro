@@ -80,6 +80,7 @@ export default defineConfig({
     },
     alias: {
         '@': path.resolve(__dirname, '../src'),
+        '@yookue/ant-buddy-pro': path.resolve(__dirname, '../src'),
     },
     styles: [
         `
@@ -87,7 +88,7 @@ export default defineConfig({
             font-family: Comfortaa, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, cursive;
         }
         .__dumi-default-layout-hero {
-            background: url("${globalSettings?.contextAssets}/img/hero-bg-1.svg") !important
+            background: url("${globalSettings?.contextAssets}/img/home/hero-bg-1.svg") !important
         }
         .__dumi-default-layout-hero h1, .__dumi-default-layout-hero .markdown, .__dumi-default-layout-hero button {
             color: #fff !important;

@@ -6,8 +6,14 @@ import {defineConfig} from 'father';
 const path = require('path');
 
 export default defineConfig({
-    esm: {},
-    cjs: {},
+    cjs: {
+        platform: 'browser',
+        transformer: 'babel',
+    },
+    esm: {
+        platform: 'browser',
+        transformer: 'babel',
+    },
     umd: {
         name: 'AntBuddyPro',
         externals: {
@@ -21,5 +27,6 @@ export default defineConfig({
     },
     alias: {
         '@': path.resolve(__dirname, './src'),
+        '@yookue/ant-buddy-pro': path.resolve(__dirname, './src'),
     }
 });

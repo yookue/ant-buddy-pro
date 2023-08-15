@@ -1,0 +1,39 @@
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@root-entry-name: 'default';
+@buddy-login-portal: ~'@{ant-prefix}-buddy-login-portal';
+
+.@{buddy-login-portal} {
+    display: flex;
+    flex-flow: column wrap;
+    height: 100vh;
+    overflow: auto;
+
+    &-vessel {
+        display: flex;
+        flex-flow: row wrap;
+        height: 100vh;
+    }
+
+    &-introduction {
+        display: flex;
+        flex: 1 1;
+    }
+
+    &-interaction {
+        display: flex;
+        flex: 1 1;
+        flex-flow: column nowrap;
+        max-width: 520px;
+        background: @component-background;
+    }
+
+    &-interchange {
+        display: flex;
+        flex: 1 1;
+        flex-flow: column wrap;
+        background: @component-background;
+        width: 100%;
+    }
+}
