@@ -4,7 +4,7 @@ Similar to [LoginFormPage](https://github.com/ant-design/pro-components/blob/mas
 
 ### Snapshot
 
-![](/assets/img/snap/login-portal-1.jpg)
+![](/ant-buddy-pro/assets/img/snap/login-portal-1.jpg)
 
 ### Import
 

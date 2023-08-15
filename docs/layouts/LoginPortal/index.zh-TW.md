@@ -4,7 +4,7 @@
 
 ### 效果截圖
 
-![](/assets/img/snap/login-portal-1.jpg)
+![](/ant-buddy-pro/assets/img/snap/login-portal-1.jpg)
 
 ### 導入組件
 
