@@ -10,7 +10,7 @@ export default defineConfig({
     base: `${globalSettings?.rootContext}/`,
     publicPath: `${globalSettings?.rootContext}/`,
     title: 'Ant Buddy Pro',
-    logo: `${globalSettings?.contextAssets}/ico/logo-blue.svg`,
+    logo: `${globalSettings?.contextAssets}/ico/logo-icon.svg`,
     locales: [
         ['en-US', 'English'],
         ['zh-CN', '简体中文'],
