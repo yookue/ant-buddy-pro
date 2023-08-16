@@ -53,6 +53,9 @@ export default defineConfig({
             }
         ]
     },
+    cssLoader: {
+        localsConvention: 'camelCase',
+    },
     // externals: {
     //     'react': 'React',
     //     'react-dom': 'ReactDOM',
