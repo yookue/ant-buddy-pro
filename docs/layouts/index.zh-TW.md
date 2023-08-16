@@ -1,7 +1,7 @@
 ---
 title: 布局總覽
 order: 1
-toc: none
+toc: false
 nav:
   title: 布局
   order: 3
