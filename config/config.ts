@@ -27,7 +27,8 @@ export default defineConfig({
         { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/iphone-retina-180×180.png`, sizes: '180×180' },
         { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/ipad-retina-167×167.png`, sizes: '167×167' },
         { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/android-192x192.png`, sizes: '192x192' },
-        { rel: 'icon', type: 'image/svg+xml', href: `${globalSettings?.contextAssets}/ico/logo-blue.svg` },
+        { rel: 'icon', type: 'image/svg+xml', href: `${globalSettings?.contextAssets}/ico/logo-icon.svg` },
+        { rel: 'fluid-icon', type: 'image/svg+xml', href: `${globalSettings?.contextAssets}/ico/logo-icon.svg` },
         { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.font.im/css?family=Comfortaa' },
     ],
     navs: {
