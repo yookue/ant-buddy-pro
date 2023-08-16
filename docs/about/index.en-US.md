@@ -1,6 +1,7 @@
 ---
 title: About Us
 order: 1
+toc: none
 nav:
   title: About
   order: 9

@@ -1,6 +1,7 @@
 ---
 title: 關於我們
 order: 1
+toc: none
 nav:
   title: 關於
   order: 9
