@@ -1,3 +1,7 @@
+---
+toc: content
+---
+
 ## FullScreen
 
 FullScreen, provides an icon with the ability to toggle document full screen mode.

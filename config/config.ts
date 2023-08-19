@@ -75,10 +75,10 @@ export default defineConfig({
             }
         ]
     ],
-    outputPath: 'docs-dist',
     resolve: {
         includes: ['docs'],
     },
+    outputPath: 'docs-dist',
     themeConfig: {
         name: `@${globalSettings?.rootContext}`
     },

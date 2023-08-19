@@ -1,3 +1,7 @@
+---
+toc: content
+---
+
 ## FullScreen
 
 FullScreen 是一个用来切换文档全屏的图标按钮。

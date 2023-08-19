@@ -24,7 +24,6 @@
     "unpkg": "dist/umd/ant-buddy-pro.min.js",
     "types": "dist/esm/index.d.ts",
     "sideEffects": [
-        "dist/umd/*",
         "**/*.less"
     ],
     "scripts": {
