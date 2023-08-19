@@ -20,6 +20,6 @@ const FullScreen: React.FC = () => {
             }
         </>
     );
-}
+};
 
 export default FullScreen;

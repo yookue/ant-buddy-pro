@@ -92,7 +92,7 @@ export type PageFooterProps = {
      * @description.zh-TW 版權 div 的 CSS 樣式
      */
     copyrightStyle?: React.CSSProperties;
-}
+};
 
 const {Footer} = Layout;
 
@@ -136,6 +136,6 @@ const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
             </div>
         </Footer>
     );
-}
+};
 
 export default PageFooter;

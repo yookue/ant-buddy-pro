@@ -81,7 +81,7 @@ export type LoginPortalProps = {
      * @description.zh-TW 右側交互區主要内容的樣式
      */
     interchangeStyle?: React.CSSProperties,
-}
+};
 
 const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps) => {
     const context = React.useContext(ConfigProvider.ConfigContext);
@@ -105,6 +105,6 @@ const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps) => {
             {props?.containerFooter}
         </div>
     );
-}
+};
 
 export default LoginPortal;
