@@ -37,10 +37,7 @@
         "doctor": "father doctor",
         "lint": "npm run lint:es && npm run lint:css",
         "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
-        "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-        "prepublish": "father doctor && npm run build",
-        "test": "father test",
-        "test:coverage": "father test --coverage"
+        "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\""
     },
     "dependencies": {
         "@ant-design/pro-components": "^1.1.25",
