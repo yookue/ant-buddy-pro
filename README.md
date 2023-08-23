@@ -29,6 +29,10 @@ import {FooBar} from '@yookue/ant-buddy-pro';
 
 Enjoy your journey in coding your projects with ant-buddy-pro. ✌️
 
+## Document
+
+- GitHub pages: https://yookue.github.io/ant-buddy-pro
+
 ## License
 
 This project is under the [MIT](https://mit-license.org/) License (MIT)
@@ -36,4 +40,3 @@ This project is under the [MIT](https://mit-license.org/) License (MIT)
 ## Website
 
 - Yookue: https://yookue.com
-- GitHub pages: https://yookue.github.io/ant-buddy-pro
