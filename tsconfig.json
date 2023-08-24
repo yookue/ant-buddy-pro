@@ -10,15 +10,21 @@
         "skipLibCheck": true,
         "strict": true,
         "paths": {
-            "@@/*": [
-                "src/.umi/*"
+            "@": [
+                "./src"
+            ],
+            "@/*": [
+                "./src/*"
             ],
             "@yookue/ant-buddy-pro": [
-                "src"
+                "./src"
             ],
             "@yookue/ant-buddy-pro/*": [
-                "src/*",
+                "./src/*",
                 "*"
+            ],
+            "@@/*": [
+                "./src/.umi/*"
             ]
         }
     },
