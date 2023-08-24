@@ -6,14 +6,8 @@ import {defineConfig} from 'father';
 const path = require('path');
 
 export default defineConfig({
-    cjs: {
-        platform: 'browser',
-        transformer: 'babel',
-    },
-    esm: {
-        platform: 'browser',
-        transformer: 'babel',
-    },
+    cjs: {},
+    esm: {},
     umd: {
         name: 'AntBuddyPro',
         externals: {
@@ -28,5 +22,8 @@ export default defineConfig({
     alias: {
         '@': path.resolve(__dirname, './src'),
         '@yookue/ant-buddy-pro': path.resolve(__dirname, './src'),
-    }
+    },
+    extraBabelPlugins: [
+        'babel-plugin-comments-clean',
+    ]
 });

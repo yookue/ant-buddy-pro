@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright (c) 2023 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
