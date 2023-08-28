@@ -24,6 +24,8 @@ export default defineConfig({
         '@yookue/ant-buddy-pro': path.resolve(__dirname, './src'),
     },
     extraBabelPlugins: [
-        'babel-plugin-comments-clean',
+        ['babel-plugin-comments', {
+            remove: 'all',
+        }]
     ]
 });
