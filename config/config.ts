@@ -65,16 +65,13 @@ export default defineConfig({
     //     'antd': 'antd',
     //     'classnames': 'classNames',
     // },
-    extraBabelPlugins: [
-        [
-            'import',
-            {
-                libraryName: 'antd',
-                libraryDirectory: 'es',
-                style: 'css',
-            }
-        ]
-    ],
+    // extraBabelPlugins: [
+    //     ['babel-plugin-import', {
+    //         libraryName: 'antd',
+    //         libraryDirectory: 'es',
+    //         style: 'css',
+    //     }]
+    // ],
     resolve: {
         includes: ['docs'],
     },

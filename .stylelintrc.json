@@ -1,3 +1,9 @@
 {
-    "extends": "@umijs/lint/dist/config/stylelint"
+    "extends": "stylelint-config-standard",
+    "rules": {
+        "indentation": 4,
+        "alpha-value-notation": "number",
+        "color-no-invalid-hex": true,
+        "selector-class-pattern": null
+    }
 }
