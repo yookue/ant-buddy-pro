@@ -1,0 +1,15 @@
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@root-entry-name: 'default';
+@buddy-input-locale: ~'@{ant-prefix}-buddy-input-locale';
+
+.@{buddy-input-locale} .@{ant-prefix}-dropdown-menu-item {
+    cursor: default !important;
+}
+
+.@{buddy-input-locale}.@{ant-prefix}-dropdown-placement-bottom .@{ant-prefix}-dropdown-menu-root,
+.@{buddy-input-locale}.@{ant-prefix}-dropdown-placement-bottomLeft .@{ant-prefix}-dropdown-menu-root,
+.@{buddy-input-locale}.@{ant-prefix}-dropdown-placement-bottomRight .@{ant-prefix}-dropdown-menu-root {
+    margin-top: -24px !important;
+}

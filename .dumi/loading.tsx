@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2023 Yookue Ltd. All rights reserved.
  *
- * Licensed under the MIT License.
+ * Licensed under the MIT License (the "License")
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -15,7 +15,9 @@
  */
 
 
-export {FullScreen} from './field/FullScreen';
-export {InputLocale} from './form/InputLocale';
-export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
-export {PageFooter, type PageFooterProps} from './layout/PageFooter';
+import {PageLoading} from '@ant-design/pro-components';
+
+
+export default () => {
+    return <PageLoading/>
+}

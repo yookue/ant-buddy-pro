@@ -22,7 +22,7 @@ export default defineConfig({
             content: 'Ant Buddy, Ant Buddy Pro, Ant Design, Ant Design Pro, React, NPM',
         }
     ],
-    favicon: `${globalSettings?.contextAssets}/ico/favicon-blue.ico`,
+    favicon: `${globalSettings?.rootContext}/favicon.ico`,
     links: [
         { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/iphone-retina-180×180.png`, sizes: '180×180' },
         { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/ipad-retina-167×167.png`, sizes: '167×167' },
@@ -57,31 +57,42 @@ export default defineConfig({
     cssLoader: {
         localsConvention: 'camelCase',
     },
-    // externals: {
-    //     'react': 'React',
-    //     'react-dom': 'ReactDOM',
-    //     'react/jsx-runtime': 'jsxRuntime',
-    //     'prop-types': 'PropTypes',
-    //     'antd': 'antd',
-    //     'classnames': 'classNames',
-    // },
-    // extraBabelPlugins: [
-    //     ['babel-plugin-import', {
-    //         libraryName: 'antd',
-    //         libraryDirectory: 'es',
-    //         style: 'css',
-    //     }]
-    // ],
+    dynamicImport: {
+        loading: '@/../.dumi/loading',
+    },
+    externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'classnames': 'classNames',
+        'moment': 'moment',
+        'antd': 'antd',
+    },
+    headScripts: [
+        'https://unpkg.com/react@17.0.2/umd/react.production.min.js',
+        'https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js',
+        'https://unpkg.com/classnames@2.3.2/index.js',
+        'https://unpkg.com/moment@2.29.4/min/moment-with-locales.min.js',
+        'https://unpkg.com/antd@4.24.13/dist/antd.min.js',
+    ],
+    extraBabelPlugins: [
+        ['babel-plugin-import', {
+            libraryName: 'antd',
+            libraryDirectory: 'es',
+            style: 'css',
+        }]
+    ],
     resolve: {
         includes: ['docs'],
     },
     outputPath: 'docs-dist',
-    themeConfig: {
-        name: `@${globalSettings?.rootContext}`
-    },
     alias: {
         '@': path.resolve(__dirname, '../src'),
         '@yookue/ant-buddy-pro': path.resolve(__dirname, '../src'),
+    },
+    apiParser: {
+        propFilter: {
+            skipNodeModules: true,
+        }
     },
     styles: [
         `
@@ -99,8 +110,8 @@ export default defineConfig({
     mode: 'site',
     exportStatic: {},
     fastRefresh: {},
-    hash: false,
+    hash: true,
     webpack5: {},
-    // mfsu: {},
+    mfsu: {},
     // ssr: {},
 });

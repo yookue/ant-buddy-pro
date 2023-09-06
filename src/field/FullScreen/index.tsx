@@ -15,7 +15,25 @@
  */
 
 
-export {FullScreen} from './field/FullScreen';
-export {InputLocale} from './form/InputLocale';
-export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
-export {PageFooter, type PageFooterProps} from './layout/PageFooter';
+import React from 'react';
+import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
+import screenfull from 'screenfull';
+
+
+export const FullScreen: React.FC = () => {
+    const toggleScreen = () => {
+        if (screenfull.isEnabled) {
+            screenfull.toggle(document.documentElement);
+        }
+    };
+
+    return (
+        <>
+            {
+                React.createElement(screenfull.isFullscreen ? FullscreenOutlined : FullscreenExitOutlined, {
+                    onClick: toggleScreen
+                })
+            }
+        </>
+    );
+};
