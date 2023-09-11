@@ -29,13 +29,13 @@
         }
     },
     "include": [
-        ".dumi/**/*",
+        "src/**/*",
         ".umirc.ts",
-        "src/**/*"
+        ".dumi/**/*"
     ],
     "exclude": [
         "node_modules",
         "dist",
-        "docs-dist",
+        "docs-dist"
     ]
 }
