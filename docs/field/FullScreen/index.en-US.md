@@ -22,6 +22,8 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 
 ### Example
 
+#### Using HTML Title
+
 ```jsx
 import React from 'react';
 import {Space} from 'antd';
@@ -30,10 +32,32 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <Space>
-            <span title="Fullscreen">
-                <FullScreen/>
+            <span>
+                <FullScreen enterTitle="Fullscreen" exitTitle="Exit Fullscreen"/>
             </span>
         </Space>
     );
 }
 ```
+
+#### Using Ant Design Tooltip
+
+```jsx
+import React from 'react';
+import {Space} from 'antd';
+import {FullScreen} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <Space>
+            <span>
+                <FullScreen enterTitle="Fullscreen" exitTitle="Exit Fullscreen" useTooltip={true}/>
+            </span>
+        </Space>
+    );
+}
+```
+
+### Properties
+
+<API src="@/field/FullScreen/index.tsx" hideTitle></API>

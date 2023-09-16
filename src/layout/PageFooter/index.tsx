@@ -18,6 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Layout} from 'antd';
 import {CopyrightOutlined} from '@ant-design/icons';
+import {If, For} from '@yookue/react-condition';
 import classNames from 'classnames';
 import './index.less';
 
@@ -123,32 +124,35 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
     return (
         <Footer className={props?.containerClazz} style={props?.containerStyle}>
             <div className={vesselClazz} style={props?.vesselStyle}>
-                {props?.links && (
+                <If condition={props?.links}>
                     <div className={`${clazzPrefix}-links`} style={props?.linksStyle}>
-                        {
-                            props?.links.map((item) => (
-                                <a
-                                    key={item.key}
-                                    className={item?.clazz}
-                                    href={item?.href}
-                                    title={item?.title}
-                                    target={item?.target || '_blank'}
-                                    rel='noopener noreferrer'
-                                    style={item?.style}
-                                >
-                                    {item?.text}
-                                </a>
-                            ))
-                        }
+                        <For
+                            of={props?.links}
+                            render={(item: any) => {
+                                return (
+                                    <a
+                                        key={item.key}
+                                        className={item?.clazz}
+                                        href={item?.href}
+                                        title={item?.title}
+                                        target={item?.target || '_blank'}
+                                        rel='noopener noreferrer'
+                                        style={item?.style}
+                                    >
+                                        {item?.text}
+                                    </a>
+                                );
+                            }}
+                        />
                     </div>
-                )}
-                {props?.copyright && (
+                </If>
+                <If condition={props?.copyright}>
                     <div className={`${clazzPrefix}-copyright`} style={props?.copyrightStyle}>
                         <React.Fragment>
                             <CopyrightOutlined/> {props?.copyright}
                         </React.Fragment>
                     </div>
-                )}
+                </If>
             </div>
         </Footer>
     );

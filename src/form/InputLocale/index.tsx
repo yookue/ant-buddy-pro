@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {ConfigProvider, Dropdown, Input, type InputProps, type MenuProps} from 'antd';
+import {ConfigProvider, Dropdown, Input, type FormRule, type InputProps, type MenuProps} from 'antd';
 import {TranslationOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
+import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
-import type {Rule} from 'rc-field-form/lib/interface';
 import omit from 'rc-util/lib/omit';
 import './index.less';
 
@@ -49,7 +49,7 @@ export type InputLocaleProps = ProFormFieldProps<OmitInputProps> & {
      * @description.zh-CN 全部语言输入项的通用校验规则
      * @description.zh-TW 全部語言輸入項的通用校驗規則
      */
-    localeRules?: Rule[];
+    localeRules?: FormRule[];
 
     /**
      * @description The DOM of addon for the primary input box
@@ -119,34 +119,39 @@ export const InputLocale: React.FC<InputLocaleProps> = (props?: InputLocaleProps
             const {label, fieldProps, rules, ...restProps} = itemProp;
             const antdInputProps = restProps as InputProps;
             const omitFieldProps = fieldProps ? omit(fieldProps, ['addonBefore', 'addonAfter']) : {};
-            const labelDom = props?.popupProField ? (
-                <ProFormText
-                    name={props?.name ? `${props?.name}[${label}]` : undefined}
-                    id={props?.id ? `${props?.id}[${label}]` : (props?.name ? `${props?.name}[${label}]` : undefined)}
-                    disabled={!!props?.disabled || !!itemProp.disabled}
-                    readonly={!!props?.readonly || !!itemProp.readonly}
-                    {...restProps}
-                    fieldProps={{
-                        addonBefore: (props?.popupAddonPos === 'before') ? label : undefined,
-                        addonAfter: (props?.popupAddonPos === 'after') ? label : undefined,
-                        ...omitFieldProps
-                    }}
-                    rules={[
-                        ...props.localeRules || [],
-                        ...rules || [],
-                    ]}
-                />
-                ) : (
-                <Input
-                    name={props?.name ? `${props?.name}[${label}]` : undefined}
-                    id={props?.id ? `${props?.id}[${label}]` : (props?.name ? `${props?.name}[${label}]` : undefined)}
-                    disabled={!!props?.disabled || !!itemProp.disabled}
-                    readOnly={!!props?.readonly || !!itemProp.readonly}
-                    {...antdInputProps}
-                    addonBefore={props?.popupAddonPos === 'before' ? label : undefined}
-                    addonAfter={props?.popupAddonPos === 'after' ? label : undefined}
-                    {...omitFieldProps}
-                />
+            const labelDom = (
+                <If condition={props?.popupProField}>
+                    <If.Then>
+                        <ProFormText
+                            name={props?.name ? `${props?.name}[${label}]` : undefined}
+                            id={props?.id ? `${props?.id}[${label}]` : (props?.name ? `${props?.name}[${label}]` : undefined)}
+                            disabled={!!props?.disabled || !!itemProp.disabled}
+                            readonly={!!props?.readonly || !!itemProp.readonly}
+                            {...restProps}
+                            fieldProps={{
+                                addonBefore: (props?.popupAddonPos === 'before') ? label : undefined,
+                                addonAfter: (props?.popupAddonPos === 'after') ? label : undefined,
+                                ...omitFieldProps
+                            }}
+                            rules={[
+                                ...props.localeRules || [],
+                                ...rules || [],
+                            ]}
+                        />
+                    </If.Then>
+                    <If.Else>
+                        <Input
+                            name={props?.name ? `${props?.name}[${label}]` : undefined}
+                            id={props?.id ? `${props?.id}[${label}]` : (props?.name ? `${props?.name}[${label}]` : undefined)}
+                            disabled={!!props?.disabled || !!itemProp.disabled}
+                            readOnly={!!props?.readonly || !!itemProp.readonly}
+                            {...antdInputProps}
+                            addonBefore={props?.popupAddonPos === 'before' ? label : undefined}
+                            addonAfter={props?.popupAddonPos === 'after' ? label : undefined}
+                            {...omitFieldProps}
+                        />
+                    </If.Else>
+                </If>
             );
             menuItems.push({
                 key: itemProp.label,
