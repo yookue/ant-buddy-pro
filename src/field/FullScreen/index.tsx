@@ -31,7 +31,7 @@ export type FullScreenProps = {
      * @description.zh-TW 要切換全屏模式的 DOM 元素
      * @default document.documentElement
      */
-    targetDom: HTMLElement,
+    targetDom?: HTMLElement,
 
     /**
      * @description Whether to use Tooltip instead of raw Title
@@ -39,7 +39,7 @@ export type FullScreenProps = {
      * @description.zh-TW 否使用 Tooltip 替代 Title
      * @default false
      */
-    useTooltip: boolean;
+    useTooltip?: boolean;
 
     /**
      * @description The properties for Tooltip

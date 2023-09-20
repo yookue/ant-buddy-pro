@@ -1,6 +1,6 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on React & Ant Design Pro",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "@ant-design/pro-components": "^1.1.25",
-        "@babel/runtime": "^7.22.10",
+        "@babel/runtime": "^7.22.15",
         "@yookue/react-condition": "^0.1.1",
         "screenfull": "^6.0.2"
     },
@@ -53,7 +53,7 @@
         "del-cli": "^5.1.0",
         "dumi": "^1.1.53",
         "eslint": "^7.32.0",
-        "father": "^4.3.4",
+        "father": "^4.3.5",
         "gh-pages": "^6.0.0",
         "prettier": "^2.8.8",
         "react": "^17.0.0",
