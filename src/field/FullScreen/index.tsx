@@ -66,7 +66,7 @@ export type FullScreenProps = {
 export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) => {
     const [fullscreen, setFullscreen] = React.useState(false);
 
-    const toggleScreen = () => {
+    const handleClick = () => {
         if (screenfull.isEnabled) {
             screenfull.toggle(props?.targetDom);
             setFullscreen(!fullscreen);
@@ -79,7 +79,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
                 <Tooltip title={fullscreen ? props?.exitTitle : props?.enterTitle} {...props?.tooltipProps}>
                     {
                         React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
-                            onClick: toggleScreen,
+                            onClick: handleClick,
                         })
                     }
                 </Tooltip>
@@ -88,7 +88,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
                 {
                     React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
                         title: fullscreen ? props?.exitTitle : props?.enterTitle,
-                        onClick: toggleScreen,
+                        onClick: handleClick,
                     })
                 }
             </If.Else>

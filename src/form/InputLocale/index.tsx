@@ -116,7 +116,8 @@ export const InputLocale: React.FC<InputLocaleProps> = (props?: InputLocaleProps
             if (!itemProp || !itemProp?.label) {
                 continue;
             }
-            const {label, fieldProps, rules, ...restProps} = itemProp;
+            const {label, fieldProps, rules} = itemProp;
+            const restProps = omit(itemProp, ['name', 'id', 'disabled', 'readonly', 'label', 'fieldProps', 'rules']);
             const antdInputProps = restProps as InputProps;
             const omitFieldProps = fieldProps ? omit(fieldProps, ['addonBefore', 'addonAfter']) : {};
             const labelDom = (
@@ -161,25 +162,25 @@ export const InputLocale: React.FC<InputLocaleProps> = (props?: InputLocaleProps
     }
 
     const [open, setOpen] = React.useState(false);
-    const onMenuClick: MenuProps['onClick'] = () => {
+    const handleMenuClick: MenuProps['onClick'] = () => {
         setOpen(true);
     };
-    const onOpenChange = (open: boolean) => {
+    const handleOpenChange = (open: boolean) => {
         setOpen(open);
     };
 
     const hiddenRef = React.useRef<HTMLDivElement>(null);
-    const restProps = props ? omit(props, ['addonDom', 'addonPos', 'overlayClazz', 'overlayStyle', 'popupAddonPos', 'popupPlacement', 'popupProField', 'localeProps', 'localeRules']) : {};
+    const restProps = omit(props as ProFormFieldProps<OmitInputProps>, ['fieldProps']);
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter']) : {};
 
     return (
         <Dropdown
-            menu={{items: menuItems, onClick: onMenuClick}}
+            menu={{items: menuItems, onClick: handleMenuClick}}
             placement={props?.popupPlacement}
             overlayClassName={popupClazz}
             overlayStyle={props?.overlayStyle}
             open={open}
-            onOpenChange={onOpenChange}
+            onOpenChange={handleOpenChange}
             getPopupContainer={() => {
                 return hiddenRef.current || document.body;
             }}
