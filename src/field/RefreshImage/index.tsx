@@ -78,7 +78,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         }
     };
 
-    const omitProps = props ? omit(props as ImageProps, ['src', 'onClick', 'onError', 'style']) : {};
+    const omitProps = props ? omit(props, ['autoCursor', 'src', 'fallbackSrc', 'onRefresh', 'onClick', 'onError', 'style']) : {};
     const styles = props?.autoCursor ? {cursor: 'pointer'} : {};
 
     return (

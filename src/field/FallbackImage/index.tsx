@@ -50,7 +50,7 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
         }
     };
 
-    const omitProps = props ? omit(props as ImageProps, ['src', 'onError']) : {};
+    const omitProps = props ? omit(props, ['src', 'fallbackSrc', 'onError']) : {};
 
     return (
         <RcImage

@@ -170,7 +170,7 @@ export const InputLocale: React.FC<InputLocaleProps> = (props?: InputLocaleProps
     };
 
     const hiddenRef = React.useRef<HTMLDivElement>(null);
-    const restProps = omit(props as ProFormFieldProps<OmitInputProps>, ['fieldProps']);
+    const restProps = props ? omit(props, ['localeProps', 'localeRules', 'addonDom', 'addonPos', 'overlayClazz', 'overlayStyle', 'popupPlacement', 'popupAddonPos', 'popupProField']) : {};
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter']) : {};
 
     return (
