@@ -25,7 +25,7 @@ export default () => {
             width={120}
             height={120}
             src='does-not-exists.png'
-            fallbackSrc={() => {
+            fallback={() => {
                 return `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`;
             }}
         />

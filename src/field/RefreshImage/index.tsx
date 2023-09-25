@@ -18,9 +18,10 @@
 import React from 'react';
 import RcImage, {type ImageProps} from 'rc-image';
 import omit from 'rc-util/lib/omit';
+import {ImageUtils} from '@/util/ImageUtils';
 
 
-export type RefreshImageProps = Omit<ImageProps, 'src'> & {
+export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
     /**
      * @description Whether to change the cursor automatically
      * @description.zh-CN 是否自动改变鼠标指针样式
@@ -40,7 +41,7 @@ export type RefreshImageProps = Omit<ImageProps, 'src'> & {
      * @description.zh-CN 图片出错后的备用源
      * @description.zh-TW 圖片出錯後的備用源
      */
-    fallbackSrc?: string | (() => string);
+    fallback?: string | (() => string);
 
     /**
      * @description The callback function when the image is refreshed
@@ -52,13 +53,13 @@ export type RefreshImageProps = Omit<ImageProps, 'src'> & {
 
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {
     const [imageSource, SetImageSource] = React.useState<string | undefined>(() => {
-        return typeof props?.src === 'function' ? props?.src() : props?.src;
+        return ImageUtils.detectSource(props?.src, data => SetImageSource(data));
     });
 
     const handleClick = (event: React.MouseEvent<any>) => {
         const previousSrc = imageSource;
         if (props?.src) {
-            SetImageSource(typeof props?.src === 'function' ? props?.src() : props?.src);
+            SetImageSource(ImageUtils.detectSource(props?.src, data => SetImageSource(data)));
         }
         const currentSrc = imageSource;
         if (typeof props?.onClick === 'function') {
@@ -70,15 +71,15 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
     };
 
     const handleError = (event: React.SyntheticEvent<any>) => {
-        if (props?.fallbackSrc) {
-            SetImageSource(typeof props?.fallbackSrc === 'function' ? props?.fallbackSrc() : props?.fallbackSrc);
+        if (props?.fallback) {
+            SetImageSource(ImageUtils.detectSource(props?.fallback, data => SetImageSource(data)));
         }
         if (typeof props?.onError === 'function') {
             props?.onError(event);
         }
     };
 
-    const omitProps = props ? omit(props, ['autoCursor', 'src', 'fallbackSrc', 'onRefresh', 'onClick', 'onError', 'style']) : {};
+    const omitProps = props ? omit(props, ['autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']) : {};
     const styles = props?.autoCursor ? {cursor: 'pointer'} : {};
 
     return (
