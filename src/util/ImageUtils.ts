@@ -22,7 +22,7 @@ export abstract class ImageUtils {
      * @param param the parameter to inspect
      * @param callback the function to execute when the parameter returns a promise
      */
-    public static detectSource = (param?: string | (() => string | undefined) | Promise<string | undefined>, callback?: ((value?: string) => void)): string | undefined => {
+    public static detectSource = (param?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>), callback?: ((value?: string) => void)): string | undefined => {
         if (!param) {
             return undefined;
         }

@@ -34,7 +34,7 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
      * @description.zh-CN 图片源
      * @description.zh-TW 圖片源
      */
-    src?: string | (() => string | undefined) | Promise<string | undefined>;
+    src?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>);
 
     /**
      * @description The fallback source of the image
