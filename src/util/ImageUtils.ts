@@ -22,7 +22,7 @@ export abstract class ImageUtils {
      * @param param the parameter to inspect
      * @param callback the function to execute when the parameter returns a promise
      */
-    public static detectSource = (param?: string | Promise<string> | (() => string), callback?: ((value: string) => void)): string | undefined => {
+    public static detectSource = (param?: string | (() => string | undefined) | Promise<string | undefined>, callback?: ((value?: string) => void)): string | undefined => {
         if (!param) {
             return undefined;
         }
@@ -37,7 +37,7 @@ export abstract class ImageUtils {
                 console.warn(`The argument 'param' is a Promise object, but has none matching argument 'callback'`);
                 return undefined;
             }
-            (param as Promise<string>).then(data => callback(data));
+            (param as Promise<string | undefined>).then(data => callback(data));
         }
         return undefined;
     }

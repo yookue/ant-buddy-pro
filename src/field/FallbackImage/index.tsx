@@ -27,14 +27,14 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
      * @description.zh-CN 图片源
      * @description.zh-TW 圖片源
      */
-    src?: string | (() => string);
+    src?: string | (() => string | undefined) | Promise<string | undefined>;
 
     /**
      * @description The fallback source of the image
      * @description.zh-CN 图片出错后的备用源
      * @description.zh-TW 圖片出錯後的備用源
      */
-    fallback?: string | (() => string);
+    fallback?: string | (() => string | undefined);
 }
 
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
