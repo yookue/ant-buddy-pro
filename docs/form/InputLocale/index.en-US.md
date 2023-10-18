@@ -8,7 +8,7 @@ InputLocale, provides a text input box with a dropdown div of locale input boxes
 
 ### Premise
 
-Before use this component, you need to install [@ant-design/icons](https://github.com/ant-design/ant-design-icons) package first if you're using the default `addonDom` attribute:
+Before use this component, you need to install [@ant-design/icons](https://github.com/ant-design/ant-design-icons) package first if you're using the default `actionDom` attribute:
 
 ```bash
 npm install @ant-design/icons --save
@@ -22,9 +22,11 @@ import {InputLocale} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-> Each `localeProps` item has its own input properties, thus you can control them as you wish, such as marking someone of them to `disabled` or `readonly`, and so on.
+> Each `popupInputProps` item has its own input properties, thus you can control them as you wish, such as marking someone of them to `disabled` or `readonly`, and so on.
 
-#### With field validation
+> `popupQuickTags` can custom language input items quickly.
+
+#### LocaleProps with field validation
 
 ```jsx
 import React from 'react';
@@ -49,44 +51,51 @@ export default () => {
                 name='localeWithValidation'
                 placeholder='Demo Field With Validation'
                 popupProField={true}
-                localeProps={[
-                    {
-                        label: 'en-US',
-                        placeholder: 'Demo Field in English',
-                        allowClear: true,
-                    },
-                    {
-                        label: 'zh-CN',
-                        placeholder: 'Demo Field in Simplified Chinese',
-                        allowClear: true,
-                    },
-                    {
-                        label: 'zh-TW',
-                        placeholder: 'Demo Field in Traditional Chinese',
-                        allowClear: true,
-                    }
-                ]}
                 rules={[
                     {
                         required: true,
                         message: 'Please input demo field',
                     },
                 ]}
-                localeRules={[
+                popupInputProps={[
                     {
-                        type: 'string',
-                        min: 2,
-                        max: 60,
-                        message: 'The value length must between 2 and 60'
+                        tag: 'en-US',
+                        placeholder: 'Demo Field in English',
+                        allowClear: true,
+                    },
+                    {
+                        tag: 'zh-CN',
+                        placeholder: 'Demo Field in Simplified Chinese',
+                        allowClear: true,
+                    },
+                    {
+                        tag: 'zh-TW',
+                        placeholder: 'Demo Field in Traditional Chinese',
+                        allowClear: true,
                     }
                 ]}
+                popupConfirmProps={{
+                    message: 'Set as default?',
+                    ok: 'Yes',
+                    cancel: 'No',
+                }}
+                popupShareProps={{
+                    rules: [
+                        {
+                            type: 'string',
+                            min: 2,
+                            max: 60,
+                            message: 'The value length must between 2 and 60',
+                        }
+                    ]
+                }}
             />
         </ProForm>
     );
 }
 ```
 
-#### Without field validation
+#### LocaleProps without field validation
 
 ```jsx
 import React from 'react';
@@ -110,19 +119,19 @@ export default () => {
             <InputLocale
                 name='localeWithoutValidation'
                 placeholder='Demo Field Without Validation'
-                localeProps={[
+                popupInputProps={[
                     {
-                        label: 'en-US',
+                        tag: 'en-US',
                         placeholder: 'Demo Field in English',
                         allowClear: true,
                     },
                     {
-                        label: 'zh-CN',
+                        tag: 'zh-CN',
                         placeholder: 'Demo Field in Simplified Chinese',
                         allowClear: true,
                     },
                     {
-                        label: 'zh-TW',
+                        tag: 'zh-TW',
                         placeholder: 'Demo Field in Traditional Chinese',
                         allowClear: true,
                     }
@@ -133,6 +142,98 @@ export default () => {
 }
 ```
 
+#### LocaleTags with field validation
+
+```jsx
+import React from 'react';
+import {message} from 'antd';
+import {ProForm} from '@ant-design/pro-components';
+import {InputLocale} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ProForm
+            submitter={{
+                searchConfig: {
+                    submitText: 'Submit',
+                    resetText: 'Rest',
+                }
+            }}
+            onFinish={async (values) => {
+                message.success('Yep, you\'ve clicked the submit button');
+            }}
+        >
+            <InputLocale
+                name='localeWithValidation'
+                placeholder='Demo Field With Validation'
+                popupActionPos='before'
+                popupProField={true}
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input demo field',
+                    },
+                ]}
+                popupQuickTags={[
+                    'en-US',
+                    'zh-CN',
+                    'zh-TW',
+                ]}
+                popupShareProps={{
+                    rules: [
+                        {
+                            type: 'string',
+                            min: 2,
+                            max: 60,
+                            message: 'The value length must between 2 and 60',
+                        }
+                    ]
+                }}
+            />
+        </ProForm>
+    );
+}
+```
+
+#### LocaleTags without field validation, disabled
+
+```jsx
+import React from 'react';
+import {message} from 'antd';
+import {ProForm} from '@ant-design/pro-components';
+import {InputLocale} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ProForm
+            submitter={{
+                searchConfig: {
+                    submitText: 'Submit',
+                    resetText: 'Rest',
+                }
+            }}
+            onFinish={async (values) => {
+                message.success('Yep, you\'ve clicked the submit button');
+            }}
+        >
+            <InputLocale
+                name='localeWithoutValidation'
+                placeholder='Demo Field Without Validation'
+                disabled
+                popupTagPos='after'
+                popupQuickTags={[
+                    'en-US',
+                    'zh-CN',
+                    'zh-TW',
+                ]}
+            />
+        </ProForm>
+    );
+}
+```
+
 ### Properties
+
+#### InputLocaleProps
 
 <API src="@/form/InputLocale/index.tsx" hideTitle></API>

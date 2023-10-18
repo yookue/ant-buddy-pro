@@ -52,4 +52,6 @@ export default () => {
 
 ### Properties
 
+##### PageFooterProps
+
 <API src="@/layout/PageFooter/index.tsx" hideTitle></API>

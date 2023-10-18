@@ -63,6 +63,7 @@ export type FullScreenProps = {
     exitTitle?: string,
 }
 
+
 export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) => {
     const [fullscreen, setFullscreen] = React.useState(false);
 

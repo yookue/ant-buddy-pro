@@ -35,4 +35,6 @@ export default () => {
 
 ### 组件属性
 
+#### FallbackImageProps
+
 <API src="@/field/FallbackImage/index.tsx" hideTitle></API>

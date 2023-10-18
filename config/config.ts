@@ -68,11 +68,16 @@ export default defineConfig({
         'antd': 'antd',
     },
     headScripts: [
-        'https://unpkg.com/react@17.0.2/umd/react.production.min.js',
-        'https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js',
-        'https://unpkg.com/classnames@2.3.2/index.js',
-        'https://unpkg.com/moment@2.29.4/min/moment-with-locales.min.js',
-        'https://unpkg.com/antd@4.24.13/dist/antd.min.js',
+        // 'https://unpkg.com/react@17.0.2/umd/react.production.min.js',
+        // 'https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js',
+        // 'https://unpkg.com/classnames@2.3.2/index.js',
+        // 'https://unpkg.com/moment@2.29.4/min/moment.min.js',
+        // 'https://unpkg.com/antd@4.24.14/dist/antd.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.production.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/classnames/2.3.2/index.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.4/moment.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/antd/4.24.14/antd.min.js',
     ],
     extraBabelPlugins: [
         ['babel-plugin-import', {

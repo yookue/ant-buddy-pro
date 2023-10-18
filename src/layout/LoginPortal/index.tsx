@@ -99,6 +99,7 @@ export type LoginPortalProps = {
     interchangeStyle?: React.CSSProperties,
 };
 
+
 export const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps) => {
     const context = React.useContext(ConfigProvider.ConfigContext);
     const prefix = context.getPrefixCls('buddy-login-portal');

@@ -8,7 +8,7 @@ InputLocale，提供了一个包含多种语言下拉框的文本输入字段，
 
 ### 使用前提
 
-如果您使用默认的 `addonDom` 属性，要使用此组件，您需要先安装 [@ant-design/icons](https://github.com/ant-design/ant-design-icons) 图标组件包：
+如果您使用默认的 `actionDom` 属性，要使用此组件，您需要先安装 [@ant-design/icons](https://github.com/ant-design/ant-design-icons) 图标组件包：
 
 ```bash
 npm install @ant-design/icons --save
@@ -22,9 +22,11 @@ import {InputLocale} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-> `localeProps` 属性下的每项，都拥有其独立的属性，这样您可以充分自定义每个语言的特性，比如把某一项或某几项设置为 `禁用` 或 `只读` 状态。
+> `popupInputProps` 属性下的每项，都拥有其独立的属性，这样您可以充分自定义每个语言的特性，比如把某一项或某几项设置为 `禁用` 或 `只读` 状态。
 
-#### 字段带校验
+> `popupQuickTags` 可以简单快速的自定义语言输入项。
+
+#### LocaleProps 带校验
 
 ```jsx
 import React from 'react';
@@ -49,44 +51,51 @@ export default () => {
                 name='localeWithValidation'
                 placeholder='示例字段-带校验'
                 popupProField={true}
-                localeProps={[
-                    {
-                        label: 'en-US',
-                        placeholder: '示例字段-英文',
-                        allowClear: true,
-                    },
-                    {
-                        label: 'zh-CN',
-                        placeholder: '示例字段-简体中文',
-                        allowClear: true,
-                    },
-                    {
-                        label: 'zh-TW',
-                        placeholder: '示例字段-繁体中文',
-                        allowClear: true,
-                    }
-                ]}
                 rules={[
                     {
                         required: true,
                         message: '请输入示例字段',
                     },
                 ]}
-                localeRules={[
+                popupInputProps={[
                     {
-                        type: 'string',
-                        min: 2,
-                        max: 60,
-                        message: '示例字段的长度必须在 2~60 之间'
+                        tag: 'en-US',
+                        placeholder: '示例字段-英文',
+                        allowClear: true,
+                    },
+                    {
+                        tag: 'zh-CN',
+                        placeholder: '示例字段-简体中文',
+                        allowClear: true,
+                    },
+                    {
+                        tag: 'zh-TW',
+                        placeholder: '示例字段-繁体中文',
+                        allowClear: true,
                     }
                 ]}
+                popupConfirmProps={{
+                    message: '设为默认吗？',
+                    ok: '是',
+                    cancel: '否',
+                }}
+                popupShareProps={{
+                    rules: [
+                        {
+                            type: 'string',
+                            min: 2,
+                            max: 60,
+                            message: '示例字段的长度必须在 2~60 之间',
+                        }
+                    ]
+                }}
             />
         </ProForm>
     );
 }
 ```
 
-#### 字段无校验
+#### LocaleProps 无校验
 
 ```jsx
 import React from 'react';
@@ -110,19 +119,19 @@ export default () => {
             <InputLocale
                 name='localeWithoutValidation'
                 placeholder='示例字段-无校验'
-                localeProps={[
+                popupInputProps={[
                     {
-                        label: 'en-US',
+                        tag: 'en-US',
                         placeholder: '示例字段-英文',
                         allowClear: true,
                     },
                     {
-                        label: 'zh-CN',
+                        tag: 'zh-CN',
                         placeholder: '示例字段-简体中文',
                         allowClear: true,
                     },
                     {
-                        label: 'zh-TW',
+                        tag: 'zh-TW',
                         placeholder: '示例字段-繁体中文',
                         allowClear: true,
                     }
@@ -133,6 +142,98 @@ export default () => {
 }
 ```
 
+#### LocaleTags 带校验
+
+```jsx
+import React from 'react';
+import {message} from 'antd';
+import {ProForm} from '@ant-design/pro-components';
+import {InputLocale} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ProForm
+            submitter={{
+                searchConfig: {
+                    submitText: '提交',
+                    resetText: '重置',
+                }
+            }}
+            onFinish={async (values) => {
+                message.success('您点击了提交按钮');
+            }}
+        >
+            <InputLocale
+                name='localeWithValidation'
+                placeholder='示例字段-带校验'
+                popupActionPos='before'
+                popupProField={true}
+                rules={[
+                    {
+                        required: true,
+                        message: '请输入示例字段',
+                    },
+                ]}
+                popupQuickTags={[
+                    'en-US',
+                    'zh-CN',
+                    'zh-TW',
+                ]}
+                popupShareProps={{
+                    rules: [
+                        {
+                            type: 'string',
+                            min: 2,
+                            max: 60,
+                            message: '示例字段的长度必须在 2~60 之间',
+                        }
+                    ]
+                }}
+            />
+        </ProForm>
+    );
+}
+```
+
+#### LocaleTags 无校验，已禁用
+
+```jsx
+import React from 'react';
+import {message} from 'antd';
+import {ProForm} from '@ant-design/pro-components';
+import {InputLocale} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ProForm
+            submitter={{
+                searchConfig: {
+                    submitText: '提交',
+                    resetText: '重置',
+                }
+            }}
+            onFinish={async (values) => {
+                message.success('您点击了提交按钮');
+            }}
+        >
+            <InputLocale
+                name='localeWithoutValidation'
+                placeholder='示例字段-无校验'
+                disabled
+                popupTagPos='after'
+                popupQuickTags={[
+                    'en-US',
+                    'zh-CN',
+                    'zh-TW',
+                ]}
+            />
+        </ProForm>
+    );
+}
+```
+
 ### 组件属性
+
+#### InputLocaleProps
 
 <API src="@/form/InputLocale/index.tsx" hideTitle></API>

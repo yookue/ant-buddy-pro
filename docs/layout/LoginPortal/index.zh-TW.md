@@ -53,4 +53,6 @@ export default () => {
 
 ### 組件屬性
 
+#### LoginPortalProps
+
 <API src="@/layout/LoginPortal/index.tsx" hideTitle></API>

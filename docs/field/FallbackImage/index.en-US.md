@@ -35,4 +35,6 @@ export default () => {
 
 ### Properties
 
+#### FallbackImageProps
+
 <API src="@/field/FallbackImage/index.tsx" hideTitle></API>

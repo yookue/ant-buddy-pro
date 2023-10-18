@@ -51,6 +51,7 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
     onRefresh?: (previousSrc?: string, currentSrc?: string) => void;
 }
 
+
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {
     const [imageSource, SetImageSource] = React.useState<string | undefined>(() => {
         return ImageUtils.detectSource(props?.src, data => SetImageSource(data));
@@ -86,8 +87,8 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         <RcImage
             {...omitProps}
             src={imageSource}
-            onClick={event => handleClick(event)}
-            onError={event => handleError(event)}
+            onClick={handleClick}
+            onError={handleError}
             style={{
                 ...styles,
                 ...props?.style,

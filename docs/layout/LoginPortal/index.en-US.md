@@ -53,4 +53,6 @@ export default () => {
 
 ### Properties
 
+#### LoginPortalProps
+
 <API src="@/layout/LoginPortal/index.tsx" hideTitle></API>

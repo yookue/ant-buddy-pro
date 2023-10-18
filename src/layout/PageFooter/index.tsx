@@ -113,6 +113,7 @@ export type PageFooterProps = {
 
 const {Footer} = Layout;
 
+
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
     const context = React.useContext(ConfigProvider.ConfigContext);
     if ((!props?.links || props?.links?.length === 0) && !props?.copyright) {

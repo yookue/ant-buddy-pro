@@ -60,4 +60,6 @@ export default () => {
 
 ### 组件属性
 
+#### FullScreenProps
+
 <API src="@/field/FullScreen/index.tsx" hideTitle></API>

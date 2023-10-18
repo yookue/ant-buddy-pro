@@ -39,4 +39,6 @@ export default () => {
 
 ### 組件屬性
 
+#### RefreshImageProps
+
 <API src="@/field/RefreshImage/index.tsx" hideTitle></API>

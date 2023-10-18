@@ -52,4 +52,6 @@ export default () => {
 
 ### 組件屬性
 
+##### PageFooterProps
+
 <API src="@/layout/PageFooter/index.tsx" hideTitle></API>

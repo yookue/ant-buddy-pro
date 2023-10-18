@@ -37,6 +37,7 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
     fallback?: string | (() => string | undefined);
 }
 
+
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
     const [imageSource, SetImageSource] = React.useState<string | undefined>(() => {
         return ImageUtils.detectSource(props?.src, data => SetImageSource(data));
@@ -57,7 +58,7 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
         <RcImage
             {...omitProps}
             src={imageSource}
-            onError={event => handleError(event)}
+            onError={handleError}
         />
     );
 };
