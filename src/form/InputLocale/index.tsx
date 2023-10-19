@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {ConfigProvider, Dropdown, Input, Popconfirm, Space, type FormRule, type InputProps, type InputRef, type MenuProps} from 'antd';
+import {ConfigProvider, Dropdown, Input, Popconfirm, Space, type FormRule, type InputProps, type MenuProps} from 'antd';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
 import {nanoid} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/lib/omit';
-import {InputUtils} from '../../util/InputUtils';
+import {InputUtils} from '@/util/InputUtils';
 import './index.less';
 
 
@@ -67,14 +67,14 @@ export type PopupShareProps = {
      * @description.zh-CN 语言输入项的最大长度
      * @description.zh-TW 語言輸入項的最大長度
      */
-    maxLength: number,
+    maxLength?: number,
 
     /**
      * @description The placeholder of locales
      * @description.zh-CN 语言输入项的占位符
      * @description.zh-TW 語言輸入項的佔位符
      */
-    placeholder: string,
+    placeholder?: string,
 
     /**
      * @description The validation rules for locales
@@ -111,7 +111,7 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
      * @description The position of action for the primary input box
      * @description.zh-CN 默认文本框的附属节点位置
      * @description.zh-TW 默認文本框的附属節點位置
-     * @default after
+     * @default 'after'
      */
     actionPos?: 'before' | 'after' | false;
 
@@ -119,7 +119,7 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
      * @description The placement of the locales dropdown
      * @description.zh-CN 语言下拉框的弹出位置
      * @description.zh-TW 語言下拉框的彈出位置
-     * @default bottomLeft
+     * @default 'bottomLeft'
      */
     popupPlacement?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'top' | 'topLeft' | 'topRight';
 
@@ -141,7 +141,7 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
      * @description The position of language tags for the locale items
      * @description.zh-CN 语言输入项的标签位置
      * @description.zh-TW 語言輸入項的標簽位置
-     * @default before
+     * @default 'before'
      */
     popupTagPos?: 'before' | 'after' | false;
 
@@ -157,7 +157,7 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
      * @description The position of language addons for the locale items
      * @description.zh-CN 语言输入项的附属节点位置
      * @description.zh-TW 語言輸入項的附屬節點位置
-     * @default after
+     * @default 'after'
      */
     popupActionPos?: 'before' | 'after' | false;
 
