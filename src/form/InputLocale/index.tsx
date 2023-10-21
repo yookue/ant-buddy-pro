@@ -162,6 +162,13 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
     popupActionPos?: 'before' | 'after' | false;
 
     /**
+     * @description Use the same rules as entry field for the locale items
+     * @description.zh-CN 语言输入项使用与默认输入项相同的校验规则
+     * @description.zh-TW 語言輸入項使用與默認輸入項相同的校驗規則
+     */
+    popupCloneRules?: boolean;
+
+    /**
      * @description The confirm properties for popup actions
      * @description.zh-CN 语言输入项的动作确认属性
      * @description.zh-TW 語言輸入項的動作確認屬性
@@ -254,6 +261,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
             const elementId = nanoid();
             const beforeDom = buildAddonDom(tag, true, elementId);
             const afterDom = buildAddonDom(tag, false, elementId);
+            const cloneRules = (props?.popupCloneRules && props?.rules) ? props?.rules : [];
             const itemDom = (
                 <If condition={props?.popupProField}>
                     <If.Then>
@@ -272,6 +280,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
                                 'data-buddy-locale-tag': elementId,
                             }}
                             rules={[
+                                ...cloneRules,
                                 ...props?.popupShareProps?.rules || [],
                                 ...rules || [],
                             ]}
@@ -307,6 +316,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
             const elementId = nanoid();
             const beforeDom = buildAddonDom(tag, true, elementId);
             const afterDom = buildAddonDom(tag, false, elementId);
+            const cloneRules = (props?.popupCloneRules && props?.rules) ? props?.rules : [];
             const itemDom = (
                 <If condition={props?.popupProField}>
                     <If.Then>
@@ -323,6 +333,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
                                 'data-buddy-locale-tag': elementId,
                             }}
                             rules={[
+                                ...cloneRules,
                                 ...props?.popupShareProps?.rules || [],
                             ]}
                         />
@@ -373,7 +384,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
             open={open}
             onOpenChange={handleOpenChange}
             getPopupContainer={() => {
-                return containerRef.current || document.body;
+                return containerRef?.current || document.body;
             }}
         >
             <Input.Group>
