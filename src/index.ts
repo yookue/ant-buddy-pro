@@ -16,7 +16,7 @@
 
 
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
-export {FullScreen} from './field/FullScreen';
+export {FullScreen, type FullScreenProps, type WrapperProps} from './field/FullScreen';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {InputLocale, type InputLocaleProps, type PopupInputProps, type PopupConfirmProps, type PopupShareProps} from './form/InputLocale';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';

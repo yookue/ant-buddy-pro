@@ -33,14 +33,14 @@ export default () => {
     return (
         <Space>
             <span>
-                <FullScreen enterTitle="Fullscreen" exitTitle="Exit Fullscreen"/>
+                <FullScreen enterTitle='Fullscreen' exitTitle='Exit Fullscreen'/>
             </span>
         </Space>
     );
 }
 ```
 
-#### Using Ant Design Tooltip
+#### Using Ant Design Tooltip and Wrapper
 
 ```jsx
 import React from 'react';
@@ -50,9 +50,7 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <Space>
-            <span>
-                <FullScreen enterTitle="Fullscreen" exitTitle="Exit Fullscreen" useTooltip={true}/>
-            </span>
+            <FullScreen enterTitle='Fullscreen' exitTitle='Exit Fullscreen' useTooltip={true} useWrapper='div'/>
         </Space>
     );
 }

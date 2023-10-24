@@ -360,7 +360,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
         }
     }
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState<boolean>(false);
     const handleMenuClick: MenuProps['onClick'] = () => {
         setOpen(true);
     };

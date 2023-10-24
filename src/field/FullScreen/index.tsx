@@ -24,14 +24,30 @@ import screenfull from 'screenfull';
 
 type OmitTooltipProps = Omit<TooltipProps, 'title'>
 
+export type WrapperProps = {
+    /**
+     * @description The CSS class name for the wrapper element
+     * @description.zh-CN 包裹的 div 或 span 的 CSS 类名
+     * @description.zh-TW 包裹的 div 或 span 的 CSS 類名
+     */
+    clazz?: string;
+
+    /**
+     * @description The CSS style for the wrapper element
+     * @description.zh-CN 包裹的 div 或 span 的 CSS 样式
+     * @description.zh-TW 包裹的 div 或 span 的 CSS 樣式
+     */
+    style?: React.CSSProperties;
+}
+
 export type FullScreenProps = {
     /**
-     * @description The target DOM element to toggle fullscreen mode
+     * @description The target DOM element to toggle fullscreen
      * @description.zh-CN 要切换全屏模式的 DOM 元素
      * @description.zh-TW 要切換全屏模式的 DOM 元素
      * @default document.documentElement
      */
-    targetDom?: HTMLElement,
+    triggerFor?: HTMLElement,
 
     /**
      * @description Whether to use Tooltip instead of raw Title
@@ -47,6 +63,21 @@ export type FullScreenProps = {
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: OmitTooltipProps,
+
+    /**
+     * @description Whether to wrap with a div or span element
+     * @description.zh-CN 是否包裹一个 div 或 span
+     * @description.zh-TW 是否包裹一個 div 或 span
+     * @default false
+     */
+    useWrapper?: 'div' | 'span' | 'p' | false;
+
+    /**
+     * @description The properties for the wrapper element
+     * @description.zh-CN 包裹的 div 或 span 的属性
+     * @description.zh-TW 包裹的 div 或 span 的屬性
+     */
+    wrapperProps?: WrapperProps,
 
     /**
      * @description The title of entering fullscreen mode
@@ -65,39 +96,97 @@ export type FullScreenProps = {
 
 
 export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) => {
-    const [fullscreen, setFullscreen] = React.useState(false);
+    if (!props?.triggerFor) {
+        throw SyntaxError(`Parameter 'triggerFor' must be a valid element!`);
+    }
 
-    const handleClick = () => {
-        if (screenfull.isEnabled) {
-            screenfull.toggle(props?.targetDom);
+    React.useEffect(() => {
+        props?.triggerFor?.addEventListener('fullscreenchange', listenScreenChange, false);
+        props?.triggerFor?.addEventListener('keydown', listenKeyDown, false);
+        return () => {
+            props?.triggerFor?.removeEventListener('fullscreenchange', listenScreenChange, false);
+            props?.triggerFor?.removeEventListener('keydown', listenKeyDown, false);
+        }
+    });
+
+    const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === props?.triggerFor);
+
+    /**
+     * Listens fullscreenchange event for the trigger element
+     *
+     * @see "https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event"
+     */
+    const listenScreenChange = () => {
+        setFullscreen(document.fullscreenElement === props?.triggerFor);
+    };
+
+    /**
+     * Listens keydown event for the trigger element
+     *
+     * @see "https://developer.mozilla.org/en-US/docs/web/api/ui_events/keyboard_event_key_values"
+     * @see "https://www.toptal.com/developers/keycode"
+     */
+    const listenKeyDown = (event: any) => {
+        if (event.key === 'Escape') {
+            setFullscreen(false);
+        } else if (event.key === 'F11') {
             setFullscreen(!fullscreen);
         }
     };
+
+    const handleToggleScreen = () => {
+        if (screenfull.isEnabled) {
+            screenfull.toggle(props?.triggerFor);
+            setFullscreen(!fullscreen);
+        }
+    };
+
+    const screenElement = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
+        onClick: handleToggleScreen,
+    });
 
     return (
         <If condition={props?.useTooltip}>
             <If.Then>
                 <Tooltip title={fullscreen ? props?.exitTitle : props?.enterTitle} {...props?.tooltipProps}>
-                    {
-                        React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
-                            onClick: handleClick,
-                        })
-                    }
+                    <If condition={typeof props?.useWrapper === 'string'}>
+                        {
+                            React.createElement((props?.useWrapper as string), {
+                                className: props?.wrapperProps?.clazz,
+                                style: props?.wrapperProps?.style,
+                            }, screenElement)
+                        }
+                    </If>
+                    <If condition={!props?.useWrapper}>
+                        {screenElement}
+                    </If>
                 </Tooltip>
             </If.Then>
             <If.Else>
-                {
-                    React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
-                        title: fullscreen ? props?.exitTitle : props?.enterTitle,
-                        onClick: handleClick,
-                    })
-                }
+                <If condition={typeof props?.useWrapper === 'string'}>
+                    {
+                        React.createElement((props?.useWrapper as string), {
+                            className: props?.wrapperProps?.clazz,
+                            style: props?.wrapperProps?.style,
+                            title: fullscreen ? props?.exitTitle : props?.enterTitle,
+                        }, screenElement)
+                    }
+                </If>
+                <If condition={!props?.useWrapper}>
+                    {
+                        React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
+                            title: fullscreen ? props?.exitTitle : props?.enterTitle,
+                            onClick: handleToggleScreen,
+                        })
+                    }
+                </If>
             </If.Else>
         </If>
     );
 };
 
 FullScreen.defaultProps = {
-    targetDom: document.documentElement,
+    triggerFor: document.documentElement,
     useTooltip: false,
+    useWrapper: false,
 }
