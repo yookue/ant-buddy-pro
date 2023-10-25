@@ -31,7 +31,7 @@ import {InputLocale} from '@yookue/ant-buddy-pro';
 ```jsx
 import React from 'react';
 import {message} from 'antd';
-import {ProForm} from '@ant-design/pro-components';
+import {ProForm} from '@ant-design/pro-form';
 import {InputLocale} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -100,7 +100,7 @@ export default () => {
 ```jsx
 import React from 'react';
 import {message} from 'antd';
-import {ProForm} from '@ant-design/pro-components';
+import {ProForm} from '@ant-design/pro-form';
 import {InputLocale} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -147,7 +147,7 @@ export default () => {
 ```jsx
 import React from 'react';
 import {message} from 'antd';
-import {ProForm} from '@ant-design/pro-components';
+import {ProForm} from '@ant-design/pro-form';
 import {InputLocale} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -200,7 +200,7 @@ export default () => {
 ```jsx
 import React from 'react';
 import {message} from 'antd';
-import {ProForm} from '@ant-design/pro-components';
+import {ProForm} from '@ant-design/pro-form';
 import {InputLocale} from '@yookue/ant-buddy-pro';
 
 export default () => {

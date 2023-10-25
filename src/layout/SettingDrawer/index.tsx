@@ -15,10 +15,18 @@
  */
 
 
-export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
-export {FullScreen, type FullScreenProps, type WrapperProps} from './field/FullScreen';
-export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
-export {InputLocale, type InputLocaleProps, type PopupInputProps, type PopupConfirmProps, type PopupShareProps} from './form/InputLocale';
-export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
-export {PageFooter, type PageFooterProps} from './layout/PageFooter';
-export {SettingDrawer} from './layout/SettingDrawer';
+import React from 'react';
+import {SettingDrawer as ProSettingDrawer, type SettingDrawerProps} from '@ant-design/pro-layout';
+import './index.less';
+
+
+export const SettingDrawer: React.FC<SettingDrawerProps> = (props?: SettingDrawerProps) => {
+    const {prefixCls, ...restProps} = props || {};
+
+    return (
+        <ProSettingDrawer
+            prefixCls={prefixCls || 'ant-buddy'}
+            {...restProps}
+        />
+    );
+};

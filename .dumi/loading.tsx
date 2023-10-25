@@ -15,7 +15,7 @@
  */
 
 
-import {PageLoading} from '@ant-design/pro-components';
+import {PageLoading} from '@ant-design/pro-layout';
 
 
 export default () => {

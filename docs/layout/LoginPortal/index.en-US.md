@@ -4,7 +4,7 @@ toc: content
 
 ## LoginPortal
 
-Similar to [LoginFormPage](https://github.com/ant-design/pro-components/blob/master/packages/form/src/components/LoginForm/index.md) of [Ant Design Pro](https://pro.ant.design/), with more customization for CSS classes and styles.
+Similar to [LoginFormPage](https://github.com/ant-design/pro-components/blob/v1/packages/form/src/components/LoginForm/index.md) of [Ant Design Pro](https://pro.ant.design/), with more customization for CSS classes and styles.
 
 ### Snapshot
 
@@ -20,7 +20,7 @@ import {LoginPortal} from '@yookue/ant-buddy-pro';
 
 ```jsx | pure
 import React from 'react';
-import {LoginForm} from '@ant-design/pro-components';
+import {LoginForm} from '@ant-design/pro-form';
 import {LoginPortal, PageFooter} from '@yookue/ant-buddy-pro';
 import {SelectLang} from '@umijs/max';
 

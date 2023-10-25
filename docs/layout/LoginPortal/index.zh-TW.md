@@ -4,7 +4,7 @@ toc: content
 
 ## LoginPortal
 
-與 [Ant Design Pro](https://pro.ant.design/) 的 [LoginFormPage](https://github.com/ant-design/pro-components/blob/master/packages/form/src/components/LoginForm/index.md) 類似, 但支持更多的自定義 CSS 樣式。
+與 [Ant Design Pro](https://pro.ant.design/) 的 [LoginFormPage](https://github.com/ant-design/pro-components/blob/v1/packages/form/src/components/LoginForm/index.md) 類似, 但支持更多的自定義 CSS 樣式。
 
 ### 效果截圖
 
@@ -20,7 +20,7 @@ import {LoginPortal} from '@yookue/ant-buddy-pro';
 
 ```jsx | pure
 import React from 'react';
-import {LoginForm} from '@ant-design/pro-components';
+import {LoginForm} from '@ant-design/pro-form';
 import {LoginPortal, PageFooter} from '@yookue/ant-buddy-pro';
 import {SelectLang} from '@umijs/max';
 

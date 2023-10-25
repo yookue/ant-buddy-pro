@@ -4,7 +4,7 @@ toc: content
 
 ## PageFooter
 
-与 [Ant Design Pro](https://pro.ant.design/) 的 [GlobalFooter](https://github.com/ant-design/pro-components/blob/master/packages/layout/src/components/GlobalFooter/index.tsx) 类似, 但支持更多的自定义 CSS 样式。
+与 [Ant Design Pro](https://pro.ant.design/) 的 [GlobalFooter](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/GlobalFooter/index.tsx) 类似, 但支持更多的自定义 CSS 样式。
 
 ### 导入组件
 
