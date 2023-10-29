@@ -23,88 +23,140 @@ import classNames from 'classnames';
 import './index.less';
 
 
+export type HyperlinkProps = {
+    /**
+     * @description The key of array for hyperlink
+     * @description.zh-CN 超链接数组的 key
+     * @description.zh-TW 超鏈接數組的 key
+     */
+    key: string;
+
+    /**
+     * @description The children of hyperlink
+     * @description.zh-CN 超链接的子节点
+     * @description.zh-TW 超鏈接的子節點
+     */
+    content?: React.ReactNode;
+
+    /**
+     * @description The title of hyperlink
+     * @description.zh-CN 超链接的正文
+     * @description.zh-TW 超鏈接的正文
+     */
+    title?: string;
+
+    /**
+     * @description The href of hyperlink
+     * @description.zh-CN 超链接的地址
+     * @description.zh-TW 超鏈接的地址
+     */
+    href?: string;
+
+    /**
+     * @description The target of hyperlink
+     * @description.zh-CN 超链接的目标窗口
+     * @description.zh-TW 超鏈接的目標窗口
+     * @default '_blank'
+     */
+    target?: string;
+
+    /**
+     * @description The relation of target to current page
+     * @description.zh-CN 超链接地址与当前页面的关系
+     * @description.zh-TW 超鏈接地址與當前頁面的關系
+     * @default 'noopener noreferrer'
+     */
+    rel?: string;
+
+    /**
+     * @description The CSS class name of hyperlink
+     * @description.zh-CN 超链接的 CSS 类名
+     * @description.zh-TW 超鏈接的 CSS 類名
+     */
+    clazz?: string;
+
+    /**
+     * @description The CSS style of hyperlink
+     * @description.zh-CN 超链接的 CSS 样式
+     * @description.zh-TW 超鏈接的 CSS 樣式
+     */
+    style?: React.CSSProperties;
+};
+
 export type PageFooterProps = {
+    /**
+     * @description The CSS class prefix of the component
+     * @description.zh-CN 组件的 CSS 类名前缀
+     * @description.zh-TW 組件的 CSS 類名前綴
+     * @default 'buddy-page-footer'
+     */
+    clazzPrefix?: string;
+
     /**
      * @description The hyperlinks array
      * @description.zh-CN 超链接数组
      * @description.zh-TW 超鏈接數組
      */
-    links?: {
-        key: string;
-        text?: React.ReactNode;
-        title?: string;
-        href?: string;
-        target?: string;
-        clazz?: string;
-        style?: React.CSSProperties;
-    }[] | false;
+    linkItems?: HyperlinkProps[];
 
     /**
-     * @description The copyright text
-     * @description.zh-CN 版权文字(无需版权标前缀)
-     * @description.zh-TW 版權文字(無需版權標前綴)
+     * @description The copyright content
+     * @description.zh-CN 版权内容
+     * @description.zh-TW 版權内容
      */
     copyright?: React.ReactNode;
 
     /**
-     * @description The CSS class name for footer div
-     * @description.zh-CN 页脚 div CSS 类名
-     * @description.zh-TW 頁腳 div CSS 類名
+     * @description The CSS class name of the footer div
+     * @description.zh-CN 页脚 div 的 CSS 类名
+     * @description.zh-TW 頁腳 div 的 CSS 類名
      */
     containerClazz?: string;
 
     /**
-     * @description The CSS style for footer div
-     * @description.zh-CN 页脚 div CSS 样式
-     * @description.zh-TW 頁腳 div CSS 樣式
+     * @description The CSS style of the footer div
+     * @description.zh-CN 页脚 div 的 CSS 样式
+     * @description.zh-TW 頁腳 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The CSS class prefix for child div of footer
-     * @description.zh-CN 子容器 div 的 CSS 类名前缀
-     * @description.zh-TW 子容器 div 的 CSS 類名前綴
-     * @default buddy-page-footer
+     * @description The CSS class names for the child of the footer div
+     * @description.zh-CN 子容器 div 的 CSS 类名
+     * @description.zh-TW 子容器 div 的 CSS 類名
      */
-    vesselClazzPrefix?: string;
+    vesselClazz?: string;
 
     /**
-     * @description The extra CSS class names for child div of footer
-     * @description.zh-CN 子容器 div 的附加 CSS 类名前缀
-     * @description.zh-TW 子容器 div 的附加 CSS 類名前綴
-     */
-    vesselAppendClazz?: string;
-
-    /**
-     * @description The CSS style for child div of footer
+     * @description The CSS style for the child of the footer div
      * @description.zh-CN 子容器 div 的 CSS 样式
      * @description.zh-TW 子容器 div 的 CSS 樣式
      */
     vesselStyle?: React.CSSProperties;
 
     /**
-     * @description The CSS class name for each hyperlink
-     * @description.zh-CN 超链接 CSS 类名
-     * @description.zh-TW 版權 CSS 類名
+     * @description The CSS class name of the hyperlinks div
+     * @description.zh-CN 超链接 div 的 CSS 类名
+     * @description.zh-TW 超鏈接 div 的 CSS 類名
      */
     linksClazz?: string;
 
     /**
-     * @description The CSS style for each hyperlink
-     * @description.zh-CN 超链接 CSS 样式
-     * @description.zh-TW 超鏈接 CSS 樣式
+     * @description The CSS style of the the hyperlinks div
+     * @description.zh-CN 超链接 div 的 CSS 样式
+     * @description.zh-TW 超鏈接 div 的 CSS 樣式
      */
     linksStyle?: React.CSSProperties;
 
     /**
-     * @description The CSS class name for copyright div
+     * @description The CSS class name of the copyright div
      * @description.zh-CN 版权 div 的 CSS 类名
      * @description.zh-TW 版權 div 的 CSS 類名
      */
     copyrightClazz?: string;
 
     /**
-     * @description The CSS style for copyright div
+     * @description The CSS style of the copyright div
      * @description.zh-CN 版权 div 的 CSS 样式
      * @description.zh-TW 版權 div 的 CSS 樣式
      */
@@ -116,20 +168,19 @@ const {Footer} = Layout;
 
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
     const context = React.useContext(ConfigProvider.ConfigContext);
-    if ((!props?.links || props?.links?.length === 0) && !props?.copyright) {
+    if ((!props?.linkItems || props?.linkItems?.length === 0) && !props?.copyright) {
         return null;
     }
-    const clazzPrefix = context.getPrefixCls(props?.vesselClazzPrefix || 'buddy-page-footer');
-    const vesselClazz = classNames(clazzPrefix, props?.vesselAppendClazz);
+    const clazzPrefix = context.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
 
     return (
         <Footer className={props?.containerClazz} style={props?.containerStyle}>
-            <div className={vesselClazz} style={props?.vesselStyle}>
-                <If condition={props?.links}>
-                    <div className={`${clazzPrefix}-links`} style={props?.linksStyle}>
+            <div className={classNames(clazzPrefix, props?.vesselClazz)} style={props?.vesselStyle}>
+                <If condition={props?.linkItems}>
+                    <div className={classNames(`${clazzPrefix}-links`, props?.linksClazz)} style={props?.linksStyle}>
                         <For
-                            of={props?.links}
-                            render={(item: any) => {
+                            of={props?.linkItems}
+                            render={(item: HyperlinkProps) => {
                                 return (
                                     <a
                                         key={item.key}
@@ -137,10 +188,10 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                                         href={item?.href}
                                         title={item?.title}
                                         target={item?.target || '_blank'}
-                                        rel='noopener noreferrer'
+                                        rel={item?.rel || 'noopener noreferrer'}
                                         style={item?.style}
                                     >
-                                        {item?.text}
+                                        {item?.content}
                                     </a>
                                 );
                             }}

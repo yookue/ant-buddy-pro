@@ -22,7 +22,7 @@ import {If} from '@yookue/react-condition';
 import screenfull from 'screenfull';
 
 
-type OmitTooltipProps = Omit<TooltipProps, 'title'>
+type OmitTooltipProps = Omit<TooltipProps, 'title'>;
 
 export type WrapperProps = {
     /**
@@ -38,7 +38,7 @@ export type WrapperProps = {
      * @description.zh-TW 包裹的 div 或 span 的 CSS 樣式
      */
     style?: React.CSSProperties;
-}
+};
 
 export type FullScreenProps = {
     /**
@@ -92,22 +92,13 @@ export type FullScreenProps = {
      * @description.zh-TW 退出全屏模式的提示
      */
     exitTitle?: string,
-}
+};
 
 
 export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) => {
     if (!props?.triggerFor) {
         throw SyntaxError(`Parameter 'triggerFor' must be a valid element!`);
     }
-
-    React.useEffect(() => {
-        props?.triggerFor?.addEventListener('fullscreenchange', listenScreenChange, false);
-        props?.triggerFor?.addEventListener('keydown', listenKeyDown, false);
-        return () => {
-            props?.triggerFor?.removeEventListener('fullscreenchange', listenScreenChange, false);
-            props?.triggerFor?.removeEventListener('keydown', listenKeyDown, false);
-        }
-    });
 
     const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === props?.triggerFor);
 
@@ -116,7 +107,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
      *
      * @see "https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event"
      */
-    const listenScreenChange = () => {
+    const handleScreenChange = () => {
         setFullscreen(document.fullscreenElement === props?.triggerFor);
     };
 
@@ -126,13 +117,22 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
      * @see "https://developer.mozilla.org/en-US/docs/web/api/ui_events/keyboard_event_key_values"
      * @see "https://www.toptal.com/developers/keycode"
      */
-    const listenKeyDown = (event: any) => {
+    const handleKeyDown = (event: any) => {
         if (event.key === 'Escape') {
             setFullscreen(false);
         } else if (event.key === 'F11') {
             setFullscreen(!fullscreen);
         }
     };
+
+    React.useLayoutEffect(() => {
+        props?.triggerFor?.addEventListener('fullscreenchange', handleScreenChange, false);
+        props?.triggerFor?.addEventListener('keydown', handleKeyDown, false);
+        return () => {
+            props?.triggerFor?.removeEventListener('fullscreenchange', handleScreenChange, false);
+            props?.triggerFor?.removeEventListener('keydown', handleKeyDown, false);
+        }
+    });
 
     const handleToggleScreen = () => {
         if (screenfull.isEnabled) {
@@ -185,8 +185,9 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     );
 };
 
+
 FullScreen.defaultProps = {
     triggerFor: document.documentElement,
     useTooltip: false,
     useWrapper: false,
-}
+};

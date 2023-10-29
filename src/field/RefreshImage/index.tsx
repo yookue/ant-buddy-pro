@@ -49,7 +49,7 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
      * @description.zh-TW 圖片刷新後的回調函數
      */
     onRefresh?: (previousSrc?: string, currentSrc?: string) => void;
-}
+};
 
 
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {

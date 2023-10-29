@@ -35,7 +35,7 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
      * @description.zh-TW 圖片出錯後的備用源
      */
     fallback?: string | (() => string | undefined);
-}
+};
 
 
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {

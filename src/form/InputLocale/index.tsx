@@ -50,7 +50,7 @@ export type PopupConfirmProps = {
      * @description.zh-TW 當確認設置某個語言項為默認值時的取消按鈕文本
      */
     cancel?: string,
-}
+};
 
 export type PopupInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<OmitInputProps> & {
     /**
@@ -59,7 +59,7 @@ export type PopupInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProF
      * @description.zh-TW 語言標簽
      */
     tag: string,
-}
+};
 
 export type PopupShareProps = {
     /**
@@ -82,22 +82,16 @@ export type PopupShareProps = {
      * @description.zh-TW 語言輸入項的校驗規則
      */
     rules?: FormRule[];
-}
+};
 
 export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<OmitInputProps> & {
     /**
-     * @description The CSS class name for the locales dropdown
-     * @description.zh-CN 语言下拉框的 CSS 类名
-     * @description.zh-TW 語言下拉框的 CSS 類名
+     * @description The CSS class prefix of the component
+     * @description.zh-CN 组件的 CSS 类名前缀
+     * @description.zh-TW 組件的 CSS 類名前綴
+     * @default 'buddy-input-locale'
      */
-    overlayClazz?: string;
-
-    /**
-     * @description The CSS style for the locales dropdown
-     * @description.zh-CN 语言下拉框的 CSS 样式
-     * @description.zh-TW 語言下拉框的 CSS 樣式
-     */
-    overlayStyle?: React.CSSProperties;
+    clazzPrefix?: string;
 
     /**
      * @description The DOM of action for the primary input box
@@ -114,6 +108,20 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
      * @default 'after'
      */
     actionPos?: 'before' | 'after' | false;
+
+    /**
+     * @description The CSS class name of the locales dropdown
+     * @description.zh-CN 语言下拉框的 CSS 类名
+     * @description.zh-TW 語言下拉框的 CSS 類名
+     */
+    popupClazz?: string;
+
+    /**
+     * @description The CSS style of the locales dropdown
+     * @description.zh-CN 语言下拉框的 CSS 样式
+     * @description.zh-TW 語言下拉框的 CSS 樣式
+     */
+    popupStyle?: React.CSSProperties;
 
     /**
      * @description The placement of the locales dropdown
@@ -169,14 +177,14 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
     popupCloneRules?: boolean;
 
     /**
-     * @description The confirm properties for popup actions
+     * @description The confirm properties of popup actions
      * @description.zh-CN 语言输入项的动作确认属性
      * @description.zh-TW 語言輸入項的動作確認屬性
      */
     popupConfirmProps?: PopupConfirmProps;
 
     /**
-     * @description The sharing properties for the locale items
+     * @description The sharing properties of the locale items
      * @description.zh-CN 语言输入项的通用属性
      * @description.zh-TW 語言輸入項的通用屬性
      */
@@ -189,13 +197,12 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
      * @default false
      */
     popupProField?: boolean;
-}
+};
 
 
 export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & React.RefAttributes<any>> = React.forwardRef((props?: InputLocaleProps, ref?: any) => {
     const context = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = context.getPrefixCls('buddy-input-locale');
-    const popupClazz = classNames(clazzPrefix, props?.overlayClazz);
+    const clazzPrefix = context.getPrefixCls(props?.clazzPrefix || 'buddy-input-locale');
     const entryId = nanoid();
 
     const handleClickCopy = (tagId: string) => {
@@ -369,7 +376,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
     };
 
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const restProps = props ? omit(props, ['overlayClazz', 'overlayStyle', 'actionDom', 'actionPos', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
+    const restProps = props ? omit(props, ['actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter']) : {};
 
     return (
@@ -379,8 +386,8 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
                 onClick: handleMenuClick,
             }}
             placement={props?.popupPlacement}
-            overlayClassName={popupClazz}
-            overlayStyle={props?.overlayStyle}
+            overlayClassName={classNames(clazzPrefix, props?.popupClazz)}
+            overlayStyle={props?.popupStyle}
             open={open}
             onOpenChange={handleOpenChange}
             getPopupContainer={() => {
@@ -404,6 +411,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
     );
 });
 
+
 InputLocale.defaultProps = {
     actionDom: <TranslationOutlined/>,
     actionPos: 'after',
@@ -412,4 +420,4 @@ InputLocale.defaultProps = {
     popupActionDom: <SelectOutlined/>,
     popupActionPos: 'after',
     popupProField: false,
-}
+};

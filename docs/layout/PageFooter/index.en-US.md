@@ -21,10 +21,10 @@ import {PageFooter} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <PageFooter
-            links={[
+            linkItems={[
                 {
                     key: 'ant-buddy-pro',
-                    text: 'Ant Buddy Pro',
+                    content: 'Ant Buddy Pro',
                     href: 'https://github.com/yookue/ant-buddy-pro',
                     style: {
                         color: '#eba77a',
