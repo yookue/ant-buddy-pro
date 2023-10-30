@@ -19,6 +19,7 @@ export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps, type WrapperProps} from './field/FullScreen';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {InputLocale, type InputLocaleProps, type PopupInputProps, type PopupConfirmProps, type PopupShareProps} from './form/InputLocale';
+export {CardTabs, type CardTabsProps} from './layout/CardTabs';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
 export {MenuTabs, type MenuTabsProps, type MenuProps, type MenuItemProps, type AdjustLayoutProps} from './layout/MenuTabs';
 export {PageFooter, type PageFooterProps, type HyperlinkProps} from './layout/PageFooter';

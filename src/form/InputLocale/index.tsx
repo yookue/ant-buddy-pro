@@ -201,8 +201,8 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
 
 
 export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & React.RefAttributes<any>> = React.forwardRef((props?: InputLocaleProps, ref?: any) => {
-    const context = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = context.getPrefixCls(props?.clazzPrefix || 'buddy-input-locale');
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-input-locale');
     const entryId = nanoid();
 
     const handleClickCopy = (tagId: string) => {

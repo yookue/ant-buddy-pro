@@ -122,9 +122,9 @@ export type MenuTabsProps = {
     entryClazz?: string;
 
     /**
-     * @description The CSS style of the entry div (Do not set 'width' property when 'autoAdjust' is true)
-     * @description.zh-CN TabBar div 的 CSS 样式 (当自动调整布局时不要设置宽度属性)
-     * @description.zh-TW TabBar div 的 CSS 樣式 (當自動調整布局時不要設置寬度屬性)
+     * @description The CSS style of the entry div
+     * @description.zh-CN TabBar div 的 CSS 样式
+     * @description.zh-TW TabBar div 的 CSS 樣式
      */
     entryStyle?: React.CSSProperties;
 
@@ -181,8 +181,8 @@ export type MenuTabsProps = {
 
 
 export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
-    const context = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = context.getPrefixCls(props?.clazzPrefix || 'buddy-menu-tabs');
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-menu-tabs');
     const containerRef = React.useRef<HTMLDivElement>();
 
     const [activeKey, setActiveKey] = React.useState<string | undefined>(props?.menuProps?.selectedKey);
@@ -218,9 +218,10 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         }, [containerRef.current]);
     }
 
-    const entryCss = props?.entryWidth ? css({width: props?.entryWidth}) : undefined;
     const omitItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
     const restProps = props?.menuProps ? omit(props?.menuProps, ['items', 'onClick']) : {};
+    const entryWidthClazz = props?.entryWidth ? css({width: props?.entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
+    const omitEntryStyle = props?.entryStyle ? omit(props?.entryStyle, ['width']) : undefined;
 
     return (
         <div
@@ -233,8 +234,8 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             }}
         >
             <div
-                className={classNames(`${clazzPrefix}-entry`, props?.entryClazz, entryCss)}
-                style={props?.entryStyle}
+                className={classNames(`${clazzPrefix}-entry`, props?.entryClazz, entryWidthClazz)}
+                style={omitEntryStyle}
             >
                 <Menu
                     items={omitItems}

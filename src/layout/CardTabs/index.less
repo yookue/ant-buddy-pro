@@ -1,0 +1,112 @@
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@root-entry-name: 'default';
+@buddy-card-tabs: ~'@{ant-prefix}-buddy-card-tabs';
+
+.@{buddy-card-tabs} .@{ant-prefix}-tabs-card {
+    .@{ant-prefix}-tabs-nav::before {
+        display: none;
+    }
+
+    .@{ant-prefix}-tabs-tab {
+        background: transparent;
+        border-color: transparent;
+    }
+
+    .@{ant-prefix}-tabs-ink-bar {
+        visibility: inherit;
+    }
+
+    &.@{ant-prefix}-tabs-top {
+        .@{ant-prefix}-tabs-nav {
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+            margin-bottom: 0;
+        }
+
+        .@{ant-prefix}-tabs-content-holder {
+            border-left: @border-width-base @border-style-base @border-color-base;
+            border-right: @border-width-base @border-style-base @border-color-base;
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+
+            .@{ant-prefix}-tabs-content {
+                padding: @padding-md @padding-lg;
+            }
+        }
+
+        .@{ant-prefix}-tabs-tab-active {
+            border-left: @border-width-base @border-style-base @border-color-base;
+            border-right: @border-width-base @border-style-base @border-color-base;
+            border-top: @border-width-base @border-style-base @border-color-base;
+        }
+    }
+
+    &.@{ant-prefix}-tabs-bottom {
+        .@{ant-prefix}-tabs-nav {
+            border-top: @border-width-base @border-style-base @border-color-base;
+            margin-top: 0;
+        }
+
+        .@{ant-prefix}-tabs-content-holder {
+            border-left: @border-width-base @border-style-base @border-color-base;
+            border-right: @border-width-base @border-style-base @border-color-base;
+            border-top: @border-width-base @border-style-base @border-color-base;
+
+            .@{ant-prefix}-tabs-content {
+                padding: @padding-md @padding-lg;
+            }
+        }
+
+        .@{ant-prefix}-tabs-tab-active {
+            border-left: @border-width-base @border-style-base @border-color-base;
+            border-right: @border-width-base @border-style-base @border-color-base;
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+        }
+    }
+
+    &.@{ant-prefix}-tabs-left {
+        .@{ant-prefix}-tabs-nav {
+            border-right: @border-width-base @border-style-base @border-color-base;
+            margin-right: 0;
+        }
+
+        .@{ant-prefix}-tabs-content-holder {
+            border-right: @border-width-base @border-style-base @border-color-base;
+            border-top: @border-width-base @border-style-base @border-color-base;
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+
+            .@{ant-prefix}-tabs-content {
+                padding: @padding-md 0;
+            }
+        }
+
+        .@{ant-prefix}-tabs-tab-active {
+            border-left: @border-width-base @border-style-base @border-color-base;
+            border-top: @border-width-base @border-style-base @border-color-base;
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+        }
+    }
+
+    &.@{ant-prefix}-tabs-right {
+        .@{ant-prefix}-tabs-nav {
+            border-left: @border-width-base @border-style-base @border-color-base;
+            margin-left: 0;
+        }
+
+        .@{ant-prefix}-tabs-content-holder {
+            border-left: @border-width-base @border-style-base @border-color-base;
+            border-top: @border-width-base @border-style-base @border-color-base;
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+
+            .@{ant-prefix}-tabs-content {
+                padding: @padding-md @padding-lg;
+            }
+        }
+
+        .@{ant-prefix}-tabs-tab-active {
+            border-right: @border-width-base @border-style-base @border-color-base;
+            border-top: @border-width-base @border-style-base @border-color-base;
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+        }
+    }
+}

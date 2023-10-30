@@ -167,11 +167,11 @@ const {Footer} = Layout;
 
 
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
-    const context = React.useContext(ConfigProvider.ConfigContext);
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
     if ((!props?.linkItems || props?.linkItems?.length === 0) && !props?.copyright) {
         return null;
     }
-    const clazzPrefix = context.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
 
     return (
         <Footer className={props?.containerClazz} style={props?.containerStyle}>
