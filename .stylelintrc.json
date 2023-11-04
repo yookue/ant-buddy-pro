@@ -2,6 +2,7 @@
     "extends": "stylelint-config-standard",
     "rules": {
         "indentation": 4,
+        "max-empty-lines": 2,
         "alpha-value-notation": "number",
         "color-no-invalid-hex": true,
         "selector-class-pattern": null
