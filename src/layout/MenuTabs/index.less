@@ -56,30 +56,26 @@
 }
 
 .@{buddy-menu-tabs}-light {
+    background-color: @component-background;
+
     .@{buddy-menu-tabs}-entry {
         border-right: @border-width-base @border-style-base @border-color-split;
     }
 
     .@{buddy-menu-tabs}-content {
-        background-color: @component-background;
-    }
-
-    .@{buddy-menu-tabs}-title {
-        color: @heading-color;
+        color: @text-color;
     }
 }
 
 .@{buddy-menu-tabs}-dark {
+    background-color: #141414;
+
     .@{buddy-menu-tabs}-entry {
         border-right: @border-width-base @border-style-base #303030;
     }
 
     .@{buddy-menu-tabs}-content {
-        background-color: #141414;
-    }
-
-    .@{buddy-menu-tabs}-title {
-        color: fade(@white, 45%);
+        color: fade(@white, 85%);
     }
 }
 
