@@ -15,30 +15,29 @@
  */
 
 
+@root-entry-name: default;
 // noinspection CssUnknownTarget
 @import (reference) '~antd/es/style/themes/index.less';
 
-@root-entry-name: 'default';
 @buddy-card-tabs: ~'@{ant-prefix}-buddy-card-tabs';
 
 
 .@{buddy-card-tabs} .@{ant-prefix}-tabs-card {
     .@{ant-prefix}-tabs-nav::before {
-        display: none;
+        border-bottom: @border-width-base @border-style-base @border-color-base;
     }
 
-    .@{ant-prefix}-tabs-tab {
-        background: transparent;
-        border-color: transparent;
+    .@{ant-prefix}-tabs-tab:not(.@{ant-prefix}-tabs-tab-active) {
+        border: @border-width-base @border-style-base @border-color-base;
     }
 
     .@{ant-prefix}-tabs-ink-bar {
+        background-color: @tabs-hover-color;
         visibility: inherit;
     }
 
     &.@{ant-prefix}-tabs-top {
         .@{ant-prefix}-tabs-nav {
-            border-bottom: @border-width-base @border-style-base @border-color-base;
             margin-bottom: 0;
         }
 

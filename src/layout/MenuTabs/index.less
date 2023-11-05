@@ -15,10 +15,10 @@
  */
 
 
+@root-entry-name: default;
 // noinspection CssUnknownTarget
 @import (reference) '~antd/es/style/themes/index.less';
 
-@root-entry-name: 'default';
 @buddy-menu-tabs: ~'@{ant-prefix}-buddy-menu-tabs';
 
 
@@ -27,8 +27,6 @@
     background-color: @menu-bg;
 
     &-entry {
-        border-right: @border-width-base @border-style-base @border-color-split;
-
         /* Override Styles */
 
         .@{ant-prefix}-menu-inline {
@@ -49,7 +47,6 @@
         padding: 16px 32px;
 
         &-title {
-            color: @heading-color;
             font-weight: 500;
             font-size: 20px;
             line-height: 28px;
@@ -57,6 +54,35 @@
         }
     }
 }
+
+.@{buddy-menu-tabs}-light {
+    .@{buddy-menu-tabs}-entry {
+        border-right: @border-width-base @border-style-base @border-color-split;
+    }
+
+    .@{buddy-menu-tabs}-content {
+        background-color: @component-background;
+    }
+
+    .@{buddy-menu-tabs}-title {
+        color: @heading-color;
+    }
+}
+
+.@{buddy-menu-tabs}-dark {
+    .@{buddy-menu-tabs}-entry {
+        border-right: @border-width-base @border-style-base #303030;
+    }
+
+    .@{buddy-menu-tabs}-content {
+        background-color: #141414;
+    }
+
+    .@{buddy-menu-tabs}-title {
+        color: fade(@white, 45%);
+    }
+}
+
 
 @media screen and (max-width: @screen-md) {
     .@{buddy-menu-tabs} {

@@ -183,6 +183,7 @@ export type MenuTabsProps = {
 export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-menu-tabs');
+    const themeClazz = (props?.menuProps?.theme === 'dark') ? `${clazzPrefix}-dark` : `${clazzPrefix}-light`;
     const containerRef = React.useRef<HTMLDivElement>();
 
     const [activeKey, setActiveKey] = React.useState<string | undefined>(props?.menuProps?.selectedKey);
@@ -225,7 +226,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     return (
         <div
-            className={classNames(clazzPrefix, props?.containerClazz)}
+            className={classNames(clazzPrefix, themeClazz, props?.containerClazz)}
             style={props?.containerStyle}
             ref={(ref) => {
                 if (ref) {
