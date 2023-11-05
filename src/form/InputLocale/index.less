@@ -21,30 +21,35 @@
 @root-entry-name: 'default';
 @buddy-input-locale: ~'@{ant-prefix}-buddy-input-locale';
 
-.@{buddy-input-locale} .@{ant-prefix}-dropdown-menu-item {
-    cursor: default !important;
-}
 
-.@{buddy-input-locale}.@{ant-prefix}-dropdown-placement-bottom .@{ant-prefix}-dropdown-menu-root,
-.@{buddy-input-locale}.@{ant-prefix}-dropdown-placement-bottomLeft .@{ant-prefix}-dropdown-menu-root,
-.@{buddy-input-locale}.@{ant-prefix}-dropdown-placement-bottomRight .@{ant-prefix}-dropdown-menu-root {
-    margin-top: -24px !important;
-}
-
-.@{buddy-input-locale}-disabled {
-    color: @disabled-color;
-}
-
-.@{buddy-input-locale}-tag:not(.@{buddy-input-locale}-disabled) {
-    &:hover {
-        color: fade(@black, 55%);
+.@{buddy-input-locale} {
+    &-disabled {
+        color: @disabled-color;
     }
-}
 
-.@{buddy-input-locale}-action:not(.@{buddy-input-locale}-disabled) {
-    &:hover {
-        color: @link-hover-color;
-        border-color: @link-hover-color;
-        cursor: pointer;
+    &-tag:not(.@{buddy-input-locale}-disabled) {
+        &:hover {
+            color: fade(@black, 55%);
+        }
+    }
+
+    &-action:not(.@{buddy-input-locale}-disabled) {
+        &:hover {
+            color: @link-hover-color;
+            border-color: @link-hover-color;
+            cursor: pointer;
+        }
+    }
+
+    /* Override Styles */
+
+    .@{ant-prefix}-dropdown-menu .@{ant-prefix}-dropdown-menu-item {
+        cursor: default;
+    }
+
+    &.@{ant-prefix}-dropdown-placement-bottom .@{ant-prefix}-dropdown-menu-root,
+    &.@{ant-prefix}-dropdown-placement-bottomLeft .@{ant-prefix}-dropdown-menu-root,
+    &.@{ant-prefix}-dropdown-placement-bottomRight .@{ant-prefix}-dropdown-menu-root {
+        margin-top: -24px;
     }
 }
