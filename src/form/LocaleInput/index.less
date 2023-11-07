@@ -19,21 +19,21 @@
 // noinspection CssUnknownTarget
 @import (reference) '~antd/es/style/themes/index.less';
 
-@buddy-input-locale: ~'@{ant-prefix}-buddy-input-locale';
+@buddy-locale-input: ~'@{ant-prefix}-buddy-locale-input';
 
 
-.@{buddy-input-locale} {
+.@{buddy-locale-input} {
     &-disabled {
         color: @disabled-color;
     }
 
-    &-tag:not(.@{buddy-input-locale}-disabled) {
+    &-tag:not(.@{buddy-locale-input}-disabled) {
         &:hover {
             color: fade(@black, 55%);
         }
     }
 
-    &-action:not(.@{buddy-input-locale}-disabled) {
+    &-action:not(.@{buddy-locale-input}-disabled) {
         &:hover {
             color: @link-hover-color;
             border-color: @link-hover-color;

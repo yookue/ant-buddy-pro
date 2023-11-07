@@ -2,9 +2,9 @@
 toc: content
 ---
 
-## InputLocale
+## LocaleInput
 
-InputLocale, provides a text input box with a dropdown div of locale input boxes, aiming to support multilingual capability for your application.
+LocaleInput, provides a text input box with a dropdown div of locale input boxes, aiming to support multilingual capability for your application.
 
 ### Premise
 
@@ -17,7 +17,7 @@ npm install @ant-design/icons --save
 ### Import
 
 ```jsx | pure
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 ```
 
 ### Example
@@ -32,7 +32,7 @@ import {InputLocale} from '@yookue/ant-buddy-pro';
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -47,7 +47,7 @@ export default () => {
                 message.success('Yep, you\'ve clicked the submit button');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithValidation'
                 placeholder='Demo Field With Validation'
                 popupProField={true}
@@ -101,7 +101,7 @@ export default () => {
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -116,7 +116,7 @@ export default () => {
                 message.success('Yep, you\'ve clicked the submit button');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithoutValidation'
                 placeholder='Demo Field Without Validation'
                 popupInputProps={[
@@ -148,7 +148,7 @@ export default () => {
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -163,7 +163,7 @@ export default () => {
                 message.success('Yep, you\'ve clicked the submit button');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithValidation'
                 placeholder='Demo Field With Validation'
                 popupActionPos='before'
@@ -201,7 +201,7 @@ export default () => {
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -216,7 +216,7 @@ export default () => {
                 message.success('Yep, you\'ve clicked the submit button');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithoutValidation'
                 placeholder='Demo Field Without Validation'
                 disabled
@@ -234,6 +234,6 @@ export default () => {
 
 ### Properties
 
-#### InputLocaleProps
+#### LocaleInputProps
 
-<API src="@/form/InputLocale/index.tsx" hideTitle></API>
+<API src="@/form/LocaleInput/index.tsx" hideTitle></API>

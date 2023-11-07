@@ -27,4 +27,8 @@ export default () => {
 
 ### 組件屬性
 
-參見 [SettingDrawer](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/SettingDrawer/index.tsx)
+##### SettingDrawerProps
+
+<API src="@/layout/SettingDrawer/index.tsx" hideTitle></API>
+
+更多屬性參見 [SettingDrawer](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/SettingDrawer/index.tsx)

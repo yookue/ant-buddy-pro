@@ -27,4 +27,8 @@ export default () => {
 
 ### Properties
 
-See [SettingDrawer](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/SettingDrawer/index.tsx)
+##### SettingDrawerProps
+
+<API src="@/layout/SettingDrawer/index.tsx" hideTitle></API>
+
+More properties can be found at [SettingDrawer](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/SettingDrawer/index.tsx)

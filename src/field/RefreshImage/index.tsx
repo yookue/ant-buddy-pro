@@ -16,12 +16,22 @@
 
 
 import React from 'react';
+import {ConfigProvider} from 'antd';
+import classNames from 'classnames';
 import RcImage, {type ImageProps} from 'rc-image';
 import omit from 'rc-util/lib/omit';
 import {ImageUtils} from '@/util/ImageUtils';
 
 
 export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
+    /**
+     * @description The CSS class prefix of the component
+     * @description.zh-CN 组件的 CSS 类名前缀
+     * @description.zh-TW 組件的 CSS 類名前綴
+     * @default 'buddy-refresh-image'
+     */
+    clazzPrefix?: string;
+
     /**
      * @description Whether to change the cursor automatically
      * @description.zh-CN 是否自动改变鼠标指针样式
@@ -53,6 +63,9 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
 
 
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-refresh-image');
+
     const [imageSource, SetImageSource] = React.useState<string | undefined>(() => {
         return ImageUtils.detectSource(props?.src, data => SetImageSource(data));
     });
@@ -80,12 +93,13 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         }
     };
 
-    const omitProps = props ? omit(props, ['autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']) : {};
+    const omitProps = props ? omit(props, ['clazzPrefix', 'className', 'autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']) : {};
     const styles = props?.autoCursor ? {cursor: 'pointer'} : {};
 
     return (
         <RcImage
             {...omitProps}
+            className={classNames(clazzPrefix, props?.className)}
             src={imageSource}
             onClick={handleClick}
             onError={handleError}

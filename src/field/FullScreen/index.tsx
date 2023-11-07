@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Tooltip, type TooltipProps} from 'antd';
+import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {If} from '@yookue/react-condition';
 import screenfull from 'screenfull';
@@ -41,6 +41,14 @@ export type WrapperProps = {
 };
 
 export type FullScreenProps = {
+    /**
+     * @description The CSS class prefix of the component
+     * @description.zh-CN 组件的 CSS 类名前缀
+     * @description.zh-TW 組件的 CSS 類名前綴
+     * @default 'buddy-full-screen'
+     */
+    clazzPrefix?: string;
+
     /**
      * @description The target DOM element to toggle fullscreen
      * @description.zh-CN 要切换全屏模式的 DOM 元素
@@ -96,6 +104,9 @@ export type FullScreenProps = {
 
 
 export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) => {
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-full-screen');
+
     if (!props?.triggerFor) {
         throw SyntaxError(`Parameter 'triggerFor' must be a valid element!`);
     }
@@ -142,6 +153,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     };
 
     const screenElement = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
+        className: clazzPrefix,
         onClick: handleToggleScreen,
     });
 

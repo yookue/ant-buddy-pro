@@ -2,9 +2,9 @@
 toc: content
 ---
 
-## InputLocale
+## LocaleInput
 
-InputLocale，提供了壹個包含多種語言下拉框的文本輸入字段，以便讓您的應用程序支持多語言特性。
+LocaleInput，提供了壹個包含多種語言下拉框的文本輸入字段，以便讓您的應用程序支持多語言特性。
 
 ### 使用前提
 
@@ -17,7 +17,7 @@ npm install @ant-design/icons --save
 ### 導入組件
 
 ```jsx | pure
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 ```
 
 ### 使用示例
@@ -32,7 +32,7 @@ import {InputLocale} from '@yookue/ant-buddy-pro';
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -47,7 +47,7 @@ export default () => {
                 message.success('您點擊了提交按鈕');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithValidation'
                 placeholder='示例字段-帶校驗'
                 popupProField={true}
@@ -101,7 +101,7 @@ export default () => {
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -116,7 +116,7 @@ export default () => {
                 message.success('您點擊了提交按鈕');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithoutValidation'
                 placeholder='示例字段-無校驗'
                 popupInputProps={[
@@ -148,7 +148,7 @@ export default () => {
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -163,7 +163,7 @@ export default () => {
                 message.success('您點擊了提交按鈕');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithValidation'
                 placeholder='示例字段-帶校驗'
                 popupActionPos='before'
@@ -201,7 +201,7 @@ export default () => {
 import React from 'react';
 import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {InputLocale} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
@@ -216,7 +216,7 @@ export default () => {
                 message.success('您點擊了提交按鈕');
             }}
         >
-            <InputLocale
+            <LocaleInput
                 name='localeWithoutValidation'
                 placeholder='示例字段-無校驗'
                 disabled
@@ -234,6 +234,6 @@ export default () => {
 
 ### 組件屬性
 
-#### InputLocaleProps
+#### LocaleInputProps
 
-<API src="@/form/InputLocale/index.tsx" hideTitle></API>
+<API src="@/form/LocaleInput/index.tsx" hideTitle></API>

@@ -84,12 +84,12 @@ export type PopupShareProps = {
     rules?: FormRule[];
 };
 
-export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<OmitInputProps> & {
+export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<OmitInputProps> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-input-locale'
+     * @default 'buddy-locale-input'
      */
     clazzPrefix?: string;
 
@@ -200,9 +200,9 @@ export type InputLocaleProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
 };
 
 
-export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & React.RefAttributes<any>> = React.forwardRef((props?: InputLocaleProps, ref?: any) => {
+export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & React.RefAttributes<any>> = React.forwardRef((props?: LocaleInputProps, ref?: any) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-input-locale');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-locale-input');
     const entryId = nanoid();
 
     const handleClickCopy = (tagId: string) => {
@@ -253,7 +253,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
             </>
         );
         return (props?.popupTagPos === props?.popupActionPos) ? (<Space>{content}</Space>) : content;
-    }
+    };
 
     const menuItems: MenuProps['items'] = [];
     if (props?.popupInputProps) {
@@ -376,7 +376,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
     };
 
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const restProps = props ? omit(props, ['actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
+    const restProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter']) : {};
 
     return (
@@ -399,10 +399,10 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
                     ref={ref}
                     {...restProps}
                     fieldProps={{
+                        ...omitFieldProps,
                         addonBefore: (props?.actionPos === 'before') ? props?.actionDom : undefined,
                         addonAfter: (props?.actionPos === 'after') ? props?.actionDom : undefined,
                         'data-buddy-locale-id': entryId,
-                        ...omitFieldProps,
                     }}
                 />
                 <div ref={containerRef}/>
@@ -412,7 +412,7 @@ export const InputLocale: React.ForwardRefExoticComponent<InputLocaleProps & Rea
 });
 
 
-InputLocale.defaultProps = {
+LocaleInput.defaultProps = {
     actionDom: <TranslationOutlined/>,
     actionPos: 'after',
     popupPlacement: 'bottomLeft',

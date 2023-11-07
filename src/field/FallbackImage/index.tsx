@@ -16,12 +16,22 @@
 
 
 import React from 'react';
+import {ConfigProvider} from 'antd';
+import classNames from 'classnames';
 import RcImage, {type ImageProps} from 'rc-image';
 import omit from 'rc-util/lib/omit';
 import {ImageUtils} from '@/util/ImageUtils';
 
 
 export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
+    /**
+     * @description The CSS class prefix of the component
+     * @description.zh-CN 组件的 CSS 类名前缀
+     * @description.zh-TW 組件的 CSS 類名前綴
+     * @default 'buddy-fallback-image'
+     */
+    clazzPrefix?: string;
+
     /**
      * @description The source of the image
      * @description.zh-CN 图片源
@@ -39,6 +49,9 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
 
 
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-fallback-image');
+
     const [imageSource, SetImageSource] = React.useState<string | undefined>(() => {
         return ImageUtils.detectSource(props?.src, data => SetImageSource(data));
     });
@@ -52,11 +65,12 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
         }
     };
 
-    const omitProps = props ? omit(props, ['src', 'fallback', 'onError']) : {};
+    const omitProps = props ? omit(props, ['clazzPrefix', 'className', 'src', 'fallback', 'onError']) : {};
 
     return (
         <RcImage
             {...omitProps}
+            className={classNames(clazzPrefix, props?.className)}
             src={imageSource}
             onError={handleError}
         />

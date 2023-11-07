@@ -174,8 +174,8 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
 
     return (
-        <Footer className={props?.containerClazz} style={props?.containerStyle}>
-            <div className={classNames(clazzPrefix, props?.vesselClazz)} style={props?.vesselStyle}>
+        <Footer className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+            <div className={props?.vesselClazz} style={props?.vesselStyle}>
                 <If condition={props?.linkItems}>
                     <div className={classNames(`${clazzPrefix}-links`, props?.linksClazz)} style={props?.linksStyle}>
                         <For

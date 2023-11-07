@@ -16,17 +16,41 @@
 
 
 import React from 'react';
-import {SettingDrawer as ProSettingDrawer, type SettingDrawerProps} from '@ant-design/pro-layout';
+import {ConfigProvider} from 'antd';
+import {SettingDrawer as ProSettingDrawer, type SettingDrawerProps as ProSettingDrawerProps} from '@ant-design/pro-layout';
+import classNames from 'classnames';
+import omit from 'rc-util/lib/omit';
 import './index.less';
 
 
+export type SettingDrawerProps = ProSettingDrawerProps & {
+    /**
+     * @description The CSS class prefix of the component
+     * @description.zh-CN 组件的 CSS 类名前缀
+     * @description.zh-TW 組件的 CSS 類名前綴
+     * @default 'buddy-setting-drawer'
+     */
+    clazzPrefix?: string;
+
+    /**
+     * @description The CSS class name of the entry div
+     * @description.zh-CN 入口 div 的 CSS 类名
+     * @description.zh-TW 入口 div 的 CSS 類名
+     */
+    entryClazz?: string;
+};
+
+
 export const SettingDrawer: React.FC<SettingDrawerProps> = (props?: SettingDrawerProps) => {
-    const {prefixCls, ...restProps} = props || {};
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-setting-drawer');
+    const handlePrefix = configContext.getPrefixCls('buddy');
+    const omitProps = props ? omit(props, ['clazzPrefix', 'entryClazz', 'prefixCls']) : {};
 
     return (
         <ProSettingDrawer
-            prefixCls={prefixCls || 'ant-buddy'}
-            {...restProps}
+            prefixCls={classNames((props?.prefixCls || clazzPrefix), props?.entryClazz, (props?.prefixCls || handlePrefix))}
+            {...omitProps}
         />
     );
 };
