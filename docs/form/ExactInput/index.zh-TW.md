@@ -22,6 +22,8 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
+#### 使用 ProForm
+
 ```jsx
 import React from 'react';
 import {message} from 'antd';
@@ -49,6 +51,29 @@ export default () => {
               }}
           />
         </ProForm>
+    );
+}
+```
+
+#### 不使用 ProForm，使用 Tooltip
+
+```jsx
+import React from 'react';
+import {message} from 'antd';
+import {ProForm} from '@ant-design/pro-form';
+import {ExactInput} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ExactInput
+            name='foobar'
+            placeholder='請輸入此項'
+            tooltipProps={{
+                title: '全字匹配',
+            }}
+            useTooltip={true}
+            proField={false}
+        />
     );
 }
 ```

@@ -16,11 +16,12 @@
 
 
 import React from 'react';
-import {ConfigProvider, Checkbox, Tooltip, type InputProps, type CheckboxProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Input, Checkbox, Tooltip, type InputProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {AimOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
 import classNames from 'classnames';
 import omit from 'rc-util/lib/omit';
+import {DesignConst} from '@/constant/DesignConst';
 import './index.less';
 
 
@@ -101,6 +102,14 @@ export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProF
      * @description.zh-TW 复选框的 Tooltip 屬性
      */
     tooltipProps?: TooltipProps,
+
+    /**
+     * @description Whether to use ProFormField instead of Input
+     * @description.zh-CN 是否使用 ProFormField 控件
+     * @description.zh-TW 是否使用 ProFormField 控件
+     * @default true
+     */
+    proField?: boolean;
 };
 
 
@@ -108,8 +117,6 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-exact-input');
 
-    const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps']) : {};
-    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter', 'className']) : {};
     const omitCheckProps = props?.checkProps ? omit(props?.checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id', 'title']) : {};
     const omitTooltipProps = props?.tooltipProps ? omit(props?.tooltipProps, ['title']) : {};
 
@@ -180,18 +187,37 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const beforeDom = buildAddonDom(true);
     const afterDom = buildAddonDom(false);
 
-    return (
-        <ProFormText
-            ref={ref}
-            {...restProps}
-            fieldProps={{
-                className: classNames(clazzPrefix, props?.className),
-                ...omitFieldProps,
-                addonBefore: beforeDom,
-                addonAfter: afterDom,
-            }}
-        />
-    );
+    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter', 'className']) : {};
+    if (props?.proField) {
+        const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField']) : {};
+
+        return (
+            <ProFormText
+                ref={ref}
+                {...restProps}
+                fieldProps={{
+                    className: classNames(clazzPrefix, props?.className),
+                    ...omitFieldProps,
+                    addonBefore: beforeDom,
+                    addonAfter: afterDom,
+                }}
+            />
+        );
+    } else {
+        // @ts-ignore
+        const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemPropsKeys]) : {};
+
+        return (
+            <Input
+                ref={ref}
+                {...restProps}
+                className={classNames(clazzPrefix, props?.className)}
+                {...omitFieldProps}
+                addonBefore={beforeDom}
+                addonAfter={afterDom}
+            />
+        );
+    }
 });
 
 
@@ -202,4 +228,5 @@ ExactInput.defaultProps = {
         nameSuffix: 'Exact',
     },
     useTooltip: false,
+    proField: true,
 };

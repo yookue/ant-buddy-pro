@@ -23,6 +23,7 @@ import {nanoid} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/lib/omit';
+import {DesignConst} from '@/constant/DesignConst';
 import {InputUtils} from '@/util/InputUtils';
 import './index.less';
 
@@ -108,6 +109,14 @@ export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
     actionPos?: 'before' | 'after' | false;
 
     /**
+     * @description Whether to use ProFormField instead of Input for the primary input box
+     * @description.zh-CN 默认文本框是否使用 ProFormField 控件
+     * @description.zh-TW 默認文本框是否使用 ProFormField 控件
+     * @default true
+     */
+    proField?: boolean;
+
+    /**
      * @description The CSS class name of the locales dropdown
      * @description.zh-CN 语言下拉框的 CSS 类名
      * @description.zh-TW 語言下拉框的 CSS 類名
@@ -189,9 +198,9 @@ export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
     popupShareProps?: PopupShareProps;
 
     /**
-     * @description Indicates whether to use Ant Design Pro text instead of Ant Design input for locale items
-     * @description.zh-CN 语言输入项是否使用 Ant Design Pro 控件
-     * @description.zh-TW 語言輸入項是否使用 Ant Design Pro 控件
+     * @description Whether to use ProFormField instead of Input for locale items
+     * @description.zh-CN 语言输入项是否使用 ProFormField 控件
+     * @description.zh-TW 語言輸入項是否使用 ProFormField 控件
      * @default false
      */
     popupProField?: boolean;
@@ -396,7 +405,9 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const afterDom = buildEntryAddonDom(false);
 
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const restProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
+    const restProProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
+    // @ts-ignore
+    const restAntProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField', ...DesignConst.ProFormFieldItemPropsKeys]) : {};
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter']) : {};
 
     return (
@@ -415,16 +426,30 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             }}
         >
             <Input.Group>
-                <ProFormText
-                    ref={ref}
-                    {...restProps}
-                    fieldProps={{
-                        ...omitFieldProps,
-                        addonBefore: beforeDom,
-                        addonAfter: afterDom,
-                        'data-buddy-locale-id': entryId,
-                    }}
-                />
+                <If condition={props?.proField}>
+                    <If.Then>
+                        <ProFormText
+                            ref={ref}
+                            {...restProProps}
+                            fieldProps={{
+                                ...omitFieldProps,
+                                addonBefore: beforeDom,
+                                addonAfter: afterDom,
+                                'data-buddy-locale-id': entryId,
+                            }}
+                        />
+                    </If.Then>
+                    <If.Else>
+                        <Input
+                            ref={ref}
+                            {...restAntProps}
+                            {...omitFieldProps}
+                            addonBefore={beforeDom}
+                            addonAfter={afterDom}
+                            data-buddy-locale-id={entryId}
+                        />
+                    </If.Else>
+                </If>
                 <div ref={containerRef}/>
             </Input.Group>
         </Dropdown>
@@ -435,6 +460,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
 LocaleInput.defaultProps = {
     actionDom: <TranslationOutlined/>,
     actionPos: 'after',
+    proField: true,
     popupPlacement: 'bottomLeft',
     popupTagPos: 'before',
     popupActionDom: <SelectOutlined/>,

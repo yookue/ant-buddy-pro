@@ -22,6 +22,8 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### Example
 
+#### With ProForm
+
 ```jsx
 import React from 'react';
 import {message} from 'antd';
@@ -49,6 +51,27 @@ export default () => {
                 }}
             />
         </ProForm>
+    );
+}
+```
+
+#### Without ProForm, with Tooltip
+
+```jsx
+import React from 'react';
+import {ExactInput} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ExactInput
+            name='foobar'
+            placeholder='Please input this field'
+            tooltipProps={{
+                title: 'Match Exactly',
+            }}
+            useTooltip={true}
+            proField={false}
+        />
     );
 }
 ```
