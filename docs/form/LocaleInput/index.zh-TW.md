@@ -180,6 +180,7 @@ export default () => {
                     'zh-TW',
                 ]}
                 popupShareProps={{
+                    placeholder: '請輸入此字段',
                     rules: [
                         {
                             type: 'string',
@@ -226,6 +227,9 @@ export default () => {
                     'zh-CN',
                     'zh-TW',
                 ]}
+                popupShareProps={{
+                    placeholder: '請輸入此字段',
+                }}
             />
         </ProForm>
     );

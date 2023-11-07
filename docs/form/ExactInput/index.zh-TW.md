@@ -44,6 +44,9 @@ export default () => {
           <ExactInput
               name='foobar'
               placeholder='請輸入此項'
+              tooltipProps={{
+                  title: '全字匹配',
+              }}
           />
         </ProForm>
     );

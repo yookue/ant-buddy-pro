@@ -16,16 +16,15 @@
 
 
 import React from 'react';
-import {ConfigProvider, Checkbox, type InputProps, type CheckboxProps} from 'antd';
+import {ConfigProvider, Checkbox, Tooltip, type InputProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {AimOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
 import classNames from 'classnames';
 import omit from 'rc-util/lib/omit';
+import './index.less';
 
 
-type OmitInputProps= Omit<InputProps, 'addonBefore' | 'addonAfter'>;
-
-export type AddonCheckProps = CheckboxProps & {
+export type AddonCheckProps = React.InputHTMLAttributes<HTMLInputElement> & CheckboxProps & {
     /**
      * @description The prefix of name for the checkbox
      * @description.zh-CN 复选框的名称前缀
@@ -56,7 +55,7 @@ export type AddonCheckProps = CheckboxProps & {
     idSuffix?: string;
 };
 
-export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<OmitInputProps> & {
+export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<InputProps> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -82,11 +81,26 @@ export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProF
     addonPos?: 'before' | 'after' | false;
 
     /**
-     * @description The checkbox properties of addon
+     * @description The properties of checkbox for addon
      * @description.zh-CN 复选框的属性
      * @description.zh-TW 複選框的屬性
      */
     checkProps?: AddonCheckProps;
+
+    /**
+     * @description Whether to use tooltip instead of raw title
+     * @description.zh-CN 是否使用 Tooltip 替代 Title
+     * @description.zh-TW 否使用 Tooltip 替代 Title
+     * @default false
+     */
+    useTooltip?: boolean;
+
+    /**
+     * @description The properties of tooltip for checkbox
+     * @description.zh-CN 复选框的 Tooltip 属性
+     * @description.zh-TW 复选框的 Tooltip 屬性
+     */
+    tooltipProps?: TooltipProps,
 };
 
 
@@ -94,9 +108,10 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-exact-input');
 
-    const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps']) : {};
-    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter']) : {};
-    const omitCheckProps = props?.checkProps ? omit(props?.checkProps, ['className', 'namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']) : {};
+    const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps']) : {};
+    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter', 'className']) : {};
+    const omitCheckProps = props?.checkProps ? omit(props?.checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id', 'title']) : {};
+    const omitTooltipProps = props?.tooltipProps ? omit(props?.tooltipProps, ['title']) : {};
 
     const generateCheckName = function() {
         if (props?.checkProps?.name) {
@@ -120,21 +135,50 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const checkboxName = generateCheckName();
     const checkboxId = generateCheckId();
 
-    const buildActionDom = function() {
-        if (!props?.addonPos) {
+    const buildAddonDom = function(before: boolean) {
+        const content: React.ReactNode[] = [];
+        if (before && props?.addonBefore) {
+            content.push(props?.addonBefore);
+        } else if (!before && props?.addonAfter) {
+            content.push(props?.addonAfter);
+        }
+        if ((before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after')) {
+            content.push((
+                <Checkbox
+                    name={checkboxName}
+                    id={checkboxId || checkboxName}
+                    {...omitCheckProps}
+                >
+                    {props?.addonDom}
+                </Checkbox>
+            ));
+        }
+        if (content.length === 0) {
             return undefined;
         }
-        return (
-            <Checkbox
-                name={checkboxName}
-                id={checkboxId || checkboxName}
-                {...omitCheckProps}
-            >
-                {props?.addonDom}
-            </Checkbox>
-        );
+        const hintTip = props?.tooltipProps?.title || props?.checkProps?.title;
+        if (hintTip) {
+            if (props?.useTooltip) {
+                return (
+                    <Tooltip
+                        title={hintTip}
+                        {...omitTooltipProps}
+                    >
+                        {content}
+                    </Tooltip>
+                );
+            } else {
+                return (
+                    <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : props?.checkProps?.title}>
+                        {content}
+                    </span>
+                );
+            }
+        }
+        return content;
     };
-    const actionDom = buildActionDom();
+    const beforeDom = buildAddonDom(true);
+    const afterDom = buildAddonDom(false);
 
     return (
         <ProFormText
@@ -143,8 +187,8 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
             fieldProps={{
                 className: classNames(clazzPrefix, props?.className),
                 ...omitFieldProps,
-                addonBefore: (props?.addonPos === 'before') ? actionDom : undefined,
-                addonAfter: (props?.addonPos === 'after') ? actionDom : undefined,
+                addonBefore: beforeDom,
+                addonAfter: afterDom,
             }}
         />
     );
@@ -156,5 +200,6 @@ ExactInput.defaultProps = {
     addonPos: 'after',
     checkProps: {
         nameSuffix: 'Exact',
-    }
+    },
+    useTooltip: false,
 };

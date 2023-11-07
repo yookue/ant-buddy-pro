@@ -33,7 +33,7 @@ export default () => {
     return (
         <Space>
             <span>
-                <FullScreen enterTitle='Fullscreen' exitTitle='Exit Fullscreen'/>
+                <FullScreen enterHint='Fullscreen' exitHint='Exit Fullscreen'/>
             </span>
         </Space>
     );
@@ -50,7 +50,7 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <Space>
-            <FullScreen enterTitle='Fullscreen' exitTitle='Exit Fullscreen' useTooltip={true} useWrapper='div'/>
+            <FullScreen enterHint='Fullscreen' exitHint='Exit Fullscreen' useTooltip={true} useWrapper='div'/>
         </Space>
     );
 }

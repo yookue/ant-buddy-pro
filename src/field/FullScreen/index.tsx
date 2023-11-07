@@ -58,7 +58,7 @@ export type FullScreenProps = {
     triggerFor?: HTMLElement,
 
     /**
-     * @description Whether to use Tooltip instead of raw Title
+     * @description Whether to use tooltip instead of raw title
      * @description.zh-CN 是否使用 Tooltip 替代 Title
      * @description.zh-TW 否使用 Tooltip 替代 Title
      * @default false
@@ -66,7 +66,7 @@ export type FullScreenProps = {
     useTooltip?: boolean;
 
     /**
-     * @description The properties for Tooltip
+     * @description The properties of tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -88,18 +88,18 @@ export type FullScreenProps = {
     wrapperProps?: WrapperProps,
 
     /**
-     * @description The title of entering fullscreen mode
+     * @description The hint title of entering fullscreen mode
      * @description.zh-CN 进入全屏模式的提示
      * @description.zh-TW 進入全屏模式的提示
      */
-    enterTitle?: string,
+    enterHint?: string,
 
     /**
-     * @description The title of exiting fullscreen mode
+     * @description The hint title of exiting fullscreen mode
      * @description.zh-CN 退出全屏模式的提示
      * @description.zh-TW 退出全屏模式的提示
      */
-    exitTitle?: string,
+    exitHint?: string,
 };
 
 
@@ -160,7 +160,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     return (
         <If condition={props?.useTooltip}>
             <If.Then>
-                <Tooltip title={fullscreen ? props?.exitTitle : props?.enterTitle} {...props?.tooltipProps}>
+                <Tooltip title={fullscreen ? props?.exitHint : props?.enterHint} {...props?.tooltipProps}>
                     <If condition={typeof props?.useWrapper === 'string'}>
                         {
                             React.createElement((props?.useWrapper as string), {
@@ -180,14 +180,14 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
                         React.createElement((props?.useWrapper as string), {
                             className: props?.wrapperProps?.clazz,
                             style: props?.wrapperProps?.style,
-                            title: fullscreen ? props?.exitTitle : props?.enterTitle,
+                            title: fullscreen ? props?.exitHint : props?.enterHint,
                         }, screenElement)
                     }
                 </If>
                 <If condition={!props?.useWrapper}>
                     {
                         React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
-                            title: fullscreen ? props?.exitTitle : props?.enterTitle,
+                            title: fullscreen ? props?.exitHint : props?.enterHint,
                             onClick: handleToggleScreen,
                         })
                     }
