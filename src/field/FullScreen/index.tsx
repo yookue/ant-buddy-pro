@@ -22,18 +22,16 @@ import {If} from '@yookue/react-condition';
 import screenfull from 'screenfull';
 
 
-type OmitTooltipProps = Omit<TooltipProps, 'title'>;
-
 export type WrapperProps = {
     /**
-     * @description The CSS class name for the wrapper element
+     * @description The CSS class name of the wrapper element
      * @description.zh-CN 包裹的 div 或 span 的 CSS 类名
      * @description.zh-TW 包裹的 div 或 span 的 CSS 類名
      */
     clazz?: string;
 
     /**
-     * @description The CSS style for the wrapper element
+     * @description The CSS style of the wrapper element
      * @description.zh-CN 包裹的 div 或 span 的 CSS 样式
      * @description.zh-TW 包裹的 div 或 span 的 CSS 樣式
      */
@@ -58,9 +56,23 @@ export type FullScreenProps = {
     triggerFor?: HTMLElement,
 
     /**
+     * @description The hint of entering fullscreen mode
+     * @description.zh-CN 进入全屏模式的提示
+     * @description.zh-TW 進入全屏模式的提示
+     */
+    enterHint?: string,
+
+    /**
+     * @description The hint of exiting fullscreen mode
+     * @description.zh-CN 退出全屏模式的提示
+     * @description.zh-TW 退出全屏模式的提示
+     */
+    exitHint?: string,
+
+    /**
      * @description Whether to use tooltip instead of raw title
-     * @description.zh-CN 是否使用 Tooltip 替代 Title
-     * @description.zh-TW 否使用 Tooltip 替代 Title
+     * @description.zh-CN 是否使用 Tooltip 替代 title
+     * @description.zh-TW 是否使用 Tooltip 替代 title
      * @default false
      */
     useTooltip?: boolean;
@@ -70,7 +82,7 @@ export type FullScreenProps = {
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
-    tooltipProps?: OmitTooltipProps,
+    tooltipProps?: Omit<TooltipProps, 'title'>,
 
     /**
      * @description Whether to wrap with a div or span element
@@ -81,25 +93,11 @@ export type FullScreenProps = {
     useWrapper?: 'div' | 'span' | 'p' | false;
 
     /**
-     * @description The properties for the wrapper element
+     * @description The properties of the wrapper element
      * @description.zh-CN 包裹的 div 或 span 的属性
      * @description.zh-TW 包裹的 div 或 span 的屬性
      */
     wrapperProps?: WrapperProps,
-
-    /**
-     * @description The hint title of entering fullscreen mode
-     * @description.zh-CN 进入全屏模式的提示
-     * @description.zh-TW 進入全屏模式的提示
-     */
-    enterHint?: string,
-
-    /**
-     * @description The hint title of exiting fullscreen mode
-     * @description.zh-CN 退出全屏模式的提示
-     * @description.zh-TW 退出全屏模式的提示
-     */
-    exitHint?: string,
 };
 
 

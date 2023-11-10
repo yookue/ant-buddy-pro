@@ -90,8 +90,8 @@ export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProF
 
     /**
      * @description Whether to use tooltip instead of raw title
-     * @description.zh-CN 是否使用 Tooltip 替代 Title
-     * @description.zh-TW 否使用 Tooltip 替代 Title
+     * @description.zh-CN 是否使用 Tooltip 替代 title
+     * @description.zh-TW 是否使用 Tooltip 替代 title
      * @default false
      */
     useTooltip?: boolean;

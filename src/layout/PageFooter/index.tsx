@@ -121,14 +121,14 @@ export type PageFooterProps = {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The CSS class names for the child of the footer div
+     * @description The CSS class names of the child that under the footer div
      * @description.zh-CN 子容器 div 的 CSS 类名
      * @description.zh-TW 子容器 div 的 CSS 類名
      */
     vesselClazz?: string;
 
     /**
-     * @description The CSS style for the child of the footer div
+     * @description The CSS style of the child that under the footer div
      * @description.zh-CN 子容器 div 的 CSS 样式
      * @description.zh-TW 子容器 div 的 CSS 樣式
      */
@@ -142,7 +142,7 @@ export type PageFooterProps = {
     linksClazz?: string;
 
     /**
-     * @description The CSS style of the the hyperlinks div
+     * @description The CSS style of the hyperlinks div
      * @description.zh-CN 超链接 div 的 CSS 样式
      * @description.zh-TW 超鏈接 div 的 CSS 樣式
      */
@@ -168,14 +168,14 @@ const {Footer} = Layout;
 
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
     if ((!props?.linkItems || props?.linkItems?.length === 0) && !props?.copyright) {
         return null;
     }
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
 
     return (
         <Footer className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
-            <div className={props?.vesselClazz} style={props?.vesselStyle}>
+            <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
                 <If condition={props?.linkItems}>
                     <div className={classNames(`${clazzPrefix}-links`, props?.linksClazz)} style={props?.linksStyle}>
                         <For
@@ -199,7 +199,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                     </div>
                 </If>
                 <If condition={props?.copyright}>
-                    <div className={`${clazzPrefix}-copyright`} style={props?.copyrightStyle}>
+                    <div className={classNames(`${clazzPrefix}-copyright`, props?.copyrightClazz)} style={props?.copyrightStyle}>
                         <React.Fragment>
                             <CopyrightOutlined/> {props?.copyright}
                         </React.Fragment>

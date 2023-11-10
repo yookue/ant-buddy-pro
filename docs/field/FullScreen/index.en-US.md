@@ -8,7 +8,9 @@ FullScreen, provides an icon with the ability to toggle document full screen mod
 
 ### Premise
 
-Before use this component, you need to install [@ant-design/icons](https://github.com/ant-design/ant-design-icons) package first:
+<Alert type='info'>
+  Before use this component, you need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first:
+</Alert>
 
 ```bash
 npm install @ant-design/icons --save

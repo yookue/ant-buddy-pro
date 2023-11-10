@@ -8,7 +8,9 @@ LocaleInput, provides a text input box with a dropdown div of locale input boxes
 
 ### Premise
 
-Before use this component, you need to install [@ant-design/icons](https://github.com/ant-design/ant-design-icons) package first if you're using the default `actionDom` attribute:
+<Alert type='info'>
+  Before use this component, you need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first if you're using the default <b><i>`actionDom`</i></b> attribute:
+</Alert>
 
 ```bash
 npm install @ant-design/icons --save

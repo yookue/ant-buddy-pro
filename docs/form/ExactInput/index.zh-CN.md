@@ -8,7 +8,9 @@ ExactInput，提供了一个带复选框的文本输入字段，以便支持精�
 
 ### 使用前提
 
-如果您使用默认的 `addonDom` 属性，要使用此组件，您需要先安装 [@ant-design/icons](https://github.com/ant-design/ant-design-icons) 图标组件包：
+<Alert type='info'>
+  如果您使用默认的 <b><i>`addonDom`</i></b> 属性，要使用此组件，您需要先安装 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 图标组件包：
+</Alert>
 
 ```bash
 npm install @ant-design/icons --save
@@ -44,7 +46,7 @@ export default () => {
             }}
         >
           <ExactInput
-              name='foobar'
+              name='foo'
               placeholder='请输入此项'
               tooltipProps={{
                   title: '全字匹配',
@@ -64,7 +66,7 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ExactInput
-            name='foobar'
+            name='bar'
             placeholder='请输入此项'
             tooltipProps={{
                 title: '全字匹配',

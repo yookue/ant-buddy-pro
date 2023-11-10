@@ -8,7 +8,7 @@ FullScreen 是一个用来切换文档全屏的图标按钮。
 
 ### 使用前提
 
-要使用此组件，您需要先安装 [@ant-design/icons](https://github.com/ant-design/ant-design-icons) 图标组件包：
+要使用此组件，您需要先安装 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 图标组件包：
 
 ```bash
 npm install @ant-design/icons --save

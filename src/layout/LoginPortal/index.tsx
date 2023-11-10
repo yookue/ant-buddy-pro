@@ -38,7 +38,7 @@ export type LoginPortalProps = {
     containerClazz?: string;
 
     /**
-     * @description The CSS style for the container div
+     * @description The CSS style of the container div
      * @description.zh-CN 容器 div 的 CSS 样式
      * @description.zh-TW 容器 div 的 CSS 樣式
      */

@@ -8,7 +8,9 @@ LocaleInput，提供了一个包含多种语言下拉框的文本输入字段，
 
 ### 使用前提
 
-如果您使用默认的 `actionDom` 属性，要使用此组件，您需要先安装 [@ant-design/icons](https://github.com/ant-design/ant-design-icons) 图标组件包：
+<Alert type='info'>
+  如果您使用默认的 <b><i>`actionDom`</i></b> 属性，要使用此组件，您需要先安装 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 图标组件包：
+</Alert>
 
 ```bash
 npm install @ant-design/icons --save

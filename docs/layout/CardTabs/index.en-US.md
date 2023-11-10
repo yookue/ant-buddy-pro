@@ -4,7 +4,7 @@ toc: content
 
 ## CardTabs
 
-Similar to [Ant Design Tab](https://4x.ant.design/components/tabs/), with `card` style and borders.
+Similar to [Tabs](https://4x.ant.design/components/tabs/) of [Ant Design](https://ant.design/), with `card` style and borders.
 
 ### Import
 

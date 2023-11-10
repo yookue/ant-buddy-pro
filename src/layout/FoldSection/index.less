@@ -1,0 +1,86 @@
+/*
+ * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License")
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+@root-entry-name: default;
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@buddy-fold-section: ~'@{ant-prefix}-buddy-fold-section';
+
+
+.@{buddy-fold-section} {
+    display: flex;
+    flex-direction: column;
+    border-radius: @border-radius-base;
+
+    &-header {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 10px @padding-md;
+        align-items: center;
+
+        &-ornament {
+            display: flex;
+            flex: none;
+            width: 22px;
+            height: 22px;
+            margin-right: 2px;
+        }
+
+        &-collapse-before, &-collapse-after {
+            display: flex;
+            flex: none;
+            border-radius: @border-radius-base;
+            width: 28px;
+            height: 28px;
+            justify-content: center;
+            color: @text-color-secondary;
+
+            &:hover {
+                cursor: pointer;
+                color: @text-color-inverse;
+                background-color: @primary-3;
+                transition: all 0.3s;
+            }
+        }
+
+        &-collapse-before {
+            margin-right: @padding-xs;
+        }
+
+        &-collapse-after {
+            margin-left: @padding-xs;
+        }
+
+        &-content {
+            flex: 1 1;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &-panel {
+        padding: @padding-md @padding-md;
+    }
+
+    &-open &-panel {
+        display: block;
+    }
+
+    &-close &-panel {
+        display: none;
+    }
+}

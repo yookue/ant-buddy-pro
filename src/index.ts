@@ -21,6 +21,7 @@ export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {ExactInput, type ExactInputProps, type AddonCheckProps} from './form/ExactInput';
 export {LocaleInput, type LocaleInputProps, type PopupInputProps, type PopupConfirmProps, type PopupShareProps} from './form/LocaleInput';
 export {CardTabs, type CardTabsProps} from './layout/CardTabs';
+export {FoldSection, type FoldSectionProps} from './layout/FoldSection';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
 export {MenuTabs, type MenuTabsProps, type MenuProps, type MenuItemProps, type AdjustLayoutProps} from './layout/MenuTabs';
 export {PageFooter, type PageFooterProps, type HyperlinkProps} from './layout/PageFooter';

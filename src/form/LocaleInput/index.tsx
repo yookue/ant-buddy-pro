@@ -212,7 +212,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-locale-input');
     const entryId = nanoid();
 
-    const handleClickCopy = (tagId: string) => {
+    const handleClonePrimary = (tagId: string) => {
         const entry = document.querySelector(`input[data-buddy-locale-id="${entryId}"]`) as HTMLInputElement;
         const tag = document.querySelector(`input[data-buddy-locale-tag="${tagId}"]`) as HTMLInputElement;
         if (entry && tag) {
@@ -243,7 +243,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 content.push((
                     <Popconfirm
                         title={props?.popupConfirmProps?.message}
-                        onConfirm={() => handleClickCopy(elementId)}
+                        onConfirm={() => handleClonePrimary(elementId)}
                         okText={props?.popupConfirmProps?.ok}
                         cancelText={props?.popupConfirmProps?.cancel}
                     >
@@ -256,7 +256,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 content.push((
                     <span
                         className={classNames(`${clazzPrefix}-action`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : undefined))}
-                        onClick={() => handleClickCopy(elementId)}
+                        onClick={() => handleClonePrimary(elementId)}
                     >
                         {props?.popupActionDom}
                     </span>
