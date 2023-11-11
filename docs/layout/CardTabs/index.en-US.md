@@ -20,18 +20,18 @@ import {Radio} from 'antd';
 import {CardTabs} from '@yookue/ant-buddy-pro';
 
 export default () => {
-    const [tabPosition, setTabPosition] = React.useState('top');
+    const [tabPos, setTabPos] = React.useState('top');
 
     return (
         <>
             <div>
                 <span style={{paddingRight: '20px'}}>Tab Position:</span>
                 <Radio.Group
-                    value={tabPosition}
+                    value={tabPos}
                     defaultValue='top'
                     buttonStyle='solid'
                     onChange={event => {
-                        setTabPosition(event.target?.value);
+                        setTabPos(event.target?.value);
                     }}
                 >
                     <Radio.Button value='top'>Top</Radio.Button>
@@ -42,7 +42,7 @@ export default () => {
             </div>
             <br/><br/>
             <CardTabs
-                tabPosition={tabPosition}
+                tabPosition={tabPos}
                 items={new Array(3).fill(null).map((_, i) => {
                 const id = String(i + 1);
                 return {

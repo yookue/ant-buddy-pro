@@ -26,24 +26,60 @@ import {FoldSection} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
+import {Empty, Radio} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {FoldSection} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [ornamentPos, setOrnamentPos] = React.useState('before');
+    const [collapsePos, setCollapsePos] = React.useState('after');
+
     return (
-        <FoldSection
-            headerOrnament={<AppstoreOutlined/>}
-            headerContent='FoldSection header caption'
-            containerStyle={{
-                border: '1px dashed #ebedf1',
-            }}
-            headerStyle={{
-                backgroundColor: '#f9fafb',
-            }}
-            panelStyle={{
-                borderTop: '1px dashed #ebedf1'
-            }}
-        />
+        <>
+            <div>
+                <span style={{paddingRight: '20px'}}>Ornament Position:</span>
+                <Radio.Group
+                    name='ornamentPos'
+                    value={ornamentPos?.toString()}
+                    defaultValue='before'
+                    buttonStyle='solid'
+                    onChange={event => {
+                        setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                    }}
+                >
+                    <Radio.Button value='before'>Before</Radio.Button>
+                    <Radio.Button value='after'>After</Radio.Button>
+                    <Radio.Button value='false'>False</Radio.Button>
+                </Radio.Group>
+            </div>
+            <br/>
+            <div>
+                <span style={{paddingRight: '20px'}}>Collapse Position:</span>
+                <Radio.Group
+                    name='collapsePos'
+                    value={collapsePos?.toString()}
+                    defaultValue='after'
+                    buttonStyle='solid'
+                    onChange={event => {
+                        setCollapsePos(event.target?.value === 'false' ? false : event.target?.value);
+                    }}
+                >
+                    <Radio.Button value='before'>Before</Radio.Button>
+                    <Radio.Button value='after'>After</Radio.Button>
+                    <Radio.Button value='false'>False</Radio.Button>
+                </Radio.Group>
+            </div>
+            <br/><br/>
+            <FoldSection
+                headerOrnament={<AppstoreOutlined/>}
+                headerOrnamentPos={ornamentPos}
+                headerContent='FoldSection header caption'
+                headerCollapsePos={collapsePos}
+                headerOpenedHint='Collapse'
+                headerClosedHint='Expend'
+                panelPlaceholder={<Empty/>}
+            />
+        </>
     );
 }
 ```

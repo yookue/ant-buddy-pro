@@ -19,43 +19,48 @@
 // noinspection CssUnknownTarget
 @import (reference) '~antd/es/style/themes/index.less';
 
-@buddy-login-portal: ~'@{ant-prefix}-buddy-login-portal';
+@buddy-apart-title: ~'@{ant-prefix}-buddy-apart-title';
 
 
-.@{buddy-login-portal} {
+.@{buddy-apart-title} {
     display: flex;
-    flex-flow: column wrap;
-    height: 100vh;
-    overflow: auto;
+    flex-flow: row nowrap;
+    border-radius: @card-radius @card-radius 0 0;
+    padding: 10px @padding-md;
+    align-items: center;
 
-    &-vessel {
+    &-ornament-before, &-ornament-after {
         display: flex;
-        flex-flow: row wrap;
-        height: 100vh;
+        flex: none;
+        width: 22px;
+        height: 22px;
     }
 
-    &-introduction {
-        display: flex;
-        flex: 1 1;
+    &-ornament-before {
+        margin-right: @padding-xss;
+        justify-content: left;
     }
 
-    &-interaction {
-        display: flex;
-        flex: 1 1;
-        flex-flow: column nowrap;
-        max-width: 520px;
-        background: @component-background;
+    &-ornament-after {
+        margin-left: @padding-xss;
+        justify-content: right;
     }
 
-    &-interchange {
-        display: flex;
+    &-content {
         flex: 1 1;
-        flex-flow: column wrap;
-        background: @component-background;
-        width: 100%;
+        text-overflow: ellipsis;
     }
 }
 
-.@{buddy-login-portal}-rtl {
+.@{buddy-apart-title}-rtl {
     direction: rtl;
+}
+
+.@{buddy-apart-title}-default {
+    background: @background-color-light;
+    border: @border-width-base @border-style-base @border-color-split;
+
+    .@{buddy-apart-title}-content {
+        font-weight: 500;
+    }
 }

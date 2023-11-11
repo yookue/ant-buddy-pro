@@ -20,6 +20,7 @@ export {FullScreen, type FullScreenProps, type WrapperProps} from './field/FullS
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {ExactInput, type ExactInputProps, type AddonCheckProps} from './form/ExactInput';
 export {LocaleInput, type LocaleInputProps, type PopupInputProps, type PopupConfirmProps, type PopupShareProps} from './form/LocaleInput';
+export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';
 export {CardTabs, type CardTabsProps} from './layout/CardTabs';
 export {FoldSection, type FoldSectionProps} from './layout/FoldSection';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';

@@ -26,29 +26,65 @@ import {FoldSection} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
+import {Empty, Radio} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {FoldSection} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [ornamentPos, setOrnamentPos] = React.useState('before');
+    const [collapsePos, setCollapsePos] = React.useState('after');
+
     return (
-        <FoldSection
-            headerOrnament={<AppstoreOutlined/>}
-            headerContent='FoldSection 头部标题'
-            containerStyle={{
-                border: '1px dashed #ebedf1',
-            }}
-            headerStyle={{
-                backgroundColor: '#f9fafb',
-            }}
-            panelStyle={{
-                borderTop: '1px dashed #ebedf1'
-            }}
-        />
+        <>
+            <div>
+                <span style={{paddingRight: '20px'}}>装饰物位置：</span>
+                <Radio.Group
+                    name='ornamentPos'
+                    value={ornamentPos?.toString()}
+                    defaultValue='before'
+                    buttonStyle='solid'
+                    onChange={event => {
+                        setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                    }}
+                >
+                    <Radio.Button value='before'>前</Radio.Button>
+                    <Radio.Button value='after'>后</Radio.Button>
+                    <Radio.Button value='false'>无</Radio.Button>
+                </Radio.Group>
+            </div>
+            <br/>
+            <div>
+                <span style={{paddingRight: '20px'}}>折叠区位置：</span>
+                <Radio.Group
+                    name='collapsePos'
+                    value={collapsePos?.toString()}
+                    defaultValue='after'
+                    buttonStyle='solid'
+                    onChange={event => {
+                        setCollapsePos(event.target?.value === 'false' ? false : event.target?.value);
+                    }}
+                >
+                    <Radio.Button value='before'>前</Radio.Button>
+                    <Radio.Button value='after'>后</Radio.Button>
+                    <Radio.Button value='false'>无</Radio.Button>
+                </Radio.Group>
+            </div>
+            <br/><br/>
+            <FoldSection
+                headerOrnament={<AppstoreOutlined/>}
+                headerOrnamentPos={ornamentPos}
+                headerContent='FoldSection 头部标题'
+                headerCollapsePos={collapsePos}
+                headerOpenedHint='折叠'
+                headerClosedHint='展开'
+                panelPlaceholder={<Empty/>}
+            />
+        </>
     );
 }
 ```
 
-### Properties
+### 组件属性
 
 ##### FoldSectionProps
 

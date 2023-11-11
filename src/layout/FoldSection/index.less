@@ -25,7 +25,7 @@
 .@{buddy-fold-section} {
     display: flex;
     flex-direction: column;
-    border-radius: @border-radius-base;
+    border-radius: @card-radius @card-radius 0 0;
 
     &-header {
         display: flex;
@@ -33,12 +33,21 @@
         padding: 10px @padding-md;
         align-items: center;
 
-        &-ornament {
+        &-ornament-before, &-ornament-after {
             display: flex;
             flex: none;
             width: 22px;
             height: 22px;
-            margin-right: 2px;
+        }
+
+        &-ornament-before {
+            margin-right: @padding-xss;
+            justify-content: left;
+        }
+
+        &-ornament-after {
+            margin-left: @padding-xss;
+            justify-content: right;
         }
 
         &-collapse-before, &-collapse-after {
@@ -48,7 +57,6 @@
             width: 28px;
             height: 28px;
             justify-content: center;
-            color: @text-color-secondary;
 
             &:hover {
                 cursor: pointer;
@@ -59,11 +67,11 @@
         }
 
         &-collapse-before {
-            margin-right: @padding-xs;
+            margin-right: @padding-xss;
         }
 
         &-collapse-after {
-            margin-left: @padding-xs;
+            margin-left: @padding-xss;
         }
 
         &-content {
@@ -82,5 +90,23 @@
 
     &-close &-panel {
         display: none;
+    }
+}
+
+.@{buddy-fold-section}-rtl {
+    direction: rtl;
+}
+
+.@{buddy-fold-section}-default {
+    background: @card-background;
+    border: @border-width-base @border-style-base @border-color-base;
+
+    .@{buddy-fold-section}-header {
+        background: @background-color-light;
+        font-weight: 500;
+    }
+
+    .@{buddy-fold-section}-panel {
+        border-top: @border-width-base @border-style-base @border-color-split;
     }
 }

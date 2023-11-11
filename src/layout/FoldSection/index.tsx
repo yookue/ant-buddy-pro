@@ -61,111 +61,119 @@ export type FoldSectionProps = {
     headerStyle?: React.CSSProperties;
 
     /**
-     * @description The ornament that under the header div
-     * @description.zh-CN 头部装饰  div 的内容
-     * @description.zh-TW 頭部裝飾 div 的内容
+     * @description The DOM of ornament span that under the header div
+     * @description.zh-CN 头部装饰 span 的内容
+     * @description.zh-TW 頭部裝飾 span 的内容
      */
     headerOrnament?: React.ReactNode;
 
     /**
-     * @description The CSS class name of ornament that under the header div
-     * @description.zh-CN 头部装饰  div 的 CSS 类名
-     * @description.zh-TW 頭部裝飾 div 的 CSS 類名
+     * @description The CSS class name of ornament span that under the header div
+     * @description.zh-CN 头部装饰 span 的 CSS 类名
+     * @description.zh-TW 頭部裝飾 span 的 CSS 類名
      */
     headerOrnamentClazz?: string;
 
     /**
-     * @description The CSS style of ornament that under the header div
-     * @description.zh-CN 头部装饰 div 的 CSS 样式
-     * @description.zh-TW 頭部裝飾 div 的 CSS 樣式
+     * @description The CSS style of ornament span that under the header div
+     * @description.zh-CN 头部装饰 span 的 CSS 样式
+     * @description.zh-TW 頭部裝飾 span 的 CSS 樣式
      */
     headerOrnamentStyle?: React.CSSProperties;
 
     /**
-     * @description The content that under the header div
-     * @description.zh-CN 头部内容 div 的内容
-     * @description.zh-TW 頭部内容 div 的内容
+     * @description The position of ornament span that under the header div
+     * @description.zh-CN 头部装饰 span 的位置
+     * @description.zh-TW 頭部裝飾 span 的位置
+     * @default 'before'
+     */
+    headerOrnamentPos?: 'before' | 'after' | false;
+
+    /**
+     * @description The DOM of content span that under the header div
+     * @description.zh-CN 头部标题 span 的内容
+     * @description.zh-TW 頭部標題 span 的内容
      */
     headerContent?: React.ReactNode;
 
     /**
-     * @description The CSS class name of content that under the header div
-     * @description.zh-CN 头部内容 div 的 CSS 类名
-     * @description.zh-TW 頭部内容 div 的 CSS 類名
+     * @description The CSS class name of content span that under the header div
+     * @description.zh-CN 头部标题 span 的 CSS 类名
+     * @description.zh-TW 頭部標題 span 的 CSS 類名
      */
     headerContentClazz?: string;
 
     /**
-     * @description The CSS style of content that under the header div
-     * @description.zh-CN 头部内容 div 的 CSS 样式
-     * @description.zh-TW 頭部内容 div 的 CSS 樣式
+     * @description The CSS style of content span that under the header div
+     * @description.zh-CN 头部标题 span 的 CSS 样式
+     * @description.zh-TW 頭部標題 span 的 CSS 樣式
      */
     headerContentStyle?: React.CSSProperties;
 
     /**
-     * @description The CSS class name of collapse that under the header div
-     * @description.zh-CN 头部折叠 div 的 CSS 类名
-     * @description.zh-TW 頭部折叠 div 的 CSS 類名
+     * @description The CSS class name of collapse span that under the header div
+     * @description.zh-CN 头部折叠 span 的 CSS 类名
+     * @description.zh-TW 頭部折叠 span 的 CSS 類名
      */
     headerCollapseClazz?: string;
 
     /**
-     * @description The CSS style of collapse that under the header div
-     * @description.zh-CN 头部折叠 div 的 CSS 样式
-     * @description.zh-TW 頭部折叠 div 的 CSS 樣式
+     * @description The CSS style of collapse span that under the header div
+     * @description.zh-CN 头部折叠 span 的 CSS 样式
+     * @description.zh-TW 頭部折叠 span 的 CSS 樣式
      */
     headerCollapseStyle?: React.CSSProperties;
 
     /**
-     * @description The position of collapse that under the header div
-     * @description.zh-CN 头部折叠 div 的位置
-     * @description.zh-TW 頭部折叠 div 的位置
+     * @description The position of collapse span that under the header div
+     * @description.zh-CN 头部折叠 span 的位置
+     * @description.zh-TW 頭部折叠 span 的位置
      * @default 'after'
      */
     headerCollapsePos?: 'before' | 'after' | false;
 
     /**
-     * @description The DOM of collapse that under the header div when expanded
-     * @description.zh-CN 头部折叠 div 的节点内容(面板展开时)
-     * @description.zh-TW 頭部折叠 div 的節點內容(面板展開時)
+     * @description The DOM of collapse span that under the header div when expanded
+     * @description.zh-CN 头部折叠 span 的节点内容(面板展开时)
+     * @description.zh-TW 頭部折叠 span 的節點內容(面板展開時)
      * @default <DownSquareOutlined/>
      */
     headerOpenedDom?: React.ReactNode;
 
     /**
-     * @description The hint of collapse that under the header div when expanded
-     * @description.zh-CN 头部折叠 div 的提示(面板展开时)
-     * @description.zh-TW 頭部折叠 div 的提示(面板展開時)
+     * @description The hint of collapse span that under the header div when expanded
+     * @description.zh-CN 头部折叠 span 的提示(面板展开时)
+     * @description.zh-TW 頭部折叠 span 的提示(面板展開時)
      */
     headerOpenedHint?: string;
 
     /**
      * @description The DOM of collapse that under the header div when collapsed
-     * @description.zh-CN 头部折叠 div 的节点内容(面板折叠时)
-     * @description.zh-TW 頭部折叠 div 的節點內容(面板摺叠時)
+     * @description.zh-CN 头部折叠 span 的节点内容(面板折叠时)
+     * @description.zh-TW 頭部折叠 span 的節點內容(面板摺叠時)
      * @default <UpSquareOutlined/>
      */
     headerClosedDom?: React.ReactNode;
 
     /**
-     * @description The hint of collapse that under the header div when collapsed
-     * @description.zh-CN 头部折叠 div 的提示(面板折叠时)
-     * @description.zh-TW 頭部折叠 div 的提示(面板摺叠時)
+     * @description The hint of collapse span that under the header div when collapsed
+     * @description.zh-CN 头部折叠 span 的提示(面板折叠时)
+     * @description.zh-TW 頭部折叠 span 的提示(面板摺叠時)
      */
     headerClosedHint?: string;
 
     /**
-     * @description Whether to use tooltip instead of raw title for the collapse
-     * @description.zh-CN 头部折叠 div 是否使用 Tooltip 替代 title
-     * @description.zh-TW 頭部折叠 div 是否使用 Tooltip 替代 title
+     * @description Whether to use tooltip instead of raw title for the collapse span
+     * @description.zh-CN 头部折叠 span 是否使用 Tooltip 替代 title
+     * @description.zh-TW 頭部折叠 span 是否使用 Tooltip 替代 title
      * @default false
      */
     useTooltip?: boolean;
 
     /**
-     * @description The properties of tooltip for the collapse
-     * @description.zh-CN 头部折叠 div 的 Tooltip 属性
-     * @description.zh-TW 頭部折叠 div 的 Tooltip 屬性
+     * @description The properties of tooltip for the collapse span
+     * @description.zh-CN 头部折叠 span 的 Tooltip 属性
+     * @description.zh-TW 頭部折叠 span 的 Tooltip 屬性
      */
     tooltipProps?: Omit<TooltipProps, 'title'>,
 
@@ -184,11 +192,18 @@ export type FoldSectionProps = {
     panelStyle?: React.CSSProperties;
 
     /**
-     * @description The content of the panel div
+     * @description The DOM of the panel div
      * @description.zh-CN 面板 div 的内容
      * @description.zh-TW 面板 div 的内容
      */
     panelContent?: React.ReactNode;
+
+    /**
+     * @description The DOM of placeholder for the panel div
+     * @description.zh-CN 面板 div 的占位符
+     * @description.zh-TW 面板 div 的佔位符
+     */
+    panelPlaceholder?: React.ReactNode;
 
     /**
      * @description Whether the panel div is opened when initializing
@@ -199,19 +214,19 @@ export type FoldSectionProps = {
     panelInitialOpen?: boolean;
 
     /**
-     * @description Whether display a placeholder when panel content is empty
-     * @description.zh-CN 当面板 div 的内容为空时是否显示占位符
-     * @description.zh-TW 當面板 div 的内容爲空時是否顯示佔位符
-     * @default true
-     */
-    panelPlaceholder?: boolean;
-
-    /**
      * @description The callback function when the panel div changed
      * @description.zh-CN 面板 div 折叠展开状态变化时的回调函数
      * @description.zh-TW 面板 div 折疊展開狀態變化時的回調函數
      */
     onOpenChange?: (open: boolean) => void;
+
+    /**
+     * @description Whether to use the default style for the component
+     * @description.zh-CN 组件是否使用默认样式
+     * @description.zh-TW 組件是否使用默認樣式
+     * @default true
+     */
+    useDefaultStyle?: boolean;
 };
 
 
@@ -220,8 +235,22 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-fold-section');
     const [panelOpen, setPanelOpen] = React.useState<boolean>(props?.panelInitialOpen || true);
 
+    const buildOrnamentDom = function(before: boolean) {
+        if (!props?.headerOrnament || !props?.headerOrnamentPos) {
+            return undefined;
+        }
+        return (
+            <span
+                className={classNames(`${clazzPrefix}-header-ornament-${before ? 'before' : 'after'}`, props?.headerOrnamentClazz)}
+                style={props?.headerOrnamentStyle}
+            >
+                {props?.headerOrnament}
+            </span>
+        );
+    }
+
     const buildCollapseDom = function(before: boolean) {
-        if (!props?.headerOpenedDom && !props?.headerClosedDom) {
+        if ((!props?.headerOpenedDom && !props?.headerClosedDom) || !props?.headerCollapsePos) {
             return undefined;
         }
         const content = (
@@ -257,19 +286,23 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     };
 
     return (
-        <section className={classNames(clazzPrefix, props?.containerClazz, `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)} style={props?.containerStyle}>
+        <section
+            className={classNames(clazzPrefix, props?.containerClazz, (props?.useDefaultStyle ? `${clazzPrefix}-default` : null), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
+            style={props?.containerStyle}
+        >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
                 <If condition={props?.headerCollapsePos === 'before'}>
                     {buildCollapseDom(true)}
                 </If>
-                <If condition={props?.headerOrnament}>
-                    <span className={classNames(`${clazzPrefix}-header-ornament`, props?.headerOrnamentClazz)} style={props?.headerOrnamentStyle}>
-                        {props?.headerOrnament}
-                    </span>
+                <If condition={props?.headerOrnamentPos === 'before'}>
+                    {buildOrnamentDom(true)}
                 </If>
                 <span className={classNames(`${clazzPrefix}-header-content`, props?.headerContentClazz)} style={props?.headerContentStyle}>
                     {props?.headerContent}
                 </span>
+                <If condition={props?.headerOrnamentPos === 'after'}>
+                    {buildOrnamentDom(false)}
+                </If>
                 <If condition={props?.headerCollapsePos === 'after'}>
                     {buildCollapseDom(false)}
                 </If>
@@ -277,10 +310,12 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
             <If condition={props?.panelContent || props?.panelPlaceholder}>
                 <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
                     <If condition={props?.panelContent}>
-                        {props?.panelContent}
-                    </If>
-                    <If condition={!props?.panelContent && props?.panelPlaceholder}>
-                        <Empty/>
+                        <If.Then>
+                            {props?.panelContent}
+                        </If.Then>
+                        <If.Else>
+                            {props?.panelPlaceholder}
+                        </If.Else>
                     </If>
                 </div>
             </If>
@@ -290,10 +325,11 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
 
 FoldSection.defaultProps = {
+    headerOrnamentPos: 'before',
     headerCollapsePos: 'after',
     headerClosedDom: <UpSquareOutlined/>,
     headerOpenedDom: <DownSquareOutlined/>,
     useTooltip: false,
     panelInitialOpen: true,
-    panelPlaceholder: true,
+    useDefaultStyle: true,
 };
