@@ -381,12 +381,12 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         }
     }
 
-    const [open, setOpen] = React.useState<boolean>(false);
+    const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
     const handleMenuClick: MenuProps['onClick'] = () => {
-        setOpen(true);
+        setMenuOpen(true);
     };
     const handleOpenChange = (open: boolean) => {
-        setOpen(open);
+        setMenuOpen(open);
     };
 
     const buildEntryAddonDom = function(before: boolean) {
@@ -419,7 +419,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             placement={props?.popupPlacement}
             overlayClassName={classNames(clazzPrefix, props?.popupClazz)}
             overlayStyle={props?.popupStyle}
-            open={open}
+            open={menuOpen}
             onOpenChange={handleOpenChange}
             getPopupContainer={() => {
                 return containerRef?.current || document.body;
