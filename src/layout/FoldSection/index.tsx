@@ -221,12 +221,12 @@ export type FoldSectionProps = {
     onOpenChange?: (open: boolean) => void;
 
     /**
-     * @description Whether to use the default style for the component
-     * @description.zh-CN 组件是否使用默认样式
-     * @description.zh-TW 組件是否使用默認樣式
-     * @default true
+     * @description Whether to use the preset style for the component
+     * @description.zh-CN 组件是否使用预设样式
+     * @description.zh-TW 組件是否使用預設樣式
+     * @default default
      */
-    useDefaultStyle?: boolean;
+    usePresetStyle?: 'default' | false;
 };
 
 
@@ -287,7 +287,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     return (
         <section
-            className={classNames(clazzPrefix, props?.containerClazz, (props?.useDefaultStyle ? `${clazzPrefix}-default` : null), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
+            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : null), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
@@ -331,5 +331,5 @@ FoldSection.defaultProps = {
     headerOpenedDom: <DownSquareOutlined/>,
     useTooltip: false,
     panelInitialOpen: true,
-    useDefaultStyle: true,
+    usePresetStyle: 'default',
 };

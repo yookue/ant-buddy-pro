@@ -23,12 +23,14 @@
 
 
 .@{buddy-page-footer} {
-    margin: 48px 0 24px;
-    padding: 0 16px;
-    text-align: center;
+    width: 100%;
+
+    &-vessel {
+        text-align: center;
+    }
 
     &-links {
-        margin-bottom: 8px;
+        margin-bottom: @margin-xs;
 
         a {
             color: @text-color-secondary;
@@ -52,4 +54,21 @@
 
 .@{buddy-page-footer}-rtl {
     direction: rtl;
+}
+
+.@{buddy-page-footer}-default {
+    .@{buddy-page-footer}-vessel {
+        margin: 48px 0 24px;
+        padding: 0 @padding-md;
+    }
+}
+
+.@{buddy-page-footer}-compact {
+    margin: 0 0;
+    padding: 0;
+
+    .@{buddy-page-footer}-vessel {
+        margin: 0 0;
+        padding: 0;
+    }
 }

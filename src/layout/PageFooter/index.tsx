@@ -32,9 +32,9 @@ export type HyperlinkProps = {
     key: string;
 
     /**
-     * @description The children of hyperlink
-     * @description.zh-CN 超链接的子节点
-     * @description.zh-TW 超鏈接的子節點
+     * @description The children content of hyperlink
+     * @description.zh-CN 超链接的子节点内容
+     * @description.zh-TW 超鏈接的子節點内容
      */
     content?: React.ReactNode;
 
@@ -93,20 +93,6 @@ export type PageFooterProps = {
     clazzPrefix?: string;
 
     /**
-     * @description The hyperlinks array
-     * @description.zh-CN 超链接数组
-     * @description.zh-TW 超鏈接數組
-     */
-    linkItems?: HyperlinkProps[];
-
-    /**
-     * @description The copyright content
-     * @description.zh-CN 版权内容
-     * @description.zh-TW 版權内容
-     */
-    copyright?: React.ReactNode;
-
-    /**
      * @description The CSS class name of the footer div
      * @description.zh-CN 页脚 div 的 CSS 类名
      * @description.zh-TW 頁腳 div 的 CSS 類名
@@ -121,18 +107,25 @@ export type PageFooterProps = {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The CSS class names of the child that under the footer div
+     * @description The CSS class names of the vessel div that under the footer div
      * @description.zh-CN 子容器 div 的 CSS 类名
      * @description.zh-TW 子容器 div 的 CSS 類名
      */
     vesselClazz?: string;
 
     /**
-     * @description The CSS style of the child that under the footer div
+     * @description The CSS style of the vessel div that under the footer div
      * @description.zh-CN 子容器 div 的 CSS 样式
      * @description.zh-TW 子容器 div 的 CSS 樣式
      */
     vesselStyle?: React.CSSProperties;
+
+    /**
+     * @description The hyperlinks array
+     * @description.zh-CN 超链接数组
+     * @description.zh-TW 超鏈接數組
+     */
+    links?: HyperlinkProps[];
 
     /**
      * @description The CSS class name of the hyperlinks div
@@ -149,6 +142,27 @@ export type PageFooterProps = {
     linksStyle?: React.CSSProperties;
 
     /**
+     * @description The sharing CSS class name of the hyperlinks
+     * @description.zh-CN 超链接的通用 CSS 类名
+     * @description.zh-TW 超鏈接的通用 CSS 類名
+     */
+    linkShareClazz?: string;
+
+    /**
+     * @description The sharing CSS style of the hyperlinks
+     * @description.zh-CN 超链接的通用 CSS 样式
+     * @description.zh-TW 超鏈接的通用 CSS 樣式
+     */
+    linkShareStyle?: React.CSSProperties;
+
+    /**
+     * @description The copyright content
+     * @description.zh-CN 版权 div 的内容
+     * @description.zh-TW 版權 div 的内容
+     */
+    copyright?: React.ReactNode;
+
+    /**
      * @description The CSS class name of the copyright div
      * @description.zh-CN 版权 div 的 CSS 类名
      * @description.zh-TW 版權 div 的 CSS 類名
@@ -161,6 +175,14 @@ export type PageFooterProps = {
      * @description.zh-TW 版權 div 的 CSS 樣式
      */
     copyrightStyle?: React.CSSProperties;
+
+    /**
+     * @description Whether to use the preset style for the component
+     * @description.zh-CN 组件是否使用预设样式
+     * @description.zh-TW 組件是否使用預設樣式
+     * @default default
+     */
+    usePresetStyle?: 'default' | 'compact' | false;
 };
 
 const {Footer} = Layout;
@@ -169,27 +191,33 @@ const {Footer} = Layout;
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
-    if ((!props?.linkItems || props?.linkItems?.length === 0) && !props?.copyright) {
+    if ((!props?.links || props?.links?.length === 0) && !props?.copyright) {
         return null;
     }
 
     return (
-        <Footer className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <Footer
+            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : null))}
+            style={props?.containerStyle}
+        >
             <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
-                <If condition={props?.linkItems}>
+                <If condition={props?.links}>
                     <div className={classNames(`${clazzPrefix}-links`, props?.linksClazz)} style={props?.linksStyle}>
                         <For
-                            of={props?.linkItems}
+                            of={props?.links}
                             render={(item: HyperlinkProps) => {
                                 return (
                                     <a
                                         key={item.key}
-                                        className={item?.clazz}
+                                        className={classNames(item?.clazz, props?.linkShareClazz)}
                                         href={item?.href}
                                         title={item?.title}
                                         target={item?.target || '_blank'}
                                         rel={item?.rel || 'noopener noreferrer'}
-                                        style={item?.style}
+                                        style={{
+                                            ...item?.style || {},
+                                            ...props?.linkShareStyle || {}
+                                        }}
                                     >
                                         {item?.content}
                                     </a>
@@ -209,3 +237,8 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
         </Footer>
     );
 };
+
+
+PageFooter.defaultProps = {
+    usePresetStyle: 'default',
+}

@@ -96,12 +96,12 @@ export type ApartTitleProps = {
     contentStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to use the default style for the component
-     * @description.zh-CN 组件是否使用默认样式
-     * @description.zh-TW 組件是否使用默認樣式
-     * @default true
+     * @description Whether to use the preset style for the component
+     * @description.zh-CN 组件是否使用预设样式
+     * @description.zh-TW 組件是否使用預設樣式
+     * @default default
      */
-    useDefaultStyle?: boolean;
+    usePresetStyle?: 'default' | false;
 };
 
 
@@ -125,7 +125,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, props?.containerClazz, (props?.useDefaultStyle ? `${clazzPrefix}-default` : null))}
+            className={classNames(`${clazzPrefix}`, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : null))}
             style={props?.containerStyle}
         >
             <If condition={props?.ornamentPos === 'before'}>
@@ -144,5 +144,5 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
 ApartTitle.defaultProps = {
     ornamentPos: 'before',
-    useDefaultStyle: true,
+    usePresetStyle: 'default',
 };
