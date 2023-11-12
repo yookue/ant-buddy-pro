@@ -99,7 +99,7 @@ export type ApartTitleProps = {
      * @description Whether to use the preset style for the component
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
-     * @default default
+     * @default 'default'
      */
     usePresetStyle?: 'default' | false;
 };

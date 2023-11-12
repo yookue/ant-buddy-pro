@@ -21,7 +21,7 @@ import {PageFooter} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <PageFooter
-            linkItems={[
+            links={[
                 {
                     key: 'ant-buddy-pro',
                     content: 'Ant Buddy Pro',
@@ -33,18 +33,12 @@ export default () => {
             ]}
             copyright={'2023 Yookue Ltd'}
             containerStyle={{
-                width: '100%',
                 backgroundColor: '#e5f7ff',
-                padding: 0,
-                bottom: '6px',
-            }}
-            vesselStyle={{
-                margin: '48px 0 6px 0',
-                padding: '0 0',
             }}
             copyrightStyle={{
-                color: '#443300'
+                color: '#443300',
             }}
+            usePresetStyle='compact'
         />
     );
 }

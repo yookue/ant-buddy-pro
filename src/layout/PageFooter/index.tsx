@@ -180,7 +180,7 @@ export type PageFooterProps = {
      * @description Whether to use the preset style for the component
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
-     * @default default
+     * @default 'default'
      */
     usePresetStyle?: 'default' | 'compact' | false;
 };
@@ -228,9 +228,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                 </If>
                 <If condition={props?.copyright}>
                     <div className={classNames(`${clazzPrefix}-copyright`, props?.copyrightClazz)} style={props?.copyrightStyle}>
-                        <React.Fragment>
-                            <CopyrightOutlined/> {props?.copyright}
-                        </React.Fragment>
+                        <CopyrightOutlined/> {props?.copyright}
                     </div>
                 </If>
             </div>
