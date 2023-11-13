@@ -19,6 +19,7 @@ import React from 'react';
 import {ConfigProvider, Input, Checkbox, Tooltip, type InputProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {AimOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
+import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/lib/omit';
 import {DesignConst} from '@/constant/DesignConst';
@@ -143,26 +144,30 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const checkboxId = generateCheckId();
 
     const buildAddonDom = function(before: boolean) {
-        const content: React.ReactNode[] = [];
-        if (before && props?.addonBefore) {
-            content.push(props?.addonBefore);
-        } else if (!before && props?.addonAfter) {
-            content.push(props?.addonAfter);
-        }
-        if ((before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after')) {
-            content.push((
-                <Checkbox
-                    name={checkboxName}
-                    id={checkboxId || checkboxName}
-                    {...omitCheckProps}
-                >
-                    {props?.addonDom}
-                </Checkbox>
-            ));
-        }
-        if (content.length === 0) {
+        if ((!props?.addonDom || (before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.addonBefore) || (!before && !props?.addonAfter))) {
             return undefined;
         }
+
+        const combineDom = (
+            <>
+                <If condition={before && props?.addonBefore}>
+                    {props?.addonBefore}
+                </If>
+                <If condition={before && props?.addonAfter}>
+                    {props?.addonAfter}
+                </If>
+                <If condition={(before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after')}>
+                    <Checkbox
+                        name={checkboxName}
+                        id={checkboxId || checkboxName}
+                        {...omitCheckProps}
+                    >
+                        {props?.addonDom}
+                    </Checkbox>
+                </If>
+            </>
+        );
+
         const hintTip = props?.tooltipProps?.title || props?.checkProps?.title;
         if (hintTip) {
             if (props?.useTooltip) {
@@ -171,23 +176,23 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
                         title={hintTip}
                         {...omitTooltipProps}
                     >
-                        {content}
+                        {combineDom}
                     </Tooltip>
                 );
             } else {
                 return (
                     <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : props?.checkProps?.title}>
-                        {content}
+                        {combineDom}
                     </span>
                 );
             }
         }
-        return content;
+        return combineDom;
     };
     const beforeDom = buildAddonDom(true);
     const afterDom = buildAddonDom(false);
 
-    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter', 'className']) : {};
+    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']) : {};
     if (props?.proField) {
         const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField']) : {};
 

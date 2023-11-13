@@ -1,6 +1,6 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "0.1.17",
+    "version": "0.1.18",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on React & Ant Design Pro",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
@@ -54,7 +54,7 @@
         "del-cli": "^5.1.0",
         "dumi": "^1.1.54",
         "eslint": "^7.32.0",
-        "father": "^4.3.6",
+        "father": "^4.3.7",
         "gh-pages": "^6.0.0",
         "prettier": "^2.8.8",
         "react": "^17.0.0",

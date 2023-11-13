@@ -221,52 +221,64 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     };
 
     const buildItemAddonDom = function(tag: string, before: boolean, elementId: string, inputProps?: PopupInputProps) {
-        const content: React.ReactNode[] = [];
-        if (inputProps) {
-            if (before && inputProps?.addonBefore) {
-                content.push(inputProps?.addonBefore);
-            } else if (!before && inputProps?.addonAfter) {
-                content.push(inputProps?.addonAfter);
-            }
-        }
-        if ((before && props?.popupTagPos === 'before') || (!before && props?.popupTagPos === 'after')) {
-            content.push((
-                <span
-                    className={classNames(`${clazzPrefix}-tag`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : undefined))}
-                >
-                    {tag}
-                </span>
-            ));
-        }
-        if ((before && props?.popupActionPos === 'before') || (!before && props?.popupActionPos === 'after')) {
-            if (props?.popupConfirmProps) {
-                content.push((
-                    <Popconfirm
-                        title={props?.popupConfirmProps?.message}
-                        onConfirm={() => handleClonePrimary(elementId)}
-                        okText={props?.popupConfirmProps?.ok}
-                        cancelText={props?.popupConfirmProps?.cancel}
-                    >
-                        <span className={classNames(`${clazzPrefix}-action`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : undefined))}>
-                            {props?.popupActionDom}
-                        </span>
-                    </Popconfirm>
-                ));
-            } else {
-                content.push((
-                    <span
-                        className={classNames(`${clazzPrefix}-action`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : undefined))}
-                        onClick={() => handleClonePrimary(elementId)}
-                    >
-                        {props?.popupActionDom}
-                    </span>
-                ));
-            }
-        }
-        if (content.length === 0) {
+        if ((!props?.popupActionDom || ((before && props?.popupTagPos !== 'before') || (!before && props?.popupTagPos !== 'after') && (before && props?.popupActionPos !== 'before') || (!before && props?.popupActionPos !== 'after'))) && ((before && !inputProps?.addonBefore) || (!before && !inputProps?.addonAfter))) {
             return undefined;
         }
-        return (props?.popupTagPos === props?.popupActionPos) ? (<Space>{content}</Space>) : content;
+
+        const actionDom = (props?.popupActionDom && props?.popupActionPos) ? (
+            <span
+                className={classNames(`${clazzPrefix}-action-${props?.popupActionPos}`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : null))}
+                onClick={() => handleClonePrimary(elementId)}
+            >
+                {props?.popupActionDom}
+            </span>
+        ) : undefined;
+
+        const combineDom = (
+            <>
+                <If condition={((before && props?.popupTagPos === 'before') || (!before && props?.popupTagPos === 'after'))}>
+                    <span className={classNames(`${clazzPrefix}-tag-${props?.popupTagPos}`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : null))}>
+                        {tag}
+                    </span>
+                </If>
+                <If condition={props?.popupActionDom && ((before && props?.popupActionPos === 'before') || (!before && props?.popupActionPos === 'after'))}>
+                    <If condition={props?.popupConfirmProps}>
+                        <If.Then>
+                            <Popconfirm
+                                title={props?.popupConfirmProps?.message}
+                                onConfirm={() => handleClonePrimary(elementId)}
+                                okText={props?.popupConfirmProps?.ok}
+                                cancelText={props?.popupConfirmProps?.cancel}
+                            >
+                                {actionDom}
+                            </Popconfirm>
+                        </If.Then>
+                        <If.Else>
+                            {actionDom}
+                        </If.Else>
+                    </If>
+                </If>
+            </>
+        );
+
+        return (
+            <>
+                <If condition={before && inputProps?.addonBefore}>
+                    {inputProps?.addonBefore}
+                </If>
+                <If condition={!before && inputProps?.addonAfter}>
+                    {inputProps?.addonAfter}
+                </If>
+                <If condition={props?.popupActionDom && props?.popupActionPos && props?.popupActionPos === props?.popupTagPos}>
+                    <If.Then>
+                        <Space>{combineDom}</Space>
+                    </If.Then>
+                    <If.Else>
+                        {combineDom}
+                    </If.Else>
+                </If>
+            </>
+        );
     };
 
     const menuItems: MenuProps['items'] = [];
@@ -278,7 +290,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const {tag, fieldProps, rules} = itemProp;
             const restProps = omit(itemProp, ['tag', 'name', 'id', 'disabled', 'readonly', 'fieldProps', 'rules']);
             const antdInputProps = restProps as InputProps;
-            const omitFieldProps = fieldProps ? omit(fieldProps, ['addonBefore', 'addonAfter', 'maxLength', 'placeholder']) : {};
+            const omitFieldProps = fieldProps ? omit(fieldProps, ['className', 'addonBefore', 'addonAfter', 'maxLength', 'placeholder']) : {};
             const elementId = nanoid();
             const beforeDom = buildItemAddonDom(tag, true, elementId, itemProp);
             const afterDom = buildItemAddonDom(tag, false, elementId, itemProp);
@@ -293,6 +305,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             readonly={props?.readonly || itemProp?.readonly}
                             {...restProps}
                             fieldProps={{
+                                className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
                                 maxLength: itemProp?.maxLength || props?.popupShareProps?.maxLength,
@@ -309,6 +322,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                     </If.Then>
                     <If.Else>
                         <Input
+                            className={classNames(`${clazzPrefix}-item`, fieldProps?.className)}
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
                             disabled={props?.disabled || itemProp.disabled}
@@ -347,6 +361,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             disabled={props?.disabled}
                             readonly={props?.readonly}
                             fieldProps={{
+                                className: `${clazzPrefix}-item`,
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
                                 maxLength: props?.popupShareProps?.maxLength,
@@ -361,6 +376,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                     </If.Then>
                     <If.Else>
                         <Input
+                            className={`${clazzPrefix}-item`}
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
                             disabled={props?.disabled}
@@ -390,16 +406,22 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     };
 
     const buildEntryAddonDom = function(before: boolean) {
-        const content: React.ReactNode[] = [];
-        if (before && props?.addonBefore) {
-            content.push(props?.addonBefore);
-        } else if (!before && props?.addonAfter) {
-            content.push(props?.addonAfter);
+        if ((!props?.actionDom || (before && props?.actionPos !== 'before') || (!before && props?.actionPos !== 'after')) && ((before && !props?.addonBefore) || (!before && !props?.addonAfter))) {
+            return undefined;
         }
-        if (props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after'))) {
-            content.push(props?.actionDom);
-        }
-        return (content.length === 0) ? undefined: content;
+        return (
+            <>
+                <If condition={before && props?.addonBefore}>
+                    {props?.addonBefore}
+                </If>
+                <If condition={!before && props?.addonAfter}>
+                    {props?.addonAfter}
+                </If>
+                <If condition={props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after'))}>
+                    {props?.actionDom}
+                </If>
+            </>
+        );
     };
     const beforeDom = buildEntryAddonDom(true);
     const afterDom = buildEntryAddonDom(false);
@@ -408,7 +430,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const restProProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
     // @ts-ignore
     const restAntProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField', ...DesignConst.ProFormFieldItemPropsKeys]) : {};
-    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['addonBefore', 'addonAfter']) : {};
+    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']) : {};
 
     return (
         <Dropdown
@@ -417,7 +439,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 onClick: handleMenuClick,
             }}
             placement={props?.popupPlacement}
-            overlayClassName={classNames(clazzPrefix, props?.popupClazz)}
+            overlayClassName={classNames(clazzPrefix + '-dropdown', props?.popupClazz)}
             overlayStyle={props?.popupStyle}
             open={menuOpen}
             onOpenChange={handleOpenChange}
@@ -432,6 +454,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             ref={ref}
                             {...restProProps}
                             fieldProps={{
+                                className: classNames(clazzPrefix, props?.fieldProps?.className),
                                 ...omitFieldProps,
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
@@ -442,6 +465,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                     <If.Else>
                         <Input
                             ref={ref}
+                            className={classNames(clazzPrefix, props?.fieldProps?.className)}
                             {...restAntProps}
                             {...omitFieldProps}
                             addonBefore={beforeDom}
@@ -450,7 +474,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                         />
                     </If.Else>
                 </If>
-                <div ref={containerRef}/>
+                <div ref={containerRef} className={`${clazzPrefix}-dropdown-container`}/>
             </Input.Group>
         </Dropdown>
     );

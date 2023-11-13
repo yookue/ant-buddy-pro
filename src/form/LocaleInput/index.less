@@ -22,18 +22,20 @@
 @buddy-locale-input: ~'@{ant-prefix}-buddy-locale-input';
 
 
-.@{buddy-locale-input} {
-    &-disabled {
+.@{buddy-locale-input}-dropdown {
+    .@{buddy-locale-input}-disabled {
         color: @disabled-color;
     }
 
-    &-tag:not(.@{buddy-locale-input}-disabled) {
+    .@{buddy-locale-input}-tag-before:not(.@{buddy-locale-input}-disabled),
+    .@{buddy-locale-input}-tag-after:not(.@{buddy-locale-input}-disabled) {
         &:hover {
-            color: fade(@black, 55%);
+            color: @icon-color-hover;
         }
     }
 
-    &-action:not(.@{buddy-locale-input}-disabled) {
+    .@{buddy-locale-input}-action-before:not(.@{buddy-locale-input}-disabled),
+    .@{buddy-locale-input}-action-after:not(.@{buddy-locale-input}-disabled) {
         &:hover {
             color: @link-hover-color;
             border-color: @link-hover-color;
