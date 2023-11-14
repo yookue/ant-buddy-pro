@@ -4,7 +4,7 @@ toc: content
 
 ## ExactInput
 
-ExactInput, provides a text input box with a checkbox, aiming to support exact capability for queries.
+ExactInput, provides a text input box with a checkbox, aiming to support exact capability for enquiries.
 
 ### Premise
 

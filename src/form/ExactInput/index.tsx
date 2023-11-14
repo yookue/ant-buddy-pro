@@ -144,7 +144,7 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const checkboxId = generateCheckId();
 
     const buildAddonDom = function(before: boolean) {
-        if ((!props?.addonDom || (before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.addonBefore) || (!before && !props?.addonAfter))) {
+        if (((before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.addonBefore) || (!before && !props?.addonAfter))) {
             return undefined;
         }
 
