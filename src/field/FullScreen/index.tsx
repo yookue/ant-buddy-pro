@@ -156,10 +156,10 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     });
 
     return (
-        <If condition={props?.useTooltip}>
+        <If condition={props?.useTooltip} validation={false}>
             <If.Then>
                 <Tooltip title={fullscreen ? props?.exitHint : props?.enterHint} {...props?.tooltipProps}>
-                    <If condition={typeof props?.useWrapper === 'string'}>
+                    <If condition={typeof props?.useWrapper === 'string'} validation={false}>
                         {
                             React.createElement((props?.useWrapper as string), {
                                 className: props?.wrapperProps?.clazz,
@@ -167,13 +167,13 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
                             }, screenElement)
                         }
                     </If>
-                    <If condition={!props?.useWrapper}>
+                    <If condition={!props?.useWrapper} validation={false}>
                         {screenElement}
                     </If>
                 </Tooltip>
             </If.Then>
             <If.Else>
-                <If condition={typeof props?.useWrapper === 'string'}>
+                <If condition={typeof props?.useWrapper === 'string'} validation={false}>
                     {
                         React.createElement((props?.useWrapper as string), {
                             className: props?.wrapperProps?.clazz,
@@ -182,7 +182,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
                         }, screenElement)
                     }
                 </If>
-                <If condition={!props?.useWrapper}>
+                <If condition={!props?.useWrapper} validation={false}>
                     {
                         React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
                             title: fullscreen ? props?.exitHint : props?.enterHint,

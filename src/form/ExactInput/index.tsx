@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Checkbox, Tooltip, type InputProps, type CheckboxProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Input, Checkbox, Space, Tooltip, type InputProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {AimOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
 import {If} from '@yookue/react-condition';
@@ -144,51 +144,58 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const checkboxId = generateCheckId();
 
     const buildAddonDom = function(before: boolean) {
-        if (((before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.addonBefore) || (!before && !props?.addonAfter))) {
+        if (((before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.fieldProps?.addonBefore) || (!before && !props?.fieldProps?.addonAfter))) {
             return undefined;
         }
 
+        const actionDom = (
+            <Checkbox
+                name={checkboxName}
+                id={checkboxId || checkboxName}
+                {...omitCheckProps}
+            >
+                {props?.addonDom}
+            </Checkbox>
+        );
+
+        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after'))].filter(object => !!object).length;
+        if (nodeCount === 0) {
+            return undefined;
+        }
+        const hintTip = props?.tooltipProps?.title || props?.checkProps?.title;
         const combineDom = (
             <>
-                <If condition={before && props?.addonBefore}>
-                    {props?.addonBefore}
+                <If condition={before && props?.fieldProps?.addonBefore} validation={false}>
+                    {props?.fieldProps?.addonBefore}
                 </If>
-                <If condition={before && props?.addonAfter}>
-                    {props?.addonAfter}
+                <If condition={!before && props?.fieldProps?.addonAfter} validation={false}>
+                    {props?.fieldProps?.addonAfter}
                 </If>
-                <If condition={(before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after')}>
-                    <Checkbox
-                        name={checkboxName}
-                        id={checkboxId || checkboxName}
-                        {...omitCheckProps}
-                    >
-                        {props?.addonDom}
-                    </Checkbox>
+                <If condition={(before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after')} validation={false}>
+                    <If condition={hintTip} validation={false}>
+                        <If condition={props?.useTooltip} validation={false}>
+                            <Tooltip
+                                title={hintTip}
+                                {...omitTooltipProps}
+                            >
+                                {actionDom}
+                            </Tooltip>
+                        </If>
+                        <If condition={!props?.useTooltip} validation={false}>
+                            <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : props?.checkProps?.title}>
+                                {actionDom}
+                            </span>
+                        </If>
+                    </If>
+                    <If condition={!hintTip} validation={false}>
+                        {actionDom}
+                    </If>
                 </If>
             </>
         );
-
-        const hintTip = props?.tooltipProps?.title || props?.checkProps?.title;
-        if (hintTip) {
-            if (props?.useTooltip) {
-                return (
-                    <Tooltip
-                        title={hintTip}
-                        {...omitTooltipProps}
-                    >
-                        {combineDom}
-                    </Tooltip>
-                );
-            } else {
-                return (
-                    <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : props?.checkProps?.title}>
-                        {combineDom}
-                    </span>
-                );
-            }
-        }
-        return combineDom;
+        return (nodeCount === 1) ? combineDom : (<Space>{combineDom}</Space>);
     };
+
     const beforeDom = buildAddonDom(true);
     const afterDom = buildAddonDom(false);
 

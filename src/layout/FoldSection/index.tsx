@@ -287,29 +287,29 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     return (
         <section
-            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : null), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
+            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
-                <If condition={props?.headerCollapsePos === 'before'}>
+                <If condition={props?.headerCollapsePos === 'before'} validation={false}>
                     {buildCollapseDom(true)}
                 </If>
-                <If condition={props?.headerOrnamentPos === 'before'}>
+                <If condition={props?.headerOrnamentPos === 'before'} validation={false}>
                     {buildOrnamentDom(true)}
                 </If>
                 <span className={classNames(`${clazzPrefix}-header-content`, props?.headerContentClazz)} style={props?.headerContentStyle}>
                     {props?.headerContent}
                 </span>
-                <If condition={props?.headerOrnamentPos === 'after'}>
+                <If condition={props?.headerOrnamentPos === 'after'} validation={false}>
                     {buildOrnamentDom(false)}
                 </If>
-                <If condition={props?.headerCollapsePos === 'after'}>
+                <If condition={props?.headerCollapsePos === 'after'} validation={false}>
                     {buildCollapseDom(false)}
                 </If>
             </div>
-            <If condition={props?.panelContent || props?.panelPlaceholder}>
+            <If condition={props?.panelContent || props?.panelPlaceholder} validation={false}>
                 <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
-                    <If condition={props?.panelContent}>
+                    <If condition={props?.panelContent} validation={false}>
                         <If.Then>
                             {props?.panelContent}
                         </If.Then>

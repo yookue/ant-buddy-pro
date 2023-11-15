@@ -256,7 +256,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                 className={classNames(`${clazzPrefix}-content`, props?.contentClazz)}
                 style={props?.contentStyle}
             >
-                <If condition={props?.showContentTitle}>
+                <If condition={props?.showContentTitle} validation={false}>
                     <div
                         className={classNames(`${clazzPrefix}-content-title`, props?.contentTitleClazz)}
                         style={props?.contentTitleStyle}

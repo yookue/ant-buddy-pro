@@ -24,7 +24,7 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-#### 使用 ProForm
+#### 使用 ProForm，使用前缀
 
 ```jsx
 import React from 'react';
@@ -50,6 +50,9 @@ export default () => {
               placeholder='请输入此项'
               tooltipProps={{
                   title: '全字匹配',
+              }}
+              fieldProps={{
+                  addonBefore: '前缀',
               }}
           />
         </ProForm>

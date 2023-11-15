@@ -24,7 +24,7 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-#### With ProForm
+#### With ProForm, with prefix
 
 ```jsx
 import React from 'react';
@@ -50,6 +50,9 @@ export default () => {
                 placeholder='Please input this field'
                 tooltipProps={{
                     title: 'Match Exactly',
+                }}
+                fieldProps={{
+                    addonBefore: 'Prefix',
                 }}
             />
         </ProForm>

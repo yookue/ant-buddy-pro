@@ -197,11 +197,11 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
 
     return (
         <Footer
-            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : null))}
+            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
-                <If condition={props?.links}>
+                <If condition={props?.links} validation={false}>
                     <div className={classNames(`${clazzPrefix}-links`, props?.linksClazz)} style={props?.linksStyle}>
                         <For
                             of={props?.links}
@@ -226,9 +226,11 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                         />
                     </div>
                 </If>
-                <If condition={props?.copyright}>
+                <If condition={props?.copyright} validation={false}>
                     <div className={classNames(`${clazzPrefix}-copyright`, props?.copyrightClazz)} style={props?.copyrightStyle}>
-                        <CopyrightOutlined/> {props?.copyright}
+                        <>
+                            <CopyrightOutlined/> {props?.copyright}
+                        </>
                     </div>
                 </If>
             </div>

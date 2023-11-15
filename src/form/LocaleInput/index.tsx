@@ -221,64 +221,62 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     };
 
     const buildItemAddonDom = function(tag: string, before: boolean, elementId: string, inputProps?: PopupInputProps) {
-        if ((!props?.popupActionDom || ((before && props?.popupTagPos !== 'before') || (!before && props?.popupTagPos !== 'after') && (before && props?.popupActionPos !== 'before') || (!before && props?.popupActionPos !== 'after'))) && ((before && !inputProps?.addonBefore) || (!before && !inputProps?.addonAfter))) {
+        if (before && props?.popupTagPos !== 'before' && !inputProps?.fieldProps?.addonBefore && props?.popupActionPos === 'before' && !props?.popupActionDom) {
             return undefined;
         }
+        if (!before && props?.popupTagPos !== 'after' && !inputProps?.fieldProps?.addonAfter && props?.popupActionPos === 'after' && !props?.popupActionDom) {
+            return undefined;
+        }
+        const itemDisabled = props?.disabled || props?.fieldProps?.disabled || inputProps?.disabled || inputProps?.fieldProps?.disabled
+        const itemReadonly = props?.readOnly || props?.fieldProps?.readonly || inputProps?.readOnly || inputProps?.fieldProps?.readonly;
 
-        const actionDom = (props?.popupActionDom && props?.popupActionPos) ? (
-            <span
-                className={classNames(`${clazzPrefix}-action-${props?.popupActionPos}`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : null))}
-                onClick={() => handleClonePrimary(elementId)}
-            >
-                {props?.popupActionDom}
+        const tagDom = ((before && props?.popupTagPos === 'before') || (!before && props?.popupTagPos === 'after')) ? (
+            <span className={classNames(`${clazzPrefix}-tag-${props?.popupTagPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined))}>
+                {tag}
             </span>
         ) : undefined;
 
+        const actionClazz = classNames(`${clazzPrefix}-action-${props?.popupActionPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined));
+        const actionDom = (props?.popupActionDom && ((before && props?.popupActionPos === 'before') || (!before && props?.popupActionPos === 'after'))) ? (
+            <If condition={props?.popupConfirmProps} validation={false}>
+                <If.Then>
+                    <Popconfirm
+                        title={props?.popupConfirmProps?.message}
+                        okText={props?.popupConfirmProps?.ok}
+                        cancelText={props?.popupConfirmProps?.cancel}
+                        disabled={itemDisabled || itemReadonly}
+                        onConfirm={() => handleClonePrimary(elementId)}
+                    >
+                        <span className={actionClazz}>
+                            {props?.popupActionDom}
+                        </span>
+                    </Popconfirm>
+                </If.Then>
+                <If.Else>
+                    <span className={actionClazz} onClick={() => handleClonePrimary(elementId)}>
+                        {props?.popupActionDom}
+                    </span>
+                </If.Else>
+            </If>
+        ) : undefined;
+
+        const nodeCount = [(before && inputProps?.fieldProps?.addonBefore), (!before && inputProps?.fieldProps?.addonAfter), tagDom, actionDom].filter(object => !!object).length;
+        if (nodeCount === 0) {
+            return undefined;
+        }
         const combineDom = (
             <>
-                <If condition={((before && props?.popupTagPos === 'before') || (!before && props?.popupTagPos === 'after'))}>
-                    <span className={classNames(`${clazzPrefix}-tag-${props?.popupTagPos}`, ((props?.disabled || props?.readonly) ? `${clazzPrefix}-disabled` : null))}>
-                        {tag}
-                    </span>
+                <If condition={before && inputProps?.fieldProps?.addonBefore} validation={false}>
+                    {inputProps?.fieldProps?.addonBefore}
                 </If>
-                <If condition={props?.popupActionDom && ((before && props?.popupActionPos === 'before') || (!before && props?.popupActionPos === 'after'))}>
-                    <If condition={props?.popupConfirmProps}>
-                        <If.Then>
-                            <Popconfirm
-                                title={props?.popupConfirmProps?.message}
-                                onConfirm={() => handleClonePrimary(elementId)}
-                                okText={props?.popupConfirmProps?.ok}
-                                cancelText={props?.popupConfirmProps?.cancel}
-                            >
-                                {actionDom}
-                            </Popconfirm>
-                        </If.Then>
-                        <If.Else>
-                            {actionDom}
-                        </If.Else>
-                    </If>
+                <If condition={!before && inputProps?.fieldProps?.addonAfter} validation={false}>
+                    {inputProps?.fieldProps?.addonAfter}
                 </If>
+                {tagDom}
+                {actionDom}
             </>
         );
-
-        return (
-            <>
-                <If condition={before && inputProps?.addonBefore}>
-                    {inputProps?.addonBefore}
-                </If>
-                <If condition={!before && inputProps?.addonAfter}>
-                    {inputProps?.addonAfter}
-                </If>
-                <If condition={props?.popupActionDom && props?.popupActionPos && props?.popupActionPos === props?.popupTagPos}>
-                    <If.Then>
-                        <Space>{combineDom}</Space>
-                    </If.Then>
-                    <If.Else>
-                        {combineDom}
-                    </If.Else>
-                </If>
-            </>
-        );
+        return (nodeCount === 1) ? combineDom : (<Space>{combineDom}</Space>);
     };
 
     const menuItems: MenuProps['items'] = [];
@@ -296,13 +294,13 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const afterDom = buildItemAddonDom(tag, false, elementId, itemProp);
             const cloneRules = (props?.popupCloneRules && props?.rules) ? props?.rules : [];
             const itemDom = (
-                <If condition={props?.popupProField}>
+                <If condition={props?.popupProField} validation={false}>
                     <If.Then>
                         <ProFormText
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled || itemProp?.disabled}
-                            readonly={props?.readonly || itemProp?.readonly}
+                            disabled={props?.disabled || props?.fieldProps?.disabled || itemProp?.disabled || itemProp?.fieldProps?.disabled}
+                            readonly={props?.readOnly || props?.fieldProps?.readonly || itemProp?.readOnly || itemProp?.fieldProps?.readonly}
                             {...restProps}
                             fieldProps={{
                                 className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
@@ -325,8 +323,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             className={classNames(`${clazzPrefix}-item`, fieldProps?.className)}
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled || itemProp.disabled}
-                            readOnly={props?.readonly || itemProp.readonly}
+                            disabled={props?.disabled || props?.fieldProps?.disabled || itemProp.disabled || itemProp?.fieldProps?.disabled}
+                            readOnly={props?.readOnly || props?.fieldProps?.readonly || itemProp.readOnly || itemProp?.fieldProps?.readonly}
                             maxLength={itemProp?.maxLength || props?.popupShareProps?.maxLength}
                             placeholder={itemProp?.placeholder || props?.popupShareProps?.placeholder}
                             {...antdInputProps}
@@ -353,13 +351,13 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const afterDom = buildItemAddonDom(tag, false, elementId);
             const cloneRules = (props?.popupCloneRules && props?.rules) ? props?.rules : [];
             const itemDom = (
-                <If condition={props?.popupProField}>
+                <If condition={props?.popupProField} validation={false}>
                     <If.Then>
                         <ProFormText
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled}
-                            readonly={props?.readonly}
+                            disabled={props?.disabled || props?.fieldProps?.disabled}
+                            readonly={props?.readOnly || props?.fieldProps?.readonly}
                             fieldProps={{
                                 className: `${clazzPrefix}-item`,
                                 addonBefore: beforeDom,
@@ -379,8 +377,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             className={`${clazzPrefix}-item`}
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled}
-                            readOnly={props?.readonly}
+                            disabled={props?.disabled || props?.fieldProps?.disabled}
+                            readOnly={props?.readOnly || props?.fieldProps?.readonly}
                             maxLength={props?.popupShareProps?.maxLength}
                             placeholder={props?.popupShareProps?.placeholder}
                             addonBefore={beforeDom}
@@ -406,23 +404,32 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     };
 
     const buildEntryAddonDom = function(before: boolean) {
-        if ((!props?.actionDom || (before && props?.actionPos !== 'before') || (!before && props?.actionPos !== 'after')) && ((before && !props?.addonBefore) || (!before && !props?.addonAfter))) {
+        if (before && !props?.fieldProps?.addonBefore && props?.actionPos === 'before' && !props?.actionDom) {
             return undefined;
         }
-        return (
+        if (!before && !props?.fieldProps?.addonAfter && props?.actionPos === 'after' && !props?.actionDom) {
+            return undefined;
+        }
+        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after')))].filter(object => !!object).length;
+        if (nodeCount === 0) {
+            return undefined;
+        }
+        const combineDom = (
             <>
-                <If condition={before && props?.addonBefore}>
-                    {props?.addonBefore}
+                <If condition={before && props?.fieldProps?.addonBefore} validation={false}>
+                    {props?.fieldProps?.addonBefore}
                 </If>
-                <If condition={!before && props?.addonAfter}>
-                    {props?.addonAfter}
+                <If condition={!before && props?.fieldProps?.addonAfter} validation={false}>
+                    {props?.fieldProps?.addonAfter}
                 </If>
-                <If condition={props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after'))}>
+                <If condition={props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after'))} validation={false}>
                     {props?.actionDom}
                 </If>
             </>
         );
+        return (nodeCount === 1) ? combineDom : (<Space>{combineDom}</Space>);
     };
+
     const beforeDom = buildEntryAddonDom(true);
     const afterDom = buildEntryAddonDom(false);
 
@@ -448,7 +455,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             }}
         >
             <Input.Group>
-                <If condition={props?.proField}>
+                <If condition={props?.proField} validation={false}>
                     <If.Then>
                         <ProFormText
                             ref={ref}
