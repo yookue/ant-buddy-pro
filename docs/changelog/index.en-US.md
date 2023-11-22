@@ -21,7 +21,7 @@ Here are some milestone versions of the changelog:
     - Add 'form/ExactInput'
 
   - **v0.1.9** [2023-10-30]
-      - Add 'layout/CardTabs'
+    - Add 'layout/CardTabs'
 
   - **v0.1.8** [2023-10-29]
     - Add 'layout/MenuTabs'

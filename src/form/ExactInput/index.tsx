@@ -201,8 +201,7 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
 
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']) : {};
     if (props?.proField) {
-        const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField']) : {};
-
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField']) : {};
         return (
             <ProFormText
                 ref={ref}
@@ -217,13 +216,12 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
         );
     } else {
         // @ts-ignore
-        const restProps = props ? omit(props, ['clazzPrefix', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemPropsKeys]) : {};
-
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemPropsKeys]) : {};
         return (
             <Input
                 ref={ref}
-                {...restProps}
                 className={classNames(clazzPrefix, props?.className)}
+                {...restProps}
                 {...omitFieldProps}
                 addonBefore={beforeDom}
                 addonAfter={afterDom}
