@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.20** [2023-11-24]
+    - Add 'layout/WrapSpace'
+
   - **v0.1.16** [2023-11-11]
     - Add 'layout/ApartTitle'
 
