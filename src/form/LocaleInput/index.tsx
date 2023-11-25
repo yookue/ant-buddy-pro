@@ -306,8 +306,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                maxLength: itemProp?.maxLength || props?.popupShareProps?.maxLength,
-                                placeholder: itemProp?.placeholder || props?.popupShareProps?.placeholder,
+                                maxLength: itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength,
+                                placeholder: itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder,
                                 ...omitFieldProps,
                                 'data-buddy-locale-tag': elementId,
                             }}
@@ -325,8 +325,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
                             disabled={props?.disabled || props?.fieldProps?.disabled || itemProp.disabled || itemProp?.fieldProps?.disabled}
                             readOnly={props?.readOnly || props?.fieldProps?.readonly || itemProp.readOnly || itemProp?.fieldProps?.readonly}
-                            maxLength={itemProp?.maxLength || props?.popupShareProps?.maxLength}
-                            placeholder={itemProp?.placeholder || props?.popupShareProps?.placeholder}
+                            maxLength={itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength}
+                            placeholder={itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder}
                             {...antdInputProps}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}

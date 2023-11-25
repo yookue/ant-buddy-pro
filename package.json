@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "@ant-design/pro-components": "^1.1.25",
-        "@babel/runtime": "^7.23.2",
+        "@babel/runtime": "^7.23.4",
         "@emotion/css": "^11.11.2",
         "@yookue/react-condition": "^0.1.6",
         "screenfull": "^6.0.2"
