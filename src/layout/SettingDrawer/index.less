@@ -211,13 +211,33 @@
     }
 }
 
-.@{ant-prefix}-pro-fixed-header:not(.@{ant-prefix}-pro-header-dark) .@{buddy-setting-drawer}-handle .@{iconfont-css-prefix}-setting,
-.@{ant-prefix}-pro-fixed-header:not(.@{ant-prefix}-pro-header-dark) .@{buddy-setting-drawer}-handle .@{iconfont-css-prefix}-close,
-.@{ant-prefix}-pro-top-nav-header .@{buddy-setting-drawer}-handle .@{iconfont-css-prefix}-setting,
-.@{ant-prefix}-pro-top-nav-header .@{buddy-setting-drawer}-handle .@{iconfont-css-prefix}-close,
-.@{ant-prefix}-pro-header-realDark .@{buddy-setting-drawer}-handle .@{iconfont-css-prefix}-setting,
-.@{ant-prefix}-pro-header-realDark .@{buddy-setting-drawer}-handle .@{iconfont-css-prefix}-close {
-    color: @text-color-dark !important;
+
+.@{ant-prefix}-layout-header:not(.@{ant-prefix}-pro-header-dark):not(.@{ant-prefix}-pro-header-realDark) {
+    .@{ant-prefix}-pro-global-header.@{ant-prefix}-pro-global-header-layout-mix .@{buddy-setting-drawer}-handle {
+        .@{iconfont-css-prefix}-setting,
+        .@{iconfont-css-prefix}-close {
+            color: @text-color-dark !important;
+        }
+    }
+}
+
+.@{ant-prefix}-layout-header.@{ant-prefix}-pro-header-dark {
+    .@{ant-prefix}-pro-global-header:not(.@{ant-prefix}-pro-global-header-layout-side) .@{buddy-setting-drawer}-handle,
+    .@{ant-prefix}-pro-top-nav-header .@{buddy-setting-drawer}-handle {
+        .@{iconfont-css-prefix}-setting,
+        .@{iconfont-css-prefix}-close {
+            color: @text-color-dark !important;
+        }
+    }
+}
+
+.@{ant-prefix}-layout-header.@{ant-prefix}-pro-header-realDark {
+    .@{buddy-setting-drawer}-handle {
+        .@{iconfont-css-prefix}-setting,
+        .@{iconfont-css-prefix}-close {
+            color: @text-color-dark !important;
+        }
+    }
 }
 
 
