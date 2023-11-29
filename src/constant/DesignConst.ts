@@ -17,17 +17,20 @@
 
 export abstract class DesignConst {
     // @see "antd/es/form/FormItem/index.d.ts"
-    public static FormItemPropsKeys = ['prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];
+    public static FormItemProps = ['prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];
 
     // @see "@ant-design/pro-form/es/components/FormItem/index.d.ts"
-    public static WarpFormItemPropsKeys = ['addonBefore', 'addonAfter', 'convertValue'];
+    public static WarpFormItemProps = ['addonBefore', 'addonAfter', 'convertValue'];
 
     // @see "@ant-design/pro-form/es/components/FormItem/index.d.ts"
-    public static ProFormItemPropsKeys = [...DesignConst.FormItemPropsKeys, ...DesignConst.WarpFormItemPropsKeys, 'ignoreFormItem', 'valueType', 'transform', 'dataFormat', 'lightProps', 'proFormFieldKey'];
+    public static ProFormItemProps = [...DesignConst.FormItemProps, ...DesignConst.WarpFormItemProps, 'ignoreFormItem', 'valueType', 'transform', 'dataFormat', 'lightProps', 'proFormFieldKey'];
 
     // @see "@ant-design/pro-form/es/interface.d.ts"
-    public static ExtendsPropsKeys = ['secondary', 'allowClear', 'bordered', 'colSize', 'params', 'ignoreFormItem', 'convertValue', 'formItemProps', 'filedConfig', 'fieldRef'];
+    public static ProFormExtendProps = ['secondary', 'allowClear', 'bordered', 'colSize', 'params', 'ignoreFormItem', 'convertValue', 'formItemProps', 'filedConfig', 'fieldRef'];
 
     // @see "@ant-design/pro-form/es/interface.d.ts"
-    public static ProFormFieldItemPropsKeys = [...DesignConst.ProFormItemPropsKeys, ...DesignConst.ExtendsPropsKeys, 'fieldProps', 'cacheForSwr', 'proFieldProps', 'footerRender', 'colProps'];
+    public static ProFormFieldItemProps = [...DesignConst.ProFormItemProps, ...DesignConst.ProFormExtendProps, 'fieldProps', 'cacheForSwr', 'proFieldProps', 'footerRender', 'colProps'];
+
+    // @see "@ant-design/pro-field/es/components/Select/index.d.ts"
+    public static ProFieldSelectProps = ['valueEnum', 'debounceTime', 'request', 'params'];
 }

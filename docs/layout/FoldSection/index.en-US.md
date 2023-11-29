@@ -26,7 +26,7 @@ import {FoldSection} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Empty, Radio} from 'antd';
+import {Empty, Radio, Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {FoldSection} from '@yookue/ant-buddy-pro';
 
@@ -69,7 +69,7 @@ export default () => {
                     <Radio.Button value='false'>False</Radio.Button>
                 </Radio.Group>
             </div>
-            <br/><br/>
+            <Divider/>
             <FoldSection
                 headerOrnament={<AppstoreOutlined/>}
                 headerOrnamentPos={ornamentPos}

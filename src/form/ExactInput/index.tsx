@@ -21,7 +21,7 @@ import {AimOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
-import omit from 'rc-util/lib/omit';
+import omit from 'rc-util/es/omit';
 import {DesignConst} from '@/constant/DesignConst';
 import './index.less';
 
@@ -216,7 +216,7 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
         );
     } else {
         // @ts-ignore
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemPropsKeys]) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemProps]) : {};
         return (
             <Input
                 ref={ref}

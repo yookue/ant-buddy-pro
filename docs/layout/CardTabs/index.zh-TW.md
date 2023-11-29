@@ -16,7 +16,7 @@ import {CardTabs} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Radio} from 'antd';
+import {Radio, Divider} from 'antd';
 import {CardTabs} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -40,7 +40,7 @@ export default () => {
                     <Radio.Button value='right'>右</Radio.Button>
                 </Radio.Group>
             </div>
-            <br/><br/>
+            <Divider/>
             <CardTabs
                 tabPosition={tabPos}
                 items={new Array(3).fill(null).map((_, i) => {

@@ -19,10 +19,11 @@ import React from 'react';
 import {ConfigProvider, Dropdown, Input, Popconfirm, Space, type FormRule, type InputProps, type MenuProps} from 'antd';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
 import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {nanoid} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
-import omit from 'rc-util/lib/omit';
+import omit from 'rc-util/es/omit';
 import {DesignConst} from '@/constant/DesignConst';
 import {InputUtils} from '@/util/InputUtils';
 import './index.less';
@@ -209,6 +210,7 @@ export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
 
 export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & React.RefAttributes<any>> = React.forwardRef((props?: LocaleInputProps, ref?: any) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-locale-input');
     const entryId = nanoid();
 
@@ -292,7 +294,6 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const elementId = nanoid();
             const beforeDom = buildItemAddonDom(tag, true, elementId, itemProp);
             const afterDom = buildItemAddonDom(tag, false, elementId, itemProp);
-            const cloneRules = (props?.popupCloneRules && props?.rules) ? props?.rules : [];
             const itemDom = (
                 <If condition={props?.popupProField} validation={false}>
                     <If.Then>
@@ -312,9 +313,9 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 'data-buddy-locale-tag': elementId,
                             }}
                             rules={[
-                                ...cloneRules,
-                                ...props?.popupShareProps?.rules || [],
-                                ...rules || [],
+                                ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
+                                ...(props?.popupShareProps?.rules || []),
+                                ...(rules || []),
                             ]}
                         />
                     </If.Then>
@@ -349,7 +350,6 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const elementId = nanoid();
             const beforeDom = buildItemAddonDom(tag, true, elementId);
             const afterDom = buildItemAddonDom(tag, false, elementId);
-            const cloneRules = (props?.popupCloneRules && props?.rules) ? props?.rules : [];
             const itemDom = (
                 <If condition={props?.popupProField} validation={false}>
                     <If.Then>
@@ -367,8 +367,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 'data-buddy-locale-tag': elementId,
                             }}
                             rules={[
-                                ...cloneRules,
-                                ...props?.popupShareProps?.rules || [],
+                                ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
+                                ...(props?.popupShareProps?.rules || []),
                             ]}
                         />
                     </If.Then>
@@ -399,7 +399,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const handleMenuClick: MenuProps['onClick'] = () => {
         setMenuOpen(true);
     };
-    const handleOpenChange = (open: boolean) => {
+    const handleMenuOpen = (open: boolean) => {
         setMenuOpen(open);
     };
 
@@ -433,11 +433,11 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const beforeDom = buildEntryAddonDom(true);
     const afterDom = buildEntryAddonDom(false);
 
-    const containerRef = React.useRef<HTMLDivElement>(null);
+    const entryImmutable = (editContext.mode === 'read') || props?.disabled || props?.fieldProps?.disabled || props?.readOnly || props?.fieldProps?.readonly;
     const restProProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
     // @ts-ignore
-    const restAntProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField', ...DesignConst.ProFormFieldItemPropsKeys]) : {};
-    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']) : {};
+    const restAntProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField', ...DesignConst.ProFormFieldItemProps]) : {};
+    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter', 'getPopupContainer']) : {};
 
     return (
         <Dropdown
@@ -446,13 +446,11 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 onClick: handleMenuClick,
             }}
             placement={props?.popupPlacement}
-            overlayClassName={classNames(clazzPrefix + '-dropdown', props?.popupClazz)}
+            overlayClassName={classNames(clazzPrefix + '-dropdown', (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.popupClazz)}
             overlayStyle={props?.popupStyle}
             open={menuOpen}
-            onOpenChange={handleOpenChange}
-            getPopupContainer={() => {
-                return containerRef?.current || document.body;
-            }}
+            onOpenChange={handleMenuOpen}
+            getPopupContainer={trigger => trigger.parentElement || document.body}
         >
             <Input.Group>
                 <If condition={props?.proField} validation={false}>
@@ -481,7 +479,6 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                         />
                     </If.Else>
                 </If>
-                <div ref={containerRef} className={`${clazzPrefix}-dropdown-container`}/>
             </Input.Group>
         </Dropdown>
     );

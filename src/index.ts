@@ -18,6 +18,7 @@
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps, type WrapperProps} from './field/FullScreen';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
+export {DivideSelect, type DivideSelectProps} from './form/DivideSelect';
 export {ExactInput, type ExactInputProps, type AddonCheckProps} from './form/ExactInput';
 export {LocaleInput, type LocaleInputProps, type PopupInputProps, type PopupConfirmProps, type PopupShareProps} from './form/LocaleInput';
 export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';

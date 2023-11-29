@@ -16,7 +16,7 @@ import {ApartTitle} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Radio} from 'antd';
+import {Radio, Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {ApartTitle} from '@yookue/ant-buddy-pro';
 
@@ -41,7 +41,7 @@ export default () => {
                     <Radio.Button value='false'>無</Radio.Button>
                 </Radio.Group>
             </div>
-            <br/><br/>
+            <Divider/>
             <ApartTitle
                 ornament={<AppstoreOutlined/>}
                 ornamentPos={ornamentPos}

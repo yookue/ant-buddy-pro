@@ -215,8 +215,8 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                                         target={item?.target || '_blank'}
                                         rel={item?.rel || 'noopener noreferrer'}
                                         style={{
-                                            ...item?.style || {},
-                                            ...props?.linkShareStyle || {}
+                                            ...(item?.style || {}),
+                                            ...(props?.linkShareStyle || {}),
                                         }}
                                     >
                                         {item?.content}

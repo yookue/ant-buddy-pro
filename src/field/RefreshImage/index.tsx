@@ -19,7 +19,7 @@ import React from 'react';
 import {ConfigProvider} from 'antd';
 import classNames from 'classnames';
 import RcImage, {type ImageProps} from 'rc-image';
-import omit from 'rc-util/lib/omit';
+import omit from 'rc-util/es/omit';
 import {ImageUtils} from '@/util/ImageUtils';
 
 
@@ -94,7 +94,6 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
     };
 
     const omitProps = props ? omit(props, ['clazzPrefix', 'className', 'autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']) : {};
-    const styles = props?.autoCursor ? {cursor: 'pointer'} : {};
 
     return (
         <RcImage
@@ -104,7 +103,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
             onClick={handleClick}
             onError={handleError}
             style={{
-                ...styles,
+                ...(props?.autoCursor ? {cursor: 'pointer'} : {}),
                 ...props?.style,
             }}
         />

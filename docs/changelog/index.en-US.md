@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.22** [2023-11-29]
+    - Add 'form/DivideSelect'
+
   - **v0.1.20** [2023-11-24]
     - Add 'layout/WrapSpace'
 

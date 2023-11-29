@@ -17,12 +17,12 @@
 
 import React from 'react';
 import {ConfigProvider, Menu, type MenuProps as AntMenuProps} from 'antd';
-import {type MenuItemType as AntMenuItemType} from 'antd/lib/menu/hooks/useItems';
+import {type MenuItemType as AntMenuItemType} from 'antd/es/menu/hooks/useItems';
 import {css} from '@emotion/css';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
-import {type MenuInfo, type MenuMode} from 'rc-menu/lib/interface';
-import omit from 'rc-util/lib/omit';
+import {type MenuInfo, type MenuMode} from 'rc-menu/es/interface';
+import omit from 'rc-util/es/omit';
 import './index.less';
 
 

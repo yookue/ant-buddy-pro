@@ -18,7 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Tabs, type TabsProps} from 'antd';
 import classNames from 'classnames';
-import omit from 'rc-util/lib/omit';
+import omit from 'rc-util/es/omit';
 import './index.less';
 
 

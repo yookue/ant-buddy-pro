@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {ConfigProvider} from 'antd';
-import {type SpaceSize} from 'antd/lib/space';
+import {type SpaceSize} from 'antd/es/space';
 import {css} from '@emotion/css';
 import classNames from 'classnames';
 
