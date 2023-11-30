@@ -25,13 +25,7 @@ export default () => {
     const [originLabel, setOriginLabel] = React.useState(false);
 
     return (
-        <ProForm
-            submitter={{
-                render: (props, doms) => {
-                    return [];
-                }
-            }}
-        >
+        <ProForm submitter={false}>
             <div>
                 <span style={{paddingRight: '20px'}}>顯示選中項：</span>
                 <Radio.Group
