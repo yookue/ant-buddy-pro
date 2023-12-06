@@ -220,7 +220,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     }
 
     const omitItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
-    const restProps = props?.menuProps ? omit(props?.menuProps, ['items', 'onClick']) : {};
+    const restProps = props?.menuProps ? omit(props?.menuProps, ['items', 'selectedKey', 'onClick']) : {};
     const entryWidthClazz = props?.entryWidth ? css({width: props?.entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
     const omitEntryStyle = props?.entryStyle ? omit(props?.entryStyle, ['width']) : undefined;
 

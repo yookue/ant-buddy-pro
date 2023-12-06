@@ -76,8 +76,7 @@ export default () => {
                     theme: menuTheme,
                 }}
                 containerStyle={{
-                    width: '100%',
-                    height: '300px',
+                    minHeight: '300px',
                 }}
             />
         </>
