@@ -222,7 +222,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         }
     };
 
-    const buildItemAddonDom = function(tag: string, before: boolean, elementId: string, inputProps?: PopupInputProps) {
+    const buildItemAddonDom = (tag: string, before: boolean, elementId: string, inputProps?: PopupInputProps) => {
         if (before && props?.popupTagPos !== 'before' && !inputProps?.fieldProps?.addonBefore && props?.popupActionPos === 'before' && !props?.popupActionDom) {
             return undefined;
         }
@@ -403,7 +403,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         setMenuOpen(open);
     };
 
-    const buildEntryAddonDom = function(before: boolean) {
+    const buildEntryAddonDom = (before: boolean) => {
         if (before && !props?.fieldProps?.addonBefore && props?.actionPos === 'before' && !props?.actionDom) {
             return undefined;
         }

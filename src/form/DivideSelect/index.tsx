@@ -122,7 +122,7 @@ export const DivideSelect: React.ForwardRefExoticComponent<DivideSelectProps & R
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-divide-select');
 
-    const rebuildOption = function(item: any, key?: string) {
+    const rebuildOption = (item: any, key?: string) => {
         return {
             value: item?.value,
             label: (
@@ -143,7 +143,7 @@ export const DivideSelect: React.ForwardRefExoticComponent<DivideSelectProps & R
         };
     }
 
-    const rebuildOptions = function() {
+    const rebuildOptions = () => {
         if (!props?.fieldProps?.options) {
             return [];
         }

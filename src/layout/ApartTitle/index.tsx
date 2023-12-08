@@ -109,7 +109,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-apart-title');
 
-    const buildOrnamentDom = function(before: boolean) {
+    const buildOrnamentDom = (before: boolean) => {
         if (!props?.ornament || !props?.ornamentPos) {
             return undefined;
         }

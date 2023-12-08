@@ -235,7 +235,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-fold-section');
     const [panelOpen, setPanelOpen] = React.useState<boolean>(props?.panelInitialOpen || true);
 
-    const buildOrnamentDom = function(before: boolean) {
+    const buildOrnamentDom = (before: boolean) => {
         if (!props?.headerOrnament || !props?.headerOrnamentPos) {
             return undefined;
         }
@@ -249,7 +249,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         );
     }
 
-    const buildCollapseDom = function(before: boolean) {
+    const buildCollapseDom = (before: boolean) => {
         if ((!props?.headerOpenedDom && !props?.headerClosedDom) || !props?.headerCollapsePos) {
             return undefined;
         }

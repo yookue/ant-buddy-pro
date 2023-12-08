@@ -121,7 +121,7 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const omitCheckProps = props?.checkProps ? omit(props?.checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id', 'title']) : {};
     const omitTooltipProps = props?.tooltipProps ? omit(props?.tooltipProps, ['title']) : {};
 
-    const generateCheckName = function() {
+    const generateCheckName = () => {
         if (props?.checkProps?.name) {
             return props?.checkProps?.name;
         }
@@ -131,7 +131,7 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
         return undefined;
     };
 
-    const generateCheckId = function() {
+    const generateCheckId = () => {
         if (props?.checkProps?.id) {
             return props?.checkProps?.id;
         }
@@ -143,7 +143,7 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
     const checkboxName = generateCheckName();
     const checkboxId = generateCheckId();
 
-    const buildAddonDom = function(before: boolean) {
+    const buildAddonDom = (before: boolean) => {
         if (((before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.fieldProps?.addonBefore) || (!before && !props?.fieldProps?.addonAfter))) {
             return undefined;
         }
