@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Empty, Tooltip, type TooltipProps} from 'antd';
+import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
 import {DownSquareOutlined, UpSquareOutlined} from '@ant-design/icons';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
@@ -214,6 +214,22 @@ export type FoldSectionProps = {
     panelInitialOpen?: boolean;
 
     /**
+     * @description Whether to render the panel div even it has none content and placeholder
+     * @description.zh-CN 面板 div 无内容也无占位符时，是否强制渲染它
+     * @description.zh-TW 面板 div 無内容也無佔位符時，是否强制渲染它
+     * @default false
+     */
+    panelForceRender?: boolean;
+
+    /**
+     * @description Whether to destroy the panel div when it's closed
+     * @description.zh-CN 关闭面板 div 时是否销毁它
+     * @description.zh-TW 關閉面板 div 時是否銷毀它
+     * @default false
+     */
+    panelDestroyOnClose?: boolean;
+
+    /**
      * @description The callback function when the panel div changed
      * @description.zh-CN 面板 div 折叠展开状态变化时的回调函数
      * @description.zh-TW 面板 div 折疊展開狀態變化時的回調函數
@@ -233,7 +249,7 @@ export type FoldSectionProps = {
 export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-fold-section');
-    const [panelOpen, setPanelOpen] = React.useState<boolean>(props?.panelInitialOpen || true);
+    const [panelOpen, setPanelOpen] = React.useState<boolean>(props?.panelInitialOpen || false);
 
     const buildOrnamentDom = (before: boolean) => {
         if (!props?.headerOrnament || !props?.headerOrnamentPos) {
@@ -280,10 +296,19 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         const openState = !panelOpen;
         setPanelOpen(openState);
         if (typeof props?.onOpenChange === 'function') {
-            // @ts-ignore
-            window.setTimeout(() => props?.onOpenChange(openState), 300);
+            React.useEffect(() => {
+                // @ts-ignore
+                window.setTimeout(() => props?.onOpenChange(openState), 300);
+            }, []);
         }
     };
+
+    const [panelRendered, setPanelRendered] = React.useState<boolean>(props?.panelForceRender || panelOpen);
+    React.useEffect(() => {
+        if (props?.panelForceRender) {
+            setPanelRendered(true);
+        }
+    }, [props?.panelForceRender]);
 
     return (
         <section
@@ -307,16 +332,9 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
                     {buildCollapseDom(false)}
                 </If>
             </div>
-            <If condition={props?.panelContent || props?.panelPlaceholder} validation={false}>
+            <If condition={(panelRendered || props?.panelContent || props?.panelPlaceholder) && (panelOpen || (!panelOpen && !props?.panelDestroyOnClose))} validation={false}>
                 <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
-                    <If condition={props?.panelContent} validation={false}>
-                        <If.Then>
-                            {props?.panelContent}
-                        </If.Then>
-                        <If.Else>
-                            {props?.panelPlaceholder}
-                        </If.Else>
-                    </If>
+                    {props?.panelContent || props?.panelPlaceholder}
                 </div>
             </If>
         </section>
@@ -331,5 +349,7 @@ FoldSection.defaultProps = {
     headerOpenedDom: <DownSquareOutlined/>,
     useTooltip: false,
     panelInitialOpen: true,
+    panelForceRender: false,
+    panelDestroyOnClose: false,
     usePresetStyle: 'default',
 };

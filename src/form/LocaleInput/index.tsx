@@ -215,8 +215,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const entryId = nanoid();
 
     const handleClonePrimary = (tagId: string) => {
-        const entry = document.querySelector(`input[data-buddy-locale-id="${entryId}"]`) as HTMLInputElement;
-        const tag = document.querySelector(`input[data-buddy-locale-tag="${tagId}"]`) as HTMLInputElement;
+        const entry = document.querySelector(`input[data-locale-input-id="${entryId}"]`) as HTMLInputElement;
+        const tag = document.querySelector(`input[data-locale-input-tag="${tagId}"]`) as HTMLInputElement;
         if (entry && tag) {
             InputUtils.setInputValue(entry, tag.value);
         }
@@ -310,7 +310,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 maxLength: itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength,
                                 placeholder: itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder,
                                 ...omitFieldProps,
-                                'data-buddy-locale-tag': elementId,
+                                'data-locale-input-tag': elementId,
                             }}
                             rules={[
                                 ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
@@ -332,7 +332,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
                             {...omitFieldProps}
-                            data-buddy-locale-tag={elementId}
+                            data-locale-input-tag={elementId}
                         />
                     </If.Else>
                 </If>
@@ -364,7 +364,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 addonAfter: afterDom,
                                 maxLength: props?.popupShareProps?.maxLength,
                                 placeholder:  props?.popupShareProps?.placeholder,
-                                'data-buddy-locale-tag': elementId,
+                                'data-locale-input-tag': elementId,
                             }}
                             rules={[
                                 ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
@@ -383,7 +383,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             placeholder={props?.popupShareProps?.placeholder}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
-                            data-buddy-locale-tag={elementId}
+                            data-locale-input-tag={elementId}
                         />
                     </If.Else>
                 </If>
@@ -463,7 +463,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 ...omitFieldProps,
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                'data-buddy-locale-id': entryId,
+                                'data-locale-input-id': entryId,
                             }}
                         />
                     </If.Then>
@@ -475,7 +475,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             {...omitFieldProps}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
-                            data-buddy-locale-id={entryId}
+                            data-locale-input-id={entryId}
                         />
                     </If.Else>
                 </If>

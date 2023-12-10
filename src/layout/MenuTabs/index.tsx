@@ -19,7 +19,6 @@ import React from 'react';
 import {ConfigProvider, Menu, type MenuProps as AntMenuProps} from 'antd';
 import {type MenuItemType as AntMenuItemType} from 'antd/es/menu/hooks/useItems';
 import {css} from '@emotion/css';
-import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import {type MenuInfo, type MenuMode} from 'rc-menu/es/interface';
 import omit from 'rc-util/es/omit';
@@ -116,60 +115,74 @@ export type MenuTabsProps = {
 
     /**
      * @description The CSS class name of the entry div
-     * @description.zh-CN TabBar div 的 CSS 类名
-     * @description.zh-TW TabBar div 的 CSS 類名
+     * @description.zh-CN 菜单栏 div 的 CSS 类名
+     * @description.zh-TW 菜單欄 div 的 CSS 類名
      */
     entryClazz?: string;
 
     /**
      * @description The CSS style of the entry div
-     * @description.zh-CN TabBar div 的 CSS 样式
-     * @description.zh-TW TabBar div 的 CSS 樣式
+     * @description.zh-CN 菜单栏 div 的 CSS 样式
+     * @description.zh-TW 菜單欄 div 的 CSS 樣式
      */
     entryStyle?: React.CSSProperties;
 
     /**
      * @description The width of the entry div
-     * @description.zh-CN TabBar div 的宽度
-     * @description.zh-TW TabBar div 的寬度
+     * @description.zh-CN 菜单栏 div 的宽度
+     * @description.zh-TW 菜單欄 div 的寬度
      * @default '208px'
      */
     entryWidth?: string;
 
     /**
-     * @description The CSS class name of the content div
-     * @description.zh-CN 内容 div 的 CSS 类名
-     * @description.zh-TW 内容 div 的 CSS 類名
+     * @description The CSS class name of the tab div
+     * @description.zh-CN 选项卡 div 的 CSS 类名
+     * @description.zh-TW 選項卡 div 的 CSS 類名
      */
-    contentClazz?: string;
+    tabClazz?: string;
 
     /**
-     * @description The CSS style of the content div
-     * @description.zh-CN 内容 div 的 CSS 样式
-     * @description.zh-TW 内容 div 的 CSS 樣式
+     * @description The CSS style of the tab div
+     * @description.zh-CN 选项卡 div 的 CSS 样式
+     * @description.zh-TW 選項卡 div 的 CSS 樣式
      */
-    contentStyle?: React.CSSProperties;
+    tabStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to show the title of the content div
-     * @description.zh-CN 是否显示内容 div 的标题
-     * @description.zh-TW 是否顯示内容 div 的標題
+     * @description Whether to show the title of the tab div
+     * @description.zh-CN 是否显示选项卡 div 的标题
+     * @description.zh-TW 是否顯示選項卡 div 的標題
      */
-    showContentTitle?: boolean;
+    showTabTitle?: boolean;
 
     /**
-     * @description The CSS class name of the content title
-     * @description.zh-CN 内容 div 的 CSS 类名
-     * @description.zh-TW 内容 div 的 CSS 類名
+     * @description The CSS class name of the tab title
+     * @description.zh-CN 选项卡 div 标题的 CSS 类名
+     * @description.zh-TW 選項卡 div 標題的 CSS 類名
      */
-    contentTitleClazz?: string;
+    tabTitleClazz?: string;
 
     /**
-     * @description The CSS style of the content title
-     * @description.zh-CN 内容 div 的 CSS 样式
-     * @description.zh-TW 内容 div 的 CSS 樣式
+     * @description The CSS style of the tab title
+     * @description.zh-CN 选项卡 div 标题的 CSS 样式
+     * @description.zh-TW 選項卡 div 標題的 CSS 樣式
      */
-    contentTitleStyle?: React.CSSProperties;
+    tabTitleStyle?: React.CSSProperties;
+
+    /**
+     * @description The CSS class name of the tab content
+     * @description.zh-CN 选项卡 div 内容的 CSS 类名
+     * @description.zh-TW 選項卡 div 内容的 CSS 類名
+     */
+    tabContentClazz?: string;
+
+    /**
+     * @description The CSS style of the tab content
+     * @description.zh-CN 选项卡 div 内容的 CSS 样式
+     * @description.zh-TW 選項卡 div 内容的 CSS 樣式
+     */
+    tabContentStyle?: React.CSSProperties;
 
     /**
      * @description The properties for auto adjust the layout
@@ -188,7 +201,6 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     const [activeKey, setActiveKey] = React.useState<string | undefined>(props?.menuProps?.selectedKey);
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
-    const activeItemProps = (props?.menuProps?.items && activeKey) ? props?.menuProps?.items?.find(item => item?.key === activeKey) : undefined;
 
     if (props?.adjustLayoutProps?.adjustOnResize) {
         const handleWindowResize = () => {
@@ -218,6 +230,38 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             };
         }, [containerRef.current]);
     }
+
+    const buildTabsDom = () => {
+        if (!props?.menuProps?.items || props?.menuProps?.items?.length === 0) {
+            return undefined;
+        }
+        const result = props?.menuProps?.items.map(item => {
+            const titleDom = !props?.showTabTitle ? undefined : (
+                <div
+                    className={classNames(`${clazzPrefix}-tab-title`, props?.tabTitleClazz)}
+                    style={props?.tabTitleStyle}
+                >
+                    {item?.label}
+                </div>
+            );
+            return (
+                <div
+                    key={item?.key}
+                    className={classNames(`${clazzPrefix}-tab`, props?.tabClazz, ((activeKey === item?.key) ? `${clazzPrefix}-tab-active` : undefined))}
+                    style={props?.tabStyle}
+                >
+                    {titleDom}
+                    <div
+                        className={classNames(`${clazzPrefix}-tab-content`, props?.tabContentClazz)}
+                        style={props?.tabContentStyle}
+                    >
+                        {item?.content}
+                    </div>
+                </div>
+            );
+        });
+        return (<>{result}</>);
+    };
 
     const omitItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
     const restProps = props?.menuProps ? omit(props?.menuProps, ['items', 'selectedKey', 'onClick']) : {};
@@ -252,20 +296,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                     {...restProps}
                 />
             </div>
-            <div
-                className={classNames(`${clazzPrefix}-content`, props?.contentClazz)}
-                style={props?.contentStyle}
-            >
-                <If condition={props?.showContentTitle} validation={false}>
-                    <div
-                        className={classNames(`${clazzPrefix}-content-title`, props?.contentTitleClazz)}
-                        style={props?.contentTitleStyle}
-                    >
-                        {activeItemProps?.label}
-                    </div>
-                </If>
-                {activeItemProps?.content}
-            </div>
+            {buildTabsDom()}
         </div>
     );
 };
@@ -273,8 +304,8 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
 MenuTabs.defaultProps = {
     entryWidth: '208px',
-    showContentTitle: true,
+    showTabTitle: true,
     adjustLayoutProps: {
         adjustOnResize: true,
     }
-}
+};
