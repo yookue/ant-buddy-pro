@@ -158,29 +158,29 @@ export type MenuTabsProps = {
 
     /**
      * @description The CSS class name of the tab title
-     * @description.zh-CN 选项卡 div 标题的 CSS 类名
-     * @description.zh-TW 選項卡 div 標題的 CSS 類名
+     * @description.zh-CN 选项卡标题 div 的 CSS 类名
+     * @description.zh-TW 選項卡標題 div 的 CSS 類名
      */
     tabTitleClazz?: string;
 
     /**
      * @description The CSS style of the tab title
-     * @description.zh-CN 选项卡 div 标题的 CSS 样式
-     * @description.zh-TW 選項卡 div 標題的 CSS 樣式
+     * @description.zh-CN 选项卡标题 div 的 CSS 样式
+     * @description.zh-TW 選項卡標題 div 的 CSS 樣式
      */
     tabTitleStyle?: React.CSSProperties;
 
     /**
      * @description The CSS class name of the tab content
-     * @description.zh-CN 选项卡 div 内容的 CSS 类名
-     * @description.zh-TW 選項卡 div 内容的 CSS 類名
+     * @description.zh-CN 选项卡内容 div 的 CSS 类名
+     * @description.zh-TW 選項卡内容 div 的 CSS 類名
      */
     tabContentClazz?: string;
 
     /**
      * @description The CSS style of the tab content
-     * @description.zh-CN 选项卡 div 内容的 CSS 样式
-     * @description.zh-TW 選項卡 div 内容的 CSS 樣式
+     * @description.zh-CN 选项卡内容 div 的 CSS 样式
+     * @description.zh-TW 選項卡内容 div 的 CSS 樣式
      */
     tabContentStyle?: React.CSSProperties;
 

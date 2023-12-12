@@ -16,9 +16,10 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Checkbox, Space, Tooltip, type InputProps, type CheckboxProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Input, Checkbox, Space, Tooltip, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
 import {AimOutlined} from '@ant-design/icons';
-import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
+import {ProFormText} from '@ant-design/pro-form';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -57,7 +58,7 @@ export type AddonCheckProps = React.InputHTMLAttributes<HTMLInputElement> & Chec
     idSuffix?: string;
 };
 
-export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<InputProps> & {
+export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldItemProps<InputProps, InputRef> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -114,7 +115,7 @@ export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProF
 };
 
 
-export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React.RefAttributes<any>> = React.forwardRef((props?: ExactInputProps, ref?: any) => {
+export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-exact-input');
 
@@ -140,14 +141,13 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
         }
         return undefined;
     };
-    const checkboxName = generateCheckName();
-    const checkboxId = generateCheckId();
 
     const buildAddonDom = (before: boolean) => {
         if (((before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.fieldProps?.addonBefore) || (!before && !props?.fieldProps?.addonAfter))) {
             return undefined;
         }
-
+        const checkboxName = generateCheckName();
+        const checkboxId = generateCheckId();
         const actionDom = (
             <Checkbox
                 name={checkboxName}
@@ -158,11 +158,16 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
             </Checkbox>
         );
 
+        const tooltipDom = props?.useTooltip ? (
+            <Tooltip title={props?.tooltipProps?.title || props?.checkProps?.title} {...omitTooltipProps}>{actionDom}</Tooltip>
+        ) : (
+            <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : props?.checkProps?.title}>{actionDom}</span>
+        );
+
         const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after'))].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
         }
-        const hintTip = props?.tooltipProps?.title || props?.checkProps?.title;
         const combineDom = (
             <>
                 <If condition={before && props?.fieldProps?.addonBefore} validation={false}>
@@ -172,23 +177,13 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
                     {props?.fieldProps?.addonAfter}
                 </If>
                 <If condition={(before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after')} validation={false}>
-                    <If condition={hintTip} validation={false}>
-                        <If condition={props?.useTooltip} validation={false}>
-                            <Tooltip
-                                title={hintTip}
-                                {...omitTooltipProps}
-                            >
-                                {actionDom}
-                            </Tooltip>
-                        </If>
-                        <If condition={!props?.useTooltip} validation={false}>
-                            <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : props?.checkProps?.title}>
-                                {actionDom}
-                            </span>
-                        </If>
-                    </If>
-                    <If condition={!hintTip} validation={false}>
-                        {actionDom}
+                    <If condition={props?.tooltipProps} validation={false}>
+                        <If.Then>
+                            {tooltipDom}
+                        </If.Then>
+                        <If.Else>
+                            {actionDom}
+                        </If.Else>
                     </If>
                 </If>
             </>
@@ -204,7 +199,6 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
         const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField']) : {};
         return (
             <ProFormText
-                ref={ref}
                 {...restProps}
                 fieldProps={{
                     className: classNames(clazzPrefix, props?.className),
@@ -219,7 +213,6 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
         const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemProps]) : {};
         return (
             <Input
-                ref={ref}
                 className={classNames(clazzPrefix, props?.className)}
                 {...restProps}
                 {...omitFieldProps}
@@ -228,7 +221,7 @@ export const ExactInput: React.ForwardRefExoticComponent<ExactInputProps & React
             />
         );
     }
-});
+};
 
 
 ExactInput.defaultProps = {

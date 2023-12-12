@@ -16,8 +16,10 @@
 
 
 import React from 'react';
-import {ConfigProvider, Select, type SelectProps} from 'antd';
-import {ProFormSelect, type ProFormFieldProps} from '@ant-design/pro-form';
+import {ConfigProvider, Select} from 'antd';
+import {ProFormSelect} from '@ant-design/pro-form';
+import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
+import {useDebounceFn} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -25,7 +27,7 @@ import {DesignConst} from '@/constant/DesignConst';
 import './index.less';
 
 
-export type DivideSelectProps = React.InputHTMLAttributes<HTMLSelectElement> & ProFormFieldProps<SelectProps> & {
+export type DivideSelectProps = ProFormSelectProps & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -112,15 +114,30 @@ export type DivideSelectProps = React.InputHTMLAttributes<HTMLSelectElement> & P
      * @description Whether to use the preset style for the component
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
-     * @default 'after-prior'
+     * @default false
      */
     usePresetStyle?: 'before-prior' | 'after-prior' | 'fifty-fifty' | false;
 };
 
 
-export const DivideSelect: React.ForwardRefExoticComponent<DivideSelectProps & React.RefAttributes<any>> = React.forwardRef((props?: DivideSelectProps, ref?: any) => {
+export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-divide-select');
+    const [optionItems, setOptionItems] = React.useState<any[]>();
+
+    const emptyRequest = async () => [];
+    const {run: fetchRequestData} = useDebounceFn(props?.request || emptyRequest, props?.debounceTime || 0);
+    React.useEffect(() => {
+        if (props?.fieldProps?.options) {
+            setOptionItems(props?.fieldProps?.options);
+        } else {
+            if (props?.request) {
+                fetchRequestData(props?.params).then(resolve => {
+                    setOptionItems(resolve);
+                });
+            }
+        }
+    }, []);
 
     const rebuildOption = (item: any, key?: string) => {
         return {
@@ -144,10 +161,13 @@ export const DivideSelect: React.ForwardRefExoticComponent<DivideSelectProps & R
     }
 
     const rebuildOptions = () => {
-        if (!props?.fieldProps?.options) {
+        if (!optionItems) {
             return [];
         }
-        return props.fieldProps.options.map((item: any, index: number) => {
+        if (!props?.usePresetStyle) {
+            return optionItems;
+        }
+        return optionItems.map((item: any, index: number) => {
             if (item?.options && Array.isArray(item?.options)) {
                 return {
                     label: item?.label,
@@ -162,10 +182,9 @@ export const DivideSelect: React.ForwardRefExoticComponent<DivideSelectProps & R
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'options', 'optionLabelProp']) : {};
 
     if (props?.proField) {
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode']) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'request', 'params', 'debounceTime']) : {};
         return (
             <ProFormSelect
-                ref={ref}
                 {...restProps}
                 fieldProps={{
                     className: classNames(clazzPrefix, props?.className),
@@ -177,10 +196,9 @@ export const DivideSelect: React.ForwardRefExoticComponent<DivideSelectProps & R
         );
     } else {
         // @ts-ignore
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'dropdownRender', ...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'request', 'params', 'debounceTime', 'valueEnum', ...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]) : {};
         return (
             <Select
-                ref={ref}
                 className={classNames(clazzPrefix, props?.className)}
                 {...restProps}
                 {...omitFieldProps}
@@ -189,7 +207,7 @@ export const DivideSelect: React.ForwardRefExoticComponent<DivideSelectProps & R
             />
         );
     }
-});
+};
 
 
 DivideSelect.defaultProps = {
@@ -197,5 +215,5 @@ DivideSelect.defaultProps = {
     optionAfterContent: 'label',
     selectOriginLabel: true,
     proField: true,
-    usePresetStyle: 'after-prior',
+    usePresetStyle: false,
 };

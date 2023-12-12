@@ -16,9 +16,10 @@
 
 
 import React from 'react';
-import {ConfigProvider, Dropdown, Input, Popconfirm, Space, type FormRule, type InputProps, type MenuProps} from 'antd';
+import {ConfigProvider, Dropdown, Input, Popconfirm, Space, type InputProps, type InputRef, type MenuProps, type FormRule} from 'antd';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
-import {ProFormText, type ProFormFieldProps} from '@ant-design/pro-form';
+import {ProFormText} from '@ant-design/pro-form';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {nanoid} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
@@ -52,7 +53,7 @@ export type PopupConfirmProps = {
     cancel?: string,
 };
 
-export type PopupInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<InputProps> & {
+export type PopupInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldItemProps<InputProps, InputRef> & {
     /**
      * @description The locale language tag
      * @description.zh-CN 语言标签
@@ -84,7 +85,7 @@ export type PopupShareProps = {
     rules?: FormRule[];
 };
 
-export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldProps<InputProps> & {
+export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldItemProps<InputProps, InputRef> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -208,7 +209,7 @@ export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
 };
 
 
-export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & React.RefAttributes<any>> = React.forwardRef((props?: LocaleInputProps, ref?: any) => {
+export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-locale-input');
@@ -229,8 +230,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         if (!before && props?.popupTagPos !== 'after' && !inputProps?.fieldProps?.addonAfter && props?.popupActionPos === 'after' && !props?.popupActionDom) {
             return undefined;
         }
-        const itemDisabled = props?.disabled || props?.fieldProps?.disabled || inputProps?.disabled || inputProps?.fieldProps?.disabled
-        const itemReadonly = props?.readOnly || props?.fieldProps?.readonly || inputProps?.readOnly || inputProps?.fieldProps?.readonly;
+        const itemDisabled = props?.disabled || props?.fieldProps?.disabled || inputProps?.disabled || inputProps?.fieldProps?.disabled;
+        const itemReadonly = props?.readOnly || inputProps?.readOnly;
 
         const tagDom = ((before && props?.popupTagPos === 'before') || (!before && props?.popupTagPos === 'after')) ? (
             <span className={classNames(`${clazzPrefix}-tag-${props?.popupTagPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined))}>
@@ -300,15 +301,15 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                         <ProFormText
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled || props?.fieldProps?.disabled || itemProp?.disabled || itemProp?.fieldProps?.disabled}
-                            readonly={props?.readOnly || props?.fieldProps?.readonly || itemProp?.readOnly || itemProp?.fieldProps?.readonly}
                             {...restProps}
                             fieldProps={{
                                 className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                maxLength: itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength,
                                 placeholder: itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder,
+                                maxLength: itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength,
+                                disabled: props?.disabled || props?.fieldProps?.disabled || itemProp?.disabled || itemProp?.fieldProps?.disabled,
+                                readOnly: props?.readOnly || itemProp?.readOnly,
                                 ...omitFieldProps,
                                 'data-locale-input-tag': elementId,
                             }}
@@ -324,13 +325,13 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             className={classNames(`${clazzPrefix}-item`, fieldProps?.className)}
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled || props?.fieldProps?.disabled || itemProp.disabled || itemProp?.fieldProps?.disabled}
-                            readOnly={props?.readOnly || props?.fieldProps?.readonly || itemProp.readOnly || itemProp?.fieldProps?.readonly}
-                            maxLength={itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength}
-                            placeholder={itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder}
-                            {...antdInputProps}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
+                            placeholder={itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder}
+                            maxLength={itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength}
+                            disabled={props?.disabled || props?.fieldProps?.disabled || itemProp.disabled || itemProp?.fieldProps?.disabled}
+                            readOnly={props?.readOnly || itemProp.readOnly}
+                            {...antdInputProps}
                             {...omitFieldProps}
                             data-locale-input-tag={elementId}
                         />
@@ -356,14 +357,14 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                         <ProFormText
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled || props?.fieldProps?.disabled}
-                            readonly={props?.readOnly || props?.fieldProps?.readonly}
                             fieldProps={{
                                 className: `${clazzPrefix}-item`,
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                maxLength: props?.popupShareProps?.maxLength,
                                 placeholder:  props?.popupShareProps?.placeholder,
+                                disabled: props?.disabled || props?.fieldProps?.disabled,
+                                readOnly: props?.readOnly,
+                                maxLength: props?.popupShareProps?.maxLength,
                                 'data-locale-input-tag': elementId,
                             }}
                             rules={[
@@ -377,12 +378,12 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             className={`${clazzPrefix}-item`}
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
-                            disabled={props?.disabled || props?.fieldProps?.disabled}
-                            readOnly={props?.readOnly || props?.fieldProps?.readonly}
-                            maxLength={props?.popupShareProps?.maxLength}
-                            placeholder={props?.popupShareProps?.placeholder}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
+                            placeholder={props?.popupShareProps?.placeholder}
+                            disabled={props?.disabled || props?.fieldProps?.disabled}
+                            readOnly={props?.readOnly}
+                            maxLength={props?.popupShareProps?.maxLength}
                             data-locale-input-tag={elementId}
                         />
                     </If.Else>
@@ -433,11 +434,11 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const beforeDom = buildEntryAddonDom(true);
     const afterDom = buildEntryAddonDom(false);
 
-    const entryImmutable = (editContext.mode === 'read') || props?.disabled || props?.fieldProps?.disabled || props?.readOnly || props?.fieldProps?.readonly;
+    const entryImmutable = (editContext.mode === 'read') || props?.disabled || props?.fieldProps?.disabled || props?.readOnly;
     const restProProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
     // @ts-ignore
     const restAntProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField', ...DesignConst.ProFormFieldItemProps]) : {};
-    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter', 'getPopupContainer']) : {};
+    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter', 'disabled', 'readOnly']) : {};
 
     return (
         <Dropdown
@@ -456,25 +457,27 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 <If condition={props?.proField} validation={false}>
                     <If.Then>
                         <ProFormText
-                            ref={ref}
                             {...restProProps}
                             fieldProps={{
                                 className: classNames(clazzPrefix, props?.fieldProps?.className),
-                                ...omitFieldProps,
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
+                                disabled: props?.disabled,
+                                readOnly: props?.readOnly,
+                                ...omitFieldProps,
                                 'data-locale-input-id': entryId,
                             }}
                         />
                     </If.Then>
                     <If.Else>
                         <Input
-                            ref={ref}
                             className={classNames(clazzPrefix, props?.fieldProps?.className)}
-                            {...restAntProps}
-                            {...omitFieldProps}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
+                            disabled={props?.disabled}
+                            readOnly={props?.readOnly}
+                            {...restAntProps}
+                            {...omitFieldProps}
                             data-locale-input-id={entryId}
                         />
                     </If.Else>
@@ -482,7 +485,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             </Input.Group>
         </Dropdown>
     );
-});
+};
 
 
 LocaleInput.defaultProps = {
