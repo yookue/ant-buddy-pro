@@ -95,9 +95,9 @@ export type DivideSelectProps = ProFormSelectProps & {
     optionAfterContent?: 'label' | 'value' | false;
 
     /**
-     * @description Whether to use the original label when `optionLabelProp` is 'label'
-     * @description.zh-CN 当 `optionLabelProp` 为 'label' 时，是否使用原始的标签值
-     * @description.zh-TW 當 `optionLabelProp` 為 'label' 時，是否使用原始的標簽值
+     * @description Whether to use the original label when `optionLabelProp` is 'label' and `proField` is false
+     * @description.zh-CN 当 `optionLabelProp` 为 'label' 且 `proField` 为 false 时，是否使用原始的标签值
+     * @description.zh-TW 當 `optionLabelProp` 為 'label' 且 `proField` 為 false 時，是否使用原始的標簽值
      * @default true
      */
     selectOriginLabel?: boolean;
@@ -123,87 +123,99 @@ export type DivideSelectProps = ProFormSelectProps & {
 export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-divide-select');
-    const [optionItems, setOptionItems] = React.useState<any[]>();
 
     const emptyRequest = async () => [];
     const {run: fetchRequestData} = useDebounceFn(props?.request || emptyRequest, props?.debounceTime || 0);
-    React.useEffect(() => {
-        if (props?.fieldProps?.options) {
-            setOptionItems(props?.fieldProps?.options);
-        } else {
-            if (props?.request) {
-                fetchRequestData(props?.params).then(resolve => {
-                    setOptionItems(resolve);
-                });
-            }
-        }
-    }, []);
 
-    const rebuildOption = (item: any, key?: string) => {
-        return {
-            value: item?.value,
-            label: (
-                <div key={key} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))} style={props?.optionStyle}>
-                    <If condition={props?.optionBeforeContent} validation={false}>
-                        <span key={`${key}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
+    const renderOption = (item: any, key?: string) => {
+        return !item ? undefined : (
+            <div key={key || item?.value} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))} style={props?.optionStyle}>
+                <If condition={props?.optionBeforeContent} validation={false}>
+                        <span key={`${key || item?.value}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
                             {(props?.optionBeforeContent === 'value') ? item?.value : item?.label}
                         </span>
-                    </If>
-                    <If condition={props?.optionAfterContent} validation={false}>
-                        <span key={`${key}-after`} className={classNames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
+                </If>
+                <If condition={props?.optionAfterContent} validation={false}>
+                        <span key={`${key || item?.value}-after`} className={classNames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
                             {(props?.optionAfterContent === 'value') ? item?.value : item?.label}
                         </span>
-                    </If>
-                </div>
-            ),
-            labelOrigin: item?.label,
-        };
-    }
-
-    const rebuildOptions = () => {
-        if (!optionItems) {
-            return [];
-        }
-        if (!props?.usePresetStyle) {
-            return optionItems;
-        }
-        return optionItems.map((item: any, index: number) => {
-            if (item?.options && Array.isArray(item?.options)) {
-                return {
-                    label: item?.label,
-                    labelOrigin: item?.label,
-                    options: item?.options?.map((subItem: any, subIndex: number) => rebuildOption(subItem, `group-${index}-option-${subIndex}`)),
-                };
-            }
-            return rebuildOption(item, `option-${index}`);
-        });
+                </If>
+            </div>
+        )
     };
 
-    const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'options', 'optionLabelProp']) : {};
-
     if (props?.proField) {
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'request', 'params', 'debounceTime']) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode']) : {};
+        const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'optionItemRender']) : {};
+
         return (
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
                     className: classNames(clazzPrefix, props?.className),
                     ...omitFieldProps,
-                    options: rebuildOptions(),
-                    optionLabelProp: (props?.selectOriginLabel && props?.fieldProps?.optionLabelProp === 'label') ? 'labelOrigin' : props?.fieldProps?.optionLabelProp,
+                    optionItemRender: (item) => renderOption(item),
                 }}
             />
         );
     } else {
+        const [optionItems, setOptionItems] = React.useState<any[]>();
+
+        React.useEffect(() => {
+            if (props?.fieldProps?.options) {
+                setOptionItems(props?.fieldProps?.options);
+            } else {
+                if (props?.request) {
+                    fetchRequestData(props?.params).then(resolve => {
+                        setOptionItems(resolve);
+                    });
+                }
+            }
+        }, []);
+
+        const rebuildOptions = () => {
+            if (!optionItems) {
+                return [];
+            }
+            if (!props?.usePresetStyle) {
+                return optionItems;
+            }
+            return optionItems.map((item: any, index: number) => {
+                if (!item) {
+                    return undefined;
+                }
+                if (item?.options && Array.isArray(item?.options)) {
+                    return {
+                        label: item?.label,
+                        labelOrigin: item?.label,
+                        options: item?.options?.map((subItem: any, subIndex: number) => {
+                            return !subItem ? undefined : {
+                                label: renderOption(subItem, `group-${index}-option-${subIndex}`),
+                                labelOrigin: subItem?.label,
+                                value: subItem?.value,
+                            };
+                        })
+                    };
+                }
+                return {
+                    label: renderOption(item, `option-${index}`),
+                    labelOrigin: item?.label,
+                    value: item?.value,
+                };
+            });
+        };
+
         // @ts-ignore
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'request', 'params', 'debounceTime', 'valueEnum', ...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'showSearch', 'request', 'params', 'debounceTime', 'valueEnum', ...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]) : {};
+        const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionItemRender']) : {};
+
         return (
             <Select
                 className={classNames(clazzPrefix, props?.className)}
                 {...restProps}
                 {...omitFieldProps}
                 options={rebuildOptions()}
-                optionLabelProp={(props?.selectOriginLabel && props?.fieldProps?.optionLabelProp === 'label') ? 'labelOrigin' : props?.fieldProps?.optionLabelProp}
+                optionLabelProp={(props?.selectOriginLabel && props?.fieldProps?.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp || 'value')}
             />
         );
     }
