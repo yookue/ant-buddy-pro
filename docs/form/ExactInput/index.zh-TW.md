@@ -28,33 +28,22 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {ExactInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            submitter={{
-                searchConfig: {
-                    submitText: '提交',
-                    resetText: '重置',
-                }
-            }}
-            onFinish={async (values) => {
-                message.success('您點擊了提交按鈕');
-            }}
-        >
-          <ExactInput
-              name='foo'
-              placeholder='請輸入此項'
-              tooltipProps={{
-                  title: '全字匹配',
-              }}
-              fieldProps={{
-                  addonBefore: '前綴',
-              }}
-          />
+        <ProForm submitter={false}>
+            <ExactInput
+                name='foo'
+                placeholder='請輸入此項'
+                tooltipProps={{
+                    title: '全字匹配',
+                }}
+                fieldProps={{
+                    addonBefore: '前綴',
+                }}
+            />
         </ProForm>
     );
 }

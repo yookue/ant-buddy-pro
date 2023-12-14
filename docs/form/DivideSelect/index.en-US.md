@@ -16,45 +16,50 @@ import {DivideSelect} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Radio, Divider} from 'antd';
-import {ProForm} from '@ant-design/pro-form';
+import {Divider} from 'antd';
+import {ProForm, ProFormRadio} from '@ant-design/pro-form';
 import {DivideSelect} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [optionLabel, setOptionLabel] = React.useState('label');
-    const [originLabel, setOriginLabel] = React.useState(false);
+    const [presetStyle, setPresetStyle] = React.useState('before-prior');
 
     return (
-        <ProForm submitter={false}>
-            <div>
-                <span style={{paddingRight: '20px'}}>Display Selected Option:</span>
-                <Radio.Group
-                    name='optionLabel'
-                    value={optionLabel}
-                    defaultValue='label'
-                    buttonStyle='solid'
-                    onChange={event => {
+        <ProForm layout='horizontal' submitter={false}>
+            <ProFormRadio.Group
+                name='optionLabel'
+                label='Display Selected Option'
+                radioType='button'
+                fieldProps={{
+                    defaultValue: 'label',
+                    buttonStyle: 'solid',
+                    onChange: (event) => {
                         setOptionLabel(event.target?.value);
-                    }}
-                >
-                    <Radio.Button value='label'>Label</Radio.Button>
-                    <Radio.Button value='value'>value</Radio.Button>
-                </Radio.Group>
-                <br/><br/>
-                <span style={{paddingRight: '20px'}}>Display Original Label:</span>
-                <Radio.Group
-                    name='originLabel'
-                    value={originLabel.toString()}
-                    defaultValue='false'
-                    buttonStyle='solid'
-                    onChange={event => {
-                        setOriginLabel(event.target?.value === 'true');
-                    }}
-                >
-                    <Radio.Button value='true'>True</Radio.Button>
-                    <Radio.Button value='false'>False</Radio.Button>
-                </Radio.Group>
-            </div>
+                    }
+                }}
+                options={[
+                    {label: 'Label', value: 'label'},
+                    {label: 'Value', value: 'value'},
+                ]}
+            />
+            <ProFormRadio.Group
+                name='presetStyle'
+                label='Use Preset Style'
+                radioType='button'
+                fieldProps={{
+                    defaultValue: 'before-prior',
+                    buttonStyle: 'solid',
+                    onChange: (event) => {
+                        setPresetStyle(event.target?.value);
+                    }
+                }}
+                options={[
+                    {label: 'Before-Prior', value: 'before-prior'},
+                    {label: '90-10', value: '90-10'},
+                    {label: '80-20', value: '80-20'},
+                    {label: '70-30', value: '70-30'},
+                ]}
+            />
             <Divider/>
             <DivideSelect
                 name='foo'
@@ -66,13 +71,7 @@ export default () => {
                         {label: 'United States', value: '+1'},
                     ]
                 }}
-                optionBeforeContent='label'
-                optionAfterContent='value'
-                optionAfterStyle={{
-                    textAlign: 'right',
-                }}
-                selectOriginLabel={originLabel}
-                usePresetStyle='before-prior'
+                usePresetStyle={presetStyle}
             />
         </ProForm>
     );

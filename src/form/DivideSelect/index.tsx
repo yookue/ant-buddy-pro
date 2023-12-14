@@ -68,9 +68,16 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description The content of the option item before
      * @description.zh-CN 下拉选项左侧 span 的内容
      * @description.zh-TW 下拉選項左側 span 的内容
-     * @default 'value'
+     * @default 'label'
      */
     optionBeforeContent?: 'label' | 'value' | false;
+
+    /**
+     * @description The render of the option item before
+     * @description.zh-CN 下拉选项左侧 span 的渲染方法
+     * @description.zh-TW 下拉選項左側 span 的渲染方法
+     */
+    optionBeforeRender?: (origin: React.ReactNode) => React.ReactNode;
 
     /**
      * @description The CSS class name of the option item after
@@ -90,9 +97,16 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description The content of the option item after
      * @description.zh-CN 下拉选项右侧 span 的内容
      * @description.zh-TW 下拉選項右側 span 的内容
-     * @default 'label'
+     * @default 'value'
      */
     optionAfterContent?: 'label' | 'value' | false;
+
+    /**
+     * @description The render of the option item after
+     * @description.zh-CN 下拉选项右侧 span 的渲染方法
+     * @description.zh-TW 下拉選項右側 span 的渲染方法
+     */
+    optionAfterRender?: (origin: React.ReactNode) => React.ReactNode;
 
     /**
      * @description Whether to use the original label when `optionLabelProp` is 'label' and `proField` is false
@@ -114,9 +128,9 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description Whether to use the preset style for the component
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
-     * @default false
+     * @default 'before-prior'
      */
-    usePresetStyle?: 'before-prior' | 'after-prior' | 'fifty-fifty' | false;
+    usePresetStyle?: 'before-prior' | 'after-prior' | '10-90' | '20-80' | '30-70' | '40-60' | '50-50' | '60-40' | '70-30' | '80-20' | '90-10' | false;
 };
 
 
@@ -127,18 +141,31 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     const emptyRequest = async () => [];
     const {run: fetchRequestData} = useDebounceFn(props?.request || emptyRequest, props?.debounceTime || 0);
 
+    const renderContent = (item: any, before: boolean) => {
+        if (!item) {
+            return undefined;
+        }
+        if (before) {
+            const content: React.ReactNode = (props?.optionBeforeContent === 'value') ? item?.value : item?.label;
+            return props?.optionBeforeRender ? props?.optionBeforeRender(content) : content;
+        } else {
+            const content: React.ReactNode = (props?.optionAfterContent === 'value') ? item?.value : item?.label;
+            return props?.optionAfterRender ? props?.optionAfterRender(content) : content;
+        }
+    };
+
     const renderOption = (item: any, key?: string) => {
         return !item ? undefined : (
             <div key={key || item?.value} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))} style={props?.optionStyle}>
                 <If condition={props?.optionBeforeContent} validation={false}>
-                        <span key={`${key || item?.value}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
-                            {(props?.optionBeforeContent === 'value') ? item?.value : item?.label}
-                        </span>
+                    <span key={`${key || item?.value}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
+                        {renderContent(item, true)}
+                    </span>
                 </If>
                 <If condition={props?.optionAfterContent} validation={false}>
-                        <span key={`${key || item?.value}-after`} className={classNames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
-                            {(props?.optionAfterContent === 'value') ? item?.value : item?.label}
-                        </span>
+                    <span key={`${key || item?.value}-after`} className={classNames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
+                        {renderContent(item, false)}
+                    </span>
                 </If>
             </div>
         )
@@ -223,9 +250,9 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
 
 
 DivideSelect.defaultProps = {
-    optionBeforeContent: 'value',
-    optionAfterContent: 'label',
+    optionBeforeContent: 'label',
+    optionAfterContent: 'value',
     selectOriginLabel: true,
     proField: true,
-    usePresetStyle: false,
+    usePresetStyle: 'before-prior',
 };

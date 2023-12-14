@@ -28,23 +28,12 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {ExactInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            submitter={{
-                searchConfig: {
-                    submitText: 'Submit',
-                    resetText: 'Rest',
-                }
-            }}
-            onFinish={async (values) => {
-                message.success('Yep, you\'ve clicked the submit button');
-            }}
-        >
+        <ProForm submitter={false}>
             <ExactInput
                 name='foo'
                 placeholder='Please input this field'

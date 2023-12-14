@@ -34,27 +34,17 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            submitter={{
-                searchConfig: {
-                    submitText: '提交',
-                    resetText: '重置',
-                }
-            }}
-            onFinish={async (values) => {
-                message.success('您点击了提交按钮');
-            }}
-        >
-          <ExactInput
-              name='foo'
-              placeholder='请输入此项'
-              tooltipProps={{
-                  title: '全字匹配',
-              }}
-              fieldProps={{
-                  addonBefore: '前缀',
-              }}
-          />
+        <ProForm submitter={false}>
+            <ExactInput
+                name='foo'
+                placeholder='请输入此项'
+                tooltipProps={{
+                    title: '全字匹配',
+                }}
+                fieldProps={{
+                    addonBefore: '前缀',
+                }}
+            />
         </ProForm>
     );
 }
