@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.27** [2023-12-16]
+    - Add 'render/SelectRenders'
+
   - **v0.1.22** [2023-11-29]
     - Add 'form/DivideSelect'
 

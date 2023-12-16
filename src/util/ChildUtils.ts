@@ -28,7 +28,7 @@ export abstract class ChildUtils {
      *
      * @see "https://learnreactjs.github.io/access-child-component-node"
      */
-    public static countChildren = (children?: any): number => {
+    public static countChildren = (children: any): number => {
         return children ? React.Children.count(children) : 0;
     }
 
@@ -40,7 +40,7 @@ export abstract class ChildUtils {
      *
      * @see "https://tagmerge.com/question/react-component-children-detect-if-empty-null-before-render"
      */
-    public static countNonnullChildren = (children?: any): number => {
+    public static countNonnullChildren = (children: any): number => {
         if (!children) {
             return 0;
         }
@@ -66,10 +66,7 @@ export abstract class ChildUtils {
      *
      * @see "https://github.com/sunknudsen/react-node-to-string"
      */
-    public static extractPureContent(node?: React.ReactNode): string | undefined {
-        if (!node) {
-            return undefined;
-        }
+    public static extractPureContent(node: React.ReactNode): string | undefined {
         let result = '';
         if (typeof node === 'string') {
             result = node;

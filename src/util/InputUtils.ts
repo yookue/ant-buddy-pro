@@ -25,10 +25,7 @@ export abstract class InputUtils {
      *
      * @see "https://coryrylan.com/blog/trigger-input-updates-with-react-controlled-inputs"
      */
-    public static setInputValue = (element?: HTMLInputElement, value?: string, callback?: ((previous?: string) => void)): void => {
-        if (!element) {
-            return;
-        }
+    public static setInputValue = (element: HTMLInputElement, value?: string, callback?: ((previous?: string) => void)): void => {
         const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
         if (!descriptor) {
             return;

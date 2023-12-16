@@ -11,6 +11,9 @@ nav:
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v0.1.27** [2023-12-16]
+    - 增加 'render/SelectRenders'
+
   - **v0.1.22** [2023-11-29]
     - 增加 'form/DivideSelect'
 
