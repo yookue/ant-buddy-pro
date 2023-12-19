@@ -203,7 +203,7 @@ export type LocaleInputProps = React.InputHTMLAttributes<HTMLInputElement> & Pro
      * @description Whether to use ProFormField instead of Input for locale items
      * @description.zh-CN 语言输入项是否使用 ProFormField 控件
      * @description.zh-TW 語言輸入項是否使用 ProFormField 控件
-     * @default false
+     * @default true
      */
     popupProField?: boolean;
 };
@@ -496,5 +496,5 @@ LocaleInput.defaultProps = {
     popupTagPos: 'before',
     popupActionDom: <SelectOutlined/>,
     popupActionPos: 'after',
-    popupProField: false,
+    popupProField: true,
 };
