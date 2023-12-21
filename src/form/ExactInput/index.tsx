@@ -17,7 +17,6 @@
 
 import React from 'react';
 import {ConfigProvider, Input, Checkbox, Space, Tooltip, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
-import {AimOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {If} from '@yookue/react-condition';
@@ -27,7 +26,7 @@ import {DesignConst} from '@/constant/DesignConst';
 import './index.less';
 
 
-export type AddonCheckProps = React.InputHTMLAttributes<HTMLInputElement> & CheckboxProps & {
+export type AddonCheckProps = React.InputHTMLAttributes<HTMLInputElement> & CheckboxProps & React.PropsWithChildren<{
     /**
      * @description The prefix of name for the checkbox
      * @description.zh-CN 复选框的名称前缀
@@ -56,7 +55,7 @@ export type AddonCheckProps = React.InputHTMLAttributes<HTMLInputElement> & Chec
      * @description.zh-TW 複選框的名稱后綴
      */
     idSuffix?: string;
-};
+}>;
 
 export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProFormFieldItemProps<InputProps, InputRef> & {
     /**
@@ -66,14 +65,6 @@ export type ExactInputProps = React.InputHTMLAttributes<HTMLInputElement> & ProF
      * @default 'buddy-exact-input'
      */
     clazzPrefix?: string;
-
-    /**
-     * @description The DOM of addon
-     * @description.zh-CN 文本框的附属节点内容
-     * @description.zh-TW 文本框的標簽節點內容
-     * @default <AimOutlined/>
-     */
-    addonDom?: React.ReactNode;
 
     /**
      * @description The position of addon
@@ -154,7 +145,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 id={checkboxId || checkboxName}
                 {...omitCheckProps}
             >
-                {props?.addonDom}
+                {props?.checkProps?.children}
             </Checkbox>
         );
 
@@ -196,7 +187,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
 
     const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']) : {};
     if (props?.proField) {
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField']) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField']) : {};
         return (
             <ProFormText
                 {...restProps}
@@ -210,7 +201,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         );
     } else {
         // @ts-ignore
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonDom', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemProps]) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'addonPos', 'checkProps', 'fieldProps', 'tooltipProps', 'proField', ...DesignConst.ProFormFieldItemProps]) : {};
         return (
             <Input
                 className={classNames(clazzPrefix, props?.className)}
@@ -225,7 +216,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
 
 
 ExactInput.defaultProps = {
-    addonDom: <AimOutlined/>,
     addonPos: 'after',
     checkProps: {
         nameSuffix: 'Exact',
