@@ -18,6 +18,9 @@
 import React from 'react';
 
 
+/**
+ * Utilities for rendering select
+ */
 export abstract class SelectRenders {
     /**
      * Returns the rendered DOM for the given select option, label first

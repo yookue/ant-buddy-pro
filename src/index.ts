@@ -29,4 +29,5 @@ export {MenuTabs, type MenuTabsProps, type MenuProps, type MenuItemProps, type A
 export {PageFooter, type PageFooterProps, type HyperlinkProps} from './layout/PageFooter';
 export {SettingDrawer, type SettingDrawerProps} from './layout/SettingDrawer';
 export {WrapSpace, type WrapSpaceProps} from './layout/WrapSpace';
+export {SchemaRenders} from './render/SchemaRenders';
 export {SelectRenders} from './render/SelectRenders';

@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.30** [2023-12-22]
+    - Add 'render/SchemaRenders'
+
   - **v0.1.27** [2023-12-16]
     - Add 'render/SelectRenders'
 

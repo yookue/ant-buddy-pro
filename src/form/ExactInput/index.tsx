@@ -53,6 +53,7 @@ export type AddonCheckProps = React.InputHTMLAttributes<HTMLInputElement> & Chec
      * @description The suffix of id for the checkbox
      * @description.zh-CN 复选框的名称后缀
      * @description.zh-TW 複選框的名稱后綴
+     * @default 'Exact'
      */
     idSuffix?: string;
 }>;
@@ -219,6 +220,7 @@ ExactInput.defaultProps = {
     addonPos: 'after',
     checkProps: {
         nameSuffix: 'Exact',
+        idSuffix: 'Exact',
     },
     useTooltip: false,
     proField: true,

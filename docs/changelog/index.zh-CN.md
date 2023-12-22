@@ -11,6 +11,9 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.30** [2023-12-22]
+    - 增加 'render/SchemaRenders'
+
   - **v0.1.27** [2023-12-16]
     - 增加 'render/SelectRenders'
 
