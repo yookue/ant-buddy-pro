@@ -213,7 +213,6 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 }
                 if (item?.options && Array.isArray(item?.options)) {
                     return {
-                        label: item?.label,
                         labelOrigin: item?.label,
                         options: item?.options?.map((subItem: any, subIndex: number) => {
                             return !subItem ? undefined : {
@@ -221,13 +220,13 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                                 labelOrigin: subItem?.label,
                                 value: subItem?.value,
                             };
-                        })
+                        }),
+                        ...(omit(item, ['options']) || {})
                     };
                 }
                 return {
                     label: renderOption(item, `option-${index}`),
-                    labelOrigin: item?.label,
-                    value: item?.value,
+                    ...(omit(item, ['label']) || {})
                 };
             });
         };
