@@ -231,7 +231,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             return undefined;
         }
         const itemDisabled = props?.disabled || props?.fieldProps?.disabled || inputProps?.disabled || inputProps?.fieldProps?.disabled;
-        const itemReadonly = props?.readOnly || inputProps?.readOnly;
+        const itemReadonly = props?.readOnly || inputProps?.readOnly || props?.proFieldProps?.readonly || inputProps?.proFieldProps?.readonly;
 
         const tagDom = ((before && props?.popupTagPos === 'before') || (!before && props?.popupTagPos === 'after')) ? (
             <span className={classNames(`${clazzPrefix}-tag-${props?.popupTagPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined))}>
@@ -282,6 +282,20 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         return (nodeCount === 1) ? combineDom : (<Space>{combineDom}</Space>);
     };
 
+    const renderItemReadonly = (tag: string, dom: React.ReactNode) => (
+        <div className={classNames(`${clazzPrefix}-item-readonly`, (!props?.popupTagPos ? undefined : `${clazzPrefix}-item-readonly-${props?.popupTagPos}`))}>
+            <If condition={props?.popupTagPos === 'before'} validation={false}>
+                <span className={`${clazzPrefix}-item-readonly-tag`}>{tag}</span>
+            </If>
+            <div className={`${clazzPrefix}-item-readonly-content`}>
+                {dom || props?.proFieldProps?.emptyText || '-'}
+            </div>
+            <If condition={props?.popupTagPos === 'after'} validation={false}>
+                <span className={`${clazzPrefix}-item-readonly-tag`}>{tag}</span>
+            </If>
+        </div>
+    );
+
     const menuItems: MenuProps['items'] = [];
     if (props?.popupInputProps) {
         for (const itemProp of props?.popupInputProps) {
@@ -289,7 +303,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 continue;
             }
             const {tag, fieldProps, rules} = itemProp;
-            const restProps = omit(itemProp, ['tag', 'name', 'id', 'disabled', 'readonly', 'fieldProps', 'rules']);
+            const restProps = omit(itemProp, ['tag', 'name', 'id', 'disabled', 'readonly', 'fieldProps', 'proFieldProps', 'rules']);
             const antdInputProps = restProps as InputProps;
             const omitFieldProps = fieldProps ? omit(fieldProps, ['className', 'addonBefore', 'addonAfter', 'maxLength', 'placeholder']) : {};
             const elementId = nanoid();
@@ -309,9 +323,13 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 placeholder: itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder,
                                 maxLength: itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength,
                                 disabled: props?.disabled || props?.fieldProps?.disabled || itemProp?.disabled || itemProp?.fieldProps?.disabled,
-                                readOnly: props?.readOnly || itemProp?.readOnly,
+                                readOnly: props?.readOnly || itemProp?.readOnly || props?.proFieldProps?.readonly || itemProp?.proFieldProps?.readonly,
                                 ...omitFieldProps,
                                 'data-locale-input-tag': elementId,
+                            }}
+                            proFieldProps={{
+                                render: (dom: React.ReactNode) => renderItemReadonly(tag, dom),
+                                ...(itemProp?.proFieldProps ? omit(itemProp?.proFieldProps, ['render']) : {})
                             }}
                             rules={[
                                 ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
@@ -330,7 +348,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             placeholder={itemProp?.placeholder || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder}
                             maxLength={itemProp?.maxLength || itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength}
                             disabled={props?.disabled || props?.fieldProps?.disabled || itemProp.disabled || itemProp?.fieldProps?.disabled}
-                            readOnly={props?.readOnly || itemProp.readOnly}
+                            readOnly={props?.readOnly || itemProp.readOnly || props?.proFieldProps?.readonly || itemProp?.proFieldProps?.readonly}
                             {...antdInputProps}
                             {...omitFieldProps}
                             data-locale-input-tag={elementId}
@@ -363,9 +381,12 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 addonAfter: afterDom,
                                 placeholder:  props?.popupShareProps?.placeholder,
                                 disabled: props?.disabled || props?.fieldProps?.disabled,
-                                readOnly: props?.readOnly,
+                                readOnly: props?.readOnly || props?.proFieldProps?.readonly,
                                 maxLength: props?.popupShareProps?.maxLength,
                                 'data-locale-input-tag': elementId,
+                            }}
+                            proFieldProps={{
+                                render: (dom: React.ReactNode) => renderItemReadonly(tag, dom),
                             }}
                             rules={[
                                 ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
@@ -382,7 +403,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             addonAfter={afterDom}
                             placeholder={props?.popupShareProps?.placeholder}
                             disabled={props?.disabled || props?.fieldProps?.disabled}
-                            readOnly={props?.readOnly}
+                            readOnly={props?.readOnly || props?.proFieldProps?.readonly}
                             maxLength={props?.popupShareProps?.maxLength}
                             data-locale-input-tag={elementId}
                         />
@@ -434,7 +455,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     const beforeDom = buildEntryAddonDom(true);
     const afterDom = buildEntryAddonDom(false);
 
-    const entryImmutable = (editContext.mode === 'read') || props?.disabled || props?.fieldProps?.disabled || props?.readOnly;
+    const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.disabled || props?.fieldProps?.disabled || props?.readOnly;
     const restProProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']) : {};
     // @ts-ignore
     const restAntProps = props ? omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'popupClazz', 'popupStyle', 'popupPlacement', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField', ...DesignConst.ProFormFieldItemProps]) : {};

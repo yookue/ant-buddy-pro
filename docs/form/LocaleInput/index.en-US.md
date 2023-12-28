@@ -52,7 +52,6 @@ export default () => {
             <LocaleInput
                 name='localeWithValidation'
                 placeholder='Demo Field With Validation'
-                popupProField={true}
                 rules={[
                     {
                         required: true,
@@ -138,6 +137,7 @@ export default () => {
                         allowClear: true,
                     }
                 ]}
+                popupProField={false}
             />
         </ProForm>
     );
@@ -169,7 +169,6 @@ export default () => {
                 name='localeWithValidation'
                 placeholder='Demo Field With Validation'
                 popupActionPos='before'
-                popupProField={true}
                 rules={[
                     {
                         required: true,
@@ -229,6 +228,7 @@ export default () => {
                     'zh-CN',
                     'zh-TW',
                 ]}
+                popupProField={false}
                 popupShareProps={{
                     placeholder: 'Please input this field',
                 }}
