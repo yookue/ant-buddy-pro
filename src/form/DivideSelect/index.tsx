@@ -172,7 +172,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (props?.proField) {
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode']) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle', 'fieldProps', 'proFieldProps', 'mode']) : {};
         const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'optionItemRender']) : {};
 
         return (
@@ -182,6 +182,14 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                     className: classNames(clazzPrefix, props?.className),
                     ...omitFieldProps,
                     optionItemRender: (item) => renderOption(item),
+                }}
+                proFieldProps={{
+                    ...((props?.fieldProps?.optionLabelProp === (props?.fieldProps?.fieldNames?.value || 'value')) ? {
+                        render: props?.proFieldProps?.render || ((dom: any) => {
+                            return (<>{dom || props?.proFieldProps?.emptyText || '-'}</>);
+                        })
+                    } : (props?.proFieldProps?.render ? {render: props?.proFieldProps?.render} : {})),
+                    ...(props?.proFieldProps ? omit(props?.proFieldProps, ['render']) : {}),
                 }}
             />
         );
@@ -221,18 +229,18 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                                 value: subItem?.value,
                             };
                         }),
-                        ...(omit(item, ['options']) || {})
+                        ...omit(item, ['options'])
                     };
                 }
                 return {
                     label: renderOption(item, `option-${index}`),
-                    ...(omit(item, ['label']) || {})
+                    ...omit(item, ['label'])
                 };
             });
         };
 
         // @ts-ignore
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'fieldProps', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'showSearch', 'request', 'params', 'debounceTime', 'valueEnum', ...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]) : {};
+        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'showSearch', ...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]) : {};
         const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionItemRender']) : {};
 
         return (

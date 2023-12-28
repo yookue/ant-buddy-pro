@@ -29,7 +29,7 @@ export abstract class DesignConst {
     public static ProFormExtendProps = ['secondary', 'allowClear', 'bordered', 'colSize', 'params', 'ignoreFormItem', 'convertValue', 'formItemProps', 'filedConfig', 'fieldRef'];
 
     // @see "@ant-design/pro-form/es/interface.d.ts"
-    public static ProFormFieldItemProps = [...DesignConst.ProFormItemProps, ...DesignConst.ProFormExtendProps, 'fieldProps', 'cacheForSwr', 'proFieldProps', 'footerRender', 'colProps'];
+    public static ProFormFieldItemProps = [...DesignConst.ProFormItemProps, ...DesignConst.ProFormExtendProps, 'fieldProps', 'proFieldProps', 'cacheForSwr', 'footerRender', 'colProps'];
 
     // @see "@ant-design/pro-field/es/components/Select/index.d.ts"
     public static ProFieldSelectProps = ['valueEnum', 'debounceTime', 'request', 'params'];
