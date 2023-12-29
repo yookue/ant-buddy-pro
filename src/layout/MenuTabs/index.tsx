@@ -171,6 +171,13 @@ export type MenuTabsProps = {
     tabTitleStyle?: React.CSSProperties;
 
     /**
+     * @description The DOM render of the tab title content
+     * @description.zh-CN 选项卡标题内容的渲染方式
+     * @description.zh-TW 選項卡標題内容的渲染方式
+     */
+    tabTitleRender?: (dom: React.ReactNode) => React.ReactNode;
+
+    /**
      * @description The CSS class name of the tab content
      * @description.zh-CN 选项卡内容 div 的 CSS 类名
      * @description.zh-TW 選項卡内容 div 的 CSS 類名
@@ -235,13 +242,13 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         if (!props?.menuProps?.items || props?.menuProps?.items?.length === 0) {
             return undefined;
         }
-        const result = props?.menuProps?.items.map(item => {
+        return props?.menuProps?.items.map(item => {
             const titleDom = !props?.showTabTitle ? undefined : (
                 <div
                     className={classNames(`${clazzPrefix}-tab-title`, props?.tabTitleClazz)}
                     style={props?.tabTitleStyle}
                 >
-                    {item?.label}
+                    {props?.tabTitleRender ? props?.tabTitleRender(item?.label) : item?.label}
                 </div>
             );
             return (
@@ -260,7 +267,6 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                 </div>
             );
         });
-        return (<>{result}</>);
     };
 
     const omitItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
