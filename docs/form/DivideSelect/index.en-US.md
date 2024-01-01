@@ -25,7 +25,7 @@ export default () => {
     const [presetStyle, setPresetStyle] = React.useState('before-prior');
 
     return (
-        <ProForm layout='horizontal' submitter={false} readonly={true}>
+        <ProForm layout='horizontal' submitter={false}>
             <ProFormRadio.Group
                 name='optionLabel'
                 label='Display Selected Option'
@@ -66,7 +66,6 @@ export default () => {
                 placeholder='Please select this field'
                 fieldProps={{
                     optionLabelProp: optionLabel,
-                    value: '+86',
                     options: [
                         {label: 'China', value: '+86'},
                         {label: 'United States', value: '+1'},
