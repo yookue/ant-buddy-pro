@@ -17,10 +17,12 @@
 
 export abstract class ImageUtils {
     /**
-     * Returns the detected image src for a given parameter
+     * Returns the detected image src for the given param
      *
      * @param param the parameter to inspect
-     * @param callback the function to execute when the parameter returns a promise
+     * @param callback the function to execute when the given param is a promise
+     *
+     * @returns the detected image src for the given param
      */
     public static detectSource = (param?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>), callback?: ((value?: string) => void)): string | undefined => {
         if (!param) {

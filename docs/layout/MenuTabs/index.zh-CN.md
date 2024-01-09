@@ -22,6 +22,7 @@ import {MenuTabs} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [menuTheme, setMenuTheme] = React.useState('light');
+    const [selectionBold, setSelectionBold] = React.useState(true);
 
     return (
         <>
@@ -35,6 +36,18 @@ export default () => {
                 }}
                 onChange={(value) => {
                     setMenuTheme(value ? 'dark' : 'light');
+                }}
+            />
+            <ProFormSwitch
+                label='选中项加粗'
+                checkedChildren='是'
+                unCheckedChildren='否'
+                fieldProps={{
+                    checked: selectionBold,
+                    defaultChecked: true,
+                }}
+                onChange={(value) => {
+                    setSelectionBold(value ? true : false);
                 }}
             />
             <Divider/>
@@ -78,6 +91,7 @@ export default () => {
                 containerStyle={{
                     minHeight: '300px',
                 }}
+                entrySelectionBold={selectionBold}
             />
         </>
     );

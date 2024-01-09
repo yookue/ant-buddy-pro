@@ -33,12 +33,14 @@
             border: none;
         }
 
-        .@{ant-prefix}-menu:not(.@{ant-prefix}-menu-horizontal) .@{ant-prefix}-menu-item-selected {
-            font-weight: bold;
-        }
-
         .@{ant-prefix}-menu-root:not(.@{ant-prefix}-menu-horizontal) {
             height: 100%;
+        }
+
+        &-bold {
+            .@{ant-prefix}-menu:not(.@{ant-prefix}-menu-horizontal) .@{ant-prefix}-menu-item-selected {
+                font-weight: bold;
+            }
         }
     }
 

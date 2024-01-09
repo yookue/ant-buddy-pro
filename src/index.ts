@@ -31,3 +31,7 @@ export {SettingDrawer, type SettingDrawerProps} from './layout/SettingDrawer';
 export {WrapSpace, type WrapSpaceProps} from './layout/WrapSpace';
 export {SchemaRenders} from './render/SchemaRenders';
 export {SelectRenders} from './render/SelectRenders';
+export {ChildUtils} from './util/ChildUtils';
+export {FileUtils} from './util/FileUtils';
+export {ImageUtils} from './util/ImageUtils';
+export {InputUtils} from './util/InputUtils';

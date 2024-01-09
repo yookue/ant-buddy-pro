@@ -24,6 +24,7 @@ export abstract class ChildUtils {
      * Returns the total number of components in the children
      *
      * @param children the element(s) to check
+     *
      * @return the total number of components in the children
      *
      * @see "https://learnreactjs.github.io/access-child-component-node"
@@ -36,6 +37,7 @@ export abstract class ChildUtils {
      * Returns the total number of nonnull components in the children
      *
      * @param children the element(s) to check
+     *
      * @return the total number of nonnull components in the children
      *
      * @see "https://tagmerge.com/question/react-component-children-detect-if-empty-null-before-render"
@@ -62,6 +64,7 @@ export abstract class ChildUtils {
      * Returns the string representation of pure content that under all the children
      *
      * @param node the node to inspect
+     *
      * @return the string representation of pure content that under all the children
      *
      * @see "https://github.com/sunknudsen/react-node-to-string"

@@ -1,6 +1,6 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "0.1.33",
+    "version": "0.1.34",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on React & Ant Design Pro",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "@ant-design/pro-components": "^1.1.25",
-        "@babel/runtime": "^7.23.6",
+        "@babel/runtime": "^7.23.8",
         "@emotion/css": "^11.11.2",
         "@yookue/react-condition": "^0.1.6",
         "screenfull": "^6.0.2"

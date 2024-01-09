@@ -136,6 +136,14 @@ export type MenuTabsProps = {
     entryWidth?: string;
 
     /**
+     * @description Whether to bold the selected menu item of the entry div
+     * @description.zh-CN 是否加粗显示菜单栏 div 选中的菜单项
+     * @description.zh-TW 是否加粗顯示菜單欄 div 選中的菜單項
+     * @default true
+     */
+    entrySelectionBold?: boolean;
+
+    /**
      * @description The CSS class name of the tab div
      * @description.zh-CN 选项卡 div 的 CSS 类名
      * @description.zh-TW 選項卡 div 的 CSS 類名
@@ -285,7 +293,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             }}
         >
             <div
-                className={classNames(`${clazzPrefix}-entry`, props?.entryClazz, entryWidthClazz)}
+                className={classNames(`${clazzPrefix}-entry`, (props?.entrySelectionBold ? `${clazzPrefix}-entry-bold` : undefined), props?.entryClazz, entryWidthClazz)}
                 style={omitEntryStyle}
             >
                 <Menu
@@ -310,6 +318,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
 MenuTabs.defaultProps = {
     entryWidth: '208px',
+    entrySelectionBold: true,
     showTabTitle: true,
     adjustLayoutProps: {
         adjustOnResize: true,

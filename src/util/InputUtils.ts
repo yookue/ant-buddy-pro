@@ -21,7 +21,7 @@ export abstract class InputUtils {
      *
      * @param element the input element to inspect
      * @param value the value to set
-     * @param callback the function to execute after set value
+     * @param callback the function to execute after value been set
      *
      * @see "https://coryrylan.com/blog/trigger-input-updates-with-react-controlled-inputs"
      */
