@@ -1,0 +1,142 @@
+/*
+ * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License")
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+@root-entry-name: default;
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@buddy-icon-select: ~'@{ant-prefix}-buddy-icon-select';
+
+
+.@{buddy-icon-select}-dropdown {
+    .@{buddy-icon-select}-ink-bar .@{ant-prefix}-tabs-ink-bar {
+        visibility: visible;
+    }
+
+    .@{ant-prefix}-pro-card-tabs .@{ant-prefix}-tabs-top {
+        padding: 0 4px;
+
+        & > .@{ant-prefix}-tabs-nav {
+            .@{ant-prefix}-tabs-nav-wrap .@{ant-prefix}-tabs-nav-list {
+                margin-top: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .@{ant-prefix}-tabs-nav-operations .@{ant-prefix}-tabs-nav-more {
+                display: none;
+            }
+
+            .@{ant-prefix}-tabs-extra-content {
+                max-width: 200px;
+                margin-right: @margin-xss;
+
+                .@{ant-prefix}-input-affix-wrapper {
+                    height: 24.58px;
+                }
+            }
+        }
+
+        & > .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-pro-card-body {
+            padding: 2px @padding-xss;
+        }
+    }
+
+    .@{buddy-icon-select}-scene-tab {
+        padding: 6px 0 6px 8px;
+
+        &-content {
+            .@{buddy-icon-select}-scroll-area {
+                width: 100%;
+                min-height: 48px !important;
+            }
+
+            .@{buddy-icon-select}-search-mismatch {
+                width: 100%;
+            }
+        }
+    }
+
+    .@{buddy-icon-select}-icon-wrapper {
+        position: relative;
+        border: @border-width-base @border-style-base @border-color-split;
+        border-radius: @border-radius-base;
+        cursor: pointer;
+        margin: 6px 6px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            border: @border-width-base @border-style-base @primary-4;
+            background-color: @primary-1;
+            transition: transform 0.8s ease;
+        }
+    }
+
+    .@{buddy-icon-select}-icon-selected {
+        border: @border-width-base @border-style-base @primary-4;
+        background-color: @primary-1;
+
+        &:before {
+            position: absolute;
+            content: '';
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: @font-size-base @border-style-base @green-4;
+            border-left: @font-size-base @border-style-base transparent;
+            border-radius: @border-radius-base;
+        }
+    }
+
+    .@{buddy-icon-select}-icon-option {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+
+        span[class=@{iconfont-css-prefix}]:hover {
+            transform: scale(1.5);
+        }
+    }
+
+    /* Override Styles */
+
+    .@{ant-prefix}-dropdown-menu {
+        padding: 0 0;
+
+        .@{ant-prefix}-dropdown-menu-item {
+            cursor: default;
+            padding-left: 0;
+            padding-right: 0;
+
+            &:hover {
+                background-color: @popover-background;
+            }
+        }
+    }
+
+    &.@{ant-prefix}-dropdown-placement-bottom .@{ant-prefix}-dropdown-menu-root,
+    &.@{ant-prefix}-dropdown-placement-bottomLeft .@{ant-prefix}-dropdown-menu-root,
+    &.@{ant-prefix}-dropdown-placement-bottomRight .@{ant-prefix}-dropdown-menu-root {
+        margin-top: -@form-item-margin-bottom;
+    }
+}
+
+
+.@{buddy-icon-select}-rtl {
+    direction: rtl;
+}

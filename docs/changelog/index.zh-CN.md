@@ -11,6 +11,13 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.35** [2024-02-06]
+    - 增加 'form/IconSelect'
+    - 增加 'util/ElementUtils'
+    - 增加 'util/FileUtils'
+    - 增加 'util/IconUtils'
+    - 增加 'util/PropsUtils'
+
   - **v0.1.30** [2023-12-22]
     - 增加 'render/SchemaRenders'
 
@@ -22,6 +29,7 @@ nav:
 
   - **v0.1.20** [2023-11-24]
     - 增加 'layout/WrapSpace'
+    - 增加 'util/ChildUtils'
 
   - **v0.1.16** [2023-11-11]
     - 增加 'layout/ApartTitle'
@@ -44,6 +52,7 @@ nav:
   - **v0.0.12** [2023-09-22]
     - 增加 'field/FallbackImage'
     - 增加 'field/RefreshImage'
+    - 增加 'util/ImageUtils'
 
   - **v0.0.8** [2023-09-06]
     - 增加 'form/LocaleInput'

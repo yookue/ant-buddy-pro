@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023- Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -15,20 +15,11 @@
  */
 
 
-@root-entry-name: default;
-// noinspection CssUnknownTarget
-@import (reference) '~antd/es/style/themes/index.less';
-
-@buddy-exact-input: ~'@{ant-prefix}-buddy-exact-input';
+import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 
 
-.@{buddy-exact-input}-addon-before.@{buddy-exact-input}-compact .@{ant-prefix}-input-group-addon:first-of-type,
-.@{buddy-exact-input}-addon-after.@{buddy-exact-input}-compact .@{ant-prefix}-input-group-addon:last-of-type {
-    padding-left: @padding-xs;
-    padding-right: @padding-xs;
-}
-
-
-.@{buddy-exact-input}-rtl {
-    direction: rtl;
-}
+export const intlLocales = ReadonlyMultiKeyMap.of([
+    [['en_US', 'setAsDefault'], 'Set as default?'],
+    [['zh_CN', 'setAsDefault'], '设为默认吗？'],
+    [['zh_TW', 'setAsDefault'], '設爲默認嗎？'],
+]);

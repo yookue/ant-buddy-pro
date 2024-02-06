@@ -31,6 +31,8 @@ export abstract class DesignConst {
     // @see "@ant-design/pro-form/es/interface.d.ts"
     public static ProFormFieldItemProps = [...DesignConst.ProFormItemProps, ...DesignConst.ProFormExtendProps, 'fieldProps', 'proFieldProps', 'cacheForSwr', 'footerRender', 'colProps'];
 
+    public static ForwardFieldProps = ['name', 'id', 'placeholder'];
+
     // @see "@ant-design/pro-field/es/components/Select/index.d.ts"
     public static ProFieldSelectProps = ['valueEnum', 'debounceTime', 'request', 'params'];
 }

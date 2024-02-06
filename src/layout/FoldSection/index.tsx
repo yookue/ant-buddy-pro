@@ -247,9 +247,12 @@ export type FoldSectionProps = {
 
 
 export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-fold-section');
-    const [panelOpen, setPanelOpen] = React.useState<boolean>(props?.panelInitialOpen || false);
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fold-section');
+
+    const [panelOpen, setPanelOpen] = React.useState(props?.panelInitialOpen);
 
     const buildOrnamentDom = (before: boolean) => {
         if (!props?.headerOrnament || !props?.headerOrnamentPos) {
@@ -303,7 +306,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         }
     };
 
-    const [panelRendered, setPanelRendered] = React.useState<boolean>(props?.panelForceRender || panelOpen);
+    const [panelRendered, setPanelRendered] = React.useState(props?.panelForceRender || panelOpen);
     React.useEffect(() => {
         if (props?.panelForceRender) {
             setPanelRendered(true);

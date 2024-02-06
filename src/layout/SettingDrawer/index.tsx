@@ -42,14 +42,18 @@ export type SettingDrawerProps = ProSettingDrawerProps & {
 
 
 export const SettingDrawer: React.FC<SettingDrawerProps> = (props?: SettingDrawerProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-setting-drawer');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-setting-drawer');
+    // noinspection JSUnresolvedReference
     const handlePrefix = configContext.getPrefixCls('buddy');
-    const omitProps = props ? omit(props, ['clazzPrefix', 'entryClazz', 'prefixCls']) : {};
+
+    const omitProps = !props ? {} : omit(props, ['clazzPrefix', 'entryClazz', 'prefixCls']);
 
     return (
         <ProSettingDrawer
-            prefixCls={classNames((props?.prefixCls || clazzPrefix), props?.entryClazz, (props?.prefixCls || handlePrefix))}
+            prefixCls={classNames((props?.prefixCls ?? clazzPrefix), props?.entryClazz, (props?.prefixCls ?? handlePrefix))}
             {...omitProps}
         />
     );

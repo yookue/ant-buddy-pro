@@ -54,7 +54,7 @@ export abstract class SelectRenders {
     public static renderValueLabelLeft = (item: {label: any, value: any}, labelPrefix?: React.ReactNode, valueWidth?: string): React.ReactNode => {
         return (
             <div key={item?.value} style={{display: 'flex', flexFlow: 'row nowrap'}}>
-                <span style={{flex: 'none', width: valueWidth || 'fit-content'}}>
+                <span style={{flex: 'none', width: valueWidth ?? 'fit-content'}}>
                     {item?.value}
                 </span>
                 <span style={{flex: '1 1', paddingLeft: '4px'}}>

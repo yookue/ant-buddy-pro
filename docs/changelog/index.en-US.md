@@ -11,6 +11,13 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.35** [2024-02-06]
+    - Add 'form/IconSelect'
+    - Add 'util/ElementUtils'
+    - Add 'util/FileUtils'
+    - Add 'util/IconUtils'
+    - Add 'util/PropsUtils'
+
   - **v0.1.30** [2023-12-22]
     - Add 'render/SchemaRenders'
 
@@ -22,6 +29,7 @@ Here are some milestone versions of the changelog:
 
   - **v0.1.20** [2023-11-24]
     - Add 'layout/WrapSpace'
+    - Add 'util/ChildUtils'
 
   - **v0.1.16** [2023-11-11]
     - Add 'layout/ApartTitle'
@@ -44,6 +52,7 @@ Here are some milestone versions of the changelog:
   - **v0.0.12** [2023-09-22]
     - Add 'field/FallbackImage'
     - Add 'field/RefreshImage'
+    - Add 'util/ImageUtils'
 
   - **v0.0.8** [2023-09-06]
     - Add 'form/LocaleInput'

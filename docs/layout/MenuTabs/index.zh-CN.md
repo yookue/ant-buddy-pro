@@ -17,39 +17,53 @@ import {MenuTabs} from '@yookue/ant-buddy-pro';
 ```jsx
 import React from 'react';
 import {Divider} from 'antd';
-import {ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {MenuTabs} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [menuTheme, setMenuTheme] = React.useState('light');
+    const [inkBar, setInkBar] = React.useState(true);
     const [selectionBold, setSelectionBold] = React.useState(true);
 
     return (
         <>
-            <ProFormSwitch
-                label='菜单主题'
-                checkedChildren='暗夜'
-                unCheckedChildren='明亮'
-                fieldProps={{
-                    checked: menuTheme === 'dark',
-                    defaultChecked: false,
-                }}
-                onChange={(value) => {
-                    setMenuTheme(value ? 'dark' : 'light');
-                }}
-            />
-            <ProFormSwitch
-                label='选中项加粗'
-                checkedChildren='是'
-                unCheckedChildren='否'
-                fieldProps={{
-                    checked: selectionBold,
-                    defaultChecked: true,
-                }}
-                onChange={(value) => {
-                    setSelectionBold(value ? true : false);
-                }}
-            />
+            <ProForm layout='horizontal' submitter={false}>
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='菜单主题'
+                        checkedChildren='暗夜'
+                        unCheckedChildren='明亮'
+                        fieldProps={{
+                            checked: menuTheme === 'dark',
+                        }}
+                        onChange={(value) => {
+                            setMenuTheme(value ? 'dark' : 'light');
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='活跃指示条'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: inkBar,
+                        }}
+                        onChange={(value) => {
+                            setInkBar(value ? true : false);
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='选中项加粗'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: selectionBold,
+                        }}
+                        onChange={(value) => {
+                            setSelectionBold(value ? true : false);
+                        }}
+                    />
+                </ProForm.Group>
+            </ProForm>
             <Divider/>
             <MenuTabs
                 menuProps={{
@@ -85,12 +99,13 @@ export default () => {
                             )
                         }
                     ],
-                    selectedKey: 'general',
+                    defaultActiveKey: 'general',
                     theme: menuTheme,
                 }}
                 containerStyle={{
                     minHeight: '300px',
                 }}
+                entryInkBar={inkBar}
                 entrySelectionBold={selectionBold}
             />
         </>

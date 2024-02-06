@@ -33,7 +33,7 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm submitter={false}>
+        <ProForm autoFocusFirstInput={false} submitter={false}>
             <ExactInput
                 name='foo'
                 placeholder='請輸入此項'

@@ -26,8 +26,9 @@ import {FoldSection} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Empty, Radio, Divider} from 'antd';
+import {Empty, Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
+import {ProForm, ProFormRadio} from '@ant-design/pro-form';
 import {FoldSection} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -36,39 +37,40 @@ export default () => {
 
     return (
         <>
-            <div>
-                <span style={{paddingRight: '20px'}}>Ornament Position:</span>
-                <Radio.Group
-                    name='ornamentPos'
-                    value={ornamentPos?.toString()}
-                    defaultValue='before'
-                    buttonStyle='solid'
-                    onChange={event => {
-                        setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+            <ProForm layout='horizontal' submitter={false}>
+                <ProFormRadio.Group
+                    label='Ornament Position'
+                    radioType='button'
+                    fieldProps={{
+                        value: ornamentPos?.toString(),
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                        }
                     }}
-                >
-                    <Radio.Button value='before'>Before</Radio.Button>
-                    <Radio.Button value='after'>After</Radio.Button>
-                    <Radio.Button value='false'>False</Radio.Button>
-                </Radio.Group>
-            </div>
-            <br/>
-            <div>
-                <span style={{paddingRight: '20px'}}>Collapse Position:</span>
-                <Radio.Group
-                    name='collapsePos'
-                    value={collapsePos?.toString()}
-                    defaultValue='after'
-                    buttonStyle='solid'
-                    onChange={event => {
-                        setCollapsePos(event.target?.value === 'false' ? false : event.target?.value);
+                    options={[
+                        {label: 'Before', value: 'before'},
+                        {label: 'After', value: 'after'},
+                        {label: 'False', value: 'false'},
+                    ]}
+                />
+                <ProFormRadio.Group
+                    label='Collapse Position'
+                    radioType='button'
+                    fieldProps={{
+                        value: collapsePos?.toString(),
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setCollapsePos(event.target?.value === 'false' ? false : event.target?.value);
+                        }
                     }}
-                >
-                    <Radio.Button value='before'>Before</Radio.Button>
-                    <Radio.Button value='after'>After</Radio.Button>
-                    <Radio.Button value='false'>False</Radio.Button>
-                </Radio.Group>
-            </div>
+                    options={[
+                        {label: 'Before', value: 'before'},
+                        {label: 'After', value: 'after'},
+                        {label: 'False', value: 'false'},
+                    ]}
+                />
+            </ProForm>
             <Divider/>
             <FoldSection
                 headerOrnament={<AppstoreOutlined/>}

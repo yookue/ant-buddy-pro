@@ -38,6 +38,7 @@ export type WrapperProps = {
     style?: React.CSSProperties;
 };
 
+
 export type FullScreenProps = {
     /**
      * @description The CSS class prefix of the component
@@ -102,14 +103,16 @@ export type FullScreenProps = {
 
 
 export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-full-screen');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-full-screen');
 
     if (!props?.triggerFor) {
         throw SyntaxError(`Parameter 'triggerFor' must be a valid element!`);
     }
 
-    const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === props?.triggerFor);
+    const [fullscreen, setFullscreen] = React.useState(document.fullscreenElement === props?.triggerFor);
 
     /**
      * Listens fullscreenchange event for the trigger element

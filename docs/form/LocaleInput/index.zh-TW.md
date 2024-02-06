@@ -39,6 +39,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: '提交',
@@ -107,6 +108,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: '提交',
@@ -155,6 +157,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: '提交',
@@ -208,6 +211,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: '提交',

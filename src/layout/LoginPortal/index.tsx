@@ -145,8 +145,10 @@ export type LoginPortalProps = {
 
 
 export const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-login-portal');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-login-portal');
 
     return (
         <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>

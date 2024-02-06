@@ -44,17 +44,37 @@ export type CardTabsProps = Omit<TabsProps, 'type'> & {
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
+
+    /**
+     * @description Whether to display the ink bar
+     * @description.zh-CN 是否显示活跃指示条
+     * @description.zh-TW 是否顯示活躍指示條
+     * @default true
+     */
+    inkBar?: boolean;
 };
 
 
 export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-card-tabs');
-    const restProps = props ? omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle']) : {};
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-card-tabs');
+
+    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'containerClazz', 'containerStyle', 'inkBar']);
 
     return (
         <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
-            <Tabs type='card' {...restProps}/>
+            <Tabs
+                className={classNames((props?.inkBar ? `${clazzPrefix}-ink-bar` : undefined), props?.className)}
+                type='card'
+                {...restProps}
+            />
         </div>
     );
+};
+
+
+CardTabs.defaultProps = {
+    inkBar: true,
 };

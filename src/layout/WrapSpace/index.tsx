@@ -56,8 +56,10 @@ export type WrapSpaceProps = {
 
 
 export const WrapSpace: React.FC<React.PropsWithChildren<WrapSpaceProps>> = (props?: React.PropsWithChildren<WrapSpaceProps>) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-wrap-space');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-wrap-space');
 
     const getNumericSize = function (size: SpaceSize) {
         // noinspection SuspiciousTypeOfGuard

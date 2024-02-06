@@ -25,13 +25,12 @@ export default () => {
     const [presetStyle, setPresetStyle] = React.useState('before-prior');
 
     return (
-        <ProForm layout='horizontal' submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <ProFormRadio.Group
-                name='optionLabel'
                 label='顯示選中項'
                 radioType='button'
                 fieldProps={{
-                    defaultValue: 'label',
+                    value: optionLabel,
                     buttonStyle: 'solid',
                     onChange: (event) => {
                         setOptionLabel(event.target?.value);
@@ -43,11 +42,10 @@ export default () => {
                 ]}
             />
             <ProFormRadio.Group
-                name='presetStyle'
                 label='使用預製樣式'
                 radioType='button'
                 fieldProps={{
-                    defaultValue: 'before-prior',
+                    value: presetStyle,
                     buttonStyle: 'solid',
                     onChange: (event) => {
                         setPresetStyle(event.target?.value);
@@ -67,8 +65,22 @@ export default () => {
                 fieldProps={{
                     optionLabelProp: optionLabel,
                     options: [
-                        {label: '中國', value: '+86'},
-                        {label: '美國', value: '+1'},
+                        {
+                            label: '亞洲',
+                            value: 'optGroup',
+                            optionType: 'optGroup',
+                            children: [
+                                {label: '中國', value: '+86'},
+                            ]
+                        },
+                        {
+                            label: '美洲',
+                            value: 'optGroup',
+                            optionType: 'optGroup',
+                            children: [
+                                {label: '美國', value: '+1'},
+                            ]
+                        }
                     ]
                 }}
                 usePresetStyle={presetStyle}

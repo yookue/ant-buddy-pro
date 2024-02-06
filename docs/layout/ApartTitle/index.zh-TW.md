@@ -16,8 +16,9 @@ import {ApartTitle} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Radio, Divider} from 'antd';
+import {Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
+import {ProForm, ProFormRadio} from '@ant-design/pro-form';
 import {ApartTitle} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -25,22 +26,24 @@ export default () => {
 
     return (
         <>
-            <div>
-                <span style={{paddingRight: '20px'}}>裝飾物位置：</span>
-                <Radio.Group
-                    name='ornamentPos'
-                    value={ornamentPos?.toString()}
-                    defaultValue='before'
-                    buttonStyle='solid'
-                    onChange={event => {
-                        setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+            <ProForm layout='horizontal' submitter={false}>
+                <ProFormRadio.Group
+                    label='裝飾物位置'
+                    radioType='button'
+                    fieldProps={{
+                        value: ornamentPos?.toString(),
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                        }
                     }}
-                >
-                    <Radio.Button value='before'>前</Radio.Button>
-                    <Radio.Button value='after'>后</Radio.Button>
-                    <Radio.Button value='false'>無</Radio.Button>
-                </Radio.Group>
-            </div>
+                    options={[
+                        {label: '前', value: 'before'},
+                        {label: '后', value: 'after'},
+                        {label: '無', value: 'false'},
+                    ]}
+                />
+            </ProForm>
             <Divider/>
             <ApartTitle
                 ornament={<AppstoreOutlined/>}

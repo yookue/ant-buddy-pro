@@ -49,23 +49,25 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
 
 
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-fallback-image');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fallback-image');
 
-    const [imageSource, SetImageSource] = React.useState<string | undefined>(() => {
-        return ImageUtils.detectSource(props?.src, data => SetImageSource(data));
+    const [imageSource, setImageSource] = React.useState(() => {
+        return ImageUtils.detectSource(props?.src, data => setImageSource(data));
     });
 
     const handleError = (event: React.SyntheticEvent<any>) => {
         if (props?.fallback) {
-            SetImageSource(ImageUtils.detectSource(props?.fallback, data => SetImageSource(data)));
+            setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
         }
         if (typeof props?.onError === 'function') {
             props?.onError(event);
         }
     };
 
-    const omitProps = props ? omit(props, ['clazzPrefix', 'className', 'src', 'fallback', 'onError']) : {};
+    const omitProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'src', 'fallback', 'onError']);
 
     return (
         <RcImage

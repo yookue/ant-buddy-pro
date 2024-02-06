@@ -21,9 +21,10 @@ import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {useDebounceFn} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {DesignConst} from '@/constant/DesignConst';
+import {PropsUtils} from '@/util/PropsUtils';
 import './index.less';
 
 
@@ -135,8 +136,10 @@ export type DivideSelectProps = ProFormSelectProps & {
 
 
 export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-divide-select');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-divide-select');
 
     const emptyRequest = async () => [];
     const {run: fetchRequestData} = useDebounceFn(props?.request || emptyRequest, props?.debounceTime || 0);
@@ -145,25 +148,33 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         if (!item) {
             return undefined;
         }
+        const label = ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.label) ?? item?.label;
+        const value = ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.value) ?? item?.value;
         if (before) {
-            const content: React.ReactNode = (props?.optionBeforeContent === 'value') ? item?.value : item?.label;
+            if (props?.optionBeforeContent === 'value' && item?.optionType === 'optGroup') {
+                return undefined;
+            }
+            const content: React.ReactNode = (props?.optionBeforeContent === 'value') ? value : label;
             return props?.optionBeforeRender ? props?.optionBeforeRender(content) : content;
         } else {
-            const content: React.ReactNode = (props?.optionAfterContent === 'value') ? item?.value : item?.label;
+            if (props?.optionAfterContent === 'value' && item?.optionType === 'optGroup') {
+                return undefined;
+            }
+            const content: React.ReactNode = (props?.optionAfterContent === 'value') ? value : label;
             return props?.optionAfterRender ? props?.optionAfterRender(content) : content;
         }
     };
 
     const renderOption = (item: any, key?: string) => {
         return !item ? undefined : (
-            <div key={key || item?.value} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))} style={props?.optionStyle}>
+            <div key={key ?? item?.value} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))} style={props?.optionStyle}>
                 <If condition={props?.optionBeforeContent} validation={false}>
-                    <span key={`${key || item?.value}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
+                    <span key={`${key ?? item?.value}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
                         {renderContent(item, true)}
                     </span>
                 </If>
                 <If condition={props?.optionAfterContent} validation={false}>
-                    <span key={`${key || item?.value}-after`} className={classNames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
+                    <span key={`${key ?? item?.value}-after`} className={classNames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
                         {renderContent(item, false)}
                     </span>
                 </If>
@@ -172,8 +183,8 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (props?.proField) {
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle', 'fieldProps', 'proFieldProps', 'mode']) : {};
-        const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'optionItemRender']) : {};
+        const restProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle', 'fieldProps', 'proFieldProps']);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'popupClassName']);
 
         return (
             <ProFormSelect
@@ -182,14 +193,15 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                     className: classNames(clazzPrefix, props?.className),
                     ...omitFieldProps,
                     optionItemRender: (item) => renderOption(item),
+                    popupClassName: classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName),
                 }}
                 proFieldProps={{
-                    ...((props?.fieldProps?.optionLabelProp === (props?.fieldProps?.fieldNames?.value || 'value')) ? {
-                        render: props?.proFieldProps?.render || ((dom: any) => {
+                    ...((props?.fieldProps?.optionLabelProp === (props?.fieldProps?.fieldNames?.value ?? 'value')) ? {
+                        render: props?.proFieldProps?.render ?? ((dom: any) => {
                             return (<>{dom || props?.proFieldProps?.emptyText || '-'}</>);
                         })
-                    } : (props?.proFieldProps?.render ? {render: props?.proFieldProps?.render} : {})),
-                    ...(props?.proFieldProps ? omit(props?.proFieldProps, ['render']) : {}),
+                    } : (!props?.proFieldProps?.render ? {} : {render: props?.proFieldProps?.render})),
+                    ...(!props?.proFieldProps ? {} : omit(props?.proFieldProps, ['render'])),
                 }}
             />
         );
@@ -197,8 +209,9 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         const [optionItems, setOptionItems] = React.useState<any[]>();
 
         React.useEffect(() => {
-            if (props?.fieldProps?.options) {
-                setOptionItems(props?.fieldProps?.options);
+            const options = ObjectUtils.getProperty(props?.fieldProps, props?.fieldProps?.fieldNames?.options) ?? props?.fieldProps?.options;
+            if (options) {
+                setOptionItems(options);
             } else {
                 if (props?.request) {
                     fetchRequestData(props?.params).then(resolve => {
@@ -206,7 +219,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                     });
                 }
             }
-        }, []);
+        }, [props?.request]);
 
         const rebuildOptions = () => {
             if (!optionItems) {
@@ -219,29 +232,39 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 if (!item) {
                     return undefined;
                 }
-                if (item?.options && Array.isArray(item?.options)) {
-                    return {
-                        labelOrigin: item?.label,
-                        options: item?.options?.map((subItem: any, subIndex: number) => {
-                            return !subItem ? undefined : {
-                                label: renderOption(subItem, `group-${index}-option-${subIndex}`),
-                                labelOrigin: subItem?.label,
-                                value: subItem?.value,
-                            };
-                        }),
-                        ...omit(item, ['options'])
+                const itemOptions = ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.options) ?? item?.options;
+                if (itemOptions && Array.isArray(itemOptions)) {
+                    const newOptions = itemOptions.map((subItem: any, subIndex: number) => {
+                        if (!subItem) {
+                            return undefined;
+                        }
+                        const subOptions = {};
+                        ObjectUtils.setProperty(subOptions, (props?.fieldProps?.fieldNames?.label ?? 'label'), renderOption(subItem, `group-${index}-option-${subIndex}`));
+                        ObjectUtils.setProperty(subOptions, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProperty(subItem, props?.fieldProps?.fieldNames?.label) ?? subItem?.label));
+                        ObjectUtils.setProperty(subOptions, (props?.fieldProps?.fieldNames?.value ?? 'value'), (ObjectUtils.getProperty(subItem, props?.fieldProps?.fieldNames?.value) ?? subItem?.value));
+                        return subOptions;
+                    });
+                    const result = {
+                        ...omit(item, (item?.optionType === 'optGroup') ? ['options', 'value', 'optionType', 'children'] : ['options']),
                     };
+                    ObjectUtils.setProperty(result, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.label) ?? item?.label));
+                    ObjectUtils.setProperty(result, (props?.fieldProps?.fieldNames?.options ?? 'options'), newOptions);
+                    return result;
                 }
-                return {
-                    label: renderOption(item, `option-${index}`),
-                    ...omit(item, ['label'])
+                const result = {
+                    ...omit(item, (item?.optionType === 'optGroup') ? ['label', 'value', 'optionType', 'children'] : ['label']),
                 };
+                ObjectUtils.setProperty(result, (props?.fieldProps?.fieldNames?.label ?? 'label'), renderOption(item, `option-${index}`));
+                ObjectUtils.setProperty(result, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.label) ?? item?.label));
+                if (item?.optionType === 'optGroup' && item?.children) {
+                    ObjectUtils.setProperty(result, 'options', item.children);
+                }
+                return result;
             });
         };
 
-        // @ts-ignore
-        const restProps = props ? omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle', 'mode', 'showSearch', ...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]) : {};
-        const omitFieldProps = props?.fieldProps ? omit(props?.fieldProps, ['className', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionItemRender']) : {};
+        const restProps = PropsUtils.pickForwardProps(props);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionItemRender', 'popupClassName']);
 
         return (
             <Select
@@ -249,7 +272,8 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 {...restProps}
                 {...omitFieldProps}
                 options={rebuildOptions()}
-                optionLabelProp={(props?.selectOriginLabel && props?.fieldProps?.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp || 'value')}
+                optionLabelProp={(props?.selectOriginLabel && props?.fieldProps?.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
+                popupClassName={classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName)}
             />
         );
     }

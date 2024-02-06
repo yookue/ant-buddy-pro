@@ -25,13 +25,12 @@ export default () => {
     const [presetStyle, setPresetStyle] = React.useState('before-prior');
 
     return (
-        <ProForm layout='horizontal' submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <ProFormRadio.Group
-                name='optionLabel'
                 label='Display Selected Option'
                 radioType='button'
                 fieldProps={{
-                    defaultValue: 'label',
+                    value: optionLabel,
                     buttonStyle: 'solid',
                     onChange: (event) => {
                         setOptionLabel(event.target?.value);
@@ -43,11 +42,10 @@ export default () => {
                 ]}
             />
             <ProFormRadio.Group
-                name='presetStyle'
                 label='Use Preset Style'
                 radioType='button'
                 fieldProps={{
-                    defaultValue: 'before-prior',
+                    value: presetStyle,
                     buttonStyle: 'solid',
                     onChange: (event) => {
                         setPresetStyle(event.target?.value);
@@ -67,8 +65,22 @@ export default () => {
                 fieldProps={{
                     optionLabelProp: optionLabel,
                     options: [
-                        {label: 'China', value: '+86'},
-                        {label: 'United States', value: '+1'},
+                        {
+                            label: 'Asia',
+                            value: 'optGroup',
+                            optionType: 'optGroup',
+                            children: [
+                                {label: 'China', value: '+86'},
+                            ]
+                        },
+                        {
+                            label: 'America',
+                            value: 'optGroup',
+                            optionType: 'optGroup',
+                            children: [
+                                {label: 'United States', value: '+1'},
+                            ]
+                        }
                     ]
                 }}
                 usePresetStyle={presetStyle}

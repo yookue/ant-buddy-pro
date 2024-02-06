@@ -27,6 +27,16 @@
     background-color: @menu-bg;
 
     &-entry {
+        .@{ant-prefix}-menu:not(.@{ant-prefix}-menu-horizontal) {
+            &.@{buddy-menu-tabs}-ink-bar-none.@{ant-prefix}-menu-inline .@{ant-prefix}-menu-item::after {
+                border-right: none;
+            }
+
+            &.@{buddy-menu-tabs}-selection-bold .@{ant-prefix}-menu-item-selected {
+                font-weight: bold;
+            }
+        }
+
         /* Override Styles */
 
         .@{ant-prefix}-menu-inline {
@@ -36,12 +46,10 @@
         .@{ant-prefix}-menu-root:not(.@{ant-prefix}-menu-horizontal) {
             height: 100%;
         }
+    }
 
-        &-bold {
-            .@{ant-prefix}-menu:not(.@{ant-prefix}-menu-horizontal) .@{ant-prefix}-menu-item-selected {
-                font-weight: bold;
-            }
-        }
+    &-entry-hidden {
+        display: none;
     }
 
     &-tab {

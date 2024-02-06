@@ -39,6 +39,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',
@@ -81,6 +82,7 @@ export default () => {
                     cancel: 'No',
                 }}
                 popupShareProps={{
+                    placeholder: 'Please input this field',
                     rules: [
                         {
                             type: 'string',
@@ -107,6 +109,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',
@@ -155,6 +158,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',
@@ -208,6 +212,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',

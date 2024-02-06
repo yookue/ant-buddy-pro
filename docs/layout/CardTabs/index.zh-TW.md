@@ -16,33 +16,50 @@ import {CardTabs} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Radio, Divider} from 'antd';
+import {Divider} from 'antd';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {CardTabs} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [tabPos, setTabPos] = React.useState('top');
+    const [inkBar, setInkBar] = React.useState(true);
 
     return (
         <>
-            <div>
-                <span style={{paddingRight: '20px'}}>Tab 位置：</span>
-                <Radio.Group
-                    value={tabPos}
-                    defaultValue='top'
-                    buttonStyle='solid'
-                    onChange={event => {
-                        setTabPos(event.target?.value);
+            <ProForm layout='horizontal' submitter={false}>
+                <ProFormRadio.Group
+                    label='Tab 位置'
+                    radioType='button'
+                    fieldProps={{
+                        value: tabPos,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setTabPos(event.target?.value);
+                        }
                     }}
-                >
-                    <Radio.Button value='top'>上</Radio.Button>
-                    <Radio.Button value='bottom'>下</Radio.Button>
-                    <Radio.Button value='left'>左</Radio.Button>
-                    <Radio.Button value='right'>右</Radio.Button>
-                </Radio.Group>
-            </div>
+                    options={[
+                        {label: '上', value: 'top'},
+                        {label: '下', value: 'bottom'},
+                        {label: '左', value: 'left'},
+                        {label: '右', value: 'right'},
+                    ]}
+                />
+                <ProFormSwitch
+                    label='活躍指示條'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: inkBar,
+                    }}
+                    onChange={(value) => {
+                        setInkBar(value ? true : false);
+                    }}
+                />
+            </ProForm>
             <Divider/>
             <CardTabs
                 tabPosition={tabPos}
+                inkBar={inkBar}
                 items={new Array(3).fill(null).map((_, i) => {
                 const id = String(i + 1);
                 return {

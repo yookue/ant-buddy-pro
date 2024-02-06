@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023- Yookue Ltd. All rights reserved.
  *
- * Licensed under the MIT License.
+ * Licensed under the MIT License (the "License")
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,13 +19,14 @@ import React from 'react';
 import {ConfigProvider, Menu, type MenuProps as AntMenuProps} from 'antd';
 import {type MenuItemType as AntMenuItemType} from 'antd/es/menu/hooks/useItems';
 import {css} from '@emotion/css';
+import {BooleanUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type MenuInfo, type MenuMode} from 'rc-menu/es/interface';
 import omit from 'rc-util/es/omit';
 import './index.less';
 
 
-export type MenuProps = Omit<AntMenuProps, 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'defaultSelectedKeys' | 'onDeselect'> & {
+export type MenuProps = Omit<AntMenuProps, 'items' | 'mode' | 'multiple' | 'selectable' | 'activeKey' | 'selectedKeys' | 'defaultSelectedKeys' | 'onDeselect'> & {
     /**
      * @description The content of the menu
      * @description.zh-CN 菜单项数组
@@ -34,12 +35,13 @@ export type MenuProps = Omit<AntMenuProps, 'items' | 'mode' | 'multiple' | 'sele
     items?: MenuItemProps[];
 
     /**
-     * @description The selected key of the menu
-     * @description.zh-CN 当前选中的菜单项
-     * @description.zh-TW 當前選中的菜單項
+     * @description The default active key of the menu
+     * @description.zh-CN 默认当前活动的菜单项
+     * @description.zh-TW 默認當前活動的菜單項
      */
-    selectedKey?: string;
+    defaultActiveKey?: string;
 };
+
 
 export type MenuItemProps = AntMenuItemType & {
     /**
@@ -49,6 +51,7 @@ export type MenuItemProps = AntMenuItemType & {
      */
     content?: React.ReactNode;
 };
+
 
 export type AdjustLayoutProps = {
     /**
@@ -82,6 +85,7 @@ export type AdjustLayoutProps = {
      */
     maxWindowWidth?: number;
 };
+
 
 export type MenuTabsProps = {
     /**
@@ -136,12 +140,28 @@ export type MenuTabsProps = {
     entryWidth?: string;
 
     /**
+     * @description Whether to display the ink bar of the entry div
+     * @description.zh-CN 是否显示菜单栏 div 的活跃指示条
+     * @description.zh-TW 是否顯示菜单栏 div 的活躍指示條
+     * @default true
+     */
+    entryInkBar?: boolean;
+
+    /**
      * @description Whether to bold the selected menu item of the entry div
      * @description.zh-CN 是否加粗显示菜单栏 div 选中的菜单项
      * @description.zh-TW 是否加粗顯示菜單欄 div 選中的菜單項
      * @default true
      */
     entrySelectionBold?: boolean;
+
+    /**
+     * @description Whether to show the entry div
+     * @description.zh-CN 是否显示菜单栏 div
+     * @description.zh-TW 是否顯示菜單欄 div
+     * @default true
+     */
+    entryVisible?: boolean;
 
     /**
      * @description The CSS class name of the tab div
@@ -156,13 +176,6 @@ export type MenuTabsProps = {
      * @description.zh-TW 選項卡 div 的 CSS 樣式
      */
     tabStyle?: React.CSSProperties;
-
-    /**
-     * @description Whether to show the title of the tab div
-     * @description.zh-CN 是否显示选项卡 div 的标题
-     * @description.zh-TW 是否顯示選項卡 div 的標題
-     */
-    showTabTitle?: boolean;
 
     /**
      * @description The CSS class name of the tab title
@@ -184,6 +197,14 @@ export type MenuTabsProps = {
      * @description.zh-TW 選項卡標題内容的渲染方式
      */
     tabTitleRender?: (dom: React.ReactNode) => React.ReactNode;
+
+    /**
+     * @description Whether to show the title of the tab div
+     * @description.zh-CN 是否显示选项卡 div 的标题
+     * @description.zh-TW 是否顯示選項卡 div 的標題
+     * @default true
+     */
+    tabTitleVisible?: boolean;
 
     /**
      * @description The CSS class name of the tab content
@@ -209,15 +230,17 @@ export type MenuTabsProps = {
 
 
 export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-menu-tabs');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-menu-tabs');
+
     const themeClazz = (props?.menuProps?.theme === 'dark') ? `${clazzPrefix}-dark` : `${clazzPrefix}-light`;
     const containerRef = React.useRef<HTMLDivElement>();
-
-    const [activeKey, setActiveKey] = React.useState<string | undefined>(props?.menuProps?.selectedKey);
+    const [activeKey, setActiveKey] = React.useState(props?.menuProps?.defaultActiveKey);
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
 
-    if (props?.adjustLayoutProps?.adjustOnResize) {
+    if (BooleanUtils.isNotFalse(props?.adjustLayoutProps?.adjustOnResize)) {
         const handleWindowResize = () => {
             requestAnimationFrame(() => {
                 if (!containerRef?.current) {
@@ -225,10 +248,10 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                 }
                 let shouldMode: MenuMode = 'inline';
                 const {offsetWidth} = containerRef.current;
-                if (offsetWidth > (props?.adjustLayoutProps?.minOffsetWidth || 400) && containerRef.current.offsetWidth < (props?.adjustLayoutProps?.maxOffsetWidth || 640)) {
+                if (offsetWidth > (props?.adjustLayoutProps?.minOffsetWidth ?? 400) && containerRef.current.offsetWidth < (props?.adjustLayoutProps?.maxOffsetWidth ?? 640)) {
                     shouldMode = 'horizontal';
                 }
-                if (offsetWidth > (props?.adjustLayoutProps?.minOffsetWidth || 400) && window.innerWidth < (props?.adjustLayoutProps?.maxWindowWidth || 768)) {
+                if (offsetWidth > (props?.adjustLayoutProps?.minOffsetWidth ?? 400) && window.innerWidth < (props?.adjustLayoutProps?.maxWindowWidth ?? 768)) {
                     shouldMode = 'horizontal';
                 }
                 setMenuMode(shouldMode);
@@ -251,7 +274,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             return undefined;
         }
         return props?.menuProps?.items.map(item => {
-            const titleDom = !props?.showTabTitle ? undefined : (
+            const titleDom = !props?.tabTitleVisible ? undefined : (
                 <div
                     className={classNames(`${clazzPrefix}-tab-title`, props?.tabTitleClazz)}
                     style={props?.tabTitleStyle}
@@ -277,8 +300,8 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         });
     };
 
-    const omitItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
-    const restProps = props?.menuProps ? omit(props?.menuProps, ['items', 'selectedKey', 'onClick']) : {};
+    const omitMenuItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
+    const restMenuProps = !props?.menuProps ? {} : omit(props?.menuProps, ['items', 'defaultActiveKey', 'onClick']);
     const entryWidthClazz = props?.entryWidth ? css({width: props?.entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
     const omitEntryStyle = props?.entryStyle ? omit(props?.entryStyle, ['width']) : undefined;
 
@@ -293,21 +316,22 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             }}
         >
             <div
-                className={classNames(`${clazzPrefix}-entry`, (props?.entrySelectionBold ? `${clazzPrefix}-entry-bold` : undefined), props?.entryClazz, entryWidthClazz)}
+                className={classNames(`${clazzPrefix}-entry`, (props?.entryVisible ? undefined : `${clazzPrefix}-entry-hidden`), props?.entryClazz, entryWidthClazz)}
                 style={omitEntryStyle}
             >
                 <Menu
-                    items={omitItems}
+                    className={classNames((props?.entryInkBar ? undefined : `${clazzPrefix}-ink-bar-none`), (props?.entrySelectionBold ? `${clazzPrefix}-selection-bold` : undefined))}
+                    items={omitMenuItems}
                     mode={menuMode}
                     multiple={false}
-                    selectedKeys={activeKey ? [activeKey] : []}
+                    defaultSelectedKeys={props?.menuProps?.defaultActiveKey ? [props?.menuProps?.defaultActiveKey] : []}
                     onClick={(menuInfo: MenuInfo) => {
                         setActiveKey(menuInfo?.key);
                         if (typeof props?.menuProps?.onClick === 'function') {
                             props?.menuProps?.onClick(menuInfo);
                         }
                     }}
-                    {...restProps}
+                    {...restMenuProps}
                 />
             </div>
             {buildTabsDom()}
@@ -318,8 +342,10 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
 MenuTabs.defaultProps = {
     entryWidth: '208px',
+    entryInkBar: true,
     entrySelectionBold: true,
-    showTabTitle: true,
+    entryVisible: true,
+    tabTitleVisible: true,
     adjustLayoutProps: {
         adjustOnResize: true,
     }

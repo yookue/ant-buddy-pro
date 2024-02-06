@@ -1,7 +1,7 @@
 # @yookue/ant-buddy-pro
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.txt)
 [![NPM version](https://img.shields.io/npm/v/@yookue/ant-buddy-pro.svg?style=flat)](https://npmjs.org/package/@yookue/ant-buddy-pro)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.txt)
 [![NPM downloads](http://img.shields.io/npm/dm/@yookue/ant-buddy-pro.svg?style=flat)](https://npmjs.org/package/@yookue/ant-buddy-pro)
 [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi)
 

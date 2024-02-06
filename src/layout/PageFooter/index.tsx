@@ -83,6 +83,7 @@ export type HyperlinkProps = {
     style?: React.CSSProperties;
 };
 
+
 export type PageFooterProps = {
     /**
      * @description The CSS class prefix of the component
@@ -185,18 +186,19 @@ export type PageFooterProps = {
     usePresetStyle?: 'default' | 'compact' | false;
 };
 
-const {Footer} = Layout;
-
 
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
+    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix || 'buddy-page-footer');
+    // noinspection JSUnresolvedReference
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-page-footer');
+
     if ((!props?.links || props?.links?.length === 0) && !props?.copyright) {
         return null;
     }
 
     return (
-        <Footer
+        <Layout.Footer
             className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))}
             style={props?.containerStyle}
         >
@@ -212,11 +214,11 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                                         className={classNames(item?.clazz, props?.linkShareClazz)}
                                         href={item?.href}
                                         title={item?.title}
-                                        target={item?.target || '_blank'}
-                                        rel={item?.rel || 'noopener noreferrer'}
+                                        target={item?.target ?? '_blank'}
+                                        rel={item?.rel ?? 'noopener noreferrer'}
                                         style={{
-                                            ...(item?.style || {}),
-                                            ...(props?.linkShareStyle || {}),
+                                            ...(item?.style ?? {}),
+                                            ...(props?.linkShareStyle ?? {}),
                                         }}
                                     >
                                         {item?.content}
@@ -234,7 +236,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                     </div>
                 </If>
             </div>
-        </Footer>
+        </Layout.Footer>
     );
 };
 
