@@ -17,90 +17,46 @@
 
 import React from 'react';
 import {type ThemeType} from '@ant-design/icons-svg/es/types';
+import {type MenuDataItem} from '@ant-design/pro-layout';
 import {StringUtils} from '@yookue/ts-lang-utils';
-import * as icons from '@/type/antd-icons';
-import {allIconClasses} from '@/type/antd-icons';
+import * as iconTypes from '@/type/antd-icons';
 
 
 export abstract class IconUtils {
     /**
-     * Returns the collections that filtered by the given theme types and icon types
+     * Returns the icons that matches the given icon name with theme types and icon types
      *
+     * @param iconName the name of the icon
      * @param themeTypes the theme types to filter, missing means all theme types
      * @param sceneTypes the icon types to filter, missing means all icon types
      *
-     * @return the collections that filtered by the given theme types and icon types
+     * @return the icons that matches the given icon name with theme types and icon types
      */
-    public static getCollections(themeTypes?: ThemeType[], sceneTypes?: icons.SceneType[]): ReadonlyMap<string, React.ComponentType<any>>[] {
-        const result: ReadonlyMap<string, React.ComponentType<any>>[] = [];
+    public static findIcons(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): React.ComponentType<any>[] | undefined {
+        if (StringUtils.isBlank(iconName)) {
+            return undefined;
+        }
         if (!themeTypes) {
-            if (!sceneTypes) {
-                result.push(...icons.outlinedAllIcons);
-                result.push(...icons.filledAllIcons);
-                result.push(...icons.twotoneAllIcons);
-            } else if (sceneTypes?.includes('direction')) {
-                result.push(...icons.directionAllIcons);
-            } else if (sceneTypes?.includes('suggestion')) {
-                result.push(...icons.suggestionAllIcons);
-            } else if (sceneTypes?.includes('editor')) {
-                result.push(...icons.editorAllIcons);
-            } else if (sceneTypes?.includes('data')) {
-                result.push(...icons.dataAllIcons);
-            } else if (sceneTypes?.includes('logo')) {
-                result.push(...icons.logoAllIcons);
-            } else if (sceneTypes?.includes('web')) {
-                result.push(...icons.webAllIcons);
-            }
-        } else if (themeTypes?.includes('outlined')) {
-            if (!sceneTypes) {
-                result.push(...icons.outlinedAllIcons);
-            } else if (sceneTypes?.includes('direction')) {
-                result.push(icons.outlinedDirectionIcons);
-            } else if (sceneTypes?.includes('suggestion')) {
-                result.push(icons.outlinedSuggestionIcons);
-            } else if (sceneTypes?.includes('editor')) {
-                result.push(icons.outlinedEditorIcons);
-            } else if (sceneTypes?.includes('data')) {
-                result.push(icons.outlinedDataIcons);
-            } else if (sceneTypes?.includes('logo')) {
-                result.push(icons.outlinedLogoIcons);
-            } else if (sceneTypes?.includes('web')) {
-                result.push(icons.outlinedWebIcons);
-            }
-        } else if (themeTypes?.includes('filled')) {
-            if (!sceneTypes) {
-                result.push(...icons.filledAllIcons);
-            } else if (sceneTypes?.includes('direction')) {
-                result.push(icons.filledDirectionIcons);
-            } else if (sceneTypes?.includes('suggestion')) {
-                result.push(icons.filledSuggestionIcons);
-            } else if (sceneTypes?.includes('editor')) {
-                result.push(icons.filledEditorIcons);
-            } else if (sceneTypes?.includes('data')) {
-                result.push(icons.filledDataIcons);
-            } else if (sceneTypes?.includes('logo')) {
-                result.push(icons.filledLogoIcons);
-            } else if (sceneTypes?.includes('web')) {
-                result.push(icons.filledWebIcons);
-            }
-        } else if (themeTypes?.includes('twotone')) {
-            if (!sceneTypes) {
-                result.push(...icons.twotoneAllIcons);
-            } else if (sceneTypes?.includes('direction')) {
-                result.push(icons.twotoneDirectionIcons);
-            } else if (sceneTypes?.includes('suggestion')) {
-                result.push(icons.twotoneSuggestionIcons);
-            } else if (sceneTypes?.includes('editor')) {
-                result.push(icons.twotoneEditorIcons);
-            } else if (sceneTypes?.includes('data')) {
-                result.push(icons.twotoneDataIcons);
-            } else if (sceneTypes?.includes('logo')) {
-                result.push(icons.twotoneLogoIcons);
-            } else if (sceneTypes?.includes('web')) {
-                result.push(icons.twotoneWebIcons);
+            if (StringUtils.endsWithIgnoreCase(iconName, 'outlined')) {
+                themeTypes = ['outlined'];
+            } else if (StringUtils.endsWithIgnoreCase(iconName, 'filled')) {
+                themeTypes = ['filled'];
+            } else if (StringUtils.endsWithIgnoreCase(iconName, 'twotone')) {
+                themeTypes = ['twotone'];
             }
         }
-        return result;
+        const result: React.ComponentType<any>[] = [];
+        const camelName = StringUtils.toCamelCase(iconName);
+        const kebabName = StringUtils.toKebabCase(iconName);
+        const collections = this.getIconCollections(themeTypes, sceneTypes);
+        collections.forEach((map) => {
+            map.forEach((value, key) => {
+                if (StringUtils.includesAnyIgnoreCase(key, [iconName, camelName, kebabName])) {
+                    result.push(value);
+                }
+            });
+        });
+        return (result.length === 0) ? undefined : result;
     }
 
     /**
@@ -112,37 +68,128 @@ export abstract class IconUtils {
      *
      * @return the icon that matches the given icon name with theme type and icon type
      */
-    public static getIcon(themeType?: ThemeType, sceneType?: icons.SceneType, iconName?: string): React.ComponentType<any> | undefined {
-        if (!themeType || !sceneType || !iconName) {
+    public static getIcon(iconName?: string, themeType?: ThemeType, sceneType?: iconTypes.SceneType): React.ComponentType<any> | undefined {
+        if (!iconName || !sceneType) {
             return undefined;
         }
-        const map: ReadonlyMap<string, React.ComponentType<any>> = allIconClasses.get([themeType, sceneType]);
+        if (!themeType) {
+            if (StringUtils.endsWithIgnoreCase(iconName, 'outlined')) {
+                themeType = 'outlined';
+            } else if (StringUtils.endsWithIgnoreCase(iconName, 'filled')) {
+                themeType = 'filled';
+            } else if (StringUtils.endsWithIgnoreCase(iconName, 'twotone')) {
+                themeType = 'twotone';
+            }
+        }
+        if (!themeType) {
+            return undefined;
+        }
+        const map = iconTypes.allIconTypes.get([themeType, sceneType]);
         return !map ? undefined : map.get(iconName);
     }
 
     /**
-     * Returns the icons that matches the given icon name with theme types and icon types
+     * Returns the collections that filtered by the given theme types and icon types
      *
-     * @param iconName the name of the icon, can be camel-case or kebab-case
      * @param themeTypes the theme types to filter, missing means all theme types
      * @param sceneTypes the icon types to filter, missing means all icon types
      *
-     * @return the icons that matches the given icon name with theme types and icon types
+     * @return the collections that filtered by the given theme types and icon types
      */
-    public static findIcons(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: icons.SceneType[]): React.ComponentType<any>[] | undefined {
-        if (StringUtils.isBlank(iconName)) {
+    public static getIconCollections(themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): ReadonlyMap<string, React.ComponentType<any>>[] {
+        const result: ReadonlyMap<string, React.ComponentType<any>>[] = [];
+        if (!themeTypes) {
+            if (!sceneTypes) {
+                result.push(...iconTypes.outlinedAllIcons);
+                result.push(...iconTypes.filledAllIcons);
+                result.push(...iconTypes.twotoneAllIcons);
+            } else if (sceneTypes?.includes('direction')) {
+                result.push(...iconTypes.directionAllIcons);
+            } else if (sceneTypes?.includes('suggestion')) {
+                result.push(...iconTypes.suggestionAllIcons);
+            } else if (sceneTypes?.includes('editor')) {
+                result.push(...iconTypes.editorAllIcons);
+            } else if (sceneTypes?.includes('data')) {
+                result.push(...iconTypes.dataAllIcons);
+            } else if (sceneTypes?.includes('logo')) {
+                result.push(...iconTypes.logoAllIcons);
+            } else if (sceneTypes?.includes('web')) {
+                result.push(...iconTypes.webAllIcons);
+            }
+        } else if (themeTypes?.includes('outlined')) {
+            if (!sceneTypes) {
+                result.push(...iconTypes.outlinedAllIcons);
+            } else if (sceneTypes?.includes('direction')) {
+                result.push(iconTypes.outlinedDirectionIcons);
+            } else if (sceneTypes?.includes('suggestion')) {
+                result.push(iconTypes.outlinedSuggestionIcons);
+            } else if (sceneTypes?.includes('editor')) {
+                result.push(iconTypes.outlinedEditorIcons);
+            } else if (sceneTypes?.includes('data')) {
+                result.push(iconTypes.outlinedDataIcons);
+            } else if (sceneTypes?.includes('logo')) {
+                result.push(iconTypes.outlinedLogoIcons);
+            } else if (sceneTypes?.includes('web')) {
+                result.push(iconTypes.outlinedWebIcons);
+            }
+        } else if (themeTypes?.includes('filled')) {
+            if (!sceneTypes) {
+                result.push(...iconTypes.filledAllIcons);
+            } else if (sceneTypes?.includes('direction')) {
+                result.push(iconTypes.filledDirectionIcons);
+            } else if (sceneTypes?.includes('suggestion')) {
+                result.push(iconTypes.filledSuggestionIcons);
+            } else if (sceneTypes?.includes('editor')) {
+                result.push(iconTypes.filledEditorIcons);
+            } else if (sceneTypes?.includes('data')) {
+                result.push(iconTypes.filledDataIcons);
+            } else if (sceneTypes?.includes('logo')) {
+                result.push(iconTypes.filledLogoIcons);
+            } else if (sceneTypes?.includes('web')) {
+                result.push(iconTypes.filledWebIcons);
+            }
+        } else if (themeTypes?.includes('twotone')) {
+            if (!sceneTypes) {
+                result.push(...iconTypes.twotoneAllIcons);
+            } else if (sceneTypes?.includes('direction')) {
+                result.push(iconTypes.twotoneDirectionIcons);
+            } else if (sceneTypes?.includes('suggestion')) {
+                result.push(iconTypes.twotoneSuggestionIcons);
+            } else if (sceneTypes?.includes('editor')) {
+                result.push(iconTypes.twotoneEditorIcons);
+            } else if (sceneTypes?.includes('data')) {
+                result.push(iconTypes.twotoneDataIcons);
+            } else if (sceneTypes?.includes('logo')) {
+                result.push(iconTypes.twotoneLogoIcons);
+            } else if (sceneTypes?.includes('web')) {
+                result.push(iconTypes.twotoneWebIcons);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns the menu items that has been resolved icons from string to component
+     *
+     * @param items the menu items to inspect
+     *
+     * @return the menu items that has been resolved icons from string to component
+     */
+    public static resolveMenuIcons(items?: MenuDataItem[]): MenuDataItem[] | undefined {
+        if (!items || items.length === 0) {
             return undefined;
         }
-        const result: React.ComponentType<any>[] = [];
-        const camelName = StringUtils.toCamelCase(iconName) ;
-        const collections = this.getCollections(themeTypes, sceneTypes);
-        collections.forEach((map) => {
-            map.forEach((value, key) => {
-                if (StringUtils.includesAnyIgnoreCase(key, [iconName, camelName])) {
-                    result.push(value);
+        return items.map(item => {
+            if (typeof item?.icon === 'string') {
+                const icons = this.findIcons(item.icon, undefined, undefined);
+                if (icons) {
+                    item.icon = icons[0];
                 }
-            });
+            }
+            if (item?.children) {
+                item.children = this.resolveMenuIcons(item.children);
+            }
+            return item;
         });
-        return (result.length === 0) ? undefined : result;
     }
 }

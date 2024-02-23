@@ -34,7 +34,7 @@ import classNames from 'classnames';
 import {Scrollbars} from 'rc-scrollbars';
 import {type DefaultOptionType} from 'rc-select/es/select';
 import omit from 'rc-util/es/omit';
-import {allIconClasses, type SceneType} from '@/type/antd-icons';
+import {allIconTypes, type SceneType} from '@/type/antd-icons';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {ElementUtils} from '@/util/ElementUtils';
 import {PropsUtils} from '@/util/PropsUtils';
@@ -285,7 +285,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         const result: any[] = [];
         ['outlined', 'filled', 'twotone'].filter(themeType => props?.themeTypes?.includes(themeType as ThemeType)).forEach(themeType => {
             ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(sceneType => props?.sceneTypes?.includes(sceneType as SceneType)).forEach(sceneType => {
-                const collection: ReadonlyMap<string, React.ComponentType<any>> = allIconClasses.get([themeType, sceneType]);
+                const collection = allIconTypes.get([themeType, sceneType]);
                 if (!collection) {
                     return;
                 }
@@ -408,7 +408,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const buildIconOptions = (themeType: ThemeType, sceneType: SceneType) => {
-        const classIcons: ReadonlyMap<string, React.ComponentType<any>> = allIconClasses.get([themeType, sceneType]);
+        const classIcons = allIconTypes.get([themeType, sceneType]);
         if (!classIcons || (StringUtils.isNotBlank(searchWord) && !Array.from(classIcons.keys()).find(key => StringUtils.includesIgnoreCase(key, searchWord)))) {
             return undefined;
         }

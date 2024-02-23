@@ -900,7 +900,7 @@ export const logoAllIcons: ReadonlyMap<string, React.ComponentType<any>>[] = [ou
 export const webAllIcons: ReadonlyMap<string, React.ComponentType<any>>[] = [outlinedWebIcons, filledWebIcons, twotoneWebIcons];
 
 
-export const allIconClasses = ReadonlyMultiKeyMap.of([
+export const allIconTypes: ReadonlyMultiKeyMap<string, ReadonlyMap<string, React.ComponentType<any>>> = ReadonlyMultiKeyMap.of([
     [['outlined', 'direction'], outlinedDirectionIcons],
     [['outlined', 'suggestion'], outlinedSuggestionIcons],
     [['outlined', 'editor'], outlinedEditorIcons],
