@@ -24,6 +24,20 @@ import * as iconTypes from '@/type/antd-icons';
 
 export abstract class IconUtils {
     /**
+     * Returns the icon that first matches the given icon name with theme types and icon types
+     *
+     * @param iconName the name of the icon
+     * @param themeTypes the theme types to filter, missing means all theme types
+     * @param sceneTypes the icon types to filter, missing means all icon types
+     *
+     * @return the icon that first matches the given icon name with theme types and icon types
+     */
+    public static findIcon(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): React.ComponentType<any> | undefined {
+        const icons = this.findIcons(iconName, themeTypes, sceneTypes);
+        return !icons ? undefined : (Array.isArray(icons) ? icons[0] : icons);
+    }
+
+    /**
      * Returns the icons that matches the given icon name with theme types and icon types
      *
      * @param iconName the name of the icon
@@ -181,10 +195,7 @@ export abstract class IconUtils {
         }
         return items.map(item => {
             if (typeof item?.icon === 'string') {
-                const icons = this.findIcons(item.icon, undefined, undefined);
-                if (icons) {
-                    item.icon = icons[0];
-                }
+                item.icon = this.findIcon(item.icon as string, undefined, undefined);
             }
             if (item?.children) {
                 item.children = this.resolveMenuIcons(item.children);
