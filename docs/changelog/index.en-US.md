@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.38** [2024-02-28]
+    - Add 'style/color'
+
   - **v0.1.35** [2024-02-06]
     - Add 'form/IconSelect'
     - Add 'util/ElementUtils'

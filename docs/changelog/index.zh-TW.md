@@ -11,6 +11,9 @@ nav:
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v0.1.38** [2024-02-28]
+    - 增加 'style/color'
+
   - **v0.1.35** [2024-02-06]
     - 增加 'form/IconSelect'
     - 增加 'util/ElementUtils'

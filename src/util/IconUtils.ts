@@ -31,6 +31,9 @@ export abstract class IconUtils {
      * @param sceneTypes the icon types to filter, missing means all icon types
      *
      * @return the icon that first matches the given icon name with theme types and icon types
+     *
+     * @example
+     * React.createElement(IconUtils.findIcon('SettingOutlined'));
      */
     public static findIcon(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): React.ComponentType<any> | undefined {
         const icons = this.findIcons(iconName, themeTypes, sceneTypes);
@@ -65,6 +68,10 @@ export abstract class IconUtils {
         const collections = this.getIconCollections(themeTypes, sceneTypes);
         collections.forEach((map) => {
             map.forEach((value, key) => {
+                if (StringUtils.equalsAnyIgnoreCase(key, [iconName, camelName, kebabName])) {
+                    result.unshift(value);
+                    return;
+                }
                 if (StringUtils.includesAnyIgnoreCase(key, [iconName, camelName, kebabName])) {
                     result.push(value);
                 }
@@ -195,7 +202,10 @@ export abstract class IconUtils {
         }
         return items.map(item => {
             if (typeof item?.icon === 'string') {
-                item.icon = this.findIcon(item.icon as string, undefined, undefined);
+                const icon = this.findIcon(item.icon as string, undefined, undefined);
+                if (icon) {
+                    item.icon = React.createElement(icon);
+                }
             }
             if (item?.children) {
                 item.children = this.resolveMenuIcons(item.children);
