@@ -38,9 +38,6 @@ export default () => {
             <ExactInput
                 name='foo'
                 placeholder='请输入此项'
-                tooltipProps={{
-                    title: '全字匹配',
-                }}
                 fieldProps={{
                     addonBefore: '前缀',
                 }}
@@ -61,9 +58,6 @@ export default () => {
         <ExactInput
             name='bar'
             placeholder='请输入此项'
-            tooltipProps={{
-                title: '全字匹配',
-            }}
             useTooltip={true}
             proField={false}
         />

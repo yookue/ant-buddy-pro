@@ -37,9 +37,6 @@ export default () => {
             <ExactInput
                 name='foo'
                 placeholder='Please input this field'
-                tooltipProps={{
-                    title: 'Match Exactly',
-                }}
                 fieldProps={{
                     addonBefore: 'Prefix',
                 }}
@@ -60,9 +57,6 @@ export default () => {
         <ExactInput
             name='bar'
             placeholder='Please input this field'
-            tooltipProps={{
-                title: 'Match Exactly',
-            }}
             useTooltip={true}
             proField={false}
         />

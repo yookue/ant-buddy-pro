@@ -19,10 +19,12 @@ import React from 'react';
 import {ConfigProvider, Input, Checkbox, Space, Tooltip, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
+import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {PropsUtils} from '@/util/PropsUtils';
+import {intlLocales} from './intl-locales';
 import './index.less';
 
 
@@ -122,6 +124,8 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-exact-input');
 
+    const intlType = useIntl();
+
     const omitCheckProps = !props?.checkProps ? {} : omit(props?.checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']);
 
     const generateCheckName = () => {
@@ -144,6 +148,23 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         return undefined;
     };
 
+    const buildTooltipDom = (actionDom: React.ReactNode) => {
+        if (props?.useTooltip) {
+            const title = props?.tooltipProps?.title || intlLocales.get([intlType.locale, 'matchExactly']) || intlLocales.get(['en_US', 'matchExactly']);
+            const restProps = !props?.tooltipProps ? {} : omit(props.tooltipProps, ['title']);
+            return (
+                <Tooltip title={title} {...restProps}>
+                    {actionDom}
+                </Tooltip>
+            );
+        }
+        return (
+            <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : (intlLocales.get([intlType.locale, 'matchExactly']) || intlLocales.get(['en_US', 'matchExactly']))}>
+                {actionDom}
+            </span>
+        );
+    };
+
     const buildAddonDom = (before: boolean) => {
         if (((before && props?.addonPos !== 'before') || (!before && props?.addonPos !== 'after')) && ((before && !props?.fieldProps?.addonBefore) || (!before && !props?.fieldProps?.addonAfter))) {
             return undefined;
@@ -159,16 +180,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 {props?.checkProps?.children}
             </Checkbox>
         );
-
-        const tooltipDom = props?.useTooltip ? (
-            <Tooltip {...props?.tooltipProps}>
-                {actionDom}
-            </Tooltip>
-        ) : (
-            <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : undefined}>
-                {actionDom}
-            </span>
-        );
+        const tooltipDom = buildTooltipDom(actionDom);
 
         const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after'))].filter(object => !!object).length;
         if (nodeCount === 0) {
@@ -183,14 +195,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                     {props?.fieldProps?.addonAfter}
                 </If>
                 <If condition={(before && props?.addonPos === 'before') || (!before && props?.addonPos === 'after')} validation={false}>
-                    <If condition={props?.tooltipProps} validation={false}>
-                        <If.Then>
-                            {tooltipDom}
-                        </If.Then>
-                        <If.Else>
-                            {actionDom}
-                        </If.Else>
-                    </If>
+                    {tooltipDom}
                 </If>
             </>
         );
