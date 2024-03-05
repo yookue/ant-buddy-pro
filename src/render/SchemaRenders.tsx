@@ -16,18 +16,14 @@
 
 
 import React from 'react';
-import omit from 'rc-util/es/omit';
 import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
 import {LocaleInput, type LocaleInputProps} from '@/form/LocaleInput';
 
 
-export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
-export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
-export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
-
-
-// noinspection DuplicatedCode
+export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
+export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 
 
 /**
@@ -49,14 +45,11 @@ export abstract class SchemaRenders {
         if (!schema || schema?.ignoreFormItem) {
             return undefined;
         }
-        const fieldName = !schema?.dataIndex ? undefined : (Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex);
-        const fieldValue = schema?.fieldProps?.value ?? schema?.initialValue;
-        const valueProps = !fieldValue ? {} : {value: fieldValue};
-        const fieldProps = !schema?.fieldProps ? {...valueProps} : {...valueProps, ...omit(schema.fieldProps, ['value'])};
+        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
         return (
             <DivideSelect
                 name={fieldName}
-                fieldProps={{...fieldProps}}
+                fieldProps={schema?.fieldProps}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
@@ -80,14 +73,11 @@ export abstract class SchemaRenders {
         if (!schema || schema?.ignoreFormItem) {
             return undefined;
         }
-        const fieldName = !schema?.dataIndex ? undefined : (Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex);
-        const fieldValue = schema?.fieldProps?.value ?? schema?.initialValue;
-        const valueProps = !fieldValue ? {} : {value: fieldValue};
-        const fieldProps = !schema?.fieldProps ? {...valueProps} : {...valueProps, ...omit(schema.fieldProps, ['value'])};
+        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
         return (
             <ExactInput
                 name={fieldName}
-                fieldProps={{...fieldProps}}
+                fieldProps={schema?.fieldProps}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
@@ -108,14 +98,11 @@ export abstract class SchemaRenders {
         if (!schema || schema?.ignoreFormItem) {
             return undefined;
         }
-        const fieldName = !schema?.dataIndex ? undefined : (Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex);
-        const fieldValue = schema?.fieldProps?.value ?? schema?.initialValue;
-        const valueProps = !fieldValue ? {} : {value: fieldValue};
-        const fieldProps = !schema?.fieldProps ? {...valueProps} : {...valueProps, ...omit(schema.fieldProps, ['value'])};
+        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
         return (
             <LocaleInput
                 name={fieldName}
-                fieldProps={{...fieldProps}}
+                fieldProps={schema?.fieldProps}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
