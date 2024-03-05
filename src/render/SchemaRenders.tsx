@@ -16,14 +16,15 @@
 
 
 import React from 'react';
+import omit from 'rc-util/es/omit';
 import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
 import {LocaleInput, type LocaleInputProps} from '@/form/LocaleInput';
 
 
-export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
-export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
-export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
+export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 
 
 /**
@@ -49,7 +50,10 @@ export abstract class SchemaRenders {
         return (
             <DivideSelect
                 name={fieldName}
-                fieldProps={schema?.fieldProps}
+                fieldProps={{
+                    defaultValue: schema?.initialValue,
+                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                }}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
@@ -77,7 +81,10 @@ export abstract class SchemaRenders {
         return (
             <ExactInput
                 name={fieldName}
-                fieldProps={schema?.fieldProps}
+                fieldProps={{
+                    defaultValue: schema?.initialValue,
+                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                }}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
@@ -102,7 +109,10 @@ export abstract class SchemaRenders {
         return (
             <LocaleInput
                 name={fieldName}
-                fieldProps={schema?.fieldProps}
+                fieldProps={{
+                    defaultValue: schema?.initialValue,
+                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                }}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
