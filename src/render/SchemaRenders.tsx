@@ -17,14 +17,16 @@
 
 import React from 'react';
 import omit from 'rc-util/es/omit';
-import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
 import {LocaleInput, type LocaleInputProps} from '@/form/LocaleInput';
+import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
+import {IconSelect, type IconSelectProps} from '@/form/IconSelect';
 
 
-export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
 export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
+export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
 
 
 /**
@@ -34,37 +36,6 @@ export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'pl
  * @see "@ant-design/pro-utils/es/typing.d.ts"
  */
 export abstract class SchemaRenders {
-    /**
-     * Returns the rendered `DivideSelect` DOM for the given schema form column
-     *
-     * @param schema the column item of `ProSchema` to render
-     * @param props the `DivideSelectProps` to inspect
-     *
-     * @return the rendered `DivideSelect` DOM for the given schema form column
-     */
-    public static renderDivideSelect = (schema: any, props?: OmitDivideSelectProps): React.ReactNode => {
-        if (!schema || schema?.ignoreFormItem) {
-            return undefined;
-        }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        return (
-            <DivideSelect
-                name={fieldName}
-                fieldProps={{
-                    defaultValue: schema?.initialValue,
-                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
-                }}
-                proFieldProps={schema?.proFieldProps}
-                tooltip={schema?.tooltip}
-                dependencies={schema?.dependencies}
-                debounceTime={schema?.debounceTime}
-                params={schema?.params}
-                request={schema?.request}
-                {...props}
-            />
-        );
-    }
-
     /**
      * Returns the rendered `ExactInput` DOM for the given schema form column
      *
@@ -82,7 +53,7 @@ export abstract class SchemaRenders {
             <ExactInput
                 name={fieldName}
                 fieldProps={{
-                    defaultValue: schema?.initialValue,
+                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
                     ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
                 }}
                 proFieldProps={schema?.proFieldProps}
@@ -110,12 +81,74 @@ export abstract class SchemaRenders {
             <LocaleInput
                 name={fieldName}
                 fieldProps={{
-                    defaultValue: schema?.initialValue,
+                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
                     ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
                 }}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
+                {...props}
+            />
+        );
+    }
+
+    /**
+     * Returns the rendered `DivideSelect` DOM for the given schema form column
+     *
+     * @param schema the column item of `ProSchema` to render
+     * @param props the `DivideSelectProps` to inspect
+     *
+     * @return the rendered `DivideSelect` DOM for the given schema form column
+     */
+    public static renderDivideSelect = (schema: any, props?: OmitDivideSelectProps): React.ReactNode => {
+        if (!schema || schema?.ignoreFormItem) {
+            return undefined;
+        }
+        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
+        return (
+            <DivideSelect
+                name={fieldName}
+                fieldProps={{
+                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
+                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                }}
+                proFieldProps={schema?.proFieldProps}
+                tooltip={schema?.tooltip}
+                dependencies={schema?.dependencies}
+                debounceTime={schema?.debounceTime}
+                params={schema?.params}
+                request={schema?.request}
+                {...props}
+            />
+        );
+    }
+
+    /**
+     * Returns the rendered `IconSelect` DOM for the given schema form column
+     *
+     * @param schema the column item of `ProSchema` to render
+     * @param props the `IconSelectProps` to inspect
+     *
+     * @return the rendered `IconSelect` DOM for the given schema form column
+     */
+    public static renderIconSelect = (schema: any, props?: OmitIconSelectProps): React.ReactNode => {
+        if (!schema || schema?.ignoreFormItem) {
+            return undefined;
+        }
+        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
+        return (
+            <IconSelect
+                name={fieldName}
+                fieldProps={{
+                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
+                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                }}
+                proFieldProps={schema?.proFieldProps}
+                tooltip={schema?.tooltip}
+                dependencies={schema?.dependencies}
+                debounceTime={schema?.debounceTime}
+                params={schema?.params}
+                request={schema?.request}
                 {...props}
             />
         );
