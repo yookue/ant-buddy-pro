@@ -16,9 +16,18 @@
 
 
 import React from 'react';
-import {DivideSelect} from '@/form/DivideSelect';
-import {ExactInput} from '@/form/ExactInput';
-import {LocaleInput} from '@/form/LocaleInput';
+import omit from 'rc-util/es/omit';
+import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
+import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
+import {LocaleInput, type LocaleInputProps} from '@/form/LocaleInput';
+
+
+export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
+export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'placeholder' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+
+
+// noinspection DuplicatedCode
 
 
 /**
@@ -32,28 +41,29 @@ export abstract class SchemaRenders {
      * Returns the rendered `DivideSelect` DOM for the given schema form column
      *
      * @param schema the column item of `ProSchema` to render
-     * @param config the column item config
-     * @param form the `FormInstance` to inspect
+     * @param props the `DivideSelectProps` to inspect
      *
      * @return the rendered `DivideSelect` DOM for the given schema form column
      */
-    public static renderDivideSelect = (schema: any, config?: any, form?: any): React.ReactNode => {
-        if (!schema || schema?.hideInForm || schema?.ignoreFormItem) {
+    public static renderDivideSelect = (schema: any, props?: OmitDivideSelectProps): React.ReactNode => {
+        if (!schema || schema?.ignoreFormItem) {
             return undefined;
         }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema?.dataIndex[0] : schema?.dataIndex;
-        const fieldValue = form ? (form?.getFieldValue(fieldName) || schema?.initialValue) : schema?.initialValue;
+        const fieldName = !schema?.dataIndex ? undefined : (Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex);
+        const fieldValue = schema?.fieldProps?.value ?? schema?.initialValue;
+        const valueProps = !fieldValue ? {} : {value: fieldValue};
+        const fieldProps = !schema?.fieldProps ? {...valueProps} : {...valueProps, ...omit(schema.fieldProps, ['value'])};
         return (
             <DivideSelect
                 name={fieldName}
-                value={fieldValue}
-                {...schema?.fieldProps}
+                fieldProps={{...fieldProps}}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
                 debounceTime={schema?.debounceTime}
                 params={schema?.params}
                 request={schema?.request}
+                {...props}
             />
         );
     }
@@ -62,28 +72,26 @@ export abstract class SchemaRenders {
      * Returns the rendered `ExactInput` DOM for the given schema form column
      *
      * @param schema the column item of `ProSchema` to render
-     * @param config the column item config
-     * @param form the `FormInstance` to inspect
+     * @param props the `ExactInputProps` to inspect
      *
      * @return the rendered `ExactInput` DOM for the given schema form column
      */
-    public static renderExactInput = (schema: any, config?: any, form?: any): React.ReactNode => {
-        if (!schema || schema?.hideInForm || schema?.ignoreFormItem) {
+    public static renderExactInput = (schema: any, props?: OmitExactInputProps): React.ReactNode => {
+        if (!schema || schema?.ignoreFormItem) {
             return undefined;
         }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema?.dataIndex[0] : schema?.dataIndex;
-        const fieldValue = form ? (form?.getFieldValue(fieldName) || schema?.initialValue) : schema?.initialValue;
+        const fieldName = !schema?.dataIndex ? undefined : (Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex);
+        const fieldValue = schema?.fieldProps?.value ?? schema?.initialValue;
+        const valueProps = !fieldValue ? {} : {value: fieldValue};
+        const fieldProps = !schema?.fieldProps ? {...valueProps} : {...valueProps, ...omit(schema.fieldProps, ['value'])};
         return (
             <ExactInput
                 name={fieldName}
-                value={fieldValue}
-                {...schema?.fieldProps}
+                fieldProps={{...fieldProps}}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
-                debounceTime={schema?.debounceTime}
-                params={schema?.params}
-                request={schema?.request}
+                {...props}
             />
         );
     }
@@ -92,28 +100,26 @@ export abstract class SchemaRenders {
      * Returns the rendered `LocaleInput` DOM for the given schema form column
      *
      * @param schema the column item of `ProSchema` to render
-     * @param config the column item config
-     * @param form the `FormInstance` to inspect
+     * @param props the `LocaleInputProps` to inspect
      *
      * @return the rendered `LocaleInput` DOM for the given schema form column
      */
-    public static renderLocaleInput = (schema: any, config?: any, form?: any): React.ReactNode => {
-        if (!schema || schema?.hideInForm || schema?.ignoreFormItem) {
+    public static renderLocaleInput = (schema: any, props?: OmitLocaleInputProps): React.ReactNode => {
+        if (!schema || schema?.ignoreFormItem) {
             return undefined;
         }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema?.dataIndex[0] : schema?.dataIndex;
-        const fieldValue = form ? (form?.getFieldValue(fieldName) || schema?.initialValue) : schema?.initialValue;
+        const fieldName = !schema?.dataIndex ? undefined : (Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex);
+        const fieldValue = schema?.fieldProps?.value ?? schema?.initialValue;
+        const valueProps = !fieldValue ? {} : {value: fieldValue};
+        const fieldProps = !schema?.fieldProps ? {...valueProps} : {...valueProps, ...omit(schema.fieldProps, ['value'])};
         return (
             <LocaleInput
                 name={fieldName}
-                value={fieldValue}
-                {...schema?.fieldProps}
+                fieldProps={{...fieldProps}}
                 proFieldProps={schema?.proFieldProps}
                 tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
-                debounceTime={schema?.debounceTime}
-                params={schema?.params}
-                request={schema?.request}
+                {...props}
             />
         );
     }
