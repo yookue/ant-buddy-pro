@@ -25,8 +25,8 @@ import {IconSelect, type IconSelectProps} from '@/form/IconSelect';
 
 export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
-export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
-export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request'>;
+export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
+export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
 
 
 /**
@@ -49,6 +49,10 @@ export abstract class SchemaRenders {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
+        const restProps = {
+            proField: props?.proField ?? false,
+            ...(!props ? {} : omit(props, ['proField'])),
+        };
         return (
             <ExactInput
                 name={fieldName}
@@ -57,9 +61,8 @@ export abstract class SchemaRenders {
                     ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
                 }}
                 proFieldProps={schema?.proFieldProps}
-                tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
-                {...props}
+                {...restProps}
             />
         );
     }
@@ -77,6 +80,10 @@ export abstract class SchemaRenders {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
+        const restProps = {
+            proField: props?.proField ?? false,
+            ...(!props ? {} : omit(props, ['proField'])),
+        };
         return (
             <LocaleInput
                 name={fieldName}
@@ -85,9 +92,8 @@ export abstract class SchemaRenders {
                     ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
                 }}
                 proFieldProps={schema?.proFieldProps}
-                tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
-                {...props}
+                {...restProps}
             />
         );
     }
@@ -105,6 +111,10 @@ export abstract class SchemaRenders {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
+        const restProps = {
+            proField: props?.proField ?? false,
+            ...(!props ? {} : omit(props, ['proField'])),
+        };
         return (
             <DivideSelect
                 name={fieldName}
@@ -113,12 +123,12 @@ export abstract class SchemaRenders {
                     ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
                 }}
                 proFieldProps={schema?.proFieldProps}
-                tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
                 debounceTime={schema?.debounceTime}
                 params={schema?.params}
                 request={schema?.request}
-                {...props}
+                valueEnum={schema?.valueEnum}
+                {...restProps}
             />
         );
     }
@@ -136,6 +146,10 @@ export abstract class SchemaRenders {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
+        const restProps = {
+            proField: props?.proField ?? false,
+            ...(!props ? {} : omit(props, ['proField'])),
+        };
         return (
             <IconSelect
                 name={fieldName}
@@ -144,12 +158,12 @@ export abstract class SchemaRenders {
                     ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
                 }}
                 proFieldProps={schema?.proFieldProps}
-                tooltip={schema?.tooltip}
                 dependencies={schema?.dependencies}
                 debounceTime={schema?.debounceTime}
                 params={schema?.params}
                 request={schema?.request}
-                {...props}
+                valueEnum={schema?.valueEnum}
+                {...restProps}
             />
         );
     }
