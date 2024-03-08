@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.47** [2024-03-08]
+    - Add 'layout/CodePreview'
+
   - **v0.1.38** [2024-02-28]
     - Add 'style/color'
 

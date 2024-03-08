@@ -24,6 +24,7 @@ export {IconSelect, type IconSelectProps} from './form/IconSelect';
 export {LocaleInput, type LocaleInputProps} from './form/LocaleInput';
 export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';
 export {CardTabs, type CardTabsProps} from './layout/CardTabs';
+export {CodePreview, type CodePreviewProps} from './layout/CodePreview';
 export {FoldSection, type FoldSectionProps} from './layout/FoldSection';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
 export {MenuTabs, type MenuTabsProps} from './layout/MenuTabs';

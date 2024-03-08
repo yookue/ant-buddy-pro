@@ -22,7 +22,7 @@ import {css} from '@emotion/css';
 import classNames from 'classnames';
 
 
-export type WrapSpaceProps = {
+export type WrapSpaceProps = React.PropsWithChildren<{
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -52,10 +52,10 @@ export type WrapSpaceProps = {
      * @default 'small'
      */
     size?: SpaceSize | [SpaceSize, SpaceSize];
-};
+}>;
 
 
-export const WrapSpace: React.FC<React.PropsWithChildren<WrapSpaceProps>> = (props?: React.PropsWithChildren<WrapSpaceProps>) => {
+export const WrapSpace: React.FC<WrapSpaceProps> = (props?: WrapSpaceProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
@@ -91,7 +91,7 @@ export const WrapSpace: React.FC<React.PropsWithChildren<WrapSpaceProps>> = (pro
     );
 
     const paddingClazz = css({
-        padding: `${verticalSize}px ${horizontalSize}px ${verticalSize}px ${horizontalSize}px`,
+        padding: `${verticalSize}px ${horizontalSize}px`,
     });
 
     return (
