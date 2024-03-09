@@ -54,21 +54,21 @@ export type FullScreenProps = {
      * @description.zh-TW 要切換全屏模式的 DOM 元素
      * @default document.documentElement
      */
-    triggerFor?: HTMLElement,
+    triggerFor?: HTMLElement;
 
     /**
      * @description The hint of entering fullscreen mode
      * @description.zh-CN 进入全屏模式的提示
      * @description.zh-TW 進入全屏模式的提示
      */
-    enterHint?: string,
+    enterHint?: string;
 
     /**
      * @description The hint of exiting fullscreen mode
      * @description.zh-CN 退出全屏模式的提示
      * @description.zh-TW 退出全屏模式的提示
      */
-    exitHint?: string,
+    exitHint?: string;
 
     /**
      * @description Whether to use tooltip instead of raw title
@@ -83,7 +83,7 @@ export type FullScreenProps = {
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
-    tooltipProps?: Omit<TooltipProps, 'title'>,
+    tooltipProps?: Omit<TooltipProps, 'title'>;
 
     /**
      * @description Whether to wrap with a div or span element
@@ -98,7 +98,7 @@ export type FullScreenProps = {
      * @description.zh-CN 包裹的 div 或 span 的属性
      * @description.zh-TW 包裹的 div 或 span 的屬性
      */
-    wrapperProps?: WrapperProps,
+    wrapperProps?: WrapperProps;
 };
 
 

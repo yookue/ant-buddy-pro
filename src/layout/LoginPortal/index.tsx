@@ -42,105 +42,105 @@ export type LoginPortalProps = {
      * @description.zh-CN 容器 div 的 CSS 样式
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
-    containerStyle?: React.CSSProperties,
+    containerStyle?: React.CSSProperties;
 
     /**
      * @description The top element of the container div
      * @description.zh-CN 容器 div 的顶部内容
      * @description.zh-TW 容器 div 的頂部内容
      */
-    containerHeader?: React.ReactNode,
+    containerHeader?: React.ReactNode;
 
     /**
      * @description The bottom element of the container div
      * @description.zh-CN 容器 div 的底部内容
      * @description.zh-TW 容器 div 的底部内容
      */
-    containerFooter?: React.ReactNode,
+    containerFooter?: React.ReactNode;
 
     /**
      * @description The CSS class name of the vessel div (container excludes containerHeader and containerFooter)
      * @description.zh-CN 二级容器 div 的 CSS 类名(容器 div 除去顶部节点和底部节点)
      * @description.zh-TW 二級容器 div 的 CSS 類名(容器 div 除去頂部節點和底部節點)
      */
-    vesselClazz?: string,
+    vesselClazz?: string;
 
     /**
      * @description The CSS style of the vessel div (container excludes containerHeader and containerFooter)
      * @description.zh-CN 二级容器 div 的 CSS 样式(容器 div 除去顶部节点和底部节点)
      * @description.zh-TW 二級容器 div 的 CSS 樣式(容器 div 除去頂部節點和底部節點)
      */
-    vesselStyle?: React.CSSProperties,
+    vesselStyle?: React.CSSProperties;
 
     /**
      * @description The CSS class name of the introduction div (left area)
      * @description.zh-CN 左侧宣传区的 CSS 类名
      * @description.zh-TW 左側宣傳區的 CSS 類名
      */
-    introductionClazz?: string,
+    introductionClazz?: string;
 
     /**
      * @description The CSS style of the introduction div (left area)
      * @description.zh-CN 左侧宣传区的 CSS 样式
      * @description.zh-TW 左側宣傳區的 CSS 樣式
      */
-    introductionStyle?: React.CSSProperties,
+    introductionStyle?: React.CSSProperties;
 
     /**
      * @description The content of the introduction div (left area)
      * @description.zh-CN 左侧宣传区的内容
      * @description.zh-TW 左側宣傳區的内容
      */
-    introductionContent?: React.ReactNode,
+    introductionContent?: React.ReactNode;
 
     /**
      * @description The CSS class name of the interaction div (right area)
      * @description.zh-CN 右侧交互区的 CSS 类名
      * @description.zh-TW 右側交互區的 CSS 類名
      */
-    interactionClazz?: string,
+    interactionClazz?: string;
 
     /**
      * @description The CSS style of the interaction div (right area)
      * @description.zh-CN 右侧交互区的 CSS 样式
      * @description.zh-TW 右側交互區的 CSS 樣式
      */
-    interactionStyle?: React.CSSProperties,
+    interactionStyle?: React.CSSProperties;
 
     /**
      * @description The top element of the interaction div (right area), typically a language switch
      * @description.zh-CN 右侧交互区的顶部内容，通常是切换语言选项
      * @description.zh-TW 右側交互區的頂部内容，通常是切換語言選項
      */
-    interactionHeader?: React.ReactNode,
+    interactionHeader?: React.ReactNode;
 
     /**
      * @description The main element of the interaction div (right area), typically a login form
      * @description.zh-CN 右侧交互区的主要内容，通常是登录表单
      * @description.zh-TW 右側交互區的主要内容，通常是登錄表單
      */
-    interactionContent?: React.ReactNode,
+    interactionContent?: React.ReactNode;
 
     /**
      * @description The bottom element of the interaction div (right area), typically a copyright declaration
      * @description.zh-CN 右侧交互区的底部内容，通常是版权声明
      * @description.zh-TW 右側交互區的底部内容，通常是版權聲明
      */
-    interactionFooter?: React.ReactNode,
+    interactionFooter?: React.ReactNode;
 
     /**
      * @description The CSS class name of the interchange div (right area main content)
      * @description.zh-CN 右侧交互区主要内容的 CSS 类名
      * @description.zh-TW 右側交互區主要内容的 CSS 類名
      */
-    interchangeClazz?: string,
+    interchangeClazz?: string;
 
     /**
      * @description The CSS style of the interchange div (right area main content)
      * @description.zh-CN 右侧交互区主要内容的 CSS 样式
      * @description.zh-TW 右側交互區主要内容的 CSS 樣式
      */
-    interchangeStyle?: React.CSSProperties,
+    interchangeStyle?: React.CSSProperties;
 };
 
 

@@ -47,21 +47,21 @@ export type PopupConfirmProps = {
      * @description.zh-CN 当确认设置某个语言项为默认值时的消息文本
      * @description.zh-TW 當確認設置某個語言項為默認值時的消息文本
      */
-    message?: string,
+    message?: string;
 
     /**
      * @description The ok button for confirming a locale item sets as default one
      * @description.zh-CN 当确认设置某个语言项为默认值时的确认按钮文本
      * @description.zh-TW 當確認設置某個語言項為默認值時的確認按鈕文本
      */
-    ok?: string,
+    ok?: string;
 
     /**
      * @description The cancel button for confirming a locale item sets as default one
      * @description.zh-CN 当确认设置某个语言项为默认值时的取消按钮文本
      * @description.zh-TW 當確認設置某個語言項為默認值時的取消按鈕文本
      */
-    cancel?: string,
+    cancel?: string;
 };
 
 
@@ -71,7 +71,7 @@ export type PopupInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-CN 语言标签
      * @description.zh-TW 語言標簽
      */
-    tag: string,
+    tag: string;
 };
 
 
@@ -81,14 +81,14 @@ export type PopupShareProps = {
      * @description.zh-CN 语言输入项的最大长度
      * @description.zh-TW 語言輸入項的最大長度
      */
-    maxLength?: number,
+    maxLength?: number;
 
     /**
      * @description The placeholder of locales
      * @description.zh-CN 语言输入项的占位符
      * @description.zh-TW 語言輸入項的佔位符
      */
-    placeholder?: string,
+    placeholder?: string;
 
     /**
      * @description The validation rules for locales

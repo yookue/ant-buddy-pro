@@ -48,70 +48,70 @@ export type IntlLocaleProps = {
      * @description.zh-CN 搜索框的占位符
      * @description.zh-TW 搜索框的占位符
      */
-    searchBox?: string,
+    searchBox?: string;
 
     /**
      * @description The display name of 'Outlined' theme type
      * @description.zh-CN 线框风格的显示名称
      * @description.zh-TW 線框風格的顯示名稱
      */
-    outlinedTheme?: string,
+    outlinedTheme?: string;
 
     /**
      * @description The display name of 'Filled' theme type
      * @description.zh-CN 实底风格的显示名称
      * @description.zh-TW 實底風格的顯示名稱
      */
-    filledTheme?: string,
+    filledTheme?: string;
 
     /**
      * @description The display name of 'TwoTone' theme type
      * @description.zh-CN 双色风格的显示名称
      * @description.zh-TW 雙色風格的顯示名稱
      */
-    twotoneTheme?: string,
+    twotoneTheme?: string;
 
     /**
      * @description The display name of 'Direction' scene type
      * @description.zh-CN 方向场景的显示名称
      * @description.zh-TW 方向場景的顯示名稱
      */
-    directionScene?: string,
+    directionScene?: string;
 
     /**
      * @description The display name of 'Suggestion' scene type
      * @description.zh-CN 建议场景的显示名称
      * @description.zh-TW 建議場景的顯示名稱
      */
-    suggestionScene?: string,
+    suggestionScene?: string;
 
     /**
      * @description The display name of 'Editor' scene type
      * @description.zh-CN 编辑场景的显示名称
      * @description.zh-TW 編輯場景的顯示名稱
      */
-    editorScene?: string,
+    editorScene?: string;
 
     /**
      * @description The display name of 'Data' scene type
      * @description.zh-CN 数据场景的显示名称
      * @description.zh-TW 數據場景的顯示名稱
      */
-    dataScene?: string,
+    dataScene?: string;
 
     /**
      * @description The display name of 'Logo' scene type
      * @description.zh-CN 品牌场景的显示名称
      * @description.zh-TW 品牌場景的顯示名稱
      */
-    logoScene?: string,
+    logoScene?: string;
 
     /**
      * @description The display name of 'Web' scene type
      * @description.zh-CN 网站场景的显示名称
      * @description.zh-TW 網站場景的顯示名稱
      */
-    webScene?: string,
+    webScene?: string;
 };
 
 
