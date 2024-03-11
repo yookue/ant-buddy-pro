@@ -178,11 +178,25 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     popupActionPos?: 'before' | 'after' | false;
 
     /**
-     * @description Use the same rules as entry field for the locale items
+     * @description Whether to use the same max length as entry field for the locale items
+     * @description.zh-CN 语言输入项使用与默认输入项相同的长度
+     * @description.zh-TW 語言輸入項使用與默認輸入項相同的長度
+     */
+    popupCloneMaxLength?: boolean;
+
+    /**
+     * @description Whether to use the same placeholder as entry field for the locale items
+     * @description.zh-CN 语言输入项使用与默认输入项相同的占位符
+     * @description.zh-TW 語言輸入項使用與默認輸入項相同的占位符
+     */
+    popupClonePlaceholder?: boolean;
+
+    /**
+     * @description Whether to use the same rules as entry field for the locale items
      * @description.zh-CN 语言输入项使用与默认输入项相同的校验规则
      * @description.zh-TW 語言輸入項使用與默認輸入項相同的校驗規則
      */
-    popupCloneRules?: boolean;
+    popupCloneRules?: 'all' | 'required' | 'optional' | false;
 
     /**
      * @description The confirm properties of popup actions
@@ -300,6 +314,21 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         </div>
     );
 
+    const cloneItemRules = () => {
+        if (!props?.rules || !props?.popupCloneRules) {
+            return [];
+        }
+        if (props.popupCloneRules === 'all') {
+            return props.rules;
+        } else if (props.popupCloneRules === 'required') {
+            return props.rules.filter((item: any) => item?.required);
+        } else if (props.popupCloneRules === 'optional') {
+            return props.rules.filter((item: any) => !item?.required);
+        }
+        return [];
+    };
+    const itemClonedRules = cloneItemRules();
+
     const menuItems: MenuProps['items'] = [];
     if (props?.popupInputProps) {
         for (const itemProp of props?.popupInputProps) {
@@ -324,8 +353,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                placeholder: itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder,
-                                maxLength: itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength,
+                                placeholder: itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined),
+                                maxLength: itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined),
                                 disabled: props?.fieldProps?.disabled || itemProp?.fieldProps?.disabled,
                                 readOnly: props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly,
                                 ...omitFieldProps,
@@ -336,7 +365,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 ...(!itemProp?.proFieldProps ? {} : omit(itemProp?.proFieldProps, ['render']))
                             }}
                             rules={[
-                                ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
+                                ...itemClonedRules,
                                 ...(props?.popupShareProps?.rules ?? []),
                                 ...(rules ?? []),
                             ]}
@@ -349,8 +378,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
-                            placeholder={itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder}
-                            maxLength={itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength}
+                            placeholder={itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined)}
+                            maxLength={itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined)}
                             disabled={props?.fieldProps?.disabled || itemProp?.fieldProps?.disabled}
                             readOnly={props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly}
                             {...antdInputProps}
@@ -383,17 +412,17 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 className: `${clazzPrefix}-item`,
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                placeholder: props?.popupShareProps?.placeholder,
+                                placeholder: props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined),
                                 disabled: props?.fieldProps?.disabled,
                                 readOnly: props?.fieldProps?.readOnly || props?.proFieldProps?.readonly,
-                                maxLength: props?.popupShareProps?.maxLength,
+                                maxLength: props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined),
                                 'data-locale-input-tag': elementId,
                             }}
                             proFieldProps={{
                                 render: (dom: React.ReactNode) => renderItemReadonly(tag, dom),
                             }}
                             rules={[
-                                ...((props?.popupCloneRules && props?.rules) ? props?.rules : []),
+                                ...itemClonedRules,
                                 ...(props?.popupShareProps?.rules || []),
                             ]}
                         />
@@ -405,10 +434,10 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
-                            placeholder={props?.popupShareProps?.placeholder}
+                            placeholder={props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined)}
                             disabled={ props?.fieldProps?.disabled}
                             readOnly={props?.fieldProps?.readOnly || props?.proFieldProps?.readonly}
-                            maxLength={props?.popupShareProps?.maxLength}
+                            maxLength={props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined)}
                             data-locale-input-tag={elementId}
                         />
                     </If.Else>
