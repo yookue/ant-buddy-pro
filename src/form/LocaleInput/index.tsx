@@ -24,7 +24,7 @@ import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrRead
 import {useIntl} from '@ant-design/pro-provider';
 import {nanoid} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
-import {BooleanUtils} from '@yookue/ts-lang-utils';
+import {BooleanUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ElementUtils} from '@/util/ElementUtils';
@@ -353,7 +353,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                placeholder: itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined),
+                                placeholder: StringUtils.joinWith(itemProp?.placeholder) || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                 maxLength: itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined),
                                 disabled: props?.fieldProps?.disabled || itemProp?.fieldProps?.disabled,
                                 readOnly: props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly,
@@ -378,7 +378,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
-                            placeholder={itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined)}
+                            placeholder={StringUtils.joinWith(itemProp?.placeholder) || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                             maxLength={itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined)}
                             disabled={props?.fieldProps?.disabled || itemProp?.fieldProps?.disabled}
                             readOnly={props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly}
@@ -412,7 +412,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 className: `${clazzPrefix}-item`,
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
-                                placeholder: props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined),
+                                placeholder: props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                 disabled: props?.fieldProps?.disabled,
                                 readOnly: props?.fieldProps?.readOnly || props?.proFieldProps?.readonly,
                                 maxLength: props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined),
@@ -434,7 +434,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             id={props?.id ? `${props?.id}[${tag}]` : (props?.name ? `${props?.name}[${tag}]` : undefined)}
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
-                            placeholder={props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? props?.fieldProps?.placeholder : undefined)}
+                            placeholder={props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                             disabled={ props?.fieldProps?.disabled}
                             readOnly={props?.fieldProps?.readOnly || props?.proFieldProps?.readonly}
                             maxLength={props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined)}
@@ -484,7 +484,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
 
     const buildEntryDom = () => {
         if (props?.proField) {
-            const restProps = !props ? {} : omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'dropdownProps', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupConfirmProps', 'popupShareProps', 'popupProField']);
+            const restProps = !props ? {} : omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'dropdownProps', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupCloneMaxLength', 'popupClonePlaceholder', 'popupCloneRules', 'popupConfirmProps', 'popupShareProps', 'popupProField']);
             return (
                 <ProFormText
                     {...restProps}
