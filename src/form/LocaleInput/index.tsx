@@ -219,6 +219,13 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @default true
      */
     popupProField?: boolean;
+
+    /**
+     * @description Whether to use the prototype ancestor to instead
+     * @description.zh-CN 是否回归到原始控件
+     * @description.zh-TW 是否回歸到原始控件
+     */
+    regressAncestor?: boolean;
 };
 
 
@@ -457,7 +464,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         if (!before && !props?.fieldProps?.addonAfter && props?.actionPos === 'after' && !props?.actionDom) {
             return undefined;
         }
-        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after')))].filter(object => !!object).length;
+        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (!props?.regressAncestor && props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after')))].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
         }
@@ -469,7 +476,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 <If condition={!before && props?.fieldProps?.addonAfter} validation={false}>
                     {props?.fieldProps?.addonAfter}
                 </If>
-                <If condition={props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after'))} validation={false}>
+                <If condition={!props?.regressAncestor && props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after'))} validation={false}>
                     {props?.actionDom}
                 </If>
             </>
@@ -511,6 +518,10 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             );
         }
     };
+
+    if (props?.regressAncestor) {
+        return buildEntryDom();
+    }
 
     const [menuOpen, setMenuOpen] = React.useState(false);
     const handleMenuClick = () => {
