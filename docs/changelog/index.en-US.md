@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.52** [2024-03-19]
+    - Add 'form/SegmentRadio'
+
   - **v0.1.47** [2024-03-08]
     - Add 'layout/CodePreview'
 
