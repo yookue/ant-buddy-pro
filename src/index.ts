@@ -36,6 +36,7 @@ export {SchemaRenders} from './render/SchemaRenders';
 export {SelectRenders} from './render/SelectRenders';
 export {ChildUtils} from './util/ChildUtils';
 export {ElementUtils} from './util/ElementUtils';
+export {FieldUtils} from './util/FieldUtils';
 export {FileUtils} from './util/FileUtils';
 export {IconUtils} from './util/IconUtils';
 export {ImageUtils} from './util/ImageUtils';

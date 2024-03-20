@@ -67,7 +67,7 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
         }
     };
 
-    const omitProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'src', 'fallback', 'onError']);
+    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'src', 'fallback', 'onError']);
 
     return (
         <RcImage

@@ -95,7 +95,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         }
     };
 
-    const omitProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']);
+    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']);
 
     return (
         <RcImage

@@ -11,8 +11,11 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.53** [2024-03-20]
+    - 增加 'util/FieldUtils'
+
   - **v0.1.52** [2024-03-19]
-    - Add 'form/SegmentRadio'
+    - 增加 'form/SegmentRadio'
 
   - **v0.1.47** [2024-03-08]
     - 增加 'layout/CodePreview'

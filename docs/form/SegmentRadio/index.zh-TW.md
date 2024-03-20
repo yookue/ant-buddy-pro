@@ -14,7 +14,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-#### 使用 fieldProps options，不使用 request
+#### 使用 options
 
 ```jsx
 import React from 'react';
@@ -50,7 +50,7 @@ export default () => {
 }
 ```
 
-#### 使用 request, 不使用 fieldProps options
+#### 使用 request
 
 ```jsx
 import React from 'react';
@@ -80,6 +80,33 @@ export default () => {
                         value: 'perfect',
                     }
                 ]}
+            />
+        </ProForm>
+    );
+}
+```
+
+#### 使用 valueEnum
+
+```jsx
+import React from 'react';
+import {ProForm} from '@ant-design/pro-form';
+import {SegmentRadio} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ProForm autoFocusFirstInput={false} submitter={false}>
+            <SegmentRadio
+                name='foobar'
+                label='請打分'
+                fieldProps={{
+                    defaultValue: 'good',
+                }}
+                valueEnum={{
+                    good: '好',
+                    excellent: '很好',
+                    perfect: '非常好',
+                }}
             />
         </ProForm>
     );

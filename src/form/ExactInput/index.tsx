@@ -210,7 +210,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'addonPos', 'checkProps', 'useTooltip', 'tooltipProps', 'proField', 'fieldProps']);
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'useTooltip', 'tooltipProps', 'proField']);
         return (
             <ProFormText
                 {...restProps}

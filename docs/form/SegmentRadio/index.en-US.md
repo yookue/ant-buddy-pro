@@ -14,7 +14,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-#### With fieldProps options, without request
+#### With options
 
 ```jsx
 import React from 'react';
@@ -50,7 +50,7 @@ export default () => {
 }
 ```
 
-#### With request, without fieldProps options
+#### With request
 
 ```jsx
 import React from 'react';
@@ -80,6 +80,33 @@ export default () => {
                         value: 'perfect',
                     }
                 ]}
+            />
+        </ProForm>
+    );
+}
+```
+
+#### With valueEnum
+
+```jsx
+import React from 'react';
+import {ProForm} from '@ant-design/pro-form';
+import {SegmentRadio} from '@yookue/ant-buddy-pro';
+
+export default () => {
+    return (
+        <ProForm autoFocusFirstInput={false} submitter={false}>
+            <SegmentRadio
+                name='foobar'
+                label='Rate this'
+                fieldProps={{
+                    defaultValue: 'good',
+                }}
+                valueEnum={{
+                    good: 'Good',
+                    excellent: 'Excellent',
+                    perfect: 'Perfect',
+                }}
             />
         </ProForm>
     );

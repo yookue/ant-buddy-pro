@@ -491,7 +491,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
 
     const buildEntryDom = () => {
         if (props?.proField) {
-            const restProps = !props ? {} : omit(props, ['clazzPrefix', 'actionDom', 'actionPos', 'dropdownProps', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupCloneMaxLength', 'popupClonePlaceholder', 'popupCloneRules', 'popupConfirmProps', 'popupShareProps', 'popupProField']);
+            const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'clazzPrefix', 'actionDom', 'actionPos', 'dropdownProps', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupCloneMaxLength', 'popupClonePlaceholder', 'popupCloneRules', 'popupConfirmProps', 'popupShareProps', 'popupProField']);
             return (
                 <ProFormText
                     {...restProps}

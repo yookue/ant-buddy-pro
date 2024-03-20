@@ -37,6 +37,7 @@ import omit from 'rc-util/es/omit';
 import {allIconTypes, type SceneType} from '@/type/antd-icons';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {ElementUtils} from '@/util/ElementUtils';
+import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
@@ -651,11 +652,16 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         }
     };
 
+    const [optionItems, setOptionItems] = React.useState(FieldUtils.buildFieldOptionsLocally(props));
+    if (props?.request) {
+        FieldUtils.buildFieldOptionsRemotely(props, setOptionItems);
+    }
+
     const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'optionMode', 'optionGroup', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps', 'proField', 'fieldProps']);
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps', 'proField']);
         return (
             <ProFormSelect
                 {...restProps}
@@ -663,7 +669,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     className: classNames(clazzPrefix, props?.className),
                     ...omitFieldProps,
                     dropdownRender: (props?.optionMode === 'text' || !props?.themeTypes || !props?.sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
-                    options: props?.fieldProps?.options ?? ((props?.request || props?.valueEnum) ? undefined : buildTextOptions()),
+                    options: optionItems ?? buildTextOptions(),
                     optionFilterProp: props?.fieldProps?.optionFilterProp || props?.fieldProps?.fieldNames?.value || 'value',
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
@@ -681,7 +687,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 {...restProps}
                 {...omitFieldProps}
                 dropdownRender={(props?.optionMode === 'text' || !props?.themeTypes || !props?.sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
-                options={props?.fieldProps?.options ?? ((props?.request || props?.valueEnum) ? undefined : buildTextOptions())}
+                options={optionItems ?? buildTextOptions()}
                 optionFilterProp={props?.fieldProps?.optionFilterProp || props?.fieldProps?.fieldNames?.value || 'value'}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}

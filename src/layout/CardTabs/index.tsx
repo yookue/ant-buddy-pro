@@ -61,7 +61,7 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-card-tabs');
 
-    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'containerClazz', 'containerStyle', 'inkBar']);
+    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'inkBar']);
 
     return (
         <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>

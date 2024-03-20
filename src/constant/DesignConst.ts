@@ -34,5 +34,5 @@ export abstract class DesignConst {
     public static ForwardFieldProps = ['name', 'id', 'placeholder'];
 
     // @see "@ant-design/pro-field/es/components/Select/index.d.ts"
-    public static ProFieldSelectProps = ['valueEnum', 'debounceTime', 'request', 'params'];
+    public static ProFieldSelectProps = ['valueEnum', 'debounceTime', 'params', 'request'];
 }

@@ -19,11 +19,11 @@ import React from 'react';
 import {ConfigProvider, Select} from 'antd';
 import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
-import {useDebounceFn} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import './index.less';
 
@@ -141,9 +141,6 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-divide-select');
 
-    const emptyRequest = async () => [];
-    const {run: fetchRequestData} = useDebounceFn(props?.request || emptyRequest, props?.debounceTime || 0);
-
     const renderContent = (item: any, before: boolean) => {
         if (!item) {
             return undefined;
@@ -183,7 +180,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle', 'fieldProps', 'proFieldProps']);
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle']);
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'popupClassName']);
 
         return (
@@ -206,27 +203,14 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             />
         );
     } else {
-        const [optionItems, setOptionItems] = React.useState<any[]>();
-
-        React.useEffect(() => {
-            const options = ObjectUtils.getProperty(props?.fieldProps, props?.fieldProps?.fieldNames?.options) ?? props?.fieldProps?.options;
-            if (options) {
-                setOptionItems(options);
-            } else {
-                if (props?.request) {
-                    fetchRequestData(props?.params).then(resolve => {
-                        setOptionItems(resolve);
-                    });
-                }
-            }
-        }, [props?.request]);
+        const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.buildFieldOptionsLocally(props) ?? []);
+        if (props?.request) {
+            FieldUtils.buildFieldOptionsRemotely(props, setOptionItems);
+        }
 
         const rebuildOptions = () => {
             if (!optionItems) {
                 return [];
-            }
-            if (!props?.usePresetStyle) {
-                return optionItems;
             }
             return optionItems.map((item: any, index: number) => {
                 if (!item) {
@@ -271,7 +255,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 className={classNames(clazzPrefix, props?.className)}
                 {...restProps}
                 {...omitFieldProps}
-                options={rebuildOptions()}
+                options={!props?.usePresetStyle ? optionItems : rebuildOptions()}
                 optionLabelProp={(props?.selectOriginLabel && props?.fieldProps?.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
                 popupClassName={classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName)}
             />

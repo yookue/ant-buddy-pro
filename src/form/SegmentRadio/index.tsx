@@ -18,9 +18,9 @@ import React from 'react';
 import {ConfigProvider, Segmented, type SegmentedProps} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
-import {useDebounceFn} from '@ant-design/pro-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {FieldUtils} from '@/util/FieldUtils';
 
 
 export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormFieldRemoteProps & {
@@ -45,19 +45,12 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-radio');
 
-    const emptyRequest = async () => [];
-    const {run: fetchRequestData} = useDebounceFn(props?.request || emptyRequest, props?.debounceTime || 0);
-
-    const [optionItems, setOptionItems] = React.useState<any[]>(props?.fieldProps?.options ?? []);
+    const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.buildFieldOptionsLocally(props) ?? []);
     if (props?.request) {
-        React.useEffect(() => {
-            fetchRequestData(props?.params).then(resolve => {
-                setOptionItems(resolve);
-            });
-        }, [props?.request]);
+        FieldUtils.buildFieldOptionsRemotely(props, setOptionItems);
     }
 
-    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'className', 'fieldProps']);
+    const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix']);
     const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options']);
 
     return (
