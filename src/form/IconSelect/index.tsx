@@ -242,7 +242,7 @@ export type IconSelectProps = ProFormSelectProps & {
     searchBox?: boolean;
 
     /**
-     * @description The locale props for displaying icons dropdown
+     * @description The locale props for the component
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */

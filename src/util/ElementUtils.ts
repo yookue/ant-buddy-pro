@@ -92,7 +92,17 @@ export abstract class ElementUtils {
     }
 
     /**
-     * Sets value for a given html element
+     * Clears value for the given html element
+     *
+     * @param element the html element to inspect
+     * @param callback the function to execute after value been set
+     */
+    public static clearElementValue = (element?: HTMLElement | null, callback?: ((previous?: string) => void)): void => {
+        this.setElementValue(element, undefined, callback)
+    }
+
+    /**
+     * Sets value for the given html element
      *
      * @param element the html element to inspect
      * @param value the value to set
