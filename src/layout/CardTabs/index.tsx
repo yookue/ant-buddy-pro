@@ -46,12 +46,36 @@ export type CardTabsProps = Omit<TabsProps, 'type'> & {
     containerStyle?: React.CSSProperties;
 
     /**
+     * @description Whether to display the tab border
+     * @description.zh-CN 是否显示标签的边框
+     * @description.zh-TW 是否顯示標簽的邊框
+     * @default true
+     */
+    tabBorder?: boolean;
+
+    /**
+     * @description Whether to display the content border
+     * @description.zh-CN 是否显示内容区的边框
+     * @description.zh-TW 是否顯示内容區的邊框
+     * @default true
+     */
+    contentBorder?: boolean;
+
+    /**
      * @description Whether to display the ink bar
      * @description.zh-CN 是否显示活跃指示条
      * @description.zh-TW 是否顯示活躍指示條
      * @default true
      */
     inkBar?: boolean;
+
+    /**
+     * @description Whether to use the preset style for the component
+     * @description.zh-CN 组件是否使用预设样式
+     * @description.zh-TW 組件是否使用預設樣式
+     * @default 'padding-md'
+     */
+    usePresetStyle?: 'padding-0' | 'padding-xss' | 'padding-xs' | 'padding-sm' | 'padding-md' | 'padding-lg' | 'padding-x-0' | 'padding-x-xss' | 'padding-x-xs' | 'padding-x-sm' | 'padding-x-md' | 'padding-x-lg' | 'padding-y-0' | 'padding-y-xss' | 'padding-y-xs' | 'padding-y-sm' | 'padding-y-md' | 'padding-y-lg' | false;
 };
 
 
@@ -61,12 +85,12 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-card-tabs');
 
-    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'inkBar']);
+    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'contentBorder', 'inkBar', 'usePresetStyle']);
 
     return (
-        <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))} style={props?.containerStyle}>
             <Tabs
-                className={classNames((props?.inkBar ? `${clazzPrefix}-ink-bar` : undefined), props?.className)}
+                className={classNames(props?.className, `${clazzPrefix}-tab-border${props?.tabBorder ? '' : '-off'}`, (props?.contentBorder ? `${clazzPrefix}-content-border` : undefined), (props?.inkBar ? `${clazzPrefix}-ink-bar` : undefined))}
                 type='card'
                 {...restProps}
             />
@@ -76,5 +100,8 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
 
 
 CardTabs.defaultProps = {
+    tabBorder: true,
+    contentBorder: true,
     inkBar: true,
+    usePresetStyle: 'padding-md',
 };

@@ -22,6 +22,8 @@ import {CardTabs} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [tabPos, setTabPos] = React.useState('top');
+    const [tabBorder, setTabBorder] = React.useState(true);
+    const [contentBorder, setContentBorder] = React.useState(true);
     const [inkBar, setInkBar] = React.useState(true);
 
     return (
@@ -44,21 +46,47 @@ export default () => {
                         {label: 'Right', value: 'right'},
                     ]}
                 />
-                <ProFormSwitch
-                    label='Ink Bar'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: inkBar,
-                    }}
-                    onChange={(value) => {
-                        setInkBar(value ? true : false);
-                    }}
-                />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='Tab Border'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: tabBorder,
+                        }}
+                        onChange={(value) => {
+                            setTabBorder(value ? true : false);
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Content Border'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: contentBorder,
+                        }}
+                        onChange={(value) => {
+                            setContentBorder(value ? true : false);
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Ink Bar'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: inkBar,
+                        }}
+                        onChange={(value) => {
+                            setInkBar(value ? true : false);
+                        }}
+                    />
+                </ProForm.Group>
             </ProForm>
             <Divider/>
             <CardTabs
                 tabPosition={tabPos}
+                tabBorder={tabBorder}
+                contentBorder={contentBorder}
                 inkBar={inkBar}
                 items={new Array(3).fill(null).map((_, i) => {
                 const id = String(i + 1);

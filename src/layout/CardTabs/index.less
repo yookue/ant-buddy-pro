@@ -32,8 +32,13 @@
             border-bottom: @border-width-base @border-style-base @border-color-base;
         }
 
-        .@{ant-prefix}-tabs-tab:not(.@{ant-prefix}-tabs-tab-active) {
+        &.@{buddy-card-tabs}-tab-border .@{ant-prefix}-tabs-tab:not(.@{ant-prefix}-tabs-tab-active) {
             border: @border-width-base @border-style-base @border-color-base;
+        }
+
+        &.@{buddy-card-tabs}-tab-border-off .@{ant-prefix}-tabs-tab {
+            background: transparent !important;
+            border: none !important;
         }
 
         .@{ant-prefix}-tabs-ink-bar {
@@ -45,20 +50,16 @@
                 margin-bottom: 0;
             }
 
-            .@{ant-prefix}-tabs-content-holder {
-                border-left: @border-width-base @border-style-base @border-color-base;
-                border-right: @border-width-base @border-style-base @border-color-base;
-                border-bottom: @border-width-base @border-style-base @border-color-base;
-
-                .@{ant-prefix}-tabs-content {
-                    padding: @padding-md @padding-lg;
-                }
-            }
-
-            .@{ant-prefix}-tabs-tab-active {
+            &.@{buddy-card-tabs}-tab-border .@{ant-prefix}-tabs-tab-active {
                 border-left: @border-width-base @border-style-base @border-color-base;
                 border-right: @border-width-base @border-style-base @border-color-base;
                 border-top: @border-width-base @border-style-base @border-color-base;
+            }
+
+            &.@{buddy-card-tabs}-content-border .@{ant-prefix}-tabs-content-holder {
+                border-left: @border-width-base @border-style-base @border-color-base;
+                border-right: @border-width-base @border-style-base @border-color-base;
+                border-bottom: @border-width-base @border-style-base @border-color-base;
             }
         }
 
@@ -68,20 +69,16 @@
                 margin-top: 0;
             }
 
-            .@{ant-prefix}-tabs-content-holder {
-                border-left: @border-width-base @border-style-base @border-color-base;
-                border-right: @border-width-base @border-style-base @border-color-base;
-                border-top: @border-width-base @border-style-base @border-color-base;
-
-                .@{ant-prefix}-tabs-content {
-                    padding: @padding-md @padding-lg;
-                }
-            }
-
-            .@{ant-prefix}-tabs-tab-active {
+            &.@{buddy-card-tabs}-tab-border .@{ant-prefix}-tabs-tab-active {
                 border-left: @border-width-base @border-style-base @border-color-base;
                 border-right: @border-width-base @border-style-base @border-color-base;
                 border-bottom: @border-width-base @border-style-base @border-color-base;
+            }
+
+            &.@{buddy-card-tabs}-content-border .@{ant-prefix}-tabs-content-holder {
+                border-left: @border-width-base @border-style-base @border-color-base;
+                border-right: @border-width-base @border-style-base @border-color-base;
+                border-top: @border-width-base @border-style-base @border-color-base;
             }
         }
 
@@ -91,17 +88,13 @@
                 margin-right: 0;
             }
 
-            .@{ant-prefix}-tabs-content-holder {
+            &.@{buddy-card-tabs}-content-border .@{ant-prefix}-tabs-content-holder {
                 border-right: @border-width-base @border-style-base @border-color-base;
                 border-top: @border-width-base @border-style-base @border-color-base;
                 border-bottom: @border-width-base @border-style-base @border-color-base;
-
-                .@{ant-prefix}-tabs-content {
-                    padding: @padding-md 0;
-                }
             }
 
-            .@{ant-prefix}-tabs-tab-active {
+            &.@{buddy-card-tabs}-tab-border .@{ant-prefix}-tabs-tab-active {
                 border-left: @border-width-base @border-style-base @border-color-base;
                 border-top: @border-width-base @border-style-base @border-color-base;
                 border-bottom: @border-width-base @border-style-base @border-color-base;
@@ -114,23 +107,104 @@
                 margin-left: 0;
             }
 
-            .@{ant-prefix}-tabs-content-holder {
-                border-left: @border-width-base @border-style-base @border-color-base;
+            &.@{buddy-card-tabs}-tab-border .@{ant-prefix}-tabs-tab-active {
+                border-right: @border-width-base @border-style-base @border-color-base;
                 border-top: @border-width-base @border-style-base @border-color-base;
                 border-bottom: @border-width-base @border-style-base @border-color-base;
-
-                .@{ant-prefix}-tabs-content {
-                    padding: @padding-md @padding-lg;
-                }
             }
 
-            .@{ant-prefix}-tabs-tab-active {
-                border-right: @border-width-base @border-style-base @border-color-base;
+            &.@{buddy-card-tabs}-content-border .@{ant-prefix}-tabs-content-holder {
+                border-left: @border-width-base @border-style-base @border-color-base;
                 border-top: @border-width-base @border-style-base @border-color-base;
                 border-bottom: @border-width-base @border-style-base @border-color-base;
             }
         }
     }
+}
+
+
+.@{buddy-card-tabs}-padding-0 .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding: 0 !important;
+}
+
+.@{buddy-card-tabs}-padding-xss .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding: @padding-xss @padding-xss !important;
+}
+
+.@{buddy-card-tabs}-padding-xs .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding: @padding-xs @padding-xs !important;
+}
+
+.@{buddy-card-tabs}-padding-sm .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding: @padding-sm @padding-sm !important;
+}
+
+.@{buddy-card-tabs}-padding-md .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding: @padding-md @padding-md !important;
+}
+
+.@{buddy-card-tabs}-padding-lg .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding: @padding-lg @padding-lg !important;
+}
+
+.@{buddy-card-tabs}-padding-x-0 .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.@{buddy-card-tabs}-padding-x-xss .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-left: @padding-xss !important;
+    padding-right: @padding-xss !important;
+}
+
+.@{buddy-card-tabs}-padding-x-xs .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-left: @padding-xs !important;
+    padding-right: @padding-xs !important;
+}
+
+.@{buddy-card-tabs}-padding-x-sm .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-left: @padding-sm !important;
+    padding-right: @padding-sm !important;
+}
+
+.@{buddy-card-tabs}-padding-x-md .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-left: @padding-md !important;
+    padding-right: @padding-md !important;
+}
+
+.@{buddy-card-tabs}-padding-x-lg .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-left: @padding-lg !important;
+    padding-right: @padding-lg !important;
+}
+
+.@{buddy-card-tabs}-padding-y-0 .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.@{buddy-card-tabs}-padding-y-xss .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-top: @padding-xss !important;
+    padding-bottom: @padding-xss !important;
+}
+
+.@{buddy-card-tabs}-padding-y-xs .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-top: @padding-xs !important;
+    padding-bottom: @padding-xs !important;
+}
+
+.@{buddy-card-tabs}-padding-y-sm .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-top: @padding-sm !important;
+    padding-bottom: @padding-sm !important;
+}
+
+.@{buddy-card-tabs}-padding-y-md .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-top: @padding-md !important;
+    padding-bottom: @padding-md !important;
+}
+
+.@{buddy-card-tabs}-padding-y-lg .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
+    padding-top: @padding-lg !important;
+    padding-bottom: @padding-lg !important;
 }
 
 
