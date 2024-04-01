@@ -15,6 +15,9 @@
  */
 
 
+import {AntUtils} from '@/util/AntUtils';
+
+
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
@@ -34,7 +37,9 @@ export {SettingDrawer, type SettingDrawerProps} from './layout/SettingDrawer';
 export {WrapSpace, type WrapSpaceProps} from './layout/WrapSpace';
 export {SchemaRenders} from './render/SchemaRenders';
 export {SelectRenders} from './render/SelectRenders';
+export {AntUtils} from './util/AntUtils';
 export {ChildUtils} from './util/ChildUtils';
+export {DialogUtils} from './util/DialogUtils';
 export {ElementUtils} from './util/ElementUtils';
 export {FieldUtils} from './util/FieldUtils';
 export {FileUtils} from './util/FileUtils';

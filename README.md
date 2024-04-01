@@ -5,9 +5,9 @@
 [![NPM downloads](http://img.shields.io/npm/dm/@yookue/ant-buddy-pro.svg?style=flat)](https://npmjs.org/package/@yookue/ant-buddy-pro)
 [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi)
 
-🏅 Awesome components based on React & Ant Design Pro ❤️
+🏅 Awesome components based on React & Ant Design ProComponents ❤️
 
-**Ant Buddy Pro** is a React components library based on [Ant Design Pro](https://pro.ant.design), providing more customization and individual components, aiming to provide better experience for React developers.
+**Ant Buddy Pro** is a React components library based on [Ant Design ProComponents](https://procomponents.ant.design/), providing more customization and individual components, aiming to provide better experience for React developers.
 
 ## Features
 
@@ -17,19 +17,19 @@
 
 ## Quickstart
 
-You can install ant-buddy-pro package in your existing React project as follows:
+You can install `ant-buddy-pro` package in your existing React project as follows:
 
 ```bash
 $ npm install @yookue/ant-buddy-pro --save
 ```
 
-Then, you may import components of ant-buddy-pro as follows:
+Then, you may import components of `ant-buddy-pro` as follows:
 
 ```jsx | pure
 import {FooBar} from '@yookue/ant-buddy-pro';
 ```
 
-Enjoy your journey in coding your projects with ant-buddy-pro. ✌️
+Enjoy your journey in coding your projects with `ant-buddy-pro`. ✌️
 
 ## Document
 
