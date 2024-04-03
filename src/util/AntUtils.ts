@@ -15,29 +15,51 @@
  */
 
 
+import omit from 'rc-util/es/omit';
+
+
 export abstract class AntUtils {
     /**
-     * Returns the data for Ant `ProTable`
-     *
-     * @param income the income data (especially server response)
-     */
-    public static echoProTable(income?: Record<string, any>): Record<string, any> {
-        return {
-            success: income?.status === 200,
-            data: income?.data?.recordsDetails || [],
-            total: income?.data?.recordsTotal || 0,
-        };
-    }
-
-    /**
-     * Returns the data for Ant `ProDescriptions`
+     * Returns the data for ProComponents `ProDescriptions`
      *
      * @param income the income data (especially server response)
      */
     public static echoProDescriptions(income?: Record<string, any>): Record<string, any> {
+        const restProps = !income ? {} : omit(income, ['success', 'data']);
         return {
-            success: income?.status === 200,
+            success: income?.success || (income?.status === 200),
             data: income?.data || {},
+            ...restProps,
+        };
+    }
+
+    /**
+     * Returns the data for ProComponents `ProList`
+     *
+     * @param income the income data (especially server response)
+     */
+    public static echoProList(income?: Record<string, any>): Record<string, any> {
+        const restProps = !income ? {} : omit(income, ['success', 'data', 'total']);
+        return {
+            success: income?.success || (income?.status === 200),
+            data: income?.data?.recordsDetails || [],
+            total: income?.data?.recordsTotal || 0,
+            ...restProps,
+        };
+    }
+
+    /**
+     * Returns the data for ProComponents `ProTable`
+     *
+     * @param income the income data (especially server response)
+     */
+    public static echoProTable(income?: Record<string, any>): Record<string, any> {
+        const restProps = !income ? {} : omit(income, ['success', 'data', 'total']);
+        return {
+            success: income?.success || (income?.status === 200),
+            data: income?.data?.recordsDetails || [],
+            total: income?.data?.recordsTotal || 0,
+            ...restProps,
         };
     }
 }
