@@ -96,10 +96,17 @@
 
 .@{buddy-fold-section}-default {
     background: @card-background;
-    border: @border-width-base @border-style-base @border-color-base;
 
     .@{buddy-fold-section}-header {
         background: @background-color-light;
+    }
+}
+
+.@{buddy-fold-section}-default,
+.@{buddy-fold-section}-classic {
+    border: @border-width-base @border-style-base @border-color-base;
+
+    .@{buddy-fold-section}-header {
         font-weight: 500;
     }
 

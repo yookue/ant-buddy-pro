@@ -34,6 +34,7 @@ import {FoldSection} from '@yookue/ant-buddy-pro';
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState('before');
     const [collapsePos, setCollapsePos] = React.useState('after');
+    const [presetStyle, setPresetStyle] = React.useState('default');
 
     return (
         <>
@@ -70,6 +71,22 @@ export default () => {
                         {label: 'False', value: 'false'},
                     ]}
                 />
+                <ProFormRadio.Group
+                    label='Preset Style'
+                    radioType='button'
+                    fieldProps={{
+                        value: presetStyle?.toString(),
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Default', value: 'default'},
+                        {label: 'Classic', value: 'classic'},
+                        {label: 'False', value: 'false'},
+                    ]}
+                />
             </ProForm>
             <Divider/>
             <FoldSection
@@ -79,7 +96,8 @@ export default () => {
                 headerCollapsePos={collapsePos}
                 headerOpenedHint='Collapse'
                 headerClosedHint='Expend'
-                panelPlaceholder={<Empty/>}
+                panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>}
+                usePresetStyle={presetStyle}
             />
         </>
     );

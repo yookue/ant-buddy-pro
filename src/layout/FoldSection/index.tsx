@@ -16,10 +16,11 @@
 
 
 import React from 'react';
-import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
-import {DownSquareOutlined, UpSquareOutlined} from '@ant-design/icons';
+import {ConfigProvider, Empty, Tooltip, type TooltipProps} from 'antd';
+import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
+import CssMotion from 'rc-motion';
 import './index.less';
 
 
@@ -136,7 +137,7 @@ export type FoldSectionProps = {
      * @description The DOM of collapse span that under the header div when expanded
      * @description.zh-CN 头部折叠 span 的节点内容(面板展开时)
      * @description.zh-TW 頭部折叠 span 的節點內容(面板展開時)
-     * @default <DownSquareOutlined/>
+     * @default <DownOutlined/>
      */
     headerOpenedDom?: React.ReactNode;
 
@@ -151,7 +152,7 @@ export type FoldSectionProps = {
      * @description The DOM of collapse that under the header div when collapsed
      * @description.zh-CN 头部折叠 span 的节点内容(面板折叠时)
      * @description.zh-TW 頭部折叠 span 的節點內容(面板摺叠時)
-     * @default <UpSquareOutlined/>
+     * @default <UpOutlined/>
      */
     headerClosedDom?: React.ReactNode;
 
@@ -199,13 +200,6 @@ export type FoldSectionProps = {
     panelContent?: React.ReactNode;
 
     /**
-     * @description The DOM of placeholder for the panel div
-     * @description.zh-CN 面板 div 的占位符
-     * @description.zh-TW 面板 div 的佔位符
-     */
-    panelPlaceholder?: React.ReactNode;
-
-    /**
      * @description Whether the panel div is opened when initializing
      * @description.zh-CN 面板 div 初始化时是否展开
      * @description.zh-TW 面板 div 初始化時是否展開
@@ -230,6 +224,14 @@ export type FoldSectionProps = {
     panelDestroyOnClose?: boolean;
 
     /**
+     * @description The DOM of placeholder for the panel div
+     * @description.zh-CN 面板 div 的占位符
+     * @description.zh-TW 面板 div 的佔位符
+     * @default <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>
+     */
+    panelPlaceholder?: React.ReactNode;
+
+    /**
      * @description The callback function when the panel div changed
      * @description.zh-CN 面板 div 折叠展开状态变化时的回调函数
      * @description.zh-TW 面板 div 折疊展開狀態變化時的回調函數
@@ -242,7 +244,7 @@ export type FoldSectionProps = {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    usePresetStyle?: 'default' | false;
+    usePresetStyle?: 'default' | 'classic' | false;
 };
 
 
@@ -312,6 +314,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
             setPanelRendered(true);
         }
     }, [props?.panelForceRender]);
+    const panelVisible = (panelRendered || !!props?.panelContent || !!props?.panelPlaceholder) && (panelOpen || (!panelOpen && !props?.panelDestroyOnClose));
 
     return (
         <section
@@ -335,11 +338,13 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
                     {buildCollapseDom(false)}
                 </If>
             </div>
-            <If condition={(panelRendered || props?.panelContent || props?.panelPlaceholder) && (panelOpen || (!panelOpen && !props?.panelDestroyOnClose))} validation={false}>
-                <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
-                    {props?.panelContent || props?.panelPlaceholder}
-                </div>
-            </If>
+            <CssMotion visible={panelVisible}>
+                {() => (
+                    <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
+                        {props?.panelContent || props?.panelPlaceholder}
+                    </div>
+                )}
+            </CssMotion>
         </section>
     );
 };
@@ -348,11 +353,12 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 FoldSection.defaultProps = {
     headerOrnamentPos: 'before',
     headerCollapsePos: 'after',
-    headerClosedDom: <UpSquareOutlined/>,
-    headerOpenedDom: <DownSquareOutlined/>,
+    headerClosedDom: <UpOutlined/>,
+    headerOpenedDom: <DownOutlined/>,
     useTooltip: false,
     panelInitialOpen: true,
     panelForceRender: false,
     panelDestroyOnClose: false,
+    panelPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>,
     usePresetStyle: 'default',
 };

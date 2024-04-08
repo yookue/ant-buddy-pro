@@ -101,7 +101,7 @@ export type ApartTitleProps = {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    usePresetStyle?: 'default' | false;
+    usePresetStyle?: 'default' | 'classic' | false;
 };
 
 

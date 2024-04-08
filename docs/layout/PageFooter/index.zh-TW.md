@@ -16,30 +16,55 @@ import {PageFooter} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
+import {Divider} from 'antd';
+import {ProForm, ProFormRadio} from '@ant-design/pro-form';
 import {PageFooter} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [presetStyle, setPresetStyle] = React.useState('compact');
+
     return (
-        <PageFooter
-            links={[
-                {
-                    key: 'ant-buddy-pro',
-                    content: 'Ant Buddy Pro',
-                    href: 'https://github.com/yookue/ant-buddy-pro',
-                    style: {
-                        color: '#eba77a',
+        <>
+            <ProForm layout='horizontal' submitter={false}>
+                <ProFormRadio.Group
+                    label='預設樣式'
+                    radioType='button'
+                    fieldProps={{
+                        value: presetStyle?.toString(),
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '默認', value: 'default'},
+                        {label: '緊凑', value: 'compact'},
+                        {label: '無', value: 'false'},
+                    ]}
+                />
+            </ProForm>
+            <Divider/>
+            <PageFooter
+                links={[
+                    {
+                        key: 'ant-buddy-pro',
+                        content: 'Ant Buddy Pro',
+                        href: 'https://github.com/yookue/ant-buddy-pro',
+                        style: {
+                            color: '#eba77a',
+                        }
                     }
-                }
-            ]}
-            copyright={'2023 Yookue Ltd'}
-            containerStyle={{
-                backgroundColor: '#e5f7ff',
-            }}
-            copyrightStyle={{
-                color: '#443300',
-            }}
-            usePresetStyle='compact'
-        />
+                ]}
+                copyright={`${new Date().getFullYear()} Yookue Ltd`}
+                containerStyle={{
+                    backgroundColor: '#e5f7ff',
+                }}
+                copyrightStyle={{
+                    color: '#443300',
+                }}
+                usePresetStyle={presetStyle}
+            />
+        </>
     );
 }
 ```

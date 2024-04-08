@@ -23,6 +23,7 @@ import {ApartTitle} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState('before');
+    const [presetStyle, setPresetStyle] = React.useState('default');
 
     return (
         <>
@@ -43,12 +44,29 @@ export default () => {
                         {label: '无', value: 'false'},
                     ]}
                 />
+                <ProFormRadio.Group
+                    label='预设样式'
+                    radioType='button'
+                    fieldProps={{
+                        value: presetStyle?.toString(),
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '默认', value: 'default'},
+                        {label: '经典', value: 'classic'},
+                        {label: '无', value: 'false'},
+                    ]}
+                />
             </ProForm>
             <Divider/>
             <ApartTitle
                 ornament={<AppstoreOutlined/>}
                 ornamentPos={ornamentPos}
                 content='ApartTitle 头部标题'
+                usePresetStyle={presetStyle}
             />
         </>
     );

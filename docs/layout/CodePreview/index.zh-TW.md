@@ -16,20 +16,45 @@ import {CodePreview} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
+import {Divider} from 'antd';
+import {ProForm, ProFormRadio} from '@ant-design/pro-form';
 import {CodePreview} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [presetStyle, setPresetStyle] = React.useState('default');
+
     return (
-        <CodePreview
-            titleContent='如何安裝這個包？'
-            textContent='npm install @yookue/ant-buddy-pro -S'
-            titleProps={{
-                level: 5,
-            }}
-            textProps={{
-                copyable: true,
-            }}
-        />
+        <>
+            <ProForm layout='horizontal' submitter={false}>
+                <ProFormRadio.Group
+                    label='預設樣式'
+                    radioType='button'
+                    fieldProps={{
+                        value: presetStyle?.toString(),
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '默認', value: 'default'},
+                        {label: '無', value: 'false'},
+                    ]}
+                />
+            </ProForm>
+            <Divider/>
+            <CodePreview
+                titleContent='如何安裝這個包？'
+                textContent='npm install @yookue/ant-buddy-pro -S'
+                titleProps={{
+                    level: 5,
+                }}
+                textProps={{
+                    copyable: true,
+                }}
+                usePresetStyle={presetStyle}
+            />
+        </>
     );
 }
 ```
