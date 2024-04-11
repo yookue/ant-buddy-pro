@@ -110,14 +110,6 @@ export type DivideSelectProps = ProFormSelectProps & {
     optionAfterRender?: (origin: React.ReactNode) => React.ReactNode;
 
     /**
-     * @description Whether to use the original label when `optionLabelProp` is 'label' and `proField` is false
-     * @description.zh-CN 当 `optionLabelProp` 为 'label' 且 `proField` 为 false 时，是否使用原始的标签值
-     * @description.zh-TW 當 `optionLabelProp` 為 'label' 且 `proField` 為 false 時，是否使用原始的標簽值
-     * @default true
-     */
-    selectOriginLabel?: boolean;
-
-    /**
      * @description Whether to use ProFormField instead of Input
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
@@ -180,7 +172,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle']);
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'proField', 'usePresetStyle']);
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
 
         return (
@@ -257,7 +249,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 {...restProps}
                 {...omitFieldProps}
                 options={!props?.usePresetStyle ? optionItems : rebuildOptions()}
-                optionLabelProp={(props?.selectOriginLabel && props?.fieldProps?.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
+                optionLabelProp={(!props?.fieldProps?.optionLabelProp || props.fieldProps.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
                 popupClassName={classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName)}
             />
         );
@@ -268,7 +260,6 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
 DivideSelect.defaultProps = {
     optionBeforeContent: 'label',
     optionAfterContent: 'value',
-    selectOriginLabel: true,
     proField: true,
     usePresetStyle: 'before-prior',
 };
