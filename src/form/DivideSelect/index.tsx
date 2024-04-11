@@ -181,7 +181,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
 
     if (props?.proField) {
         const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'selectOriginLabel', 'proField', 'usePresetStyle']);
-        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'popupClassName']);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
 
         return (
             <ProFormSelect
@@ -190,6 +190,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                     className: classNames(clazzPrefix, props?.className),
                     ...omitFieldProps,
                     optionItemRender: (item) => renderOption(item),
+                    optionLabelProp: props?.fieldProps?.optionLabelProp ?? 'label',
                     popupClassName: classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName),
                 }}
                 proFieldProps={{
