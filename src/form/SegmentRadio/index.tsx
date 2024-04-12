@@ -21,6 +21,7 @@ import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-des
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {FieldUtils} from '@/util/FieldUtils';
+import {PropsUtils} from '@/util/PropsUtils';
 
 
 export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormFieldRemoteProps & {
@@ -31,6 +32,21 @@ export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormF
      * @default 'buddy-segment-radio'
      */
     clazzPrefix?: string;
+
+    /**
+     * @description Whether to keep the `options` or `valueEnum` data when using the `request` data
+     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
+     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
+     */
+    requestKeepOptions?: 'request-before' | 'request-after' | false;
+
+    /**
+     * @description Whether to use ProFormField instead of Input
+     * @description.zh-CN 是否使用 ProFormField 控件
+     * @description.zh-TW 是否使用 ProFormField 控件
+     * @default true
+     */
+    proField?: boolean;
 };
 
 
@@ -45,23 +61,41 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-radio');
 
-    const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.buildFieldOptionsLocally(props) ?? []);
+    // noinspection DuplicatedCode
+    const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
     if (props?.request) {
-        FieldUtils.buildFieldOptionsRemotely(props, setOptionItems);
+        FieldUtils.fetchFieldRequestData(props, values => {
+            setOptionItems(!props?.requestKeepOptions ? values : ((props.requestKeepOptions === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
+        });
     }
 
-    const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix']);
     const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options']);
-
-    return (
-        <ProForm.Item
-            className={classNames(clazzPrefix, props?.className)}
-            {...restProps}
-        >
+    if (props?.proField) {
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'requestKeepOptions', 'proField']);
+        return (
+            <ProForm.Item
+                className={classNames(clazzPrefix, props?.className)}
+                {...restProps}
+            >
+                <Segmented
+                    options={optionItems}
+                    {...restFieldProps}
+                />
+            </ProForm.Item>
+        );
+    } else {
+        const restProps = PropsUtils.pickForwardProps(props);
+        return (
             <Segmented
                 options={optionItems}
+                {...restProps}
                 {...restFieldProps}
             />
-        </ProForm.Item>
-    );
+        );
+    }
+};
+
+
+SegmentRadio.defaultProps = {
+    proField: true,
 };

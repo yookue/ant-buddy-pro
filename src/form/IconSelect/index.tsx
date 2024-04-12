@@ -142,6 +142,13 @@ export type IconSelectProps = ProFormSelectProps & {
     optionGroup?: boolean;
 
     /**
+     * @description Whether to keep the `options` or `valueEnum` data when using the `request` data
+     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
+     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
+     */
+    requestKeepOptions?: 'request-before' | 'request-after' | false;
+
+    /**
      * @description Whether to use ProFormField instead of Input
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
@@ -652,16 +659,19 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         }
     };
 
-    const [optionItems, setOptionItems] = React.useState(FieldUtils.buildFieldOptionsLocally(props));
+    // noinspection DuplicatedCode
+    const [optionItems, setOptionItems] = React.useState(FieldUtils.optionsToLabeledValues(props) ?? []);
     if (props?.request) {
-        FieldUtils.buildFieldOptionsRemotely(props, setOptionItems);
+        FieldUtils.fetchFieldRequestData(props, values => {
+            setOptionItems(!props?.requestKeepOptions ? values : ((props.requestKeepOptions === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
+        });
     }
 
     const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps', 'proField']);
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestKeepOptions', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps']);
         return (
             <ProFormSelect
                 {...restProps}

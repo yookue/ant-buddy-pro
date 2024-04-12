@@ -29,19 +29,17 @@ export abstract class FieldUtils {
      *
      * @returns Returns the built array of Ant ProComponents LabeledValue, with locale data
      */
-    public static buildFieldOptionsLocally = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps): LabeledValue[] | undefined => {
-        return !props ? undefined : (props?.fieldProps?.options ?? (!props?.valueEnum ? undefined : this.toLabeledValues(props.valueEnum)));
+    public static optionsToLabeledValues = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps): LabeledValue[] | undefined => {
+        return !props ? undefined : (props?.fieldProps?.options ?? (!props?.valueEnum ? undefined : this.propsToLabeledValues(props.valueEnum)));
     }
 
     /**
-     * Returns the built array of Ant ProComponents LabeledValue, with remote data
+     * Fetches the request data with the given field, with debounce capable
      *
      * @param props the properties object to inspect
      * @param callback the function to execute
-     *
-     * @returns Returns the built array of Ant ProComponents LabeledValue, with remote data
      */
-    public static buildFieldOptionsRemotely = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps, callback?: ((values?: any) => void)): void => {
+    public static fetchFieldRequestData = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps, callback?: ((values?: any) => void)): void => {
         if (!props || !props?.request || !callback) {
             return;
         }
@@ -60,7 +58,7 @@ export abstract class FieldUtils {
      *
      * @returns Returns the converted array of Ant ProComponents LabeledValue
      */
-    public static toLabeledValues = (props?: object): LabeledValue[] | undefined => {
+    public static propsToLabeledValues = (props?: object): LabeledValue[] | undefined => {
         if (!props) {
             return undefined;
         }

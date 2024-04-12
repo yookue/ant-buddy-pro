@@ -110,6 +110,13 @@ export type DivideSelectProps = ProFormSelectProps & {
     optionAfterRender?: (origin: React.ReactNode) => React.ReactNode;
 
     /**
+     * @description Whether to keep the `options` or `valueEnum` data when using the `request` data
+     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
+     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
+     */
+    requestKeepOptions?: 'request-before' | 'request-after' | false;
+
+    /**
      * @description Whether to use ProFormField instead of Input
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
@@ -172,7 +179,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'proField', 'usePresetStyle']);
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestKeepOptions', 'proField', 'usePresetStyle']);
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
 
         return (
@@ -196,9 +203,12 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             />
         );
     } else {
-        const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.buildFieldOptionsLocally(props) ?? []);
+        // noinspection DuplicatedCode
+        const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
         if (props?.request) {
-            FieldUtils.buildFieldOptionsRemotely(props, setOptionItems);
+            FieldUtils.fetchFieldRequestData(props, values => {
+                setOptionItems(!props?.requestKeepOptions ? values : ((props.requestKeepOptions === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
+            });
         }
 
         const rebuildOptions = () => {
