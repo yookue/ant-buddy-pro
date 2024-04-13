@@ -37,7 +37,7 @@ Enjoy your journey in coding your projects with `ant-buddy-pro`. ✌️
 
 ## License
 
-This project is under the [MIT License](https://mit-license.org/)
+This project is under the [MIT License](https://mit-license.org/).
 
 ## Website
 
