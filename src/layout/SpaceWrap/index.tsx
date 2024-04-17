@@ -22,12 +22,12 @@ import {css} from '@emotion/css';
 import classNames from 'classnames';
 
 
-export type WrapSpaceProps = React.PropsWithChildren<{
+export type SpaceWrapProps = React.PropsWithChildren<{
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-wrap-space'
+     * @default 'buddy-space-wrap'
      */
     clazzPrefix?: string;
 
@@ -55,11 +55,11 @@ export type WrapSpaceProps = React.PropsWithChildren<{
 }>;
 
 
-export const WrapSpace: React.FC<WrapSpaceProps> = (props?: WrapSpaceProps) => {
+export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-wrap-space');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-space-wrap');
 
     const getNumericSize = function (size: SpaceSize) {
         // noinspection SuspiciousTypeOfGuard
@@ -102,6 +102,6 @@ export const WrapSpace: React.FC<WrapSpaceProps> = (props?: WrapSpaceProps) => {
 };
 
 
-WrapSpace.defaultProps = {
+SpaceWrap.defaultProps = {
     size: 'small',
 };

@@ -15,9 +15,6 @@
  */
 
 
-import {AntUtils} from '@/util/AntUtils';
-
-
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
@@ -34,7 +31,7 @@ export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
 export {MenuTabs, type MenuTabsProps} from './layout/MenuTabs';
 export {PageFooter, type PageFooterProps} from './layout/PageFooter';
 export {SettingDrawer, type SettingDrawerProps} from './layout/SettingDrawer';
-export {WrapSpace, type WrapSpaceProps} from './layout/WrapSpace';
+export {SpaceWrap, type SpaceWrapProps} from './layout/SpaceWrap';
 export {SchemaRenders} from './render/SchemaRenders';
 export {SelectRenders} from './render/SelectRenders';
 export {AntUtils} from './util/AntUtils';
