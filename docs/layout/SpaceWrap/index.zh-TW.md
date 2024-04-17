@@ -21,8 +21,9 @@ import {SpaceWrap} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <SpaceWrap size={['small', 'middle']} containerStyle={{border: '1px solid #f5f2f0'}}>
-            <span>這裏是壹個子節點。</span>
+        <SpaceWrap size='middle' containerStyle={{border: '1px solid #f5f2f0'}}>
+            <span>這是第一個子節點。</span>
+            <span>這是第二個子節點。</span>
         </SpaceWrap>
     );
 }

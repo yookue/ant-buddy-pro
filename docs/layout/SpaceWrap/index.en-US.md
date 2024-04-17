@@ -21,8 +21,9 @@ import {SpaceWrap} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <SpaceWrap size={['small', 'middle']} containerStyle={{border: '1px solid #f5f2f0'}}>
-            <span>Here is a child content.</span>
+        <SpaceWrap size='middle' containerStyle={{border: '1px solid #f5f2f0'}}>
+            <span>Here is the first child content.</span>
+            <span>Here is the second child content.</span>
         </SpaceWrap>
     );
 }

@@ -16,13 +16,14 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
+import {ConfigProvider, Space, type SpaceProps} from 'antd';
 import {type SpaceSize} from 'antd/es/space';
 import {css} from '@emotion/css';
 import classNames from 'classnames';
+import omit from 'rc-util/es/omit';
 
 
-export type SpaceWrapProps = React.PropsWithChildren<{
+export type SpaceWrapProps = SpaceProps & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -44,15 +45,7 @@ export type SpaceWrapProps = React.PropsWithChildren<{
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
-
-    /**
-     * @description The padding size of the wrapper div
-     * @description.zh-CN 容器 div 的内间距大小
-     * @description.zh-TW 容器 div 的内間距大小
-     * @default 'small'
-     */
-    size?: SpaceSize | [SpaceSize, SpaceSize];
-}>;
+};
 
 
 export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
@@ -76,11 +69,11 @@ export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
                 case 'large':
                     return 24;
                 default:
-                    break;
+                    return 8;
             }
         }
         return 0;
-    }
+    };
 
     const [horizontalSize, verticalSize] = React.useMemo(
         () =>
@@ -94,14 +87,13 @@ export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
         padding: `${verticalSize}px ${horizontalSize}px`,
     });
 
+    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle']);
+
     return (
         <div className={classNames(clazzPrefix, paddingClazz, props?.containerClazz)} style={props?.containerStyle}>
-            {props?.children}
+            <Space {...restProps}>
+                {props?.children}
+            </Space>
         </div>
     );
-};
-
-
-SpaceWrap.defaultProps = {
-    size: 'small',
 };
