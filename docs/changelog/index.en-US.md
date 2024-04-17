@@ -50,7 +50,7 @@ Here are some milestone versions of the changelog:
     - Add 'form/DivideSelect'
 
   - **v0.1.20** [2023-11-24]
-    - Add 'layout/SpaceWrap'
+    - Add 'layout/SpaceBound'
     - Add 'util/ChildUtils'
 
   - **v0.1.16** [2023-11-11]

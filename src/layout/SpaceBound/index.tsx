@@ -23,12 +23,12 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 
 
-export type SpaceWrapProps = SpaceProps & {
+export type SpaceBoundProps = SpaceProps & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-space-wrap'
+     * @default 'buddy-space-bound'
      */
     clazzPrefix?: string;
 
@@ -48,11 +48,11 @@ export type SpaceWrapProps = SpaceProps & {
 };
 
 
-export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
+export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-space-wrap');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-space-bound');
 
     const getNumericSize = function (size: SpaceSize) {
         // noinspection SuspiciousTypeOfGuard
@@ -99,6 +99,6 @@ export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
 };
 
 
-SpaceWrap.defaultProps = {
+SpaceBound.defaultProps = {
     size: 'small',
 };

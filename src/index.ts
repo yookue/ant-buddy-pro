@@ -32,7 +32,7 @@ export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
 export {MenuTabs, type MenuTabsProps} from './layout/MenuTabs';
 export {PageFooter, type PageFooterProps} from './layout/PageFooter';
 export {SettingDrawer, type SettingDrawerProps} from './layout/SettingDrawer';
-export {SpaceWrap, type SpaceWrapProps} from './layout/SpaceWrap';
+export {SpaceBound, type SpaceBoundProps} from './layout/SpaceBound';
 export {SchemaRenders} from './render/SchemaRenders';
 export {SelectRenders} from './render/SelectRenders';
 export {AntUtils} from './util/AntUtils';
