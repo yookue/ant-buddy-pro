@@ -109,7 +109,7 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     tooltipProps?: TooltipProps,
 
     /**
-     * @description Whether to use ProFormField instead of Input
+     * @description Whether to use ProFormField instead of Antd
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
      * @default true
@@ -123,7 +123,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-exact-input');
-
     const intlType = useIntl();
 
     const omitCheckProps = !props?.checkProps ? {} : omit(props?.checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']);

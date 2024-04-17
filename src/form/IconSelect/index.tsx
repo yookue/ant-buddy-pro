@@ -149,7 +149,7 @@ export type IconSelectProps = ProFormSelectProps & {
     requestKeepOptions?: 'request-before' | 'request-after' | false;
 
     /**
-     * @description Whether to use ProFormField instead of Input
+     * @description Whether to use ProFormField instead of Antd
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
      * @default true
@@ -279,6 +279,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
+    const intlType = useIntl();
 
     const [dropdownOpen, setDropdownOpen] = React.useState(props?.fieldProps?.open);
     const defaultTheme = (props?.defaultThemeType && props?.themeTypes?.includes(props?.defaultThemeType)) ? props.defaultThemeType : (props?.themeTypes ? props.themeTypes[0] : undefined);
@@ -287,7 +288,6 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const [searchWord, setSearchWord] = React.useState(props?.fieldProps?.searchValue);
     const [searchDisabled, setSearchDisabled] = React.useState(false);
     const entryId = nanoid();
-    const intlType = useIntl();
 
     const buildTextOptions = () => {
         const result: any[] = [];

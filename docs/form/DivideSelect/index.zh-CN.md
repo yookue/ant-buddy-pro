@@ -4,7 +4,7 @@ toc: content
 
 ## DivideSelect
 
-DivideSelect, provides a capability that displaying the label of option item, into two parts.
+DivideSelect, 提供了一下可以将选项的标签和值分开显示的选择框。
 
 ### 导入组件
 

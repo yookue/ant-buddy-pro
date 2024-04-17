@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.65** [2024-04-17]
+    - Add 'form/ChronoSelect'
+
   - **v0.1.63** [2024-04-14]
     - Add 'style/alive'
 

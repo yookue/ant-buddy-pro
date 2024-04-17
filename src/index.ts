@@ -18,6 +18,7 @@
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
+export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';
 export {DivideSelect, type DivideSelectProps} from './form/DivideSelect';
 export {ExactInput, type ExactInputProps} from './form/ExactInput';
 export {IconSelect, type IconSelectProps} from './form/IconSelect';

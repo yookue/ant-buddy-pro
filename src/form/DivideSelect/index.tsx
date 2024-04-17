@@ -117,7 +117,7 @@ export type DivideSelectProps = ProFormSelectProps & {
     requestKeepOptions?: 'request-before' | 'request-after' | false;
 
     /**
-     * @description Whether to use ProFormField instead of Input
+     * @description Whether to use ProFormField instead of Antd
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
      * @default true

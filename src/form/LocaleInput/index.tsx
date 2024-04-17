@@ -140,7 +140,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     multilingualism?: boolean;
 
     /**
-     * @description Whether to use ProFormField instead of Input for the primary input box
+     * @description Whether to use ProFormField instead of Antd for the primary input box
      * @description.zh-CN 默认文本框是否使用 ProFormField 控件
      * @description.zh-TW 默認文本框是否使用 ProFormField 控件
      * @default true
@@ -221,7 +221,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     popupShareProps?: PopupShareProps;
 
     /**
-     * @description Whether to use ProFormField instead of Input for locale items
+     * @description Whether to use ProFormField instead of Antd for the locale items
      * @description.zh-CN 语言输入项是否使用 ProFormField 控件
      * @description.zh-TW 語言輸入項是否使用 ProFormField 控件
      * @default true
@@ -236,11 +236,10 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const editContext = React.useContext(EditOrReadOnlyContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
+    const intlType = useIntl();
 
     const fieldRef = React.useRef<InputRef>(null);
     React.useImperativeHandle(ref, () => fieldRef.current);
-
-    const intlType = useIntl();
 
     const handleSetAsDefault = (tagId: string) => {
         const element = document.querySelector(`input[data-locale-input-tag='${tagId}']`) as HTMLInputElement;
