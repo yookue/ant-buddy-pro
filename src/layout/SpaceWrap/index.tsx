@@ -69,7 +69,7 @@ export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
                 case 'large':
                     return 24;
                 default:
-                    return 8;
+                    return 0;
             }
         }
         return 0;
@@ -96,4 +96,9 @@ export const SpaceWrap: React.FC<SpaceWrapProps> = (props?: SpaceWrapProps) => {
             </Space>
         </div>
     );
+};
+
+
+SpaceWrap.defaultProps = {
+    size: 'small',
 };
