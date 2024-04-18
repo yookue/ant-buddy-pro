@@ -26,6 +26,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
+import './index.less';
 
 
 export type UintType = 'millis' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years' | 'forever';
@@ -128,6 +129,13 @@ export type ChronoSelectProps = ProFormSelectProps & {
      * @default true
      */
     proField?: boolean;
+
+    /**
+     * @description Whether to use the preset style for the component
+     * @description.zh-CN 组件是否使用预设样式
+     * @description.zh-TW 組件是否使用預設樣式
+     */
+    usePresetStyle?: 'addon' | false;
 };
 
 
@@ -151,12 +159,12 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options']);
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'localeProps', 'proField']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'localeProps', 'proField', 'usePresetStyle']);
         return (
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, props?.className),
+                    className: classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.className),
                     ...omitFieldProps,
                     options: props?.fieldProps?.options ?? optionItems,
                 }}
@@ -166,7 +174,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
         const restProps = PropsUtils.pickForwardProps(props);
         return (
             <Select
-                className={classNames(clazzPrefix, props?.className)}
+                className={classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.className)}
                 {...restProps}
                 {...omitFieldProps}
                 options={props?.fieldProps?.options ?? optionItems}
