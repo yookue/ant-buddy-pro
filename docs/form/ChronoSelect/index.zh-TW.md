@@ -4,7 +4,7 @@ toc: content
 
 ## ChronoSelect
 
-ChronoSelect, 提供了一個可以顯示時間單位的選擇框，選項數據來源於 [ChronoUnit](https://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoUnit.html)。
+ChronoSelect, 提供了一個可以選擇時間單位的選擇框，選項數據來源於 [ChronoUnit](https://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoUnit.html)。
 
 ### 導入組件
 

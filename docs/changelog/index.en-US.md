@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.66** [2024-04-18]
+    - Add 'form/ChronoTuple'
+
   - **v0.1.65** [2024-04-17]
     - Add 'form/ChronoSelect'
 
