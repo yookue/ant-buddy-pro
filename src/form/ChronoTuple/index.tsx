@@ -104,7 +104,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
                     label={props?.selectProps?.label ?? (formContext.vertical ? ' ' : '')}
                     {...restSelectProps}
                     proField={props?.proField}
-                    usePresetStyle={props?.selectProps?.usePresetStyle ?? 'addon'}
+                    usePresetStyle={(props?.selectProps?.usePresetStyle === undefined) ? 'addon' : false}
                 />
             </Input.Group>
         </div>
