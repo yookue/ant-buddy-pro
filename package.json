@@ -43,8 +43,8 @@
         "@babel/runtime": "^7.24.4",
         "@emotion/css": "^11.11.2",
         "@yookue/react-condition": "^0.1.9",
-        "@yookue/ts-lang-utils": "^0.1.30",
-        "@yookue/ts-multi-map": "^0.1.18",
+        "@yookue/ts-lang-utils": "^0.1.31",
+        "@yookue/ts-multi-map": "^0.1.20",
         "rc-scrollbars": "^1.1.6",
         "screenfull": "^6.0.2"
     },
