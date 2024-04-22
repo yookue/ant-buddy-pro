@@ -350,7 +350,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const clearIconsBadge = () => {
-        const elements = document.querySelectorAll(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option]`);
+        const elements = document.querySelectorAll<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option]`);
         elements?.forEach(item => ElementUtils.removeClassName(item as HTMLElement, `${clazzPrefix}-icon-selected`));
     };
 
@@ -358,7 +358,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         if (StringUtils.isBlank(iconName)) {
             return;
         }
-        const element = document.querySelector(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option='${iconName}']`) as HTMLElement;
+        const element = document.querySelector<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option='${iconName}']`);
         if (element) {
             selected ? ElementUtils.appendClassName(element, `${clazzPrefix}-icon-selected`) : ElementUtils.removeClassName(element, `${clazzPrefix}-icon-selected`);
         }

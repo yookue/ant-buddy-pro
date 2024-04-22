@@ -247,7 +247,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     React.useImperativeHandle(ref, () => fieldRef.current);
 
     const handleSetAsDefault = (tagId: string) => {
-        const element = document.querySelector(`input[data-locale-input-tag='${tagId}']`) as HTMLInputElement;
+        const element = document.querySelector<HTMLInputElement>(`input[data-locale-input-tag='${tagId}']`);
         if (element && fieldRef.current?.input) {
             ElementUtils.setElementValue(fieldRef.current?.input, element.value);
         }
