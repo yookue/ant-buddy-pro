@@ -41,6 +41,11 @@ export type SettingDrawerProps = ProSettingDrawerProps & {
 };
 
 
+/**
+ * Component for displaying an icon which can be used to change the layout settings
+ *
+ * @author David Hsing
+ */
 export const SettingDrawer: React.FC<SettingDrawerProps> = (props?: SettingDrawerProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

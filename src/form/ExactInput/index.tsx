@@ -118,6 +118,11 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
 };
 
 
+/**
+ * Component for displaying a text input box with a checkbox which aiming to support exact capability for enquiries
+ *
+ * @author David Hsing
+ */
 export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

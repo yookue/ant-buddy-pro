@@ -19,6 +19,11 @@ import {Modal, type ModalFuncProps} from 'antd';
 import {withWarn, withInfo, withSuccess, withError, withConfirm} from 'antd/es/modal/confirm';
 
 
+/**
+ * Utilities for Ant Design dialogs
+ *
+ * @author David Hsing
+ */
 export abstract class DialogUtils {
     /**
      * Popups a warn modal dialog

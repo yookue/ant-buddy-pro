@@ -20,6 +20,13 @@ import * as icons from '@ant-design/icons';
 import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 
 
+/**
+ * Types for Ant Design icons
+ *
+ * @author David Hsing
+ */
+
+
 export type SceneType = 'direction' | 'suggestion' | 'editor' | 'data' | 'logo' | 'web';
 
 

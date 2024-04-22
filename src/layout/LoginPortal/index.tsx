@@ -144,6 +144,11 @@ export type LoginPortalProps = {
 };
 
 
+/**
+ * Component for displaying a login layout
+ *
+ * @author David Hsing
+ */
 export const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

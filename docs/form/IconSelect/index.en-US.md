@@ -4,7 +4,7 @@ toc: content
 
 ## IconSelect
 
-IconSelect, provides a capability that displaying icons for choosing.
+IconSelect, provides a select box that displaying icons for choosing.
 
 ### Import
 

@@ -134,6 +134,11 @@ export type DivideSelectProps = ProFormSelectProps & {
 };
 
 
+/**
+ * Component for displaying a select box with the capability that displaying the label and value of options into two parts
+ *
+ * @author David Hsing
+ */
 export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

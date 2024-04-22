@@ -19,6 +19,11 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 
+/**
+ * Utilities for React children DOM
+ *
+ * @author David Hsing
+ */
 export abstract class ChildUtils {
     /**
      * Returns the total number of components in the children

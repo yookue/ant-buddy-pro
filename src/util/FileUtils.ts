@@ -18,6 +18,11 @@
 import {type RcFile} from 'antd/es/upload/interface';
 
 
+/**
+ * Utilities for files
+ *
+ * @author David Hsing
+ */
 export abstract class FileUtils {
     /**
      * Returns whether the given file is a jpeg file

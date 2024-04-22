@@ -21,7 +21,7 @@ nav:
     - 增加 'style/alive'
 
   - **v0.1.57** [2024-04-01]
-    - 增加 'util/AntUtils'
+    - 增加 'util/DatasetUtils'
     - 增加 'util/DialogUtils'
 
   - **v0.1.53** [2024-03-20]

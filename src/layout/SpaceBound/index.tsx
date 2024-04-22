@@ -48,6 +48,11 @@ export type SpaceBoundProps = SpaceProps & {
 };
 
 
+/**
+ * Component for displaying a div which can keep spaces for children
+ *
+ * @author David Hsing
+ */
 export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

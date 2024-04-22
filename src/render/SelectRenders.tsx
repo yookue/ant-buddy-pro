@@ -19,7 +19,9 @@ import React from 'react';
 
 
 /**
- * Utilities for rendering select
+ * Renders for rendering select
+ *
+ * @author David Hsing
  */
 export abstract class SelectRenders {
     /**

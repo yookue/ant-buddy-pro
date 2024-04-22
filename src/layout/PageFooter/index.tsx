@@ -187,6 +187,11 @@ export type PageFooterProps = {
 };
 
 
+/**
+ * Component for displaying a footer
+ *
+ * @author David Hsing
+ */
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

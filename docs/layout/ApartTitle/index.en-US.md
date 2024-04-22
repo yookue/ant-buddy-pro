@@ -4,7 +4,7 @@ toc: content
 
 ## ApartTitle
 
-ApartTitle component, displays a title bar with an ornament, in order to separate page areas.
+ApartTitle component, displays a title bar and an ornament, in order to separate page areas.
 
 ### Import
 

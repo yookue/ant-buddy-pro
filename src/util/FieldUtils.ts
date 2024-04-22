@@ -21,6 +21,11 @@ import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-des
 import {useDebounceFn} from '@ant-design/pro-utils';
 
 
+/**
+ * Utilities for Ant Design fields
+ *
+ * @author David Hsing
+ */
 export abstract class FieldUtils {
     /**
      * Returns the built array of Ant ProComponents LabeledValue, with locale data

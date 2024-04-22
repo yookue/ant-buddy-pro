@@ -15,6 +15,11 @@
  */
 
 
+/**
+ * Utilities for HTML elements
+ *
+ * @author David Hsing
+ */
 export abstract class ElementUtils {
     /**
      * Appends the given class name to the given html element

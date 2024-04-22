@@ -139,6 +139,11 @@ export type ChronoSelectProps = ProFormSelectProps & {
 };
 
 
+/**
+ * Component for displaying a select box with chrono units
+ *
+ * @author David Hsing
+ */
 export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

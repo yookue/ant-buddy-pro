@@ -4,7 +4,7 @@ toc: content
 
 ## DivideSelect
 
-DivideSelect, provides a capability that displaying the label of option item, into two parts.
+DivideSelect, provides a capability that displaying the label and value of options into two parts.
 
 ### Import
 

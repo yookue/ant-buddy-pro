@@ -51,9 +51,11 @@ export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormF
 
 
 /**
- * Simple Segmented wrapper for antd v4
+ * Component for displaying a segmented field
  *
  * @see "https://github.com/ant-design/pro-components/blob/main/packages/form/src/components/Segmented/index.tsx"
+ *
+ * @author David Hsing
  */
 export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioProps) => {
     // noinspection JSUnresolvedReference

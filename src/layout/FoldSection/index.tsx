@@ -248,6 +248,11 @@ export type FoldSectionProps = {
 };
 
 
+/**
+ * Component for displaying a header and a panel which can be collapsed
+ *
+ * @author David Hsing
+ */
 export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

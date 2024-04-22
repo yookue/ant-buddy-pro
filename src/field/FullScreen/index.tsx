@@ -102,6 +102,11 @@ export type FullScreenProps = {
 };
 
 
+/**
+ * Component for displaying an icon with fullscreen capability
+ *
+ * @author David Hsing
+ */
 export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

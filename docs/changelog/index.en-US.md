@@ -21,7 +21,7 @@ Here are some milestone versions of the changelog:
     - Add 'style/alive'
 
   - **v0.1.57** [2024-04-01]
-    - Add 'util/AntUtils'
+    - Add 'util/DatasetUtils'
     - Add 'util/DialogUtils'
 
   - **v0.1.53** [2024-03-20]

@@ -15,6 +15,11 @@
  */
 
 
+/**
+ * Constants for Ant Design & ProComponents
+ *
+ * @author David Hsing
+ */
 export abstract class DesignConst {
     // @see "antd/es/form/FormItem/index.d.ts"
     public static FormItemProps = ['prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];

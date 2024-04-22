@@ -141,6 +141,11 @@ export type CodePreviewProps = React.PropsWithChildren<{
 }>;
 
 
+/**
+ * Component for displaying a code snippet
+ *
+ * @author David Hsing
+ */
 export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

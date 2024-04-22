@@ -48,6 +48,11 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
 };
 
 
+/**
+ * Component for displaying an img with fallback capability
+ *
+ * @author David Hsing
+ */
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

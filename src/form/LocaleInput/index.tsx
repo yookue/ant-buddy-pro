@@ -230,6 +230,11 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
 };
 
 
+/**
+ * Component for displaying a text input box with a dropdown div of locale input boxes
+ *
+ * @author David Hsing
+ */
 export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & React.RefAttributes<any>> = React.forwardRef((props?: LocaleInputProps, ref?: any) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

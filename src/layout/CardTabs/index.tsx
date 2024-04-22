@@ -79,6 +79,11 @@ export type CardTabsProps = Omit<TabsProps, 'type'> & {
 };
 
 
+/**
+ * Component for displaying a tabs with card styles
+ *
+ * @author David Hsing
+ */
 export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

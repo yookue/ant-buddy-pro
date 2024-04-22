@@ -18,7 +18,12 @@
 import omit from 'rc-util/es/omit';
 
 
-export abstract class AntUtils {
+/**
+ * Utilities for Ant Design datasets
+ *
+ * @author David Hsing
+ */
+export abstract class DatasetUtils {
     /**
      * Returns the data for ProComponents `ProDescriptions`
      *

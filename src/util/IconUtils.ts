@@ -22,6 +22,11 @@ import {StringUtils} from '@yookue/ts-lang-utils';
 import * as iconTypes from '@/type/antd-icons';
 
 
+/**
+ * Utilities for Ant Design icons
+ *
+ * @author David Hsing
+ */
 export abstract class IconUtils {
     /**
      * Returns the icon that first matches the given icon name with theme types and icon types

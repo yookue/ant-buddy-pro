@@ -81,6 +81,11 @@ export type ChronoTupleProps = {
 };
 
 
+/**
+ * Component for displaying a number input box and a select box with chrono units
+ *
+ * @author David Hsing
+ */
 export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

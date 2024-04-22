@@ -105,6 +105,11 @@ export type ApartTitleProps = {
 };
 
 
+/**
+ * Component for displaying a title bar and an ornament
+ *
+ * @author David Hsing
+ */
 export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

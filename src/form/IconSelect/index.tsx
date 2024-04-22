@@ -272,6 +272,11 @@ export type IconSelectProps = ProFormSelectProps & {
 };
 
 
+/**
+ * Component for displaying a select box with Ant Design icons
+ *
+ * @author David Hsing
+ */
 export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

@@ -15,6 +15,11 @@
  */
 
 
+/**
+ * Utilities for images
+ *
+ * @author David Hsing
+ */
 export abstract class ImageUtils {
     /**
      * Returns the detected image src for the given param

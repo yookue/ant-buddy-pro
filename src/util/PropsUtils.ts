@@ -19,6 +19,11 @@ import omit from 'rc-util/es/omit';
 import {DesignConst} from '@/constant/DesignConst';
 
 
+/**
+ * Utilities for properties
+ *
+ * @author David Hsing
+ */
 export abstract class PropsUtils {
     /**
      * Returns the omitted record of Ant ProComponents from the given props
