@@ -11,9 +11,11 @@
 
 ## Features
 
-- 🪄 Elegant default configurations assist developers to get started as simple as possible
-- 💎 React components compatible with Ant Design. More components are coming soon
-- 🎨 Theme capabilities, for customizing complete theme components, are up to you
+🪄 Elegant default configurations assist developers to get started as simple as possible
+
+💎 React components compatible with Ant Design. More components are coming soon
+
+🎨 Theme capabilities, for customizing complete theme components, are up to you
 
 ## Quickstart
 
