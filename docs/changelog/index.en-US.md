@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.68** [2024-04-27]
+    - Add 'form/MaskInput'
+
   - **v0.1.66** [2024-04-18]
     - Add 'form/ChronoTuple'
 

@@ -248,7 +248,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
 
     const handleSetAsDefault = (tagId: string) => {
         const element = document.querySelector<HTMLInputElement>(`input[data-locale-input-tag='${tagId}']`);
-        if (element && fieldRef.current?.input) {
+        if (element) {
             ElementUtils.setElementValue(fieldRef.current?.input, element.value);
         }
     };
@@ -543,7 +543,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 onClick: handleMenuClick,
             }}
             getPopupContainer={trigger => {
-                const container = (typeof props?.dropdownProps?.getPopupContainer === 'function') ? props?.dropdownProps?.getPopupContainer(trigger) : undefined;
+                const container = (typeof props?.dropdownProps?.getPopupContainer === 'function') ? props.dropdownProps.getPopupContainer(trigger) : undefined;
                 return container || trigger?.parentElement || document.body;
             }}
             overlayClassName={classNames(`${clazzPrefix}-dropdown`, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.dropdownProps?.overlayClassName)}
@@ -551,7 +551,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             onOpenChange={(open: boolean) => {
                 handleMenuOpen(open);
                 if (typeof props?.dropdownProps?.onOpenChange === 'function') {
-                    props?.dropdownProps?.onOpenChange(open);
+                    props.dropdownProps.onOpenChange(open);
                 }
             }}
             {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['getPopupContainer', 'overlayClassName', 'onOpenChange']))}

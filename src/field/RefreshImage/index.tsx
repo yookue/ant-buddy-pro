@@ -84,10 +84,10 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         }
         const currentSrc = imageSource;
         if (typeof props?.onClick === 'function') {
-            props?.onClick(event);
+            props.onClick(event);
         }
         if (typeof props?.onRefresh === 'function') {
-            props?.onRefresh(previousSrc, currentSrc);
+            props.onRefresh(previousSrc, currentSrc);
         }
     };
 
@@ -96,7 +96,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
             setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
         }
         if (typeof props?.onError === 'function') {
-            props?.onError(event);
+            props.onError(event);
         }
     };
 

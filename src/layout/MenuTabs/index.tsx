@@ -248,7 +248,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     if (BooleanUtils.isNotFalse(props?.adjustLayoutProps?.adjustOnResize)) {
         const handleWindowResize = () => {
             requestAnimationFrame(() => {
-                if (!containerRef?.current) {
+                if (!containerRef.current) {
                     return;
                 }
                 let shouldMode: MenuMode = 'inline';
@@ -264,7 +264,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         };
 
         React.useLayoutEffect(() => {
-            if (containerRef?.current) {
+            if (containerRef.current) {
                 window.addEventListener('resize', handleWindowResize);
                 handleWindowResize();
             }
@@ -333,7 +333,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                     onClick={(menuInfo: MenuInfo) => {
                         setActiveKey(menuInfo?.key);
                         if (typeof props?.menuProps?.onClick === 'function') {
-                            props?.menuProps?.onClick(menuInfo);
+                            props.menuProps.onClick(menuInfo);
                         }
                     }}
                     {...restMenuProps}

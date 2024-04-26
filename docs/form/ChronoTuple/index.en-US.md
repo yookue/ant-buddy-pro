@@ -21,7 +21,7 @@ import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {ChronoTuple} from '@yookue/ant-buddy-pro';
 
 export default () => {
-    const [widthBlock, setWidthBlock] = React.useState(false);
+    const [widthBlock, setWidthBlock] = React.useState(true);
 
     return (
         <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>

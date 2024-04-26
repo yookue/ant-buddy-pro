@@ -176,7 +176,7 @@ export type FoldSectionProps = {
      * @description.zh-CN 头部折叠 span 的 Tooltip 属性
      * @description.zh-TW 頭部折叠 span 的 Tooltip 屬性
      */
-    tooltipProps?: Omit<TooltipProps, 'title'>,
+    tooltipProps?: Omit<TooltipProps, 'title'>;
 
     /**
      * @description The CSS class name of the panel div

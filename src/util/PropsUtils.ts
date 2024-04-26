@@ -24,6 +24,7 @@ import {DesignConst} from '@/constant/DesignConst';
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class PropsUtils {
     /**
      * Returns the omitted record of Ant ProComponents from the given props

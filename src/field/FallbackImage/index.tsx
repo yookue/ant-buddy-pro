@@ -68,7 +68,7 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
             setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
         }
         if (typeof props?.onError === 'function') {
-            props?.onError(event);
+            props.onError(event);
         }
     };
 

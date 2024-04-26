@@ -169,7 +169,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.className),
+                    className: classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.fieldProps?.className),
                     ...omitFieldProps,
                     options: props?.fieldProps?.options ?? optionItems,
                 }}
@@ -179,7 +179,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
         const restProps = PropsUtils.pickForwardProps(props);
         return (
             <Select
-                className={classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.className)}
+                className={classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
                 options={props?.fieldProps?.options ?? optionItems}

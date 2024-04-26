@@ -23,13 +23,14 @@ import React from 'react';
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class SelectRenders {
     /**
      * Returns the rendered DOM for the given select option, label first
      *
      * @param item the option item to render
      *
-     * @return the rendered DOM for the given select option, label first
+     * @returns the rendered DOM for the given select option, label first
      */
     public static renderLabelValue = (item: {label: any, value: any}): React.ReactNode => {
         return (
@@ -51,7 +52,7 @@ export abstract class SelectRenders {
      * @param labelPrefix the prefix of the label, such as '-'
      * @param valueWidth the width of the value
      *
-     * @return the rendered DOM for the given select option, value first, label align left
+     * @returns the rendered DOM for the given select option, value first, label align left
      */
     public static renderValueLabelLeft = (item: {label: any, value: any}, labelPrefix?: React.ReactNode, valueWidth?: string): React.ReactNode => {
         return (
@@ -71,7 +72,7 @@ export abstract class SelectRenders {
      *
      * @param item the option item to render
      *
-     * @return the rendered DOM for the given select option, value first, label align right
+     * @returns the rendered DOM for the given select option, value first, label align right
      */
     public static renderValueLabelRight = (item: {label: any, value: any}): React.ReactNode => {
         return (

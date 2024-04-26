@@ -24,6 +24,7 @@ import {withWarn, withInfo, withSuccess, withError, withConfirm} from 'antd/es/m
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class DialogUtils {
     /**
      * Popups a warn modal dialog

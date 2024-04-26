@@ -26,6 +26,7 @@ import {useDebounceFn} from '@ant-design/pro-utils';
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class FieldUtils {
     /**
      * Returns the built array of Ant ProComponents LabeledValue, with locale data

@@ -106,7 +106,7 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-CN 复选框的 Tooltip 属性
      * @description.zh-TW 复选框的 Tooltip 屬性
      */
-    tooltipProps?: TooltipProps,
+    tooltipProps?: TooltipProps;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -214,12 +214,12 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'useTooltip', 'tooltipProps', 'proField']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'useTooltip', 'tooltipProps', 'proField']);
         return (
             <ProFormText
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, posClazz, compactClazz, props?.className),
+                    className: classNames(clazzPrefix, posClazz, compactClazz, props?.fieldProps?.className),
                     ...omitFieldProps,
                     addonBefore: beforeDom,
                     addonAfter: afterDom,
@@ -230,7 +230,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         const restProps = PropsUtils.pickForwardProps(props);
         return (
             <Input
-                className={classNames(clazzPrefix, posClazz, compactClazz, props?.className)}
+                className={classNames(clazzPrefix, posClazz, compactClazz, props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
                 addonBefore={beforeDom}

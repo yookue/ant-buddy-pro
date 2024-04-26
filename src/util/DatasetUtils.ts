@@ -23,6 +23,7 @@ import omit from 'rc-util/es/omit';
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class DatasetUtils {
     /**
      * Returns the data for ProComponents `ProDescriptions`

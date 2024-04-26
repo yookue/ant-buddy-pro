@@ -23,13 +23,14 @@ import {type RcFile} from 'antd/es/upload/interface';
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class FileUtils {
     /**
      * Returns whether the given file is a jpeg file
      *
      * @param file the file to inspect
      *
-     * @return whether the given file is a jpeg file
+     * @returns whether the given file is a jpeg file
      */
     public static isJpgImage(file?: RcFile): boolean {
         return !!file && file.type === 'image/jpeg';
@@ -40,7 +41,7 @@ export abstract class FileUtils {
      *
      * @param file the file to inspect
      *
-     * @return whether the given file is a png file
+     * @returns whether the given file is a png file
      */
     public static isPngImage(file?: RcFile): boolean {
         return !!file && file.type === 'image/png';

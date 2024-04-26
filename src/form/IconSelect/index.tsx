@@ -268,7 +268,7 @@ export type IconSelectProps = ProFormSelectProps & {
      * @description.zh-CN 图标选项的 Tooltip 属性
      * @description.zh-TW 圖標選項的 Tooltip 屬性
      */
-    tooltipProps?: Omit<TooltipProps, 'title'>,
+    tooltipProps?: Omit<TooltipProps, 'title'>;
 };
 
 
@@ -676,12 +676,12 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestKeepOptions', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestKeepOptions', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps']);
         return (
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, props?.className),
+                    className: classNames(clazzPrefix, props?.fieldProps?.className),
                     ...omitFieldProps,
                     dropdownRender: (props?.optionMode === 'text' || !props?.themeTypes || !props?.sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
                     options: optionItems ?? buildTextOptions(),
@@ -698,7 +698,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         const restProps = PropsUtils.pickForwardProps(props);
         return (
             <Select
-                className={classNames(clazzPrefix, props?.className)}
+                className={classNames(clazzPrefix, props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
                 dropdownRender={(props?.optionMode === 'text' || !props?.themeTypes || !props?.sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}

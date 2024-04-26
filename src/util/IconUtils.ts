@@ -27,6 +27,7 @@ import * as iconTypes from '@/type/antd-icons';
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class IconUtils {
     /**
      * Returns the icon that first matches the given icon name with theme types and icon types
@@ -35,7 +36,7 @@ export abstract class IconUtils {
      * @param themeTypes the theme types to filter, missing means all theme types
      * @param sceneTypes the icon types to filter, missing means all icon types
      *
-     * @return the icon that first matches the given icon name with theme types and icon types
+     * @returns the icon that first matches the given icon name with theme types and icon types
      *
      * @example
      * React.createElement(IconUtils.findIcon('SettingOutlined'));
@@ -52,7 +53,7 @@ export abstract class IconUtils {
      * @param themeTypes the theme types to filter, missing means all theme types
      * @param sceneTypes the icon types to filter, missing means all icon types
      *
-     * @return the icons that matches the given icon name with theme types and icon types
+     * @returns the icons that matches the given icon name with theme types and icon types
      */
     public static findIcons(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): React.ComponentType<any>[] | undefined {
         if (StringUtils.isBlank(iconName)) {
@@ -92,7 +93,7 @@ export abstract class IconUtils {
      * @param themeType the theme type to filter
      * @param sceneType the icon type to filter
      *
-     * @return the icon that matches the given icon name with theme type and icon type
+     * @returns the icon that matches the given icon name with theme type and icon type
      */
     public static getIcon(iconName?: string, themeType?: ThemeType, sceneType?: iconTypes.SceneType): React.ComponentType<any> | undefined {
         if (!iconName || !sceneType) {
@@ -120,7 +121,7 @@ export abstract class IconUtils {
      * @param themeTypes the theme types to filter, missing means all theme types
      * @param sceneTypes the icon types to filter, missing means all icon types
      *
-     * @return the collections that filtered by the given theme types and icon types
+     * @returns the collections that filtered by the given theme types and icon types
      */
     public static getIconCollections(themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): ReadonlyMap<string, React.ComponentType<any>>[] {
         const result: ReadonlyMap<string, React.ComponentType<any>>[] = [];
@@ -199,7 +200,7 @@ export abstract class IconUtils {
      *
      * @param items the menu items to inspect
      *
-     * @return the menu items that has been resolved icons from string to component
+     * @returns the menu items that has been resolved icons from string to component
      */
     public static resolveMenuIcons(items?: MenuDataItem[]): MenuDataItem[] | undefined {
         if (!items || items.length === 0) {

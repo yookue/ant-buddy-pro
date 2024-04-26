@@ -20,6 +20,7 @@
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class ElementUtils {
     /**
      * Appends the given class name to the given html element
@@ -64,7 +65,7 @@ export abstract class ElementUtils {
      *
      * @param element the html element to inspect
      *
-     * @return the value property descriptor of the given html element
+     * @returns the value property descriptor of the given html element
      *
      * @see "https://coryrylan.com/blog/trigger-input-updates-with-react-controlled-inputs"
      */
@@ -87,7 +88,7 @@ export abstract class ElementUtils {
      *
      * @param element the html element to inspect
      *
-     * @return the value of the given html element
+     * @returns the value of the given html element
      *
      * @see "https://coryrylan.com/blog/trigger-input-updates-with-react-controlled-inputs"
      */

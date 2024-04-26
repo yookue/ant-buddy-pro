@@ -1,9 +1,9 @@
 ---
-title: Ant Buddy Pro - 开箱即用的 Ant Design Pro 增强组件
+title: Ant Buddy Pro - 开箱即用的 Ant Design ProComponents 增强组件
 order: 1
 hero:
-  title: ant-buddy-pro
-  desc: 🏅 开箱即用的 React & Ant Design Pro 增强组件 ❤️
+  title: Ant Buddy Pro
+  desc: 🏅 开箱即用的 React & Ant Design ProComponents 增强组件 ❤️
   actions:
     - text: 快速上手
       link: /zh-CN/guide

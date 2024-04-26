@@ -1,9 +1,9 @@
 ---
-title: Ant Buddy Pro - Awesome components based on Ant Design Pro
+title: Ant Buddy Pro - Awesome components based on Ant Design ProComponents
 order: 1
 hero:
-  title: ant-buddy-pro
-  desc: 🏅 Awesome components based on React & Ant Design Pro ❤️
+  title: Ant Buddy Pro
+  desc: 🏅 Awesome components based on React & Ant Design ProComponents ❤️
   actions:
   - text: Getting Started
     link: /guide

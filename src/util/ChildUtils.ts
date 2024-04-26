@@ -24,13 +24,14 @@ import ReactDOMServer from 'react-dom/server';
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class ChildUtils {
     /**
      * Returns the total number of components in the children
      *
      * @param children the element(s) to check
      *
-     * @return the total number of components in the children
+     * @returns the total number of components in the children
      *
      * @see "https://learnreactjs.github.io/access-child-component-node"
      */
@@ -43,7 +44,7 @@ export abstract class ChildUtils {
      *
      * @param children the element(s) to check
      *
-     * @return the total number of nonnull components in the children
+     * @returns the total number of nonnull components in the children
      *
      * @see "https://tagmerge.com/question/react-component-children-detect-if-empty-null-before-render"
      */
@@ -70,7 +71,7 @@ export abstract class ChildUtils {
      *
      * @param node the node to inspect
      *
-     * @return the string representation of pure content that under all the children
+     * @returns the string representation of pure content that under all the children
      *
      * @see "https://github.com/sunknudsen/react-node-to-string"
      */

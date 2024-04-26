@@ -19,12 +19,14 @@ import React from 'react';
 import omit from 'rc-util/es/omit';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
 import {LocaleInput, type LocaleInputProps} from '@/form/LocaleInput';
+import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
 import {IconSelect, type IconSelectProps} from '@/form/IconSelect';
 
 
 export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+export type OmitMaskInputProps = Omit<MaskInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
 export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
 
@@ -37,6 +39,7 @@ export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'plac
  *
  * @author David Hsing
  */
+// noinspection JSUnusedGlobalSymbols
 export abstract class SchemaRenders {
     /**
      * Returns the rendered `ExactInput` DOM for the given schema form column
@@ -44,7 +47,7 @@ export abstract class SchemaRenders {
      * @param schema the column item of `ProSchema` to render
      * @param props the `ExactInputProps` to inspect
      *
-     * @return the rendered `ExactInput` DOM for the given schema form column
+     * @returns the rendered `ExactInput` DOM for the given schema form column
      */
     public static renderExactInput = (schema: any, props?: OmitExactInputProps): React.ReactNode => {
         if (!schema || schema?.ignoreFormItem) {
@@ -75,7 +78,7 @@ export abstract class SchemaRenders {
      * @param schema the column item of `ProSchema` to render
      * @param props the `LocaleInputProps` to inspect
      *
-     * @return the rendered `LocaleInput` DOM for the given schema form column
+     * @returns the rendered `LocaleInput` DOM for the given schema form column
      */
     public static renderLocaleInput = (schema: any, props?: OmitLocaleInputProps): React.ReactNode => {
         if (!schema || schema?.ignoreFormItem) {
@@ -101,12 +104,43 @@ export abstract class SchemaRenders {
     }
 
     /**
+     * Returns the rendered `MaskInput` DOM for the given schema form column
+     *
+     * @param schema the column item of `ProSchema` to render
+     * @param props the `MaskInputProps` to inspect
+     *
+     * @returns the rendered `MaskInput` DOM for the given schema form column
+     */
+    public static renderMaskInput = (schema: any, props?: OmitMaskInputProps): React.ReactNode => {
+        if (!schema || schema?.ignoreFormItem) {
+            return undefined;
+        }
+        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
+        const restProps = {
+            proField: props?.proField ?? false,
+            ...(!props ? {} : omit(props, ['proField'])),
+        };
+        return (
+            <MaskInput
+                name={fieldName}
+                fieldProps={{
+                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
+                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                }}
+                proFieldProps={schema?.proFieldProps}
+                dependencies={schema?.dependencies}
+                {...restProps}
+            />
+        );
+    }
+
+    /**
      * Returns the rendered `DivideSelect` DOM for the given schema form column
      *
      * @param schema the column item of `ProSchema` to render
      * @param props the `DivideSelectProps` to inspect
      *
-     * @return the rendered `DivideSelect` DOM for the given schema form column
+     * @returns the rendered `DivideSelect` DOM for the given schema form column
      */
     public static renderDivideSelect = (schema: any, props?: OmitDivideSelectProps): React.ReactNode => {
         if (!schema || schema?.ignoreFormItem) {
@@ -141,7 +175,7 @@ export abstract class SchemaRenders {
      * @param schema the column item of `ProSchema` to render
      * @param props the `IconSelectProps` to inspect
      *
-     * @return the rendered `IconSelect` DOM for the given schema form column
+     * @returns the rendered `IconSelect` DOM for the given schema form column
      */
     public static renderIconSelect = (schema: any, props?: OmitIconSelectProps): React.ReactNode => {
         if (!schema || schema?.ignoreFormItem) {

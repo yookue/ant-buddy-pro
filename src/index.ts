@@ -24,6 +24,7 @@ export {DivideSelect, type DivideSelectProps} from './form/DivideSelect';
 export {ExactInput, type ExactInputProps} from './form/ExactInput';
 export {IconSelect, type IconSelectProps} from './form/IconSelect';
 export {LocaleInput, type LocaleInputProps} from './form/LocaleInput';
+export {MaskInput, type MaskInputProps} from './form/MaskInput';
 export {SegmentRadio, type SegmentRadioProps} from './form/SegmentRadio';
 export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';
 export {CardTabs, type CardTabsProps} from './layout/CardTabs';
