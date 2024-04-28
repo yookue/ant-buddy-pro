@@ -19,19 +19,19 @@
 
 ## Quickstart
 
-You can install `ant-buddy-pro` package in your existing React project as follows:
+You can install this package in your existing React project as follows:
 
 ```bash
 $ npm install @yookue/ant-buddy-pro --save
 ```
 
-Then, you may import components of `ant-buddy-pro` as follows:
+Then, you may import components as follows:
 
 ```jsx | pure
-import {FooBar} from '@yookue/ant-buddy-pro';
+import {Components} from '@yookue/ant-buddy-pro';
 ```
 
-Enjoy your journey in coding your projects with `ant-buddy-pro`. ✌️
+Enjoy your coding journey with `ant-buddy-pro`. ✌️
 
 ## Document
 
