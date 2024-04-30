@@ -1,16 +1,16 @@
-// @see "https://github.com/umijs/dumi-template"
+// @see "https://v1.d.umijs.org/config"
 
-import {defineConfig} from 'dumi';
 import globalSettings from './globalSettings';
 
 
 const path = require('path');
 
-export default defineConfig({
-    base: `${globalSettings?.rootContext}/`,
-    publicPath: `${globalSettings?.rootContext}/`,
+
+export default {
+    base: `${globalSettings.context?.root}/`,
+    publicPath: `${globalSettings.context?.root}/`,
     title: 'Ant Buddy Pro',
-    logo: `${globalSettings?.contextAssets}/ico/logo-icon.svg`,
+    logo: `${globalSettings.context?.assets}/ico/logo-icon.svg`,
     locales: [
         ['en-US', 'English'],
         ['zh-CN', '简体中文'],
@@ -22,13 +22,13 @@ export default defineConfig({
             content: 'Ant Buddy, Ant Buddy Pro, Ant Design, Ant Design Pro, React, NPM',
         }
     ],
-    favicon: `${globalSettings?.rootContext}/favicon.ico`,
+    favicon: `${globalSettings.context?.root}/favicon.ico`,
     links: [
-        { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/iphone-retina-180×180.png`, sizes: '180×180' },
-        { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/ipad-retina-167×167.png`, sizes: '167×167' },
-        { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings?.contextAssets}/ico/android-192x192.png`, sizes: '192x192' },
-        { rel: 'icon', type: 'image/svg+xml', href: `${globalSettings?.contextAssets}/ico/logo-icon.svg` },
-        { rel: 'fluid-icon', type: 'image/svg+xml', href: `${globalSettings?.contextAssets}/ico/logo-icon.svg` },
+        { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings.context?.assets}/ico/iphone-retina-180×180.png`, sizes: '180×180' },
+        { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings.context?.assets}/ico/ipad-retina-167×167.png`, sizes: '167×167' },
+        { rel: 'apple-touch-icon', type: 'image/png', href: `${globalSettings.context?.assets}/ico/android-192x192.png`, sizes: '192x192' },
+        { rel: 'icon', type: 'image/svg+xml', href: `${globalSettings.context?.assets}/ico/logo-icon.svg` },
+        { rel: 'fluid-icon', type: 'image/svg+xml', href: `${globalSettings.context?.assets}/ico/logo-icon.svg` },
         { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.font.im/css?family=Comfortaa' },
     ],
     navs: {
@@ -36,21 +36,21 @@ export default defineConfig({
             null,
             {
                 title: 'GitHub',
-                path: `https://github.com/yookue${globalSettings?.rootContext}`,
+                path: `https://github.com/yookue${globalSettings.context?.root}`,
             }
         ],
         'zh-CN': [
             null,
             {
                 title: 'GitHub',
-                path: `https://github.com/yookue${globalSettings?.rootContext}`,
+                path: `https://github.com/yookue${globalSettings.context?.root}`,
             }
         ],
         'zh-TW': [
             null,
             {
                 title: 'GitHub',
-                path: `https://github.com/yookue${globalSettings?.rootContext}`,
+                path: `https://github.com/yookue${globalSettings.context?.root}`,
             }
         ]
     },
@@ -58,7 +58,7 @@ export default defineConfig({
         localsConvention: 'camelCase',
     },
     dynamicImport: {
-        loading: '@/../.dumi/loading',
+        loading: '@ant-design/pro-layout/es/PageLoading',
     },
     externals: {
         'react': 'React',
@@ -105,7 +105,7 @@ export default defineConfig({
             font-family: Comfortaa, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, cursive;
         }
         .__dumi-default-layout-hero {
-            background: url("${globalSettings?.contextAssets}/img/home/hero-bg-1.svg") !important
+            background: url("${globalSettings.context?.assets}/img/home/hero-bg-1.svg") !important
         }
         .__dumi-default-layout-hero h1, .__dumi-default-layout-hero .markdown, .__dumi-default-layout-hero button {
             color: #fff !important;
@@ -119,4 +119,4 @@ export default defineConfig({
     webpack5: {},
     mfsu: {},
     // ssr: {},
-});
+};

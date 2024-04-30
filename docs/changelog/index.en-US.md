@@ -7,7 +7,7 @@ nav:
   order: 10
 ---
 
-## Version history
+## Version History
 
 Here are some milestone versions of the changelog:
 

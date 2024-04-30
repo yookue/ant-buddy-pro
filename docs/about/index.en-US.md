@@ -7,16 +7,21 @@ nav:
   order: 9
 ---
 
-## Contact us
+## Contact Us
 
 You can visit us at:
 
-- Yookue official：[https://yookue.com](https://yookue.com)
+- Yookue: [https://yookue.com](https://yookue.com)
 - GitHub: [https://github.com/yookue/ant-buddy-pro](https://github.com/yookue/ant-buddy-pro)
 
-## Special thanks
+## Documentation
+
+- GitHub pages: [https://yookue.github.io/ant-buddy-pro](https://yookue.github.io/ant-buddy-pro)
+
+## Special Thanks
 
 - [Ant Design](https://ant.design)
 - [Ant Design Pro](https://pro.ant.design)
+- [Ant Design ProComponents](https://pro-components.antdigital.dev)
 - [dumi](https://d.umijs.org/)
 - [umi](https://umijs.org)

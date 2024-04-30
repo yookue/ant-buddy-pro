@@ -20,9 +20,11 @@ import {defineConfig} from 'father';
 
 const path = require('path');
 
+
 /**
  * @see "https://github.com/umijs/father/blob/master/docs/config.md"
  */
+// noinspection JSUnusedGlobalSymbols
 export default defineConfig({
     cjs: {},
     esm: {},
