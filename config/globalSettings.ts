@@ -18,6 +18,11 @@
 const ROOT_CONTEXT: string = '/ant-buddy-pro';
 
 
+/**
+ * Global variables
+ *
+ * @author David Hsing
+ */
 export default {
     organ: {
         organTrademark: 'Yookue',
