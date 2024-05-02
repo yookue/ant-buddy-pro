@@ -15,10 +15,8 @@
  */
 
 
+import nodePath from 'node:path';
 import globalSettings from './globalSettings';
-
-
-const path = require('path');
 
 
 /**
@@ -113,8 +111,8 @@ export default {
     },
     outputPath: 'docs-dist',
     alias: {
-        '@': path.resolve(__dirname, '../src'),
-        '@yookue/ant-buddy-pro': path.resolve(__dirname, '../src'),
+        '@': nodePath.resolve(__dirname, '../src'),
+        '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, '../src'),
     },
     apiParser: {
         propFilter: {
