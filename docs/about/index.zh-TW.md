@@ -14,10 +14,6 @@ nav:
 - Yookue: [https://yookue.com](https://yookue.com)
 - GitHub: [https://github.com/yookue/ant-buddy-pro](https://github.com/yookue/ant-buddy-pro)
 
-## 説明文檔
-
-- GitHub pages: [https://yookue.github.io/ant-buddy-pro](https://yookue.github.io/ant-buddy-pro)
-
 ## 特別感謝
 
 - [Ant Design](https://ant.design)

@@ -15,10 +15,8 @@
  */
 
 
+import nodePath from 'node:path';
 import {defineConfig} from 'father';
-
-
-const path = require('path');
 
 
 /**
@@ -40,8 +38,8 @@ export default defineConfig({
         }
     },
     alias: {
-        '@': path.resolve(__dirname, './src'),
-        '@yookue/ant-buddy-pro': path.resolve(__dirname, './src'),
+        '@': nodePath.resolve(__dirname, './src'),
+        '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
     },
     extraBabelPlugins: [
         ['babel-plugin-comments', {

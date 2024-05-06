@@ -5,6 +5,7 @@
         "max-empty-lines": 2,
         "alpha-value-notation": "number",
         "color-no-invalid-hex": true,
-        "selector-class-pattern": null
+        "selector-class-pattern": null,
+        "selector-list-comma-newline-after": "always-multi-line"
     }
 }

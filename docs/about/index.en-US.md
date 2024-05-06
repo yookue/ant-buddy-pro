@@ -14,10 +14,6 @@ You can visit us at:
 - Yookue: [https://yookue.com](https://yookue.com)
 - GitHub: [https://github.com/yookue/ant-buddy-pro](https://github.com/yookue/ant-buddy-pro)
 
-## Documentation
-
-- GitHub pages: [https://yookue.github.io/ant-buddy-pro](https://yookue.github.io/ant-buddy-pro)
-
 ## Special Thanks
 
 - [Ant Design](https://ant.design)
