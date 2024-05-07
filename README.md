@@ -31,7 +31,7 @@ Then, you may import components as follows:
 import {Foobar} from '@yookue/ant-buddy-pro';
 ```
 
-Enjoy your coding journey with `ant-buddy-pro`. ✌️
+Enjoy your coding journey with `ant-buddy-pro` ✌️
 
 ## Document
 
