@@ -1,11 +1,10 @@
 {
-    "extends": "stylelint-config-standard",
+    "extends": "stylelint-config-standard-less",
     "rules": {
-        "indentation": 4,
-        "max-empty-lines": 2,
         "alpha-value-notation": "number",
+        "color-function-notation": "legacy",
         "color-no-invalid-hex": true,
-        "selector-class-pattern": null,
-        "selector-list-comma-newline-after": "always-multi-line"
+        "comment-empty-line-before": "always",
+        "custom-property-empty-line-before": "never"
     }
 }

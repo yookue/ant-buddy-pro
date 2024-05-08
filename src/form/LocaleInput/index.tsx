@@ -343,7 +343,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
 
     const menuItems: MenuProps['items'] = [];
     if (props?.popupInputProps) {
-        for (const itemProp of props?.popupInputProps) {
+        for (const itemProp of props.popupInputProps) {
             if (!itemProp || !itemProp?.tag) {
                 continue;
             }
@@ -407,7 +407,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             });
         }
     } else if (!props?.popupInputProps && props?.popupQuickTags) {
-        for (const tag of props?.popupQuickTags) {
+        for (const tag of props.popupQuickTags) {
             if (!tag || tag.length === 0) {
                 continue;
             }
