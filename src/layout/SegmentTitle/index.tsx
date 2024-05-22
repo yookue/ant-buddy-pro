@@ -22,12 +22,12 @@ import classNames from 'classnames';
 import './index.less';
 
 
-export type ApartTitleProps = {
+export type SegmentTitleProps = {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-apart-title'
+     * @default 'buddy-segment-title'
      */
     clazzPrefix?: string;
 
@@ -46,52 +46,52 @@ export type ApartTitleProps = {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The DOM of ornament span
-     * @description.zh-CN 装饰 span 的内容
-     * @description.zh-TW 裝飾 span 的内容
+     * @description The DOM of ornament div
+     * @description.zh-CN 装饰 div 的内容
+     * @description.zh-TW 裝飾 div 的内容
      */
     ornament?: React.ReactNode;
 
     /**
-     * @description The CSS class name of ornament span
-     * @description.zh-CN 装饰 span 的 CSS 类名
-     * @description.zh-TW 裝飾 span 的 CSS 類名
+     * @description The CSS class name of ornament div
+     * @description.zh-CN 装饰 div 的 CSS 类名
+     * @description.zh-TW 裝飾 div 的 CSS 類名
      */
     ornamentClazz?: string;
 
     /**
-     * @description The CSS style of ornament span
-     * @description.zh-CN 装饰 span 的 CSS 样式
-     * @description.zh-TW 裝飾 span 的 CSS 樣式
+     * @description The CSS style of ornament div
+     * @description.zh-CN 装饰 div 的 CSS 样式
+     * @description.zh-TW 裝飾 div 的 CSS 樣式
      */
     ornamentStyle?: React.CSSProperties;
 
     /**
-     * @description The position of ornament span
-     * @description.zh-CN 装饰 span 的位置
-     * @description.zh-TW 裝飾 span 的位置
+     * @description The position of ornament div
+     * @description.zh-CN 装饰 div 的位置
+     * @description.zh-TW 裝飾 div 的位置
      * @default 'before'
      */
     ornamentPos?: 'before' | 'after' | false;
 
     /**
-     * @description The DOM of content span
-     * @description.zh-CN 标题 span 的内容
-     * @description.zh-TW 標題 span 的内容
+     * @description The DOM of content div
+     * @description.zh-CN 标题 div 的内容
+     * @description.zh-TW 標題 div 的内容
      */
     content?: React.ReactNode;
 
     /**
-     * @description The CSS class name of content span
-     * @description.zh-CN 标题 span 的 CSS 类名
-     * @description.zh-TW 標題 span 的 CSS 類名
+     * @description The CSS class name of content div
+     * @description.zh-CN 标题 div 的 CSS 类名
+     * @description.zh-TW 標題 div 的 CSS 類名
      */
     contentClazz?: string;
 
     /**
-     * @description The CSS style of content span
-     * @description.zh-CN 标题 span 的 CSS 样式
-     * @description.zh-TW 標題 span 的 CSS 樣式
+     * @description The CSS style of content div
+     * @description.zh-CN 标题 div 的 CSS 样式
+     * @description.zh-TW 標題 div 的 CSS 樣式
      */
     contentStyle?: React.CSSProperties;
 
@@ -101,32 +101,32 @@ export type ApartTitleProps = {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    usePresetStyle?: 'default' | 'classic' | false;
+    usePresetStyle?: 'default' | 'success' | 'processing' | 'warning' | 'error' | false;
 };
 
 
 /**
- * Component for displaying a title apart
+ * Component for displaying a title segment
  *
  * @author David Hsing
  */
-export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) => {
+export const SegmentTitle: React.FC<SegmentTitleProps> = (props?: SegmentTitleProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-apart-title');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-title');
 
     const buildOrnamentDom = (before: boolean) => {
         if (!props?.ornament || !props?.ornamentPos) {
             return undefined;
         }
         return (
-            <span
+            <div
                 className={classNames(`${clazzPrefix}-ornament-${before ? 'before' : 'after'}`, props?.ornamentClazz)}
                 style={props?.ornamentStyle}
             >
                 {props?.ornament}
-            </span>
+            </div>
         );
     }
 
@@ -138,9 +138,9 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
             <If condition={props?.ornamentPos === 'before'} validation={false}>
                 {buildOrnamentDom(true)}
             </If>
-            <span className={classNames(`${clazzPrefix}-content`, props?.contentClazz)} style={props?.contentStyle}>
+            <div className={classNames(`${clazzPrefix}-content`, props?.contentClazz)} style={props?.contentStyle}>
                 {props?.content}
-            </span>
+            </div>
             <If condition={props?.ornamentPos === 'after'} validation={false}>
                 {buildOrnamentDom(false)}
             </If>
@@ -149,7 +149,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 };
 
 
-ApartTitle.defaultProps = {
+SegmentTitle.defaultProps = {
     ornamentPos: 'before',
     usePresetStyle: 'default',
 };

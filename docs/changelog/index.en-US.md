@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.73** [2024-05-22]
+    - Add 'layout/SegmentTitle'
+
   - **v0.1.68** [2024-04-27]
     - Add 'form/MaskInput'
 

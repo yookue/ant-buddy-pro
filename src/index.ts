@@ -33,6 +33,7 @@ export {FoldSection, type FoldSectionProps} from './layout/FoldSection';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
 export {MenuTabs, type MenuTabsProps} from './layout/MenuTabs';
 export {PageFooter, type PageFooterProps} from './layout/PageFooter';
+export {SegmentTitle, type SegmentTitleProps} from './layout/SegmentTitle';
 export {SettingDrawer, type SettingDrawerProps} from './layout/SettingDrawer';
 export {SpaceBound, type SpaceBoundProps} from './layout/SpaceBound';
 export {SchemaRenders} from './render/SchemaRenders';

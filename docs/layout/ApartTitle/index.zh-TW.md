@@ -45,18 +45,18 @@ export default () => {
                     ]}
                 />
                 <ProFormRadio.Group
-                    label='摺叠區位置'
+                    label='預設樣式'
                     radioType='button'
                     fieldProps={{
-                        value: collapsePos?.toString(),
+                        value: presetStyle?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setCollapsePos(event.target?.value === 'false' ? false : event.target?.value);
+                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
                         }
                     }}
                     options={[
-                        {label: '前', value: 'before'},
-                        {label: '后', value: 'after'},
+                        {label: '默認', value: 'default'},
+                        {label: '經典', value: 'classic'},
                         {label: '無', value: 'false'},
                     ]}
                 />
@@ -65,7 +65,7 @@ export default () => {
             <ApartTitle
                 ornament={<AppstoreOutlined/>}
                 ornamentPos={ornamentPos}
-                content='ApartTitle 頭部標題'
+                content='ApartTitle 標題内容'
                 usePresetStyle={presetStyle}
             />
         </>

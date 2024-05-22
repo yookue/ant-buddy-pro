@@ -2,14 +2,14 @@
 toc: content
 ---
 
-## ApartTitle
+## SegmentTitle
 
-ApartTitle component, displays a title bar and an ornament icon, in order to separate page areas.
+SegmentTitle 组件，可展示一个带有装饰前缀的标题栏，用于分割页面区域。
 
 ### Import
 
 ```jsx | pure
-import {ApartTitle} from '@yookue/ant-buddy-pro';
+import {SegmentTitle} from '@yookue/ant-buddy-pro';
 ```
 
 ### Example
@@ -17,9 +17,8 @@ import {ApartTitle} from '@yookue/ant-buddy-pro';
 ```jsx
 import React from 'react';
 import {Divider} from 'antd';
-import {AppstoreOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {ApartTitle} from '@yookue/ant-buddy-pro';
+import {SegmentTitle} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState('before');
@@ -29,7 +28,7 @@ export default () => {
         <>
             <ProForm layout='horizontal' submitter={false}>
                 <ProFormRadio.Group
-                    label='Ornament Position'
+                    label='装饰物位置'
                     radioType='button'
                     fieldProps={{
                         value: ornamentPos?.toString(),
@@ -39,13 +38,13 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Before', value: 'before'},
-                        {label: 'After', value: 'after'},
-                        {label: 'False', value: 'false'},
+                        {label: '前', value: 'before'},
+                        {label: '后', value: 'after'},
+                        {label: '无', value: 'false'},
                     ]}
                 />
                 <ProFormRadio.Group
-                    label='Preset Style'
+                    label='预设样式'
                     radioType='button'
                     fieldProps={{
                         value: presetStyle?.toString(),
@@ -55,17 +54,20 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Default', value: 'default'},
-                        {label: 'Classic', value: 'classic'},
-                        {label: 'False', value: 'false'},
+                        {label: '默认', value: 'default'},
+                        {label: '成功', value: 'success'},
+                        {label: '处理中', value: 'processing'},
+                        {label: '警告', value: 'warning'},
+                        {label: '错误', value: 'error'},
+                        {label: '无', value: 'false'},
                     ]}
                 />
             </ProForm>
             <Divider/>
-            <ApartTitle
-                ornament={<AppstoreOutlined/>}
+            <SegmentTitle
+                ornament='1'
                 ornamentPos={ornamentPos}
-                content='ApartTitle header content'
+                content='SegmentTitle 标题内容'
                 usePresetStyle={presetStyle}
             />
         </>
@@ -73,8 +75,8 @@ export default () => {
 }
 ```
 
-### Properties
+### 组件属性
 
-##### ApartTitleProps
+##### SegmentTitleProps
 
-<API src="@/layout/ApartTitle/index.tsx" hideTitle></API>
+<API src="@/layout/SegmentTitle/index.tsx" hideTitle></API>

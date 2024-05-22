@@ -2,14 +2,14 @@
 toc: content
 ---
 
-## ApartTitle
+## SegmentTitle
 
-ApartTitle component, displays a title bar and an ornament icon, in order to separate page areas.
+SegmentTitle component, displays a title bar and an ornament prefix, in order to separate page areas.
 
 ### Import
 
 ```jsx | pure
-import {ApartTitle} from '@yookue/ant-buddy-pro';
+import {SegmentTitle} from '@yookue/ant-buddy-pro';
 ```
 
 ### Example
@@ -17,9 +17,8 @@ import {ApartTitle} from '@yookue/ant-buddy-pro';
 ```jsx
 import React from 'react';
 import {Divider} from 'antd';
-import {AppstoreOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {ApartTitle} from '@yookue/ant-buddy-pro';
+import {SegmentTitle} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState('before');
@@ -56,16 +55,19 @@ export default () => {
                     }}
                     options={[
                         {label: 'Default', value: 'default'},
-                        {label: 'Classic', value: 'classic'},
+                        {label: 'Success', value: 'success'},
+                        {label: 'Processing', value: 'processing'},
+                        {label: 'Warning', value: 'warning'},
+                        {label: 'Error', value: 'error'},
                         {label: 'False', value: 'false'},
                     ]}
                 />
             </ProForm>
             <Divider/>
-            <ApartTitle
-                ornament={<AppstoreOutlined/>}
+            <SegmentTitle
+                ornament='1'
                 ornamentPos={ornamentPos}
-                content='ApartTitle header content'
+                content='SegmentTitle header content'
                 usePresetStyle={presetStyle}
             />
         </>
@@ -75,6 +77,6 @@ export default () => {
 
 ### Properties
 
-##### ApartTitleProps
+##### SegmentTitleProps
 
-<API src="@/layout/ApartTitle/index.tsx" hideTitle></API>
+<API src="@/layout/SegmentTitle/index.tsx" hideTitle></API>
