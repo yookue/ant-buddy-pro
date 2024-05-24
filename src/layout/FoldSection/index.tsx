@@ -259,10 +259,24 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fold-section');
 
-    const [panelOpen, setPanelOpen] = React.useState(props?.panelInitialOpen);
+    // Initialize the default props
+    const {
+        headerOrnamentPos = 'before',
+        headerCollapsePos = 'after',
+        headerClosedDom = <UpOutlined/>,
+        headerOpenedDom = <DownOutlined/>,
+        useTooltip = false,
+        panelInitialOpen = true,
+        panelForceRender = false,
+        panelDestroyOnClose = false,
+        panelPlaceholder = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>,
+        usePresetStyle = 'default',
+    } = props ?? {};
+
+    const [panelOpen, setPanelOpen] = React.useState(panelInitialOpen);
 
     const buildOrnamentDom = (before: boolean) => {
-        if (!props?.headerOrnament || !props?.headerOrnamentPos) {
+        if (!props?.headerOrnament || !headerOrnamentPos) {
             return undefined;
         }
         return (
@@ -276,20 +290,20 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     }
 
     const buildCollapseDom = (before: boolean) => {
-        if ((!props?.headerOpenedDom && !props?.headerClosedDom) || !props?.headerCollapsePos) {
+        if ((!headerOpenedDom && !headerClosedDom) || !headerCollapsePos) {
             return undefined;
         }
         const content = (
             <span
                 className={classNames(`${clazzPrefix}-header-collapse-${before ? 'before' : 'after'}`, props?.headerCollapseClazz)}
                 style={props?.headerCollapseStyle}
-                title={props?.useTooltip ? undefined : (panelOpen ? props?.headerOpenedHint : props?.headerClosedHint)}
+                title={useTooltip ? undefined : (panelOpen ? props?.headerOpenedHint : props?.headerClosedHint)}
                 onClick={handleCollapse}
             >
-                {panelOpen ? props?.headerOpenedDom : props?.headerClosedDom}
+                {panelOpen ? headerOpenedDom : headerClosedDom}
             </span>
         );
-        if (!props?.useTooltip) {
+        if (!useTooltip) {
             return content;
         }
         return (
@@ -313,57 +327,43 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         }
     };
 
-    const [panelRendered, setPanelRendered] = React.useState(props?.panelForceRender || panelOpen);
+    const [panelRendered, setPanelRendered] = React.useState(panelForceRender ?? panelOpen);
     React.useEffect(() => {
-        if (props?.panelForceRender) {
+        if (panelForceRender) {
             setPanelRendered(true);
         }
-    }, [props?.panelForceRender]);
-    const panelVisible = (panelRendered || !!props?.panelContent || !!props?.panelPlaceholder) && (panelOpen || (!panelOpen && !props?.panelDestroyOnClose));
+    }, [panelForceRender]);
+    const panelVisible = (panelRendered || !!props?.panelContent || !!panelPlaceholder) && (panelOpen || (!panelOpen && !panelDestroyOnClose));
 
     return (
         <section
-            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
+            className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
-                <If condition={props?.headerCollapsePos === 'before'} validation={false}>
+                <If condition={headerCollapsePos === 'before'} validation={false}>
                     {buildCollapseDom(true)}
                 </If>
-                <If condition={props?.headerOrnamentPos === 'before'} validation={false}>
+                <If condition={headerOrnamentPos === 'before'} validation={false}>
                     {buildOrnamentDom(true)}
                 </If>
                 <span className={classNames(`${clazzPrefix}-header-content`, props?.headerContentClazz)} style={props?.headerContentStyle}>
                     {props?.headerContent}
                 </span>
-                <If condition={props?.headerOrnamentPos === 'after'} validation={false}>
+                <If condition={headerOrnamentPos === 'after'} validation={false}>
                     {buildOrnamentDom(false)}
                 </If>
-                <If condition={props?.headerCollapsePos === 'after'} validation={false}>
+                <If condition={headerCollapsePos === 'after'} validation={false}>
                     {buildCollapseDom(false)}
                 </If>
             </div>
             <CssMotion visible={panelVisible}>
                 {() => (
                     <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
-                        {props?.panelContent || props?.panelPlaceholder}
+                        {props?.panelContent || panelPlaceholder}
                     </div>
                 )}
             </CssMotion>
         </section>
     );
-};
-
-
-FoldSection.defaultProps = {
-    headerOrnamentPos: 'before',
-    headerCollapsePos: 'after',
-    headerClosedDom: <UpOutlined/>,
-    headerOpenedDom: <DownOutlined/>,
-    useTooltip: false,
-    panelInitialOpen: true,
-    panelForceRender: false,
-    panelDestroyOnClose: false,
-    panelPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>,
-    usePresetStyle: 'default',
 };

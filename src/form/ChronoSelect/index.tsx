@@ -149,11 +149,18 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-chrono-select');
+
+    // Initialize the default props
+    const {
+        unitTypes = ['millis', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'],
+        proField = true,
+    } = props ?? {};
+
     const intlType = useIntl();
 
     const optionItems: LabeledValue[] = [];
-    if (props?.unitTypes) {
-        props.unitTypes.forEach(item => {
+    if (unitTypes) {
+        unitTypes.forEach(item => {
             optionItems.push({
                 label: ObjectUtils.getProperty(props?.localeProps, item) || intlLocales.get([intlType.locale, item]) || intlLocales.get(['en_US', item]),
                 value: item,
@@ -163,7 +170,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options']);
 
-    if (props?.proField) {
+    if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'localeProps', 'proField', 'usePresetStyle']);
         return (
             <ProFormSelect
@@ -186,10 +193,4 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
             />
         );
     }
-};
-
-
-ChronoSelect.defaultProps = {
-    unitTypes: ['millis', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'],
-    proField: true,
 };

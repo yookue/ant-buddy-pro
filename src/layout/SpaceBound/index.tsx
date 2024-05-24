@@ -59,14 +59,19 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-space-bound');
 
-    const getNumericSize = function (size: SpaceSize) {
+    // Initialize the default props
+    const {
+        size = 'small',
+    } = props ?? {};
+
+    const getNumericSize = function (space: SpaceSize) {
         // noinspection SuspiciousTypeOfGuard
-        if (typeof size === 'number') {
-            return size;
+        if (typeof space === 'number') {
+            return space;
         }
         // noinspection SuspiciousTypeOfGuard
-        if (typeof size === 'string') {
-            switch (size) {
+        if (typeof space === 'string') {
+            switch (space) {
                 case 'small':
                     return 8;
                 case 'middle':
@@ -82,10 +87,10 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
 
     const [horizontalSize, verticalSize] = React.useMemo(
         () =>
-            ((Array.isArray(props?.size) ? props?.size : [props?.size, props?.size]) as [SpaceSize, SpaceSize]).map(item =>
+            ((Array.isArray(size) ? size : [size, size]) as [SpaceSize, SpaceSize]).map(item =>
                 getNumericSize(item),
             ),
-        [props?.size],
+        [size],
     );
 
     const paddingClazz = css({
@@ -101,9 +106,4 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
             </Space>
         </div>
     );
-};
-
-
-SpaceBound.defaultProps = {
-    size: 'small',
 };

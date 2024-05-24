@@ -284,10 +284,27 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
+
+    // Initialize the default props
+    const {
+        optionMode = 'icon',
+        optionGroup = true,
+        proField = true,
+        themeTypes = ['outlined', 'filled', 'twotone'],
+        defaultThemeType = 'outlined',
+        themeInkBar = true,
+        sceneTypes = ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'],
+        defaultSceneType = 'direction',
+        sceneInkBar = true,
+        sceneEntryWidth = '150px',
+        searchBox = true,
+        useTooltip = false,
+    } = props ?? {};
+
     const intlType = useIntl();
 
     const [dropdownOpen, setDropdownOpen] = React.useState(props?.fieldProps?.open);
-    const defaultTheme = (props?.defaultThemeType && props?.themeTypes?.includes(props?.defaultThemeType)) ? props.defaultThemeType : (props?.themeTypes ? props.themeTypes[0] : undefined);
+    const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);
     const [activeTab, setActiveTab] = React.useState(defaultTheme);
     const searchRef = React.useRef<InputRef>(null);
     const [searchWord, setSearchWord] = React.useState(props?.fieldProps?.searchValue);
@@ -296,8 +313,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     const buildTextOptions = () => {
         const result: any[] = [];
-        ['outlined', 'filled', 'twotone'].filter(themeType => props?.themeTypes?.includes(themeType as ThemeType)).forEach(themeType => {
-            ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(sceneType => props?.sceneTypes?.includes(sceneType as SceneType)).forEach(sceneType => {
+        ['outlined', 'filled', 'twotone'].filter(themeType => themeTypes?.includes(themeType as ThemeType)).forEach(themeType => {
+            ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(sceneType => sceneTypes?.includes(sceneType as SceneType)).forEach(sceneType => {
                 const collection = allIconTypes.get([themeType, sceneType]);
                 if (!collection) {
                     return;
@@ -320,7 +337,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 if (children.length === 0) {
                     return;
                 }
-                if (props?.optionGroup) {
+                if (optionGroup) {
                     const themeTitle = ObjectUtils.getProperty(props?.localeProps, `${themeType}Theme`) || intlLocales.get([intlType.locale, `${themeType}Theme`]) || intlLocales.get(['en_US', `${themeType}Theme`]);
                     const sceneTitle = ObjectUtils.getProperty(props?.localeProps, `${sceneType}Scene`) || intlLocales.get([intlType.locale, `${sceneType}Scene`]) || intlLocales.get(['en_US', `${sceneType}Scene`]);
                     const optGroup = {
@@ -443,7 +460,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                             <Wave>
                                 <div
                                     className={classNames(`${clazzPrefix}-icon-option`, props?.optionIconClazz)}
-                                    title={!props?.useTooltip ? key : undefined}
+                                    title={!useTooltip ? key : undefined}
                                     style={props?.optionIconStyle}
                                     onClick={() => handleIconClick(key)}
                                 >
@@ -452,7 +469,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                             </Wave>
                         </div>
                     );
-                    return !props?.useTooltip ? content : (
+                    return !useTooltip ? content : (
                         <Tooltip title={key} {...props?.tooltipProps}>
                             {content}
                         </Tooltip>
@@ -515,8 +532,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const buildIconTabs = (themeType: ThemeType) => {
-        if (props?.optionGroup) {
-            return ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => props?.sceneTypes?.includes(item as SceneType)).map(item => {
+        if (optionGroup) {
+            return ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => sceneTypes?.includes(item as SceneType)).map(item => {
                 return {
                     key: item,
                     label: ObjectUtils.getProperty(props?.localeProps, `${item}Scene`) || intlLocales.get([intlType.locale, `${item}Scene`]) || intlLocales.get(['en_US', `${item}Scene`]),
@@ -524,7 +541,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 };
             });
         }
-        const classified = ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => props?.sceneTypes?.includes(item as SceneType)).map(item => {
+        const classified = ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => sceneTypes?.includes(item as SceneType)).map(item => {
             return buildIconOptions(themeType, item as SceneType);
         });
         if (!classified || classified.length === 0 || classified.every(item => ObjectUtils.isNil(item))) {
@@ -556,14 +573,14 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const buildThemeTabs = (themeType: ThemeType) => {
-        if (!props?.themeTypes?.includes(themeType)) {
+        if (!themeTypes?.includes(themeType)) {
             return undefined;
         }
         const menuItems = buildIconTabs(themeType);
         if (!menuItems || menuItems.length === 0) {
             return undefined;
         }
-        const activeKey = !props?.optionGroup ? menuItems[0].key : (((props?.defaultSceneType && props?.sceneTypes?.includes(props?.defaultSceneType)) ? props.defaultSceneType : undefined) || (props?.sceneTypes ? props.sceneTypes[0] : undefined));
+        const activeKey = !optionGroup ? menuItems[0].key : (((defaultSceneType && sceneTypes?.includes(defaultSceneType)) ? defaultSceneType : undefined) || (sceneTypes ? sceneTypes[0] : undefined));
         return (
             <MenuTabs
                 menuProps={{
@@ -571,10 +588,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     defaultActiveKey: activeKey,
                     defaultActiveFirst: true,
                 }}
-                entryWidth={props?.sceneEntryWidth}
-                entryInkBar={props?.sceneInkBar}
+                entryWidth={sceneEntryWidth}
+                entryInkBar={sceneInkBar}
                 entrySelectionBold={false}
-                entryVisible={props?.optionGroup}
+                entryVisible={optionGroup}
                 tabClazz={`${clazzPrefix}-scene-tab`}
                 tabTitleVisible={false}
                 tabContentClazz={`${clazzPrefix}-scene-tab-content`}
@@ -582,7 +599,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         );
     };
 
-    const themeItems = ['outlined', 'filled', 'twotone'].filter(item => props?.themeTypes?.includes(item as ThemeType)).map(item => {
+    const themeItems = ['outlined', 'filled', 'twotone'].filter(item => themeTypes?.includes(item as ThemeType)).map(item => {
         return {
             key: item,
             label: ObjectUtils.getProperty(props?.localeProps, `${item}Theme`) || intlLocales.get([intlType.locale, `${item}Theme`]) || intlLocales.get(['en_US', `${item}Theme`]),
@@ -599,7 +616,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     ev.preventDefault();
                     ev.stopPropagation();
                 }}
-                onClick={!props?.searchBox ? undefined : (ev) => {
+                onClick={!searchBox ? undefined : (ev) => {
                     if (ev.target !== searchRef.current?.input && searchRef.current?.input === document.activeElement) {
                         // Disabled and re-enable the search box to restore non-focus state
                         setSearchDisabled(true);
@@ -609,7 +626,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 data-icon-select-dropdown={entryId}
             >
                 <ProCard
-                    className={classNames(props?.themeInkBar ? `${clazzPrefix}-ink-bar` : undefined)}
+                    className={classNames(themeInkBar ? `${clazzPrefix}-ink-bar` : undefined)}
                     tabs={{
                         activeKey: activeTab,
                         type: 'card',
@@ -617,7 +634,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         onChange: (activeKey: string) => {
                             setActiveTab(activeKey as ThemeType);
                         },
-                        tabBarExtraContent: !props?.searchBox ? undefined : (
+                        tabBarExtraContent: !searchBox ? undefined : (
                             <Input.Search
                                 ref={searchRef}
                                 placeholder={props?.localeProps?.searchBox || intlLocales.get([intlType.locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
@@ -639,13 +656,13 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const handleOptionClear = () => {
-        if (props?.optionMode === 'icon') {
+        if (optionMode === 'icon') {
             clearIconsBadge();
         }
     };
 
     const handleOptionDeselect = (value: string | number | LabeledValue, option: DefaultOptionType) => {
-        if (props?.optionMode === 'icon') {
+        if (optionMode === 'icon') {
             if (typeof value === 'string' || typeof value === 'number') {
                 changeIconBadge(value as string, false);
             } else {
@@ -675,7 +692,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
-    if (props?.proField) {
+    if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestKeepOptions', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps']);
         return (
             <ProFormSelect
@@ -683,7 +700,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 fieldProps={{
                     className: classNames(clazzPrefix, props?.fieldProps?.className),
                     ...omitFieldProps,
-                    dropdownRender: (props?.optionMode === 'text' || !props?.themeTypes || !props?.sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
+                    dropdownRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
                     options: optionItems ?? buildTextOptions(),
                     optionFilterProp: props?.fieldProps?.optionFilterProp || props?.fieldProps?.fieldNames?.value || 'value',
                     virtual: props?.fieldProps?.virtual ?? false,
@@ -701,7 +718,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
-                dropdownRender={(props?.optionMode === 'text' || !props?.themeTypes || !props?.sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
+                dropdownRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
                 options={optionItems ?? buildTextOptions()}
                 optionFilterProp={props?.fieldProps?.optionFilterProp || props?.fieldProps?.fieldNames?.value || 'value'}
                 virtual={props?.fieldProps?.virtual ?? false}
@@ -712,20 +729,4 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             />
         );
     }
-};
-
-
-IconSelect.defaultProps = {
-    optionMode: 'icon',
-    optionGroup: true,
-    proField: true,
-    themeTypes: ['outlined', 'filled', 'twotone'],
-    defaultThemeType: 'outlined',
-    themeInkBar: true,
-    sceneTypes: ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'],
-    defaultSceneType: 'direction',
-    sceneInkBar: true,
-    sceneEntryWidth: '150px',
-    searchBox: true,
-    useTooltip: false,
 };

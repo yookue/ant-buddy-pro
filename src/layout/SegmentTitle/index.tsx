@@ -116,8 +116,14 @@ export const SegmentTitle: React.FC<SegmentTitleProps> = (props?: SegmentTitlePr
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-title');
 
+    // Initialize the default props
+    const {
+        ornamentPos = 'before',
+        usePresetStyle = 'default',
+    } = props ?? {};
+
     const buildOrnamentDom = (before: boolean) => {
-        if (!props?.ornament || !props?.ornamentPos) {
+        if (!props?.ornament || !ornamentPos) {
             return undefined;
         }
         return (
@@ -132,24 +138,18 @@ export const SegmentTitle: React.FC<SegmentTitleProps> = (props?: SegmentTitlePr
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))}
+            className={classNames(`${clazzPrefix}`, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))}
             style={props?.containerStyle}
         >
-            <If condition={props?.ornamentPos === 'before'} validation={false}>
+            <If condition={ornamentPos === 'before'} validation={false}>
                 {buildOrnamentDom(true)}
             </If>
             <div className={classNames(`${clazzPrefix}-content`, props?.contentClazz)} style={props?.contentStyle}>
                 {props?.content}
             </div>
-            <If condition={props?.ornamentPos === 'after'} validation={false}>
+            <If condition={ornamentPos === 'after'} validation={false}>
                 {buildOrnamentDom(false)}
             </If>
         </div>
     );
-};
-
-
-SegmentTitle.defaultProps = {
-    ornamentPos: 'before',
-    usePresetStyle: 'default',
 };

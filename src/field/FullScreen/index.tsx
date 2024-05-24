@@ -18,25 +18,8 @@
 import React from 'react';
 import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
-import {If} from '@yookue/react-condition';
+import classNames from 'classnames';
 import screenfull from 'screenfull';
-
-
-export type WrapperProps = {
-    /**
-     * @description The CSS class name of the wrapper element
-     * @description.zh-CN 包裹的 div 或 span 的 CSS 类名
-     * @description.zh-TW 包裹的 div 或 span 的 CSS 類名
-     */
-    clazz?: string;
-
-    /**
-     * @description The CSS style of the wrapper element
-     * @description.zh-CN 包裹的 div 或 span 的 CSS 样式
-     * @description.zh-TW 包裹的 div 或 span 的 CSS 樣式
-     */
-    style?: React.CSSProperties;
-};
 
 
 export type FullScreenProps = {
@@ -47,6 +30,20 @@ export type FullScreenProps = {
      * @default 'buddy-full-screen'
      */
     clazzPrefix?: string;
+
+    /**
+     * @description The CSS class name of the container span
+     * @description.zh-CN 容器 span 的 CSS 类名
+     * @description.zh-TW 容器 span 的 CSS 類名
+     */
+    containerClazz?: string;
+
+    /**
+     * @description The CSS style of the container span
+     * @description.zh-CN 容器 span 的 CSS 样式
+     * @description.zh-TW 容器 span 的 CSS 樣式
+     */
+    containerStyle?: React.CSSProperties;
 
     /**
      * @description The target DOM element to toggle fullscreen
@@ -84,21 +81,6 @@ export type FullScreenProps = {
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: Omit<TooltipProps, 'title'>;
-
-    /**
-     * @description Whether to wrap with a div or span element
-     * @description.zh-CN 是否包裹一个 div 或 span
-     * @description.zh-TW 是否包裹一個 div 或 span
-     * @default false
-     */
-    useWrapper?: 'div' | 'span' | 'p' | false;
-
-    /**
-     * @description The properties of the wrapper element
-     * @description.zh-CN 包裹的 div 或 span 的属性
-     * @description.zh-TW 包裹的 div 或 span 的屬性
-     */
-    wrapperProps?: WrapperProps;
 };
 
 
@@ -113,11 +95,17 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-full-screen');
 
-    if (!props?.triggerFor) {
+    // Initialize the default props
+    const {
+        triggerFor = document.documentElement,
+        useTooltip = false,
+    } = props ?? {};
+
+    if (!triggerFor) {
         throw SyntaxError(`Parameter 'triggerFor' must be a valid element!`);
     }
 
-    const [fullscreen, setFullscreen] = React.useState(document.fullscreenElement === props?.triggerFor);
+    const [fullscreen, setFullscreen] = React.useState(document.fullscreenElement === triggerFor);
 
     /**
      * Listens fullscreenchange event for the trigger element
@@ -125,7 +113,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
      * @see "https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event"
      */
     const handleScreenChange = () => {
-        setFullscreen(document.fullscreenElement === props?.triggerFor);
+        setFullscreen(document.fullscreenElement === triggerFor);
     };
 
     /**
@@ -143,69 +131,30 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     };
 
     React.useLayoutEffect(() => {
-        props?.triggerFor?.addEventListener('fullscreenchange', handleScreenChange, false);
-        props?.triggerFor?.addEventListener('keydown', handleKeyDown, false);
+        triggerFor?.addEventListener('fullscreenchange', handleScreenChange, false);
+        triggerFor?.addEventListener('keydown', handleKeyDown, false);
         return () => {
-            props?.triggerFor?.removeEventListener('fullscreenchange', handleScreenChange, false);
-            props?.triggerFor?.removeEventListener('keydown', handleKeyDown, false);
+            triggerFor?.removeEventListener('fullscreenchange', handleScreenChange, false);
+            triggerFor?.removeEventListener('keydown', handleKeyDown, false);
         }
     });
 
     const handleToggleScreen = () => {
         if (screenfull.isEnabled) {
-            screenfull.toggle(props?.triggerFor);
+            screenfull.toggle(triggerFor);
             setFullscreen(!fullscreen);
         }
     };
 
-    const screenElement = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
-        className: clazzPrefix,
-        onClick: handleToggleScreen,
-    });
-
-    return (
-        <If condition={props?.useTooltip} validation={false}>
-            <If.Then>
-                <Tooltip title={fullscreen ? props?.exitHint : props?.enterHint} {...props?.tooltipProps}>
-                    <If condition={typeof props?.useWrapper === 'string'} validation={false}>
-                        {
-                            React.createElement((props?.useWrapper as string), {
-                                className: props?.wrapperProps?.clazz,
-                                style: props?.wrapperProps?.style,
-                            }, screenElement)
-                        }
-                    </If>
-                    <If condition={!props?.useWrapper} validation={false}>
-                        {screenElement}
-                    </If>
-                </Tooltip>
-            </If.Then>
-            <If.Else>
-                <If condition={typeof props?.useWrapper === 'string'} validation={false}>
-                    {
-                        React.createElement((props?.useWrapper as string), {
-                            className: props?.wrapperProps?.clazz,
-                            style: props?.wrapperProps?.style,
-                            title: fullscreen ? props?.exitHint : props?.enterHint,
-                        }, screenElement)
-                    }
-                </If>
-                <If condition={!props?.useWrapper} validation={false}>
-                    {
-                        React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
-                            title: fullscreen ? props?.exitHint : props?.enterHint,
-                            onClick: handleToggleScreen,
-                        })
-                    }
-                </If>
-            </If.Else>
-        </If>
+    const buildScreenDom = (tooltip: boolean) => (
+        <span className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle} title={!tooltip ? undefined : (fullscreen ? props?.exitHint : props?.enterHint)}>
+            {React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {onClick: handleToggleScreen})}
+        </span>
     );
-};
 
-
-FullScreen.defaultProps = {
-    triggerFor: document.documentElement,
-    useTooltip: false,
-    useWrapper: false,
+    return !useTooltip ? buildScreenDom(true) : (
+        <Tooltip title={fullscreen ? props?.exitHint : props?.enterHint} {...props?.tooltipProps}>
+            {buildScreenDom(false)}
+        </Tooltip>
+    );
 };

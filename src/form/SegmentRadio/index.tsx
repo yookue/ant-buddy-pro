@@ -63,6 +63,11 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-radio');
 
+    // Initialize the default props
+    const {
+        proField = true,
+    } = props ?? {};
+
     // noinspection DuplicatedCode
     const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
     if (props?.request) {
@@ -72,7 +77,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     }
 
     const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options']);
-    if (props?.proField) {
+    if (proField) {
         const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'requestKeepOptions', 'proField']);
         return (
             <ProForm.Item
@@ -95,9 +100,4 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
             />
         );
     }
-};
-
-
-SegmentRadio.defaultProps = {
-    proField: true,
 };

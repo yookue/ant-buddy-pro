@@ -65,6 +65,11 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
 
+    // Initialize the default props
+    const {
+        proField = true,
+    } = props ?? {};
+
     warning(!!formContext, `This component needs a FormContext`);
 
     const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
@@ -116,7 +121,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'onChange', 'onCompositionStart', 'onCompositionEnd']);
 
-    if (props?.proField) {
+    if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'patterns', 'proField']);
         return (
             <ProFormText
@@ -143,9 +148,4 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
             />
         );
     }
-};
-
-
-MaskInput.defaultProps = {
-    proField: true,
 };

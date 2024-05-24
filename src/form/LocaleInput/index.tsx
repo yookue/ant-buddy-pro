@@ -241,6 +241,22 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const editContext = React.useContext(EditOrReadOnlyContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
+
+    // Initialize the default props
+    const {
+        actionDom = <TranslationOutlined/>,
+        actionPos = 'after',
+        multilingualism = true,
+        proField = true,
+        popupTagPos = 'before',
+        popupActionDom = <SelectOutlined/>,
+        popupActionPos = 'after',
+        popupConfirmProps = {
+            enabled: true,
+        },
+        popupProField = true,
+    } = props ?? {};
+
     const intlType = useIntl();
 
     const fieldRef = React.useRef<InputRef>(null);
@@ -254,40 +270,40 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     };
 
     const buildItemAddonDom = (tag: string, before: boolean, elementId: string, inputProps?: PopupInputProps) => {
-        if (before && props?.popupTagPos !== 'before' && !inputProps?.fieldProps?.addonBefore && props?.popupActionPos === 'before' && !props?.popupActionDom) {
+        if (before && popupTagPos !== 'before' && !inputProps?.fieldProps?.addonBefore && popupActionPos === 'before' && !popupActionDom) {
             return undefined;
         }
-        if (!before && props?.popupTagPos !== 'after' && !inputProps?.fieldProps?.addonAfter && props?.popupActionPos === 'after' && !props?.popupActionDom) {
+        if (!before && popupTagPos !== 'after' && !inputProps?.fieldProps?.addonAfter && popupActionPos === 'after' && !popupActionDom) {
             return undefined;
         }
         const itemDisabled = props?.fieldProps?.disabled || inputProps?.fieldProps?.disabled;
         const itemReadonly = props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || inputProps?.fieldProps?.readOnly || inputProps?.proFieldProps?.readonly;
 
-        const tagDom = ((before && props?.popupTagPos === 'before') || (!before && props?.popupTagPos === 'after')) ? (
-            <span className={classNames(`${clazzPrefix}-tag-${props?.popupTagPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined))}>
+        const tagDom = ((before && popupTagPos === 'before') || (!before && popupTagPos === 'after')) ? (
+            <span className={classNames(`${clazzPrefix}-tag-${popupTagPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined))}>
                 {tag}
             </span>
         ) : undefined;
 
-        const actionClazz = classNames(`${clazzPrefix}-action-${props?.popupActionPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined));
-        const actionDom = (props?.popupActionDom && ((before && props?.popupActionPos === 'before') || (!before && props?.popupActionPos === 'after'))) ? (
-            <If condition={BooleanUtils.isNotFalse(props?.popupConfirmProps?.enabled)} validation={false}>
+        const actionClazz = classNames(`${clazzPrefix}-action-${popupActionPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined));
+        const actionDom = (popupActionDom && ((before && popupActionPos === 'before') || (!before && popupActionPos === 'after'))) ? (
+            <If condition={BooleanUtils.isNotFalse(popupConfirmProps?.enabled)} validation={false}>
                 <If.Then>
                     <Popconfirm
-                        title={props?.popupConfirmProps?.message || intlLocales.get([intlType.locale, 'setAsDefault']) || intlLocales.get(['en_US', 'setAsDefault'])}
-                        okText={props?.popupConfirmProps?.ok}
-                        cancelText={props?.popupConfirmProps?.cancel}
+                        title={popupConfirmProps?.message || intlLocales.get([intlType.locale, 'setAsDefault']) || intlLocales.get(['en_US', 'setAsDefault'])}
+                        okText={popupConfirmProps?.ok}
+                        cancelText={popupConfirmProps?.cancel}
                         disabled={itemDisabled || itemReadonly}
                         onConfirm={() => handleSetAsDefault(elementId)}
                     >
                         <span className={actionClazz}>
-                            {props?.popupActionDom}
+                            {popupActionDom}
                         </span>
                     </Popconfirm>
                 </If.Then>
                 <If.Else>
                     <span className={actionClazz} onClick={() => handleSetAsDefault(elementId)}>
-                        {props?.popupActionDom}
+                        {popupActionDom}
                     </span>
                 </If.Else>
             </If>
@@ -313,14 +329,14 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     };
 
     const renderItemReadonly = (tag: string, dom: React.ReactNode) => (
-        <div className={classNames(`${clazzPrefix}-item-readonly`, (props?.popupTagPos ? `${clazzPrefix}-item-readonly-${props?.popupTagPos}` : undefined))}>
-            <If condition={props?.popupTagPos === 'before'} validation={false}>
+        <div className={classNames(`${clazzPrefix}-item-readonly`, (popupTagPos ? `${clazzPrefix}-item-readonly-${popupTagPos}` : undefined))}>
+            <If condition={popupTagPos === 'before'} validation={false}>
                 <span className={`${clazzPrefix}-item-readonly-tag`}>{tag}</span>
             </If>
             <div className={`${clazzPrefix}-item-readonly-content`}>
                 {dom || props?.proFieldProps?.emptyText || '-'}
             </div>
-            <If condition={props?.popupTagPos === 'after'} validation={false}>
+            <If condition={popupTagPos === 'after'} validation={false}>
                 <span className={`${clazzPrefix}-item-readonly-tag`}>{tag}</span>
             </If>
         </div>
@@ -355,7 +371,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const beforeDom = buildItemAddonDom(tag, true, elementId, itemProp);
             const afterDom = buildItemAddonDom(tag, false, elementId, itemProp);
             const itemDom = (
-                <If condition={props?.popupProField} validation={false}>
+                <If condition={popupProField} validation={false}>
                     <If.Then>
                         <ProFormText
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
@@ -415,7 +431,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const beforeDom = buildItemAddonDom(tag, true, elementId);
             const afterDom = buildItemAddonDom(tag, false, elementId);
             const itemDom = (
-                <If condition={props?.popupProField} validation={false}>
+                <If condition={popupProField} validation={false}>
                     <If.Then>
                         <ProFormText
                             name={props?.name ? `${props?.name}[${tag}]` : undefined}
@@ -463,13 +479,13 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     }
 
     const buildEntryAddonDom = (before: boolean) => {
-        if (before && !props?.fieldProps?.addonBefore && props?.actionPos === 'before' && !props?.actionDom) {
+        if (before && !props?.fieldProps?.addonBefore && actionPos === 'before' && !actionDom) {
             return undefined;
         }
-        if (!before && !props?.fieldProps?.addonAfter && props?.actionPos === 'after' && !props?.actionDom) {
+        if (!before && !props?.fieldProps?.addonAfter && actionPos === 'after' && !actionDom) {
             return undefined;
         }
-        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (props?.multilingualism && props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after')))].filter(object => !!object).length;
+        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (multilingualism && actionDom && ((before && actionPos === 'before') || (!before && actionPos === 'after')))].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
         }
@@ -481,8 +497,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 <If condition={!before && props?.fieldProps?.addonAfter} validation={false}>
                     {props?.fieldProps?.addonAfter}
                 </If>
-                <If condition={props?.multilingualism && props?.actionDom && ((before && props?.actionPos === 'before') || (!before && props?.actionPos === 'after'))} validation={false}>
-                    {props?.actionDom}
+                <If condition={multilingualism && actionDom && ((before && actionPos === 'before') || (!before && actionPos === 'after'))} validation={false}>
+                    {actionDom}
                 </If>
             </>
         );
@@ -495,7 +511,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['ref', 'className', 'addonBefore', 'addonAfter']);
 
     const buildEntryDom = () => {
-        if (props?.proField) {
+        if (proField) {
             const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'clazzPrefix', 'actionDom', 'actionPos', 'dropdownProps', 'multilingualism', 'proField', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupCloneMaxLength', 'popupClonePlaceholder', 'popupCloneRules', 'popupConfirmProps', 'popupShareProps', 'popupProField']);
             return (
                 <ProFormText
@@ -524,7 +540,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         }
     };
 
-    if (!props?.multilingualism) {
+    if (!multilingualism) {
         return buildEntryDom();
     }
 
@@ -562,18 +578,3 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         </Dropdown>
     );
 });
-
-
-LocaleInput.defaultProps = {
-    actionDom: <TranslationOutlined/>,
-    actionPos: 'after',
-    multilingualism: true,
-    proField: true,
-    popupTagPos: 'before',
-    popupActionDom: <SelectOutlined/>,
-    popupActionPos: 'after',
-    popupConfirmProps: {
-        enabled: true,
-    },
-    popupProField: true,
-};

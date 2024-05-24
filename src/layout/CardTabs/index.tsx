@@ -90,23 +90,23 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-card-tabs');
 
+    // Initialize the default props
+    const {
+        tabBorder = true,
+        contentBorder = true,
+        inkBar = true,
+        usePresetStyle = 'padding-md',
+    } = props ?? {};
+
     const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'contentBorder', 'inkBar', 'usePresetStyle']);
 
     return (
-        <div className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))} style={props?.containerStyle}>
+        <div className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))} style={props?.containerStyle}>
             <Tabs
-                className={classNames(props?.className, `${clazzPrefix}-tab-border${props?.tabBorder ? '' : '-off'}`, (props?.contentBorder ? `${clazzPrefix}-content-border` : undefined), (props?.inkBar ? `${clazzPrefix}-ink-bar` : undefined))}
+                className={classNames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (contentBorder ? `${clazzPrefix}-content-border` : undefined), (inkBar ? `${clazzPrefix}-ink-bar` : undefined))}
                 type='card'
                 {...restProps}
             />
         </div>
     );
-};
-
-
-CardTabs.defaultProps = {
-    tabBorder: true,
-    contentBorder: true,
-    inkBar: true,
-    usePresetStyle: 'padding-md',
 };

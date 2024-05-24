@@ -198,13 +198,18 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-page-footer');
 
+    // Initialize the default props
+    const {
+        usePresetStyle = 'default',
+    } = props ?? {};
+
     if ((!props?.links || props?.links?.length === 0) && !props?.copyright) {
         return null;
     }
 
     return (
         <Layout.Footer
-            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))}
+            className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
@@ -244,8 +249,3 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
         </Layout.Footer>
     );
 };
-
-
-PageFooter.defaultProps = {
-    usePresetStyle: 'default',
-}

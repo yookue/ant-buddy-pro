@@ -240,12 +240,24 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-menu-tabs');
 
+    // Initialize the default props
+    const {
+        entryWidth = '208px',
+        entryInkBar = true,
+        entrySelectionBold = true,
+        entryVisible = true,
+        tabTitleVisible = true,
+        adjustLayoutProps = {
+            adjustOnResize: true,
+        }
+    } = props ?? {};
+
     const themeClazz = (props?.menuProps?.theme === 'dark') ? `${clazzPrefix}-dark` : `${clazzPrefix}-light`;
     const containerRef = React.useRef<HTMLDivElement>();
     const [activeKey, setActiveKey] = React.useState(props?.menuProps?.defaultActiveKey);
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
 
-    if (BooleanUtils.isNotFalse(props?.adjustLayoutProps?.adjustOnResize)) {
+    if (BooleanUtils.isNotFalse(adjustLayoutProps?.adjustOnResize)) {
         const handleWindowResize = () => {
             requestAnimationFrame(() => {
                 if (!containerRef.current) {
@@ -253,10 +265,10 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                 }
                 let shouldMode: MenuMode = 'inline';
                 const {offsetWidth} = containerRef.current;
-                if (offsetWidth > (props?.adjustLayoutProps?.minOffsetWidth ?? 400) && containerRef.current.offsetWidth < (props?.adjustLayoutProps?.maxOffsetWidth ?? 640)) {
+                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && containerRef.current.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
                     shouldMode = 'horizontal';
                 }
-                if (offsetWidth > (props?.adjustLayoutProps?.minOffsetWidth ?? 400) && window.innerWidth < (props?.adjustLayoutProps?.maxWindowWidth ?? 768)) {
+                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && window.innerWidth < (adjustLayoutProps?.maxWindowWidth ?? 768)) {
                     shouldMode = 'horizontal';
                 }
                 setMenuMode(shouldMode);
@@ -279,7 +291,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             return undefined;
         }
         return props?.menuProps?.items.map(item => {
-            const titleDom = !props?.tabTitleVisible ? undefined : (
+            const titleDom = !tabTitleVisible ? undefined : (
                 <div
                     className={classNames(`${clazzPrefix}-tab-title`, props?.tabTitleClazz)}
                     style={props?.tabTitleStyle}
@@ -307,7 +319,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     const omitMenuItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
     const restMenuProps = !props?.menuProps ? {} : omit(props?.menuProps, ['items', 'defaultActiveKey', 'onClick']);
-    const entryWidthClazz = props?.entryWidth ? css({width: props?.entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
+    const entryWidthClazz = entryWidth ? css({width: entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
     const omitEntryStyle = props?.entryStyle ? omit(props?.entryStyle, ['width']) : undefined;
 
     return (
@@ -321,11 +333,11 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             }}
         >
             <div
-                className={classNames(`${clazzPrefix}-entry`, (props?.entryVisible ? undefined : `${clazzPrefix}-entry-hidden`), props?.entryClazz, entryWidthClazz)}
+                className={classNames(`${clazzPrefix}-entry`, (entryVisible ? undefined : `${clazzPrefix}-entry-hidden`), props?.entryClazz, entryWidthClazz)}
                 style={omitEntryStyle}
             >
                 <Menu
-                    className={classNames((props?.entryInkBar ? undefined : `${clazzPrefix}-ink-bar-none`), (props?.entrySelectionBold ? `${clazzPrefix}-selection-bold` : undefined))}
+                    className={classNames((entryInkBar ? undefined : `${clazzPrefix}-ink-bar-none`), (entrySelectionBold ? `${clazzPrefix}-selection-bold` : undefined))}
                     items={omitMenuItems}
                     mode={menuMode}
                     multiple={false}
@@ -342,16 +354,4 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             {buildTabsDom()}
         </div>
     );
-};
-
-
-MenuTabs.defaultProps = {
-    entryWidth: '208px',
-    entryInkBar: true,
-    entrySelectionBold: true,
-    entryVisible: true,
-    tabTitleVisible: true,
-    adjustLayoutProps: {
-        adjustOnResize: true,
-    }
 };

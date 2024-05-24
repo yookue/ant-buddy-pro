@@ -18,6 +18,7 @@
 import React from 'react';
 import {ConfigProvider} from 'antd';
 import {If} from '@yookue/react-condition';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import './index.less';
 
@@ -116,8 +117,14 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-apart-title');
 
+    // Initialize the default props
+    const {
+        ornamentPos = 'before',
+        usePresetStyle = 'default',
+    } = props ?? {};
+
     const buildOrnamentDom = (before: boolean) => {
-        if (!props?.ornament || !props?.ornamentPos) {
+        if (!props?.ornament || !ornamentPos) {
             return undefined;
         }
         return (
@@ -132,24 +139,18 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))}
+            className={classNames(`${clazzPrefix}`, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))}
             style={props?.containerStyle}
         >
-            <If condition={props?.ornamentPos === 'before'} validation={false}>
+            <If condition={ornamentPos === 'before'} validation={false}>
                 {buildOrnamentDom(true)}
             </If>
             <span className={classNames(`${clazzPrefix}-content`, props?.contentClazz)} style={props?.contentStyle}>
                 {props?.content}
             </span>
-            <If condition={props?.ornamentPos === 'after'} validation={false}>
+            <If condition={ornamentPos === 'after'} validation={false}>
                 {buildOrnamentDom(false)}
             </If>
         </div>
     );
-};
-
-
-ApartTitle.defaultProps = {
-    ornamentPos: 'before',
-    usePresetStyle: 'default',
 };

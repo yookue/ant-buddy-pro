@@ -152,9 +152,14 @@ export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-code-preview');
 
+    // Initialize the default props
+    const {
+        usePresetStyle = 'default',
+    } = props ?? {};
+
     return (
         <div
-            className={classNames(clazzPrefix, props?.containerClazz, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined))}
+            className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))}
             style={props?.containerStyle}
         >
             <pre className={classNames(`${clazzPrefix}-pre`, props?.preClazz)} style={props?.preStyle}>
@@ -184,9 +189,4 @@ export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps
             </pre>
         </div>
     );
-};
-
-
-CodePreview.defaultProps = {
-    usePresetStyle: 'default',
 };

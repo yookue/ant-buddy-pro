@@ -93,7 +93,12 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-chrono-tuple');
 
-    const digitNode = props?.proField ? (
+    // Initialize the default props
+    const {
+        proField = true,
+    } = props ?? {};
+
+    const digitNode = proField ? (
         <ProFormDigit {...props?.digitProps}/>
     ) : (
         <InputNumber {...PropsUtils.pickForwardProps(props?.digitProps)} {...props?.digitProps?.fieldProps}/>
@@ -108,15 +113,10 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
                 <ChronoSelect
                     label={props?.selectProps?.label ?? (formContext.vertical ? ' ' : '')}
                     {...restSelectProps}
-                    proField={props?.proField}
+                    proField={proField}
                     usePresetStyle={(props?.selectProps?.usePresetStyle === undefined) ? 'addon' : props.selectProps.usePresetStyle}
                 />
             </Input.Group>
         </div>
     );
-};
-
-
-ChronoTuple.defaultProps = {
-    proField: true,
 };
