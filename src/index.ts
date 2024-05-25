@@ -47,3 +47,4 @@ export {FileUtils} from './util/FileUtils';
 export {IconUtils} from './util/IconUtils';
 export {ImageUtils} from './util/ImageUtils';
 export {PropsUtils} from './util/PropsUtils';
+export {RouteUtils} from './util/RouteUtils';

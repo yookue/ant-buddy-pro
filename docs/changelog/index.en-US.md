@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.74** [2024-05-25]
+    - Add 'util/RouteUtils'
+
   - **v0.1.73** [2024-05-22]
     - Add 'layout/SegmentTitle'
 
