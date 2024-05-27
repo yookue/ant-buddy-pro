@@ -42,7 +42,6 @@ export default defineConfig({
         '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
     },
     extraBabelPlugins: [
-        '@babel/plugin-syntax-dynamic-import',
         ['@yookue/babel-plugin-remove-comment', {
             scope: 'all',
         }],
