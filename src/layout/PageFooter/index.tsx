@@ -164,6 +164,14 @@ export type PageFooterProps = {
     copyright?: React.ReactNode;
 
     /**
+     * @description Whether to display the copyright icon
+     * @description.zh-CN 是否显示版权图标
+     * @description.zh-TW 是否顯示版權圖標
+     * @default true
+     */
+    copyrightIcon?: boolean;
+
+    /**
      * @description The CSS class name of the copyright div
      * @description.zh-CN 版权 div 的 CSS 类名
      * @description.zh-TW 版權 div 的 CSS 類名
@@ -200,6 +208,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
 
     // Initialize the default props
     const {
+        copyrightIcon = true,
         usePresetStyle = 'default',
     } = props ?? {};
 
@@ -240,9 +249,16 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                 </If>
                 <If condition={props?.copyright} validation={false}>
                     <div className={classNames(`${clazzPrefix}-copyright`, props?.copyrightClazz)} style={props?.copyrightStyle}>
-                        <>
-                            <CopyrightOutlined/> {props?.copyright}
-                        </>
+                        <If condition={copyrightIcon} validation={false}>
+                            <If.Then>
+                                <>
+                                    <CopyrightOutlined/> {props?.copyright}
+                                </>
+                            </If.Then>
+                            <If.Else>
+                                {props?.copyright}
+                            </If.Else>
+                        </If>
                     </div>
                 </If>
             </div>

@@ -17,15 +17,27 @@ import {PageFooter} from '@yookue/ant-buddy-pro';
 ```jsx
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {PageFooter} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [presetStyle, setPresetStyle] = React.useState('compact');
+    const [copyrightIcon, setCopyrightIcon] = React.useState(true);
 
     return (
         <>
             <ProForm layout='horizontal' submitter={false}>
+                <ProFormSwitch
+                    label='Copyright Icon'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: copyrightIcon,
+                    }}
+                    onChange={(value) => {
+                        setCopyrightIcon(value ? true : false);
+                    }}
+                />
                 <ProFormRadio.Group
                     label='Preset Style'
                     radioType='button'
@@ -56,6 +68,7 @@ export default () => {
                     }
                 ]}
                 copyright={`${new Date().getFullYear()} Yookue Ltd`}
+                copyrightIcon={copyrightIcon}
                 containerStyle={{
                     backgroundColor: '#e5f7ff',
                 }}
