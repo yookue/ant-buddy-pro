@@ -27,10 +27,11 @@
     flex-direction: column;
     border-radius: @card-radius @card-radius 0 0;
 
+    // noinspection DuplicatedCode
     &-header {
         display: flex;
         flex-flow: row nowrap;
-        padding: 10px @padding-md;
+        padding: @padding-xs @padding-md;
         align-items: center;
 
         &-ornament-before, &-ornament-after {
@@ -104,7 +105,7 @@
 
 .@{buddy-fold-section}-default,
 .@{buddy-fold-section}-classic {
-    border: @border-width-base @border-style-base @border-color-base;
+    border: @border-width-base @border-style-base @border-color-split;
 
     .@{buddy-fold-section}-header {
         font-weight: 500;
