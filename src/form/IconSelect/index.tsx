@@ -681,8 +681,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         }
     };
 
-    // noinspection DuplicatedCode
     const [optionItems, setOptionItems] = React.useState(FieldUtils.optionsToLabeledValues(props) ?? []);
+    // noinspection DuplicatedCode
     if (props?.request) {
         FieldUtils.fetchFieldRequestData(props, values => {
             setOptionItems(!props?.requestKeepOptions ? values : ((props.requestKeepOptions === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));

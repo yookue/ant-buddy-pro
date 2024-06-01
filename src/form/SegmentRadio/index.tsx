@@ -18,6 +18,7 @@ import React from 'react';
 import {ConfigProvider, Segmented, type SegmentedProps} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {FieldUtils} from '@/util/FieldUtils';
@@ -60,6 +61,7 @@ export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormF
 export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-radio');
 
@@ -76,7 +78,9 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
         });
     }
 
-    const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options']);
+    const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled;
+    const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options', 'disabled']);
+
     if (proField) {
         const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'requestKeepOptions', 'proField']);
         return (
@@ -86,6 +90,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
             >
                 <Segmented
                     options={optionItems}
+                    disabled={entryImmutable}
                     {...restFieldProps}
                 />
             </ProForm.Item>
@@ -95,6 +100,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
         return (
             <Segmented
                 options={optionItems}
+                disabled={entryImmutable}
                 {...restProps}
                 {...restFieldProps}
             />
