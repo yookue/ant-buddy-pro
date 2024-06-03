@@ -18,7 +18,6 @@
 import React from 'react';
 import {ConfigProvider} from 'antd';
 import {If} from '@yookue/react-condition';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import './index.less';
 

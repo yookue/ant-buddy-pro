@@ -24,7 +24,7 @@ import CssMotion from 'rc-motion';
 import './index.less';
 
 
-export type FoldSectionProps = {
+export type FoldSectionProps = React.PropsWithChildren<{
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -245,7 +245,7 @@ export type FoldSectionProps = {
      * @default 'default'
      */
     usePresetStyle?: 'default' | 'classic' | false;
-};
+}>;
 
 
 /**
@@ -360,7 +360,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
             <CssMotion visible={panelVisible}>
                 {() => (
                     <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
-                        {props?.panelContent || panelPlaceholder}
+                        {props?.panelContent || props?.children || panelPlaceholder}
                     </div>
                 )}
             </CssMotion>

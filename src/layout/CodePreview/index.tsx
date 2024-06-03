@@ -182,9 +182,7 @@ export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps
                             {props?.textContent}
                         </Typography.Text>
                     </If>
-                    <If condition={props?.children} validation={false}>
-                        {props?.children}
-                    </If>
+                    {props?.children}
                 </code>
             </pre>
         </div>
