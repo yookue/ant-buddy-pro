@@ -26,32 +26,24 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Space} from 'antd';
 import {FullScreen} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <Space>
-            <span>
-                <FullScreen enterHint='全屏' exitHint='退出全屏'/>
-            </span>
-        </Space>
+        <FullScreen enterHint='全屏' exitHint='退出全屏'/>
     );
 }
 ```
 
-#### 使用 Ant Design Tooltip 和 Wrapper
+#### 使用 Ant Tooltip
 
 ```jsx
 import React from 'react';
-import {Space} from 'antd';
 import {FullScreen} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <Space>
-            <FullScreen enterHint='全屏' exitHint='退出全屏' useTooltip={true} useWrapper='div'/>
-        </Space>
+        <FullScreen enterHint='全屏' exitHint='退出全屏' useTooltip={true}/>
     );
 }
 ```

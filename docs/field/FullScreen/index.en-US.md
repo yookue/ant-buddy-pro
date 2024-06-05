@@ -28,32 +28,24 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Space} from 'antd';
 import {FullScreen} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <Space>
-            <span>
-                <FullScreen enterHint='Fullscreen' exitHint='Exit Fullscreen'/>
-            </span>
-        </Space>
+        <FullScreen enterHint='Fullscreen' exitHint='Exit Fullscreen'/>
     );
 }
 ```
 
-#### Using Ant Design Tooltip and Wrapper
+#### Using Ant Tooltip
 
 ```jsx
 import React from 'react';
-import {Space} from 'antd';
 import {FullScreen} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <Space>
-            <FullScreen enterHint='Fullscreen' exitHint='Exit Fullscreen' useTooltip={true} useWrapper='div'/>
-        </Space>
+        <FullScreen enterHint='Fullscreen' exitHint='Exit Fullscreen' useTooltip={true}/>
     );
 }
 ```
