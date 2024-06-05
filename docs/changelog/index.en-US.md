@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.81** [2024-06-05]
+    - Add 'layout/DelayModal'
+
   - **v0.1.73** [2024-05-22]
     - Add 'layout/SegmentTitle'
 
@@ -28,7 +31,7 @@ Here are some milestone versions of the changelog:
 
   - **v0.1.57** [2024-04-01]
     - Add 'util/DatasetUtils'
-    - Add 'util/DialogUtils'
+    - Add 'util/ModalUtils'
 
   - **v0.1.53** [2024-03-20]
     - Add 'util/FieldUtils'

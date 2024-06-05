@@ -20,69 +20,69 @@ import {withWarn, withInfo, withSuccess, withError, withConfirm} from 'antd/es/m
 
 
 /**
- * Utilities for Ant Design dialogs
+ * Utilities for Ant Design modals
  *
  * @author David Hsing
  */
 // noinspection JSUnusedGlobalSymbols
-export abstract class DialogUtils {
+export abstract class ModalUtils {
     /**
-     * Popups a warn modal dialog
+     * Popups a confirmation modal
      *
      * @param props the properties object to inspect
-     * @param preprocess whether to preprocess the properties (replaces the icon, etc.)
+     * @param preprocess whether to preprocess the properties (setups the icon, etc.)
      */
-    public static modalWarn = (props?: ModalFuncProps, preprocess?: boolean): void => {
+    public static confirm = (props?: ModalFuncProps, preprocess?: boolean): void => {
         if (props) {
-            Modal.warning(preprocess ? withWarn(props) : props);
+            Modal.confirm(preprocess ? withConfirm(props) : props);
         }
     }
 
     /**
-     * Popups an info modal dialog
+     * Popups an info modal
      *
      * @param props the properties object to inspect
-     * @param preprocess whether to preprocess the properties (replaces the icon, etc.)
+     * @param preprocess whether to preprocess the properties (setups the icon, etc.)
      */
-    public static modalInfo = (props?: ModalFuncProps, preprocess?: boolean): void => {
+    public static info = (props?: ModalFuncProps, preprocess?: boolean): void => {
         if (props) {
             Modal.info(preprocess ? withInfo(props) : props);
         }
     }
 
     /**
-     * Popups a success modal dialog
+     * Popups a warn modal
      *
      * @param props the properties object to inspect
-     * @param preprocess whether to preprocess the properties (replaces the icon, etc.)
+     * @param preprocess whether to preprocess the properties (setups the icon, etc.)
      */
-    public static modalSuccess = (props?: ModalFuncProps, preprocess?: boolean): void => {
+    public static warn = (props?: ModalFuncProps, preprocess?: boolean): void => {
+        if (props) {
+            Modal.warning(preprocess ? withWarn(props) : props);
+        }
+    }
+
+    /**
+     * Popups a success modal
+     *
+     * @param props the properties object to inspect
+     * @param preprocess whether to preprocess the properties (setups the icon, etc.)
+     */
+    public static success = (props?: ModalFuncProps, preprocess?: boolean): void => {
         if (props) {
             Modal.success(preprocess ? withSuccess(props) : props);
         }
     }
 
     /**
-     * Popups an error modal dialog
+     * Popups an error modal
      *
      * @param props the properties object to inspect
-     * @param preprocess whether to preprocess the properties (replaces the icon, etc.)
+     * @param preprocess whether to preprocess the properties (setups the icon, etc.)
      */
-    public static modalError = (props?: ModalFuncProps, preprocess?: boolean): void => {
+    public static error = (props?: ModalFuncProps, preprocess?: boolean): void => {
         if (props) {
             Modal.error(preprocess ? withError(props) : props);
-        }
-    }
-
-    /**
-     * Popups a confirm modal dialog
-     *
-     * @param props the properties object to inspect
-     * @param preprocess whether to preprocess the properties (replaces the icon, etc.)
-     */
-    public static modalConfirm = (props?: ModalFuncProps, preprocess?: boolean): void => {
-        if (props) {
-            Modal.confirm(preprocess ? withConfirm(props) : props);
         }
     }
 }

@@ -11,6 +11,9 @@ nav:
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v0.1.81** [2024-06-05]
+    - 增加 'layout/DelayModal'
+
   - **v0.1.73** [2024-05-22]
     - 增加 'layout/SegmentTitle'
 
@@ -28,7 +31,7 @@ nav:
 
   - **v0.1.57** [2024-04-01]
     - 增加 'util/DatasetUtils'
-    - 增加 'util/DialogUtils'
+    - 增加 'util/ModalUtils'
 
   - **v0.1.53** [2024-03-20]
     - 增加 'util/FieldUtils'

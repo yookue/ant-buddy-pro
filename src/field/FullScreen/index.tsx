@@ -101,10 +101,6 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
         useTooltip = false,
     } = props ?? {};
 
-    if (!triggerFor) {
-        throw SyntaxError(`Parameter 'triggerFor' must be a valid element!`);
-    }
-
     const [fullscreen, setFullscreen] = React.useState(document.fullscreenElement === triggerFor);
 
     /**
@@ -130,12 +126,12 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
         }
     };
 
-    React.useLayoutEffect(() => {
-        triggerFor?.addEventListener('fullscreenchange', handleScreenChange, false);
-        triggerFor?.addEventListener('keydown', handleKeyDown, false);
+    React.useEffect(() => {
+        triggerFor.addEventListener('fullscreenchange', handleScreenChange, false);
+        triggerFor.addEventListener('keydown', handleKeyDown, false);
         return () => {
-            triggerFor?.removeEventListener('fullscreenchange', handleScreenChange, false);
-            triggerFor?.removeEventListener('keydown', handleKeyDown, false);
+            triggerFor.removeEventListener('fullscreenchange', handleScreenChange, false);
+            triggerFor.removeEventListener('keydown', handleKeyDown, false);
         }
     });
 
