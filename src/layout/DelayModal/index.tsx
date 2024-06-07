@@ -133,11 +133,11 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
     const [onceShown, setOnceShown] = React.useState<boolean>(false);
     const timerIdRef = React.useRef<number>(0)
 
-    const entryId = nanoid();
+    const elementId = nanoid();
     const actionType = props?.actionType ?? (props?.modalProps ? 'modal' : 'info');
     const omitFuncProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'preprocess']);
     Object.assign(omitFuncProps, {
-        'key': entryId,
+        'key': elementId,
         'className': classNames(clazzPrefix, props?.modalFunProps?.className),
     });
 
@@ -173,13 +173,13 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
                 break;
         }
         setOnceShown(true);
-        if (props?.onOpen) {
+        if (typeof props?.onOpen === 'function') {
             props.onOpen();
         }
     };
 
     const clearTimer = () => {
-        if (timerIdRef?.current) {
+        if (timerIdRef.current) {
             window.clearTimeout(timerIdRef.current);
             timerIdRef.current = 0;
         }
@@ -212,19 +212,19 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
     const restProps = !props?.modalProps ? {} : omit(props.modalProps, ['wrapClassName', 'onOk', 'onCancel']);
     return (
         <Modal
-            key={entryId}
+            key={elementId}
             open={modalOpen}
             wrapClassName={classNames(clazzPrefix, props?.modalProps?.wrapClassName)}
             {...restProps}
             onOk={(ev: React.MouseEvent<HTMLElement>) => {
                 setModalOpen(false);
-                if (props?.modalProps?.onOk) {
+                if (typeof props?.modalProps?.onOk === 'function') {
                     props.modalProps.onOk(ev);
                 }
             }}
             onCancel={(ev: React.MouseEvent<HTMLElement>) => {
                 setModalOpen(false);
-                if (props?.modalProps?.onCancel) {
+                if (typeof props?.modalProps?.onCancel === 'function') {
                     props.modalProps.onCancel(ev);
                 }
             }}

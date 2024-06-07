@@ -320,10 +320,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         const openState = !panelOpen;
         setPanelOpen(openState);
         if (typeof props?.onOpenChange === 'function') {
-            React.useEffect(() => {
-                // @ts-ignore
-                window.setTimeout(() => props?.onOpenChange(openState), 300);
-            }, []);
+            props.onOpenChange(openState);
         }
     };
 
