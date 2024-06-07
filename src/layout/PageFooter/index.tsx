@@ -32,6 +32,20 @@ export type HyperlinkProps = {
     key: string;
 
     /**
+     * @description The CSS class name of hyperlink
+     * @description.zh-CN 超链接的 CSS 类名
+     * @description.zh-TW 超鏈接的 CSS 類名
+     */
+    clazz?: string;
+
+    /**
+     * @description The CSS style of hyperlink
+     * @description.zh-CN 超链接的 CSS 样式
+     * @description.zh-TW 超鏈接的 CSS 樣式
+     */
+    style?: React.CSSProperties;
+
+    /**
      * @description The children content of hyperlink
      * @description.zh-CN 超链接的子节点内容
      * @description.zh-TW 超鏈接的子節點内容
@@ -67,20 +81,6 @@ export type HyperlinkProps = {
      * @default 'noopener noreferrer'
      */
     rel?: string;
-
-    /**
-     * @description The CSS class name of hyperlink
-     * @description.zh-CN 超链接的 CSS 类名
-     * @description.zh-TW 超鏈接的 CSS 類名
-     */
-    clazz?: string;
-
-    /**
-     * @description The CSS style of hyperlink
-     * @description.zh-CN 超链接的 CSS 样式
-     * @description.zh-TW 超鏈接的 CSS 樣式
-     */
-    style?: React.CSSProperties;
 };
 
 
@@ -230,17 +230,17 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                                 return (
                                     <a
                                         key={item.key}
-                                        className={classNames(item?.clazz, props?.linkShareClazz)}
-                                        href={item?.href}
-                                        title={item?.title}
-                                        target={item?.target ?? '_blank'}
-                                        rel={item?.rel ?? 'noopener noreferrer'}
+                                        className={classNames(item.clazz, props?.linkShareClazz)}
+                                        href={item.href}
+                                        title={item.title}
+                                        target={item.target ?? '_blank'}
+                                        rel={item.rel ?? 'noopener noreferrer'}
                                         style={{
-                                            ...(item?.style ?? {}),
-                                            ...(props?.linkShareStyle ?? {}),
+                                            ...item.style,
+                                            ...props?.linkShareStyle,
                                         }}
                                     >
-                                        {item?.content}
+                                        {item.content}
                                     </a>
                                 );
                             }}
