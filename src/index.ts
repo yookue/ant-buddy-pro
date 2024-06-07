@@ -26,6 +26,7 @@ export {IconSelect, type IconSelectProps} from './form/IconSelect';
 export {LocaleInput, type LocaleInputProps} from './form/LocaleInput';
 export {MaskInput, type MaskInputProps} from './form/MaskInput';
 export {SegmentRadio, type SegmentRadioProps} from './form/SegmentRadio';
+export {StretchInput, type StretchInputProps} from './form/StretchInput';
 export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';
 export {CardTabs, type CardTabsProps} from './layout/CardTabs';
 export {CodePreview, type CodePreviewProps} from './layout/CodePreview';

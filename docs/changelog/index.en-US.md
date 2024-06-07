@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.82** [2024-06-08]
+    - Add 'form/StretchInput'
+
   - **v0.1.81** [2024-06-05]
     - Add 'layout/DelayModal'
 
