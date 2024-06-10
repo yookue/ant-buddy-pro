@@ -1,0 +1,50 @@
+/*
+ * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License")
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+@root-entry-name: default;
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@buddy-notify-badge: ~'@{ant-prefix}-buddy-notify-badge';
+
+
+.@{buddy-notify-badge}-tabs {
+    .@{buddy-notify-badge}-builtin-footer {
+        height: 46px;
+        color: @text-color;
+        line-height: 46px;
+        text-align: center;
+        border-top: 1px solid @border-color-split;
+        border-radius: 0 0 @border-radius-base @border-radius-base;
+        transition: all 0.3s;
+
+        .@{buddy-notify-badge}-footer-button {
+            display: inline-block;
+            width: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+
+            &:only-child {
+                width: 100%;
+            }
+            &:not(:only-child):last-child {
+                border-left: 1px solid @border-color-split;
+            }
+        }
+    }
+}

@@ -17,6 +17,7 @@
 
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';
+export {NotifyBadge, type NotifyBadgeProps} from './field/NotifyBadge';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';
 export {ChronoTuple, type ChronoTupleProps} from './form/ChronoTuple';

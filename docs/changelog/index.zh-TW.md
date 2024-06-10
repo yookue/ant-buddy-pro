@@ -11,8 +11,9 @@ nav:
 
 以下是一些裏程碑版本的更新軌跡：
 
-  - **v0.1.82** [2024-06-08]
+  - **v0.1.82** [2024-06-11]
     - 增加 'form/StretchInput'
+    - 增加 'field/NotifyBadge'
 
   - **v0.1.81** [2024-06-05]
     - 增加 'layout/DelayModal'
