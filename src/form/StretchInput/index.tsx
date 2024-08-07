@@ -130,7 +130,6 @@ export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & R
     }
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['ref', 'className', 'style', 'onFocus', 'onBlur']);
-
     if (props?.proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'collapseDom', 'collapseTrigger', 'stretchClazz', 'stretchStyle', 'proField']);
         return (

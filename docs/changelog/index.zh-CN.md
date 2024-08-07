@@ -11,6 +11,9 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.83** [2024-08-08]
+    - 增加 'form/CaptchaInput'
+
   - **v0.1.82** [2024-06-18]
     - 增加 'form/StretchInput'
     - 增加 'field/NotifyBadge'

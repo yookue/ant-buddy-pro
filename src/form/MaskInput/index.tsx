@@ -64,7 +64,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
 
     const form = Form.useFormInstance();
-    warning(!!form, `ant-buddy-pro/${MaskInput.name} needs a Form instance`);
+    warning(!!form, `MaskInput needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -109,7 +109,6 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     };
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'onChange', 'onCompositionStart', 'onCompositionEnd']);
-
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'patterns', 'proField']);
         return (

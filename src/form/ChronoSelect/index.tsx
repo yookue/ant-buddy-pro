@@ -168,7 +168,6 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
     }
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options']);
-
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'localeProps', 'proField', 'usePresetStyle']);
         return (

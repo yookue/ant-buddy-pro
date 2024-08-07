@@ -90,14 +90,14 @@ export default {
     headScripts: [
         // 'https://unpkg.com/react@18.2.0/umd/react.production.min.js',
         // 'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js',
-        // 'https://unpkg.com/classnames@2.5.1/index.js',
+        // 'https://unpkg.com/classnames@2.5.2/index.js',
         // 'https://unpkg.com/moment@2.30.1/min/moment.min.js',
-        // 'https://unpkg.com/antd@4.24.14/dist/antd.min.js',
+        // 'https://unpkg.com/antd@4.24.15/dist/antd.min.js',
         'https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js',
         'https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/classnames/2.5.1/index.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/classnames/2.5.2/index.min.js',
         'https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/moment.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/antd/4.24.14/antd.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/antd/4.24.15/antd.min.js',
     ],
     extraBabelPlugins: [
         ['babel-plugin-import', {
