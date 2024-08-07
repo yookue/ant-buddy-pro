@@ -26,4 +26,12 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'more'], 'More'],
     [['zh_CN', 'more'], '更多'],
     [['zh_TW', 'more'], '更多'],
+
+    [['en_US', 'notice'], 'Notice'],
+    [['zh_CN', 'notice'], '通知'],
+    [['zh_TW', 'notice'], '通知'],
+
+    [['en_US', 'task'], 'Task'],
+    [['zh_CN', 'task'], '任务'],
+    [['zh_TW', 'task'], '任務'],
 ]);
