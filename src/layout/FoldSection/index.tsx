@@ -319,9 +319,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     const handleCollapse = () => {
         const openState = !panelOpen;
         setPanelOpen(openState);
-        if (typeof props?.onOpenChange === 'function') {
-            props.onOpenChange(openState);
-        }
+        props?.onOpenChange?.(openState);
     };
 
     const [panelRendered, setPanelRendered] = React.useState(panelForceRender ?? panelOpen);

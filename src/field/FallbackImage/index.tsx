@@ -67,9 +67,7 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
         if (props?.fallback) {
             setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
         }
-        if (typeof props?.onError === 'function') {
-            props.onError(event);
-        }
+        props?.onError?.(event);
     };
 
     const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'src', 'fallback', 'onError']);

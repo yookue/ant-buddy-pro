@@ -70,7 +70,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
         proField = true,
     } = props ?? {};
 
-    warning(!!formContext, `This component needs a FormContext`);
+    warning(!!formContext, `MaskInput requires a FormContext`);
 
     const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
     const composeRef = React.useRef<boolean>(false);
@@ -79,14 +79,10 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
         if (value && props?.patterns && !props.patterns.some(item => RegexUtils.testResetting(item, value))) {
             formContext?.form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
-            if (typeof failAction === 'function') {
-                failAction();
-            }
+            failAction?.();
         } else {
             previousRef.current = value;
-            if (typeof passAction === 'function') {
-                passAction();
-            }
+            passAction?.();
         }
     };
 
@@ -95,24 +91,18 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
             return;
         }
         processValue(ev.target.value, () => {
-            if (typeof props?.fieldProps?.onChange === 'function') {
-                props.fieldProps.onChange(ev);
-            }
+            props?.fieldProps?.onChange?.(ev);
         });
     };
 
     const handleCompositionStart = (ev: React.CompositionEvent<HTMLInputElement>) => {
         composeRef.current = true;
-        if (typeof props?.fieldProps?.onCompositionStart === 'function') {
-            props.fieldProps.onCompositionStart(ev);
-        }
+        props?.fieldProps?.onCompositionStart?.(ev);
     };
 
     const handleCompositionEnd = (ev: React.CompositionEvent<HTMLInputElement>) => {
         composeRef.current = false;
-        if (typeof props?.fieldProps?.onCompositionEnd === 'function') {
-            props.fieldProps.onCompositionEnd(ev);
-        }
+        props?.fieldProps?.onCompositionEnd?.(ev);
         // WebKit browser (especially Chrome) triggers the `onCompositionEnd` event after `onChange` event
         if (webkitBrowser) {
             processValue(ev.currentTarget.value);

@@ -17,7 +17,7 @@
 
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';
-export {NotifyBadge, type NotifyBadgeProps} from './field/NotifyBadge';
+export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/NotifyBadge';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';
 export {ChronoTuple, type ChronoTupleProps} from './form/ChronoTuple';
@@ -50,3 +50,4 @@ export {FileUtils} from './util/FileUtils';
 export {IconUtils} from './util/IconUtils';
 export {ImageUtils} from './util/ImageUtils';
 export {PropsUtils} from './util/PropsUtils';
+export {StyleUtils} from './util/StyleUtils';

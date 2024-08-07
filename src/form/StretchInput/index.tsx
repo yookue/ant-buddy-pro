@@ -109,16 +109,12 @@ export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & R
 
     const handleFocus = (ev: React.FocusEvent<HTMLInputElement>) => {
         setStretchMe(true);
-        if (typeof props?.fieldProps?.onFocus === 'function') {
-            props.fieldProps.onFocus(ev);
-        }
+        props?.fieldProps?.onFocus?.(ev);
     };
 
     const handleBlur = (ev: React.FocusEvent<HTMLInputElement>) => {
         setStretchMe(false);
-        if (typeof props?.fieldProps?.onBlur === 'function') {
-            props.fieldProps.onBlur(ev);
-        }
+        props?.fieldProps?.onBlur?.(ev);
     };
 
     if (props?.collapseDom && !stretchMe) {

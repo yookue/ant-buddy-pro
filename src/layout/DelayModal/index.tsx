@@ -173,9 +173,7 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
                 break;
         }
         setOnceShown(true);
-        if (typeof props?.onOpen === 'function') {
-            props.onOpen();
-        }
+        props?.onOpen?.();
     };
 
     const clearTimer = () => {
@@ -218,15 +216,11 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
             {...restProps}
             onOk={(ev: React.MouseEvent<HTMLElement>) => {
                 setModalOpen(false);
-                if (typeof props?.modalProps?.onOk === 'function') {
-                    props.modalProps.onOk(ev);
-                }
+                props?.modalProps?.onOk?.(ev);
             }}
             onCancel={(ev: React.MouseEvent<HTMLElement>) => {
                 setModalOpen(false);
-                if (typeof props?.modalProps?.onCancel === 'function') {
-                    props.modalProps.onCancel(ev);
-                }
+                props?.modalProps?.onCancel?.(ev);
             }}
         />
     );

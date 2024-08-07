@@ -83,21 +83,15 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
             setImageSource(ImageUtils.detectSource(props?.src, data => setImageSource(data)));
         }
         const currentSrc = imageSource;
-        if (typeof props?.onClick === 'function') {
-            props.onClick(event);
-        }
-        if (typeof props?.onRefresh === 'function') {
-            props.onRefresh(previousSrc, currentSrc);
-        }
+        props?.onClick?.(event);
+        props?.onRefresh?.(previousSrc, currentSrc);
     };
 
     const handleError = (event: React.SyntheticEvent<any>) => {
         if (props?.fallback) {
             setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
         }
-        if (typeof props?.onError === 'function') {
-            props.onError(event);
-        }
+        props?.onError?.(event);
     };
 
     const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']);

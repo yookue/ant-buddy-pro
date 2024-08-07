@@ -520,10 +520,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     );
                 }}
                 onScroll={ev => {
-                    if (typeof props?.fieldProps?.onPopupScroll === 'function') {
-                        // @ts-ignore
-                        props.fieldProps.onPopupScroll(ev);
-                    }
+                    // @ts-ignore
+                    props?.fieldProps?.onPopupScroll?.(ev);
                 }}
             >
                 {content}
@@ -643,9 +641,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                                 disabled={searchDisabled}
                                 onSearch={(value: string) => {
                                     setSearchWord(value);
-                                    if (typeof props?.fieldProps?.onSearch === 'function') {
-                                        props.fieldProps.onSearch(value);
-                                    }
+                                    props?.fieldProps?.onSearch?.(value);
                                 }}
                             />
                         )
@@ -669,16 +665,12 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 changeIconBadge(value?.value as string, false);
             }
         }
-        if (typeof props?.fieldProps?.onDeselect === 'function') {
-            props.fieldProps.onDeselect(value, option);
-        }
+        props?.fieldProps?.onDeselect?.(value, option);
     };
 
     const handleDropdownOpenChange = (open: boolean) => {
         setDropdownOpen(open);
-        if (typeof props?.fieldProps?.onDropdownVisibleChange === 'function') {
-            props.fieldProps.onDropdownVisibleChange(open);
-        }
+        props?.fieldProps?.onDropdownVisibleChange?.(open);
     };
 
     const [optionItems, setOptionItems] = React.useState(FieldUtils.optionsToLabeledValues(props) ?? []);

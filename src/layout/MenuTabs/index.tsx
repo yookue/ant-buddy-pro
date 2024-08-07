@@ -344,9 +344,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                     defaultSelectedKeys={props?.menuProps?.defaultActiveKey ? [props?.menuProps?.defaultActiveKey] : []}
                     onClick={(menuInfo: MenuInfo) => {
                         setActiveKey(menuInfo?.key);
-                        if (typeof props?.menuProps?.onClick === 'function') {
-                            props.menuProps.onClick(menuInfo);
-                        }
+                        props?.menuProps?.onClick?.(menuInfo);
                     }}
                     {...restMenuProps}
                 />

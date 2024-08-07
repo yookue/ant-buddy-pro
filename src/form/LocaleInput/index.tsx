@@ -559,16 +559,14 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 onClick: handleMenuClick,
             }}
             getPopupContainer={trigger => {
-                const container = (typeof props?.dropdownProps?.getPopupContainer === 'function') ? props.dropdownProps.getPopupContainer(trigger) : undefined;
+                const container = props?.dropdownProps?.getPopupContainer?.(trigger);
                 return container || trigger?.parentElement || document.body;
             }}
             overlayClassName={classNames(`${clazzPrefix}-dropdown`, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.dropdownProps?.overlayClassName)}
             open={menuOpen}
             onOpenChange={(open: boolean) => {
                 handleMenuOpen(open);
-                if (typeof props?.dropdownProps?.onOpenChange === 'function') {
-                    props.dropdownProps.onOpenChange(open);
-                }
+                props?.dropdownProps?.onOpenChange?.(open);
             }}
             {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['getPopupContainer', 'overlayClassName', 'onOpenChange']))}
         >
