@@ -1,1 +1,0 @@
-(self["webpackChunk_yookue_ant_buddy_pro"]=self["webpackChunk_yookue_ant_buddy_pro"]||[]).push([[8032],{48032:function(u,n,o){"use strict";o.r(n);o(16835),o(29134)},29134:function(){},16835:function(){}}]);
