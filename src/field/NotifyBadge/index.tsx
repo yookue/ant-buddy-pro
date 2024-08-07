@@ -278,14 +278,13 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-notify-badge');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
         badgeContent = <BellOutlined style={{cursor: 'pointer'}}/>,
         dropdownEnabled = true,
     } = props ?? {};
-
-    const intlType = useIntl();
 
     const badgeDom = (
         <Badge className={`${clazzPrefix}-entry-badge`} {...props?.badgeProps}>

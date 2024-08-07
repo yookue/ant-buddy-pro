@@ -14,6 +14,7 @@ nav:
   - **v0.1.82** [2024-06-18]
     - 增加 'form/StretchInput'
     - 增加 'field/NotifyBadge'
+    - 增加 'util/StyleUtils'
 
   - **v0.1.81** [2024-06-05]
     - 增加 'layout/DelayModal'

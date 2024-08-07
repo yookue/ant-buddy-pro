@@ -284,6 +284,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
@@ -300,8 +301,6 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         searchBox = true,
         useTooltip = false,
     } = props ?? {};
-
-    const intlType = useIntl();
 
     const [dropdownOpen, setDropdownOpen] = React.useState(props?.fieldProps?.open);
     const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);

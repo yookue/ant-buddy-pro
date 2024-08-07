@@ -43,7 +43,7 @@ export default () => {
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',
-                    resetText: 'Rest',
+                    resetText: 'Reset',
                 }
             }}
             onFinish={async (values) => {
@@ -113,7 +113,7 @@ export default () => {
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',
-                    resetText: 'Rest',
+                    resetText: 'Reset',
                 }
             }}
             onFinish={async (values) => {
@@ -162,7 +162,7 @@ export default () => {
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',
-                    resetText: 'Rest',
+                    resetText: 'Reset',
                 }
             }}
             onFinish={async (values) => {
@@ -216,7 +216,7 @@ export default () => {
             submitter={{
                 searchConfig: {
                     submitText: 'Submit',
-                    resetText: 'Rest',
+                    resetText: 'Reset',
                 }
             }}
             onFinish={async (values) => {

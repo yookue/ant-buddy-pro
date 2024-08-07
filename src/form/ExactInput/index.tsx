@@ -128,6 +128,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-exact-input');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
@@ -140,8 +141,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         useTooltip = false,
         proField = true,
     } = props ?? {};
-
-    const intlType = useIntl();
 
     const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']);
 

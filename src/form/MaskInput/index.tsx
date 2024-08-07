@@ -16,8 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, type InputProps, type InputRef} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {ConfigProvider, Form, Input, type InputProps, type InputRef} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {RegexUtils} from '@yookue/ts-lang-utils';
@@ -61,24 +60,24 @@ export type MaskInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
 export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
+
+    const form = Form.useFormInstance();
+    warning(!!form, `This component needs a Form instance`);
 
     // Initialize the default props
     const {
         proField = true,
     } = props ?? {};
 
-    warning(!!formContext, `MaskInput requires a FormContext`);
-
     const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
     const composeRef = React.useRef<boolean>(false);
-    const previousRef = React.useRef<string>(formContext?.form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
+    const previousRef = React.useRef<string>(form.getFieldValue(props?.name ?? props?.fieldProps?.name));
 
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
         if (value && props?.patterns && !props.patterns.some(item => RegexUtils.testResetting(item, value))) {
-            formContext?.form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
+            form.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
             failAction?.();
         } else {
             previousRef.current = value;

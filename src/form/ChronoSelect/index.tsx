@@ -149,14 +149,13 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-chrono-select');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
         unitTypes = ['millis', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'],
         proField = true,
     } = props ?? {};
-
-    const intlType = useIntl();
 
     const optionItems: LabeledValue[] = [];
     if (unitTypes) {

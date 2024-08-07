@@ -4,17 +4,17 @@ toc: content
 
 ## NotifyBadge
 
-NotifyBadge, provides a badge with dropdown notify list.
+NotifyBadge，提供了一個帶下拉框的徽標。
 
-The typical scenario is, displaying a small icon with a dropdown which lists notices and tasks.
+典型的應用場景是，顯示一個小圖標，下拉展示通知和任務列表。
 
-### Import
+### 導入組件
 
 ```jsx | pure
 import {NotifyBadge} from '@yookue/ant-buddy-pro';
 ```
 
-### Example
+### 使用示例
 
 ```jsx
 import React from 'react';
@@ -38,7 +38,7 @@ export default () => {
                 items: [
                     {
                         key: 'notice',
-                        label: 'Notice',
+                        label: '通知',
                         labelBadgeProps: {
                             size: 'small',
                             offset: [6],
@@ -48,36 +48,36 @@ export default () => {
                                 {
                                     id: '001',
                                     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
-                                    title: 'You\'ve received 12 reports',
+                                    title: '您收到了 12 份報告',
                                     timestamp: '2024-01-01',
                                 },
                                 {
                                     id: '002',
                                     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-                                    title: 'The person who you recommended has passed the interview',
-                                    description: 'This notice has been read already',
+                                    title: '您推薦的人員已經通過了面試',
+                                    description: '此通知是已讀',
                                     timestamp: '2024-01-02',
                                     read: true,
                                 },
                             ],
                         },
-                        listPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>,
+                        listPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='無數據'/>,
                         showClear: true,
                         showMore: true,
                         usePresetStyle: 'notice',
                         onClick: (ev, id) => {
-                            message.info(`You\'ve clicked the notice ${id} item`);
+                            message.info(`您點擊了通知項 ${id}`);
                         },
                         onClear: () => {
-                            message.info('You\'ve clicked the clear notices button');
+                            message.info('您點擊了清除通知按鈕');
                         },
                         onMore: () => {
-                            message.info('You\'ve clicked the more notices button');
+                            message.info('您點擊了更多通知按鈕');
                         }
                     },
                     {
                         key: 'task',
-                        label: 'Task',
+                        label: '任務',
                         labelBadgeProps: {
                             size: 'small',
                             offset: [6],
@@ -86,50 +86,50 @@ export default () => {
                             dataSource: [
                                 {
                                     id: '001',
-                                    title: 'Start unit test',
-                                    description: 'You should start it in the next 3 days',
-                                    extra: <Tag color='red'>Not started</Tag>,
+                                    title: '開始單元測試',
+                                    description: '您應該在 3 天內啟動此任務',
+                                    extra: <Tag color='red'>未開始</Tag>,
                                     timestamp: '2024-02-01',
                                 },
                                 {
                                     id: '002',
-                                    title: 'Emergent bug fix',
-                                    description: 'This task has been done already',
-                                    extra: <Tag color='green'>Done</Tag>,
+                                    title: '緊急缺陷修復',
+                                    description: '此任務項已完成',
+                                    extra: <Tag color='green'>已完成</Tag>,
                                     timestamp: '2024-02-02',
                                     read: true,
                                 },
                             ],
                         },
-                        listPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>,
+                        listPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='無數據'/>,
                         showClear: true,
                         showMore: true,
                         usePresetStyle: 'task',
                         onClick: (ev, id) => {
-                            message.info(`You\'ve clicked the task ${id} item`);
+                            message.info(`您點擊了通知任務項 ${id}`);
                         },
                         onClear: () => {
-                            message.info('You\'ve clicked the clear tasks button');
+                            message.info('您點擊了清除任務按鈕');
                         },
                         onMore: () => {
-                            message.info('You\'ve clicked the more tasks button');
+                            message.info('您點擊了更多任務按鈕');
                         }
                     }
                 ],
                 onChange: (activeKey) => {
-                    console.log('Tabs switched to ' + activeKey);
+                    console.log('標籤頁切換到 ' + activeKey);
                 }
             }}
             localeProps={{
-                clearButton: 'Clear',
-                moreButton: 'More',
+                clearButton: '清除',
+                moreButton: '更多',
             }}
         />
     );
 }
 ```
 
-### Properties
+### 組件屬性
 
 #### NotifyBadgeProps
 

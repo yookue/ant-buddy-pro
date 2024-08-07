@@ -241,6 +241,7 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
     const editContext = React.useContext(EditOrReadOnlyContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
@@ -256,8 +257,6 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         },
         popupProField = true,
     } = props ?? {};
-
-    const intlType = useIntl();
 
     const fieldRef = React.useRef<InputRef>(null);
     React.useImperativeHandle(ref, () => fieldRef.current);

@@ -19,6 +19,7 @@ export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';
 export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/NotifyBadge';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
+export {CaptchaInput, type CaptchaInputProps, type CaptchaFieldRef} from './form/CaptchaInput';
 export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';
 export {ChronoTuple, type ChronoTupleProps} from './form/ChronoTuple';
 export {DivideSelect, type DivideSelectProps} from './form/DivideSelect';
