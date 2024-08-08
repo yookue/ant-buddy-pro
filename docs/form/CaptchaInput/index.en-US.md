@@ -49,7 +49,6 @@ export default () => {
                     message.success('Captcha sent successfully');
                 }}
                 countDown={29}
-                countEnd={1}
                 localeProps={{
                     'generate': 'Get Captcha',
                     'resend': 'Resend',

@@ -70,7 +70,7 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
      * @description The timer end point, in seconds
      * @description.zh-CN 计时器的结束点，单位秒
      * @description.zh-TW 計時器的結束點，單位秒
-     * @default 0
+     * @default 1
      */
     countEnd?: number;
 
@@ -138,7 +138,7 @@ export const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((
             return (timing && count > 0) ? `${resend}(${count})` : generate;
         },
         countDown = 59,
-        countEnd = 0,
+        countEnd = 1,
         timerInterval = 1000,
     } = props ?? {};
 

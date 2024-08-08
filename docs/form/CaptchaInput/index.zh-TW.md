@@ -49,7 +49,6 @@ export default () => {
                     message.success('驗證碼發送成功');
                 }}
                 countDown={29}
-                countEnd={1}
                 localeProps={{
                     'generate': '獲取驗證碼',
                     'resend': '重新發送',
