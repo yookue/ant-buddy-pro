@@ -157,8 +157,8 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         if (!item) {
             return undefined;
         }
-        const label = ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.label) ?? item?.label;
-        const value = ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.value) ?? item?.value;
+        const label = ObjectUtils.getProp(item, props?.fieldProps?.fieldNames?.label) ?? item?.label;
+        const value = ObjectUtils.getProp(item, props?.fieldProps?.fieldNames?.value) ?? item?.value;
         if (before) {
             if (optionBeforeContent === 'value' && item?.optionType === 'optGroup') {
                 return undefined;
@@ -232,32 +232,32 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 if (!item) {
                     return undefined;
                 }
-                const itemOptions = ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.options) ?? item?.options;
+                const itemOptions = ObjectUtils.getProp(item, props?.fieldProps?.fieldNames?.options) ?? item?.options;
                 if (itemOptions && Array.isArray(itemOptions)) {
                     const newOptions = itemOptions.map((subItem: any, subIndex: number) => {
                         if (!subItem) {
                             return undefined;
                         }
                         const subOptions = {};
-                        ObjectUtils.setProperty(subOptions, (props?.fieldProps?.fieldNames?.label ?? 'label'), renderOption(subItem, `group-${index}-option-${subIndex}`));
-                        ObjectUtils.setProperty(subOptions, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProperty(subItem, props?.fieldProps?.fieldNames?.label) ?? subItem?.label));
-                        ObjectUtils.setProperty(subOptions, (props?.fieldProps?.fieldNames?.value ?? 'value'), (ObjectUtils.getProperty(subItem, props?.fieldProps?.fieldNames?.value) ?? subItem?.value));
+                        ObjectUtils.setProp(subOptions, (props?.fieldProps?.fieldNames?.label ?? 'label'), renderOption(subItem, `group-${index}-option-${subIndex}`));
+                        ObjectUtils.setProp(subOptions, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProp(subItem, props?.fieldProps?.fieldNames?.label) ?? subItem?.label));
+                        ObjectUtils.setProp(subOptions, (props?.fieldProps?.fieldNames?.value ?? 'value'), (ObjectUtils.getProp(subItem, props?.fieldProps?.fieldNames?.value) ?? subItem?.value));
                         return subOptions;
                     });
                     const result = {
                         ...omit(item, (item?.optionType === 'optGroup') ? ['options', 'value', 'optionType', 'children'] : ['options']),
                     };
-                    ObjectUtils.setProperty(result, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.label) ?? item?.label));
-                    ObjectUtils.setProperty(result, (props?.fieldProps?.fieldNames?.options ?? 'options'), newOptions);
+                    ObjectUtils.setProp(result, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProp(item, props?.fieldProps?.fieldNames?.label) ?? item?.label));
+                    ObjectUtils.setProp(result, (props?.fieldProps?.fieldNames?.options ?? 'options'), newOptions);
                     return result;
                 }
                 const result = {
                     ...omit(item, (item?.optionType === 'optGroup') ? ['label', 'value', 'optionType', 'children'] : ['label']),
                 };
-                ObjectUtils.setProperty(result, (props?.fieldProps?.fieldNames?.label ?? 'label'), renderOption(item, `option-${index}`));
-                ObjectUtils.setProperty(result, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProperty(item, props?.fieldProps?.fieldNames?.label) ?? item?.label));
+                ObjectUtils.setProp(result, (props?.fieldProps?.fieldNames?.label ?? 'label'), renderOption(item, `option-${index}`));
+                ObjectUtils.setProp(result, `${props?.fieldProps?.fieldNames?.label ?? 'label'}Origin`, (ObjectUtils.getProp(item, props?.fieldProps?.fieldNames?.label) ?? item?.label));
                 if (item?.optionType === 'optGroup' && item?.children) {
-                    ObjectUtils.setProperty(result, 'options', item.children);
+                    ObjectUtils.setProp(result, 'options', item.children);
                 }
                 return result;
             });

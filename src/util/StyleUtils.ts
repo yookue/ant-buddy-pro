@@ -41,7 +41,7 @@ export abstract class StyleUtils {
             return true;
         }
         const styles = this.stringToStyles(html.getAttribute('style'));
-        return ObjectUtils.getProperty(styles, 'color-scheme') === 'dark';
+        return ObjectUtils.getProp(styles, 'color-scheme') === 'dark';
     }
 
     /**
@@ -64,7 +64,7 @@ export abstract class StyleUtils {
             const key = StringUtils.trim(StringUtils.substringBeforeLast(item, ':'));
             const value = StringUtils.trim(StringUtils.substringAfterLast(item, ':'));
             if (key && value) {
-                ObjectUtils.setProperty(result, key, value);
+                ObjectUtils.setProp(result, key, value);
             }
         });
         return result;

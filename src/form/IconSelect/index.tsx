@@ -330,8 +330,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                                 <span>{key}</span>
                             </Space>
                         );
-                        ObjectUtils.setProperty(optItem, (props?.fieldProps?.fieldNames?.label ?? 'label'), content);
-                        ObjectUtils.setProperty(optItem, (props?.fieldProps?.fieldNames?.value ?? 'value'), key);
+                        ObjectUtils.setProp(optItem, (props?.fieldProps?.fieldNames?.label ?? 'label'), content);
+                        ObjectUtils.setProp(optItem, (props?.fieldProps?.fieldNames?.value ?? 'value'), key);
                         children.push(optItem);
                     }
                 });
@@ -339,14 +339,14 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     return;
                 }
                 if (optionGroup) {
-                    const themeTitle = ObjectUtils.getProperty(props?.localeProps, `${themeType}Theme`) || intlLocales.get([intlType.locale, `${themeType}Theme`]) || intlLocales.get(['en_US', `${themeType}Theme`]);
-                    const sceneTitle = ObjectUtils.getProperty(props?.localeProps, `${sceneType}Scene`) || intlLocales.get([intlType.locale, `${sceneType}Scene`]) || intlLocales.get(['en_US', `${sceneType}Scene`]);
+                    const themeTitle = ObjectUtils.getProp(props?.localeProps, `${themeType}Theme`) || intlLocales.get([intlType.locale, `${themeType}Theme`]) || intlLocales.get(['en_US', `${themeType}Theme`]);
+                    const sceneTitle = ObjectUtils.getProp(props?.localeProps, `${sceneType}Scene`) || intlLocales.get([intlType.locale, `${sceneType}Scene`]) || intlLocales.get(['en_US', `${sceneType}Scene`]);
                     const optGroup = {
                         optionType: 'optGroup',
                         children: children,
                     };
-                    ObjectUtils.setProperty(optGroup, (props?.fieldProps?.fieldNames?.label ?? 'label'), `${themeTitle}-${sceneTitle}`);
-                    ObjectUtils.setProperty(optGroup, (props?.fieldProps?.fieldNames?.value ?? 'value'), 'optGroup');
+                    ObjectUtils.setProp(optGroup, (props?.fieldProps?.fieldNames?.label ?? 'label'), `${themeTitle}-${sceneTitle}`);
+                    ObjectUtils.setProp(optGroup, (props?.fieldProps?.fieldNames?.value ?? 'value'), 'optGroup');
                     result.push(optGroup);
                 } else {
                     result.push(...children);
@@ -535,7 +535,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             return ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => sceneTypes?.includes(item as SceneType)).map(item => {
                 return {
                     key: item,
-                    label: ObjectUtils.getProperty(props?.localeProps, `${item}Scene`) || intlLocales.get([intlType.locale, `${item}Scene`]) || intlLocales.get(['en_US', `${item}Scene`]),
+                    label: ObjectUtils.getProp(props?.localeProps, `${item}Scene`) || intlLocales.get([intlType.locale, `${item}Scene`]) || intlLocales.get(['en_US', `${item}Scene`]),
                     content: wrapIconOptions(buildIconOptions(themeType, item as SceneType)),
                 };
             });
@@ -601,7 +601,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const themeItems = ['outlined', 'filled', 'twotone'].filter(item => themeTypes?.includes(item as ThemeType)).map(item => {
         return {
             key: item,
-            label: ObjectUtils.getProperty(props?.localeProps, `${item}Theme`) || intlLocales.get([intlType.locale, `${item}Theme`]) || intlLocales.get(['en_US', `${item}Theme`]),
+            label: ObjectUtils.getProp(props?.localeProps, `${item}Theme`) || intlLocales.get([intlType.locale, `${item}Theme`]) || intlLocales.get(['en_US', `${item}Theme`]),
             children: buildThemeTabs(item as ThemeType),
         };
     });
