@@ -63,4 +63,4 @@ export default () => {
 
 #### CaptchaInputProps
 
-<API src="@/form/CaptchaInput/alias.tsx" hideTitle></API>
+<API src="@/form/CaptchaInput/index.tsx" hideTitle></API>

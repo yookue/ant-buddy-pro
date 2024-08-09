@@ -18,6 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Form, Input, Button} from 'antd';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
+import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -118,9 +119,7 @@ export type CaptchaInputRef = {
  *
  * @author David Hsing
  */
-export const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {    CaptchaInputField.displayName = 'CaptchaInput';
-    CaptchaInputField.displayName = 'CaptchaInput';
-
+const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {    CaptchaInputField.displayName = 'CaptchaInput';
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
@@ -237,3 +236,7 @@ export const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((
         </div>
     );
 });
+
+
+CaptchaInputField.displayName = 'CaptchaInput';
+export const CaptchaInput: React.FC<CaptchaInputProps> = createField(CaptchaInputField) as typeof CaptchaInputField;
