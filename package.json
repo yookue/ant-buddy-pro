@@ -80,7 +80,7 @@
     },
     "publishConfig": {
         "access": "public",
-        "registry": "https://registry.npmjs.org/"
+        "registry": "https://registry.npmjs.org"
     },
     "collective": {
         "url": "https://opencollective.com/yookue-awesome"
