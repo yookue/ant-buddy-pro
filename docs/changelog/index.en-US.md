@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.86** [2024-08-10]
+    - Add 'layout/FlexBox'
+
   - **v0.1.83** [2024-08-08]
     - Add 'form/CaptchaInput'
 

@@ -33,6 +33,7 @@ export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';
 export {CardTabs, type CardTabsProps} from './layout/CardTabs';
 export {CodePreview, type CodePreviewProps} from './layout/CodePreview';
 export {DelayModal, type DelayModalProps} from './layout/DelayModal';
+export {FlexBox, type FlexBoxProps} from './layout/FlexBox';
 export {FoldSection, type FoldSectionProps} from './layout/FoldSection';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
 export {MenuTabs, type MenuTabsProps} from './layout/MenuTabs';
