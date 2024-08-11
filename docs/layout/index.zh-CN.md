@@ -9,4 +9,4 @@ nav:
 
 ## 布局总览
 
-ant-buddy-pro 布局，基于 [Ant Design Pro](https://pro.ant.design/) 的 [ProLayout](https://github.com/ant-design/pro-components/tree/master/packages/layout) 进行扩展和增强，提供更多的定制化选项。
+`ant-buddy-pro` 布局，基于 [Ant Design Pro](https://pro.ant.design/) 的 [ProLayout](https://github.com/ant-design/pro-components/tree/master/packages/layout) 进行扩展和增强，提供更多的定制化选项。
