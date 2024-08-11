@@ -119,7 +119,7 @@ export type CaptchaInputRef = {
  *
  * @author David Hsing
  */
-const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {    CaptchaInputField.displayName = 'CaptchaInput';
+const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
