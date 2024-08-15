@@ -18,7 +18,7 @@ import {RefreshImage} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {RefreshImage} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -32,7 +32,7 @@ export default () => {
             title='点击刷新图片'
             autoCursor={true}
             onRefresh={() => {
-                message.success('图片已刷新');
+                messageApi.success('图片已刷新');
             }}
         />
     );

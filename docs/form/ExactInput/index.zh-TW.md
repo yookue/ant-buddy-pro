@@ -50,7 +50,7 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {ExactInput} from '@yookue/ant-buddy-pro';
 

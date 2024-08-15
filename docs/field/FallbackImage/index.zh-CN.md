@@ -16,7 +16,7 @@ import {FallbackImage} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {FallbackImage} from '@yookue/ant-buddy-pro';
 
 export default () => {

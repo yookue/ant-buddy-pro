@@ -32,7 +32,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {LocaleInput} from '@yookue/ant-buddy-pro';
 
@@ -47,7 +47,7 @@ export default () => {
                 }
             }}
             onFinish={async (values) => {
-                message.success('您点击了提交按钮');
+                messageApi.success('您点击了提交按钮');
             }}
         >
             <LocaleInput
@@ -101,7 +101,7 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {LocaleInput} from '@yookue/ant-buddy-pro';
 
@@ -116,7 +116,7 @@ export default () => {
                 }
             }}
             onFinish={async (values) => {
-                message.success('您点击了提交按钮');
+                messageApi.success('您点击了提交按钮');
             }}
         >
             <LocaleInput
@@ -150,7 +150,7 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {LocaleInput} from '@yookue/ant-buddy-pro';
 
@@ -165,7 +165,7 @@ export default () => {
                 }
             }}
             onFinish={async (values) => {
-                message.success('您点击了提交按钮');
+                messageApi.success('您点击了提交按钮');
             }}
         >
             <LocaleInput
@@ -204,7 +204,7 @@ export default () => {
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {LocaleInput} from '@yookue/ant-buddy-pro';
 
@@ -219,7 +219,7 @@ export default () => {
                 }
             }}
             onFinish={async (values) => {
-                message.success('您点击了提交按钮');
+                messageApi.success('您点击了提交按钮');
             }}
         >
             <LocaleInput

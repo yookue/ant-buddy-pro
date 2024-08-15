@@ -18,7 +18,7 @@ import {NotifyBadge} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Empty, Tag, message} from 'antd';
+import {Empty, Tag, message as messageApi} from 'antd';
 import {NotifyBadge} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -66,13 +66,13 @@ export default () => {
                         showMore: true,
                         usePresetStyle: 'notice',
                         onClick: (ev, id) => {
-                            message.info(`You\'ve clicked the notice ${id} item`);
+                            messageApi.info(`You\'ve clicked the notice ${id} item`);
                         },
                         onClear: () => {
-                            message.info('You\'ve clicked the clear notices button');
+                            messageApi.info('You\'ve clicked the clear notices button');
                         },
                         onMore: () => {
-                            message.info('You\'ve clicked the more notices button');
+                            messageApi.info('You\'ve clicked the more notices button');
                         }
                     },
                     {
@@ -106,13 +106,13 @@ export default () => {
                         showMore: true,
                         usePresetStyle: 'task',
                         onClick: (ev, id) => {
-                            message.info(`You\'ve clicked the task ${id} item`);
+                            messageApi.info(`You\'ve clicked the task ${id} item`);
                         },
                         onClear: () => {
-                            message.info('You\'ve clicked the clear tasks button');
+                            messageApi.info('You\'ve clicked the clear tasks button');
                         },
                         onMore: () => {
-                            message.info('You\'ve clicked the more tasks button');
+                            messageApi.info('You\'ve clicked the more tasks button');
                         }
                     }
                 ],

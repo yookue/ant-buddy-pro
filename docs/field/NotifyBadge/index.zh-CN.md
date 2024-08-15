@@ -18,7 +18,7 @@ import {NotifyBadge} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Empty, Tag, message} from 'antd';
+import {Empty, Tag, message as messageApi} from 'antd';
 import {NotifyBadge} from '@yookue/ant-buddy-pro';
 
 export default () => {
@@ -66,13 +66,13 @@ export default () => {
                         showMore: true,
                         usePresetStyle: 'notice',
                         onClick: (ev, id) => {
-                            message.info(`您点击了通知项 ${id}`);
+                            messageApi.info(`您点击了通知项 ${id}`);
                         },
                         onClear: () => {
-                            message.info('您点击了清除通知按钮');
+                            messageApi.info('您点击了清除通知按钮');
                         },
                         onMore: () => {
-                            message.info('您点击了更多通知按钮');
+                            messageApi.info('您点击了更多通知按钮');
                         }
                     },
                     {
@@ -106,13 +106,13 @@ export default () => {
                         showMore: true,
                         usePresetStyle: 'task',
                         onClick: (ev, id) => {
-                            message.info(`您点击了任务项 ${id}`);
+                            messageApi.info(`您点击了任务项 ${id}`);
                         },
                         onClear: () => {
-                            message.info('您点击了清除任务按钮');
+                            messageApi.info('您点击了清除任务按钮');
                         },
                         onMore: () => {
-                            message.info('您点击了更多任务按钮');
+                            messageApi.info('您点击了更多任务按钮');
                         }
                     }
                 ],

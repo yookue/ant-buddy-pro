@@ -16,7 +16,7 @@ import {CaptchaInput} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {message} from 'antd';
+import {message as messageApi} from 'antd';
 import {MobileOutlined, SafetyCertificateOutlined} from '@ant-design/icons';
 import {ProForm, ProFormText} from '@ant-design/pro-form';
 import {CaptchaInput} from '@yookue/ant-buddy-pro';
@@ -46,7 +46,7 @@ export default () => {
                 }}
                 phoneName='mobile'
                 onGenerate={() => {
-                    message.success('验证码发送成功');
+                    messageApi.success('验证码发送成功');
                 }}
                 countDown={29}
                 localeProps={{
