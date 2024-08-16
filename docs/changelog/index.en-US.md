@@ -11,6 +11,10 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.87** [2024-08-16]
+    - Add 'form/AvatarUpload'
+    - Add 'util/NodeUtils'
+
   - **v0.1.86** [2024-08-10]
     - Add 'layout/FlexBox'
 

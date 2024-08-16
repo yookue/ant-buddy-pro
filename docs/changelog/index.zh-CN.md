@@ -11,6 +11,10 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.87** [2024-08-16]
+    - 增加 'form/AvatarUpload'
+    - 增加 'util/NodeUtils'
+
   - **v0.1.86** [2024-08-10]
     - 增加 'layout/FlexBox'
 
