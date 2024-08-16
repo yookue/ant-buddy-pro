@@ -67,10 +67,10 @@ export default () => {
             </ProForm>
             <Divider/>
             <AvatarUpload
-                name='avatar'
-                readonly={readonly}
                 imageSrc='https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
+                readonly={readonly}
                 uploadProps={{
+                    name: 'avatar',
                     allowedFileTypes: [
                         'image/jpeg',
                         'image/png',
