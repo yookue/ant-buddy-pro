@@ -24,42 +24,38 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-#### With ProForm, with prefix
-
 ```jsx
 import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
+import {Divider} from 'antd';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {ExactInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [useTooltip, setUseTooltip] = React.useState(false);
+
     return (
         <ProForm autoFocusFirstInput={false} submitter={false}>
+            <ProFormSwitch
+                label='Use Tooltip'
+                checkedChildren='True'
+                unCheckedChildren='False'
+                fieldProps={{
+                    checked: useTooltip,
+                }}
+                onChange={(value) => {
+                    setUseTooltip(value ? true : false);
+                }}
+            />
+            <Divider/>
             <ExactInput
-                name='foo'
+                name='foobar'
                 placeholder='Please input this field'
                 fieldProps={{
                     addonBefore: 'Prefix',
                 }}
+                useTooltip={useTooltip}
             />
         </ProForm>
-    );
-}
-```
-
-#### Without ProForm, with Tooltip
-
-```jsx
-import React from 'react';
-import {ExactInput} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ExactInput
-            name='bar'
-            placeholder='Please input this field'
-            useTooltip={true}
-            proField={false}
-        />
     );
 }
 ```

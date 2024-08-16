@@ -24,44 +24,38 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-#### 使用 ProForm，使用前綴
-
 ```jsx
 import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
+import {Divider} from 'antd';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {ExactInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [useTooltip, setUseTooltip] = React.useState(false);
+
     return (
         <ProForm autoFocusFirstInput={false} submitter={false}>
+            <ProFormSwitch
+                label='Tooltip 控件'
+                checkedChildren='是'
+                unCheckedChildren='否'
+                fieldProps={{
+                    checked: useTooltip,
+                }}
+                onChange={(value) => {
+                    setUseTooltip(value ? true : false);
+                }}
+            />
+            <Divider/>
             <ExactInput
-                name='foo'
+                name='foobar'
                 placeholder='請輸入此項'
                 fieldProps={{
                     addonBefore: '前綴',
                 }}
+                useTooltip={useTooltip}
             />
         </ProForm>
-    );
-}
-```
-
-#### 不使用 ProForm，使用 Tooltip
-
-```jsx
-import React from 'react';
-import {message as messageApi} from 'antd';
-import {ProForm} from '@ant-design/pro-form';
-import {ExactInput} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ExactInput
-            name='bar'
-            placeholder='請輸入此項'
-            useTooltip={true}
-            proField={false}
-        />
     );
 }
 ```
