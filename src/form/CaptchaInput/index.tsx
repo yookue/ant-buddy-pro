@@ -18,7 +18,6 @@
 import React from 'react';
 import {ConfigProvider, Form, Input, Button} from 'antd';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
-import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -119,8 +118,8 @@ export type CaptchaInputRef = {
  *
  * @author David Hsing
  */
-const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
-    CaptchaInputField.displayName = 'CaptchaInput';
+export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & React.RefAttributes<any>> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
+    CaptchaInput.displayName = CaptchaInput.name;
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
@@ -129,7 +128,7 @@ const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?:
     const intlType = useIntl();
 
     const form = Form.useFormInstance();
-    warning(!!form, `CaptchaInput needs a Form instance`);
+    warning(!!form, `${CaptchaInput.name} needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -143,9 +142,9 @@ const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?:
         timerInterval = 1000,
     } = props ?? {};
 
-    warning(countEnd >= 0, `CaptchaInput prop 'countEnd' must be greater than or equal to 0`);
-    warning(countDown >= countEnd, `CaptchaInput prop 'countDown' must be greater than or equal to prop 'countEnd'`);
-    warning(timerInterval > 0, `CaptchaInput prop 'timerInterval' must be greater than 0`);
+    warning(countEnd >= 0, `${CaptchaInput.name} prop 'countEnd' must be greater than or equal to 0`);
+    warning(countDown >= countEnd, `${CaptchaInput.name} prop 'countDown' must be greater than or equal to prop 'countEnd'`);
+    warning(timerInterval > 0, `${CaptchaInput.name} prop 'timerInterval' must be greater than 0`);
 
     const [count, setCount] = React.useState<number>(countDown);
     const [loading, setLoading] = React.useState<boolean>();
@@ -238,6 +237,3 @@ const CaptchaInputField: React.FC<CaptchaInputProps> = React.forwardRef((props?:
         </div>
     );
 });
-
-
-export const CaptchaInput: React.FC<CaptchaInputProps> = createField(CaptchaInputField) as typeof CaptchaInputField;

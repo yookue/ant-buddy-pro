@@ -286,7 +286,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const intlType = useIntl();
 
     const form = Form.useFormInstance();
-    warning(!!form, `IconSelect needs a Form instance`);
+    warning(!!form, `${IconSelect.name} needs a Form instance`);
 
     // Initialize the default props
     const {

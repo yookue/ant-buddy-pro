@@ -77,6 +77,8 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @author David Hsing
  */
 export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & React.RefAttributes<any>> = React.forwardRef((props?: StretchInputProps, ref?: any) => {
+    StretchInput.displayName = StretchInput.name;
+
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
