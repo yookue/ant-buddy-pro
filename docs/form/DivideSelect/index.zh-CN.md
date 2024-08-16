@@ -83,7 +83,7 @@ export default () => {
                         }
                     ]
                 }}
-                usePresetStyle={presetStyle}
+                presetStyle={presetStyle}
             />
         </ProForm>
     );

@@ -130,7 +130,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'before-prior'
      */
-    usePresetStyle?: 'before-prior' | 'after-prior' | '10-90' | '20-80' | '30-70' | '40-60' | '50-50' | '60-40' | '70-30' | '80-20' | '90-10' | false;
+    presetStyle?: 'before-prior' | 'after-prior' | '10-90' | '20-80' | '30-70' | '40-60' | '50-50' | '60-40' | '70-30' | '80-20' | '90-10' | false;
 };
 
 
@@ -150,7 +150,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         optionBeforeContent = 'label',
         optionAfterContent = 'value',
         proField = true,
-        usePresetStyle = 'before-prior',
+        presetStyle = 'before-prior',
     } = props ?? {};
 
     const renderContent = (item: any, before: boolean) => {
@@ -176,7 +176,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
 
     const renderOption = (item: any, key?: string) => {
         return !item ? undefined : (
-            <div key={key ?? item?.value} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))} style={props?.optionStyle}>
+            <div key={key ?? item?.value} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))} style={props?.optionStyle}>
                 <If condition={optionBeforeContent} validation={false}>
                     <span key={`${key ?? item?.value}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
                         {renderContent(item, true)}
@@ -192,7 +192,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestKeepOptions', 'proField', 'usePresetStyle']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestKeepOptions', 'proField', 'presetStyle']);
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
 
         return (
@@ -271,7 +271,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
-                options={!usePresetStyle ? optionItems : rebuildOptions()}
+                options={!presetStyle ? optionItems : rebuildOptions()}
                 optionLabelProp={(!props?.fieldProps?.optionLabelProp || props.fieldProps.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
                 popupClassName={classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName)}
             />

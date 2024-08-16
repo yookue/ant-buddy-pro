@@ -25,7 +25,7 @@ export default () => {
     const [themeInkBar, setThemeInkBar] = React.useState(true);
     const [sceneInkBar, setSceneInkBar] = React.useState(true);
     const [searchBox, setSearchBox] = React.useState(true);
-    const [useTooltip, setUseTooltip] = React.useState(false);
+    const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
 
     return (
         <ProForm layout='horizontal' submitter={false}>
@@ -88,11 +88,11 @@ export default () => {
                     checkedChildren='是'
                     unCheckedChildren='否'
                     fieldProps={{
-                        checked: useTooltip,
+                        checked: tooltipCtrl,
                         disabled: optionMode === 'text',
                     }}
                     onChange={(value) => {
-                        setUseTooltip(value ? true : false);
+                        setTooltipCtrl(value ? true : false);
                     }}
                 />
             </ProForm.Group>
@@ -107,6 +107,7 @@ export default () => {
                 fieldProps={{
                     notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='无数据'/>),
                 }}
+                tooltipCtrl={tooltipCtrl}
                 localeProps={{
                     searchBox: '搜索',
                     outlinedTheme: '线框风格',
@@ -119,7 +120,6 @@ export default () => {
                     logoScene: '品牌类',
                     webScene: '网站类',
                 }}
-                useTooltip={useTooltip}
             />
         </ProForm>
     );

@@ -75,7 +75,7 @@ export type CardTabsProps = Omit<TabsProps, 'type'> & {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'padding-md'
      */
-    usePresetStyle?: 'padding-0' | 'padding-xss' | 'padding-xs' | 'padding-sm' | 'padding-md' | 'padding-lg' | 'padding-x-0' | 'padding-x-xss' | 'padding-x-xs' | 'padding-x-sm' | 'padding-x-md' | 'padding-x-lg' | 'padding-y-0' | 'padding-y-xss' | 'padding-y-xs' | 'padding-y-sm' | 'padding-y-md' | 'padding-y-lg' | false;
+    presetStyle?: 'padding-0' | 'padding-xss' | 'padding-xs' | 'padding-sm' | 'padding-md' | 'padding-lg' | 'padding-x-0' | 'padding-x-xss' | 'padding-x-xs' | 'padding-x-sm' | 'padding-x-md' | 'padding-x-lg' | 'padding-y-0' | 'padding-y-xss' | 'padding-y-xs' | 'padding-y-sm' | 'padding-y-md' | 'padding-y-lg' | false;
 };
 
 
@@ -95,13 +95,13 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
         tabBorder = true,
         contentBorder = true,
         inkBar = true,
-        usePresetStyle = 'padding-md',
+        presetStyle = 'padding-md',
     } = props ?? {};
 
-    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'contentBorder', 'inkBar', 'usePresetStyle']);
+    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'contentBorder', 'inkBar', 'presetStyle']);
 
     return (
-        <div className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))} style={props?.containerStyle}>
+        <div className={classNames(clazzPrefix, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))} style={props?.containerStyle}>
             <Tabs
                 className={classNames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (contentBorder ? `${clazzPrefix}-content-border` : undefined), (inkBar ? `${clazzPrefix}-ink-bar` : undefined))}
                 type='card'

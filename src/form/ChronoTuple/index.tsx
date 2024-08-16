@@ -104,7 +104,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
         <InputNumber {...PropsUtils.pickForwardProps(props?.digitProps)} {...props?.digitProps?.fieldProps}/>
     );
 
-    const restSelectProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'usePresetStyle']);
+    const restSelectProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'presetStyle']);
 
     return (
         <div className={classNames(clazzPrefix, props?.containerClazz, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined))} style={props?.containerStyle}>
@@ -114,7 +114,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
                     label={props?.selectProps?.label ?? (formContext.vertical ? ' ' : '')}
                     {...restSelectProps}
                     proField={proField}
-                    usePresetStyle={(props?.selectProps?.usePresetStyle === undefined) ? 'addon' : props.selectProps.usePresetStyle}
+                    presetStyle={(props?.selectProps?.presetStyle === undefined) ? 'addon' : props.selectProps.presetStyle}
                 />
             </Input.Group>
         </div>

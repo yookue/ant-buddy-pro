@@ -21,6 +21,7 @@ import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import CssMotion from 'rc-motion';
+import {NodeUtils} from '@/util/NodeUtils';
 import './index.less';
 
 
@@ -146,7 +147,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-CN 头部折叠 span 的提示(面板展开时)
      * @description.zh-TW 頭部折叠 span 的提示(面板展開時)
      */
-    headerOpenedHint?: string;
+    headerOpenedHint?: React.ReactNode;
 
     /**
      * @description The DOM of collapse that under the header div when collapsed
@@ -161,20 +162,20 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-CN 头部折叠 span 的提示(面板折叠时)
      * @description.zh-TW 頭部折叠 span 的提示(面板摺叠時)
      */
-    headerClosedHint?: string;
+    headerClosedHint?: React.ReactNode;
 
     /**
-     * @description Whether to use tooltip instead of raw title for the collapse span
-     * @description.zh-CN 头部折叠 span 是否使用 Tooltip 替代 title
-     * @description.zh-TW 頭部折叠 span 是否使用 Tooltip 替代 title
+     * @description Whether to use tooltip control
+     * @description.zh-CN 是否使用 Tooltip 控件
+     * @description.zh-TW 是否使用 Tooltip 控件
      * @default false
      */
-    useTooltip?: boolean;
+    tooltipCtrl?: boolean;
 
     /**
-     * @description The properties of tooltip for the collapse span
-     * @description.zh-CN 头部折叠 span 的 Tooltip 属性
-     * @description.zh-TW 頭部折叠 span 的 Tooltip 屬性
+     * @description The properties of tooltip
+     * @description.zh-CN Tooltip 属性
+     * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: Omit<TooltipProps, 'title'>;
 
@@ -244,7 +245,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    usePresetStyle?: 'default' | 'classic' | false;
+    presetStyle?: 'default' | 'classic' | false;
 }>;
 
 
@@ -265,12 +266,12 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         headerCollapsePos = 'after',
         headerClosedDom = <UpOutlined/>,
         headerOpenedDom = <DownOutlined/>,
-        useTooltip = false,
+        tooltipCtrl = false,
         panelInitialOpen = true,
         panelForceRender = false,
         panelDestroyOnClose = false,
         panelPlaceholder = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>,
-        usePresetStyle = 'default',
+        presetStyle = 'default',
     } = props ?? {};
 
     const [panelOpen, setPanelOpen] = React.useState(panelInitialOpen);
@@ -297,18 +298,18 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
             <span
                 className={classNames(`${clazzPrefix}-header-collapse-${before ? 'before' : 'after'}`, props?.headerCollapseClazz)}
                 style={props?.headerCollapseStyle}
-                title={useTooltip ? undefined : (panelOpen ? props?.headerOpenedHint : props?.headerClosedHint)}
+                title={tooltipCtrl ? undefined : NodeUtils.toString(panelOpen ? props?.headerOpenedHint : props?.headerClosedHint)}
                 onClick={handleCollapse}
             >
                 {panelOpen ? headerOpenedDom : headerClosedDom}
             </span>
         );
-        if (!useTooltip) {
+        if (!tooltipCtrl) {
             return content;
         }
         return (
             <Tooltip
-                title={panelOpen ? props?.headerOpenedHint : props?.headerClosedHint}
+                title={NodeUtils.toString(panelOpen ? props?.headerOpenedHint : props?.headerClosedHint)}
                 {...props?.tooltipProps}
             >
                 {content}
@@ -332,7 +333,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     return (
         <section
-            className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
+            className={classNames(clazzPrefix, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>

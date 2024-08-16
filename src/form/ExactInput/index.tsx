@@ -94,12 +94,12 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     checkProps?: AddonCheckProps;
 
     /**
-     * @description Whether to use tooltip instead of raw title
-     * @description.zh-CN 是否使用 Tooltip 替代 title
-     * @description.zh-TW 是否使用 Tooltip 替代 title
+     * @description Whether to use tooltip control
+     * @description.zh-CN 是否使用 Tooltip 控件
+     * @description.zh-TW 是否使用 Tooltip 控件
      * @default false
      */
-    useTooltip?: boolean;
+    tooltipCtrl?: boolean;
 
     /**
      * @description The properties of tooltip for checkbox
@@ -138,7 +138,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             nameSuffix: 'Exact',
             idSuffix: 'Exact',
         },
-        useTooltip = false,
+        tooltipCtrl = false,
         proField = true,
     } = props ?? {};
 
@@ -165,7 +165,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     };
 
     const buildTooltipDom = (actionDom: React.ReactNode) => {
-        if (useTooltip) {
+        if (tooltipCtrl) {
             const title = props?.tooltipProps?.title || intlLocales.get([intlType.locale, 'matchExactly']) || intlLocales.get(['en_US', 'matchExactly']);
             const restProps = !props?.tooltipProps ? {} : omit(props.tooltipProps, ['title']);
             return (
@@ -226,7 +226,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'useTooltip', 'tooltipProps', 'proField']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'tooltipCtrl', 'tooltipProps', 'proField']);
         return (
             <ProFormText
                 {...restProps}

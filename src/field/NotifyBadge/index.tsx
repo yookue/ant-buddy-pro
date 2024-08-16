@@ -160,7 +160,7 @@ export type MixinTabProps = Omit<RcTab, 'children'> & {
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
      */
-    usePresetStyle?: 'notice' | 'task' | false;
+    presetStyle?: 'notice' | 'task' | false;
 };
 
 
@@ -311,10 +311,10 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                 </Badge>
             );
         }
-        if (tab.usePresetStyle !== 'notice' && tab.usePresetStyle !== 'task') {
+        if (tab.presetStyle !== 'notice' && tab.presetStyle !== 'task') {
             return undefined;
         }
-        const label = intlLocales.get([intlType.locale, tab.usePresetStyle]) ?? intlLocales.get(['en_US', tab.usePresetStyle]);
+        const label = intlLocales.get([intlType.locale, tab.presetStyle]) ?? intlLocales.get(['en_US', tab.presetStyle]);
         return !tab.labelBadgeProps ? label : (
             <Badge count={unreadCount} {...omitProps}>
                 {label}
@@ -386,7 +386,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                     <If condition={showClear} validation={false}>
                         <div
                             className={`${clazzPrefix}-action-button`}
-                            onClick={ev => tab.onClear?.(ev, tab.key ?? tab.usePresetStyle)}
+                            onClick={ev => tab.onClear?.(ev, tab.key ?? tab.presetStyle)}
                         >
                             {props?.localeProps?.clearButton || intlLocales.get([intlType.locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
                         </div>
@@ -394,7 +394,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                     <If condition={showMore} validation={false}>
                         <div
                             className={`${clazzPrefix}-action-button`}
-                            onClick={ev => tab.onMore?.(ev, tab.key ?? tab.usePresetStyle)}
+                            onClick={ev => tab.onMore?.(ev, tab.key ?? tab.presetStyle)}
                         >
                             {props?.localeProps?.moreButton || intlLocales.get([intlType.locale, 'more']) || intlLocales.get(['en_US', 'more'])}
                         </div>
@@ -420,14 +420,14 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                         if (tab.listProps?.renderItem) {
                             return tab.listProps.renderItem(item, index);
                         }
-                        return (tab.usePresetStyle === 'notice' || tab.usePresetStyle === 'task') ? renderPresetList(item, index, tab) : undefined;
+                        return (tab.presetStyle === 'notice' || tab.presetStyle === 'task') ? renderPresetList(item, index, tab) : undefined;
                     }}
                 />
             );
             return {
-                key: tab.key ?? tab.usePresetStyle,
+                key: tab.key ?? tab.presetStyle,
                 label: renderTabLabel(tab),
-                ...omit(tab, ['key', 'label', 'labelBadgeProps', 'listProps', 'showClear', 'showMore', 'onClick', 'onClear', 'onMore', 'usePresetStyle']),
+                ...omit(tab, ['key', 'label', 'labelBadgeProps', 'listProps', 'showClear', 'showMore', 'onClick', 'onClear', 'onMore', 'presetStyle']),
                 children: content,
             } as RcTab;
         });

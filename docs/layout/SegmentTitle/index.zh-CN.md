@@ -68,7 +68,7 @@ export default () => {
                 ornament='1'
                 ornamentPos={ornamentPos}
                 content='SegmentTitle 标题内容'
-                usePresetStyle={presetStyle}
+                presetStyle={presetStyle}
             />
         </>
     );

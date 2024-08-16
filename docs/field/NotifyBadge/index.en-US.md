@@ -64,7 +64,7 @@ export default () => {
                         listPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>,
                         showClear: true,
                         showMore: true,
-                        usePresetStyle: 'notice',
+                        presetStyle: 'notice',
                         onClick: (ev, id) => {
                             messageApi.info(`You\'ve clicked the notice ${id} item`);
                         },
@@ -104,7 +104,7 @@ export default () => {
                         listPlaceholder: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>,
                         showClear: true,
                         showMore: true,
-                        usePresetStyle: 'task',
+                        presetStyle: 'task',
                         onClick: (ev, id) => {
                             messageApi.info(`You\'ve clicked the task ${id} item`);
                         },

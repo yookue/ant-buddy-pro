@@ -191,7 +191,7 @@ export type PageFooterProps = {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    usePresetStyle?: 'default' | 'compact' | false;
+    presetStyle?: 'default' | 'compact' | false;
 };
 
 
@@ -209,7 +209,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
     // Initialize the default props
     const {
         copyrightIcon = true,
-        usePresetStyle = 'default',
+        presetStyle = 'default',
     } = props ?? {};
 
     if ((!props?.links || props?.links?.length === 0) && !props?.copyright) {
@@ -218,7 +218,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
 
     return (
         <Layout.Footer
-            className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))}
+            className={classNames(clazzPrefix, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>

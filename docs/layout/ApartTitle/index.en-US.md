@@ -66,7 +66,7 @@ export default () => {
                 ornament={<AppstoreOutlined/>}
                 ornamentPos={ornamentPos}
                 content='ApartTitle header content'
-                usePresetStyle={presetStyle}
+                presetStyle={presetStyle}
             />
         </>
     );

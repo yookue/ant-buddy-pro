@@ -22,28 +22,37 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-#### 使用 HTML Title
-
 ```jsx
 import React from 'react';
+import {Divider} from 'antd';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {FullScreen} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
+
     return (
-        <FullScreen enterHint='全屏' exitHint='退出全屏'/>
-    );
-}
-```
-
-#### 使用 Ant Tooltip
-
-```jsx
-import React from 'react';
-import {FullScreen} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <FullScreen enterHint='全屏' exitHint='退出全屏' useTooltip={true}/>
+        <>
+            <ProForm autoFocusFirstInput={false} submitter={false}>
+                <ProFormSwitch
+                    label='Tooltip Ctrl'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: tooltipCtrl,
+                    }}
+                    onChange={(value) => {
+                        setTooltipCtrl(value ? true : false);
+                    }}
+                />
+            </ProForm>
+            <Divider/>
+            <FullScreen
+                enterHint='全屏'
+                exitHint='退出全屏'
+                tooltipCtrl={tooltipCtrl}
+            />
+        </>
     );
 }
 ```

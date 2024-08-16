@@ -137,7 +137,7 @@ export type CodePreviewProps = React.PropsWithChildren<{
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    usePresetStyle?: 'default' | false;
+    presetStyle?: 'default' | false;
 }>;
 
 
@@ -154,12 +154,12 @@ export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps
 
     // Initialize the default props
     const {
-        usePresetStyle = 'default',
+        presetStyle = 'default',
     } = props ?? {};
 
     return (
         <div
-            className={classNames(clazzPrefix, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))}
+            className={classNames(clazzPrefix, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))}
             style={props?.containerStyle}
         >
             <pre className={classNames(`${clazzPrefix}-pre`, props?.preClazz)} style={props?.preStyle}>

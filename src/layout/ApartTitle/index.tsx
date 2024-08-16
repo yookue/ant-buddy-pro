@@ -101,7 +101,7 @@ export type ApartTitleProps = {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    usePresetStyle?: 'default' | 'classic' | false;
+    presetStyle?: 'default' | 'classic' | false;
 };
 
 
@@ -119,7 +119,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
     // Initialize the default props
     const {
         ornamentPos = 'before',
-        usePresetStyle = 'default',
+        presetStyle = 'default',
     } = props ?? {};
 
     const buildOrnamentDom = (before: boolean) => {
@@ -138,7 +138,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, props?.containerClazz, (usePresetStyle ? `${clazzPrefix}-${usePresetStyle}` : undefined))}
+            className={classNames(`${clazzPrefix}`, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))}
             style={props?.containerStyle}
         >
             <If condition={ornamentPos === 'before'} validation={false}>

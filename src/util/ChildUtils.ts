@@ -20,7 +20,7 @@ import ReactDOMServer from 'react-dom/server';
 
 
 /**
- * Utilities for React children DOM
+ * Utilities for React children
  *
  * @author David Hsing
  */
@@ -64,30 +64,5 @@ export abstract class ChildUtils {
             }
         });
         return result;
-    }
-
-    /**
-     * Returns the string representation of pure content that under all the children
-     *
-     * @param node the node to inspect
-     *
-     * @returns the string representation of pure content that under all the children
-     *
-     * @see "https://github.com/sunknudsen/react-node-to-string"
-     */
-    public static extractPureContent(node: React.ReactNode): string | undefined {
-        let result = '';
-        if (typeof node === 'string') {
-            result = node;
-        } else if (typeof node === 'number') {
-            result = node.toString();
-        } else if (node instanceof Array) {
-            node.forEach((child) => {
-                result += ChildUtils.extractPureContent(child);
-            });
-        } else if (React.isValidElement(node)) {
-            result += ChildUtils.extractPureContent(node.props.children);
-        }
-        return (result.length === 0) ? undefined : result;
     }
 }

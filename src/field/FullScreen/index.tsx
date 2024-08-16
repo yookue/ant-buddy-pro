@@ -20,6 +20,7 @@ import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import classNames from 'classnames';
 import screenfull from 'screenfull';
+import {NodeUtils} from '@/util/NodeUtils';
 
 
 export type FullScreenProps = {
@@ -58,22 +59,22 @@ export type FullScreenProps = {
      * @description.zh-CN 进入全屏模式的提示
      * @description.zh-TW 進入全屏模式的提示
      */
-    enterHint?: string;
+    enterHint?: React.ReactNode;
 
     /**
      * @description The hint of exiting fullscreen mode
      * @description.zh-CN 退出全屏模式的提示
      * @description.zh-TW 退出全屏模式的提示
      */
-    exitHint?: string;
+    exitHint?: React.ReactNode;
 
     /**
-     * @description Whether to use tooltip instead of raw title
-     * @description.zh-CN 是否使用 Tooltip 替代 title
-     * @description.zh-TW 是否使用 Tooltip 替代 title
+     * @description Whether to use tooltip control
+     * @description.zh-CN 是否使用 Tooltip 控件
+     * @description.zh-TW 是否使用 Tooltip 控件
      * @default false
      */
-    useTooltip?: boolean;
+    tooltipCtrl?: boolean;
 
     /**
      * @description The properties of tooltip
@@ -98,7 +99,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     // Initialize the default props
     const {
         triggerFor = document.documentElement,
-        useTooltip = false,
+        tooltipCtrl = false,
     } = props ?? {};
 
     const [fullscreen, setFullscreen] = React.useState(document.fullscreenElement === triggerFor);
@@ -143,13 +144,20 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     };
 
     const buildScreenDom = (tooltip: boolean) => (
-        <span className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle} title={!tooltip ? undefined : (fullscreen ? props?.exitHint : props?.enterHint)}>
+        <span
+            className={classNames(clazzPrefix, props?.containerClazz)}
+            style={props?.containerStyle}
+            title={!tooltip ? undefined : NodeUtils.toString(fullscreen ? props?.exitHint : props?.enterHint)}
+        >
             {React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {onClick: handleToggleScreen})}
         </span>
     );
 
-    return !useTooltip ? buildScreenDom(true) : (
-        <Tooltip title={fullscreen ? props?.exitHint : props?.enterHint} {...props?.tooltipProps}>
+    return !tooltipCtrl ? buildScreenDom(true) : (
+        <Tooltip
+            title={NodeUtils.toString(fullscreen ? props?.exitHint : props?.enterHint)}
+            {...props?.tooltipProps}
+        >
             {buildScreenDom(false)}
         </Tooltip>
     );

@@ -135,7 +135,7 @@ export type ChronoSelectProps = ProFormSelectProps & {
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
      */
-    usePresetStyle?: 'addon' | false;
+    presetStyle?: 'addon' | false;
 };
 
 
@@ -169,12 +169,12 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options']);
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'localeProps', 'proField', 'usePresetStyle']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'localeProps', 'proField', 'presetStyle']);
         return (
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.fieldProps?.className),
+                    className: classNames(clazzPrefix, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className),
                     ...omitFieldProps,
                     options: props?.fieldProps?.options ?? optionItems,
                 }}
@@ -184,7 +184,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
         const restProps = PropsUtils.pickForwardProps(props);
         return (
             <Select
-                className={classNames(clazzPrefix, (props?.usePresetStyle ? `${clazzPrefix}-${props?.usePresetStyle}` : undefined), props?.fieldProps?.className)}
+                className={classNames(clazzPrefix, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
                 options={props?.fieldProps?.options ?? optionItems}

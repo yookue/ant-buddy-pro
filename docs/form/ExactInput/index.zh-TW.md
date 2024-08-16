@@ -31,7 +31,7 @@ import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {ExactInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
-    const [useTooltip, setUseTooltip] = React.useState(false);
+    const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
 
     return (
         <ProForm autoFocusFirstInput={false} submitter={false}>
@@ -40,10 +40,10 @@ export default () => {
                 checkedChildren='是'
                 unCheckedChildren='否'
                 fieldProps={{
-                    checked: useTooltip,
+                    checked: tooltipCtrl,
                 }}
                 onChange={(value) => {
-                    setUseTooltip(value ? true : false);
+                    setTooltipCtrl(value ? true : false);
                 }}
             />
             <Divider/>
@@ -53,7 +53,7 @@ export default () => {
                 fieldProps={{
                     addonBefore: '前綴',
                 }}
-                useTooltip={useTooltip}
+                tooltipCtrl={tooltipCtrl}
             />
         </ProForm>
     );

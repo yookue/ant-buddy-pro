@@ -75,7 +75,7 @@ export default () => {
                 copyrightStyle={{
                     color: '#443300',
                 }}
-                usePresetStyle={presetStyle}
+                presetStyle={presetStyle}
             />
         </>
     );

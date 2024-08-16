@@ -52,7 +52,7 @@ export default () => {
                 textProps={{
                     copyable: true,
                 }}
-                usePresetStyle={presetStyle}
+                presetStyle={presetStyle}
             />
         </>
     );

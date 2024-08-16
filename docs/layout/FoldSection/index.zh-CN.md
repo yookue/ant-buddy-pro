@@ -28,13 +28,14 @@ import {FoldSection} from '@yookue/ant-buddy-pro';
 import React from 'react';
 import {Empty, Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {FoldSection} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState('before');
     const [collapsePos, setCollapsePos] = React.useState('after');
     const [presetStyle, setPresetStyle] = React.useState('default');
+    const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
 
     return (
         <>
@@ -87,6 +88,17 @@ export default () => {
                         {label: '无', value: 'false'},
                     ]}
                 />
+                <ProFormSwitch
+                    label='Tooltip 控件'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: tooltipCtrl,
+                    }}
+                    onChange={(value) => {
+                        setTooltipCtrl(value ? true : false);
+                    }}
+                />
             </ProForm>
             <Divider/>
             <FoldSection
@@ -97,7 +109,8 @@ export default () => {
                 headerOpenedHint='折叠'
                 headerClosedHint='展开'
                 panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='无数据'/>}
-                usePresetStyle={presetStyle}
+                presetStyle={presetStyle}
+                tooltipCtrl={tooltipCtrl}
             />
         </>
     );

@@ -256,17 +256,17 @@ export type IconSelectProps = ProFormSelectProps & {
     localeProps?: IntlLocaleProps;
 
     /**
-     * @description Whether to use tooltip instead of raw title
-     * @description.zh-CN 是否使用 Tooltip 替代 title
-     * @description.zh-TW 是否使用 Tooltip 替代 title
+     * @description Whether to use tooltip control
+     * @description.zh-CN 是否使用 Tooltip 控件
+     * @description.zh-TW 是否使用 Tooltip 控件
      * @default false
      */
-    useTooltip?: boolean;
+    tooltipCtrl?: boolean;
 
     /**
-     * @description The properties of tooltip for checkbox
-     * @description.zh-CN 图标选项的 Tooltip 属性
-     * @description.zh-TW 圖標選項的 Tooltip 屬性
+     * @description The properties of tooltip
+     * @description.zh-CN Tooltip 属性
+     * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: Omit<TooltipProps, 'title'>;
 };
@@ -301,7 +301,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         sceneInkBar = true,
         sceneEntryWidth = '150px',
         searchBox = true,
-        useTooltip = false,
+        tooltipCtrl = false,
     } = props ?? {};
 
     const [dropdownOpen, setDropdownOpen] = React.useState(props?.fieldProps?.open);
@@ -461,7 +461,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                             <Wave>
                                 <div
                                     className={classNames(`${clazzPrefix}-icon-option`, props?.optionIconClazz)}
-                                    title={!useTooltip ? key : undefined}
+                                    title={!tooltipCtrl ? key : undefined}
                                     style={props?.optionIconStyle}
                                     onClick={() => handleIconClick(key)}
                                 >
@@ -470,7 +470,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                             </Wave>
                         </div>
                     );
-                    return !useTooltip ? content : (
+                    return !tooltipCtrl ? content : (
                         <Tooltip title={key} {...props?.tooltipProps}>
                             {content}
                         </Tooltip>
@@ -686,7 +686,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestKeepOptions', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'useTooltip', 'tooltipProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestKeepOptions', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
         return (
             <ProFormSelect
                 {...restProps}
