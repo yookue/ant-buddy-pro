@@ -34,7 +34,7 @@ export default () => {
     const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
 
     return (
-        <ProForm autoFocusFirstInput={false} submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <ProFormSwitch
                 label='Tooltip Ctrl'
                 checkedChildren='True'

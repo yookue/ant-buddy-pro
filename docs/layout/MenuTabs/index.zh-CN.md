@@ -27,7 +27,7 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' submitter={false}>
+            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
                 <ProForm.Group>
                     <ProFormSwitch
                         label='菜单主题'

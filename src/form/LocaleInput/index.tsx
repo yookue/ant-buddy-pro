@@ -235,8 +235,8 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  *
  * @author David Hsing
  */
-export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & React.RefAttributes<any>> = React.forwardRef((props?: LocaleInputProps, ref?: any) => {
-    LocaleInput.displayName = LocaleInput.name;
+export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & React.RefAttributes<InputRef>> = React.forwardRef<InputRef, LocaleInputProps>((props?: LocaleInputProps, ref?: any) => {
+    LocaleInput.displayName = 'LocaleInput';
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);

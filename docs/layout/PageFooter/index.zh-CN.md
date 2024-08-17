@@ -26,7 +26,7 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' submitter={false}>
+            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
                 <ProFormSwitch
                     label='版权图标'
                     checkedChildren='是'

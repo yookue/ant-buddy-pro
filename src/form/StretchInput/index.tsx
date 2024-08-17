@@ -76,8 +76,8 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  *
  * @author David Hsing
  */
-export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & React.RefAttributes<any>> = React.forwardRef((props?: StretchInputProps, ref?: any) => {
-    StretchInput.displayName = StretchInput.name;
+export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & React.RefAttributes<InputRef>> = React.forwardRef<InputRef, StretchInputProps>((props?: StretchInputProps, ref?: any) => {
+    StretchInput.displayName = 'StretchInput';
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
@@ -89,10 +89,10 @@ export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & R
         collapseTrigger = 'click',
     } = props ?? {};
 
-    const fieldRef = React.useRef<InputRef>(null);
-    React.useImperativeHandle(ref, () => fieldRef.current);
-
     const [stretchMe, setStretchMe] = React.useState<boolean>(false);
+    const fieldRef = React.useRef<InputRef>(null);
+
+    React.useImperativeHandle(ref, () => fieldRef.current);
 
     const ensureStretch = (ev: any) => {
         if (props?.collapseDom && stretchMe && !fieldRef.current?.input?.contains(ev.target)) {

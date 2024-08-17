@@ -29,7 +29,7 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' submitter={false}>
+            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
                 <ProFormRadio.Group
                     label='动作类型'
                     radioType='button'

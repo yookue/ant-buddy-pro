@@ -28,7 +28,7 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' submitter={false}>
+            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
                 <ProFormRadio.Group
                     label='Tab Position'
                     radioType='button'

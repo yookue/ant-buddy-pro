@@ -33,7 +33,7 @@ export default () => {
 
     return (
         <>
-            <ProForm autoFocusFirstInput={false} submitter={false}>
+            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
                 <ProFormSwitch
                     label='Tooltip Ctrl'
                     checkedChildren='True'

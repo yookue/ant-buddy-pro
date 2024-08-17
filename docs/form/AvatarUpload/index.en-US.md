@@ -16,7 +16,8 @@ import {AvatarUpload} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {Divider} from 'antd';
+import {Button, Divider} from 'antd';
+import {RollbackOutlined} from '@ant-design/icons';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {AvatarUpload} from '@yookue/ant-buddy-pro';
 
@@ -24,10 +25,11 @@ export default () => {
     const [readonly, setReadonly] = React.useState(false);
     const [cropEnabled, setCropEnabled] = React.useState(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
+    const avatarRef = React.useRef(null);
 
     return (
         <>
-            <ProForm autoFocusFirstInput={false} submitter={false}>
+            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
                 <ProForm.Group>
                     <ProFormSwitch
                         label='Readonly'
@@ -63,10 +65,17 @@ export default () => {
                             setTooltipCtrl(value ? true : false);
                         }}
                     />
+                    <Button
+                        icon={<RollbackOutlined/>}
+                        onClick={() => avatarRef.current.setImageSrc('https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png')}
+                    >
+                        Restore
+                    </Button>
                 </ProForm.Group>
             </ProForm>
             <Divider/>
             <AvatarUpload
+                ref={avatarRef}
                 imageSrc='https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
                 readonly={readonly}
                 uploadProps={{
@@ -76,8 +85,8 @@ export default () => {
                         'image/png',
                     ],
                     warnWithTypes: true,
-                    maxFileSize: 500,
-                    fileSizeUint: 'KB',
+                    maxFileSize: 1,
+                    fileSizeUint: 'MB',
                 }}
                 cropEnabled={cropEnabled}
                 cropProps={{

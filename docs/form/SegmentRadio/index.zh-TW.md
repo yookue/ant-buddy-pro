@@ -23,7 +23,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm autoFocusFirstInput={false} submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <SegmentRadio
                 name='foobar'
                 label='請打分'
@@ -59,7 +59,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm autoFocusFirstInput={false} submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <SegmentRadio
                 name='foobar'
                 label='請打分'
@@ -95,7 +95,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm autoFocusFirstInput={false} submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <SegmentRadio
                 name='foobar'
                 label='請打分'

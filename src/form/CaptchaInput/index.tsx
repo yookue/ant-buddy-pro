@@ -119,7 +119,7 @@ export type CaptchaInputRef = {
  * @author David Hsing
  */
 export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & React.RefAttributes<any>> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
-    CaptchaInput.displayName = CaptchaInput.name;
+    CaptchaInput.displayName = 'CaptchaInput';
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
@@ -128,7 +128,7 @@ export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & R
     const intlType = useIntl();
 
     const form = Form.useFormInstance();
-    warning(!!form, `${CaptchaInput.name} needs a Form instance`);
+    warning(!!form, `CaptchaInput needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -142,28 +142,26 @@ export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & R
         timerInterval = 1000,
     } = props ?? {};
 
-    warning(countEnd >= 0, `${CaptchaInput.name} prop 'countEnd' must be greater than or equal to 0`);
-    warning(countDown >= countEnd, `${CaptchaInput.name} prop 'countDown' must be greater than or equal to prop 'countEnd'`);
-    warning(timerInterval > 0, `${CaptchaInput.name} prop 'timerInterval' must be greater than 0`);
+    warning(countEnd >= 0, `CaptchaInput prop 'countEnd' must be greater than or equal to 0`);
+    warning(countDown >= countEnd, `CaptchaInput prop 'countDown' must be greater than or equal to prop 'countEnd'`);
+    warning(timerInterval > 0, `CaptchaInput prop 'timerInterval' must be greater than 0`);
 
     const [count, setCount] = React.useState<number>(countDown);
     const [loading, setLoading] = React.useState<boolean>();
     const [timing, setTiming] = React.useState(false);
+    const fieldRef = React.useRef<HTMLDivElement>();
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
         startTiming: () => {
             setTiming(true);
         },
-
         endTiming: () => {
             setTiming(false);
         },
-
         isLoading: () => {
             return loading;
         },
-
         isTiming: () => {
             return timing;
         }
@@ -218,7 +216,11 @@ export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & R
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'value', 'onChange']);
     return (
-        <div ref={ref} className={classNames(`${clazzPrefix}-container`, props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            ref={ref => fieldRef.current = ref ?? undefined}
+            className={classNames(`${clazzPrefix}-container`, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             <Input
                 className={classNames(clazzPrefix, props?.className)}
                 value={props?.value ?? props?.fieldProps?.value}

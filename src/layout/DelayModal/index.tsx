@@ -119,7 +119,7 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-delay-modal');
 
-    warning(!!props?.modalProps || !!props?.modalFunProps, `${DelayModal.name} must has any props of 'modalProps/modalFunProps' at least`);
+    warning(!!props?.modalProps || !!props?.modalFunProps, `DelayModal must has any props of 'modalProps/modalFunProps' at least`);
 
     // Initialize the default props
     const {

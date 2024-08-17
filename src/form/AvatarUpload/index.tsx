@@ -208,6 +208,7 @@ export type AvatarUploadProps = {
 export type AvatarUploadRef = {
     isLoading: () => boolean;
     getImageSrc: () => string;
+    setImageSrc: (src?: string) => void;
 };
 
 
@@ -216,8 +217,8 @@ export type AvatarUploadRef = {
  *
  * @author David Hsing
  */
-export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & React.RefAttributes<any>> = React.forwardRef((props?: AvatarUploadProps, ref?: any) => {
-    AvatarUpload.displayName = AvatarUpload.name;
+export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & React.RefAttributes<AvatarUploadRef>> = React.forwardRef((props?: AvatarUploadProps, ref?: any) => {
+    AvatarUpload.displayName = 'AvatarUpload';
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
@@ -235,15 +236,18 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
 
     const [loading, setLoading] = React.useState(false);
     const [imageSrc, setImageSrc] = React.useState(props?.imageSrc);
+    const fieldRef = React.useRef<HTMLDivElement>();
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
         isLoading: () => {
             return loading;
         },
-
         getImageSrc: () => {
             return imageSrc;
+        },
+        setImageSrc: (src?: string) => {
+            setImageSrc(src);
         }
     }));
 
@@ -378,7 +382,11 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
     };
 
     return (
-        <div ref={ref} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            ref={ref => fieldRef.current = ref ?? undefined}
+            className={classNames(clazzPrefix, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             {buildAvatarDom()}
         </div>
     );

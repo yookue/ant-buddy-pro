@@ -23,7 +23,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm autoFocusFirstInput={false} submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <SegmentRadio
                 name='foobar'
                 label='Rate this'
@@ -59,7 +59,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm autoFocusFirstInput={false} submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <SegmentRadio
                 name='foobar'
                 label='Rate this'
@@ -95,7 +95,7 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm autoFocusFirstInput={false} submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <SegmentRadio
                 name='foobar'
                 label='Rate this'

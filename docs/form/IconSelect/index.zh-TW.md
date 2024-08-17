@@ -28,7 +28,7 @@ export default () => {
     const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
 
     return (
-        <ProForm layout='horizontal' submitter={false}>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <ProForm.Group>
                 <ProFormRadio.Group
                     label='選項模式'

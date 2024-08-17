@@ -286,7 +286,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const intlType = useIntl();
 
     const form = Form.useFormInstance();
-    warning(!!form, `${IconSelect.name} needs a Form instance`);
+    warning(!!form, `IconSelect needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -307,9 +307,9 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const [dropdownOpen, setDropdownOpen] = React.useState(props?.fieldProps?.open);
     const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);
     const [activeTab, setActiveTab] = React.useState(defaultTheme);
-    const searchRef = React.useRef<InputRef>(null);
     const [searchWord, setSearchWord] = React.useState(props?.fieldProps?.searchValue);
     const [searchDisabled, setSearchDisabled] = React.useState(false);
+    const searchRef = React.useRef<InputRef>(null);
     const elementId = nanoid();
 
     const buildTextOptions = () => {
