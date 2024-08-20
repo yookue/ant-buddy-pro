@@ -16,12 +16,15 @@ import {CaptchaInput} from '@yookue/ant-buddy-pro';
 
 ```jsx
 import React from 'react';
-import {message as messageApi} from 'antd';
-import {MobileOutlined, SafetyCertificateOutlined} from '@ant-design/icons';
+import {Button, Divider, message as messageApi} from 'antd';
+import {MobileOutlined, SafetyCertificateOutlined, ClockCircleOutlined} from '@ant-design/icons';
 import {ProForm, ProFormText} from '@ant-design/pro-form';
 import {CaptchaInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
+    const [timing, setTiming] = React.useState(false);
+    const captchaRef = React.useRef(null);
+
     return (
         <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
             <ProFormText
@@ -38,6 +41,7 @@ export default () => {
                 ]}
             />
             <CaptchaInput
+                ref={captchaRef}
                 name='captcha'
                 placeholder='验证码'
                 fieldProps={{
@@ -45,15 +49,33 @@ export default () => {
                     prefix: <SafetyCertificateOutlined/>
                 }}
                 phoneName='mobile'
+                countDown={29}
                 onGenerate={() => {
                     messageApi.success('验证码发送成功');
                 }}
-                countDown={29}
+                onTimer={count => {
+                    if (count === 1) {
+                        setTiming(false);
+                    }
+                }}
                 localeProps={{
                     'generate': '获取验证码',
                     'resend': '重新发送',
                 }}
             />
+            <Divider/>
+            <Button
+                icon={<ClockCircleOutlined/>}
+                disabled={timing}
+                onClick={() => {
+                    if (!captchaRef.current.isTiming()) {
+                        captchaRef.current.startTiming();
+                        setTiming(true);
+                    }
+                }}
+            >
+                手动计时
+            </Button>
         </ProForm>
     );
 }
