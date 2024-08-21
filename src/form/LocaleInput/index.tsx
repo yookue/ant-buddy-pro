@@ -235,15 +235,14 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  *
  * @author David Hsing
  */
-export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & React.RefAttributes<InputRef>> = React.forwardRef<InputRef, LocaleInputProps>((props?: LocaleInputProps, ref?: any) => {
-    LocaleInput.displayName = 'LocaleInput';
-
+export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
     const intlType = useIntl();
+    const entryId = nanoid();
 
     // Initialize the default props
     const {
@@ -260,13 +259,11 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
         popupProField = true,
     } = props ?? {};
 
-    const fieldRef = React.useRef<InputRef>(null);
-    React.useImperativeHandle(ref, () => fieldRef.current);
-
     const handleSetAsDefault = (tagId: string) => {
+        const entry = document.querySelector<HTMLInputElement>(`input[data-locale-input-id='${entryId}']`);
         const element = document.querySelector<HTMLInputElement>(`input[data-locale-input-tag='${tagId}']`);
-        if (element) {
-            ElementUtils.setElementValue(fieldRef.current?.input, element.value);
+        if (entry && element) {
+            ElementUtils.setElementValue(entry, element.value);
         }
     };
 
@@ -384,8 +381,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 addonAfter: afterDom,
                                 placeholder: StringUtils.joinWith(itemProp?.placeholder) || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                 maxLength: itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined),
-                                disabled: props?.fieldProps?.disabled || itemProp?.fieldProps?.disabled,
-                                readOnly: props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly,
+                                disabled: props?.disabled || props?.fieldProps?.disabled || itemProp?.disabled || itemProp?.fieldProps?.disabled,
+                                readOnly: props?.readonly || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly,
                                 ...omitFieldProps,
                                 'data-locale-input-tag': elementId,
                             }}
@@ -409,8 +406,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             addonAfter={afterDom}
                             placeholder={StringUtils.joinWith(itemProp?.placeholder) || itemProp?.fieldProps?.placeholder || props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                             maxLength={itemProp?.fieldProps?.maxLength || props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined)}
-                            disabled={props?.fieldProps?.disabled || itemProp?.fieldProps?.disabled}
-                            readOnly={props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly}
+                            disabled={props?.disabled || props?.fieldProps?.disabled || itemProp?.disabled || itemProp?.fieldProps?.disabled}
+                            readOnly={props?.readonly || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || itemProp?.readonly || itemProp?.fieldProps?.readOnly || itemProp?.proFieldProps?.readonly}
                             {...antdInputProps}
                             {...omitFieldProps}
                             data-locale-input-tag={elementId}
@@ -442,8 +439,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                                 addonBefore: beforeDom,
                                 addonAfter: afterDom,
                                 placeholder: props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
-                                disabled: props?.fieldProps?.disabled,
-                                readOnly: props?.fieldProps?.readOnly || props?.proFieldProps?.readonly,
+                                disabled: props?.disabled || props?.fieldProps?.disabled,
+                                readOnly: props?.readonly || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly,
                                 maxLength: props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined),
                                 'data-locale-input-tag': elementId,
                             }}
@@ -464,8 +461,8 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                             addonBefore={beforeDom}
                             addonAfter={afterDom}
                             placeholder={props?.popupShareProps?.placeholder || (props?.popupClonePlaceholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
-                            disabled={ props?.fieldProps?.disabled}
-                            readOnly={props?.fieldProps?.readOnly || props?.proFieldProps?.readonly}
+                            disabled={props?.disabled || props?.fieldProps?.disabled}
+                            readOnly={props?.readonly || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly}
                             maxLength={props?.popupShareProps?.maxLength || (props?.popupCloneMaxLength ? props?.fieldProps?.maxLength : undefined)}
                             data-locale-input-tag={elementId}
                         />
@@ -518,11 +515,11 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
                 <ProFormText
                     {...restProps}
                     fieldProps={{
-                        ref: fieldRef,
                         className: classNames(clazzPrefix, props?.fieldProps?.className),
                         addonBefore: beforeDom,
                         addonAfter: afterDom,
                         ...omitFieldProps,
+                        'data-locale-input-id': entryId,
                     }}
                 />
             )
@@ -530,12 +527,12 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             const restProps = PropsUtils.pickForwardProps(props);
             return (
                 <Input
-                    ref={fieldRef}
                     className={classNames(clazzPrefix, props?.fieldProps?.className)}
                     addonBefore={beforeDom}
                     addonAfter={afterDom}
                     {...restProps}
                     {...omitFieldProps}
+                    data-locale-input-id={entryId}
                 />
             );
         }
@@ -576,4 +573,4 @@ export const LocaleInput: React.ForwardRefExoticComponent<LocaleInputProps & Rea
             </Input.Group>
         </Dropdown>
     );
-});
+};

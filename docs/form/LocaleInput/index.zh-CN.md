@@ -76,11 +76,6 @@ export default () => {
                         allowClear: true,
                     }
                 ]}
-                popupConfirmProps={{
-                    message: '设为默认吗？',
-                    ok: '是',
-                    cancel: '否',
-                }}
                 popupShareProps={{
                     rules: [
                         {
@@ -90,6 +85,11 @@ export default () => {
                             message: '示例字段的长度必须在 2~60 之间',
                         }
                     ]
+                }}
+                popupConfirmProps={{
+                    message: '设为默认吗？',
+                    ok: '是',
+                    cancel: '否',
                 }}
             />
         </ProForm>
@@ -140,6 +140,11 @@ export default () => {
                     }
                 ]}
                 popupProField={false}
+                popupConfirmProps={{
+                    message: '设为默认吗？',
+                    ok: '是',
+                    cancel: '否',
+                }}
             />
         </ProForm>
     );
@@ -194,6 +199,11 @@ export default () => {
                         }
                     ]
                 }}
+                popupConfirmProps={{
+                    message: '设为默认吗？',
+                    ok: '是',
+                    cancel: '否',
+                }}
             />
         </ProForm>
     );
@@ -235,6 +245,11 @@ export default () => {
                 popupProField={false}
                 popupShareProps={{
                     placeholder: '请输入此字段',
+                }}
+                popupConfirmProps={{
+                    message: '设为默认吗？',
+                    ok: '是',
+                    cancel: '否',
                 }}
             />
         </ProForm>

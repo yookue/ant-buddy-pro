@@ -23,7 +23,7 @@ import {CaptchaInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [timing, setTiming] = React.useState(false);
-    const captchaRef = React.useRef(null);
+    const captchaInputRef = React.useRef(null);
 
     return (
         <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
@@ -41,9 +41,9 @@ export default () => {
                 ]}
             />
             <CaptchaInput
-                ref={captchaRef}
                 name='captcha'
                 placeholder='Captcha Code'
+                fieldRef={captchaInputRef}
                 fieldProps={{
                     maxLength: 6,
                     prefix: <SafetyCertificateOutlined/>
@@ -53,11 +53,7 @@ export default () => {
                 onGenerate={() => {
                     messageApi.success('Captcha sent successfully');
                 }}
-                onTimer={count => {
-                    if (count === 1) {
-                        setTiming(false);
-                    }
-                }}
+                onTimer={count => setTiming(count > 1)}
                 localeProps={{
                     'generate': 'Get Captcha',
                     'resend': 'Resend',
@@ -68,8 +64,8 @@ export default () => {
                 icon={<ClockCircleOutlined/>}
                 disabled={timing}
                 onClick={() => {
-                    if (!captchaRef.current.isTiming()) {
-                        captchaRef.current.startTiming();
+                    if (!captchaInputRef.current.isTiming()) {
+                        captchaInputRef.current.startTimer();
                         setTiming(true);
                     }
                 }}

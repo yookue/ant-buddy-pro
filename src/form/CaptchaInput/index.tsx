@@ -18,6 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Form, Input, Button} from 'antd';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
+import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -106,10 +107,10 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
 
 
 export type CaptchaInputRef = {
-    startTiming: () => never;
-    endTiming: () => never;
     isLoading: () => boolean;
     isTiming: () => boolean;
+    startTimer: () => void;
+    endTimer: () => void;
 };
 
 
@@ -118,8 +119,8 @@ export type CaptchaInputRef = {
  *
  * @author David Hsing
  */
-export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & React.RefAttributes<any>> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
-    CaptchaInput.displayName = 'CaptchaInput';
+const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & React.RefAttributes<CaptchaInputRef>> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
+    CaptchaInputField.displayName = 'CaptchaInput';
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
@@ -153,17 +154,17 @@ export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & R
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        startTiming: () => {
-            setTiming(true);
-        },
-        endTiming: () => {
-            setTiming(false);
-        },
         isLoading: () => {
             return loading;
         },
         isTiming: () => {
             return timing;
+        },
+        startTimer: () => {
+            setTiming(true);
+        },
+        endTimer: () => {
+            setTiming(false);
         }
     }));
 
@@ -239,3 +240,6 @@ export const CaptchaInput: React.ForwardRefExoticComponent<CaptchaInputProps & R
         </div>
     );
 });
+
+
+export const CaptchaInput = createField(CaptchaInputField) as typeof CaptchaInputField;

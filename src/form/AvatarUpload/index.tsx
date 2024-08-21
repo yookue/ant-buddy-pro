@@ -138,24 +138,17 @@ export type AvatarUploadProps = {
     imageSrc?: string;
 
     /**
-     * @description Whether is readonly or not
-     * @description.zh-CN 是否只读模式
-     * @description.zh-TW 是否只讀模式
-     */
-    readonly?: boolean;
-
-    /**
-     * @description The shape of the avatar
+     * @description The shape of the image
      * @description.zh-CN 头像的形状
      * @description.zh-TW 頭像的形狀
      * @default 'circle'
      */
-    shape?: 'circle' | 'square';
+    imageShape?: 'circle' | 'square';
 
     /**
      * @description Whether to enable crop or not
-     * @description.zh-CN 是否允许裁剪
-     * @description.zh-TW 是否允許裁剪
+     * @description.zh-CN 是否启用裁剪
+     * @description.zh-TW 是否啟用裁剪
      * @default true
      */
     cropEnabled?: boolean;
@@ -172,7 +165,14 @@ export type AvatarUploadProps = {
      * @description.zh-CN 头像属性
      * @description.zh-TW 頭像屬性
      */
-    avatarProps?: Omit<AvatarProps, 'src' | 'shape'>;
+    avatarProps?: Omit<AvatarProps, 'src' | 'srcSet' | 'shape'>;
+
+    /**
+     * @description Whether to enable upload or not
+     * @description.zh-CN 是否启用上传
+     * @description.zh-TW 是否啟用上傳
+     */
+    uploadEnabled?: boolean;
 
     /**
      * @description The upload props for the component
@@ -229,7 +229,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
 
     // Initialize the default props
     const {
-        shape = 'circle',
+        imageShape = 'circle',
         cropEnabled = true,
         tooltipCtrl = false,
     } = props ?? {};
@@ -306,21 +306,50 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         }
     };
 
+    const buildAvatarPlaceholder = () => {
+        if (props?.avatarProps?.icon) {
+            return props.avatarProps.icon;
+        }
+        return !tooltipCtrl ? (
+            <span className={`${clazzPrefix}-icon-placeholder`} title={NodeUtils.toString(props?.tooltipProps?.title)}>
+                <UserOutlined/>
+            </span>
+        ) : (
+            <Tooltip {...props?.tooltipProps}>
+                <span className={`${clazzPrefix}-icon-placeholder`}>
+                    <UserOutlined/>
+                </span>
+            </Tooltip>
+        );
+    };
+
     const buildUploadPlaceholder = () => {
         if (typeof props?.uploadProps?.placeholder === 'function') {
             return props.uploadProps.placeholder();
         }
-        return props?.uploadProps?.placeholder ?? (
-            <div>
+        if (props?.uploadProps?.placeholder) {
+            return props.uploadProps.placeholder;
+        }
+        const innerDom = (
+            <>
                 {loading ? <LoadingOutlined/> : <PlusOutlined/>}
                 <div style={{marginTop: 8}}>
                     {props?.localeProps?.upload || intlLocales.get([intlType.locale, 'upload']) || intlLocales.get(['en_US', 'upload'])}
                 </div>
-            </div>
+            </>
+        );
+        return !tooltipCtrl ? (
+            <span className={`${clazzPrefix}-action-placeholder`} title={NodeUtils.toString(props?.tooltipProps?.title)}>
+                {innerDom}
+            </span>
+        ) : (
+            <Tooltip {...props?.tooltipProps}>
+                <span className={`${clazzPrefix}-action-placeholder`}>
+                    {innerDom}
+                </span>
+            </Tooltip>
         );
     };
-
-    const entryImmutable = props?.readonly || editContext.mode === 'read';
 
     const buildImageDom = () => {
         if (!imageSrc) {
@@ -335,15 +364,16 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         );
     };
 
+    const entryImmutable = !props?.uploadEnabled || editContext.mode === 'read';
     const buildAvatarDom = () => {
         if (entryImmutable) {
             const omitAvatarProps = !props?.avatarProps ? {} : omit(props.avatarProps, ['className', 'size', 'icon']);
             return (
                 <Avatar
                     className={classNames(`${clazzPrefix}-avatar`, props?.avatarProps?.className)}
-                    shape={shape}
+                    shape={imageShape}
                     size={props?.avatarProps?.size ?? {xs: 24, sm: 32, md: 48, lg: 64, xl: 104, xxl: 128}}
-                    icon={props?.avatarProps?.icon ?? <UserOutlined/>}
+                    icon={buildAvatarPlaceholder()}
                     src={buildImageDom()}
                     {...omitAvatarProps}
                 />
@@ -352,7 +382,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         const omitUploadProps = !props?.uploadProps ? {} : omit(props.uploadProps, ['className', 'name', 'fileList', 'listType', 'maxCount', 'showUploadList', 'onChange', 'allowedFileTypes', 'warnWithTypes', 'maxFileSize', 'fileSizeUint', 'placeholder']);
         const uploadDom = (
             <Upload
-                className={classNames(`${clazzPrefix}-action-${shape}`, props?.uploadProps?.className)}
+                className={classNames(`${clazzPrefix}-action-${imageShape}`, props?.uploadProps?.className)}
                 name={props?.uploadProps?.name ?? 'avatar'}
                 listType={props?.uploadProps?.listType ?? 'picture-card'}
                 maxCount={props?.uploadProps?.maxCount ?? 1}

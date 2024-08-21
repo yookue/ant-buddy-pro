@@ -19,6 +19,7 @@ import React from 'react';
 import {ConfigProvider, Input, type InputProps, type InputRef} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
+import {nanoid} from '@ant-design/pro-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {PropsUtils} from '@/util/PropsUtils';
@@ -76,13 +77,12 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  *
  * @author David Hsing
  */
-export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & React.RefAttributes<InputRef>> = React.forwardRef<InputRef, StretchInputProps>((props?: StretchInputProps, ref?: any) => {
-    StretchInput.displayName = 'StretchInput';
-
+export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-stretch-input');
+    const entryId = nanoid();
 
     // Initialize the default props
     const {
@@ -90,13 +90,13 @@ export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & R
     } = props ?? {};
 
     const [stretchMe, setStretchMe] = React.useState<boolean>(false);
-    const fieldRef = React.useRef<InputRef>(null);
-
-    React.useImperativeHandle(ref, () => fieldRef.current);
 
     const ensureStretch = (ev: any) => {
-        if (props?.collapseDom && stretchMe && !fieldRef.current?.input?.contains(ev.target)) {
-            setStretchMe(false);
+        if (props?.collapseDom && stretchMe) {
+            const entry = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`);
+            if (entry && !entry.contains(ev.target)) {
+                setStretchMe(false);
+            }
         }
     };
 
@@ -131,19 +131,19 @@ export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & R
         );
     }
 
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['ref', 'className', 'style', 'onFocus', 'onBlur']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'style', 'onFocus', 'onBlur']);
     if (props?.proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'collapseDom', 'collapseTrigger', 'stretchClazz', 'stretchStyle', 'proField']);
         return (
             <ProFormText
                 {...restProps}
                 fieldProps={{
-                    ref: fieldRef,
                     className: classNames(clazzPrefix, (stretchMe ? props?.stretchClazz : props?.fieldProps?.className)),
                     ...omitFieldProps,
                     onFocus: handleFocus,
                     onBlur: handleBlur,
                     style: stretchMe ? props?.stretchStyle : props?.fieldProps?.style,
+                    'data-stretch-input-id': entryId,
                 }}
             />
         );
@@ -151,14 +151,14 @@ export const StretchInput: React.ForwardRefExoticComponent<StretchInputProps & R
         const restProps = PropsUtils.pickForwardProps(props);
         return (
             <Input
-                ref={fieldRef}
                 className={classNames(clazzPrefix, (stretchMe ? props?.stretchClazz : props?.fieldProps?.className))}
                 {...restProps}
                 {...omitFieldProps}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 style={stretchMe ? props?.stretchStyle : props?.fieldProps?.style}
+                data-stretch-input-id={entryId}
             />
         );
     }
-});
+};

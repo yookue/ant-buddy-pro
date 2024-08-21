@@ -76,11 +76,6 @@ export default () => {
                         allowClear: true,
                     }
                 ]}
-                popupConfirmProps={{
-                    message: 'Set as default?',
-                    ok: 'Yes',
-                    cancel: 'No',
-                }}
                 popupShareProps={{
                     placeholder: 'Please input this field',
                     rules: [
@@ -91,6 +86,11 @@ export default () => {
                             message: 'The value length must between 2 and 60',
                         }
                     ]
+                }}
+                popupConfirmProps={{
+                    message: 'Set as default?',
+                    ok: 'Yes',
+                    cancel: 'No',
                 }}
             />
         </ProForm>
@@ -141,6 +141,11 @@ export default () => {
                     }
                 ]}
                 popupProField={false}
+                popupConfirmProps={{
+                    message: 'Set as default?',
+                    ok: 'Yes',
+                    cancel: 'No',
+                }}
             />
         </ProForm>
     );
@@ -195,6 +200,11 @@ export default () => {
                         }
                     ]
                 }}
+                popupConfirmProps={{
+                    message: 'Set as default?',
+                    ok: 'Yes',
+                    cancel: 'No',
+                }}
             />
         </ProForm>
     );
@@ -236,6 +246,11 @@ export default () => {
                 popupProField={false}
                 popupShareProps={{
                     placeholder: 'Please input this field',
+                }}
+                popupConfirmProps={{
+                    message: 'Set as default?',
+                    ok: 'Yes',
+                    cancel: 'No',
                 }}
             />
         </ProForm>
