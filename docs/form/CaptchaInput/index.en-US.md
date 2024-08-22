@@ -65,7 +65,7 @@ export default () => {
                 disabled={timing}
                 onClick={() => {
                     if (!captchaInputRef.current.isTiming()) {
-                        captchaInputRef.current.startTimer();
+                        captchaInputRef.current.startTiming();
                         setTiming(true);
                     }
                 }}

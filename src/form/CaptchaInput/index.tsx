@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {ConfigProvider, Form, Input, Button} from 'antd';
-import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
+import {type CaptFieldRef as CaptchaInputRef, type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
@@ -25,6 +25,9 @@ import omit from 'rc-util/es/omit';
 import warning from 'rc-util/es/warning';
 import {intlLocales} from './intl-locales';
 import './index.less';
+
+
+export type {CaptchaInputRef};
 
 
 export type IntlLocaleProps = {
@@ -106,14 +109,6 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
 };
 
 
-export type CaptchaInputRef = {
-    isLoading: () => boolean;
-    isTiming: () => boolean;
-    startTimer: () => void;
-    endTimer: () => void;
-};
-
-
 /**
  * Component for displaying a text input box with captcha capability
  *
@@ -160,10 +155,10 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         isTiming: () => {
             return timing;
         },
-        startTimer: () => {
+        startTiming: () => {
             setTiming(true);
         },
-        endTimer: () => {
+        endTiming: () => {
             setTiming(false);
         }
     }));

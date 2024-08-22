@@ -31,6 +31,13 @@ import {intlLocales} from './intl-locales';
 import './index.less';
 
 
+export type AvatarUploadRef = {
+    isLoading: () => boolean;
+    getImageSrc: () => string;
+    setImageSrc: (src?: string) => void;
+};
+
+
 export type FileUploadProps = UploadProps & {
     /**
      * @description The allowed file types
@@ -202,13 +209,6 @@ export type AvatarUploadProps = {
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: TooltipProps;
-};
-
-
-export type AvatarUploadRef = {
-    isLoading: () => boolean;
-    getImageSrc: () => string;
-    setImageSrc: (src?: string) => void;
 };
 
 
