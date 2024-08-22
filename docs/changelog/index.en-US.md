@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.91** [2024-08-22]
+    - Add 'field/BorderBox'
+
   - **v0.1.87** [2024-08-16]
     - Add 'form/AvatarUpload'
     - Add 'util/NodeUtils'
@@ -27,7 +30,7 @@ Here are some milestone versions of the changelog:
     - Add 'util/StyleUtils'
 
   - **v0.1.81** [2024-06-05]
-    - Add 'layout/DelayModal'
+    - Add 'field/DelayModal'
 
   - **v0.1.73** [2024-05-22]
     - Add 'layout/SegmentTitle'

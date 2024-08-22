@@ -15,6 +15,7 @@
  */
 
 
+export {BorderBox, type BorderBoxProps} from './field/BorderBox';
 export {DelayModal, type DelayModalProps} from './field/DelayModal';
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';

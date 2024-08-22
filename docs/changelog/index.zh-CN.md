@@ -11,6 +11,9 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.91** [2024-08-22]
+    - 增加 'field/BorderBox'
+
   - **v0.1.87** [2024-08-16]
     - 增加 'form/AvatarUpload'
     - 增加 'util/NodeUtils'
@@ -27,7 +30,7 @@ nav:
     - 增加 'util/StyleUtils'
 
   - **v0.1.81** [2024-06-05]
-    - 增加 'layout/DelayModal'
+    - 增加 'field/DelayModal'
 
   - **v0.1.73** [2024-05-22]
     - 增加 'layout/SegmentTitle'
