@@ -15,6 +15,7 @@
  */
 
 
+export {DelayModal, type DelayModalProps} from './field/DelayModal';
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {FullScreen, type FullScreenProps} from './field/FullScreen';
 export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/NotifyBadge';
@@ -33,7 +34,6 @@ export {StretchInput, type StretchInputProps} from './form/StretchInput';
 export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';
 export {CardTabs, type CardTabsProps} from './layout/CardTabs';
 export {CodePreview, type CodePreviewProps} from './layout/CodePreview';
-export {DelayModal, type DelayModalProps} from './layout/DelayModal';
 export {FlexBox, type FlexBoxProps} from './layout/FlexBox';
 export {FoldSection, type FoldSectionProps} from './layout/FoldSection';
 export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';

@@ -96,4 +96,4 @@ export default () => {
 
 #### DelayModalProps
 
-<API src="@/layout/DelayModal/index.tsx" hideTitle></API>
+<API src="@/field/DelayModal/index.tsx" hideTitle></API>
