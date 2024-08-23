@@ -200,7 +200,7 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
             });
             clearTimer();
         }
-    });
+    }, []);
 
     if (actionType !== 'modal') {
         return null;

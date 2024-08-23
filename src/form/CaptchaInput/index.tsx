@@ -179,13 +179,13 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
             }, timerInterval);
         }
         return () => window.clearInterval(interval);
-    });
+    }, []);
 
     React.useEffect(() => {
         if (timing && props?.onTimer) {
             props.onTimer(count);
         }
-    });
+    }, []);
 
     const buildCaptcha = async (mobile?: string) => {
         if (!mobile || !props?.onGenerate) {

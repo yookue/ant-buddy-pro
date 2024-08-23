@@ -107,7 +107,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
             document.removeEventListener('keydown', ensureStretch);
             document.removeEventListener('mousedown', ensureStretch);
         }
-    });
+    }, []);
 
     const handleFocus = (ev: React.FocusEvent<HTMLInputElement>) => {
         setStretchMe(true);

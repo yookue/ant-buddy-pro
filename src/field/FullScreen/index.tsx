@@ -134,7 +134,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
             triggerFor.removeEventListener('fullscreenchange', handleScreenChange, false);
             triggerFor.removeEventListener('keydown', handleKeyDown, false);
         }
-    });
+    }, []);
 
     const handleToggleScreen = () => {
         if (screenfull.isEnabled) {
