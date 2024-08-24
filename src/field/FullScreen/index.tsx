@@ -18,9 +18,11 @@
 import React from 'react';
 import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
+import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
 import screenfull from 'screenfull';
 import {NodeUtils} from '@/util/NodeUtils';
+import {intlLocales} from './intl-locales';
 
 
 export type FullScreenProps = {
@@ -95,6 +97,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-full-screen');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
@@ -143,22 +146,29 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
         }
     };
 
-    const buildScreenDom = (tooltip: boolean) => (
+    const enterHint = intlLocales.get([intlType.locale, 'enterHint']) || intlLocales.get(['en_US', 'enterHint']);
+    const exitHint = intlLocales.get([intlType.locale, 'exitHint']) || intlLocales.get(['en_US', 'exitHint']);
+
+    const buildScreenDom = () => (
         <span
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
-            title={!tooltip ? undefined : NodeUtils.toString(fullscreen ? props?.exitHint : props?.enterHint)}
+            title={tooltipCtrl ? undefined : (NodeUtils.toString(fullscreen ? props?.exitHint : props?.enterHint) ?? (fullscreen ? exitHint : enterHint))}
         >
             {React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {onClick: handleToggleScreen})}
         </span>
     );
 
-    return !tooltipCtrl ? buildScreenDom(true) : (
+    if (!tooltipCtrl) {
+        return buildScreenDom();
+    }
+
+    return (
         <Tooltip
-            title={NodeUtils.toString(fullscreen ? props?.exitHint : props?.enterHint)}
+            title={(fullscreen ? props?.exitHint : props?.enterHint) ?? (fullscreen ? exitHint : enterHint)}
             {...props?.tooltipProps}
         >
-            {buildScreenDom(false)}
+            {buildScreenDom()}
         </Tooltip>
     );
 };
