@@ -364,9 +364,8 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         );
     };
 
-    const entryImmutable = !props?.uploadEnabled || editContext.mode === 'read';
     const buildAvatarDom = () => {
-        if (entryImmutable) {
+        if (!props?.uploadEnabled || editContext.mode === 'read') {
             const omitAvatarProps = !props?.avatarProps ? {} : omit(props.avatarProps, ['className', 'size', 'icon']);
             return (
                 <Avatar
