@@ -28,7 +28,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 > `popupQuickTags` 可以簡單快速的自定義語言輸入項。
 
-#### LocaleProps 帶校驗
+#### Props 帶校驗
 
 ```jsx
 import React from 'react';
@@ -39,6 +39,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -51,7 +52,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithValidation'
+                name='foobar'
                 placeholder='示例字段-帶校驗'
                 rules={[
                     {
@@ -97,7 +98,7 @@ export default () => {
 }
 ```
 
-#### LocaleProps 無校驗
+#### Props 無校驗
 
 ```jsx
 import React from 'react';
@@ -108,6 +109,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -120,7 +122,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithoutValidation'
+                name='foobar'
                 placeholder='示例字段-無校驗'
                 popupInputProps={[
                     {
@@ -151,7 +153,7 @@ export default () => {
 }
 ```
 
-#### LocaleTags 帶校驗
+#### Tags 帶校驗
 
 ```jsx
 import React from 'react';
@@ -162,6 +164,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -174,7 +177,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithValidation'
+                name='foobar'
                 placeholder='示例字段-帶校驗'
                 popupActionPos='before'
                 rules={[
@@ -210,7 +213,7 @@ export default () => {
 }
 ```
 
-#### LocaleTags 無校驗，已禁用
+#### Tags 無校驗，已禁用
 
 ```jsx
 import React from 'react';
@@ -221,6 +224,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -233,7 +237,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithoutValidation'
+                name='foobar'
                 placeholder='示例字段-無校驗'
                 disabled
                 popupTagPos='after'

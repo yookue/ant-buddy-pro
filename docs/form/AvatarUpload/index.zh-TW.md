@@ -29,76 +29,74 @@ export default () => {
     const avatarUploadRef = React.useRef(null);
 
     return (
-        <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-                <ProForm.Group>
-                    <ProFormRadio.Group
-                        label='Image Shape'
-                        radioType='button'
-                        fieldProps={{
-                            value: imageShape,
-                            buttonStyle: 'solid',
-                            onChange: (event) => {
-                                setImageShape(event.target?.value);
-                            }
-                        }}
-                        options={[
-                            {label: '圓形', value: 'circle'},
-                            {label: '方形', value: 'square'},
-                        ]}
-                    />
-                </ProForm.Group>
-                <ProForm.Group>
-                    <ProFormSwitch
-                        label='啟用上傳'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: uploadEnabled,
-                        }}
-                        onChange={(value) => {
-                            setUploadEnabled(value ? true : false);
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='啟用裁剪'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: cropEnabled,
-                            disabled: !uploadEnabled,
-                        }}
-                        onChange={(value) => {
-                            setCropEnabled(value ? true : false);
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='Tooltip 控件'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: tooltipCtrl,
-                        }}
-                        onChange={(value) => {
-                            setTooltipCtrl(value ? true : false);
-                        }}
-                    />
-                </ProForm.Group>
-                <ProForm.Group>
-                    <Button
-                        icon={<PictureOutlined/>}
-                        onClick={() => avatarUploadRef.current.setImageSrc('https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png')}
-                    >
-                        設定
-                    </Button>
-                    <Button
-                        icon={<ClearOutlined/>}
-                        onClick={() => avatarUploadRef.current.setImageSrc(undefined)}
-                    >
-                        清空
-                    </Button>
-                </ProForm.Group>
-            </ProForm>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
+            <ProForm.Group>
+                <ProFormRadio.Group
+                    label='Image Shape'
+                    radioType='button'
+                    fieldProps={{
+                        value: imageShape,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setImageShape(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '圓形', value: 'circle'},
+                        {label: '方形', value: 'square'},
+                    ]}
+                />
+            </ProForm.Group>
+            <ProForm.Group>
+                <ProFormSwitch
+                    label='啟用上傳'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: uploadEnabled,
+                    }}
+                    onChange={(value) => {
+                        setUploadEnabled(value ? true : false);
+                    }}
+                />
+                <ProFormSwitch
+                    label='啟用裁剪'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: cropEnabled,
+                        disabled: !uploadEnabled,
+                    }}
+                    onChange={(value) => {
+                        setCropEnabled(value ? true : false);
+                    }}
+                />
+                <ProFormSwitch
+                    label='Tooltip 控件'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: tooltipCtrl,
+                    }}
+                    onChange={(value) => {
+                        setTooltipCtrl(value ? true : false);
+                    }}
+                />
+            </ProForm.Group>
+            <ProForm.Group>
+                <Button
+                    icon={<PictureOutlined/>}
+                    onClick={() => avatarUploadRef.current.setImageSrc('https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png')}
+                >
+                    設定
+                </Button>
+                <Button
+                    icon={<ClearOutlined/>}
+                    onClick={() => avatarUploadRef.current.setImageSrc(undefined)}
+                >
+                    清空
+                </Button>
+            </ProForm.Group>
             <Divider/>
             <AvatarUpload
                 ref={avatarUploadRef}
@@ -132,7 +130,7 @@ export default () => {
                     'cropModalTitle': '頭像裁剪',
                 }}
             />
-        </>
+        </ProForm>
     );
 }
 ```

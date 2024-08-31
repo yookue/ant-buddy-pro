@@ -53,7 +53,11 @@ export default () => {
                 onGenerate={() => {
                     messageApi.success('驗證碼發送成功');
                 }}
-                onTimer={count => setTiming(count > 1)}
+                onTimer={count => {
+                    console.log('CaptchaInput timer count = ' + count);
+                }}
+                onTimerBegin={() => setTiming(true)}
+                onTimerEnd={() => setTiming(false)}
                 localeProps={{
                     'generate': '獲取驗證碼',
                     'resend': '重新發送',
@@ -66,7 +70,6 @@ export default () => {
                 onClick={() => {
                     if (!captchaInputRef.current.isTiming()) {
                         captchaInputRef.current.startTiming();
-                        setTiming(true);
                     }
                 }}
             >

@@ -29,76 +29,74 @@ export default () => {
     const avatarUploadRef = React.useRef(null);
 
     return (
-        <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-                <ProForm.Group>
-                    <ProFormRadio.Group
-                        label='Image Shape'
-                        radioType='button'
-                        fieldProps={{
-                            value: imageShape,
-                            buttonStyle: 'solid',
-                            onChange: (event) => {
-                                setImageShape(event.target?.value);
-                            }
-                        }}
-                        options={[
-                            {label: 'Circle', value: 'circle'},
-                            {label: 'Square', value: 'square'},
-                        ]}
-                    />
-                </ProForm.Group>
-                <ProForm.Group>
-                    <ProFormSwitch
-                        label='Upload Enabled'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: uploadEnabled,
-                        }}
-                        onChange={(value) => {
-                            setUploadEnabled(value ? true : false);
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='Crop Enabled'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: cropEnabled,
-                            disabled: !uploadEnabled,
-                        }}
-                        onChange={(value) => {
-                            setCropEnabled(value ? true : false);
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='Tooltip Ctrl'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: tooltipCtrl,
-                        }}
-                        onChange={(value) => {
-                            setTooltipCtrl(value ? true : false);
-                        }}
-                    />
-                </ProForm.Group>
-                <ProForm.Group>
-                    <Button
-                        icon={<PictureOutlined/>}
-                        onClick={() => avatarUploadRef.current.setImageSrc('https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png')}
-                    >
-                        Set
-                    </Button>
-                    <Button
-                        icon={<ClearOutlined/>}
-                        onClick={() => avatarUploadRef.current.setImageSrc(undefined)}
-                    >
-                        Clear
-                    </Button>
-                </ProForm.Group>
-            </ProForm>
+        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
+            <ProForm.Group>
+                <ProFormRadio.Group
+                    label='Image Shape'
+                    radioType='button'
+                    fieldProps={{
+                        value: imageShape,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setImageShape(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Circle', value: 'circle'},
+                        {label: 'Square', value: 'square'},
+                    ]}
+                />
+            </ProForm.Group>
+            <ProForm.Group>
+                <ProFormSwitch
+                    label='Upload Enabled'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: uploadEnabled,
+                    }}
+                    onChange={(value) => {
+                        setUploadEnabled(value ? true : false);
+                    }}
+                />
+                <ProFormSwitch
+                    label='Crop Enabled'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: cropEnabled,
+                        disabled: !uploadEnabled,
+                    }}
+                    onChange={(value) => {
+                        setCropEnabled(value ? true : false);
+                    }}
+                />
+                <ProFormSwitch
+                    label='Tooltip Ctrl'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: tooltipCtrl,
+                    }}
+                    onChange={(value) => {
+                        setTooltipCtrl(value ? true : false);
+                    }}
+                />
+            </ProForm.Group>
+            <ProForm.Group>
+                <Button
+                    icon={<PictureOutlined/>}
+                    onClick={() => avatarUploadRef.current.setImageSrc('https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png')}
+                >
+                    Set
+                </Button>
+                <Button
+                    icon={<ClearOutlined/>}
+                    onClick={() => avatarUploadRef.current.setImageSrc(undefined)}
+                >
+                    Clear
+                </Button>
+            </ProForm.Group>
             <Divider/>
             <AvatarUpload
                 ref={avatarUploadRef}
@@ -132,7 +130,7 @@ export default () => {
                     'cropModalTitle': 'Avatar Crop',
                 }}
             />
-        </>
+        </ProForm>
     );
 }
 ```

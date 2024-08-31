@@ -234,9 +234,9 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         tooltipCtrl = false,
     } = props ?? {};
 
+    const fieldRef = React.useRef<HTMLDivElement>();
     const [loading, setLoading] = React.useState(false);
     const [imageSrc, setImageSrc] = React.useState(props?.imageSrc);
-    const fieldRef = React.useRef<HTMLDivElement>();
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({

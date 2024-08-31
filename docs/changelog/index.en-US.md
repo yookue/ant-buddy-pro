@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.94** [2024-08-31]
+    - Add 'form/TagInput'
+
   - **v0.1.91** [2024-08-22]
     - Add 'field/BorderBox'
 

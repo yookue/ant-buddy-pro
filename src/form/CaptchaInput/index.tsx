@@ -71,14 +71,6 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The timer end point, in seconds
-     * @description.zh-CN 计时器的结束点，单位秒
-     * @description.zh-TW 計時器的結束點，單位秒
-     * @default 1
-     */
-    countEnd?: number;
-
-    /**
      * @description The timer interval, in milliseconds
      * @description.zh-CN 计时器的间隔，单位毫秒
      * @description.zh-TW 計時器的間隔，單位毫秒
@@ -99,6 +91,20 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
      * @description.zh-TW 計時變化時的回調函數
      */
     onTimer?: (count: number) => void;
+
+    /**
+     * @description The callback function when the timer begin
+     * @description.zh-CN 计时开始时的回调函数
+     * @description.zh-TW 計時開始時的回調函數
+     */
+    onTimerBegin?: () => void;
+
+    /**
+     * @description The callback function when the timer end
+     * @description.zh-CN 计时结束时的回调函数
+     * @description.zh-TW 計時結束時的回調函數
+     */
+    onTimerEnd?: () => void;
 
     /**
      * @description The locale props for the component
@@ -123,8 +129,8 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-captcha-input');
     const intlType = useIntl();
 
-    const form = Form.useFormInstance();
-    warning(!!form, `CaptchaInput needs a Form instance`);
+    const formInstance = Form.useFormInstance();
+    warning(!!formInstance, `CaptchaInput '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -134,18 +140,16 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
             return (timing && count > 0) ? `${resend}(${count})` : generate;
         },
         countDown = 59,
-        countEnd = 1,
         timerInterval = 1000,
     } = props ?? {};
 
-    warning(countEnd >= 0, `CaptchaInput prop 'countEnd' must be greater than or equal to 0`);
-    warning(countDown >= countEnd, `CaptchaInput prop 'countDown' must be greater than or equal to prop 'countEnd'`);
-    warning(timerInterval > 0, `CaptchaInput prop 'timerInterval' must be greater than 0`);
+    warning(countDown > 0, `CaptchaInput '${props?.name}' prop 'countDown' must be greater than 0`);
+    warning(timerInterval > 0, `CaptchaInput '${props?.name}' prop 'timerInterval' must be greater than 0`);
 
+    const fieldRef = React.useRef<HTMLDivElement>();
     const [count, setCount] = React.useState<number>(countDown);
     const [loading, setLoading] = React.useState<boolean>();
     const [timing, setTiming] = React.useState(false);
-    const fieldRef = React.useRef<HTMLDivElement>();
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -156,7 +160,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
             return timing;
         },
         startTiming: () => {
-            setTiming(true);
+            validatePhoneName().then(() => setTiming(true)).catch(() => {});
         },
         endTiming: () => {
             setTiming(false);
@@ -167,11 +171,17 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         let interval = 0;
         const seconds = countDown;
         if (timing) {
+            if (props?.onTimerBegin) {
+                props.onTimerBegin();
+            }
             interval = window.setInterval(() => {
                 setCount((previous) => {
-                    if (previous <= countEnd) {
+                    if (previous <= 1) {
                         setTiming(false);
                         window.clearInterval(interval);
+                        if (props?.onTimerEnd) {
+                            props.onTimerEnd();
+                        }
                         return seconds ?? 59;
                     }
                     return previous - 1;
@@ -179,13 +189,13 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
             }, timerInterval);
         }
         return () => window.clearInterval(interval);
-    }, []);
+    }, [timing]);
 
     React.useEffect(() => {
         if (timing && props?.onTimer) {
             props.onTimer(count);
         }
-    }, []);
+    }, [timing, count]);
 
     const buildCaptcha = async (mobile?: string) => {
         if (!mobile || !props?.onGenerate) {
@@ -199,12 +209,16 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         setLoading(false);
     };
 
+    const validatePhoneName = async () => {
+        if (props?.phoneName) {
+            await formInstance?.validateFields([props.phoneName].flat(1));
+        }
+    };
+
     const handleClick = async () => {
         try {
-            if (props?.phoneName) {
-                await form?.validateFields([props.phoneName].flat(1));
-            }
-            const mobile = (!form || !props?.phoneName) ? undefined : form?.getFieldValue([props.phoneName].flat(1));
+            await validatePhoneName();
+            const mobile = (!formInstance || !props?.phoneName) ? undefined : formInstance?.getFieldValue([props.phoneName].flat(1));
             await buildCaptcha(mobile);
         } catch (ignored) {
         }

@@ -63,8 +63,8 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
 
-    const form = Form.useFormInstance();
-    warning(!!form, `MaskInput needs a Form instance`);
+    const formInstance = Form.useFormInstance();
+    warning(!!formInstance, `MaskInput '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -73,11 +73,11 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
 
     const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
     const composeRef = React.useRef<boolean>(false);
-    const previousRef = React.useRef<string>(form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
+    const previousRef = React.useRef<string>(formInstance?.getFieldValue(props?.name ?? props?.fieldProps?.name));
 
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
         if (value && props?.patterns && !props.patterns.some(item => RegexUtils.testResetting(item, value))) {
-            form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
+            formInstance?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
             failAction?.();
         } else {
             previousRef.current = value;

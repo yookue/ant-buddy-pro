@@ -285,8 +285,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
     const intlType = useIntl();
 
-    const form = Form.useFormInstance();
-    warning(!!form, `IconSelect needs a Form instance`);
+    const formInstance = Form.useFormInstance();
+    warning(!!formInstance, `IconSelect '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -357,7 +357,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const isIconSelected = (iconName?: string) => {
-        const fieldValue = form?.getFieldValue(props?.name);
+        const fieldValue = formInstance?.getFieldValue(props?.name);
         if (!fieldValue || StringUtils.isBlank(iconName)) {
             return false;
         }
@@ -389,16 +389,16 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         if (isIconSelected(iconName)) {
             if (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') {
                 changeIconBadge(iconName, false);
-                const fieldValue = form?.getFieldValue(props?.name);
+                const fieldValue = formInstance?.getFieldValue(props?.name);
                 if (fieldValue) {
                     const result = !props?.fieldProps?.labelInValue ? fieldValue.filter((item: any) => {
                         return !StringUtils.equalsIgnoreCase(item as string, iconName);
                     }) : fieldValue.filter((item: LabeledValue) => {
                         return !StringUtils.equalsIgnoreCase(item?.value as string, iconName);
                     });
-                    form?.setFieldValue(props?.name, result);
+                    formInstance?.setFieldValue(props?.name, result);
                 } else {
-                    form?.setFieldValue(props?.name, undefined);
+                    formInstance?.setFieldValue(props?.name, undefined);
                 }
             } else {
                 setDropdownOpen(false);
@@ -408,16 +408,16 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 clearIconsBadge();
             }
             changeIconBadge(iconName, true);
-            const fieldValue = form?.getFieldValue(props?.name);
+            const fieldValue = formInstance?.getFieldValue(props?.name);
             if (fieldValue && (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags')) {
                 if (props?.fieldProps?.labelInValue) {
                     const value: LabeledValue = {
                         label: iconName,
                         value: iconName,
                     };
-                    form?.setFieldValue(props?.name, [...fieldValue, value]);
+                    formInstance?.setFieldValue(props?.name, [...fieldValue, value]);
                 } else {
-                    form?.setFieldValue(props?.name, [...fieldValue, iconName]);
+                    formInstance?.setFieldValue(props?.name, [...fieldValue, iconName]);
                 }
             } else {
                 if (props?.fieldProps?.labelInValue) {
@@ -426,10 +426,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         value: iconName,
                     };
                     const result = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [value] : value;
-                    form?.setFieldValue(props?.name, result);
+                    formInstance?.setFieldValue(props?.name, result);
                 } else {
                     const result = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [iconName] : iconName;
-                    form?.setFieldValue(props?.name, result);
+                    formInstance?.setFieldValue(props?.name, result);
                 }
             }
             if (props?.fieldProps?.mode !== 'multiple' && props?.fieldProps?.mode !== 'tags') {

@@ -53,7 +53,11 @@ export default () => {
                 onGenerate={() => {
                     messageApi.success('Captcha sent successfully');
                 }}
-                onTimer={count => setTiming(count > 1)}
+                onTimer={count => {
+                    console.log('CaptchaInput timer count = ' + count);
+                }}
+                onTimerBegin={() => setTiming(true)}
+                onTimerEnd={() => setTiming(false)}
                 localeProps={{
                     'generate': 'Get Captcha',
                     'resend': 'Resend',
@@ -66,7 +70,6 @@ export default () => {
                 onClick={() => {
                     if (!captchaInputRef.current.isTiming()) {
                         captchaInputRef.current.startTiming();
-                        setTiming(true);
                     }
                 }}
             >

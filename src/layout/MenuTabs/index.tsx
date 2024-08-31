@@ -252,20 +252,20 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         }
     } = props ?? {};
 
+    const containerRef = React.useRef<HTMLDivElement>();
     const themeClazz = (props?.menuProps?.theme === 'dark') ? `${clazzPrefix}-dark` : `${clazzPrefix}-light`;
     const [activeKey, setActiveKey] = React.useState(props?.menuProps?.defaultActiveKey);
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
-    const fieldRef = React.useRef<HTMLDivElement>();
 
     if (BooleanUtils.isNotFalse(adjustLayoutProps?.adjustOnResize)) {
         const handleWindowResize = () => {
             requestAnimationFrame(() => {
-                if (!fieldRef.current) {
+                if (!containerRef.current) {
                     return;
                 }
                 let shouldMode: MenuMode = 'inline';
-                const {offsetWidth} = fieldRef.current;
-                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && fieldRef.current.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
+                const {offsetWidth} = containerRef.current;
+                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && containerRef.current.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
                     shouldMode = 'horizontal';
                 }
                 if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && window.innerWidth < (adjustLayoutProps?.maxWindowWidth ?? 768)) {
@@ -276,14 +276,14 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         };
 
         React.useLayoutEffect(() => {
-            if (fieldRef.current) {
+            if (containerRef.current) {
                 window.addEventListener('resize', handleWindowResize);
                 handleWindowResize();
             }
             return () => {
                 window.removeEventListener('resize', handleWindowResize);
             };
-        }, [fieldRef.current]);
+        }, [containerRef.current]);
     }
 
     const buildTabsDom = () => {
@@ -324,7 +324,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     return (
         <div
-            ref={ref => fieldRef.current = ref ?? undefined}
+            ref={ref => containerRef.current = ref ?? undefined}
             className={classNames(clazzPrefix, themeClazz, props?.containerClazz)}
             style={props?.containerStyle}
         >

@@ -28,7 +28,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 > `popupQuickTags` can custom language input items quickly.
 
-#### LocaleProps with field validation
+#### Props with field validation
 
 ```jsx
 import React from 'react';
@@ -39,6 +39,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -51,7 +52,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithValidation'
+                name='foobar'
                 placeholder='Demo Field With Validation'
                 rules={[
                     {
@@ -98,7 +99,7 @@ export default () => {
 }
 ```
 
-#### LocaleProps without field validation
+#### Props without field validation
 
 ```jsx
 import React from 'react';
@@ -109,6 +110,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -121,7 +123,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithoutValidation'
+                name='foobar'
                 placeholder='Demo Field Without Validation'
                 popupInputProps={[
                     {
@@ -152,7 +154,7 @@ export default () => {
 }
 ```
 
-#### LocaleTags with field validation
+#### Tags with field validation
 
 ```jsx
 import React from 'react';
@@ -163,6 +165,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -175,7 +178,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithValidation'
+                name='foobar'
                 placeholder='Demo Field With Validation'
                 popupActionPos='before'
                 rules={[
@@ -211,7 +214,7 @@ export default () => {
 }
 ```
 
-#### LocaleTags without field validation, disabled
+#### Tags without field validation, disabled
 
 ```jsx
 import React from 'react';
@@ -222,6 +225,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 export default () => {
     return (
         <ProForm
+            layout='horizontal'
             autoFocusFirstInput={false}
             submitter={{
                 searchConfig: {
@@ -234,7 +238,7 @@ export default () => {
             }}
         >
             <LocaleInput
-                name='localeWithoutValidation'
+                name='foobar'
                 placeholder='Demo Field Without Validation'
                 disabled
                 popupTagPos='after'
