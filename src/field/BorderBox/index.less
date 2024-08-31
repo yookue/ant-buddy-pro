@@ -24,9 +24,20 @@
 
 .@{buddy-border-box} {
     border-radius: @border-radius-base;
-    padding: @padding-xss @padding-xs;
 
-    &.@{buddy-border-box}-bordered {
-        border: @border-width-base @border-style-base @border-color-base;
+    &.@{buddy-border-box}-top {
+        border-top: @border-width-base @border-style-base @border-color-base;
+    }
+
+    &.@{buddy-border-box}-right {
+        border-right: @border-width-base @border-style-base @border-color-base;
+    }
+
+    &.@{buddy-border-box}-bottom {
+        border-bottom: @border-width-base @border-style-base @border-color-base;
+    }
+
+    &.@{buddy-border-box}-left {
+        border-left: @border-width-base @border-style-base @border-color-base;
     }
 }

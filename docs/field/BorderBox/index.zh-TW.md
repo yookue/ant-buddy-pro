@@ -21,25 +21,69 @@ import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {BorderBox} from '@yookue/ant-buddy-pro';
 
 export default () => {
-    const [bordered, setBordered] = React.useState(true);
+    const [borderTop, setBorderTop] = React.useState(true);
+    const [borderRight, setBorderRight] = React.useState(true);
+    const [borderBottom, setBorderBottom] = React.useState(true);
+    const [borderLeft, setBorderLeft] = React.useState(true);
 
     return (
         <>
             <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-                <ProFormSwitch
-                    label='邊框'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: bordered,
-                    }}
-                    onChange={(value) => {
-                        setBordered(value ? true : false);
-                    }}
-                />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='頂部邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderTop,
+                        }}
+                        onChange={(value) => {
+                            setBorderTop(value ? true : false);
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='右側邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderRight,
+                        }}
+                        onChange={(value) => {
+                            setBorderRight(value ? true : false);
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='底部邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderBottom,
+                        }}
+                        onChange={(value) => {
+                            setBorderBottom(value ? true : false);
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='左側邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderLeft,
+                        }}
+                        onChange={(value) => {
+                            setBorderLeft(value ? true : false);
+                        }}
+                    />
+                </ProForm.Group>
             </ProForm>
             <Divider/>
-            <BorderBox bordered={bordered} containerStyle={{padding: '12px'}}>
+            <BorderBox
+                borderTop={borderTop}
+                borderRight={borderRight}
+                borderBottom={borderBottom}
+                borderLeft={borderLeft}
+                containerStyle={{padding: '12px'}}
+            >
                 <Checkbox>復選框</Checkbox>
             </BorderBox>
         </>

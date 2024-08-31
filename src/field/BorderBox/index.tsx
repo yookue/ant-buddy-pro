@@ -45,12 +45,36 @@ export type BorderBoxProps = React.PropsWithChildren<{
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description Whether border or not
-     * @description.zh-CN 是否有边框
-     * @description.zh-TW 是否有邊框
+     * @description Whether border top or not
+     * @description.zh-CN 顶部是否有边框
+     * @description.zh-TW 頂部是否有邊框
      * @default true
      */
-    bordered?: boolean;
+    borderTop?: boolean;
+
+    /**
+     * @description Whether border right or not
+     * @description.zh-CN 右侧是否有边框
+     * @description.zh-TW 右側是否有邊框
+     * @default true
+     */
+    borderRight?: boolean;
+
+    /**
+     * @description Whether border bottom or not
+     * @description.zh-CN 底部是否有边框
+     * @description.zh-TW 底部是否有邊框
+     * @default true
+     */
+    borderBottom?: boolean;
+
+    /**
+     * @description Whether border left or not
+     * @description.zh-CN 左侧是否有边框
+     * @description.zh-TW 左側是否有邊框
+     * @default true
+     */
+    borderLeft?: boolean;
 }>;
 
 
@@ -67,11 +91,17 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
 
     // Initialize the default props
     const {
-        bordered = true,
+        borderTop = true,
+        borderRight = true,
+        borderBottom = true,
+        borderLeft = true,
     } = props ?? {};
 
     return (
-        <div className={classNames(clazzPrefix, (!bordered ? undefined : `${clazzPrefix}-bordered`), props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            className={classNames(clazzPrefix, (!borderTop ? undefined : `${clazzPrefix}-top`), (!borderRight ? undefined : `${clazzPrefix}-right`), (!borderBottom ? undefined : `${clazzPrefix}-bottom`), (!borderLeft ? undefined : `${clazzPrefix}-left`), props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             {props?.children}
         </div>
     );
