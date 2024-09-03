@@ -23,6 +23,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
+import {type WithFalse, type RequestOptionOrder} from '@/type/declaration';
 
 
 export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormFieldRemoteProps & {
@@ -39,7 +40,7 @@ export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormF
      * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
      * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
      */
-    requestKeepOptions?: 'request-before' | 'request-after' | false;
+    requestOptionOrder?: WithFalse<RequestOptionOrder>;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -74,15 +75,15 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
     if (props?.request) {
         FieldUtils.fetchFieldRequestData(props, values => {
-            setOptionItems(!props?.requestKeepOptions ? values : ((props.requestKeepOptions === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
+            setOptionItems(!props?.requestOptionOrder ? values : ((props.requestOptionOrder === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
         });
     }
 
-    const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled;
+    const entryImmutable = props?.fieldProps?.disabled || (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read');
     const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options', 'disabled']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'requestKeepOptions', 'proField']);
+        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'requestOptionOrder', 'proField']);
         return (
             <ProForm.Item
                 className={classNames(clazzPrefix, props?.className)}

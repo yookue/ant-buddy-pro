@@ -14,50 +14,7 @@ import {CodePreview} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {CodePreview} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    const [presetStyle, setPresetStyle] = React.useState('default');
-
-    return (
-        <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-                <ProFormRadio.Group
-                    label='预设样式'
-                    radioType='button'
-                    fieldProps={{
-                        value: presetStyle?.toString(),
-                        buttonStyle: 'solid',
-                        onChange: (event) => {
-                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
-                        }
-                    }}
-                    options={[
-                        {label: '默认', value: 'default'},
-                        {label: '无', value: 'false'},
-                    ]}
-                />
-            </ProForm>
-            <Divider/>
-            <CodePreview
-                titleContent='如何安装这个包？'
-                textContent='npm install @yookue/ant-buddy-pro -S'
-                titleProps={{
-                    level: 5,
-                }}
-                textProps={{
-                    copyable: true,
-                }}
-                presetStyle={presetStyle}
-            />
-        </>
-    );
-}
-```
+<code src="./demo.zh-CN.tsx"></code>
 
 ### 组件属性
 

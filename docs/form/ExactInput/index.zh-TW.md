@@ -24,41 +24,7 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ExactInput} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
-
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProFormSwitch
-                label='Tooltip 控件'
-                checkedChildren='是'
-                unCheckedChildren='否'
-                fieldProps={{
-                    checked: tooltipCtrl,
-                }}
-                onChange={(value) => {
-                    setTooltipCtrl(value ? true : false);
-                }}
-            />
-            <Divider/>
-            <ExactInput
-                name='foobar'
-                placeholder='請輸入此項'
-                fieldProps={{
-                    addonBefore: '前綴',
-                }}
-                tooltipCtrl={tooltipCtrl}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo.zh-TW.tsx"></code>
 
 ### 組件屬性
 

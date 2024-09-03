@@ -20,7 +20,11 @@ import {ConfigProvider, Layout} from 'antd';
 import {CopyrightOutlined} from '@ant-design/icons';
 import {If, For} from '@yookue/react-condition';
 import classNames from 'classnames';
+import {type WithFalse} from '@/type/declaration';
 import './index.less';
+
+
+export type FooterPresetStyle = WithFalse<'default' | 'compact'>;
 
 
 export type HyperlinkProps = {
@@ -191,7 +195,7 @@ export type PageFooterProps = {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    presetStyle?: 'default' | 'compact' | false;
+    presetStyle?: FooterPresetStyle;
 };
 
 

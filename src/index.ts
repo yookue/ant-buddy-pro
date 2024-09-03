@@ -56,3 +56,5 @@ export {IconUtils} from './util/IconUtils';
 export {ImageUtils} from './util/ImageUtils';
 export {PropsUtils} from './util/PropsUtils';
 export {StyleUtils} from './util/StyleUtils';
+export {type IconSceneType} from './type/antd-icons';
+export * from './type/declaration';

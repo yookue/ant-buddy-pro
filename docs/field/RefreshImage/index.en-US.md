@@ -16,28 +16,7 @@ import {RefreshImage} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-```jsx
-import React from 'react';
-import {message as messageApi} from 'antd';
-import {RefreshImage} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <RefreshImage
-            width={120}
-            height={120}
-            src={() => {
-                return `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`;
-            }}
-            title='Click to refresh'
-            autoCursor={true}
-            onRefresh={() => {
-                messageApi.success('Image has been refreshed');
-            }}
-        />
-    );
-}
-```
+<code src="./demo.en-US.tsx"></code>
 
 ### Properties
 

@@ -37,6 +37,9 @@ export type MixinModalFuncProps = Omit<ModalFuncProps, 'open'> & {
 };
 
 
+export type ModalActionType = 'confirm' | 'info' | 'warn' | 'success' | 'error' | 'modal';
+
+
 export type DelayModalProps = {
     /**
      * @description The CSS class prefix of the component
@@ -52,7 +55,7 @@ export type DelayModalProps = {
      * @description.zh-TW 顯示模態對話框的動作類型
      * @default 'modal' || 'info'
      */
-    actionType?: 'confirm' | 'info' | 'warn' | 'success' | 'error' | 'modal';
+    actionType?: ModalActionType;
 
     /**
      * @description Whether to display the modal only once
@@ -213,13 +216,13 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
             open={modalOpen}
             wrapClassName={classNames(clazzPrefix, props?.modalProps?.wrapClassName)}
             {...restProps}
-            onOk={(ev: React.MouseEvent<HTMLElement>) => {
+            onOk={(event: React.MouseEvent<HTMLElement>) => {
                 setModalOpen(false);
-                props?.modalProps?.onOk?.(ev);
+                props?.modalProps?.onOk?.(event);
             }}
-            onCancel={(ev: React.MouseEvent<HTMLElement>) => {
+            onCancel={(event: React.MouseEvent<HTMLElement>) => {
                 setModalOpen(false);
-                props?.modalProps?.onCancel?.(ev);
+                props?.modalProps?.onCancel?.(event);
             }}
         />
     );

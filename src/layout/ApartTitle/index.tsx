@@ -19,7 +19,11 @@ import React from 'react';
 import {ConfigProvider} from 'antd';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
+import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
 import './index.less';
+
+
+export type ApartPresetStyle = WithFalse<'default' | 'classic'>;
 
 
 export type ApartTitleProps = {
@@ -72,7 +76,7 @@ export type ApartTitleProps = {
      * @description.zh-TW 裝飾 span 的位置
      * @default 'before'
      */
-    ornamentPos?: 'before' | 'after' | false;
+    ornamentPos?: WithFalse<BeforeAfterPos>;
 
     /**
      * @description The DOM of content span
@@ -101,7 +105,7 @@ export type ApartTitleProps = {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    presetStyle?: 'default' | 'classic' | false;
+    presetStyle?: ApartPresetStyle;
 };
 
 

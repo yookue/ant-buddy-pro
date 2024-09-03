@@ -21,7 +21,11 @@ import {type TitleProps} from 'antd/es/typography/Title';
 import {type TextProps} from 'antd/es/typography/Text';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
+import {type WithFalse} from '@/type/declaration';
 import './index.less';
+
+
+export type PreviewPresetStyle = WithFalse<'default'>;
 
 
 export type CodePreviewProps = React.PropsWithChildren<{
@@ -137,7 +141,7 @@ export type CodePreviewProps = React.PropsWithChildren<{
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    presetStyle?: 'default' | false;
+    presetStyle?: PreviewPresetStyle;
 }>;
 
 

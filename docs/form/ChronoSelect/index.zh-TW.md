@@ -14,33 +14,7 @@ import {ChronoSelect} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {ChronoSelect} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ChronoSelect
-                name='foobar'
-                placeholder='請選擇此項'
-                localeProps={{
-                    millis: '毫秒',
-                    seconds: '秒',
-                    minutes: '分',
-                    hours: '小時',
-                    days: '天',
-                    weeks: '周',
-                    months: '月',
-                    years: '年',
-                    forever: '永久',
-                }}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo.zh-TW.tsx"></code>
 
 ### 組件屬性
 

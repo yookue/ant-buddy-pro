@@ -26,10 +26,14 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
+import {type WithFalse} from '@/type/declaration';
 import './index.less';
 
 
-export type UintType = 'millis' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years' | 'forever';
+export type ChronoUintType = 'millis' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years' | 'forever';
+
+
+export type ChronoPresetStyle = WithFalse<'addon'>;
 
 
 export type IntlLocaleProps = {
@@ -113,7 +117,7 @@ export type ChronoSelectProps = ProFormSelectProps & {
      * @description.zh-TW 單位類型
      * @default ['millis', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years']
      */
-    unitTypes?: UintType[];
+    unitTypes?: ChronoUintType[];
 
     /**
      * @description The locale props for the component
@@ -135,7 +139,7 @@ export type ChronoSelectProps = ProFormSelectProps & {
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
      */
-    presetStyle?: 'addon' | false;
+    presetStyle?: ChronoPresetStyle;
 };
 
 

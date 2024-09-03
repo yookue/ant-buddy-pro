@@ -15,19 +15,7 @@ import {SpaceBound} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {SpaceBound} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <SpaceBound size='middle' containerStyle={{border: '1px solid #f5f2f0'}}>
-            <span>這是第一個子節點。</span>
-            <span>這是第二個子節點。</span>
-        </SpaceBound>
-    );
-}
-```
+<code src="./demo.zh-TW.tsx"></code>
 
 ### 組件屬性
 

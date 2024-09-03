@@ -41,7 +41,7 @@ export abstract class IconUtils {
      * @example
      * React.createElement(IconUtils.findIcon('SettingOutlined'));
      */
-    public static findIcon(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): React.ComponentType<any> | undefined {
+    public static findIcon(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.IconSceneType[]): React.ComponentType<any> | undefined {
         const icons = this.findIcons(iconName, themeTypes, sceneTypes);
         return !icons ? undefined : (Array.isArray(icons) ? icons[0] : icons);
     }
@@ -55,7 +55,7 @@ export abstract class IconUtils {
      *
      * @returns the icons that matches the given icon name with theme types and icon types
      */
-    public static findIcons(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): React.ComponentType<any>[] | undefined {
+    public static findIcons(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.IconSceneType[]): React.ComponentType<any>[] | undefined {
         if (StringUtils.isBlank(iconName)) {
             return undefined;
         }
@@ -95,7 +95,7 @@ export abstract class IconUtils {
      *
      * @returns the icon that matches the given icon name with theme type and icon type
      */
-    public static getIcon(iconName?: string, themeType?: ThemeType, sceneType?: iconTypes.SceneType): React.ComponentType<any> | undefined {
+    public static getIcon(iconName?: string, themeType?: ThemeType, sceneType?: iconTypes.IconSceneType): React.ComponentType<any> | undefined {
         if (!iconName || !sceneType) {
             return undefined;
         }
@@ -123,7 +123,7 @@ export abstract class IconUtils {
      *
      * @returns the collections that filtered by the given theme types and icon types
      */
-    public static getIconCollections(themeTypes?: ThemeType[], sceneTypes?: iconTypes.SceneType[]): ReadonlyMap<string, React.ComponentType<any>>[] {
+    public static getIconCollections(themeTypes?: ThemeType[], sceneTypes?: iconTypes.IconSceneType[]): ReadonlyMap<string, React.ComponentType<any>>[] {
         const result: ReadonlyMap<string, React.ComponentType<any>>[] = [];
         if (!themeTypes) {
             if (!sceneTypes) {

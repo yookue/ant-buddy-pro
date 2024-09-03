@@ -29,6 +29,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ElementUtils} from '@/util/ElementUtils';
 import {PropsUtils} from '@/util/PropsUtils';
+import {type WithFalse, type BeforeAfterPos, type RuleValidateScope} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -122,7 +123,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 默認文本框的附属節點位置
      * @default 'after'
      */
-    actionPos?: 'before' | 'after' | false;
+    actionPos?: WithFalse<BeforeAfterPos>;
 
     /**
      * @description The properties of the dropdown div
@@ -167,7 +168,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 語言輸入項的標簽位置
      * @default 'before'
      */
-    popupTagPos?: 'before' | 'after' | false;
+    popupTagPos?: WithFalse<BeforeAfterPos>;
 
     /**
      * @description The DOM of language action for the primary input box
@@ -183,7 +184,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 語言輸入項的附屬節點位置
      * @default 'after'
      */
-    popupActionPos?: 'before' | 'after' | false;
+    popupActionPos?: WithFalse<BeforeAfterPos>;
 
     /**
      * @description Whether to use the same max length as entry field for the locale items
@@ -204,7 +205,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-CN 语言输入项使用与默认输入项相同的校验规则
      * @description.zh-TW 語言輸入項使用與默認輸入項相同的校驗規則
      */
-    popupCloneRules?: 'all' | 'required' | 'optional' | false;
+    popupCloneRules?: WithFalse<RuleValidateScope>;
 
     /**
      * @description The confirm properties of popup actions
@@ -542,7 +543,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         return buildEntryDom();
     }
 
-    const [menuOpen, setMenuOpen] = React.useState(false);
+    const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
     const handleMenuClick = () => {
         setMenuOpen(true);
     };

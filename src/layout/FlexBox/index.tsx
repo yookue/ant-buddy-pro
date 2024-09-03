@@ -23,6 +23,9 @@ import classNames from 'classnames';
 import './index.less';
 
 
+export type BoxGapSize = 'small' | 'middle' | 'large' | React.CSSProperties['gap'];
+
+
 export type FlexBoxProps = React.PropsWithChildren<{
     /**
      * @description The CSS class prefix of the component
@@ -140,7 +143,7 @@ export type FlexBoxProps = React.PropsWithChildren<{
      * @description.zh-TW 行與列之間的間隙
      * @see https://developer.mozilla.org/en-US/docs/Web/CSS/gap
      */
-    gap?: 'small' | 'middle' | 'large' | React.CSSProperties['gap'];
+    gap?: BoxGapSize;
 }>;
 
 

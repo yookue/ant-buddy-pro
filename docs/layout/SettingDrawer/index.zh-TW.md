@@ -14,16 +14,7 @@ import {SettingDrawer} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {SettingDrawer} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <SettingDrawer hideHintAlert hideCopyButton/>
-    );
-}
-```
+<code src="./demo.tsx"></code>
 
 ### 組件屬性
 

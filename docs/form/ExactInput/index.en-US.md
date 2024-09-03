@@ -24,41 +24,7 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-```jsx
-import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ExactInput} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
-
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProFormSwitch
-                label='Tooltip Ctrl'
-                checkedChildren='True'
-                unCheckedChildren='False'
-                fieldProps={{
-                    checked: tooltipCtrl,
-                }}
-                onChange={(value) => {
-                    setTooltipCtrl(value ? true : false);
-                }}
-            />
-            <Divider/>
-            <ExactInput
-                name='foobar'
-                placeholder='Please input this field'
-                fieldProps={{
-                    addonBefore: 'Prefix',
-                }}
-                tooltipCtrl={tooltipCtrl}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo.en-US.tsx"></code>
 
 ### Properties
 

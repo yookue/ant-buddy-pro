@@ -85,26 +85,26 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
         }
     };
 
-    const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (composeRef.current) {
             return;
         }
-        processValue(ev.target.value, () => {
-            props?.fieldProps?.onChange?.(ev);
+        processValue(event.target.value, () => {
+            props?.fieldProps?.onChange?.(event);
         });
     };
 
-    const handleCompositionStart = (ev: React.CompositionEvent<HTMLInputElement>) => {
+    const handleCompositionStart = (event: React.CompositionEvent<HTMLInputElement>) => {
         composeRef.current = true;
-        props?.fieldProps?.onCompositionStart?.(ev);
+        props?.fieldProps?.onCompositionStart?.(event);
     };
 
-    const handleCompositionEnd = (ev: React.CompositionEvent<HTMLInputElement>) => {
+    const handleCompositionEnd = (event: React.CompositionEvent<HTMLInputElement>) => {
         composeRef.current = false;
-        props?.fieldProps?.onCompositionEnd?.(ev);
+        props?.fieldProps?.onCompositionEnd?.(event);
         // WebKit browser (especially Chrome) triggers the `onCompositionEnd` event after `onChange` event
         if (webkitBrowser) {
-            processValue(ev.currentTarget.value);
+            processValue(event.currentTarget.value);
         }
     };
 

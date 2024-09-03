@@ -15,19 +15,7 @@ import {SpaceBound} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-```jsx
-import React from 'react';
-import {SpaceBound} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <SpaceBound size='middle' containerStyle={{border: '1px solid #f5f2f0'}}>
-            <span>Here is the first child content.</span>
-            <span>Here is the second child content.</span>
-        </SpaceBound>
-    );
-}
-```
+<code src="./demo.en-US.tsx"></code>
 
 ### Properties
 

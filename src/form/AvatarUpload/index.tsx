@@ -27,6 +27,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {FileUtils} from '@/util/FileUtils';
 import {NodeUtils} from '@/util/NodeUtils';
+import {type CircleSquareType, type FileSizeUint} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -65,7 +66,7 @@ export type FileUploadProps = UploadProps & {
      * @description.zh-CN 允许上传的最大文件大小的单位
      * @description.zh-TW 允許上傳的最大文件大小的單位
      */
-    fileSizeUint?: 'KB' | 'MB' | 'GB';
+    fileSizeUint?: FileSizeUint;
 
     /**
      * @description The upload placeholder
@@ -150,7 +151,7 @@ export type AvatarUploadProps = {
      * @description.zh-TW 頭像的形狀
      * @default 'circle'
      */
-    imageShape?: 'circle' | 'square';
+    imageShape?: CircleSquareType;
 
     /**
      * @description Whether to enable crop or not
@@ -165,7 +166,7 @@ export type AvatarUploadProps = {
      * @description.zh-CN 裁剪属性
      * @description.zh-TW 裁剪屬性
      */
-    cropProps?: ImgCropProps;
+    cropProps?: Omit<ImgCropProps, 'children'>;
 
     /**
      * @description The props for the avatar
@@ -235,8 +236,8 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>();
-    const [loading, setLoading] = React.useState(false);
-    const [imageSrc, setImageSrc] = React.useState(props?.imageSrc);
+    const [loading, setLoading] = React.useState<boolean>(false);
+    const [imageSrc, setImageSrc] = React.useState<string | undefined>(props?.imageSrc);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({

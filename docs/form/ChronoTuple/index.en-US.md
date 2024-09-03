@@ -14,58 +14,7 @@ import {ChronoTuple} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-```jsx
-import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ChronoTuple} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    const [widthBlock, setWidthBlock] = React.useState(true);
-
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProForm.Group>
-                <ProFormSwitch
-                    label='Width Block'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: widthBlock,
-                    }}
-                    onChange={(value) => {
-                        setWidthBlock(value ? true : false);
-                    }}
-                />
-            </ProForm.Group>
-            <Divider/>
-            <ChronoTuple
-                digitProps={{
-                    name: 'durationAmount',
-                    label: 'Duration',
-                    placeholder: 'Amount',
-                }}
-                selectProps={{
-                    name: 'durationUnit',
-                    placeholder: 'Unit',
-                    localeProps: {
-                        millis: 'Millis',
-                        seconds: 'Seconds',
-                        minutes: 'Minutes',
-                        hours: 'Hours',
-                        days: 'Days',
-                        weeks: 'Weeks',
-                        months: 'Months',
-                        years: 'Years',
-                        forever: 'Forever',
-                    }
-                }}
-                widthBlock={widthBlock}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo.en-US.tsx"></code>
 
 ### Properties
 

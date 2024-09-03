@@ -24,40 +24,7 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-```jsx
-import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {FullScreen} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    const [tooltipCtrl, setTooltipCtrl] = React.useState(false);
-
-    return (
-        <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-                <ProFormSwitch
-                    label='Tooltip Ctrl'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: tooltipCtrl,
-                    }}
-                    onChange={(value) => {
-                        setTooltipCtrl(value ? true : false);
-                    }}
-                />
-            </ProForm>
-            <Divider/>
-            <FullScreen
-                enterHint='Fullscreen'
-                exitHint='Exit Fullscreen'
-                tooltipCtrl={tooltipCtrl}
-            />
-        </>
-    );
-}
-```
+<code src="./demo.en-US.tsx"></code>
 
 ### Properties
 

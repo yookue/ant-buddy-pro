@@ -25,6 +25,9 @@ import omit from 'rc-util/es/omit';
 import {PropsUtils} from '@/util/PropsUtils';
 
 
+export type StretchTriggerType = 'click' | 'hover';
+
+
 export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     /**
      * @description The CSS class prefix of the component
@@ -42,14 +45,6 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     collapseDom?: React.ReactNode;
 
     /**
-     * @description The trigger method when stretch the collapsed DOM
-     * @description.zh-CN 当需要拉伸已折叠的 DOM 时的触发方式
-     * @description.zh-TW 當需要拉伸已折疊的 DOM 時的觸發方式
-     * @default 'click'
-     */
-    collapseTrigger?: 'click' | 'hover';
-
-    /**
      * @description The CSS class name when stretched
      * @description.zh-CN 拉伸状态时的 CSS 类名
      * @description.zh-TW 拉伸狀態時的 CSS 類名
@@ -62,6 +57,14 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 拉伸狀態時的 CSS 樣式
      */
     stretchStyle?: React.CSSProperties;
+
+    /**
+     * @description The trigger method when stretch the collapsed DOM
+     * @description.zh-CN 当需要拉伸已折叠的 DOM 时的触发方式
+     * @description.zh-TW 當需要拉伸已折疊的 DOM 時的觸發方式
+     * @default 'click'
+     */
+    stretchTrigger?: StretchTriggerType;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -86,15 +89,15 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
 
     // Initialize the default props
     const {
-        collapseTrigger = 'click',
+        stretchTrigger = 'click',
     } = props ?? {};
 
     const [stretchMe, setStretchMe] = React.useState<boolean>(false);
 
-    const ensureStretch = (ev: any) => {
+    const ensureStretch = (event: any) => {
         if (props?.collapseDom && stretchMe) {
             const entry = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`);
-            if (entry && !entry.contains(ev.target)) {
+            if (entry && !entry.contains(event.target)) {
                 setStretchMe(false);
             }
         }
@@ -109,22 +112,22 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         }
     }, []);
 
-    const handleFocus = (ev: React.FocusEvent<HTMLInputElement>) => {
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setStretchMe(true);
-        props?.fieldProps?.onFocus?.(ev);
+        props?.fieldProps?.onFocus?.(event);
     };
 
-    const handleBlur = (ev: React.FocusEvent<HTMLInputElement>) => {
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
         setStretchMe(false);
-        props?.fieldProps?.onBlur?.(ev);
+        props?.fieldProps?.onBlur?.(event);
     };
 
     if (props?.collapseDom && !stretchMe) {
         return (
             <span
                 className={`${clazzPrefix}-collapsed`}
-                onClick={collapseTrigger !== 'click' ? undefined : () => setStretchMe(true)}
-                onMouseOver={collapseTrigger !== 'hover' ? undefined : () => setStretchMe(true)}
+                onClick={stretchTrigger !== 'click' ? undefined : () => setStretchMe(true)}
+                onMouseOver={stretchTrigger !== 'hover' ? undefined : () => setStretchMe(true)}
             >
                 {props.collapseDom}
             </span>
@@ -133,7 +136,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'style', 'onFocus', 'onBlur']);
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'collapseDom', 'collapseTrigger', 'stretchClazz', 'stretchStyle', 'proField']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'collapseDom', 'stretchTrigger', 'stretchClazz', 'stretchStyle', 'proField']);
         return (
             <ProFormText
                 {...restProps}

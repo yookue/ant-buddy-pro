@@ -105,7 +105,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props?: FullScreenProps) =
         tooltipCtrl = false,
     } = props ?? {};
 
-    const [fullscreen, setFullscreen] = React.useState(document.fullscreenElement === triggerFor);
+    const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === triggerFor);
 
     /**
      * Listens fullscreenchange event for the trigger element

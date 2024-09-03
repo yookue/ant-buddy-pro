@@ -254,7 +254,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     const containerRef = React.useRef<HTMLDivElement>();
     const themeClazz = (props?.menuProps?.theme === 'dark') ? `${clazzPrefix}-dark` : `${clazzPrefix}-light`;
-    const [activeKey, setActiveKey] = React.useState(props?.menuProps?.defaultActiveKey);
+    const [activeKey, setActiveKey] = React.useState<string | undefined>(props?.menuProps?.defaultActiveKey);
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
 
     if (BooleanUtils.isNotFalse(adjustLayoutProps?.adjustOnResize)) {
@@ -265,7 +265,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                 }
                 let shouldMode: MenuMode = 'inline';
                 const {offsetWidth} = containerRef.current;
-                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && containerRef.current.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
+                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && containerRef.current?.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
                     shouldMode = 'horizontal';
                 }
                 if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && window.innerWidth < (adjustLayoutProps?.maxWindowWidth ?? 768)) {

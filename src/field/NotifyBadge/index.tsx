@@ -25,6 +25,7 @@ import {ArrayUtils, BooleanUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type Tab as RcTab} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
+import {type WithFalse} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -160,7 +161,7 @@ export type MixinTabProps = Omit<RcTab, 'children'> & {
      * @description.zh-CN 组件是否使用预设样式
      * @description.zh-TW 組件是否使用預設樣式
      */
-    presetStyle?: 'notice' | 'task' | false;
+    presetStyle?: WithFalse<'notice' | 'task'>;
 };
 
 
@@ -339,7 +340,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
             <List.Item
                 key={item.key || item.id || index}
                 className={classNames(`${clazzPrefix}-list-item`, `${clazzPrefix}-list-item-${item.read ? 'read' : 'unread'}`)}
-                onClick={ev => tab.onClick?.(ev, item.key || item.id || index)}
+                onClick={event => tab.onClick?.(event, item.key || item.id || index)}
             >
                 <List.Item.Meta
                     className={`${clazzPrefix}-list-item-meta`}
@@ -386,7 +387,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                     <If condition={showClear} validation={false}>
                         <div
                             className={`${clazzPrefix}-action-button`}
-                            onClick={ev => tab.onClear?.(ev, tab.key ?? tab.presetStyle)}
+                            onClick={event => tab.onClear?.(event, tab.key ?? tab.presetStyle)}
                         >
                             {props?.localeProps?.clearButton || intlLocales.get([intlType.locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
                         </div>
@@ -394,7 +395,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                     <If condition={showMore} validation={false}>
                         <div
                             className={`${clazzPrefix}-action-button`}
-                            onClick={ev => tab.onMore?.(ev, tab.key ?? tab.presetStyle)}
+                            onClick={event => tab.onMore?.(event, tab.key ?? tab.presetStyle)}
                         >
                             {props?.localeProps?.moreButton || intlLocales.get([intlType.locale, 'more']) || intlLocales.get(['en_US', 'more'])}
                         </div>

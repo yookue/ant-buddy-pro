@@ -25,7 +25,11 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
+import {type WithFalse, type LabelValueType, type RequestOptionOrder} from '@/type/declaration';
 import './index.less';
+
+
+export type DividePresetStyle = WithFalse<'before-prior' | 'after-prior' | '10-90' | '20-80' | '30-70' | '40-60' | '50-50' | '60-40' | '70-30' | '80-20' | '90-10'>;
 
 
 export type DivideSelectProps = ProFormSelectProps & {
@@ -71,7 +75,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-TW 下拉選項左側 span 的内容
      * @default 'label'
      */
-    optionBeforeContent?: 'label' | 'value' | false;
+    optionBeforeContent?: WithFalse<LabelValueType>;
 
     /**
      * @description The render of the option item before
@@ -100,7 +104,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-TW 下拉選項右側 span 的内容
      * @default 'value'
      */
-    optionAfterContent?: 'label' | 'value' | false;
+    optionAfterContent?: WithFalse<LabelValueType>;
 
     /**
      * @description The render of the option item after
@@ -114,7 +118,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
      * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
      */
-    requestKeepOptions?: 'request-before' | 'request-after' | false;
+    requestOptionOrder?: WithFalse<RequestOptionOrder>;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -130,7 +134,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'before-prior'
      */
-    presetStyle?: 'before-prior' | 'after-prior' | '10-90' | '20-80' | '30-70' | '40-60' | '50-50' | '60-40' | '70-30' | '80-20' | '90-10' | false;
+    presetStyle?: DividePresetStyle;
 };
 
 
@@ -192,7 +196,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestKeepOptions', 'proField', 'presetStyle']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestOptionOrder', 'proField', 'presetStyle']);
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
 
         return (
@@ -220,7 +224,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
         if (props?.request) {
             FieldUtils.fetchFieldRequestData(props, values => {
-                setOptionItems(!props?.requestKeepOptions ? values : ((props.requestKeepOptions === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
+                setOptionItems(!props?.requestOptionOrder ? values : ((props.requestOptionOrder === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
             });
         }
 

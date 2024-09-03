@@ -16,102 +16,15 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 #### 使用 options
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {SegmentRadio} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='請打分'
-                fieldProps={{
-                    defaultValue: 'good',
-                    options: [
-                        {
-                            label: '好',
-                            value: 'good',
-                        },
-                        {
-                            label: '很好',
-                            value: 'excellent',
-                        },
-                        {
-                            label: '非常好',
-                            value: 'perfect',
-                        }
-                    ]
-                }}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo-1.zh-TW.tsx"></code>
 
 #### 使用 request
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {SegmentRadio} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='請打分'
-                fieldProps={{
-                    defaultValue: 'good',
-                }}
-                request={async () => [
-                    {
-                        label: '好',
-                        value: 'good',
-                    },
-                    {
-                        label: '很好',
-                        value: 'excellent',
-                    },
-                    {
-                        label: '非常好',
-                        value: 'perfect',
-                    }
-                ]}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo-2.zh-TW.tsx"></code>
 
 #### 使用 valueEnum
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {SegmentRadio} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='請打分'
-                fieldProps={{
-                    defaultValue: 'good',
-                }}
-                valueEnum={{
-                    good: '好',
-                    excellent: '很好',
-                    perfect: '非常好',
-                }}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo-3.zh-TW.tsx"></code>
 
 ### 組件屬性
 

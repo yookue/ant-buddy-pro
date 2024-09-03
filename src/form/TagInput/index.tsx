@@ -202,9 +202,9 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                 scale: 0,
                 duration: 200,
             },
-            onEnd: (ev) => {
-                if (ev.type === 'appear' || ev.type === 'enter') {
-                    (ev.target as any).style = 'display: inline-block';
+            onEnd: (event) => {
+                if (event.type === 'appear' || event.type === 'enter') {
+                    (event.target as any).style = 'display: inline-block';
                 }
             }
         };
@@ -226,11 +226,11 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                     <span key={`${index}_${objectHash(content)}`} className={`${clazzPrefix}-fulfil-span`}>
                         <Tag
                             className={classNames(`${clazzPrefix}-fulfil-tag`, props?.fulfilTagShareProps?.className)}
-                            onClose={ev => {
+                            onClose={event => {
                                 if (props?.fulfilTagShareProps?.onClose) {
-                                    props.fulfilTagShareProps.onClose(ev);
+                                    props.fulfilTagShareProps.onClose(event);
                                 }
-                                if (!ev.isDefaultPrevented()) {
+                                if (!event.isDefaultPrevented()) {
                                     handleClose();
                                 }
                             }}
@@ -247,14 +247,14 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                 <span key={`${index}_${objectHash(content)}`} className={`${clazzPrefix}-fulfil-span`}>
                     <Tag
                         className={classNames(`${clazzPrefix}-fulfil-tag`, origin.className, props?.fulfilTagShareProps?.className)}
-                        onClose={ev => {
+                        onClose={event => {
                             if (origin.onClose) {
-                                origin.onClose(ev);
+                                origin.onClose(event);
                             }
                             if (props?.fulfilTagShareProps?.onClose) {
-                                props.fulfilTagShareProps.onClose(ev);
+                                props.fulfilTagShareProps.onClose(event);
                             }
-                            if (!ev.isDefaultPrevented()) {
+                            if (!event.isDefaultPrevented()) {
                                 handleClose();
                             }
                         }}
@@ -303,22 +303,22 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                         value={inputValue}
                         size={props?.addingInputProps?.size ?? 'small'}
                         style={props?.addingInputProps?.style ?? {width: '80px'}}
-                        onChange={ev => {
-                            setInputValue(ev.target.value);
+                        onChange={event => {
+                            setInputValue(event.target.value);
                             if (props?.addingInputProps?.onChange) {
-                                props.addingInputProps.onChange(ev);
+                                props.addingInputProps.onChange(event);
                             }
                         }}
-                        onPressEnter={ev => {
+                        onPressEnter={event => {
                             handleConfirm();
                             if (props?.addingInputProps?.onPressEnter) {
-                                props.addingInputProps.onPressEnter(ev);
+                                props.addingInputProps.onPressEnter(event);
                             }
                         }}
-                        onBlur={ev => {
+                        onBlur={event => {
                             handleConfirm();
                             if (props?.addingInputProps?.onBlur) {
-                                props.addingInputProps.onBlur(ev);
+                                props.addingInputProps.onBlur(event);
                             }
                         }}
                         {...omitProps}
@@ -331,10 +331,10 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                 <div className={`${clazzPrefix}-action`}>
                     <Tag
                         className={classNames(`${clazzPrefix}-action-tag`, props?.addingTagProps?.className)}
-                        onClick={ev => {
+                        onClick={event => {
                             setInputVisible(true);
                             if (props?.addingTagProps?.onClick) {
-                                props.addingTagProps.onClick(ev);
+                                props.addingTagProps.onClick(event);
                             }
                         }}
                         {...omitProps}

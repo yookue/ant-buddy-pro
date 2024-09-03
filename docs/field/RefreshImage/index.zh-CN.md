@@ -16,28 +16,7 @@ import {RefreshImage} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {message as messageApi} from 'antd';
-import {RefreshImage} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <RefreshImage
-            width={120}
-            height={120}
-            src={() => {
-                return `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`;
-            }}
-            title='点击刷新图片'
-            autoCursor={true}
-            onRefresh={() => {
-                messageApi.success('图片已刷新');
-            }}
-        />
-    );
-}
-```
+<code src="./demo.zh-CN.tsx"></code>
 
 ### 组件属性
 

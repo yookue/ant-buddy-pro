@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {ConfigProvider, Form, Input, Button} from 'antd';
-import {type CaptFieldRef as CaptchaInputRef, type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
+import {type CaptFieldRef, type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
@@ -27,7 +27,9 @@ import {intlLocales} from './intl-locales';
 import './index.less';
 
 
-export type {CaptchaInputRef};
+export type CaptchaInputRef = CaptFieldRef & {
+    isTiming: () => boolean;
+};
 
 
 export type IntlLocaleProps = {
@@ -83,7 +85,7 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
      * @description.zh-CN 生成验证码时的回调函数，返回 false 将会中断计时器
      * @description.zh-TW 生成驗證碼時的回調函數，返回 false 將會中斷計時器
      */
-    onGenerate?: (mobile: string) => Promise<boolean | void>;
+    onGenerate?: (mobile?: string) => boolean | void | Promise<boolean | void>;
 
     /**
      * @description The callback function when the timer changed
@@ -149,7 +151,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const fieldRef = React.useRef<HTMLDivElement>();
     const [count, setCount] = React.useState<number>(countDown);
     const [loading, setLoading] = React.useState<boolean>();
-    const [timing, setTiming] = React.useState(false);
+    const [timing, setTiming] = React.useState<boolean>(false);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({

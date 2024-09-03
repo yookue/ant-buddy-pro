@@ -27,7 +27,7 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
  */
 
 
-export type SceneType = 'direction' | 'suggestion' | 'editor' | 'data' | 'logo' | 'web';
+export type IconSceneType = 'direction' | 'suggestion' | 'editor' | 'data' | 'logo' | 'web';
 
 
 export const outlinedDirectionIcons: ReadonlyMap<string, React.ComponentType<any>> = new Map<string, React.ComponentType<any>>([

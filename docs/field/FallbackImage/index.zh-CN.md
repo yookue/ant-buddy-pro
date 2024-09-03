@@ -14,24 +14,7 @@ import {FallbackImage} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {message as messageApi} from 'antd';
-import {FallbackImage} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <FallbackImage
-            width={120}
-            height={120}
-            src='does-not-exists.png'
-            fallback={() => {
-                return `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`;
-            }}
-        />
-    );
-}
-```
+<code src="./demo.tsx"></code>
 
 ### 组件属性
 

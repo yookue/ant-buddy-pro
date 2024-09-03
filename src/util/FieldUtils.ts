@@ -19,6 +19,7 @@ import React from 'react';
 import {type LabeledValue} from 'antd/es/select';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
 import {useDebounceFn} from '@ant-design/pro-utils';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 
 
 /**
@@ -36,7 +37,13 @@ export abstract class FieldUtils {
      * @returns Returns the built array of Ant ProComponents LabeledValue, with locale data
      */
     public static optionsToLabeledValues = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps): LabeledValue[] | undefined => {
-        return !props ? undefined : (props?.fieldProps?.options ?? (!props?.valueEnum ? undefined : this.propsToLabeledValues(props.valueEnum)));
+        if (!props) {
+            return undefined;
+        }
+        if (ObjectUtils.isNotEmpty(props?.fieldProps?.options)) {
+            return props.fieldProps.options;
+        }
+        return ObjectUtils.isEmpty(props?.valueEnum) ? undefined : this.propsToLabeledValues(props.valueEnum);
     }
 
     /**

@@ -16,102 +16,15 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 #### With options
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {SegmentRadio} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='Rate this'
-                fieldProps={{
-                    defaultValue: 'good',
-                    options: [
-                        {
-                            label: 'Good',
-                            value: 'good',
-                        },
-                        {
-                            label: 'Excellent',
-                            value: 'excellent',
-                        },
-                        {
-                            label: 'Perfect',
-                            value: 'perfect',
-                        }
-                    ]
-                }}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo-1.en-US.tsx"></code>
 
 #### With request
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {SegmentRadio} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='Rate this'
-                fieldProps={{
-                    defaultValue: 'good',
-                }}
-                request={async () => [
-                    {
-                        label: 'Good',
-                        value: 'good',
-                    },
-                    {
-                        label: 'Excellent',
-                        value: 'excellent',
-                    },
-                    {
-                        label: 'Perfect',
-                        value: 'perfect',
-                    }
-                ]}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo-2.en-US.tsx"></code>
 
 #### With valueEnum
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {SegmentRadio} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='Rate this'
-                fieldProps={{
-                    defaultValue: 'good',
-                }}
-                valueEnum={{
-                    good: 'Good',
-                    excellent: 'Excellent',
-                    perfect: 'Perfect',
-                }}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo-3.en-US.tsx"></code>
 
 ### Properties
 

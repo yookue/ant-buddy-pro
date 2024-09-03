@@ -22,7 +22,11 @@ import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import CssMotion from 'rc-motion';
 import {NodeUtils} from '@/util/NodeUtils';
+import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
 import './index.less';
+
+
+export type SectionPresetStyle = WithFalse<'default' | 'classic'>;
 
 
 export type FoldSectionProps = React.PropsWithChildren<{
@@ -89,7 +93,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-TW 頭部裝飾 span 的位置
      * @default 'before'
      */
-    headerOrnamentPos?: 'before' | 'after' | false;
+    headerOrnamentPos?: WithFalse<BeforeAfterPos>;
 
     /**
      * @description The DOM of content span that under the header div
@@ -132,7 +136,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-TW 頭部折叠 span 的位置
      * @default 'after'
      */
-    headerCollapsePos?: 'before' | 'after' | false;
+    headerCollapsePos?: WithFalse<BeforeAfterPos>;
 
     /**
      * @description The DOM of collapse span that under the header div when expanded
@@ -245,7 +249,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-TW 組件是否使用預設樣式
      * @default 'default'
      */
-    presetStyle?: 'default' | 'classic' | false;
+    presetStyle?: SectionPresetStyle;
 }>;
 
 
@@ -274,7 +278,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         presetStyle = 'default',
     } = props ?? {};
 
-    const [panelOpen, setPanelOpen] = React.useState(panelInitialOpen);
+    const [panelOpen, setPanelOpen] = React.useState<boolean>(panelInitialOpen);
 
     const buildOrnamentDom = (before: boolean) => {
         if (!props?.headerOrnament || !headerOrnamentPos) {
@@ -323,7 +327,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         props?.onOpenChange?.(openState);
     };
 
-    const [panelRendered, setPanelRendered] = React.useState(panelForceRender ?? panelOpen);
+    const [panelRendered, setPanelRendered] = React.useState<boolean>(panelForceRender ?? panelOpen);
     React.useEffect(() => {
         if (panelForceRender) {
             setPanelRendered(true);

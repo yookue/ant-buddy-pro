@@ -14,28 +14,7 @@ import {MaskInput} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-```jsx
-import React from 'react';
-import {ProForm} from '@ant-design/pro-form';
-import {MaskInput} from '@yookue/ant-buddy-pro';
-
-export default () => {
-    return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <MaskInput
-                name='foobar'
-                placeholder='請輸入此項'
-                fieldProps={{
-                    addonBefore: '數字或字母',
-                }}
-                patterns={[
-                    /^[a-zA-Z0-9]+$/,
-                ]}
-            />
-        </ProForm>
-    );
-}
-```
+<code src="./demo.zh-TW.tsx"></code>
 
 ### 組件屬性
 

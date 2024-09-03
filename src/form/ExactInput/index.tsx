@@ -24,6 +24,7 @@ import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {PropsUtils} from '@/util/PropsUtils';
+import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -76,7 +77,7 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 文本框的附属節點位置
      * @default 'after'
      */
-    addonPos?: 'before' | 'after' | false;
+    addonPos?: WithFalse<BeforeAfterPos>;
 
     /**
      * @description Whether to use compact mode for the addon
