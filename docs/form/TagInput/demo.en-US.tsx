@@ -25,6 +25,7 @@ import {TagInput, type TagInputRef} from '@yookue/ant-buddy-pro';
 export default () => {
     const [addable, setAddable] = React.useState<boolean>(false);
     const [removable, setRemovable] = React.useState<boolean>(false);
+    const [tweenOneEnabled, setTweenOneEnabled] = React.useState<boolean>(true);
     const [performSubmit, setPerformSubmit] = React.useState<boolean>(true);
     const tagInputRef = React.useRef<TagInputRef>(null);
 
@@ -68,6 +69,18 @@ export default () => {
                     }}
                 />
                 <ProFormSwitch
+                    label='TweenOne Enabled'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: tweenOneEnabled,
+                        disabled: !removable,
+                        onChange: (value) => {
+                            setTweenOneEnabled(value);
+                        }
+                    }}
+                />
+                <ProFormSwitch
                     label='Perform Submit'
                     checkedChildren='True'
                     unCheckedChildren='False'
@@ -99,6 +112,7 @@ export default () => {
                 ref={tagInputRef}
                 name='foobar'
                 addable={addable}
+                tweenOneEnabled={tweenOneEnabled}
                 performSubmit={performSubmit}
                 fulfilTagItems={[
                     {
