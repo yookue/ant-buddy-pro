@@ -220,8 +220,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const handleClick = async () => {
         try {
             await validatePhoneName();
-            const mobile = (!formInstance || !props?.phoneName) ? undefined : formInstance?.getFieldValue([props.phoneName].flat(1));
-            await buildCaptcha(mobile);
+            await buildCaptcha((!formInstance || !props?.phoneName) ? undefined : formInstance?.getFieldValue([props.phoneName].flat(1)));
         } catch (ignored) {
         }
     }
