@@ -135,6 +135,15 @@ export default () => {
                 fulfilTagShareProps={{
                     closable: removable,
                 }}
+                addingInputProps={{
+                    placeholder: '标签',
+                    rules: [{
+                        type: 'string',
+                        max: 30,
+                        message: '长度不能大于 30',
+                    }],
+                }}
+                proField={true}
             />
             <Divider/>
         </ProForm>

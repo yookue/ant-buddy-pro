@@ -228,7 +228,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'value', 'onChange']);
     return (
         <div
-            ref={ref => fieldRef.current = ref ?? undefined}
+            ref={(div) => fieldRef.current = div ?? undefined}
             className={classNames(`${clazzPrefix}-container`, props?.containerClazz)}
             style={props?.containerStyle}
         >

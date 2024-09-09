@@ -16,16 +16,22 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Input, Tag, type InputProps, type InputRef, type TagProps} from 'antd';
+import {ConfigProvider, Form, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {PlusOutlined} from '@ant-design/icons';
+import {ProFormText} from '@ant-design/pro-form';
+import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {useIntl} from '@ant-design/pro-provider';
+import {nanoid} from '@ant-design/pro-utils';
 import {ArrayUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import objectHash from 'object-hash';
 import omit from 'rc-util/es/omit';
 import warning from 'rc-util/es/warning';
 import {TweenOneGroup, type IGroupProps as TweenOneGroupProps} from 'rc-tween-one';
+import {PropsUtils} from '@/util/PropsUtils';
+import {intlLocales} from './intl-locales';
 import './index.less';
 
 
@@ -34,6 +40,21 @@ export type TagInputRef = {
     setTagContents: (contents?: string[] | null) => void,
     addTagContent: (content?: string | null) => void,
     removeTagContent: (content?: string | null) => void,
+};
+
+
+export type AddingInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'name' | 'fieldProps'> & {
+    fieldProps?: Omit<FieldProps<InputRef>, 'ref'> & Omit<InputProps, 'ref' | 'name' | 'id' | 'value' | 'type'>;
+};
+
+
+export type IntlLocaleProps = {
+    /**
+     * @description Tag already exists
+     * @description.zh-CN 标签已存在
+     * @description.zh-TW 標簽已存在
+     */
+    duplicateTag?: string;
 };
 
 
@@ -96,7 +117,7 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
      * @description.zh-CN 添加标签的文本框的属性
      * @description.zh-TW 添加標簽的文本框的屬性
      */
-    addingInputProps?: Omit<InputProps, 'ref' | 'name' | 'value' | 'type'>;
+    addingInputProps?: AddingInputProps;
 
     /**
      * @description The props of the adding tag
@@ -121,12 +142,35 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
     tweenOneProps?: TweenOneGroupProps;
 
     /**
+     * @description Whether to warn if the tag already exists
+     * @description.zh-CN 是否显示标签已存在的警告
+     * @description.zh-TW 是否顯示標簽已存在的警告
+     * @default true
+     */
+    warnDuplicate?: boolean;
+
+    /**
      * @description Whether to perform as submit fields
      * @description.zh-CN 是否作为表单项提交
      * @description.zh-TW 是否作為表單項提交
      * @default true
      */
     performSubmit?: boolean;
+
+    /**
+     * @description Whether to use ProFormField instead of Antd
+     * @description.zh-CN 是否使用 ProFormField 控件
+     * @description.zh-TW 是否使用 ProFormField 控件
+     * @default true
+     */
+    proField?: boolean;
+
+    /**
+     * @description The locale props for the component
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 };
 
 
@@ -144,15 +188,19 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-tag-input');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
         tweenOneEnabled = true,
+        warnDuplicate = true,
         performSubmit = true,
+        proField = true,
     } = props ?? {};
 
+    const entryId = nanoid();
     const fieldRef = React.useRef<HTMLDivElement>();
-    const inputRef = React.useRef<InputRef>(null);
+    const [inputName, setInputName] = React.useState<string>();
     const [inputValue, setInputValue] = React.useState<string>();
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
     const [tagContents, setTagContents] = React.useState<string[]>(() => {
@@ -182,10 +230,8 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     }));
 
     React.useEffect(() => {
-        if (inputVisible) {
-            inputRef.current?.focus();
-        }
-    });
+        setInputName(inputVisible ? (formContext?.name ? `${formContext.name}_${entryId}` : entryId) : undefined);
+    }, [inputVisible]);
 
     const buildTweenOneProps = () => {
         return props?.tweenOneProps ?? {
@@ -277,67 +323,154 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
         );
     };
 
+    const handleInputConfirm = async () => {
+        if (!inputVisible) {
+            return;
+        }
+        if (props?.name && proField && formContext?.form) {
+            try {
+                await formContext.form.validateFields([inputName]);
+            } catch (ignored) {
+                return;
+            }
+        }
+        if (inputValue) {
+            if (tagContents?.indexOf(inputValue) === -1) {
+                const contents = [...tagContents, inputValue];
+                setTagContents(contents);
+                if (props?.name && props?.performSubmit && formContext?.form) {
+                    formContext.form.setFieldValue(props.name, contents);
+                }
+            } else {
+                if (warnDuplicate && !proField) {
+                    messageApi.warn(props?.localeProps?.duplicateTag || intlLocales.get([intlType.locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
+                }
+            }
+        }
+        setInputVisible(false);
+        setInputValue(undefined);
+    };
+
     const buildActionDom = () => {
         if (!props?.addable || editContext.mode === 'read') {
             return undefined;
         }
         if (inputVisible) {
-            const handleConfirm = () => {
-                if (inputValue && tagContents?.indexOf(inputValue) === -1) {
-                    const contents = [...tagContents, inputValue];
-                    setTagContents(contents);
-                    if (props?.name && props?.performSubmit && formContext?.form) {
-                        formContext.form.setFieldValue(props.name, contents);
-                    }
-                }
-                setInputVisible(false);
-                setInputValue(undefined);
-            };
-            const omitProps = !props?.addingInputProps ? {} : omit(props.addingInputProps, ['className', 'size', 'style', 'onChange', 'onPressEnter', 'onBlur']);
-            return (
-                <div className={`${clazzPrefix}-action`}>
-                    <Input
-                        ref={inputRef}
-                        className={classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.className)}
-                        type='text'
-                        value={inputValue}
-                        size={props?.addingInputProps?.size ?? 'small'}
-                        style={props?.addingInputProps?.style ?? {width: '80px'}}
-                        onChange={event => {
-                            setInputValue(event.target.value);
-                            if (props?.addingInputProps?.onChange) {
-                                props.addingInputProps.onChange(event);
-                            }
-                        }}
-                        onPressEnter={event => {
-                            handleConfirm();
-                            if (props?.addingInputProps?.onPressEnter) {
-                                props.addingInputProps.onPressEnter(event);
-                            }
-                        }}
-                        onBlur={event => {
-                            handleConfirm();
-                            if (props?.addingInputProps?.onBlur) {
-                                props.addingInputProps.onBlur(event);
-                            }
-                        }}
-                        {...omitProps}
-                    />
-                </div>
-            );
+            const omitFieldProps = !props?.addingInputProps?.fieldProps ? {} : omit(props.addingInputProps.fieldProps, ['className', 'size', 'style', 'onChange', 'onPressEnter', 'onBlur']);
+            if (proField) {
+                const restProps = !props?.addingInputProps ? {} : omit(props.addingInputProps, ['fieldProps', 'rules']);
+                return (
+                    <div className={`${clazzPrefix}-action`}>
+                        <ProFormText
+                            name={inputName}
+                            {...restProps}
+                            fieldProps={{
+                                ref: (input) => input?.focus(),
+                                className: classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className),
+                                type: 'text',
+                                value: inputValue,
+                                ...omitFieldProps,
+                                size: props?.addingInputProps?.fieldProps?.size ?? 'small',
+                                style: props?.addingInputProps?.fieldProps?.style ?? {width: '100px'},
+                                onChange: (event) => {
+                                    if (props?.addingInputProps?.fieldProps?.onChange) {
+                                        props.addingInputProps.fieldProps.onChange(event);
+                                    }
+                                    if (!event.isDefaultPrevented()) {
+                                        setInputValue(event.target.value);
+                                    }
+                                },
+                                onPressEnter: (event) => {
+                                    if (props?.addingInputProps?.fieldProps?.onPressEnter) {
+                                        props.addingInputProps.fieldProps.onPressEnter(event);
+                                    }
+                                    if (!event.isDefaultPrevented()) {
+                                        handleInputConfirm().then();
+                                    }
+                                },
+                                onBlur: (event) => {
+                                    if (props?.addingInputProps?.fieldProps?.onBlur) {
+                                        props.addingInputProps.fieldProps.onBlur(event);
+                                    }
+                                    if (!event.isDefaultPrevented()) {
+                                        handleInputConfirm().then();
+                                    }
+                                },
+                            }}
+                            rules={[
+                                ...(props?.addingInputProps?.rules ?? []),
+                                !warnDuplicate ? {} : {
+                                    validator: async (_rule: any, value: string) => {
+                                        if (!value) {
+                                            return undefined;
+                                        }
+                                        if (tagContents?.indexOf(value) === -1) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(props?.localeProps?.duplicateTag || intlLocales.get([intlType.locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
+                                    }
+                                }
+                            ]}
+                        />
+                    </div>
+                );
+            } else {
+                const restProps = PropsUtils.pickForwardProps(props);
+                return (
+                    <div className={`${clazzPrefix}-action`}>
+                        <Input
+                            ref={(input) => input?.focus()}
+                            className={classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className)}
+                            type='text'
+                            id={inputName}
+                            value={inputValue}
+                            {...restProps}
+                            {...omitFieldProps}
+                            size={props?.addingInputProps?.fieldProps?.size ?? 'small'}
+                            style={props?.addingInputProps?.fieldProps?.style ?? {width: '80px'}}
+                            onChange={event => {
+                                if (props?.addingInputProps?.fieldProps?.onChange) {
+                                    props.addingInputProps.fieldProps.onChange(event);
+                                }
+                                if (!event.isDefaultPrevented()) {
+                                    setInputValue(event.target.value);
+                                }
+                            }}
+                            onPressEnter={event => {
+                                if (props?.addingInputProps?.fieldProps?.onPressEnter) {
+                                    props.addingInputProps.fieldProps.onPressEnter(event);
+                                }
+                                if (!event.isDefaultPrevented()) {
+                                    handleInputConfirm().then();
+                                }
+                            }}
+                            onBlur={event => {
+                                if (props?.addingInputProps?.fieldProps?.onBlur) {
+                                    props.addingInputProps.fieldProps.onBlur(event);
+                                }
+                                if (!event.isDefaultPrevented()) {
+                                    handleInputConfirm().then();
+                                }
+                            }}
+                        />
+                    </div>
+                );
+            }
         } else {
-            const omitProps = !props?.addingTagProps ? {} : omit(props.addingTagProps, ['className', 'onClick', 'children']);
+            const omitTagProps = !props?.addingTagProps ? {} : omit(props.addingTagProps, ['className', 'onClick', 'children']);
             return (
                 <div className={`${clazzPrefix}-action`}>
                     <Tag
                         className={classNames(`${clazzPrefix}-action-tag`, props?.addingTagProps?.className)}
+                        {...omitTagProps}
                         onClick={event => {
-                            setInputVisible(true);
                             if (props?.addingTagProps?.onClick) {
                                 props.addingTagProps.onClick(event);
                             }
+                            if (!event.isDefaultPrevented()) {
+                                setInputVisible(true);
+                            }
                         }}
-                        {...omitProps}
                     >
                         {props?.addingTagProps?.children ?? <PlusOutlined/>}
                     </Tag>
@@ -367,8 +500,8 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
 
     return (
         <div
-            ref={ref => fieldRef.current = ref ?? undefined}
-            className={classNames(clazzPrefix, props?.containerClazz)}
+            ref={(div) => fieldRef.current = div ?? undefined}
+            className={classNames(clazzPrefix, ((proField && props?.addable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildFulfilDom()}

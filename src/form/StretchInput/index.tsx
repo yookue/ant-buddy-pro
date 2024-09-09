@@ -85,13 +85,13 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-stretch-input');
-    const entryId = nanoid();
 
     // Initialize the default props
     const {
         stretchTrigger = 'click',
     } = props ?? {};
 
+    const entryId = nanoid();
     const [stretchMe, setStretchMe] = React.useState<boolean>(false);
 
     const ensureStretch = (event: any) => {

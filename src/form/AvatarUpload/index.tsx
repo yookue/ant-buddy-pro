@@ -86,25 +86,18 @@ export type IntlLocaleProps = {
     upload?: string;
 
     /**
-     * @description File size cant not be greater than {}{}
-     * @description.zh-CN 文件大小不能超过 {}{}
-     * @description.zh-TW 文件大小不能超過 {}{}
-     */
-    maxFileSize?: string;
-
-    /**
-     * @description File type is disallowed
-     * @description.zh-CN 文件类型不允许
-     * @description.zh-TW 文件類型不允許
-     */
-    typesDisallowed?: string;
-
-    /**
      * @description Only allowed some files
      * @description.zh-CN 只允许特定类型的文件
      * @description.zh-TW 只允許特定類型的文件
      */
-    typesDisallowedDetail?: string;
+    allowTypes?: string;
+
+    /**
+     * @description File type is disallowed
+     * @description.zh-CN 不允许的文件类型
+     * @description.zh-TW 不允許的文件類型
+     */
+    disallowType?: string;
 
     /**
      * @description The title of image crop modal
@@ -112,6 +105,13 @@ export type IntlLocaleProps = {
      * @description.zh-TW 頭像裁剪對話框的標題
      */
     cropModalTitle?: string;
+
+    /**
+     * @description File size cant not be greater than {}{}
+     * @description.zh-CN 文件大小不能超过 {}{}
+     * @description.zh-TW 文件大小不能超過 {}{}
+     */
+    maxFileSize?: string;
 };
 
 
@@ -255,9 +255,9 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
     const handleBeforeUpload = (file: RcFile, fileList: RcFile[]) => {
         if (props?.uploadProps?.allowedFileTypes && !props.uploadProps.allowedFileTypes.some(item => file.type === item)) {
             if (!props?.uploadProps?.warnWithTypes) {
-                messageApi.error(props?.localeProps?.typesDisallowed || intlLocales.get([intlType.locale, 'typesDisallowed']) || intlLocales.get(['en_US', 'typesDisallowed']));
+                messageApi.error(props?.localeProps?.disallowType || intlLocales.get([intlType.locale, 'disallowType']) || intlLocales.get(['en_US', 'disallowType']));
             } else {
-                const template = props?.localeProps?.typesDisallowedDetail || intlLocales.get([intlType.locale, 'typesDisallowedDetail']) || intlLocales.get(['en_US', 'typesDisallowedDetail']);
+                const template = props?.localeProps?.allowTypes || intlLocales.get([intlType.locale, 'allowTypes']) || intlLocales.get(['en_US', 'allowTypes']);
                 const types = StringUtils.joinWith(props.uploadProps.allowedFileTypes.map(item => (item === 'image/jpeg') ? 'jpg' : StringUtils.substringAfterLast(item, '/')) as string[], '/');
                 messageApi.error(StringUtils.formatBrace(template, types));
             }
@@ -413,7 +413,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
 
     return (
         <div
-            ref={ref => fieldRef.current = ref ?? undefined}
+            ref={(div) => fieldRef.current = div ?? undefined}
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >

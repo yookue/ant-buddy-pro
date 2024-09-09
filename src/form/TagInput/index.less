@@ -33,4 +33,30 @@
         display: none;
         visibility: hidden;
     }
+
+    &.@{buddy-tag-input}-pro-field {
+        min-height: 46px;
+
+        .@{ant-prefix}-form-item-control-input {
+            min-height: @tag-line-height;
+
+            .@{ant-prefix}-input-affix-wrapper-sm {
+                &::before {
+                    line-height: @tag-line-height;
+                }
+
+                .@{ant-prefix}-input-sm {
+                    font-size: @font-size-sm;
+                    height: @tag-line-height;
+                }
+            }
+        }
+    }
+
+    &:not(.@{buddy-tag-input}-pro-field) {
+        .@{ant-prefix}-input-sm {
+            font-size: @font-size-sm;
+            height: 21px;
+        }
+    }
 }

@@ -125,10 +125,10 @@ export default () => {
                 }}
                 localeProps={{
                     'upload': 'Upload',
-                    'maxFileSize': 'File size cant not be greater than {}{}',
-                    'typesDisallowed': 'File type is disallowed',
-                    'typesDisallowedDetail': 'Only allowed {} files',
+                    'allowTypes': 'Only allowed {} files',
+                    'disallowType': 'File type is disallowed',
                     'cropModalTitle': 'Avatar Crop',
+                    'maxFileSize': 'File size cant not be greater than {}{}',
                 }}
             />
         </ProForm>

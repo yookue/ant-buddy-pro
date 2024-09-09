@@ -243,7 +243,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
     const intlType = useIntl();
-    const entryId = nanoid();
 
     // Initialize the default props
     const {
@@ -259,6 +258,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         },
         popupProField = true,
     } = props ?? {};
+
+    const entryId = nanoid();
 
     const handleSetAsDefault = (tagId: string) => {
         const entry = document.querySelector<HTMLInputElement>(`input[data-locale-input-id='${entryId}']`);

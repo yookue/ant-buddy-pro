@@ -324,7 +324,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     return (
         <div
-            ref={ref => containerRef.current = ref ?? undefined}
+            ref={(div) => containerRef.current = div ?? undefined}
             className={classNames(clazzPrefix, themeClazz, props?.containerClazz)}
             style={props?.containerStyle}
         >

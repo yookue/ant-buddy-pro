@@ -125,10 +125,10 @@ export default () => {
                 }}
                 localeProps={{
                     'upload': '上傳',
-                    'maxFileSize': '文件大小不能超過 {}{}',
-                    'typesDisallowed': '文件類型不允許',
-                    'typesDisallowedDetail': '只允許 {} 類型的文件',
+                    'allowTypes': '只允許 {} 類型的文件',
+                    'disallowType': '文件類型不允許',
                     'cropModalTitle': '頭像裁剪',
+                    'maxFileSize': '文件大小不能超過 {}{}',
                 }}
             />
         </ProForm>
