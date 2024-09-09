@@ -44,7 +44,7 @@ export default () => {
                         {label: 'Center', value: 'center'},
                         {label: 'End', value: 'end'},
                         {label: 'Space-Between', value: 'space-between'},
-                        {label: 'Apace-Around', value: 'space-around'},
+                        {label: 'Space-Around', value: 'space-around'},
                         {label: 'Space-Evenly', value: 'space-evenly'},
                     ]}
                 />
