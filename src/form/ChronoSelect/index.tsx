@@ -24,9 +24,9 @@ import {useIntl} from '@ant-design/pro-provider';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {type WithFalse} from '@/type/declaration';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
-import {type WithFalse} from '@/type/declaration';
 import './index.less';
 
 

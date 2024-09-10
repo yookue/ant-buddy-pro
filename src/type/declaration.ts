@@ -25,6 +25,6 @@ export type BeforeAfterPos = 'before' | 'after';
 
 export type LabelValueType = 'label' | 'value';
 
-export type RequestOptionOrder = 'request-before' | 'request-after';
+export type RequestOptionPlace = 'before' | 'after' | 'override';
 
 export type RuleValidateScope = 'all' | 'required' | 'optional';

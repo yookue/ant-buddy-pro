@@ -25,9 +25,9 @@ import {StringUtils, NumberUtils} from '@yookue/ts-lang-utils';
 import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {type CircleSquareType, type FileSizeUint} from '@/type/declaration';
 import {FileUtils} from '@/util/FileUtils';
 import {NodeUtils} from '@/util/NodeUtils';
-import {type CircleSquareType, type FileSizeUint} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
 

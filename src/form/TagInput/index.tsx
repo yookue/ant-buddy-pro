@@ -20,26 +20,28 @@ import {ConfigProvider, Form, Input, Tag, type InputProps, type InputRef, type T
 import {FormContext} from 'antd/es/form/context';
 import {PlusOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
-import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
+import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {nanoid} from '@ant-design/pro-utils';
-import {ArrayUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {ArrayUtils, NumberUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import objectHash from 'object-hash';
 import omit from 'rc-util/es/omit';
 import warning from 'rc-util/es/warning';
 import {TweenOneGroup, type IGroupProps as TweenOneGroupProps} from 'rc-tween-one';
+import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
+import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
 
 export type TagInputRef = {
-    getTagContents: () => string[],
-    setTagContents: (contents?: string[] | null) => void,
-    addTagContent: (content?: string | null) => void,
-    removeTagContent: (content?: string | null) => void,
+    getTagContents: () => (string | number)[],
+    setTagContents: (contents?: (string | number)[] | null) => void,
+    addTagContent: (content?: string | number | null) => void,
+    removeTagContent: (content?: string | number | null) => void,
 };
 
 
@@ -64,11 +66,11 @@ export type TextTagProps = Omit<TagProps, 'children'> & {
      * @description.zh-CN Tag 的文本内容
      * @description.zh-TW Tag 的文本内容
      */
-    content?: string;
+    content?: string | number;
 };
 
 
-export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'> & {
+export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'> & Omit<ProFormFieldRemoteProps, 'valueEnum'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -96,14 +98,14 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
      * @description.zh-CN 已完成标签的属性或内容
      * @description.zh-TW 已完成標簽的屬性或內容
      */
-    fulfilTagItems?: (TextTagProps | string)[];
+    fulfilTagItems?: (TextTagProps | string | number)[];
 
     /**
      * @description The shared props of the fulfil tags
      * @description.zh-CN 已完成标签的通用属性
      * @description.zh-TW 已完成標簽的通用屬性
      */
-    fulfilTagShareProps?: Omit<TagProps, 'children'>;
+    fulfilTagProps?: Omit<TagProps, 'children'>;
 
     /**
      * @description Whether the tag is addable or not
@@ -158,6 +160,13 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
     performSubmit?: boolean;
 
     /**
+     * @description Whether to keep the `fulfilTagItems` data when using the `request` data
+     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `fulfilTagItems` 数据
+     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `fulfilTagItems` 數據
+     */
+    requestOptionPlace?: WithFalse<RequestOptionPlace>;
+
+    /**
      * @description Whether to use ProFormField instead of Antd
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
@@ -203,26 +212,46 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     const [inputName, setInputName] = React.useState<string>();
     const [inputValue, setInputValue] = React.useState<string>();
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
-    const [tagContents, setTagContents] = React.useState<string[]>(() => {
-        const result = [...new Set(props?.fulfilTagItems?.map(item => (typeof item === 'string') ? item : item?.content))] as string[];
-        warning(result.length === props?.fulfilTagItems?.length, `TagInput '${props?.name}' must includes unique contents`);
+
+    const [tagContents, setTagContents] = React.useState<(string | number)[]>(() => {
+        const result = [...new Set(props?.fulfilTagItems?.map(item => (typeof item === 'string' || typeof item === 'number') ? item : item?.content))] as string[];
+        warning(!props?.fulfilTagItems || (result.length === props?.fulfilTagItems?.length), `TagInput '${props?.name}' prop 'fulfilTagItems' must includes unique contents`);
         return result;
     });
+    if (props?.request && props?.requestOptionPlace !== false) {
+        FieldUtils.fetchRemoteRequest(props, values => {
+            if (!values) {
+                if (props?.requestOptionPlace === 'override') {
+                    setTagContents([]);
+                }
+                return;
+            }
+            const result = [...new Set(values.map(item => item.value))] as string[];
+            warning(result.length === values.length, `TagInput '${props?.name}' prop 'request' must includes unique response`);
+            if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
+                setTagContents(result);
+            } else if (props?.requestOptionPlace === 'before') {
+                setTagContents([...result, ...tagContents]);
+            } else if (props?.requestOptionPlace === 'after') {
+                setTagContents([...tagContents, ...result]);
+            }
+        }, []);
+    }
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
         getTagContents: () => {
             return tagContents;
         },
-        setTagContents: (contents?: string[] | null) => {
+        setTagContents: (contents?: (string | number)[] | null) => {
             setTagContents([...new Set(contents)]);
         },
-        addTagContent: (content?: string | null) => {
+        addTagContent: (content?: string | number | null) => {
             if (!ArrayUtils.includes(tagContents, content)) {
                 setTagContents(ArrayUtils.add(tagContents, content) ?? []);
             }
         },
-        removeTagContent: (content?: string | null) => {
+        removeTagContent: (content?: string | number | null) => {
             if (ArrayUtils.includes(tagContents, content)) {
                 setTagContents(ArrayUtils.remove(tagContents, content) ?? []);
             }
@@ -232,6 +261,12 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     React.useEffect(() => {
         setInputName(inputVisible ? (formContext?.name ? `${formContext.name}_${entryId}` : entryId) : undefined);
     }, [inputVisible]);
+
+    React.useEffect(() => {
+        if (props?.name && formContext?.form) {
+            formContext.form.setFieldValue(props.name, (props?.performSubmit ? tagContents : undefined));
+        }
+    }, [tagContents]);
 
     const buildTweenOneProps = () => {
         return props?.tweenOneProps ?? {
@@ -261,20 +296,17 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
             const handleClose = () => {
                 const contents = tagContents.filter(item => item !== content);
                 setTagContents(contents);
-                if (props?.name && props?.performSubmit && formContext?.form) {
-                    formContext.form.setFieldValue(props.name, contents);
-                }
             };
-            const origin = props?.fulfilTagItems?.find(item => (typeof item === 'string') ? item === content : item.content === content);
-            const omitShareProps = !props?.fulfilTagShareProps ? {} : omit(props.fulfilTagShareProps, ['className', 'onClose']);
-            if (!origin || typeof origin === 'string') {
+            const origin = props?.fulfilTagItems?.find(item => (typeof item === 'string' || typeof item === 'number') ? item === content : item.content === content);
+            const omitShareProps = !props?.fulfilTagProps ? {} : omit(props.fulfilTagProps, ['className', 'onClose']);
+            if (!origin || typeof origin === 'string' || typeof origin === 'number') {
                 return (
                     <span key={`${index}_${objectHash(content)}`} className={`${clazzPrefix}-fulfil-span`}>
                         <Tag
-                            className={classNames(`${clazzPrefix}-fulfil-tag`, props?.fulfilTagShareProps?.className)}
+                            className={classNames(`${clazzPrefix}-fulfil-tag`, props?.fulfilTagProps?.className)}
                             onClose={event => {
-                                if (props?.fulfilTagShareProps?.onClose) {
-                                    props.fulfilTagShareProps.onClose(event);
+                                if (props?.fulfilTagProps?.onClose) {
+                                    props.fulfilTagProps.onClose(event);
                                 }
                                 if (!event.isDefaultPrevented()) {
                                     handleClose();
@@ -292,13 +324,13 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
             return (
                 <span key={`${index}_${objectHash(content)}`} className={`${clazzPrefix}-fulfil-span`}>
                     <Tag
-                        className={classNames(`${clazzPrefix}-fulfil-tag`, origin.className, props?.fulfilTagShareProps?.className)}
+                        className={classNames(`${clazzPrefix}-fulfil-tag`, origin.className, props?.fulfilTagProps?.className)}
                         onClose={event => {
                             if (origin.onClose) {
                                 origin.onClose(event);
                             }
-                            if (props?.fulfilTagShareProps?.onClose) {
-                                props.fulfilTagShareProps.onClose(event);
+                            if (props?.fulfilTagProps?.onClose) {
+                                props.fulfilTagProps.onClose(event);
                             }
                             if (!event.isDefaultPrevented()) {
                                 handleClose();
@@ -335,12 +367,10 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
             }
         }
         if (inputValue) {
-            if (tagContents?.indexOf(inputValue) === -1) {
+            const valueInteger = NumberUtils.toInteger(inputValue);
+            if (tagContents?.indexOf(inputValue) === -1 && (valueInteger === undefined || tagContents?.indexOf(valueInteger) === -1)) {
                 const contents = [...tagContents, inputValue];
                 setTagContents(contents);
-                if (props?.name && props?.performSubmit && formContext?.form) {
-                    formContext.form.setFieldValue(props.name, contents);
-                }
             } else {
                 if (warnDuplicate && !proField) {
                     messageApi.warn(props?.localeProps?.duplicateTag || intlLocales.get([intlType.locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
@@ -404,7 +434,8 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                                         if (!value) {
                                             return undefined;
                                         }
-                                        if (tagContents?.indexOf(value) === -1) {
+                                        const valueInteger = NumberUtils.toInteger(value);
+                                        if (tagContents?.indexOf(value) === -1 && (valueInteger === undefined || tagContents?.indexOf(valueInteger) === -1)) {
                                             return Promise.resolve();
                                         }
                                         return Promise.reject(props?.localeProps?.duplicateTag || intlLocales.get([intlType.locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));

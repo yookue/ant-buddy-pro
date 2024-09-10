@@ -27,9 +27,9 @@ import {If} from '@yookue/react-condition';
 import {BooleanUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {type WithFalse, type BeforeAfterPos, type RuleValidateScope} from '@/type/declaration';
 import {ElementUtils} from '@/util/ElementUtils';
 import {PropsUtils} from '@/util/PropsUtils';
-import {type WithFalse, type BeforeAfterPos, type RuleValidateScope} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
 

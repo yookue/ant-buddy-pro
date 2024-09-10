@@ -23,9 +23,9 @@ import {If} from '@yookue/react-condition';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {type WithFalse, type LabelValueType, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
-import {type WithFalse, type LabelValueType, type RequestOptionOrder} from '@/type/declaration';
 import './index.less';
 
 
@@ -118,7 +118,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
      * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
      */
-    requestOptionOrder?: WithFalse<RequestOptionOrder>;
+    requestOptionPlace?: WithFalse<RequestOptionPlace>;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -196,7 +196,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestOptionOrder', 'proField', 'presetStyle']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestOptionPlace', 'proField', 'presetStyle']);
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
 
         return (
@@ -222,10 +222,22 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     } else {
         // noinspection DuplicatedCode
         const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
-        if (props?.request) {
-            FieldUtils.fetchFieldRequestData(props, values => {
-                setOptionItems(!props?.requestOptionOrder ? values : ((props.requestOptionOrder === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
-            });
+        if (props?.request && props?.requestOptionPlace !== false) {
+            FieldUtils.fetchRemoteRequest(props, values => {
+                if (!values) {
+                    if (props?.requestOptionPlace === 'override') {
+                        setOptionItems([]);
+                    }
+                    return;
+                }
+                if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
+                    setOptionItems(values);
+                } else if (props?.requestOptionPlace === 'before') {
+                    setOptionItems([...values, ...optionItems]);
+                } else if (props?.requestOptionPlace === 'after') {
+                    setOptionItems([...optionItems, ...values]);
+                }
+            }, []);
         }
 
         const rebuildOptions = () => {

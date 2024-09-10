@@ -132,9 +132,18 @@ export default () => {
                         content: 'world',
                     }
                 ]}
-                fulfilTagShareProps={{
+                fulfilTagProps={{
                     closable: removable,
                 }}
+                request={async () => [
+                    {
+                        value: 'request',
+                    },
+                    {
+                        value: new Date().getFullYear(),
+                    }
+                ]}
+                requestOptionPlace='after'
                 addingInputProps={{
                     placeholder: 'Tag',
                     rules: [{

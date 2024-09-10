@@ -21,8 +21,8 @@ import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import CssMotion from 'rc-motion';
-import {NodeUtils} from '@/util/NodeUtils';
 import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
+import {NodeUtils} from '@/util/NodeUtils';
 import './index.less';
 
 

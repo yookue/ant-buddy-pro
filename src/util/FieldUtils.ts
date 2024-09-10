@@ -18,7 +18,7 @@
 import React from 'react';
 import {type LabeledValue} from 'antd/es/select';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
-import {useDebounceFn} from '@ant-design/pro-utils';
+import {type RequestOptionsType, useDebounceFn} from '@ant-design/pro-utils';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 
 
@@ -29,6 +29,25 @@ import {ObjectUtils} from '@yookue/ts-lang-utils';
  */
 // noinspection JSUnusedGlobalSymbols
 export abstract class FieldUtils {
+    /**
+     * Fetches the request data with the given field, with debounce capable
+     *
+     * @param props the properties object to inspect
+     * @param callback the function to execute
+     * @param deps the dependencies for effect
+     */
+    public static fetchRemoteRequest = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps, callback?: ((values?: RequestOptionsType[]) => void), deps?: React.DependencyList): void => {
+        if (!props || !props?.request || !callback) {
+            return;
+        }
+        const {run: requestFn} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        React.useEffect(() => {
+            requestFn(props?.params).then(resolve => {
+                callback(resolve);
+            });
+        }, deps);
+    }
+
     /**
      * Returns the built array of Ant ProComponents LabeledValue, with locale data
      *
@@ -44,24 +63,6 @@ export abstract class FieldUtils {
             return props.fieldProps.options;
         }
         return ObjectUtils.isEmpty(props?.valueEnum) ? undefined : this.propsToLabeledValues(props.valueEnum);
-    }
-
-    /**
-     * Fetches the request data with the given field, with debounce capable
-     *
-     * @param props the properties object to inspect
-     * @param callback the function to execute
-     */
-    public static fetchFieldRequestData = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps, callback?: ((values?: any) => void)): void => {
-        if (!props || !props?.request || !callback) {
-            return;
-        }
-        const {run: requestData} = useDebounceFn(props.request, props?.debounceTime ?? 0);
-        React.useEffect(() => {
-            requestData(props?.params).then(resolve => {
-                callback(resolve);
-            });
-        }, [props.request]);
     }
 
     /**

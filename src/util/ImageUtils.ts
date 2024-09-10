@@ -40,11 +40,7 @@ export abstract class ImageUtils {
         if (typeof param === 'function') {
             return this.detectSource(param(), callback);
         }
-        if (typeof param === 'object' && Object.prototype.toString.call(param) === '[object Promise]') {
-            if (!callback) {
-                console.warn(`The argument 'param' is a Promise object, but has none matching argument 'callback'`);
-                return undefined;
-            }
+        if (typeof param === 'object' && Object.prototype.toString.call(param) === '[object Promise]' && !!callback) {
             (param as Promise<string | undefined>).then(data => callback(data));
         }
         return undefined;

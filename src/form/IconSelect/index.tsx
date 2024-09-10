@@ -36,10 +36,10 @@ import omit from 'rc-util/es/omit';
 import warning from 'rc-util/es/warning';
 import {allIconTypes, type IconSceneType} from '@/type/antd-icons';
 import {MenuTabs} from '@/layout/MenuTabs';
+import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ElementUtils} from '@/util/ElementUtils';
 import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
-import {type WithFalse, type RequestOptionOrder} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -150,7 +150,7 @@ export type IconSelectProps = ProFormSelectProps & {
      * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
      * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
      */
-    requestOptionOrder?: WithFalse<RequestOptionOrder>;
+    requestOptionPlace?: WithFalse<RequestOptionPlace>;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -680,17 +680,29 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     // noinspection DuplicatedCode
     const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
-    if (props?.request) {
-        FieldUtils.fetchFieldRequestData(props, values => {
-            setOptionItems(!props?.requestOptionOrder ? values : ((props.requestOptionOrder === 'request-before') ? [...values, ...optionItems] : [...optionItems, ...values]));
-        });
+    if (props?.request && props?.requestOptionPlace !== false) {
+        FieldUtils.fetchRemoteRequest(props, values => {
+            if (!values) {
+                if (props?.requestOptionPlace === 'override') {
+                    setOptionItems([]);
+                }
+                return;
+            }
+            if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
+                setOptionItems(values);
+            } else if (props?.requestOptionPlace === 'before') {
+                setOptionItems([...values, ...optionItems]);
+            } else if (props?.requestOptionPlace === 'after') {
+                setOptionItems([...optionItems, ...values]);
+            }
+        }, []);
     }
 
     const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestOptionOrder', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestOptionPlace', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
         return (
             <ProFormSelect
                 {...restProps}

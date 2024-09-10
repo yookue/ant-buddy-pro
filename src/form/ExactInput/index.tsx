@@ -23,8 +23,8 @@ import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {PropsUtils} from '@/util/PropsUtils';
 import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
+import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
