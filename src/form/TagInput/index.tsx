@@ -394,7 +394,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             return undefined;
         }
         if (inputVisible) {
-            const omitFieldProps = !props?.addingInputProps?.fieldProps ? {} : omit(props.addingInputProps.fieldProps, ['className', 'size', 'style', 'onChange', 'onPressEnter', 'onBlur']);
+            const omitFieldProps = !props?.addingInputProps?.fieldProps ? {} : omit(props.addingInputProps.fieldProps, ['className', 'size', 'onChange', 'onPressEnter', 'onBlur']);
             if (proField) {
                 const restProps = !props?.addingInputProps ? {} : omit(props.addingInputProps, ['fieldProps', 'rules']);
                 return (
@@ -409,7 +409,6 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                 value: inputValue,
                                 ...omitFieldProps,
                                 size: props?.addingInputProps?.fieldProps?.size ?? 'small',
-                                style: props?.addingInputProps?.fieldProps?.style ?? {width: '100px'},
                                 onChange: (event) => {
                                     props?.addingInputProps?.fieldProps?.onChange?.(event);
                                     if (!event.isDefaultPrevented()) {
@@ -460,7 +459,6 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                             {...restProps}
                             {...omitFieldProps}
                             size={props?.addingInputProps?.fieldProps?.size ?? 'small'}
-                            style={props?.addingInputProps?.fieldProps?.style ?? {width: '80px'}}
                             onChange={event => {
                                 props?.addingInputProps?.fieldProps?.onChange?.(event);
                                 if (!event.isDefaultPrevented()) {
