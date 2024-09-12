@@ -78,6 +78,7 @@ export default () => {
                 <TagInput
                     fieldRef={tagInputRef}
                     name='foobar'
+                    valuePropName='fulfilTagItems'
                     readonly={readonly}
                     tweenOneAnim={tweenOneAnim}
                     fulfilTagItems={[

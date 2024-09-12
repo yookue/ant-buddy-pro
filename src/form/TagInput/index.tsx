@@ -106,14 +106,14 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
      * @description.zh-CN 远程数据请求
      * @description.zh-TW 遠程數據請求
      */
-    request?: (params: any, props: any) => Promise<(TextTagProps | string | number)[]>;
+    request?: (params: any, props: any) => Promise<(string | number | TextTagProps)[]>;
 
     /**
      * @description The props or content of the fulfil tags
      * @description.zh-CN 已完成标签的属性或内容
      * @description.zh-TW 已完成標簽的屬性或內容
      */
-    fulfilTagItems?: (TextTagProps | string | number)[];
+    fulfilTagItems?: (string | number | TextTagProps)[];
 
     /**
      * @description The shared props of the fulfil tags
@@ -225,7 +225,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         return result;
     });
     if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, (values?: (TextTagProps | string | number)[]) => {
+        FieldUtils.fetchRemoteRequest(props, (values?: (string | number | TextTagProps)[]) => {
             if (!values) {
                 if (props?.requestOptionPlace === 'override') {
                     setTagContents(undefined);
