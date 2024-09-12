@@ -387,8 +387,10 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         setInputValue(undefined);
     };
 
+    const entryImmutable = props?.readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+
     const buildActionDom = () => {
-        if (props?.readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
+        if (entryImmutable) {
             return undefined;
         }
         if (inputVisible) {
@@ -505,7 +507,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     return (
         <div
             ref={(div) => fieldRef.current = div ?? undefined}
-            className={classNames(clazzPrefix, ((proField && !props?.readonly) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildFulfilDom()}
