@@ -119,7 +119,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef'> & {
+export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -172,12 +172,12 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     shape?: CircleSquareShape;
 
     /**
-     * @description Whether to enable crop or not
-     * @description.zh-CN 是否启用裁剪
-     * @description.zh-TW 是否啟用裁剪
+     * @description Whether to crop image or not
+     * @description.zh-CN 是否裁剪图片
+     * @description.zh-TW 是否裁剪圖片
      * @default true
      */
-    cropEnabled?: boolean;
+    cropImage?: boolean;
 
     /**
      * @description The crop props for the component
@@ -199,13 +199,6 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
      * @description.zh-TW 頭像屬性
      */
     imageProps?: Omit<ImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
-
-    /**
-     * @description Whether to enable upload or not
-     * @description.zh-CN 是否启用上传
-     * @description.zh-TW 是否啟用上傳
-     */
-    uploadEnabled?: boolean;
 
     /**
      * @description The upload props for the component
@@ -270,7 +263,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     // Initialize the default props
     const {
         shape = 'circle',
-        cropEnabled = true,
+        cropImage = true,
         tooltipCtrl = false,
     } = props ?? {};
 
@@ -433,7 +426,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     };
 
     const buildAvatarDom = () => {
-        if (!props?.uploadEnabled || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
+        if (props?.readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
             const omitAvatarProps = !props?.avatarProps ? {} : omit(props.avatarProps, ['className', 'size', 'icon']);
             return (
                 <Avatar
@@ -461,7 +454,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
                 {imageSrc ? buildImageDom() : buildUploadPlaceholder()}
             </Upload>
         );
-        if (!cropEnabled) {
+        if (!cropImage) {
             return uploadDom;
         }
         const omitCropProps = !props?.cropProps ? {} : omit(props.cropProps, ['modalClassName', 'modalTitle', 'rotationSlider']);

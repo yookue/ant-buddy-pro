@@ -25,8 +25,8 @@ import {AvatarUpload, ConsoleUtils, type AvatarUploadRef, type CircleSquareShape
 export default () => {
     const avatarUploadRef = React.useRef<AvatarUploadRef>(null);
     const [shape, setShape] = React.useState<CircleSquareShape>('circle');
-    const [uploadEnabled, setUploadEnabled] = React.useState<boolean>(false);
-    const [cropEnabled, setCropEnabled] = React.useState<boolean>(true);
+    const [readonly, setReadonly] = React.useState<boolean>(true);
+    const [cropImage, setCropImage] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
@@ -59,25 +59,25 @@ export default () => {
                 </ProForm.Group>
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='啟用上傳'
+                        label='只讀'
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
-                            checked: uploadEnabled,
+                            checked: readonly,
                             onChange: (value) => {
-                                setUploadEnabled(value);
+                                setReadonly(value);
                             }
                         }}
                     />
                     <ProFormSwitch
-                        label='啟用裁剪'
+                        label='裁剪圖片'
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
-                            checked: cropEnabled,
-                            disabled: !uploadEnabled,
+                            checked: cropImage,
+                            disabled: readonly,
                             onChange: (value) => {
-                                setCropEnabled(value);
+                                setCropImage(value);
                             }
                         }}
                     />
@@ -111,9 +111,9 @@ export default () => {
                 <AvatarUpload
                     fieldRef={avatarUploadRef}
                     name='avatar'
-                    shape={shape}
                     valuePropName='imageSrc'
-                    uploadEnabled={uploadEnabled}
+                    readonly={readonly}
+                    shape={shape}
                     uploadProps={{
                         allowedFileTypes: [
                             'image/jpeg',
@@ -123,7 +123,7 @@ export default () => {
                         maxFileSize: 1,
                         fileSizeUint: 'MB',
                     }}
-                    cropEnabled={cropEnabled}
+                    cropImage={cropImage}
                     cropProps={{
                         minZoom: 0.8,
                         modalOk: '確定',

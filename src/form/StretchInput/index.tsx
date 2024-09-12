@@ -72,6 +72,13 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 是否使用 ProFormField 控件
      */
     proField?: boolean;
+
+    /**
+     * @description The callback function when stretch changed
+     * @description.zh-CN 拉伸状态变化时的回调函数
+     * @description.zh-TW 拉伸狀態變化時的回調函數
+     */
+    onStretchChange?: (stretch?: boolean) => void;
 };
 
 
@@ -111,6 +118,10 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
             document.removeEventListener('mousedown', ensureStretch);
         }
     }, []);
+
+    React.useEffect(() => {
+        props?.onStretchChange?.(stretchMe);
+    }, [stretchMe]);
 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setStretchMe(true);

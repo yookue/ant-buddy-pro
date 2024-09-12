@@ -71,7 +71,7 @@ export type TextTagProps = Omit<TagProps, 'children'> & {
 };
 
 
-export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
+export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -123,13 +123,6 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
     fulfilTagProps?: Omit<TagProps, 'children'>;
 
     /**
-     * @description Whether the tag is addable or not
-     * @description.zh-CN 是否可以添加标签
-     * @description.zh-TW 是否可以添加標簽
-     */
-    addable?: boolean;
-
-    /**
      * @description The props of the adding input
      * @description.zh-CN 添加标签的文本框的属性
      * @description.zh-TW 添加標簽的文本框的屬性
@@ -149,7 +142,7 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
      * @description.zh-TW 是否啟用 tween-one 動畫
      * @default true
      */
-    tweenOneEnabled?: boolean;
+    tweenOneAnim?: boolean;
 
     /**
      * @description The props of the tween-one animation
@@ -215,7 +208,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
 
     // Initialize the default props
     const {
-        tweenOneEnabled = true,
+        tweenOneAnim = true,
         warnDuplicate = true,
         proField = true,
     } = props ?? {};
@@ -356,7 +349,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 </span>
             );
         });
-        const wrapDom = !tweenOneEnabled ? tagsDom : (
+        const wrapDom = !tweenOneAnim ? tagsDom : (
             <TweenOneGroup {...buildTweenOneProps()}>
                 {tagsDom}
             </TweenOneGroup>
@@ -395,7 +388,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     };
 
     const buildActionDom = () => {
-        if (!props?.addable || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
+        if (props?.readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
             return undefined;
         }
         if (inputVisible) {
@@ -512,7 +505,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     return (
         <div
             ref={(div) => fieldRef.current = div ?? undefined}
-            className={classNames(clazzPrefix, ((proField && props?.addable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, ((proField && !props?.readonly) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildFulfilDom()}

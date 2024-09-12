@@ -24,9 +24,8 @@ import {TagInput, ConsoleUtils, type TagInputRef} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const tagInputRef = React.useRef<TagInputRef>(null);
-    const [addable, setAddable] = React.useState<boolean>(false);
-    const [removable, setRemovable] = React.useState<boolean>(false);
-    const [tweenOneEnabled, setTweenOneEnabled] = React.useState<boolean>(true);
+    const [readonly, setReadonly] = React.useState<boolean>(true);
+    const [tweenOneAnim, setTweenOneAnim] = React.useState<boolean>(true);
 
     return (
         <>
@@ -38,36 +37,25 @@ export default () => {
             >
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='Addable'
+                        label='Readonly'
                         checkedChildren='True'
                         unCheckedChildren='False'
                         fieldProps={{
-                            checked: addable,
+                            checked: readonly,
                             onChange: (value) => {
-                                setAddable(value);
+                                setReadonly(value);
                             }
                         }}
                     />
                     <ProFormSwitch
-                        label='Removable'
+                        label='TweenOne Animation'
                         checkedChildren='True'
                         unCheckedChildren='False'
                         fieldProps={{
-                            checked: removable,
+                            checked: tweenOneAnim,
+                            disabled: readonly,
                             onChange: (value) => {
-                                setRemovable(value);
-                            }
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='TweenOne Enabled'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: tweenOneEnabled,
-                            disabled: !removable,
-                            onChange: (value) => {
-                                setTweenOneEnabled(value);
+                                setTweenOneAnim(value);
                             }
                         }}
                     />
@@ -90,8 +78,8 @@ export default () => {
                 <TagInput
                     fieldRef={tagInputRef}
                     name='foobar'
-                    addable={addable}
-                    tweenOneEnabled={tweenOneEnabled}
+                    readonly={readonly}
+                    tweenOneAnim={tweenOneAnim}
                     fulfilTagItems={[
                         {
                             color: 'volcano',
@@ -111,7 +99,7 @@ export default () => {
                         }
                     ]}
                     fulfilTagProps={{
-                        closable: removable,
+                        closable: !readonly,
                     }}
                     request={async () => {
                         return [
