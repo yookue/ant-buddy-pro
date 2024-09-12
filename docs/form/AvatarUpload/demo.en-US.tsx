@@ -23,11 +23,11 @@ import {AvatarUpload, ConsoleUtils, type AvatarUploadRef, type CircleSquareShape
 
 
 export default () => {
+    const avatarUploadRef = React.useRef<AvatarUploadRef>(null);
     const [shape, setShape] = React.useState<CircleSquareShape>('circle');
     const [uploadEnabled, setUploadEnabled] = React.useState<boolean>(false);
     const [cropEnabled, setCropEnabled] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
-    const avatarUploadRef = React.useRef<AvatarUploadRef>(null);
 
     return (
         <>
