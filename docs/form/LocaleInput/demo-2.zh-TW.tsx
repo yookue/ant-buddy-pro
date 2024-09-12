@@ -23,46 +23,49 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            layout='horizontal'
-            autoFocusFirstInput={false}
-            submitter={{
-                searchConfig: {
-                    submitText: '提交',
-                    resetText: '重置',
-                }
-            }}
-            onFinish={async () => {
-                messageApi.success('您點擊了提交按鈕');
-            }}
-        >
-            <LocaleInput
-                name='foobar'
-                placeholder='示例字段-無校驗'
-                popupInputProps={[
-                    {
-                        tag: 'en-US',
-                        placeholder: '示例字段-英文',
-                        allowClear: true,
-                    },
-                    {
-                        tag: 'zh-CN',
-                        placeholder: '示例字段-簡體中文',
-                        allowClear: true,
-                    },
-                    {
-                        tag: 'zh-TW',
-                        placeholder: '示例字段-繁體中文',
-                        allowClear: true,
+        <>
+            <ProForm
+                name='LocaleInput_demo2'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: '提交',
+                        resetText: '重置',
                     }
-                ]}
-                popupProField={false}
-                popupConfirmProps={{
-                    message: '設為默認嗎？',
-                    ok: '是',
-                    cancel: '否',
                 }}
-            />
-        </ProForm>
+                onFinish={async () => {
+                    messageApi.success('您點擊了提交按鈕');
+                }}
+            >
+                <LocaleInput
+                    name='foobar'
+                    placeholder='示例字段-無校驗'
+                    popupInputProps={[
+                        {
+                            tag: 'en-US',
+                            placeholder: '示例字段-英文',
+                            allowClear: true,
+                        },
+                        {
+                            tag: 'zh-CN',
+                            placeholder: '示例字段-簡體中文',
+                            allowClear: true,
+                        },
+                        {
+                            tag: 'zh-TW',
+                            placeholder: '示例字段-繁體中文',
+                            allowClear: true,
+                        }
+                    ]}
+                    popupProField={false}
+                    popupConfirmProps={{
+                        message: '設為默認嗎？',
+                        ok: '是',
+                        cancel: '否',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

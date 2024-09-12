@@ -23,39 +23,42 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            layout='horizontal'
-            autoFocusFirstInput={false}
-            submitter={{
-                searchConfig: {
-                    submitText: '提交',
-                    resetText: '重置',
-                }
-            }}
-            onFinish={async () => {
-                messageApi.success('您點擊了提交按鈕');
-            }}
-        >
-            <LocaleInput
-                name='foobar'
-                placeholder='示例字段-無校驗'
-                disabled
-                popupTagPos='after'
-                popupQuickTags={[
-                    'en-US',
-                    'zh-CN',
-                    'zh-TW',
-                ]}
-                popupProField={false}
-                popupShareProps={{
-                    placeholder: '請輸入此字段',
+        <>
+            <ProForm
+                name='LocaleInput_demo4'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: '提交',
+                        resetText: '重置',
+                    }
                 }}
-                popupConfirmProps={{
-                    message: '設為默認嗎？',
-                    ok: '是',
-                    cancel: '否',
+                onFinish={async () => {
+                    messageApi.success('您點擊了提交按鈕');
                 }}
-            />
-        </ProForm>
+            >
+                <LocaleInput
+                    name='foobar'
+                    placeholder='示例字段-無校驗'
+                    disabled
+                    popupTagPos='after'
+                    popupQuickTags={[
+                        'en-US',
+                        'zh-CN',
+                        'zh-TW',
+                    ]}
+                    popupProField={false}
+                    popupShareProps={{
+                        placeholder: '請輸入此字段',
+                    }}
+                    popupConfirmProps={{
+                        message: '設為默認嗎？',
+                        ok: '是',
+                        cancel: '否',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

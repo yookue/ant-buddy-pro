@@ -39,7 +39,9 @@ export abstract class IconUtils {
      * @returns the icon that first matches the given icon name with theme types and icon types
      *
      * @example
+     * ```ts
      * React.createElement(IconUtils.findIcon('SettingOutlined'));
+     * ```
      */
     public static findIcon(iconName?: string, themeTypes?: ThemeType[], sceneTypes?: iconTypes.IconSceneType[]): React.ComponentType<any> | undefined {
         const icons = this.findIcons(iconName, themeTypes, sceneTypes);

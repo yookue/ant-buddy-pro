@@ -41,8 +41,8 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
 
     /**
      * @description The fallback source of the image
-     * @description.zh-CN 图片出错后的备用源
-     * @description.zh-TW 圖片出錯後的備用源
+     * @description.zh-CN 备用图片源
+     * @description.zh-TW 備用圖片源
      */
     fallback?: string | (() => string | undefined);
 };

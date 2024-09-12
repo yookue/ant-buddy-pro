@@ -25,44 +25,51 @@ export default () => {
     const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
 
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProForm.Group>
-                <ProFormSwitch
-                    label='匹配宽度'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: widthBlock,
-                        onChange: (value) => {
-                            setWidthBlock(value);
+        <>
+            <ProForm
+                name='ChronoTuple_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='匹配宽度'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: widthBlock,
+                            onChange: (value) => {
+                                setWidthBlock(value);
+                            }
+                        }}
+                    />
+                </ProForm.Group>
+                <Divider/>
+                <ChronoTuple
+                    digitProps={{
+                        name: 'durationAmount',
+                        label: '时间间隔',
+                        placeholder: '数值',
+                    }}
+                    selectProps={{
+                        name: 'durationUnit',
+                        placeholder: '单位',
+                        localeProps: {
+                            millis: '毫秒',
+                            seconds: '秒',
+                            minutes: '分',
+                            hours: '小时',
+                            days: '天',
+                            weeks: '周',
+                            months: '月',
+                            years: '年',
+                            forever: '永久',
                         }
                     }}
+                    widthBlock={widthBlock}
                 />
-            </ProForm.Group>
-            <Divider/>
-            <ChronoTuple
-                digitProps={{
-                    name: 'durationAmount',
-                    label: '时间间隔',
-                    placeholder: '数值',
-                }}
-                selectProps={{
-                    name: 'durationUnit',
-                    placeholder: '单位',
-                    localeProps: {
-                        millis: '毫秒',
-                        seconds: '秒',
-                        minutes: '分',
-                        hours: '小时',
-                        days: '天',
-                        weeks: '周',
-                        months: '月',
-                        years: '年',
-                        forever: '永久',
-                    }
-                }}
-                widthBlock={widthBlock}
-            />
-        </ProForm>
+            </ProForm>
+        </>
     );
 }

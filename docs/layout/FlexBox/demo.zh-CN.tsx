@@ -28,7 +28,12 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
+            <ProForm
+                name='FlexBox_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ProFormRadio.Group
                     label='主轴空间'
                     radioType='button'

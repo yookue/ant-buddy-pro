@@ -19,6 +19,7 @@ import {ConfigProvider, Segmented, type SegmentedProps} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {type RequestOptionsType} from '@ant-design/pro-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
@@ -74,7 +75,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     // noinspection DuplicatedCode
     const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
     if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, values => {
+        FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
             if (!values) {
                 if (props?.requestOptionPlace === 'override') {
                     setOptionItems([]);
@@ -91,7 +92,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
         }, []);
     }
 
-    const entryImmutable = props?.fieldProps?.disabled || (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read');
+    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
     const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options', 'disabled']);
 
     if (proField) {

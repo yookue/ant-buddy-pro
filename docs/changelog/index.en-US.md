@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.100** [2024-09-12]
+    - Add 'util/ConsoleUtils'
+
   - **v0.1.94** [2024-08-31]
     - Add 'form/TagInput'
 

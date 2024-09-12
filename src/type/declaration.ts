@@ -17,7 +17,7 @@
 
 export type WithFalse<T> = T | false;
 
-export type CircleSquareType = 'circle' | 'square';
+export type CircleSquareShape = 'circle' | 'square';
 
 export type FileSizeUint = 'KB' | 'MB' | 'GB';
 

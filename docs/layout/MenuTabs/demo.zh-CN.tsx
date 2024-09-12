@@ -29,7 +29,12 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
+            <ProForm
+                name='MenuTabs_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ProForm.Group>
                     <ProFormSwitch
                         label='菜单主题'

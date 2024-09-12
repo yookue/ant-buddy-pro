@@ -28,7 +28,12 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
+            <ProForm
+                name='SegmentTitle_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ProFormRadio.Group
                     label='装饰物位置'
                     radioType='button'

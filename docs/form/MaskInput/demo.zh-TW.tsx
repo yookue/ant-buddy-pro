@@ -22,17 +22,24 @@ import {MaskInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <MaskInput
-                name='foobar'
-                placeholder='請輸入此項'
-                fieldProps={{
-                    addonBefore: '數字或字母',
-                }}
-                patterns={[
-                    /^[a-zA-Z0-9]+$/,
-                ]}
-            />
-        </ProForm>
+        <>
+            <ProForm
+                name='MaskInput_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <MaskInput
+                    name='foobar'
+                    placeholder='請輸入此項'
+                    fieldProps={{
+                        addonBefore: '數字或字母',
+                    }}
+                    patterns={[
+                        /^[a-zA-Z0-9]+$/,
+                    ]}
+                />
+            </ProForm>
+        </>
     );
 }

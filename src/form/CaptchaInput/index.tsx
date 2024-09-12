@@ -17,18 +17,21 @@
 
 import React from 'react';
 import {ConfigProvider, Form, Input, Button} from 'antd';
-import {type CaptFieldRef, type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
+import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import warning from 'rc-util/es/warning';
+import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
 
-export type CaptchaInputRef = CaptFieldRef & {
+export type CaptchaInputRef = {
+    isLoading: boolean;
     isTiming: () => boolean;
+    startTimer: () => void;
+    endTimer: () => void;
 };
 
 
@@ -49,7 +52,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
+export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'fieldRef' | 'onGetCaptcha'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -71,6 +74,13 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'onGetCaptcha'> & {
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
+
+    /**
+     * @description The ref of the component
+     * @description.zh-CN 组件的 ref 句柄
+     * @description.zh-TW 組件的 ref 句柄
+     */
+    fieldRef?: React.Ref<CaptchaInputRef | null | undefined>;
 
     /**
      * @description The timer interval, in milliseconds
@@ -132,7 +142,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const intlType = useIntl();
 
     const formInstance = Form.useFormInstance();
-    warning(!!formInstance, `CaptchaInput '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formInstance, true, 'CaptchaInput', `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -145,8 +155,8 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         timerInterval = 1000,
     } = props ?? {};
 
-    warning(countDown > 0, `CaptchaInput '${props?.name}' prop 'countDown' must be greater than 0`);
-    warning(timerInterval > 0, `CaptchaInput '${props?.name}' prop 'timerInterval' must be greater than 0`);
+    ConsoleUtils.warn(countDown > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'countDown' must be greater than 0`);
+    ConsoleUtils.warn(timerInterval > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'timerInterval' must be greater than 0`);
 
     const fieldRef = React.useRef<HTMLDivElement>();
     const [count, setCount] = React.useState<number>(countDown);
@@ -161,10 +171,10 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         isTiming: () => {
             return timing;
         },
-        startTiming: () => {
+        startTimer: () => {
             validatePhoneName().then(() => setTiming(true)).catch(() => {});
         },
-        endTiming: () => {
+        endTimer: () => {
             setTiming(false);
         }
     }));
@@ -173,17 +183,13 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         let interval = 0;
         const seconds = countDown;
         if (timing) {
-            if (props?.onTimerBegin) {
-                props.onTimerBegin();
-            }
+            props?.onTimerBegin?.();
             interval = window.setInterval(() => {
                 setCount((previous) => {
                     if (previous <= 1) {
                         setTiming(false);
                         window.clearInterval(interval);
-                        if (props?.onTimerEnd) {
-                            props.onTimerEnd();
-                        }
+                        props?.onTimerEnd?.();
                         return seconds ?? 59;
                     }
                     return previous - 1;
@@ -194,8 +200,8 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     }, [timing]);
 
     React.useEffect(() => {
-        if (timing && props?.onTimer) {
-            props.onTimer(count);
+        if (timing) {
+            props?.onTimer?.(count);
         }
     }, [timing, count]);
 
@@ -252,4 +258,5 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
 });
 
 
+// @ts-ignore
 export const CaptchaInput = createField(CaptchaInputField) as typeof CaptchaInputField;

@@ -16,11 +16,12 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi} from 'antd';
+import {ConfigProvider, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {PlusOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
 import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
+import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {nanoid} from '@ant-design/pro-utils';
@@ -28,9 +29,9 @@ import {ArrayUtils, NumberUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import objectHash from 'object-hash';
 import omit from 'rc-util/es/omit';
-import warning from 'rc-util/es/warning';
 import {TweenOneGroup, type IGroupProps as TweenOneGroupProps} from 'rc-tween-one';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
+import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
@@ -38,7 +39,7 @@ import './index.less';
 
 
 export type TagInputRef = {
-    getTagContents: () => (string | number)[],
+    getTagContents: () => (string | number)[] | undefined,
     setTagContents: (contents?: (string | number)[] | null) => void,
     addTagContent: (content?: string | number | null) => void,
     removeTagContent: (content?: string | number | null) => void,
@@ -70,7 +71,7 @@ export type TextTagProps = Omit<TagProps, 'children'> & {
 };
 
 
-export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'> & Omit<ProFormFieldRemoteProps, 'valueEnum'> & {
+export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -92,6 +93,20 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
+
+    /**
+     * @description The ref of the component
+     * @description.zh-CN 组件的 ref 句柄
+     * @description.zh-TW 組件的 ref 句柄
+     */
+    fieldRef?: React.Ref<TagInputRef | null | undefined>;
+
+    /**
+     * @description The remote request
+     * @description.zh-CN 远程数据请求
+     * @description.zh-TW 遠程數據請求
+     */
+    request?: (params: any, props: any) => Promise<(TextTagProps | string | number)[]>;
 
     /**
      * @description The props or content of the fulfil tags
@@ -152,14 +167,6 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
     warnDuplicate?: boolean;
 
     /**
-     * @description Whether to perform as submit fields
-     * @description.zh-CN 是否作为表单项提交
-     * @description.zh-TW 是否作為表單項提交
-     * @default true
-     */
-    performSubmit?: boolean;
-
-    /**
      * @description Whether to keep the `fulfilTagItems` data when using the `request` data
      * @description.zh-CN 使用 `request` 数据的同时，是否保留 `fulfilTagItems` 数据
      * @description.zh-TW 使用 `request` 數據的同時，是否保留 `fulfilTagItems` 數據
@@ -180,7 +187,14 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
-};
+
+    /**
+     * @description The callback function when the tag contents changed
+     * @description.zh-CN 标签内容变化时的回调函数
+     * @description.zh-TW 標簽内容變化時的回調函數
+     */
+    onTagContentsChange?: (contents?: (string | number)[]) => void;
+} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
 
 
 /**
@@ -188,8 +202,8 @@ export type TagInputProps = Pick<React.InputHTMLAttributes<HTMLInputElement>, 'n
  *
  * @author David Hsing
  */
-export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.RefAttributes<TagInputRef>> = React.forwardRef((props?: TagInputProps, ref?: any) => {
-    TagInput.displayName = 'TagInput';
+const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAttributes<TagInputRef>> = React.forwardRef((props?: TagInputProps, ref?: any) => {
+    TagInputField.displayName = 'TagInput';
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
@@ -203,7 +217,6 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     const {
         tweenOneEnabled = true,
         warnDuplicate = true,
-        performSubmit = true,
         proField = true,
     } = props ?? {};
 
@@ -213,27 +226,29 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     const [inputValue, setInputValue] = React.useState<string>();
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
 
-    const [tagContents, setTagContents] = React.useState<(string | number)[]>(() => {
+    const [tagContents, setTagContents] = React.useState<(string | number)[] | undefined>(() => {
         const result = [...new Set(props?.fulfilTagItems?.map(item => (typeof item === 'string' || typeof item === 'number') ? item : item?.content))] as string[];
-        warning(!props?.fulfilTagItems || (result.length === props?.fulfilTagItems?.length), `TagInput '${props?.name}' prop 'fulfilTagItems' must includes unique contents`);
+        ConsoleUtils.warn(!props?.fulfilTagItems || (result.length === props?.fulfilTagItems?.length), true, 'TagInput', `Field '${props?.name}' prop 'fulfilTagItems' must includes unique contents`);
         return result;
     });
     if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, values => {
+        FieldUtils.fetchRemoteRequest(props, (values?: (TextTagProps | string | number)[]) => {
             if (!values) {
                 if (props?.requestOptionPlace === 'override') {
-                    setTagContents([]);
+                    setTagContents(undefined);
                 }
                 return;
             }
-            const result = [...new Set(values.map(item => item.value))] as string[];
-            warning(result.length === values.length, `TagInput '${props?.name}' prop 'request' must includes unique response`);
+            const result = [...new Set(values?.map(item => {
+                return (typeof item === 'string' || typeof item === 'number') ? item : item.content;
+            }))] as (string | number)[];
+            ConsoleUtils.warn(result.length === values.length, true, 'TagInput', `Field '${props?.name}' prop 'request' must includes unique response`);
             if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
                 setTagContents(result);
             } else if (props?.requestOptionPlace === 'before') {
-                setTagContents([...result, ...tagContents]);
+                setTagContents([...result, ...(tagContents ?? [])]);
             } else if (props?.requestOptionPlace === 'after') {
-                setTagContents([...tagContents, ...result]);
+                setTagContents([...(tagContents ?? []), ...result]);
             }
         }, []);
     }
@@ -264,8 +279,9 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
 
     React.useEffect(() => {
         if (props?.name && formContext?.form) {
-            formContext.form.setFieldValue(props.name, (props?.performSubmit ? tagContents : undefined));
+            formContext.form.setFieldValue(props.name, tagContents);
         }
+        props?.onTagContentsChange?.(tagContents);
     }, [tagContents]);
 
     const buildTweenOneProps = () => {
@@ -292,7 +308,10 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     };
 
     const buildFulfilDom = () => {
-        const tagsDom = tagContents?.map((content, index) => {
+        if (!tagContents) {
+            return undefined;
+        }
+        const tagsDom = tagContents.map((content, index) => {
             const handleClose = () => {
                 const contents = tagContents.filter(item => item !== content);
                 setTagContents(contents);
@@ -305,9 +324,7 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                         <Tag
                             className={classNames(`${clazzPrefix}-fulfil-tag`, props?.fulfilTagProps?.className)}
                             onClose={event => {
-                                if (props?.fulfilTagProps?.onClose) {
-                                    props.fulfilTagProps.onClose(event);
-                                }
+                                props?.fulfilTagProps?.onClose?.(event);
                                 if (!event.isDefaultPrevented()) {
                                     handleClose();
                                 }
@@ -326,12 +343,8 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                     <Tag
                         className={classNames(`${clazzPrefix}-fulfil-tag`, origin.className, props?.fulfilTagProps?.className)}
                         onClose={event => {
-                            if (origin.onClose) {
-                                origin.onClose(event);
-                            }
-                            if (props?.fulfilTagProps?.onClose) {
-                                props.fulfilTagProps.onClose(event);
-                            }
+                            origin?.onClose?.(event);
+                            props?.fulfilTagProps?.onClose?.(event);
                             if (!event.isDefaultPrevented()) {
                                 handleClose();
                             }
@@ -382,7 +395,7 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
     };
 
     const buildActionDom = () => {
-        if (!props?.addable || editContext.mode === 'read') {
+        if (!props?.addable || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
             return undefined;
         }
         if (inputVisible) {
@@ -403,29 +416,23 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                                 size: props?.addingInputProps?.fieldProps?.size ?? 'small',
                                 style: props?.addingInputProps?.fieldProps?.style ?? {width: '100px'},
                                 onChange: (event) => {
-                                    if (props?.addingInputProps?.fieldProps?.onChange) {
-                                        props.addingInputProps.fieldProps.onChange(event);
-                                    }
+                                    props?.addingInputProps?.fieldProps?.onChange?.(event);
                                     if (!event.isDefaultPrevented()) {
                                         setInputValue(event.target.value);
                                     }
                                 },
                                 onPressEnter: (event) => {
-                                    if (props?.addingInputProps?.fieldProps?.onPressEnter) {
-                                        props.addingInputProps.fieldProps.onPressEnter(event);
-                                    }
+                                    props?.addingInputProps?.fieldProps?.onPressEnter?.(event);
                                     if (!event.isDefaultPrevented()) {
                                         handleInputConfirm().then();
                                     }
                                 },
                                 onBlur: (event) => {
-                                    if (props?.addingInputProps?.fieldProps?.onBlur) {
-                                        props.addingInputProps.fieldProps.onBlur(event);
-                                    }
+                                    props?.addingInputProps?.fieldProps?.onBlur?.(event);
                                     if (!event.isDefaultPrevented()) {
                                         handleInputConfirm().then();
                                     }
-                                },
+                                }
                             }}
                             rules={[
                                 ...(props?.addingInputProps?.rules ?? []),
@@ -460,25 +467,19 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                             size={props?.addingInputProps?.fieldProps?.size ?? 'small'}
                             style={props?.addingInputProps?.fieldProps?.style ?? {width: '80px'}}
                             onChange={event => {
-                                if (props?.addingInputProps?.fieldProps?.onChange) {
-                                    props.addingInputProps.fieldProps.onChange(event);
-                                }
+                                props?.addingInputProps?.fieldProps?.onChange?.(event);
                                 if (!event.isDefaultPrevented()) {
                                     setInputValue(event.target.value);
                                 }
                             }}
                             onPressEnter={event => {
-                                if (props?.addingInputProps?.fieldProps?.onPressEnter) {
-                                    props.addingInputProps.fieldProps.onPressEnter(event);
-                                }
+                                props?.addingInputProps?.fieldProps?.onPressEnter?.(event);
                                 if (!event.isDefaultPrevented()) {
                                     handleInputConfirm().then();
                                 }
                             }}
                             onBlur={event => {
-                                if (props?.addingInputProps?.fieldProps?.onBlur) {
-                                    props.addingInputProps.fieldProps.onBlur(event);
-                                }
+                                props?.addingInputProps?.fieldProps?.onBlur?.(event);
                                 if (!event.isDefaultPrevented()) {
                                     handleInputConfirm().then();
                                 }
@@ -495,9 +496,7 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
                         className={classNames(`${clazzPrefix}-action-tag`, props?.addingTagProps?.className)}
                         {...omitTagProps}
                         onClick={event => {
-                            if (props?.addingTagProps?.onClick) {
-                                props.addingTagProps.onClick(event);
-                            }
+                            props?.addingTagProps?.onClick?.(event);
                             if (!event.isDefaultPrevented()) {
                                 setInputVisible(true);
                             }
@@ -510,25 +509,6 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
         }
     };
 
-    const buildSubmitDom = () => {
-        if (!performSubmit || !props?.name) {
-            return undefined;
-        }
-        return (
-            <div className={`${clazzPrefix}-submit`}>
-                <Form.List name={props.name} initialValue={tagContents}>
-                    {fields =>
-                        fields.map(field => (
-                            <Form.Item hidden={true} {...field}>
-                                <Input type='hidden'/>
-                            </Form.Item>
-                        ))
-                    }
-                </Form.List>
-            </div>
-        );
-    };
-
     return (
         <div
             ref={(div) => fieldRef.current = div ?? undefined}
@@ -537,7 +517,10 @@ export const TagInput: React.ForwardRefExoticComponent<TagInputProps & React.Ref
         >
             {buildFulfilDom()}
             {buildActionDom()}
-            {buildSubmitDom()}
         </div>
     );
 });
+
+
+// @ts-ignore
+export const TagInput = createField(TagInputField) as typeof TagInputField;

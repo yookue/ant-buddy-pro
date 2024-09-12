@@ -23,46 +23,49 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            layout='horizontal'
-            autoFocusFirstInput={false}
-            submitter={{
-                searchConfig: {
-                    submitText: 'Submit',
-                    resetText: 'Reset',
-                }
-            }}
-            onFinish={async () => {
-                messageApi.success(`Yep, you've clicked the submit button`);
-            }}
-        >
-            <LocaleInput
-                name='foobar'
-                placeholder='Demo Field Without Validation'
-                popupInputProps={[
-                    {
-                        tag: 'en-US',
-                        placeholder: 'Demo Field in English',
-                        allowClear: true,
-                    },
-                    {
-                        tag: 'zh-CN',
-                        placeholder: 'Demo Field in Simplified Chinese',
-                        allowClear: true,
-                    },
-                    {
-                        tag: 'zh-TW',
-                        placeholder: 'Demo Field in Traditional Chinese',
-                        allowClear: true,
+        <>
+            <ProForm
+                name='LocaleInput_demo2'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: 'Submit',
+                        resetText: 'Reset',
                     }
-                ]}
-                popupProField={false}
-                popupConfirmProps={{
-                    message: 'Set as default?',
-                    ok: 'Yes',
-                    cancel: 'No',
                 }}
-            />
-        </ProForm>
+                onFinish={async () => {
+                    messageApi.success(`Yep, you've clicked the submit button`);
+                }}
+            >
+                <LocaleInput
+                    name='foobar'
+                    placeholder='Demo Field Without Validation'
+                    popupInputProps={[
+                        {
+                            tag: 'en-US',
+                            placeholder: 'Demo Field in English',
+                            allowClear: true,
+                        },
+                        {
+                            tag: 'zh-CN',
+                            placeholder: 'Demo Field in Simplified Chinese',
+                            allowClear: true,
+                        },
+                        {
+                            tag: 'zh-TW',
+                            placeholder: 'Demo Field in Traditional Chinese',
+                            allowClear: true,
+                        }
+                    ]}
+                    popupProField={false}
+                    popupConfirmProps={{
+                        message: 'Set as default?',
+                        ok: 'Yes',
+                        cancel: 'No',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

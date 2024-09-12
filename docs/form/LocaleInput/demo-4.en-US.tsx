@@ -23,39 +23,42 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            layout='horizontal'
-            autoFocusFirstInput={false}
-            submitter={{
-                searchConfig: {
-                    submitText: 'Submit',
-                    resetText: 'Reset',
-                }
-            }}
-            onFinish={async () => {
-                messageApi.success(`Yep, you've clicked the submit button`);
-            }}
-        >
-            <LocaleInput
-                name='foobar'
-                placeholder='Demo Field Without Validation'
-                disabled
-                popupTagPos='after'
-                popupQuickTags={[
-                    'en-US',
-                    'zh-CN',
-                    'zh-TW',
-                ]}
-                popupProField={false}
-                popupShareProps={{
-                    placeholder: 'Please input this field',
+        <>
+            <ProForm
+                name='LocaleInput_demo4'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: 'Submit',
+                        resetText: 'Reset',
+                    }
                 }}
-                popupConfirmProps={{
-                    message: 'Set as default?',
-                    ok: 'Yes',
-                    cancel: 'No',
+                onFinish={async () => {
+                    messageApi.success(`Yep, you've clicked the submit button`);
                 }}
-            />
-        </ProForm>
+            >
+                <LocaleInput
+                    name='foobar'
+                    placeholder='Demo Field Without Validation'
+                    disabled
+                    popupTagPos='after'
+                    popupQuickTags={[
+                        'en-US',
+                        'zh-CN',
+                        'zh-TW',
+                    ]}
+                    popupProField={false}
+                    popupShareProps={{
+                        placeholder: 'Please input this field',
+                    }}
+                    popupConfirmProps={{
+                        message: 'Set as default?',
+                        ok: 'Yes',
+                        cancel: 'No',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

@@ -28,7 +28,12 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
+            <ProForm
+                name='PageFooter_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ProFormSwitch
                     label='Copyright Icon'
                     checkedChildren='True'

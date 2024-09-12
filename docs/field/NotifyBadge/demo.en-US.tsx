@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Empty, Tag, message as messageApi} from 'antd';
-import {NotifyBadge} from '@yookue/ant-buddy-pro';
+import {NotifyBadge, ConsoleUtils} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
@@ -116,7 +116,7 @@ export default () => {
                     }
                 ],
                 onChange: (activeKey) => {
-                    console.log('Tabs switched to ' + activeKey);
+                    ConsoleUtils.log(false, false, 'NotifyBadge', 'Tabs switched to ' + activeKey);
                 }
             }}
             localeProps={{

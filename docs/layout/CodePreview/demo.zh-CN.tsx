@@ -27,7 +27,12 @@ export default () => {
 
     return (
         <>
-            <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
+            <ProForm
+                name='CodePreview_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ProFormRadio.Group
                     label='预设样式'
                     radioType='button'

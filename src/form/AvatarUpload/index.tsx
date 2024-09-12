@@ -16,16 +16,18 @@
 
 
 import React from 'react';
-import {ConfigProvider, Avatar, Image, Tooltip, Upload, type AvatarProps, type TooltipProps, type UploadProps, message as messageApi} from 'antd';
+import {ConfigProvider, Avatar, Image, Tooltip, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps, message as messageApi} from 'antd';
 import {type RcFile} from 'antd/es/upload/interface';
 import {UserOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
+import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {StringUtils, NumberUtils} from '@yookue/ts-lang-utils';
 import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {type CircleSquareType, type FileSizeUint} from '@/type/declaration';
+import {type CircleSquareShape, type FileSizeUint} from '@/type/declaration';
 import {FileUtils} from '@/util/FileUtils';
 import {NodeUtils} from '@/util/NodeUtils';
 import {intlLocales} from './intl-locales';
@@ -36,10 +38,12 @@ export type AvatarUploadRef = {
     isLoading: () => boolean;
     getImageSrc: () => string;
     setImageSrc: (src?: string) => void;
+    getFallbackSrc: () => string;
+    setFallbackSrc: (src?: string) => void;
 };
 
 
-export type FileUploadProps = UploadProps & {
+export type FileUploadProps = Omit<UploadProps, 'name' | 'maxCount' | 'showUploadList'> & {
     /**
      * @description The allowed file types
      * @description.zh-CN 允许上传的文件类型
@@ -115,7 +119,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type AvatarUploadProps = {
+export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -139,19 +143,33 @@ export type AvatarUploadProps = {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The image source
+     * @description The ref of the component
+     * @description.zh-CN 组件的 ref 句柄
+     * @description.zh-TW 組件的 ref 句柄
+     */
+    fieldRef?: React.Ref<AvatarUploadRef | null | undefined>;
+
+    /**
+     * @description The source of the image
      * @description.zh-CN 图片源
      * @description.zh-TW 圖片源
      */
     imageSrc?: string;
 
     /**
-     * @description The shape of the image
-     * @description.zh-CN 头像的形状
-     * @description.zh-TW 頭像的形狀
+     * @description The fallback source of the image
+     * @description.zh-CN 备用图片源
+     * @description.zh-TW 備用圖片源
+     */
+    fallbackSrc?: string;
+
+    /**
+     * @description The shape of the component
+     * @description.zh-CN 组件的形状
+     * @description.zh-TW 組件的形狀
      * @default 'circle'
      */
-    imageShape?: CircleSquareType;
+    shape?: CircleSquareShape;
 
     /**
      * @description Whether to enable crop or not
@@ -173,7 +191,14 @@ export type AvatarUploadProps = {
      * @description.zh-CN 头像属性
      * @description.zh-TW 頭像屬性
      */
-    avatarProps?: Omit<AvatarProps, 'src' | 'srcSet' | 'shape'>;
+    avatarProps?: Omit<AvatarProps, 'src' | 'srcSet' | 'shape' | 'children'>;
+
+    /**
+     * @description The props for the avatar
+     * @description.zh-CN 头像属性
+     * @description.zh-TW 頭像屬性
+     */
+    imageProps?: Omit<ImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
 
     /**
      * @description Whether to enable upload or not
@@ -210,7 +235,21 @@ export type AvatarUploadProps = {
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: TooltipProps;
-};
+
+    /**
+     * @description The callback function when the image source changed
+     * @description.zh-CN 图片源变化时的回调函数
+     * @description.zh-TW 圖片源變化時的回調函數
+     */
+    onImageSrcChange?: (src?: string) => void;
+
+    /**
+     * @description the callback function when the fallback image source changed
+     * @description.zh-CN 备用图片源变化时的回调函数
+     * @description.zh-TW 備用圖片源變化時的回調函數
+     */
+    onFallbackSrcChange?: (src?: string) => void;
+}  & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
 
 
 /**
@@ -218,8 +257,8 @@ export type AvatarUploadProps = {
  *
  * @author David Hsing
  */
-export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & React.RefAttributes<AvatarUploadRef>> = React.forwardRef((props?: AvatarUploadProps, ref?: any) => {
-    AvatarUpload.displayName = 'AvatarUpload';
+const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & React.RefAttributes<AvatarUploadRef>> = React.forwardRef((props?: AvatarUploadProps, ref?: any) => {
+    AvatarUploadField.displayName = 'AvatarUpload';
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
@@ -230,7 +269,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
 
     // Initialize the default props
     const {
-        imageShape = 'circle',
+        shape = 'circle',
         cropEnabled = true,
         tooltipCtrl = false,
     } = props ?? {};
@@ -238,6 +277,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
     const fieldRef = React.useRef<HTMLDivElement>();
     const [loading, setLoading] = React.useState<boolean>(false);
     const [imageSrc, setImageSrc] = React.useState<string | undefined>(props?.imageSrc);
+    const [fallbackSrc, setFallbackSrc] = React.useState<string | undefined>(props?.fallbackSrc);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -249,8 +289,22 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         },
         setImageSrc: (src?: string) => {
             setImageSrc(src);
+        },
+        getFallbackSrc: () => {
+            return fallbackSrc;
+        },
+        setFallbackSrc: (src?: string) => {
+            setFallbackSrc(src);
         }
     }));
+
+    React.useEffect(() => {
+        props?.onImageSrcChange?.(imageSrc);
+    }, [imageSrc]);
+
+    React.useEffect(() => {
+        props?.onFallbackSrcChange?.(fallbackSrc);
+    }, [fallbackSrc]);
 
     const handleBeforeUpload = (file: RcFile, fileList: RcFile[]) => {
         if (props?.uploadProps?.allowedFileTypes && !props.uploadProps.allowedFileTypes.some(item => file.type === item)) {
@@ -288,6 +342,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         if (props?.uploadProps?.beforeUpload) {
             return props.uploadProps.beforeUpload(file, fileList);
         }
+        return true;
     };
 
     const handleUploadChange: UploadProps['onChange'] = (info: any) => {
@@ -302,9 +357,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
                 setImageSrc(url);
             });
         }
-        if (props?.uploadProps?.onChange) {
-            props.uploadProps.onChange(info);
-        }
+        props?.uploadProps?.onChange?.(info);
     };
 
     const buildAvatarPlaceholder = () => {
@@ -356,22 +409,36 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         if (!imageSrc) {
             return undefined;
         }
+        const omitProps = !props?.imageProps ? {} : omit(props.imageProps, ['rootClassName']);
         return !tooltipCtrl ? (
-            <Image src={imageSrc} rootClassName={`${clazzPrefix}-image`} preview={false} style={{width: '100%'}} title={NodeUtils.toString(props?.tooltipProps?.title)}/>
+            <Image
+                src={imageSrc}
+                fallback={fallbackSrc}
+                rootClassName={classNames(`${clazzPrefix}-image`, props?.imageProps?.rootClassName)}
+                preview={false}
+                title={NodeUtils.toString(props?.tooltipProps?.title)}
+                {...omitProps}
+            />
         ) : (
             <Tooltip {...props?.tooltipProps}>
-                <Image src={imageSrc} rootClassName={`${clazzPrefix}-image`} preview={false} style={{width: '100%'}}/>
+                <Image
+                    src={imageSrc}
+                    fallback={fallbackSrc}
+                    rootClassName={classNames(`${clazzPrefix}-image`, props?.imageProps?.rootClassName)}
+                    preview={false}
+                    {...omitProps}
+                />
             </Tooltip>
         );
     };
 
     const buildAvatarDom = () => {
-        if (!props?.uploadEnabled || editContext.mode === 'read') {
+        if (!props?.uploadEnabled || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
             const omitAvatarProps = !props?.avatarProps ? {} : omit(props.avatarProps, ['className', 'size', 'icon']);
             return (
                 <Avatar
                     className={classNames(`${clazzPrefix}-avatar`, props?.avatarProps?.className)}
-                    shape={imageShape}
+                    shape={shape}
                     size={props?.avatarProps?.size ?? {xs: 24, sm: 32, md: 48, lg: 64, xl: 104, xxl: 128}}
                     icon={buildAvatarPlaceholder()}
                     src={buildImageDom()}
@@ -379,14 +446,14 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
                 />
             );
         }
-        const omitUploadProps = !props?.uploadProps ? {} : omit(props.uploadProps, ['className', 'name', 'fileList', 'listType', 'maxCount', 'showUploadList', 'onChange', 'allowedFileTypes', 'warnWithTypes', 'maxFileSize', 'fileSizeUint', 'placeholder']);
+        const omitUploadProps = !props?.uploadProps ? {} : omit(props.uploadProps, ['className', 'fileList', 'listType', 'onChange', 'allowedFileTypes', 'warnWithTypes', 'maxFileSize', 'fileSizeUint', 'placeholder']);
         const uploadDom = (
             <Upload
-                className={classNames(`${clazzPrefix}-action-${imageShape}`, props?.uploadProps?.className)}
-                name={props?.uploadProps?.name ?? 'avatar'}
+                className={classNames(`${clazzPrefix}-action-${shape}`, props?.uploadProps?.className)}
+                name={props?.name}
                 listType={props?.uploadProps?.listType ?? 'picture-card'}
-                maxCount={props?.uploadProps?.maxCount ?? 1}
-                showUploadList={props?.uploadProps?.showUploadList ?? false}
+                maxCount={1}
+                showUploadList={false}
                 beforeUpload={handleBeforeUpload}
                 onChange={handleUploadChange}
                 {...omitUploadProps}
@@ -421,3 +488,7 @@ export const AvatarUpload: React.ForwardRefExoticComponent<AvatarUploadProps & R
         </div>
     );
 });
+
+
+// @ts-ignore
+export const AvatarUpload = createField(AvatarUploadField) as typeof AvatarUploadField;

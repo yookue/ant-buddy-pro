@@ -507,7 +507,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     const beforeDom = buildEntryAddonDom(true);
     const afterDom = buildEntryAddonDom(false);
-    const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly;
+    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['ref', 'className', 'addonBefore', 'addonAfter']);
 
     const buildEntryDom = () => {

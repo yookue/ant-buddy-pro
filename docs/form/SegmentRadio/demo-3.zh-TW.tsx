@@ -22,20 +22,27 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='請打分'
-                fieldProps={{
-                    defaultValue: 'good',
-                    options: [],
-                }}
-                valueEnum={{
-                    good: '好',
-                    excellent: '很好',
-                    perfect: '非常好',
-                }}
-            />
-        </ProForm>
+        <>
+            <ProForm
+                name='SegmentRadio_demo3'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <SegmentRadio
+                    name='foobar'
+                    label='請打分'
+                    fieldProps={{
+                        defaultValue: 'good',
+                        options: [],
+                    }}
+                    valueEnum={{
+                        good: '好',
+                        excellent: '很好',
+                        perfect: '非常好',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

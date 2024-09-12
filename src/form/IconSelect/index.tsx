@@ -26,17 +26,17 @@ import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {nanoid} from '@ant-design/pro-utils';
+import {type RequestOptionsType, nanoid} from '@ant-design/pro-utils';
 import {For, MapIterator} from '@yookue/react-condition';
 import {StringUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {Scrollbars} from 'rc-scrollbars';
 import {type DefaultOptionType} from 'rc-select/es/select';
 import omit from 'rc-util/es/omit';
-import warning from 'rc-util/es/warning';
 import {allIconTypes, type IconSceneType} from '@/type/antd-icons';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
+import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {ElementUtils} from '@/util/ElementUtils';
 import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
@@ -290,7 +290,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const intlType = useIntl();
 
     const formInstance = Form.useFormInstance();
-    warning(!!formInstance, `IconSelect '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formInstance, true, 'IconSelect',  `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -681,7 +681,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     // noinspection DuplicatedCode
     const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
     if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, values => {
+        FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
             if (!values) {
                 if (props?.requestOptionPlace === 'override') {
                     setOptionItems([]);
@@ -698,7 +698,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         }, []);
     }
 
-    const entryImmutable = (editContext.mode === 'read') || (props?.proFieldProps?.mode === 'read') || props?.fieldProps?.disabled;
+    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {

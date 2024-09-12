@@ -17,39 +17,28 @@
 
 import React from 'react';
 import {ProForm} from '@ant-design/pro-form';
-import {SegmentRadio} from '@yookue/ant-buddy-pro';
+import {TagInput} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
     return (
         <>
             <ProForm
-                name='SegmentRadio_demo2'
+                name='TagInput_demo2'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
+                initialValues={{
+                    foobar: [
+                        'ant',
+                        'buddy',
+                        'pro',
+                    ]
+                }}
             >
-                <SegmentRadio
+                <TagInput
                     name='foobar'
-                    label='Rate this'
-                    fieldProps={{
-                        defaultValue: 'good',
-                        options: [],
-                    }}
-                    request={async () => [
-                        {
-                            label: 'Good',
-                            value: 'good',
-                        },
-                        {
-                            label: 'Excellent',
-                            value: 'excellent',
-                        },
-                        {
-                            label: 'Perfect',
-                            value: 'perfect',
-                        }
-                    ]}
+                    valuePropName='fulfilTagItems'
                 />
             </ProForm>
         </>

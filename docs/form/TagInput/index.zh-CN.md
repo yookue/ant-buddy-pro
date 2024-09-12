@@ -14,7 +14,13 @@ import {TagInput} from '@yookue/ant-buddy-pro';
 
 ### 使用示例
 
-<code src="./demo.zh-CN.tsx"></code>
+#### 使用属性初始化
+
+<code src="./demo-1.zh-CN.tsx"></code>
+
+#### 使用表单初始化
+
+<code src="./demo-2.tsx"></code>
 
 ### 组件属性
 

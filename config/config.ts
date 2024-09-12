@@ -111,6 +111,7 @@ export default {
     },
     outputPath: 'docs-dist',
     alias: {
+        '#': nodePath.resolve(__dirname, '..'),
         '@': nodePath.resolve(__dirname, '../src'),
         '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, '../src'),
     },

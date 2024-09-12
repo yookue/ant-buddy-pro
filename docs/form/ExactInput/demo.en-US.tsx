@@ -25,27 +25,34 @@ export default () => {
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProFormSwitch
-                label='Tooltip Ctrl'
-                checkedChildren='True'
-                unCheckedChildren='False'
-                fieldProps={{
-                    checked: tooltipCtrl,
-                    onChange: (value) => {
-                        setTooltipCtrl(value);
-                    }
-                }}
-            />
-            <Divider/>
-            <ExactInput
-                name='foobar'
-                placeholder='Please input this field'
-                fieldProps={{
-                    addonBefore: 'Prefix',
-                }}
-                tooltipCtrl={tooltipCtrl}
-            />
-        </ProForm>
+        <>
+            <ProForm
+                name='ExactInput_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ProFormSwitch
+                    label='Tooltip Ctrl'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: tooltipCtrl,
+                        onChange: (value) => {
+                            setTooltipCtrl(value);
+                        }
+                    }}
+                />
+                <Divider/>
+                <ExactInput
+                    name='foobar'
+                    placeholder='Please input this field'
+                    fieldProps={{
+                        addonBefore: 'Prefix',
+                    }}
+                    tooltipCtrl={tooltipCtrl}
+                />
+            </ProForm>
+        </>
     );
 }

@@ -20,7 +20,7 @@ import {ConfigProvider, Modal, type ModalProps, type ModalFuncProps} from 'antd'
 import {nanoid} from '@ant-design/pro-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import warning from 'rc-util/es/warning';
+import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {ModalUtils} from '@/util/ModalUtils';
 
 
@@ -122,7 +122,7 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-delay-modal');
 
-    warning(!!props?.modalProps || !!props?.modalFunProps, `DelayModal must has any props of 'modalProps/modalFunProps' at least`);
+    ConsoleUtils.warn(!!props?.modalProps || !!props?.modalFunProps, true, 'DelayModal', ` Any props of 'modalProps/modalFunProps' is required`);
 
     // Initialize the default props
     const {

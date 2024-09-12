@@ -18,7 +18,7 @@
 import React from 'react';
 import {type LabeledValue} from 'antd/es/select';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
-import {type RequestOptionsType, useDebounceFn} from '@ant-design/pro-utils';
+import {useDebounceFn} from '@ant-design/pro-utils';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 
 
@@ -33,10 +33,10 @@ export abstract class FieldUtils {
      * Fetches the request data with the given field, with debounce capable
      *
      * @param props the properties object to inspect
-     * @param callback the function to execute
+     * @param callback the function to execute, the `values` default type is `RequestOptionsType`
      * @param deps the dependencies for effect
      */
-    public static fetchRemoteRequest = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps, callback?: ((values?: RequestOptionsType[]) => void), deps?: React.DependencyList): void => {
+    public static fetchRemoteRequest = (props?: {request?: any, params?: any, debounceTime?: number}, callback?: ((values?: any) => void), deps?: React.DependencyList): void => {
         if (!props || !props?.request || !callback) {
             return;
         }

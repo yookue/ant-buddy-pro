@@ -22,28 +22,35 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <SegmentRadio
-                name='foobar'
-                label='Rate this'
-                fieldProps={{
-                    defaultValue: 'good',
-                    options: [
-                        {
-                            label: 'Good',
-                            value: 'good',
-                        },
-                        {
-                            label: 'Excellent',
-                            value: 'excellent',
-                        },
-                        {
-                            label: 'Perfect',
-                            value: 'perfect',
-                        }
-                    ]
-                }}
-            />
-        </ProForm>
+        <>
+            <ProForm
+                name='SegmentRadio_demo1'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <SegmentRadio
+                    name='foobar'
+                    label='Rate this'
+                    fieldProps={{
+                        defaultValue: 'good',
+                        options: [
+                            {
+                                label: 'Good',
+                                value: 'good',
+                            },
+                            {
+                                label: 'Excellent',
+                                value: 'excellent',
+                            },
+                            {
+                                label: 'Perfect',
+                                value: 'perfect',
+                            }
+                        ]
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

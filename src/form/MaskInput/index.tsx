@@ -22,7 +22,7 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {RegexUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import warning from 'rc-util/es/warning';
+import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 
 
@@ -64,7 +64,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
 
     const formInstance = Form.useFormInstance();
-    warning(!!formInstance, `MaskInput '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formInstance, true, 'MaskInput',  `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {

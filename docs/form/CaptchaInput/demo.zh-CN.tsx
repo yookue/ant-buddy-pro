@@ -19,7 +19,7 @@ import React from 'react';
 import {Button, Divider, message as messageApi} from 'antd';
 import {MobileOutlined, SafetyCertificateOutlined, ClockCircleOutlined} from '@ant-design/icons';
 import {ProForm, ProFormText} from '@ant-design/pro-form';
-import {CaptchaInput, type CaptchaInputRef} from '@yookue/ant-buddy-pro';
+import {CaptchaInput, ConsoleUtils, type CaptchaInputRef} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
@@ -27,55 +27,62 @@ export default () => {
     const captchaInputRef = React.useRef<CaptchaInputRef>(null);
 
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProFormText
-                name='mobile'
-                fieldProps={{
-                    prefix: <MobileOutlined/>
-                }}
-                placeholder='手机号'
-                rules={[
-                    {
-                        required: true,
-                        message: '此项为必填项',
-                    }
-                ]}
-            />
-            <CaptchaInput
-                name='captcha'
-                placeholder='验证码'
-                fieldRef={captchaInputRef}
-                fieldProps={{
-                    maxLength: 6,
-                    prefix: <SafetyCertificateOutlined/>
-                }}
-                phoneName='mobile'
-                countDown={29}
-                onGenerate={() => {
-                    messageApi.success('验证码发送成功');
-                }}
-                onTimer={count => {
-                    console.log('CaptchaInput timer count = ' + count);
-                }}
-                onTimerBegin={() => setTiming(true)}
-                onTimerEnd={() => setTiming(false)}
-                localeProps={{
-                    'generate': '获取验证码',
-                    'resend': '重新发送',
-                }}
-            />
-            <Divider/>
-            <Button
-                icon={<ClockCircleOutlined/>}
-                disabled={timing}
-                onClick={() => {
-                    if (!captchaInputRef.current?.isTiming()) {
-                        captchaInputRef.current?.startTiming();
-                    }
-                }}
+        <>
+            <ProForm
+                name='CaptchaInput_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
             >
-                手动计时
-            </Button>
-        </ProForm>
+                <ProFormText
+                    name='mobile'
+                    fieldProps={{
+                        prefix: <MobileOutlined/>
+                    }}
+                    placeholder='手机号'
+                    rules={[
+                        {
+                            required: true,
+                            message: '此项为必填项',
+                        }
+                    ]}
+                />
+                <CaptchaInput
+                    name='captcha'
+                    placeholder='验证码'
+                    fieldRef={captchaInputRef}
+                    fieldProps={{
+                        maxLength: 6,
+                        prefix: <SafetyCertificateOutlined/>
+                    }}
+                    phoneName='mobile'
+                    countDown={29}
+                    onGenerate={() => {
+                        messageApi.success('验证码发送成功');
+                    }}
+                    onTimer={count => {
+                        ConsoleUtils.log(false, false, 'CaptchaInput', '计时器倒数 ' + count);
+                    }}
+                    onTimerBegin={() => setTiming(true)}
+                    onTimerEnd={() => setTiming(false)}
+                    localeProps={{
+                        'generate': '获取验证码',
+                        'resend': '重新发送',
+                    }}
+                />
+                <Divider/>
+                <Button
+                    icon={<ClockCircleOutlined/>}
+                    disabled={timing}
+                    onClick={() => {
+                        if (!captchaInputRef.current?.isTiming()) {
+                            captchaInputRef.current?.startTimer();
+                        }
+                    }}
+                >
+                    手动计时
+                </Button>
+            </ProForm>
+        </>
     );
 }

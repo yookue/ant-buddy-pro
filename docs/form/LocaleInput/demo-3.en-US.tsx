@@ -23,51 +23,54 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            layout='horizontal'
-            autoFocusFirstInput={false}
-            submitter={{
-                searchConfig: {
-                    submitText: 'Submit',
-                    resetText: 'Reset',
-                }
-            }}
-            onFinish={async () => {
-                messageApi.success(`Yep, you've clicked the submit button`);
-            }}
-        >
-            <LocaleInput
-                name='foobar'
-                placeholder='Demo Field With Validation'
-                popupActionPos='before'
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input demo field',
-                    },
-                ]}
-                popupQuickTags={[
-                    'en-US',
-                    'zh-CN',
-                    'zh-TW',
-                ]}
-                popupShareProps={{
-                    placeholder: 'Please input this field',
-                    rules: [
+        <>
+            <ProForm
+                name='LocaleInput_demo3'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: 'Submit',
+                        resetText: 'Reset',
+                    }
+                }}
+                onFinish={async () => {
+                    messageApi.success(`Yep, you've clicked the submit button`);
+                }}
+            >
+                <LocaleInput
+                    name='foobar'
+                    placeholder='Demo Field With Validation'
+                    popupActionPos='before'
+                    rules={[
                         {
-                            type: 'string',
-                            min: 2,
-                            max: 60,
-                            message: 'The value length must between 2 and 60',
-                        }
-                    ]
-                }}
-                popupConfirmProps={{
-                    message: 'Set as default?',
-                    ok: 'Yes',
-                    cancel: 'No',
-                }}
-            />
-        </ProForm>
+                            required: true,
+                            message: 'Please input demo field',
+                        },
+                    ]}
+                    popupQuickTags={[
+                        'en-US',
+                        'zh-CN',
+                        'zh-TW',
+                    ]}
+                    popupShareProps={{
+                        placeholder: 'Please input this field',
+                        rules: [
+                            {
+                                type: 'string',
+                                min: 2,
+                                max: 60,
+                                message: 'The value length must between 2 and 60',
+                            }
+                        ]
+                    }}
+                    popupConfirmProps={{
+                        message: 'Set as default?',
+                        ok: 'Yes',
+                        cancel: 'No',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

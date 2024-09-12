@@ -30,99 +30,106 @@ export default () => {
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProForm.Group>
-                <ProFormRadio.Group
-                    label='選項模式'
-                    radioType='button'
+        <>
+            <ProForm
+                name='IconSelect_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ProForm.Group>
+                    <ProFormRadio.Group
+                        label='選項模式'
+                        radioType='button'
+                        fieldProps={{
+                            value: optionMode,
+                            buttonStyle: 'solid',
+                            onChange: (event) => {
+                                setOptionMode(event.target?.value);
+                            }
+                        }}
+                        options={[
+                            {label: '圖標', value: 'icon'},
+                            {label: '文本', value: 'text'},
+                        ]}
+                    />
+                </ProForm.Group>
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='主題指示條'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: themeInkBar,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setThemeInkBar(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='場景指示條'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: sceneInkBar,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setSceneInkBar(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='搜索框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: searchBox,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setSearchBox(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Tooltip 控件'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: tooltipCtrl,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setTooltipCtrl(value);
+                            }
+                        }}
+                    />
+                </ProForm.Group>
+                <Divider/>
+                <IconSelect
+                    name='DemoIcon'
+                    placeholder='請選擇圖標'
+                    optionMode={optionMode}
+                    themeInkBar={themeInkBar}
+                    sceneInkBar={sceneInkBar}
+                    searchBox={searchBox}
                     fieldProps={{
-                        value: optionMode,
-                        buttonStyle: 'solid',
-                        onChange: (event) => {
-                            setOptionMode(event.target?.value);
-                        }
+                        notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='無數據'/>),
                     }}
-                    options={[
-                        {label: '圖標', value: 'icon'},
-                        {label: '文本', value: 'text'},
-                    ]}
-                />
-            </ProForm.Group>
-            <ProForm.Group>
-                <ProFormSwitch
-                    label='主題指示條'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: themeInkBar,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setThemeInkBar(value);
-                        }
+                    tooltipCtrl={tooltipCtrl}
+                    localeProps={{
+                        searchBox: '搜索',
+                        outlinedTheme: '線框風格',
+                        filledTheme: '實底風格',
+                        twotoneTheme: '雙色風格',
+                        directionScene: '方向類',
+                        suggestionScene: '建議類',
+                        editorScene: '編輯類',
+                        dataScene: '數據類',
+                        logoScene: '品牌類',
+                        webScene: '網站類',
                     }}
                 />
-                <ProFormSwitch
-                    label='場景指示條'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: sceneInkBar,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setSceneInkBar(value);
-                        }
-                    }}
-                />
-                <ProFormSwitch
-                    label='搜索框'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: searchBox,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setSearchBox(value);
-                        }
-                    }}
-                />
-                <ProFormSwitch
-                    label='Tooltip 控件'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: tooltipCtrl,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setTooltipCtrl(value);
-                        }
-                    }}
-                />
-            </ProForm.Group>
-            <Divider/>
-            <IconSelect
-                name='DemoIcon'
-                placeholder='請選擇圖標'
-                optionMode={optionMode}
-                themeInkBar={themeInkBar}
-                sceneInkBar={sceneInkBar}
-                searchBox={searchBox}
-                fieldProps={{
-                    notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='無數據'/>),
-                }}
-                tooltipCtrl={tooltipCtrl}
-                localeProps={{
-                    searchBox: '搜索',
-                    outlinedTheme: '線框風格',
-                    filledTheme: '實底風格',
-                    twotoneTheme: '雙色風格',
-                    directionScene: '方向類',
-                    suggestionScene: '建議類',
-                    editorScene: '編輯類',
-                    dataScene: '數據類',
-                    logoScene: '品牌類',
-                    webScene: '網站類',
-                }}
-            />
-        </ProForm>
+            </ProForm>
+        </>
     );
 }

@@ -22,22 +22,29 @@ import {ChronoSelect} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ChronoSelect
-                name='foobar'
-                placeholder='请选择此项'
-                localeProps={{
-                    millis: '毫秒',
-                    seconds: '秒',
-                    minutes: '分',
-                    hours: '小时',
-                    days: '天',
-                    weeks: '周',
-                    months: '月',
-                    years: '年',
-                    forever: '永久',
-                }}
-            />
-        </ProForm>
+        <>
+            <ProForm
+                name='ChronoSelect_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ChronoSelect
+                    name='foobar'
+                    placeholder='请选择此项'
+                    localeProps={{
+                        millis: '毫秒',
+                        seconds: '秒',
+                        minutes: '分',
+                        hours: '小时',
+                        days: '天',
+                        weeks: '周',
+                        months: '月',
+                        years: '年',
+                        forever: '永久',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }

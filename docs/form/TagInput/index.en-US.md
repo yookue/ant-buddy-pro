@@ -14,7 +14,13 @@ import {TagInput} from '@yookue/ant-buddy-pro';
 
 ### Example
 
-<code src="./demo.en-US.tsx"></code>
+#### Initialize With Props
+
+<code src="./demo-1.en-US.tsx"></code>
+
+#### Initialize With Form
+
+<code src="./demo-2.tsx"></code>
 
 ### Properties
 

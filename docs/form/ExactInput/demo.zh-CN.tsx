@@ -25,27 +25,34 @@ export default () => {
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProFormSwitch
-                label='Tooltip 控件'
-                checkedChildren='是'
-                unCheckedChildren='否'
-                fieldProps={{
-                    checked: tooltipCtrl,
-                    onChange: (value) => {
-                        setTooltipCtrl(value);
-                    }
-                }}
-            />
-            <Divider/>
-            <ExactInput
-                name='foobar'
-                placeholder='请输入此项'
-                fieldProps={{
-                    addonBefore: '前缀',
-                }}
-                tooltipCtrl={tooltipCtrl}
-            />
-        </ProForm>
+        <>
+            <ProForm
+                name='ExactInput_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ProFormSwitch
+                    label='Tooltip 控件'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: tooltipCtrl,
+                        onChange: (value) => {
+                            setTooltipCtrl(value);
+                        }
+                    }}
+                />
+                <Divider/>
+                <ExactInput
+                    name='foobar'
+                    placeholder='请输入此项'
+                    fieldProps={{
+                        addonBefore: '前缀',
+                    }}
+                    tooltipCtrl={tooltipCtrl}
+                />
+            </ProForm>
+        </>
     );
 }

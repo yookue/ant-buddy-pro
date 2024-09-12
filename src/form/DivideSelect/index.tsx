@@ -19,6 +19,7 @@ import React from 'react';
 import {ConfigProvider, Select} from 'antd';
 import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
+import {type RequestOptionsType} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -223,7 +224,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         // noinspection DuplicatedCode
         const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
         if (props?.request && props?.requestOptionPlace !== false) {
-            FieldUtils.fetchRemoteRequest(props, values => {
+            FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
                 if (!values) {
                     if (props?.requestOptionPlace === 'override') {
                         setOptionItems([]);

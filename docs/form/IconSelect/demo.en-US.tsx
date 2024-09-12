@@ -30,99 +30,106 @@ export default () => {
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
-        <ProForm layout='horizontal' autoFocusFirstInput={false} submitter={false}>
-            <ProForm.Group>
-                <ProFormRadio.Group
-                    label='Option Mode'
-                    radioType='button'
+        <>
+            <ProForm
+                name='IconSelect_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ProForm.Group>
+                    <ProFormRadio.Group
+                        label='Option Mode'
+                        radioType='button'
+                        fieldProps={{
+                            value: optionMode,
+                            buttonStyle: 'solid',
+                            onChange: (event) => {
+                                setOptionMode(event.target?.value);
+                            }
+                        }}
+                        options={[
+                            {label: 'Icon', value: 'icon'},
+                            {label: 'Text', value: 'text'},
+                        ]}
+                    />
+                </ProForm.Group>
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='Theme Ink Bar'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: themeInkBar,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setThemeInkBar(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Scene Ink Bar'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: sceneInkBar,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setSceneInkBar(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Search Box'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: searchBox,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setSearchBox(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Tooltip Ctrl'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: tooltipCtrl,
+                            disabled: optionMode === 'text',
+                            onChange: (value) => {
+                                setTooltipCtrl(value);
+                            }
+                        }}
+                    />
+                </ProForm.Group>
+                <Divider/>
+                <IconSelect
+                    name='DemoIcon'
+                    placeholder='Please select an icon'
+                    optionMode={optionMode}
+                    themeInkBar={themeInkBar}
+                    sceneInkBar={sceneInkBar}
+                    searchBox={searchBox}
                     fieldProps={{
-                        value: optionMode,
-                        buttonStyle: 'solid',
-                        onChange: (event) => {
-                            setOptionMode(event.target?.value);
-                        }
+                        notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>),
                     }}
-                    options={[
-                        {label: 'Icon', value: 'icon'},
-                        {label: 'Text', value: 'text'},
-                    ]}
-                />
-            </ProForm.Group>
-            <ProForm.Group>
-                <ProFormSwitch
-                    label='Theme Ink Bar'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: themeInkBar,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setThemeInkBar(value);
-                        }
+                    tooltipCtrl={tooltipCtrl}
+                    localeProps={{
+                        searchBox: 'Search',
+                        outlinedTheme: 'Outlined',
+                        filledTheme: 'Filled',
+                        twotoneTheme: 'Two Tone',
+                        directionScene: 'Direction',
+                        suggestionScene: 'Suggestion',
+                        editorScene: 'Editor',
+                        dataScene: 'Data',
+                        logoScene: 'Logo',
+                        webScene: 'Web',
                     }}
                 />
-                <ProFormSwitch
-                    label='Scene Ink Bar'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: sceneInkBar,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setSceneInkBar(value);
-                        }
-                    }}
-                />
-                <ProFormSwitch
-                    label='Search Box'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: searchBox,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setSearchBox(value);
-                        }
-                    }}
-                />
-                <ProFormSwitch
-                    label='Tooltip Ctrl'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: tooltipCtrl,
-                        disabled: optionMode === 'text',
-                        onChange: (value) => {
-                            setTooltipCtrl(value);
-                        }
-                    }}
-                />
-            </ProForm.Group>
-            <Divider/>
-            <IconSelect
-                name='DemoIcon'
-                placeholder='Please select an icon'
-                optionMode={optionMode}
-                themeInkBar={themeInkBar}
-                sceneInkBar={sceneInkBar}
-                searchBox={searchBox}
-                fieldProps={{
-                    notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>),
-                }}
-                tooltipCtrl={tooltipCtrl}
-                localeProps={{
-                    searchBox: 'Search',
-                    outlinedTheme: 'Outlined',
-                    filledTheme: 'Filled',
-                    twotoneTheme: 'Two Tone',
-                    directionScene: 'Direction',
-                    suggestionScene: 'Suggestion',
-                    editorScene: 'Editor',
-                    dataScene: 'Data',
-                    logoScene: 'Logo',
-                    webScene: 'Web',
-                }}
-            />
-        </ProForm>
+            </ProForm>
+        </>
     );
 }

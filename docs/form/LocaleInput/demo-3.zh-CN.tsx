@@ -23,51 +23,54 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     return (
-        <ProForm
-            layout='horizontal'
-            autoFocusFirstInput={false}
-            submitter={{
-                searchConfig: {
-                    submitText: '提交',
-                    resetText: '重置',
-                }
-            }}
-            onFinish={async () => {
-                messageApi.success('您点击了提交按钮');
-            }}
-        >
-            <LocaleInput
-                name='foobar'
-                placeholder='示例字段-带校验'
-                popupActionPos='before'
-                rules={[
-                    {
-                        required: true,
-                        message: '请输入示例字段',
-                    },
-                ]}
-                popupQuickTags={[
-                    'en-US',
-                    'zh-CN',
-                    'zh-TW',
-                ]}
-                popupShareProps={{
-                    placeholder: '请输入此字段',
-                    rules: [
+        <>
+            <ProForm
+                name='LocaleInput_demo3'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: '提交',
+                        resetText: '重置',
+                    }
+                }}
+                onFinish={async () => {
+                    messageApi.success('您点击了提交按钮');
+                }}
+            >
+                <LocaleInput
+                    name='foobar'
+                    placeholder='示例字段-带校验'
+                    popupActionPos='before'
+                    rules={[
                         {
-                            type: 'string',
-                            min: 2,
-                            max: 60,
-                            message: '示例字段的长度必须在 2~60 之间',
-                        }
-                    ]
-                }}
-                popupConfirmProps={{
-                    message: '设为默认吗？',
-                    ok: '是',
-                    cancel: '否',
-                }}
-            />
-        </ProForm>
+                            required: true,
+                            message: '请输入示例字段',
+                        },
+                    ]}
+                    popupQuickTags={[
+                        'en-US',
+                        'zh-CN',
+                        'zh-TW',
+                    ]}
+                    popupShareProps={{
+                        placeholder: '请输入此字段',
+                        rules: [
+                            {
+                                type: 'string',
+                                min: 2,
+                                max: 60,
+                                message: '示例字段的长度必须在 2~60 之间',
+                            }
+                        ]
+                    }}
+                    popupConfirmProps={{
+                        message: '设为默认吗？',
+                        ok: '是',
+                        cancel: '否',
+                    }}
+                />
+            </ProForm>
+        </>
     );
 }
