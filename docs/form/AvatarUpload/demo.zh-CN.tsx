@@ -112,6 +112,7 @@ export default () => {
                     fieldRef={avatarUploadRef}
                     name='avatar'
                     valuePropName='imageSrc'
+                    trigger='onImageSrcChange'
                     readonly={readonly}
                     shape={shape}
                     uploadProps={{

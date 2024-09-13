@@ -79,6 +79,7 @@ export default () => {
                     fieldRef={tagInputRef}
                     name='foobar'
                     valuePropName='fulfilTagItems'
+                    trigger='onTagContentsChange'
                     readonly={readonly}
                     tweenOneAnim={tweenOneAnim}
                     fulfilTagItems={[
