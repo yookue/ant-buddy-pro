@@ -94,6 +94,9 @@ export default () => {
                             }
                         ]
                     }}
+                    valueEnum={{
+                        '+7': '俄羅斯',
+                    }}
                     presetStyle={presetStyle}
                 />
             </ProForm>

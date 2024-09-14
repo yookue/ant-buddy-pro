@@ -16,18 +16,20 @@
 
 import React from 'react';
 import {ConfigProvider, Segmented, type SegmentedProps} from 'antd';
+import {type SegmentedLabeledOption} from 'antd/es/segmented';
 import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {type RequestOptionsType} from '@ant-design/pro-utils';
+import pickProFormItemProps from '@ant-design/pro-utils/es/pickProFormItemProps';
 import classNames from 'classnames';
+import {type SegmentedRawOption} from 'rc-segmented';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 
 
-export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormFieldRemoteProps & {
+export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'placeholder' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -37,9 +39,30 @@ export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormF
     clazzPrefix?: string;
 
     /**
-     * @description Whether to keep the `options` or `valueEnum` data when using the `request` data
-     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
-     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
+     * @description The CSS class name of the container div
+     * @description.zh-CN 容器 div 的 CSS 类名
+     * @description.zh-TW 容器 div 的 CSS 類名
+     */
+    containerClazz?: string;
+
+    /**
+     * @description The CSS style of the container div
+     * @description.zh-CN 容器 div 的 CSS 样式
+     * @description.zh-TW 容器 div 的 CSS 樣式
+     */
+    containerStyle?: React.CSSProperties;
+
+    /**
+     * @description The remote request
+     * @description.zh-CN 远程数据请求
+     * @description.zh-TW 遠程數據請求
+     */
+    request?: (params?: Record<string, any>, props?: Record<string, any>) => Promise<(SegmentedRawOption | SegmentedLabeledOption)[]>;
+
+    /**
+     * @description Whether to keep the `options` data when using the `request` data
+     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 数据
+     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 數據
      */
     requestOptionPlace?: WithFalse<RequestOptionPlace>;
 
@@ -50,6 +73,13 @@ export type SegmentRadioProps = ProFormFieldItemProps<SegmentedProps> & ProFormF
      * @default true
      */
     proField?: boolean;
+
+    /**
+     * @description The callback function when the option items changed
+     * @description.zh-CN 选项变化时的回调函数
+     * @description.zh-TW 選項變化時的回調函數
+     */
+    onOptionItemsChange?: (options?: (SegmentedRawOption | SegmentedLabeledOption)[]) => void;
 };
 
 
@@ -72,52 +102,61 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
         proField = true,
     } = props ?? {};
 
-    // noinspection DuplicatedCode
-    const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
+    const [optionItems, setOptionItems] = React.useState<(SegmentedRawOption | SegmentedLabeledOption)[] | undefined>(() => {
+        const rawOptions = props?.fieldProps?.options ?? [];
+        const enumOptions = FieldUtils.valueEnumToSegmentOptions(props?.valueEnum) ?? [];
+        return [...rawOptions, ...enumOptions];
+    });
     if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
+        FieldUtils.fetchRemoteRequest(props, (values?: (SegmentedRawOption | SegmentedLabeledOption)[]) => {
+            // noinspection DuplicatedCode
             if (!values) {
                 if (props?.requestOptionPlace === 'override') {
-                    setOptionItems([]);
+                    setOptionItems(undefined);
                 }
                 return;
             }
             if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
                 setOptionItems(values);
             } else if (props?.requestOptionPlace === 'before') {
-                setOptionItems([...values, ...optionItems]);
+                setOptionItems([...values, ...(optionItems ?? [])]);
             } else if (props?.requestOptionPlace === 'after') {
-                setOptionItems([...optionItems, ...values]);
+                setOptionItems([...(optionItems ?? []), ...values]);
             }
         }, []);
     }
+
+    React.useEffect(() => {
+        props?.onOptionItemsChange?.(optionItems);
+    }, [optionItems]);
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
     const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options', 'disabled']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'requestOptionPlace', 'proField']);
+        const restProps = !props ? {} : pickProFormItemProps(props);
         return (
-            <ProForm.Item
-                className={classNames(clazzPrefix, props?.className)}
-                {...restProps}
-            >
-                <Segmented
-                    options={optionItems}
-                    disabled={entryImmutable}
-                    {...restFieldProps}
-                />
-            </ProForm.Item>
+            <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+                <ProForm.Item {...restProps}>
+                    <Segmented
+                        options={optionItems ?? []}
+                        disabled={entryImmutable}
+                        {...restFieldProps}
+                    />
+                </ProForm.Item>
+            </div>
         );
     } else {
         const restProps = PropsUtils.pickForwardProps(props);
         return (
-            <Segmented
-                options={optionItems}
-                disabled={entryImmutable}
-                {...restProps}
-                {...restFieldProps}
-            />
+            <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+                <Segmented
+                    options={optionItems ?? []}
+                    disabled={entryImmutable}
+                    {...restProps}
+                    {...restFieldProps}
+                />
+            </div>
         );
     }
 };

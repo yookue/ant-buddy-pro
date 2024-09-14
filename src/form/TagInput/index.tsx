@@ -71,7 +71,7 @@ export type TextTagProps = Omit<TagProps, 'children'> & {
 };
 
 
-export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum' | 'readonly'> & {
+export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -106,7 +106,14 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
      * @description.zh-CN 远程数据请求
      * @description.zh-TW 遠程數據請求
      */
-    request?: (params: any, props: any) => Promise<(string | number | TextTagProps)[]>;
+    request?: (params?: Record<string, any>, props?: Record<string, any>) => Promise<(string | number | TextTagProps)[]>;
+
+    /**
+     * @description Whether to keep the `fulfilTagItems` data when using the `request` data
+     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `fulfilTagItems` 数据
+     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `fulfilTagItems` 數據
+     */
+    requestOptionPlace?: WithFalse<RequestOptionPlace>;
 
     /**
      * @description The props or content of the fulfil tags
@@ -160,13 +167,6 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
     warnDuplicate?: boolean;
 
     /**
-     * @description Whether to keep the `fulfilTagItems` data when using the `request` data
-     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `fulfilTagItems` 数据
-     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `fulfilTagItems` 數據
-     */
-    requestOptionPlace?: WithFalse<RequestOptionPlace>;
-
-    /**
      * @description Whether to use ProFormField instead of Antd
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
@@ -211,6 +211,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         tweenOneAnim = true,
         warnDuplicate = true,
         proField = true,
+        readonly = true,
     } = props ?? {};
 
     const entryId = nanoid();
@@ -387,7 +388,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         setInputValue(undefined);
     };
 
-    const entryImmutable = props?.readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+    const entryImmutable = readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
 
     const buildActionDom = () => {
         if (entryImmutable) {

@@ -16,9 +16,10 @@
 
 
 import React from 'react';
-import {type LabeledValue} from 'antd/es/select';
-import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
-import {useDebounceFn} from '@ant-design/pro-utils';
+import {type DefaultOptionType} from 'antd/es/select';
+import {type SegmentedLabeledOption} from 'antd/es/segmented';
+import {type ProSchemaValueEnumObj, type ProSchemaValueEnumMap, useDebounceFn} from '@ant-design/pro-utils';
+import {type ProSchemaValueEnumType} from '@ant-design/pro-utils/es/typing';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 
 
@@ -49,38 +50,77 @@ export abstract class FieldUtils {
     }
 
     /**
-     * Returns the built array of Ant ProComponents LabeledValue, with locale data
+     * Returns the converted array of Ant DefaultOptionType
      *
-     * @param props the properties object to inspect
+     * @param source the properties object to inspect
      *
-     * @returns Returns the built array of Ant ProComponents LabeledValue, with locale data
+     * @returns Returns the converted array of Ant DefaultOptionType
      */
-    public static optionsToLabeledValues = (props?: ProFormFieldItemProps<any> & ProFormFieldRemoteProps): LabeledValue[] | undefined => {
-        if (!props) {
+    public static valueEnumToSelectOptions = (source?: ProSchemaValueEnumMap | ProSchemaValueEnumObj | ((params: any) => ProSchemaValueEnumMap | ProSchemaValueEnumObj)): DefaultOptionType[] | undefined => {
+        if (!source) {
             return undefined;
         }
-        if (ObjectUtils.isNotEmpty(props?.fieldProps?.options)) {
-            return props.fieldProps.options;
-        }
-        return ObjectUtils.isEmpty(props?.valueEnum) ? undefined : this.propsToLabeledValues(props.valueEnum);
+        const extractLabel = (value: ProSchemaValueEnumType | React.ReactNode) => {
+            return ObjectUtils.isPlain(value) ? (value as ProSchemaValueEnumType).text : value;
+        };
+        const convertOption = (value: ProSchemaValueEnumMap | ProSchemaValueEnumObj) => {
+            if (value instanceof Map) {
+                const result: DefaultOptionType[] = [];
+                (value as ProSchemaValueEnumMap).forEach((v, k) => {
+                    result.push({
+                        label: extractLabel(v),
+                        value: k,
+                    } as DefaultOptionType);
+                });
+                return result;
+            }
+            return ObjectUtils.mapEachProp(value, (k: string) => {
+                return {
+                    label: extractLabel(value[k]),
+                    value: k,
+                } as DefaultOptionType;
+            });
+        };
+        return (typeof source === 'function') ? this.valueEnumToSelectOptions(source({})) : convertOption(source);
     }
 
     /**
-     * Returns the converted array of Ant ProComponents LabeledValue
+     * Returns the converted array of Ant SegmentedLabeledOption
      *
-     * @param props the properties object to inspect
+     * @param source the properties object to inspect
      *
-     * @returns Returns the converted array of Ant ProComponents LabeledValue
+     * @returns Returns the converted array of Ant SegmentedLabeledOption
      */
-    public static propsToLabeledValues = (props?: object): LabeledValue[] | undefined => {
-        if (!props) {
+    public static valueEnumToSegmentOptions = (source?: ProSchemaValueEnumMap | ProSchemaValueEnumObj | ((params: any) => ProSchemaValueEnumMap | ProSchemaValueEnumObj)): SegmentedLabeledOption[] | undefined => {
+        if (!source) {
             return undefined;
         }
-        const result: LabeledValue[] = [];
-        Object.keys(props).filter(key => Object.prototype.hasOwnProperty.call(props, key)).forEach(key => {
-            // @ts-ignore
-            result.push({label: props[key], value: key});
-        });
-        return result;
+        const extractLabel = (value: React.ReactNode | ProSchemaValueEnumType) => {
+            return ObjectUtils.isPlain(value) ? (value as ProSchemaValueEnumType).text : value;
+        };
+        const extractDisabled = (value: React.ReactNode | ProSchemaValueEnumType) => {
+            return ObjectUtils.isPlain(value) ? (value as ProSchemaValueEnumType).disabled : undefined;
+        };
+        const convertOption = (value: ProSchemaValueEnumMap | ProSchemaValueEnumObj) => {
+            if (value instanceof Map) {
+                const result: SegmentedLabeledOption[] = [];
+                (value as ProSchemaValueEnumMap).forEach((v, k) => {
+                    result.push({
+                        label: extractLabel(v),
+                        value: k,
+                        disabled: extractDisabled(v),
+                    } as SegmentedLabeledOption);
+                });
+                return result;
+            }
+            return ObjectUtils.mapEachProp(value, (k: string) => {
+                return {
+                    label: extractLabel(value[k]),
+                    value: k,
+                    disabled: extractDisabled(value[k]),
+                } as SegmentedLabeledOption;
+            });
+        };
+        return (typeof source === 'function') ? this.valueEnumToSegmentOptions(source({})) : convertOption(source);
     }
 }

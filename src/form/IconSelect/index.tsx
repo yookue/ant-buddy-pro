@@ -16,17 +16,17 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Input, Select, Empty, Space, Tooltip, type InputRef, type TooltipProps} from 'antd';
+import {ConfigProvider, Form, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps} from 'antd';
 import {type LabeledValue} from 'antd/es/select';
 import Wave from 'antd/es/_util/wave';
 import {default as Icon} from '@ant-design/icons';
 import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/es/types';
 import {ProCard} from '@ant-design/pro-card';
 import {ProFormSelect} from '@ant-design/pro-form';
-import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
+import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {type RequestOptionsType, nanoid} from '@ant-design/pro-utils';
+import {nanoid} from '@ant-design/pro-utils';
 import {For, MapIterator} from '@yookue/react-condition';
 import {StringUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -38,13 +38,17 @@ import {MenuTabs} from '@/layout/MenuTabs';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {ElementUtils} from '@/util/ElementUtils';
-import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
 
 export type IconOptionMode = 'icon' | 'text';
+
+
+export type SelectFieldProps = Omit<ProFormFieldItemProps<SelectProps, RefSelectProps>, 'fieldProps'> & {
+    fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'dropdownRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'showSearch' | 'onPopupScroll'>;
+};
 
 
 export type IntlLocaleProps = {
@@ -120,7 +124,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type IconSelectProps = ProFormSelectProps & {
+export type IconSelectProps = SelectFieldProps & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -308,7 +312,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         tooltipCtrl = false,
     } = props ?? {};
 
-    const [dropdownOpen, setDropdownOpen] = React.useState<boolean>(props?.fieldProps?.open ?? false);
+    const [dropdownOpen, setDropdownOpen] = React.useState<boolean>((props?.fieldProps?.open || props?.fieldProps?.defaultOpen) ?? false);
     const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);
     const [activeTab, setActiveTab] = React.useState<IconThemeType | undefined>(defaultTheme);
     const [searchWord, setSearchWord] = React.useState<string | undefined>(props?.fieldProps?.searchValue);
@@ -357,6 +361,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 }
             });
         });
+        console.log(result);
         return result;
     };
 
@@ -678,40 +683,20 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         props?.fieldProps?.onDropdownVisibleChange?.(open);
     };
 
-    // noinspection DuplicatedCode
-    const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
-    if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
-            if (!values) {
-                if (props?.requestOptionPlace === 'override') {
-                    setOptionItems([]);
-                }
-                return;
-            }
-            if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
-                setOptionItems(values);
-            } else if (props?.requestOptionPlace === 'before') {
-                setOptionItems([...values, ...optionItems]);
-            } else if (props?.requestOptionPlace === 'after') {
-                setOptionItems([...optionItems, ...values]);
-            }
-        }, []);
-    }
-
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'dropdownRender', 'options', 'optionFilterProp', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'valueEnum', 'params', 'request', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestOptionPlace', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestOptionPlace', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
         return (
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
                     className: classNames(clazzPrefix, props?.fieldProps?.className),
                     ...omitFieldProps,
+                    disabled: entryImmutable,
                     dropdownRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
-                    options: optionItems ?? buildTextOptions(),
-                    optionFilterProp: props?.fieldProps?.optionFilterProp || props?.fieldProps?.fieldNames?.value || 'value',
+                    options: (optionMode === 'text') ? buildTextOptions() : [],
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
                     onClear: handleOptionClear,
@@ -727,9 +712,9 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
+                disabled={entryImmutable}
                 dropdownRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
-                options={optionItems ?? buildTextOptions()}
-                optionFilterProp={props?.fieldProps?.optionFilterProp || props?.fieldProps?.fieldNames?.value || 'value'}
+                options={(optionMode === 'text') ? buildTextOptions() : []}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}
                 onClear={handleOptionClear}

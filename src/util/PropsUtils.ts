@@ -33,7 +33,7 @@ export abstract class PropsUtils {
      *
      * @returns the omitted record of Ant ProComponents from the given props
      */
-    public static omitProProps = (props?: object): Record<string, any> => {
+    public static omitProProps = (props?: Record<string, any>): Record<string, any> => {
         // @ts-ignore
         return !props ? {} : omit(props, [...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]);
     }
@@ -45,7 +45,7 @@ export abstract class PropsUtils {
      *
      * @returns the forwarded record of Ant ProComponents from the given props
      */
-    public static pickForwardProps = (props?: object): Record<string, any> => {
+    public static pickForwardProps = (props?: Record<string, any>): Record<string, any> => {
         if (!props) {
             return {};
         }

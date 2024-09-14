@@ -158,6 +158,30 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         presetStyle = 'before-prior',
     } = props ?? {};
 
+    // noinspection DuplicatedCode
+    const [optionItems, setOptionItems] = React.useState<any[] | undefined>(() => {
+        const rawOptions = props?.fieldProps?.options ?? [];
+        const enumOptions = FieldUtils.valueEnumToSelectOptions(props?.valueEnum) ?? [];
+        return [...rawOptions, ...enumOptions];
+    });
+    if (props?.request && props?.requestOptionPlace !== false) {
+        FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
+            if (!values) {
+                if (props?.requestOptionPlace === 'override') {
+                    setOptionItems(undefined);
+                }
+                return;
+            }
+            if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
+                setOptionItems(values);
+            } else if (props?.requestOptionPlace === 'before') {
+                setOptionItems([...values, ...(optionItems ?? [])]);
+            } else if (props?.requestOptionPlace === 'after') {
+                setOptionItems([...(optionItems ?? []), ...values]);
+            }
+        }, []);
+    }
+
     const renderContent = (item: any, before: boolean) => {
         if (!item) {
             return undefined;
@@ -197,18 +221,18 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     };
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestOptionPlace', 'proField', 'presetStyle']);
-        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
-
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'request', 'valueEnum', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestOptionPlace', 'proField', 'presetStyle']);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options', 'optionItemRender', 'optionLabelProp', 'popupClassName']);
         return (
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
                     className: classNames(clazzPrefix, props?.fieldProps?.className),
-                    ...omitFieldProps,
+                    options: optionItems,
                     optionItemRender: (item) => renderOption(item),
                     optionLabelProp: props?.fieldProps?.optionLabelProp ?? 'label',
                     popupClassName: classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName),
+                    ...omitFieldProps,
                 }}
                 proFieldProps={{
                     ...((props?.fieldProps?.optionLabelProp === (props?.fieldProps?.fieldNames?.value ?? 'value')) ? {
@@ -221,29 +245,9 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             />
         );
     } else {
-        // noinspection DuplicatedCode
-        const [optionItems, setOptionItems] = React.useState<any[]>(FieldUtils.optionsToLabeledValues(props) ?? []);
-        if (props?.request && props?.requestOptionPlace !== false) {
-            FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
-                if (!values) {
-                    if (props?.requestOptionPlace === 'override') {
-                        setOptionItems([]);
-                    }
-                    return;
-                }
-                if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
-                    setOptionItems(values);
-                } else if (props?.requestOptionPlace === 'before') {
-                    setOptionItems([...values, ...optionItems]);
-                } else if (props?.requestOptionPlace === 'after') {
-                    setOptionItems([...optionItems, ...values]);
-                }
-            }, []);
-        }
-
         const rebuildOptions = () => {
             if (!optionItems) {
-                return [];
+                return undefined;
             }
             return optionItems.map((item: any, index: number) => {
                 if (!item) {
@@ -287,10 +291,10 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             <Select
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}
                 {...restProps}
-                {...omitFieldProps}
-                options={!presetStyle ? optionItems : rebuildOptions()}
+                options={(!presetStyle ? optionItems : rebuildOptions()) ?? []}
                 optionLabelProp={(!props?.fieldProps?.optionLabelProp || props.fieldProps.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
                 popupClassName={classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName)}
+                {...omitFieldProps}
             />
         );
     }

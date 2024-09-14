@@ -195,10 +195,6 @@ export abstract class SchemaRenders {
                 }}
                 proFieldProps={schema?.proFieldProps}
                 dependencies={schema?.dependencies}
-                debounceTime={schema?.debounceTime}
-                params={schema?.params}
-                request={schema?.request}
-                valueEnum={schema?.valueEnum}
                 {...restProps}
             />
         );

@@ -265,6 +265,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         shape = 'circle',
         cropImage = true,
         tooltipCtrl = false,
+        readonly = true,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>();
@@ -426,7 +427,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     };
 
     const buildAvatarDom = () => {
-        if (props?.readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
+        if (readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
             const omitAvatarProps = !props?.avatarProps ? {} : omit(props.avatarProps, ['className', 'size', 'icon']);
             return (
                 <Avatar
