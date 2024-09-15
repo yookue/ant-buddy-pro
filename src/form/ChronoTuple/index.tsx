@@ -104,15 +104,14 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
         <InputNumber {...PropsUtils.pickForwardProps(props?.digitProps)} {...props?.digitProps?.fieldProps}/>
     );
 
-    const restSelectProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'presetStyle']);
-
+    const omitProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'presetStyle']);
     return (
         <div className={classNames(clazzPrefix, props?.containerClazz, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined))} style={props?.containerStyle}>
             <Input.Group compact={true}>
                 {digitNode}
                 <ChronoSelect
-                    label={props?.selectProps?.label ?? (formContext.vertical ? ' ' : '')}
-                    {...restSelectProps}
+                    label={props?.selectProps?.label ?? (formContext?.vertical ? ' ' : '')}
+                    {...omitProps}
                     proField={proField}
                     presetStyle={(props?.selectProps?.presetStyle === undefined) ? 'addon' : props.selectProps.presetStyle}
                 />

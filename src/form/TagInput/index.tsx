@@ -71,7 +71,7 @@ export type TextTagProps = Omit<TagProps, 'children'> & {
 };
 
 
-export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
+export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -128,6 +128,14 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
      * @description.zh-TW 已完成標簽的通用屬性
      */
     fulfilTagProps?: Omit<TagProps, 'children'>;
+
+    /**
+     * @description Whether the tag is addable or not
+     * @description.zh-CN 是否可以添加标签
+     * @description.zh-TW 是否可以添加標簽
+     * @default false
+     */
+    addable?: boolean;
 
     /**
      * @description The props of the adding input
@@ -208,10 +216,10 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
 
     // Initialize the default props
     const {
+        addable = false,
         tweenOneAnim = true,
         warnDuplicate = true,
         proField = true,
-        readonly = true,
     } = props ?? {};
 
     const entryId = nanoid();
@@ -388,7 +396,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         setInputValue(undefined);
     };
 
-    const entryImmutable = readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+    const entryImmutable = !addable || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
 
     const buildActionDom = () => {
         if (entryImmutable) {

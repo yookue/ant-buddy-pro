@@ -28,7 +28,7 @@ export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'plac
 export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitMaskInputProps = Omit<MaskInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
-export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
+export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 
 
 /**
@@ -160,10 +160,10 @@ export abstract class SchemaRenders {
                 }}
                 proFieldProps={schema?.proFieldProps}
                 dependencies={schema?.dependencies}
+                valueEnum={schema?.valueEnum}
                 debounceTime={schema?.debounceTime}
                 params={schema?.params}
                 request={schema?.request}
-                valueEnum={schema?.valueEnum}
                 {...restProps}
             />
         );

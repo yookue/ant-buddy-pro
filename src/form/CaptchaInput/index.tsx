@@ -16,7 +16,8 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Input, Button} from 'antd';
+import {ConfigProvider, Input, Button} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
@@ -137,12 +138,12 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
 
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-captcha-input');
     const intlType = useIntl();
 
-    const formInstance = Form.useFormInstance();
-    ConsoleUtils.warn(!!formInstance, true, 'CaptchaInput', `Field '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formContext?.form, true, 'CaptchaInput', `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -219,14 +220,14 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
 
     const validatePhoneName = async () => {
         if (props?.phoneName) {
-            await formInstance?.validateFields([props.phoneName].flat(1));
+            await formContext?.form?.validateFields([props.phoneName].flat(1));
         }
     };
 
     const handleClick = async () => {
         try {
             await validatePhoneName();
-            await buildCaptcha((!formInstance || !props?.phoneName) ? undefined : formInstance?.getFieldValue([props.phoneName].flat(1)));
+            await buildCaptcha((!formContext?.form || !props?.phoneName) ? undefined : formContext.form.getFieldValue([props.phoneName].flat(1)));
         } catch (ignored) {
         }
     }

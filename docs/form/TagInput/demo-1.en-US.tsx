@@ -24,7 +24,8 @@ import {TagInput, ConsoleUtils, type TagInputRef} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const tagInputRef = React.useRef<TagInputRef>(null);
-    const [readonly, setReadonly] = React.useState<boolean>(true);
+    const [addable, setAddable] = React.useState<boolean>(false);
+    const [removable, setRemovable] = React.useState<boolean>(false);
     const [tweenOneAnim, setTweenOneAnim] = React.useState<boolean>(true);
 
     return (
@@ -37,13 +38,24 @@ export default () => {
             >
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='Readonly'
+                        label='Addable'
                         checkedChildren='True'
                         unCheckedChildren='False'
                         fieldProps={{
-                            checked: readonly,
+                            checked: addable,
                             onChange: (value) => {
-                                setReadonly(value);
+                                setAddable(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Removable'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: removable,
+                            onChange: (value) => {
+                                setRemovable(value);
                             }
                         }}
                     />
@@ -53,7 +65,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: tweenOneAnim,
-                            disabled: readonly,
+                            disabled: !removable,
                             onChange: (value) => {
                                 setTweenOneAnim(value);
                             }
@@ -80,7 +92,7 @@ export default () => {
                     name='foobar'
                     valuePropName='fulfilTagItems'
                     trigger='onTagContentsChange'
-                    readonly={readonly}
+                    addable={addable}
                     tweenOneAnim={tweenOneAnim}
                     fulfilTagItems={[
                         {
@@ -101,7 +113,7 @@ export default () => {
                         }
                     ]}
                     fulfilTagProps={{
-                        closable: !readonly,
+                        closable: removable,
                     }}
                     request={async () => {
                         return [

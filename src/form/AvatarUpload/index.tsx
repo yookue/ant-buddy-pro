@@ -119,7 +119,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled'> & {
+export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -172,21 +172,6 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     shape?: CircleSquareShape;
 
     /**
-     * @description Whether to crop image or not
-     * @description.zh-CN 是否裁剪图片
-     * @description.zh-TW 是否裁剪圖片
-     * @default true
-     */
-    cropImage?: boolean;
-
-    /**
-     * @description The crop props for the component
-     * @description.zh-CN 裁剪属性
-     * @description.zh-TW 裁剪屬性
-     */
-    cropProps?: Omit<ImgCropProps, 'children'>;
-
-    /**
      * @description The props for the avatar
      * @description.zh-CN 头像属性
      * @description.zh-TW 頭像屬性
@@ -201,6 +186,14 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     imageProps?: Omit<ImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
 
     /**
+     * @description Whether to enable upload or not
+     * @description.zh-CN 是否启用上传
+     * @description.zh-TW 是否啟用上傳
+     * @default false
+     */
+    uploadEnabled?: boolean;
+
+    /**
      * @description The upload props for the component
      * @description.zh-CN 上传属性
      * @description.zh-TW 上傳屬性
@@ -208,11 +201,19 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     uploadProps?: FileUploadProps;
 
     /**
-     * @description The locale props for the component
-     * @description.zh-CN 多语言属性
-     * @description.zh-TW 多語言屬性
+     * @description Whether to enable crop or not
+     * @description.zh-CN 是否启用裁剪
+     * @description.zh-TW 是否啟用裁剪
+     * @default true
      */
-    localeProps?: IntlLocaleProps;
+    cropEnabled?: boolean;
+
+    /**
+     * @description The crop props for the component
+     * @description.zh-CN 裁剪属性
+     * @description.zh-TW 裁剪屬性
+     */
+    cropProps?: Omit<ImgCropProps, 'children'>;
 
     /**
      * @description Whether to use tooltip control
@@ -228,6 +229,13 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: TooltipProps;
+
+    /**
+     * @description The locale props for the component
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 
     /**
      * @description The callback function when the image source changed
@@ -263,9 +271,9 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     // Initialize the default props
     const {
         shape = 'circle',
-        cropImage = true,
+        cropEnabled = true,
+        uploadEnabled = false,
         tooltipCtrl = false,
-        readonly = true,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>();
@@ -427,7 +435,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     };
 
     const buildAvatarDom = () => {
-        if (readonly || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
+        if (!uploadEnabled || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly) {
             const omitAvatarProps = !props?.avatarProps ? {} : omit(props.avatarProps, ['className', 'size', 'icon']);
             return (
                 <Avatar
@@ -455,7 +463,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
                 {imageSrc ? buildImageDom() : buildUploadPlaceholder()}
             </Upload>
         );
-        if (!cropImage) {
+        if (!cropEnabled) {
             return uploadDom;
         }
         const omitCropProps = !props?.cropProps ? {} : omit(props.cropProps, ['modalClassName', 'modalTitle', 'rotationSlider']);

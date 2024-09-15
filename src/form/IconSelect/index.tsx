@@ -16,7 +16,8 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {type LabeledValue} from 'antd/es/select';
 import Wave from 'antd/es/_util/wave';
 import {default as Icon} from '@ant-design/icons';
@@ -35,7 +36,6 @@ import {type DefaultOptionType} from 'rc-select/es/select';
 import omit from 'rc-util/es/omit';
 import {allIconTypes, type IconSceneType} from '@/type/antd-icons';
 import {MenuTabs} from '@/layout/MenuTabs';
-import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {ElementUtils} from '@/util/ElementUtils';
 import {PropsUtils} from '@/util/PropsUtils';
@@ -148,13 +148,6 @@ export type IconSelectProps = SelectFieldProps & {
      * @default true
      */
     optionGroup?: boolean;
-
-    /**
-     * @description Whether to keep the `options` or `valueEnum` data when using the `request` data
-     * @description.zh-CN 使用 `request` 数据的同时，是否保留 `options` 或 `valueEnum` 数据
-     * @description.zh-TW 使用 `request` 數據的同時，是否保留 `options` 或 `valueEnum` 數據
-     */
-    requestOptionPlace?: WithFalse<RequestOptionPlace>;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -289,12 +282,12 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
+    const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
     const intlType = useIntl();
 
-    const formInstance = Form.useFormInstance();
-    ConsoleUtils.warn(!!formInstance, true, 'IconSelect',  `Field '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formContext?.form, true, 'IconSelect',  `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -366,7 +359,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const isIconSelected = (iconName?: string) => {
-        const fieldValue = formInstance?.getFieldValue(props?.name);
+        const fieldValue = formContext?.form?.getFieldValue(props?.name);
         if (!fieldValue || StringUtils.isBlank(iconName)) {
             return false;
         }
@@ -398,16 +391,16 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         if (isIconSelected(iconName)) {
             if (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') {
                 changeIconBadge(iconName, false);
-                const fieldValue = formInstance?.getFieldValue(props?.name);
+                const fieldValue = formContext?.form?.getFieldValue(props?.name);
                 if (fieldValue) {
                     const result = !props?.fieldProps?.labelInValue ? fieldValue.filter((item: any) => {
                         return !StringUtils.equalsIgnoreCase(item as string, iconName);
                     }) : fieldValue.filter((item: LabeledValue) => {
                         return !StringUtils.equalsIgnoreCase(item?.value as string, iconName);
                     });
-                    formInstance?.setFieldValue(props?.name, result);
+                    formContext?.form?.setFieldValue(props?.name, result);
                 } else {
-                    formInstance?.setFieldValue(props?.name, undefined);
+                    formContext?.form?.setFieldValue(props?.name, undefined);
                 }
             } else {
                 setDropdownOpen(false);
@@ -417,16 +410,16 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 clearIconsBadge();
             }
             changeIconBadge(iconName, true);
-            const fieldValue = formInstance?.getFieldValue(props?.name);
+            const fieldValue = formContext?.form?.getFieldValue(props?.name);
             if (fieldValue && (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags')) {
                 if (props?.fieldProps?.labelInValue) {
                     const value: LabeledValue = {
                         label: iconName,
                         value: iconName,
                     };
-                    formInstance?.setFieldValue(props?.name, [...fieldValue, value]);
+                    formContext?.form?.setFieldValue(props?.name, [...fieldValue, value]);
                 } else {
-                    formInstance?.setFieldValue(props?.name, [...fieldValue, iconName]);
+                    formContext?.form?.setFieldValue(props?.name, [...fieldValue, iconName]);
                 }
             } else {
                 if (props?.fieldProps?.labelInValue) {
@@ -435,10 +428,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         value: iconName,
                     };
                     const result = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [value] : value;
-                    formInstance?.setFieldValue(props?.name, result);
+                    formContext?.form?.setFieldValue(props?.name, result);
                 } else {
                     const result = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [iconName] : iconName;
-                    formInstance?.setFieldValue(props?.name, result);
+                    formContext?.form?.setFieldValue(props?.name, result);
                 }
             }
             if (props?.fieldProps?.mode !== 'multiple' && props?.fieldProps?.mode !== 'tags') {
@@ -687,7 +680,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'requestOptionPlace', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
         return (
             <ProFormSelect
                 {...restProps}

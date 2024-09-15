@@ -16,7 +16,8 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Input, type InputProps, type InputRef} from 'antd';
+import {ConfigProvider, Input, type InputProps, type InputRef} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {RegexUtils} from '@yookue/ts-lang-utils';
@@ -60,11 +61,11 @@ export type MaskInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
 export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const formContext = React.useContext(FormContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
 
-    const formInstance = Form.useFormInstance();
-    ConsoleUtils.warn(!!formInstance, true, 'MaskInput',  `Field '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formContext?.form, true, 'MaskInput',  `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -73,11 +74,11 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
 
     const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
     const composeRef = React.useRef<boolean>(false);
-    const previousRef = React.useRef<string>(formInstance?.getFieldValue(props?.name ?? props?.fieldProps?.name));
+    const previousRef = React.useRef<string>(formContext?.form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
 
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
         if (value && props?.patterns && !props.patterns.some(item => RegexUtils.testResetting(item, value))) {
-            formInstance?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
+            formContext?.form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
             failAction?.();
         } else {
             previousRef.current = value;

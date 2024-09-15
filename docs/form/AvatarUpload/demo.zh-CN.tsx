@@ -25,8 +25,8 @@ import {AvatarUpload, ConsoleUtils, type AvatarUploadRef, type CircleSquareShape
 export default () => {
     const avatarUploadRef = React.useRef<AvatarUploadRef>(null);
     const [shape, setShape] = React.useState<CircleSquareShape>('circle');
-    const [readonly, setReadonly] = React.useState<boolean>(true);
-    const [cropImage, setCropImage] = React.useState<boolean>(true);
+    const [uploadEnabled, setUploadEnabled] = React.useState<boolean>(false);
+    const [cropEnabled, setCropEnabled] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
@@ -42,7 +42,7 @@ export default () => {
             >
                 <ProForm.Group>
                     <ProFormRadio.Group
-                        label='Image Shape'
+                        label='形状'
                         radioType='button'
                         fieldProps={{
                             value: shape,
@@ -59,25 +59,25 @@ export default () => {
                 </ProForm.Group>
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='只读'
+                        label='启用上传'
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
-                            checked: readonly,
+                            checked: uploadEnabled,
                             onChange: (value) => {
-                                setReadonly(value);
+                                setUploadEnabled(value);
                             }
                         }}
                     />
                     <ProFormSwitch
-                        label='裁剪图片'
+                        label='启用裁剪'
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
-                            checked: cropImage,
-                            disabled: readonly,
+                            checked: cropEnabled,
+                            disabled: uploadEnabled,
                             onChange: (value) => {
-                                setCropImage(value);
+                                setCropEnabled(value);
                             }
                         }}
                     />
@@ -113,8 +113,8 @@ export default () => {
                     name='avatar'
                     valuePropName='imageSrc'
                     trigger='onImageSrcChange'
-                    readonly={readonly}
                     shape={shape}
+                    uploadEnabled={uploadEnabled}
                     uploadProps={{
                         allowedFileTypes: [
                             'image/jpeg',
@@ -124,7 +124,7 @@ export default () => {
                         maxFileSize: 1,
                         fileSizeUint: 'MB',
                     }}
-                    cropImage={cropImage}
+                    cropEnabled={cropEnabled}
                     cropProps={{
                         minZoom: 0.8,
                         modalOk: '确定',
