@@ -689,7 +689,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     ...omitFieldProps,
                     disabled: entryImmutable,
                     dropdownRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
-                    options: (optionMode === 'text') ? buildTextOptions() : [],
+                    options: buildTextOptions(),
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
                     onClear: handleOptionClear,
@@ -707,7 +707,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 {...omitFieldProps}
                 disabled={entryImmutable}
                 dropdownRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
-                options={(optionMode === 'text') ? buildTextOptions() : []}
+                options={buildTextOptions()}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}
                 onClear={handleOptionClear}
