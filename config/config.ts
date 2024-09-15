@@ -50,6 +50,7 @@ export default {
         { rel: 'icon', type: 'image/svg+xml', href: `${globalSettings.context?.assets}/ico/logo-icon.svg` },
         { rel: 'fluid-icon', type: 'image/svg+xml', href: `${globalSettings.context?.assets}/ico/logo-icon.svg` },
         { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.font.im/css?family=Comfortaa' },
+        { rel: 'stylesheet', type: 'text/css', href: `${globalSettings.context?.assets}/css/darkness.css` },
     ],
     navs: {
         'en-US': [
