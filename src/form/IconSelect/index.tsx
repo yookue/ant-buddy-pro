@@ -354,9 +354,12 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 }
             });
         });
-        console.log(result);
         return result;
     };
+
+    const textOptions = React.useMemo(() => {
+        return buildTextOptions();
+    }, [themeTypes, sceneTypes]);
 
     const isIconSelected = (iconName?: string) => {
         const fieldValue = formContext?.form?.getFieldValue(props?.name);
@@ -512,14 +515,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     );
                 }}
                 renderTrackHorizontal={props => {
-                    const style: React.CSSProperties = {
-                        display: 'none',
-                        visibility: 'hidden',
-                    };
                     return (
-                        <div className={props?.className} style={style}>
-                            {props?.children}
-                        </div>
+                        <div className={props?.className} style={{display: 'none'}}></div>
                     );
                 }}
                 onScroll={event => {
@@ -677,7 +674,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'virtual', 'open', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'virtual', 'open', 'popupClassName', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
@@ -689,9 +686,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     ...omitFieldProps,
                     disabled: entryImmutable,
                     dropdownRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
-                    options: buildTextOptions(),
+                    options: textOptions,
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
+                    popupClassName: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName) : undefined,
                     onClear: handleOptionClear,
                     onDeselect: handleOptionDeselect,
                     onDropdownVisibleChange: handleDropdownOpenChange,
@@ -707,9 +705,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 {...omitFieldProps}
                 disabled={entryImmutable}
                 dropdownRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
-                options={buildTextOptions()}
+                options={textOptions}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}
+                popupClassName={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName) : undefined}
                 onClear={handleOptionClear}
                 onDeselect={handleOptionDeselect}
                 onDropdownVisibleChange={handleDropdownOpenChange}
