@@ -120,7 +120,7 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'fieldRef' | 'onGetCap
     onTimerEnd?: () => void;
 
     /**
-     * @description The locale props for the component
+     * @description The props for locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */

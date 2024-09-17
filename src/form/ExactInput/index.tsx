@@ -95,15 +95,15 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     checkProps?: AddonCheckProps;
 
     /**
-     * @description Whether to use tooltip control
-     * @description.zh-CN 是否使用 Tooltip 控件
-     * @description.zh-TW 是否使用 Tooltip 控件
+     * @description Whether to use tooltip
+     * @description.zh-CN 是否使用 Tooltip
+     * @description.zh-TW 是否使用 Tooltip
      * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The properties of tooltip for checkbox
+     * @description The prop for tooltip of the checkbox
      * @description.zh-CN 复选框的 Tooltip 属性
      * @description.zh-TW 复选框的 Tooltip 屬性
      */

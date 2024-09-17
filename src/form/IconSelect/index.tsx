@@ -250,22 +250,22 @@ export type IconSelectProps = SelectFieldProps & {
     searchBox?: boolean;
 
     /**
-     * @description The locale props for the component
+     * @description The props for locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
 
     /**
-     * @description Whether to use tooltip control
-     * @description.zh-CN 是否使用 Tooltip 控件
-     * @description.zh-TW 是否使用 Tooltip 控件
+     * @description Whether to use tooltip
+     * @description.zh-CN 是否使用 Tooltip
+     * @description.zh-TW 是否使用 Tooltip
      * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The properties of tooltip
+     * @description The prop for tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */

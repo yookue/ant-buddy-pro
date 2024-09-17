@@ -179,9 +179,9 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     avatarProps?: Omit<AvatarProps, 'src' | 'srcSet' | 'shape' | 'children'>;
 
     /**
-     * @description The props for the avatar
-     * @description.zh-CN 头像属性
-     * @description.zh-TW 頭像屬性
+     * @description The props for the image
+     * @description.zh-CN 图像属性
+     * @description.zh-TW 圖像屬性
      */
     imageProps?: Omit<ImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
 
@@ -194,7 +194,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     uploadEnabled?: boolean;
 
     /**
-     * @description The upload props for the component
+     * @description The props for uploading
      * @description.zh-CN 上传属性
      * @description.zh-TW 上傳屬性
      */
@@ -209,29 +209,29 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     cropEnabled?: boolean;
 
     /**
-     * @description The crop props for the component
+     * @description The props for cropping
      * @description.zh-CN 裁剪属性
      * @description.zh-TW 裁剪屬性
      */
     cropProps?: Omit<ImgCropProps, 'children'>;
 
     /**
-     * @description Whether to use tooltip control
-     * @description.zh-CN 是否使用 Tooltip 控件
-     * @description.zh-TW 是否使用 Tooltip 控件
+     * @description Whether to use tooltip
+     * @description.zh-CN 是否使用 Tooltip
+     * @description.zh-TW 是否使用 Tooltip
      * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The properties of tooltip
+     * @description The prop for tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: TooltipProps;
 
     /**
-     * @description The locale props for the component
+     * @description The props for locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */
