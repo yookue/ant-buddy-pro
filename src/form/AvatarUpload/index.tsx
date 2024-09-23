@@ -466,13 +466,12 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         if (!cropEnabled) {
             return uploadDom;
         }
-        const omitCropProps = !props?.cropProps ? {} : omit(props.cropProps, ['modalClassName', 'modalTitle', 'rotationSlider']);
+        const omitCropProps = !props?.cropProps ? {} : omit(props.cropProps, ['modalClassName', 'modalTitle']);
         const cropModalTitle = props?.localeProps?.cropModalTitle || intlLocales.get([intlType.locale, 'cropModalTitle']) || intlLocales.get(['en_US', 'cropModalTitle']);
         return (
             <ImgCrop
                 modalClassName={classNames(`${clazzPrefix}-crop`, props?.cropProps?.modalClassName)}
                 modalTitle={props?.cropProps?.modalTitle ?? cropModalTitle}
-                rotationSlider={props?.cropProps?.rotationSlider ?? true}
                 {...omitCropProps}
             >
                 {uploadDom}
