@@ -1,6 +1,6 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "0.1.106",
+    "version": "0.1.107",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on React & Ant Design ProComponents",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
@@ -46,7 +46,7 @@
         "@yookue/react-condition": "^0.1.18",
         "@yookue/ts-lang-utils": "^0.1.57",
         "@yookue/ts-multi-map": "^0.1.29",
-        "antd-img-crop": "~4.4.0",
+        "antd-img-crop": "^4.23.0",
         "object-hash": "^3.0.0",
         "rc-scrollbars": "^1.1.6",
         "rc-tween-one": "^3.0.6",
