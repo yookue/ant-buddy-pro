@@ -116,7 +116,7 @@ Here are some milestone versions of the changelog:
     - Add 'form/LocaleInput'
 
   - **v0.0.3** [2023-08-15]
-    - Add 'field/FullScreen'
+    - Add 'field/Fullscreen'
     - Add 'layout/LoginPortal'
 
   - **v0.0.1** [2023-08-13]

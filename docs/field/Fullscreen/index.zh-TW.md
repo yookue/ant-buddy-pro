@@ -2,9 +2,9 @@
 toc: content
 ---
 
-## FullScreen
+## Fullscreen
 
-FullScreen 是壹個用來切換文檔全屏的圖標按鈕。
+Fullscreen 是壹個用來切換全屏的圖標按鈕。
 
 ### 使用前提
 
@@ -17,7 +17,7 @@ npm install @ant-design/icons --save
 ### 導入組件
 
 ```jsx | pure
-import {FullScreen} from '@yookue/ant-buddy-pro';
+import {Fullscreen} from '@yookue/ant-buddy-pro';
 ```
 
 ### 使用示例
@@ -26,6 +26,6 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 
 ### 組件屬性
 
-#### FullScreenProps
+#### FullscreenProps
 
-<API src="@/field/FullScreen/index.tsx" hideTitle></API>
+<API src="@/field/Fullscreen/index.tsx" hideTitle></API>

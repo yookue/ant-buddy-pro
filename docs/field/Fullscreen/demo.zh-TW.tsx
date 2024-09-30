@@ -18,7 +18,7 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {FullScreen} from '@yookue/ant-buddy-pro';
+import {Fullscreen} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
@@ -27,7 +27,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='FullScreen_demo'
+                name='Fullscreen_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
@@ -45,10 +45,12 @@ export default () => {
                 />
             </ProForm>
             <Divider/>
-            <FullScreen
-                enterHint='全屏'
-                exitHint='退出全屏'
+            <Fullscreen
                 tooltipCtrl={tooltipCtrl}
+                localeProps={{
+                    requestFullscreen: '全屏',
+                    exitFullscreen: '退出全屏',
+                }}
             />
         </>
     );

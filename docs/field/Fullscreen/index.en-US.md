@@ -2,9 +2,9 @@
 toc: content
 ---
 
-## FullScreen
+## Fullscreen
 
-FullScreen, provides an icon with the ability to toggle document full screen mode.
+Fullscreen, provides an icon with the ability to toggle fullscreen mode.
 
 ### Premise
 
@@ -19,7 +19,7 @@ npm install @ant-design/icons --save
 ### Import
 
 ```jsx | pure
-import {FullScreen} from '@yookue/ant-buddy-pro';
+import {Fullscreen} from '@yookue/ant-buddy-pro';
 ```
 
 ### Example
@@ -28,6 +28,6 @@ import {FullScreen} from '@yookue/ant-buddy-pro';
 
 ### Properties
 
-#### FullScreenProps
+#### FullscreenProps
 
-<API src="@/field/FullScreen/index.tsx" hideTitle></API>
+<API src="@/field/Fullscreen/index.tsx" hideTitle></API>

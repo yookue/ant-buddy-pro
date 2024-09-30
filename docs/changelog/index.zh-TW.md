@@ -116,7 +116,7 @@ nav:
     - 增加 'form/LocaleInput'
 
   - **v0.0.3** [2023-08-15]
-    - 增加 'field/FullScreen'
+    - 增加 'field/Fullscreen'
     - 增加 'layout/LoginPortal'
 
   - **v0.0.1** [2023-08-13]
