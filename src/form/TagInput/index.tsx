@@ -257,18 +257,18 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getTagContents: () => {
+        getTagContents: (): (string | number)[] | undefined => {
             return tagContents;
         },
-        setTagContents: (contents?: (string | number)[] | null) => {
+        setTagContents: (contents?: (string | number)[] | null): void => {
             setTagContents([...new Set(contents)]);
         },
-        addTagContent: (content?: string | number | null) => {
+        addTagContent: (content?: string | number | null): void => {
             if (!ArrayUtils.includes(tagContents, content)) {
                 setTagContents(ArrayUtils.add(tagContents, content) ?? []);
             }
         },
-        removeTagContent: (content?: string | number | null) => {
+        removeTagContent: (content?: string | number | null): void => {
             if (ArrayUtils.includes(tagContents, content)) {
                 setTagContents(ArrayUtils.remove(tagContents, content) ?? []);
             }

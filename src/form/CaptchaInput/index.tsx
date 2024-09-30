@@ -161,21 +161,21 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
 
     const fieldRef = React.useRef<HTMLDivElement>();
     const [count, setCount] = React.useState<number>(countDown);
-    const [loading, setLoading] = React.useState<boolean>();
+    const [loading, setLoading] = React.useState<boolean>(false);
     const [timing, setTiming] = React.useState<boolean>(false);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        isLoading: () => {
+        isLoading: (): boolean => {
             return loading;
         },
-        isTiming: () => {
+        isTiming: (): boolean => {
             return timing;
         },
-        startTimer: () => {
+        startTimer: (): void => {
             validatePhoneName().then(() => setTiming(true)).catch(() => {});
         },
-        endTimer: () => {
+        endTimer: (): void => {
             setTiming(false);
         }
     }));

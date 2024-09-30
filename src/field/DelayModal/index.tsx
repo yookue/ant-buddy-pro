@@ -93,7 +93,7 @@ export type DelayModalProps = {
      * @description.zh-TW 要觸發延遲事件的 DOM 元素
      * @default document
      */
-    triggerFor?: HTMLElement;
+    triggerElement?: HTMLElement;
 
     /**
      * @description The properties of the modal
@@ -128,7 +128,7 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
     const {
         preventEvents = ['keydown', 'mousedown', 'scroll'],
         timeoutMillis = 1000 * 60 * 5,
-        triggerFor = document,
+        triggerElement = document,
     } = props ?? {};
 
     const [modalOpen, setModalOpen] = React.useState<boolean>(false);
@@ -146,7 +146,7 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
     const onTimer = () => {
         if (props?.onceOnly) {
             preventEvents.forEach(item => {
-                triggerFor.removeEventListener(item, startTimer);
+                triggerElement.removeEventListener(item, startTimer);
             });
             clearTimer();
         }
@@ -194,12 +194,12 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
 
     React.useEffect(() => {
         preventEvents.forEach(item => {
-            triggerFor.addEventListener(item, startTimer);
+            triggerElement.addEventListener(item, startTimer);
         });
         startTimer();
         return () => {
             preventEvents.forEach(item => {
-                triggerFor.removeEventListener(item, startTimer);
+                triggerElement.removeEventListener(item, startTimer);
             });
             clearTimer();
         }
