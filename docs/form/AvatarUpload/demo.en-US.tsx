@@ -75,7 +75,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: cropEnabled,
-                            disabled: uploadEnabled,
+                            disabled: !uploadEnabled,
                             onChange: (value) => {
                                 setCropEnabled(value);
                             }

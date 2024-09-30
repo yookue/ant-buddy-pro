@@ -36,9 +36,9 @@ import './index.less';
 
 export type AvatarUploadRef = {
     isLoading: () => boolean;
-    getImageSrc: () => string;
+    getImageSrc: () => string | undefined;
     setImageSrc: (src?: string) => void;
-    getFallbackSrc: () => string;
+    getFallbackSrc: () => string | undefined;
     setFallbackSrc: (src?: string) => void;
 };
 
@@ -283,19 +283,19 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        isLoading: () => {
+        isLoading: (): boolean => {
             return loading;
         },
-        getImageSrc: () => {
+        getImageSrc: (): string | undefined => {
             return imageSrc;
         },
-        setImageSrc: (src?: string) => {
+        setImageSrc: (src?: string): void => {
             setImageSrc(src);
         },
-        getFallbackSrc: () => {
+        getFallbackSrc: (): string | undefined => {
             return fallbackSrc;
         },
-        setFallbackSrc: (src?: string) => {
+        setFallbackSrc: (src?: string): void => {
             setFallbackSrc(src);
         }
     }));
