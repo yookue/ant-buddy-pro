@@ -21,7 +21,6 @@ import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
 import screenfull from 'screenfull';
-import {NodeUtils} from '@/util/NodeUtils';
 import {intlLocales} from './intl-locales';
 
 
@@ -200,24 +199,23 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
         }
     };
 
-    const requestFullscreen = intlLocales.get([intlType.locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
-    const exitFullscreen = intlLocales.get([intlType.locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
-
     const iconDom = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
         onClick: handleToggleScreen,
     });
 
-    const buildInnerDom = () => {
+    const buildIconWrap = () => {
+        const requestFullscreen = intlLocales.get([intlType.locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
+        const exitFullscreen = intlLocales.get([intlType.locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
         if (!tooltipCtrl) {
             return (
-                <span title={NodeUtils.toString(fullscreen ? props?.localeProps?.exitFullscreen : props?.localeProps?.requestFullscreen) ?? (fullscreen ? exitFullscreen : requestFullscreen)}>
+                <span title={fullscreen ? (props?.localeProps?.exitFullscreen ?? exitFullscreen) : (props?.localeProps?.requestFullscreen ?? requestFullscreen)}>
                     {iconDom}
                 </span>
             );
         }
         return (
             <Tooltip
-                title={(fullscreen ? props?.localeProps?.exitFullscreen : props?.localeProps?.requestFullscreen) ?? (fullscreen ? exitFullscreen : requestFullscreen)}
+                title={fullscreen ? (props?.localeProps?.exitFullscreen ?? exitFullscreen) : (props?.localeProps?.requestFullscreen ?? requestFullscreen)}
                 {...props?.tooltipProps}
             >
                 {iconDom}
@@ -231,7 +229,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >
-            {buildInnerDom()}
+            {buildIconWrap()}
         </div>
     );
 });

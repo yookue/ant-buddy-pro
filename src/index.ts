@@ -18,9 +18,10 @@
 export {BorderBox, type BorderBoxProps} from './field/BorderBox';
 export {DelayModal, type DelayModalProps} from './field/DelayModal';
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
-export {FullScreen, type FullScreenProps} from './field/FullScreen';
+export {Fullscreen, type FullscreenProps, type FullscreenRef} from './field/Fullscreen';
 export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/NotifyBadge';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
+export {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from './field/ThumbToggle';
 export {AvatarUpload, type AvatarUploadProps, type AvatarUploadRef} from './form/AvatarUpload';
 export {CaptchaInput, type CaptchaInputProps, type CaptchaInputRef} from './form/CaptchaInput';
 export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';

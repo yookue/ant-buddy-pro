@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.108** [2024-10-01]
+    - Add 'field/ThumbToggle'
+
   - **v0.1.100** [2024-09-12]
     - Add 'util/ConsoleUtils'
 
