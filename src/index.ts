@@ -19,6 +19,7 @@ export {BorderBox, type BorderBoxProps} from './field/BorderBox';
 export {DelayModal, type DelayModalProps} from './field/DelayModal';
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {Fullscreen, type FullscreenProps, type FullscreenRef} from './field/Fullscreen';
+export {LabelField, type LabelFieldProps} from './field/LabelField';
 export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/NotifyBadge';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from './field/ThumbToggle';

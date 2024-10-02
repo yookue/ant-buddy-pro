@@ -17,11 +17,13 @@
 
 export type WithFalse<T> = T | false;
 
+export type AxisDirectionType = 'horizontal' | 'vertical';
+
+export type BeforeAfterType = 'before' | 'after';
+
 export type CircleSquareShape = 'circle' | 'square';
 
 export type FileSizeUint = 'KB' | 'MB' | 'GB';
-
-export type BeforeAfterPos = 'before' | 'after';
 
 export type LabelValueType = 'label' | 'value';
 

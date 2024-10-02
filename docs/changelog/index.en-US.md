@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.109** [2024-10-03]
+    - Add 'field/LabelField'
+
   - **v0.1.108** [2024-10-01]
     - Add 'field/ThumbToggle'
 
