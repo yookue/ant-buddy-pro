@@ -190,9 +190,9 @@ export type PageFooterProps = {
     copyrightStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to use the preset style for the component
-     * @description.zh-CN 组件是否使用预设样式
-     * @description.zh-TW 組件是否使用預設樣式
+     * @description The preset style of the component
+     * @description.zh-CN 预设样式
+     * @description.zh-TW 預設樣式
      * @default 'default'
      */
     presetStyle?: FooterPresetStyle;

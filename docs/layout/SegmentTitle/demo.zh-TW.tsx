@@ -18,12 +18,12 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {SegmentTitle, type BeforeAfterPos} from '@yookue/ant-buddy-pro';
+import {SegmentTitle, type BeforeAfterType} from '@yookue/ant-buddy-pro';
 import {type TitlePresetStyle} from '@yookue/ant-buddy-pro/layout/SegmentTitle';
 
 
 export default () => {
-    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterPos>('before');
+    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
     const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle>('default');
 
     return (
@@ -41,13 +41,13 @@ export default () => {
                         value: ornamentPos?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                            setOrnamentPos(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '前', value: 'before'},
                         {label: '后', value: 'after'},
-                        {label: '無', value: 'false'},
+                        {label: '無', value: false},
                     ]}
                 />
                 <ProFormRadio.Group
@@ -57,7 +57,7 @@ export default () => {
                         value: presetStyle?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                            setPresetStyle(event.target?.value);
                         }
                     }}
                     options={[
@@ -66,7 +66,7 @@ export default () => {
                         {label: '處理中', value: 'processing'},
                         {label: '警告', value: 'warning'},
                         {label: '錯誤', value: 'error'},
-                        {label: '無', value: 'false'},
+                        {label: '無', value: false},
                     ]}
                 />
             </ProForm>

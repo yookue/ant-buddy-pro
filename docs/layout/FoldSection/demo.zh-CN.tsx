@@ -19,13 +19,13 @@ import React from 'react';
 import {Empty, Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {FoldSection, type BeforeAfterPos} from '@yookue/ant-buddy-pro';
+import {FoldSection, type BeforeAfterType} from '@yookue/ant-buddy-pro';
 import {type SectionPresetStyle} from '@yookue/ant-buddy-pro/layout/FoldSection';
 
 
 export default () => {
-    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterPos>('before');
-    const [collapsePos, setCollapsePos] = React.useState<BeforeAfterPos>('after');
+    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
+    const [collapsePos, setCollapsePos] = React.useState<BeforeAfterType>('after');
     const [presetStyle, setPresetStyle] = React.useState<SectionPresetStyle>('default');
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
@@ -44,13 +44,13 @@ export default () => {
                         value: ornamentPos?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                            setOrnamentPos(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '前', value: 'before'},
                         {label: '后', value: 'after'},
-                        {label: '无', value: 'false'},
+                        {label: '无', value: false},
                     ]}
                 />
                 <ProFormRadio.Group
@@ -60,13 +60,13 @@ export default () => {
                         value: collapsePos?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setCollapsePos(event.target?.value === 'false' ? false : event.target?.value);
+                            setCollapsePos(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '前', value: 'before'},
                         {label: '后', value: 'after'},
-                        {label: '无', value: 'false'},
+                        {label: '无', value: false},
                     ]}
                 />
                 <ProFormRadio.Group
@@ -76,13 +76,13 @@ export default () => {
                         value: presetStyle?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                            setPresetStyle(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '默认', value: 'default'},
                         {label: '经典', value: 'classic'},
-                        {label: '无', value: 'false'},
+                        {label: '无', value: false},
                     ]}
                 />
                 <ProFormSwitch

@@ -27,7 +27,7 @@ import {If} from '@yookue/react-condition';
 import {BooleanUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {type WithFalse, type BeforeAfterPos, type RuleValidateScope} from '@/type/declaration';
+import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
 import {ElementUtils} from '@/util/ElementUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
@@ -123,7 +123,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 默認文本框的附属節點位置
      * @default 'after'
      */
-    actionPos?: WithFalse<BeforeAfterPos>;
+    actionPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description The properties of the dropdown div
@@ -168,7 +168,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 語言輸入項的標簽位置
      * @default 'before'
      */
-    popupTagPos?: WithFalse<BeforeAfterPos>;
+    popupTagPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description The DOM of language action for the primary input box
@@ -184,7 +184,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 語言輸入項的附屬節點位置
      * @default 'after'
      */
-    popupActionPos?: WithFalse<BeforeAfterPos>;
+    popupActionPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description Whether to use the same max length as entry field for the locale items

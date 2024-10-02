@@ -52,13 +52,13 @@ export default () => {
                         value: presetStyle?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                            setPresetStyle(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '默認', value: 'default'},
                         {label: '緊凑', value: 'compact'},
-                        {label: '無', value: 'false'},
+                        {label: '無', value: false},
                     ]}
                 />
             </ProForm>

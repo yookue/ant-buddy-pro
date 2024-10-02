@@ -52,13 +52,13 @@ export default () => {
                         value: presetStyle?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                            setPresetStyle(event.target?.value);
                         }
                     }}
                     options={[
                         {label: 'Default', value: 'default'},
                         {label: 'Compact', value: 'compact'},
-                        {label: 'False', value: 'false'},
+                        {label: 'False', value: false},
                     ]}
                 />
             </ProForm>

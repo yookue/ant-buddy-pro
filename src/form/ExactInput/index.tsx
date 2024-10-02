@@ -23,7 +23,7 @@ import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
+import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
@@ -77,7 +77,7 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 文本框的附属節點位置
      * @default 'after'
      */
-    addonPos?: WithFalse<BeforeAfterPos>;
+    addonPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description Whether to use compact mode for the addon

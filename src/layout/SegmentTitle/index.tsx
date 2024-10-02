@@ -19,7 +19,7 @@ import React from 'react';
 import {ConfigProvider} from 'antd';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
-import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
+import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import './index.less';
 
 
@@ -76,7 +76,7 @@ export type SegmentTitleProps = {
      * @description.zh-TW 裝飾 div 的位置
      * @default 'before'
      */
-    ornamentPos?: WithFalse<BeforeAfterPos>;
+    ornamentPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description The DOM of content div
@@ -100,9 +100,9 @@ export type SegmentTitleProps = {
     contentStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to use the preset style for the component
-     * @description.zh-CN 组件是否使用预设样式
-     * @description.zh-TW 組件是否使用預設樣式
+     * @description The preset style of the component
+     * @description.zh-CN 预设样式
+     * @description.zh-TW 預設樣式
      * @default 'default'
      */
     presetStyle?: TitlePresetStyle;

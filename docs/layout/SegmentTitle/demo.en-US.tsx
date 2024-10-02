@@ -18,12 +18,12 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {SegmentTitle, type BeforeAfterPos} from '@yookue/ant-buddy-pro';
+import {SegmentTitle, type BeforeAfterType} from '@yookue/ant-buddy-pro';
 import {type TitlePresetStyle} from '@yookue/ant-buddy-pro/layout/SegmentTitle';
 
 
 export default () => {
-    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterPos>('before');
+    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
     const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle>('default');
 
     return (
@@ -41,13 +41,13 @@ export default () => {
                         value: ornamentPos?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                            setOrnamentPos(event.target?.value);
                         }
                     }}
                     options={[
                         {label: 'Before', value: 'before'},
                         {label: 'After', value: 'after'},
-                        {label: 'False', value: 'false'},
+                        {label: 'False', value: false},
                     ]}
                 />
                 <ProFormRadio.Group
@@ -57,7 +57,7 @@ export default () => {
                         value: presetStyle?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                            setPresetStyle(event.target?.value);
                         }
                     }}
                     options={[
@@ -66,7 +66,7 @@ export default () => {
                         {label: 'Processing', value: 'processing'},
                         {label: 'Warning', value: 'warning'},
                         {label: 'Error', value: 'error'},
-                        {label: 'False', value: 'false'},
+                        {label: 'False', value: false},
                     ]}
                 />
             </ProForm>

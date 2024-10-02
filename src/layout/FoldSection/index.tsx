@@ -21,7 +21,7 @@ import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import CssMotion from 'rc-motion';
-import {type WithFalse, type BeforeAfterPos} from '@/type/declaration';
+import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {NodeUtils} from '@/util/NodeUtils';
 import './index.less';
 
@@ -93,7 +93,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-TW 頭部裝飾 span 的位置
      * @default 'before'
      */
-    headerOrnamentPos?: WithFalse<BeforeAfterPos>;
+    headerOrnamentPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description The DOM of content span that under the header div
@@ -136,7 +136,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-TW 頭部折叠 span 的位置
      * @default 'after'
      */
-    headerCollapsePos?: WithFalse<BeforeAfterPos>;
+    headerCollapsePos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description The DOM of collapse span that under the header div when expanded
@@ -244,9 +244,9 @@ export type FoldSectionProps = React.PropsWithChildren<{
     onOpenChange?: (open: boolean) => void;
 
     /**
-     * @description Whether to use the preset style for the component
-     * @description.zh-CN 组件是否使用预设样式
-     * @description.zh-TW 組件是否使用預設樣式
+     * @description The preset style of the component
+     * @description.zh-CN 预设样式
+     * @description.zh-TW 預設樣式
      * @default 'default'
      */
     presetStyle?: SectionPresetStyle;

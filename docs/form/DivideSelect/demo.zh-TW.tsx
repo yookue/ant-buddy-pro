@@ -35,7 +35,7 @@ export default () => {
                 submitter={false}
             >
                 <ProFormRadio.Group
-                    label='顯示選中項'
+                    label='選項和標簽'
                     radioType='button'
                     fieldProps={{
                         value: optionLabel,
@@ -50,7 +50,7 @@ export default () => {
                     ]}
                 />
                 <ProFormRadio.Group
-                    label='預製樣式'
+                    label='預設樣式'
                     radioType='button'
                     fieldProps={{
                         value: presetStyle,
@@ -67,6 +67,7 @@ export default () => {
                         {label: '70-30', value: '70-30'},
                         {label: '60-40', value: '60-40'},
                         {label: '50-50', value: '50-50'},
+                        {label: '無', value: false},
                     ]}
                 />
                 <Divider/>

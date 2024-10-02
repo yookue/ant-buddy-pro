@@ -19,12 +19,12 @@ import React from 'react';
 import {Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {ApartTitle, type BeforeAfterPos} from '@yookue/ant-buddy-pro';
+import {ApartTitle, type BeforeAfterType} from '@yookue/ant-buddy-pro';
 import {type ApartPresetStyle} from '@yookue/ant-buddy-pro/layout/ApartTitle';
 
 
 export default () => {
-    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterPos>('before');
+    const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
     const [presetStyle, setPresetStyle] = React.useState<ApartPresetStyle>('default');
 
     return (
@@ -42,13 +42,13 @@ export default () => {
                         value: ornamentPos?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setOrnamentPos(event.target?.value === 'false' ? false : event.target?.value);
+                            setOrnamentPos(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '前', value: 'before'},
                         {label: '后', value: 'after'},
-                        {label: '无', value: 'false'},
+                        {label: '无', value: false},
                     ]}
                 />
                 <ProFormRadio.Group
@@ -58,13 +58,13 @@ export default () => {
                         value: presetStyle?.toString(),
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setPresetStyle(event.target?.value === 'false' ? false : event.target?.value);
+                            setPresetStyle(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '默认', value: 'default'},
                         {label: '经典', value: 'classic'},
-                        {label: '无', value: 'false'},
+                        {label: '无', value: false},
                     ]}
                 />
             </ProForm>
