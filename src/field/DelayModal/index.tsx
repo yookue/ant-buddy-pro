@@ -131,15 +131,15 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
         triggerElement = document,
     } = props ?? {};
 
+    const entryId = nanoid();
     const [modalOpen, setModalOpen] = React.useState<boolean>(false);
     const [onceShown, setOnceShown] = React.useState<boolean>(false);
     const timerIdRef = React.useRef<number>(0)
 
-    const elementId = nanoid();
     const actionType = props?.actionType ?? (props?.modalProps ? 'modal' : 'info');
     const omitFuncProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'preprocess']);
     Object.assign(omitFuncProps, {
-        'key': elementId,
+        'key': entryId,
         'className': classNames(clazzPrefix, props?.modalFunProps?.className),
     });
 
@@ -212,7 +212,7 @@ export const DelayModal: React.FC<DelayModalProps> = (props?: DelayModalProps) =
     const restProps = !props?.modalProps ? {} : omit(props.modalProps, ['wrapClassName', 'onOk', 'onCancel']);
     return (
         <Modal
-            key={elementId}
+            key={entryId}
             open={modalOpen}
             wrapClassName={classNames(clazzPrefix, props?.modalProps?.wrapClassName)}
             {...restProps}

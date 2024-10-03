@@ -305,13 +305,13 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         tooltipCtrl = false,
     } = props ?? {};
 
+    const entryId = nanoid();
     const [dropdownOpen, setDropdownOpen] = React.useState<boolean>((props?.fieldProps?.open || props?.fieldProps?.defaultOpen) ?? false);
     const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);
     const [activeTab, setActiveTab] = React.useState<IconThemeType | undefined>(defaultTheme);
     const [searchWord, setSearchWord] = React.useState<string | undefined>(props?.fieldProps?.searchValue);
     const [searchDisabled, setSearchDisabled] = React.useState<boolean>(false);
     const searchRef = React.useRef<InputRef>(null);
-    const elementId = nanoid();
 
     const buildTextOptions = () => {
         const result: any[] = [];
@@ -373,7 +373,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const clearIconsBadge = () => {
-        const elements = document.querySelectorAll<HTMLElement>(`[data-icon-select-dropdown='${elementId}'] [data-icon-select-option]`);
+        const elements = document.querySelectorAll<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option]`);
         elements?.forEach(item => ElementUtils.removeClassName(item as HTMLElement, `${clazzPrefix}-icon-selected`));
     };
 
@@ -381,7 +381,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         if (StringUtils.isBlank(iconName)) {
             return;
         }
-        const element = document.querySelector<HTMLElement>(`[data-icon-select-dropdown='${elementId}'] [data-icon-select-option='${iconName}']`);
+        const element = document.querySelector<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option='${iconName}']`);
         if (element) {
             selected ? ElementUtils.appendClassName(element, `${clazzPrefix}-icon-selected`) : ElementUtils.removeClassName(element, `${clazzPrefix}-icon-selected`);
         }
@@ -621,7 +621,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         setTimeout(() => setSearchDisabled(false), 50);
                     }
                 }}
-                data-icon-select-dropdown={elementId}
+                data-icon-select-dropdown={entryId}
             >
                 <ProCard
                     className={classNames(themeInkBar ? `${clazzPrefix}-ink-bar` : undefined)}
