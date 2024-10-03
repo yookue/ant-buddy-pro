@@ -286,6 +286,12 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         props?.onTagContentsChange?.(tagContents);
     }, [tagContents]);
 
+    React.useLayoutEffect(() => {
+        const parentClazz = configContext.getPrefixCls('form-item');
+        const targetClazz = `${clazzPrefix}-form-item`;
+        fieldRef.current?.closest(`.${parentClazz}`)?.classList?.add(targetClazz);
+    }, [fieldRef.current]);
+
     const buildTweenOneProps = () => {
         return props?.tweenOneProps ?? {
             appear: false,
