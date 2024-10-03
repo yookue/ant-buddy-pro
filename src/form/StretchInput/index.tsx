@@ -101,27 +101,31 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
     const entryId = nanoid();
     const [stretchMe, setStretchMe] = React.useState<boolean>(false);
 
-    const ensureStretch = (event: any) => {
-        if (props?.collapseDom && stretchMe) {
-            const entry = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`);
-            if (entry && !entry.contains(event.target)) {
-                setStretchMe(false);
-            }
+    const restoreCollapse = (event: any) => {
+        if (!props?.collapseDom || !stretchMe) {
+            return;
+        }
+        const entry = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`);
+        if (entry && !entry.contains(event.target)) {
+            setStretchMe(false);
         }
     };
 
     React.useEffect(() => {
-        document.addEventListener('keydown', ensureStretch);
-        document.addEventListener('mousedown', ensureStretch);
-        return () => {
-            document.removeEventListener('keydown', ensureStretch);
-            document.removeEventListener('mousedown', ensureStretch);
+        if (stretchMe && props?.collapseDom) {
+            document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`)?.focus();
         }
-    }, []);
-
-    React.useEffect(() => {
         props?.onStretchChange?.(stretchMe);
     }, [stretchMe]);
+
+    React.useLayoutEffect(() => {
+        document.addEventListener('keydown', restoreCollapse);
+        document.addEventListener('mousedown', restoreCollapse);
+        return () => {
+            document.removeEventListener('keydown', restoreCollapse);
+            document.removeEventListener('mousedown', restoreCollapse);
+        }
+    }, []);
 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setStretchMe(true);
