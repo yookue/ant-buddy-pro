@@ -152,6 +152,13 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
     addingTagProps?: TagProps;
 
     /**
+     * @description Whether to use compact margin for the item
+     * @description.zh-CN 是否使用紧凑边距
+     * @description.zh-TW 是否使用緊凑邊距
+     */
+    compactMargin?: boolean;
+
+    /**
      * @description Whether the tween-one animation is enabled
      * @description.zh-CN 是否启用 tween-one 动画
      * @description.zh-TW 是否啟用 tween-one 動畫
@@ -287,9 +294,11 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     }, [tagContents]);
 
     React.useLayoutEffect(() => {
-        const parentClazz = configContext.getPrefixCls('form-item');
-        const targetClazz = `${clazzPrefix}-form-item`;
-        fieldRef.current?.closest(`.${parentClazz}`)?.classList?.add(targetClazz);
+        if (props?.compactMargin) {
+            const parentClazz = configContext.getPrefixCls('form-item');
+            const targetClazz = `${clazzPrefix}-compact-margin`;
+            fieldRef.current?.closest(`.${parentClazz}`)?.classList?.add(targetClazz);
+        }
     }, [fieldRef.current]);
 
     const buildTweenOneProps = () => {

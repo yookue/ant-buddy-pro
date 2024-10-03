@@ -85,7 +85,7 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 文本框的附属節點是否使用緊凑模式
      * @default true
      */
-    addonCompact?: boolean;
+    compactAddon?: boolean;
 
     /**
      * @description The properties of checkbox for addon
@@ -134,7 +134,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     // Initialize the default props
     const {
         addonPos = 'after',
-        addonCompact = true,
+        compactAddon = true,
         checkProps = {
             nameSuffix: 'Exact',
             idSuffix: 'Exact',
@@ -223,7 +223,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const afterDom = buildAddonDom(false);
 
     const posClazz = !addonPos ? undefined : `${clazzPrefix}-addon-${addonPos}`;
-    const compactClazz = !addonCompact ? undefined : `${clazzPrefix}-compact`;
+    const compactClazz = !compactAddon ? undefined : `${clazzPrefix}-compact`;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
 
     if (proField) {
