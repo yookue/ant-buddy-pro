@@ -31,6 +31,7 @@ export type ThumbDirection = 'up' | 'down';
 export type ThumbToggleRef = {
     isChecked: () => boolean;
     setChecked: (checked: boolean) => void;
+    toggleChecked: () => Promise<void>;
     getCount: () => number;
     setCount: (count: number) => void;
     increaseCount: () => void;
@@ -179,7 +180,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description.zh-CN 计数的触发更新函数
      * @description.zh-TW 計數的觸發更新函數
      */
-    onTrigger?: (checked?: boolean, count?: number) => boolean | number | void | Promise<boolean | number | void>;
+    onToggle?: (checked?: boolean, count?: number) => boolean | number | void | Promise<boolean | number | void>;
 
     /**
      * @description The props for locale
@@ -226,6 +227,9 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
         setChecked: (checked: boolean): void => {
             setChecked(checked);
         },
+        toggleChecked: async (): Promise<void> => {
+            await handleToggle();
+        },
         getCount: (): number => {
             return count;
         },
@@ -244,27 +248,29 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
         props?.onChange?.(checked, count);
     }, [checked, count]);
 
+    const handleToggle = async () => {
+        if (props?.onToggle) {
+            try {
+                const value = await props.onToggle(checked, count);
+                if (typeof value === 'number') {
+                    setCount(value);
+                } else if (value === true) {
+                    setCount(Math.max(0, (checked ? ((count ?? 1) - 1) : ((count ?? 0) + 1))));
+                }
+            } catch (ignored) {
+            }
+        } else {
+            setCount(Math.max(0, (checked ? ((count ?? 1) - 1) : ((count ?? 0) + 1))));
+        }
+        setChecked(!checked);
+    };
+
     const buildIconDom = () => {
         const icon = (direction === 'up') ? (checked ? LikeFilled : LikeOutlined) : (checked ? DislikeFilled : DislikeOutlined);
         return React.createElement(icon, {
             className: classNames(`${clazzPrefix}-icon-${direction}`, (checked ? props?.checkedClazz : props?.uncheckedClazz)),
             style: checked ? props?.checkedStyle : props?.uncheckedStyle,
-            onClick: !props?.checkable ? undefined : async () => {
-                if (props?.onTrigger) {
-                    try {
-                        const value = await props.onTrigger(checked, count);
-                        if (typeof value === 'number') {
-                            setCount(value);
-                        } else if (value === true) {
-                            setCount(Math.max(0, (checked ? ((count ?? 1) - 1) : ((count ?? 0) + 1))));
-                        }
-                    } catch (ignored) {
-                    }
-                } else {
-                    setCount(Math.max(0, (checked ? ((count ?? 1) - 1) : ((count ?? 0) + 1))));
-                }
-                setChecked(!checked);
-            }
+            onClick: !props?.checkable ? undefined : async () => handleToggle(),
         });
     };
 
