@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Button, Divider} from 'antd';
-import {PlusOutlined, MinusOutlined} from '@ant-design/icons';
+import {PlusOutlined, MinusOutlined, FireOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {ThumbToggle, ConsoleUtils, type ThumbToggleRef} from '@yookue/ant-buddy-pro';
 import {type ThumbDirection} from '@yookue/ant-buddy-pro/field/ThumbToggle';
@@ -100,6 +100,12 @@ export default () => {
                         onClick={() => thumbToggleRef.current?.decreaseCount()}
                     >
                         Decrease
+                    </Button>
+                    <Button
+                        icon={<FireOutlined/>}
+                        onClick={() => thumbToggleRef.current?.toggleChecked()}
+                    >
+                        Toggle
                     </Button>
                 </ProForm.Group>
             </ProForm>
