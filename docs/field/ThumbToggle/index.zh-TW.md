@@ -4,9 +4,7 @@ toc: content
 
 ## ThumbToggle
 
-ThumbToggle 用於顯示壹個拇指圖標，並可以切換。
-
-典型的應用場景是，顯示兩個拇指，分別為 `喜歡` 和 `不喜歡`。
+ThumbToggle 用於顯示壹個拇指圖標和計數，並可以切換。
 
 ### 導入組件
 

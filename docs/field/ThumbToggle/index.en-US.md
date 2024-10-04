@@ -4,9 +4,7 @@ toc: content
 
 ## ThumbToggle
 
-ThumbToggle component, can display a thumb with toggle capability.
-
-The typical scenario is, displaying two thumbs which acted as `like` and `dislike`.
+ThumbToggle component, can display a thumb with toggle capability, and a count.
 
 ### Import
 

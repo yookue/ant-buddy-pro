@@ -23,6 +23,7 @@ export {LabelField, type LabelFieldProps} from './field/LabelField';
 export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/NotifyBadge';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from './field/ThumbToggle';
+export {ThumbTuple, type ThumbTupleProps, type ThumbTupleRef} from './field/ThumbTuple';
 export {AvatarUpload, type AvatarUploadProps, type AvatarUploadRef} from './form/AvatarUpload';
 export {CaptchaInput, type CaptchaInputProps, type CaptchaInputRef} from './form/CaptchaInput';
 export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';
