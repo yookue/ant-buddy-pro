@@ -4,7 +4,7 @@ toc: content
 
 ## ThumbToggle
 
-ThumbToggle 用于显示一个拇指图标和计数，并可以切换。
+ThumbToggle 用于显示一个带计数的拇指图标，并可以切换。
 
 ### 导入组件
 

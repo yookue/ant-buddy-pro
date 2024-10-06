@@ -36,13 +36,13 @@ export default () => {
                 <ProForm.Group>
                     <Button
                         icon={<LikeOutlined/>}
-                        onClick={() => thumbTupleRef.current?.getThumbUpRef()?.current?.toggleChecked()}
+                        onClick={() => thumbTupleRef.current?.getThumbLikeRef()?.current?.toggleChecked()}
                     >
                         Toggle Like
                     </Button>
                     <Button
                         icon={<DislikeOutlined/>}
-                        onClick={() => thumbTupleRef.current?.getThumbDownRef()?.current?.toggleChecked()}
+                        onClick={() => thumbTupleRef.current?.getThumbDislikeRef()?.current?.toggleChecked()}
                     >
                         Toggle Dislike
                     </Button>
@@ -51,7 +51,7 @@ export default () => {
             <Divider/>
             <ThumbTuple
                 ref={thumbTupleRef}
-                thumbUpProps={{
+                thumbLikeProps={{
                     checkable: true,
                     tooltipCtrl: true,
                     localeProps: {
@@ -59,7 +59,7 @@ export default () => {
                         dislike: 'Dislike',
                     }
                 }}
-                thumbDownProps={{
+                thumbDislikeProps={{
                     checkable: true,
                     tooltipCtrl: true,
                     localeProps: {

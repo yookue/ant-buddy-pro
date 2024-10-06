@@ -20,12 +20,12 @@ import {Button, Divider} from 'antd';
 import {PlusOutlined, MinusOutlined, FireOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {ThumbToggle, ConsoleUtils, type ThumbToggleRef} from '@yookue/ant-buddy-pro';
-import {type ThumbDirection} from '@yookue/ant-buddy-pro/field/ThumbToggle';
+import {type ThumbActionType} from '@yookue/ant-buddy-pro/field/ThumbToggle';
 
 
 export default () => {
     const thumbToggleRef = React.useRef<ThumbToggleRef>(null);
-    const [direction, setDirection] = React.useState<ThumbDirection>('up');
+    const [actionType, setActionType] = React.useState<ThumbActionType>('like');
     const [showCount, setShowCount] = React.useState<boolean>(true);
     const [showZero, setShowZero] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
@@ -39,18 +39,19 @@ export default () => {
                 submitter={false}
             >
                 <ProFormRadio.Group
-                    label='方向'
+                    label='动作类型'
                     radioType='button'
                     fieldProps={{
-                        value: direction,
+                        value: actionType,
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setDirection(event.target?.value);
+                            setActionType(event.target?.value);
                         }
                     }}
                     options={[
-                        {label: '上', value: 'up'},
-                        {label: '下', value: 'down'},
+                        {label: '喜欢', value: 'like'},
+                        {label: '不喜欢', value: 'dislike'},
+                        {label: '收藏', value: 'favorite'},
                     ]}
                 />
                 <ProForm.Group>
@@ -66,11 +67,12 @@ export default () => {
                         }}
                     />
                     <ProFormSwitch
-                        label='显示 0 计数'
+                        label='显示计数 0'
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: showZero,
+                            disabled: !showCount,
                             onChange: (value) => {
                                 setShowZero(value);
                             }
@@ -112,8 +114,8 @@ export default () => {
             <Divider/>
             <ThumbToggle
                 ref={thumbToggleRef}
+                actionType={actionType}
                 checkable={true}
-                direction={direction}
                 showCount={showCount}
                 showZero={showZero}
                 tooltipCtrl={tooltipCtrl}
@@ -124,6 +126,7 @@ export default () => {
                 localeProps={{
                     like: '喜欢',
                     dislike: '不喜欢',
+                    favorite: '收藏',
                 }}
             />
         </>

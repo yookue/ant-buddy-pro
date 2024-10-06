@@ -4,7 +4,7 @@ toc: content
 
 ## ThumbToggle
 
-ThumbToggle component, can display a thumb with toggle capability, and a count.
+ThumbToggle component, can display a thumb with toggle capability, and a count number.
 
 ### Import
 

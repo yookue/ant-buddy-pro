@@ -20,12 +20,12 @@ import {Button, Divider} from 'antd';
 import {PlusOutlined, MinusOutlined, FireOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {ThumbToggle, ConsoleUtils, type ThumbToggleRef} from '@yookue/ant-buddy-pro';
-import {type ThumbDirection} from '@yookue/ant-buddy-pro/field/ThumbToggle';
+import {type ThumbActionType} from '@yookue/ant-buddy-pro/field/ThumbToggle';
 
 
 export default () => {
     const thumbToggleRef = React.useRef<ThumbToggleRef>(null);
-    const [direction, setDirection] = React.useState<ThumbDirection>('up');
+    const [actionType, setActionType] = React.useState<ThumbActionType>('like');
     const [showCount, setShowCount] = React.useState<boolean>(true);
     const [showZero, setShowZero] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
@@ -39,18 +39,19 @@ export default () => {
                 submitter={false}
             >
                 <ProFormRadio.Group
-                    label='Direction'
+                    label='Action Type'
                     radioType='button'
                     fieldProps={{
-                        value: direction,
+                        value: actionType,
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setDirection(event.target?.value);
+                            setActionType(event.target?.value);
                         }
                     }}
                     options={[
-                        {label: 'Up', value: 'up'},
-                        {label: 'Down', value: 'down'},
+                        {label: 'Like', value: 'like'},
+                        {label: 'Dislike', value: 'dislike'},
+                        {label: 'Favorite', value: 'favorite'},
                     ]}
                 />
                 <ProForm.Group>
@@ -71,6 +72,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: showZero,
+                            disabled: !showCount,
                             onChange: (value) => {
                                 setShowZero(value);
                             }
@@ -112,8 +114,8 @@ export default () => {
             <Divider/>
             <ThumbToggle
                 ref={thumbToggleRef}
+                actionType={actionType}
                 checkable={true}
-                direction={direction}
                 showCount={showCount}
                 showZero={showZero}
                 tooltipCtrl={tooltipCtrl}
@@ -124,6 +126,7 @@ export default () => {
                 localeProps={{
                     like: 'Like',
                     dislike: 'Dislike',
+                    favorite: 'Favorite',
                 }}
             />
         </>

@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.112** [2024-10-06]
+    - Add 'field/CountField'
+
   - **v0.1.111** [2024-10-04]
     - Add 'field/ThumbTuple'
 
