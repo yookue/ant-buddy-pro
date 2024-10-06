@@ -24,6 +24,7 @@ import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
+import {NodeUtils} from '@/util/NodeUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
@@ -143,8 +144,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         proField = true,
     } = props ?? {};
 
-    const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']);
-
     const generateCheckName = () => {
         if (checkProps?.name) {
             return checkProps?.name;
@@ -166,19 +165,23 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     };
 
     const buildTooltipDom = (actionDom: React.ReactNode) => {
-        if (tooltipCtrl) {
-            const title = props?.tooltipProps?.title || intlLocales.get([intlType.locale, 'matchExactly']) || intlLocales.get(['en_US', 'matchExactly']);
-            const restProps = !props?.tooltipProps ? {} : omit(props.tooltipProps, ['title']);
+        const matchExactly = intlLocales.get([intlType.locale, 'matchExactly']) || intlLocales.get(['en_US', 'matchExactly']);
+        if (!tooltipCtrl) {
             return (
-                <Tooltip title={title} {...restProps}>
+                <span className={`${clazzPrefix}-addon-tooltip`} title={NodeUtils.toString(props?.tooltipProps?.title) ?? matchExactly}>
                     {actionDom}
-                </Tooltip>
+                </span>
             );
         }
         return (
-            <span title={(typeof props?.tooltipProps?.title === 'string') ? props?.tooltipProps?.title : (intlLocales.get([intlType.locale, 'matchExactly']) || intlLocales.get(['en_US', 'matchExactly']))}>
-                {actionDom}
-            </span>
+            <Tooltip
+                title={props?.tooltipProps?.title ?? matchExactly}
+                {...(!props?.tooltipProps ? {} : omit(props.tooltipProps, ['title']))}
+            >
+                <span className={`${clazzPrefix}-addon-tooltip`}>
+                    {actionDom}
+                </span>
+            </Tooltip>
         );
     };
 
@@ -188,6 +191,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         }
         const checkboxName = generateCheckName();
         const checkboxId = generateCheckId();
+        const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']);
         const actionDom = (
             <Checkbox
                 name={checkboxName}
@@ -198,7 +202,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             </Checkbox>
         );
         const tooltipDom = buildTooltipDom(actionDom);
-
         const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && addonPos === 'before') || (!before && addonPos === 'after'))].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
@@ -216,12 +219,15 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 </If>
             </>
         );
-        return (nodeCount === 1) ? combineDom : (<Space>{combineDom}</Space>);
+        return (nodeCount === 1) ? combineDom : (
+            <Space className={`${clazzPrefix}-addon-space`}>
+                {combineDom}
+            </Space>
+        );
     };
 
     const beforeDom = buildAddonDom(true);
     const afterDom = buildAddonDom(false);
-
     const posClazz = !addonPos ? undefined : `${clazzPrefix}-addon-${addonPos}`;
     const compactClazz = !compactAddon ? undefined : `${clazzPrefix}-compact`;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
@@ -233,9 +239,9 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 {...restProps}
                 fieldProps={{
                     className: classNames(clazzPrefix, posClazz, compactClazz, props?.fieldProps?.className),
-                    ...omitFieldProps,
                     addonBefore: beforeDom,
                     addonAfter: afterDom,
+                    ...omitFieldProps,
                 }}
             />
         );

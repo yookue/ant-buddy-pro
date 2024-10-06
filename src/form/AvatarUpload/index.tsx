@@ -367,12 +367,15 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             return props.avatarProps.icon;
         }
         return !tooltipCtrl ? (
-            <span className={`${clazzPrefix}-icon-placeholder`} title={NodeUtils.toString(props?.tooltipProps?.title)}>
+            <span
+                className={`${clazzPrefix}-avatar-tooltip`}
+                title={NodeUtils.toString(props?.tooltipProps?.title)}
+            >
                 <UserOutlined/>
             </span>
         ) : (
             <Tooltip {...props?.tooltipProps}>
-                <span className={`${clazzPrefix}-icon-placeholder`}>
+                <span className={`${clazzPrefix}-avatar-tooltip`}>
                     <UserOutlined/>
                 </span>
             </Tooltip>
@@ -395,12 +398,15 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             </>
         );
         return !tooltipCtrl ? (
-            <span className={`${clazzPrefix}-action-placeholder`} title={NodeUtils.toString(props?.tooltipProps?.title)}>
+            <span
+                className={`${clazzPrefix}-upload-tooltip`}
+                title={NodeUtils.toString(props?.tooltipProps?.title)}
+            >
                 {innerDom}
             </span>
         ) : (
             <Tooltip {...props?.tooltipProps}>
-                <span className={`${clazzPrefix}-action-placeholder`}>
+                <span className={`${clazzPrefix}-upload-tooltip`}>
                     {innerDom}
                 </span>
             </Tooltip>
@@ -411,12 +417,13 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         if (!imageSrc) {
             return undefined;
         }
-        const omitProps = !props?.imageProps ? {} : omit(props.imageProps, ['rootClassName']);
+        const omitProps = !props?.imageProps ? {} : omit(props.imageProps, ['className', 'rootClassName']);
         return !tooltipCtrl ? (
             <Image
+                className={classNames(`${clazzPrefix}-image`, props?.imageProps?.className)}
                 src={imageSrc}
                 fallback={fallbackSrc}
-                rootClassName={classNames(`${clazzPrefix}-image`, props?.imageProps?.rootClassName)}
+                rootClassName={classNames(`${clazzPrefix}-image-root`, props?.imageProps?.rootClassName)}
                 preview={false}
                 title={NodeUtils.toString(props?.tooltipProps?.title)}
                 {...omitProps}
@@ -424,9 +431,10 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         ) : (
             <Tooltip {...props?.tooltipProps}>
                 <Image
+                    className={classNames(`${clazzPrefix}-image`, props?.imageProps?.className)}
                     src={imageSrc}
                     fallback={fallbackSrc}
-                    rootClassName={classNames(`${clazzPrefix}-image`, props?.imageProps?.rootClassName)}
+                    rootClassName={classNames(`${clazzPrefix}-image-root`, props?.imageProps?.rootClassName)}
                     preview={false}
                     {...omitProps}
                 />

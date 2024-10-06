@@ -16,26 +16,26 @@
 
 
 import React from 'react';
-import {ConfigProvider, Badge, Tooltip, type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
-import {LikeFilled, DislikeFilled, LikeOutlined, DislikeOutlined} from '@ant-design/icons';
+import {ConfigProvider, type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
+import {LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, StarOutlined, StarFilled} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
+import {type AxisDirectionType} from '@/type/declaration';
+import {CountField, type CountFieldRef} from '@/field/CountField';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
 
-export type ThumbDirection = 'up' | 'down';
+export type ThumbActionType = 'like' | 'dislike' | 'favorite';
 
 
-export type ThumbToggleRef = {
+export type ThumbToggleRef = CountFieldRef & {
+    isCheckable: () => boolean,
+    setCheckable: (checkable: boolean) => void;
     isChecked: () => boolean;
     setChecked: (checked: boolean) => void;
     toggleChecked: () => Promise<void>;
-    getCount: () => number;
-    setCount: (count: number) => void;
-    increaseCount: () => void;
-    decreaseCount: () => void;
 };
 
 
@@ -53,6 +53,13 @@ export type IntlLocaleProps = {
      * @description.zh-TW 不喜歡
      */
     dislike?: string;
+
+    /**
+     * @description Favorite
+     * @description.zh-CN 收藏
+     * @description.zh-TW 收藏
+     */
+    favorite?: string;
 };
 
 
@@ -80,37 +87,45 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description Whether can click the thumb or not
-     * @description.zh-CN 是否可点击拇指交互
-     * @description.zh-TW 是否可點擊拇指交互
+     * @description The action type
+     * @description.zh-CN 动作类型
+     * @description.zh-TW 動作類型
+     */
+    actionType: ThumbActionType;
+
+    /**
+     * @description Whether can checked the icon or not
+     * @description.zh-CN 是否可选中图标
+     * @description.zh-TW 是否可選中圖標
+     * @default false
      */
     checkable?: boolean;
 
     /**
      * @description The CSS class name of the icon when checked
-     * @description.zh-CN 拇指图标选中时的 CSS 类名
-     * @description.zh-TW 拇指圖標選中時的 CSS 類名
+     * @description.zh-CN 图标选中时的 CSS 类名
+     * @description.zh-TW 圖標選中時的 CSS 類名
      */
     checkedClazz?: string;
 
     /**
      * @description The CSS style of the icon when checked
-     * @description.zh-CN 拇指图标选中时的 CSS 样式
-     * @description.zh-TW 拇指圖標選中時的 CSS 樣式
+     * @description.zh-CN 图标选中时的 CSS 样式
+     * @description.zh-TW 圖標選中時的 CSS 樣式
      */
     checkedStyle?: React.CSSProperties;
 
     /**
      * @description The CSS class name of the icon when unchecked
-     * @description.zh-CN 拇指图标未选中时的 CSS 类名
-     * @description.zh-TW 拇指圖標未選中時的 CSS 類名
+     * @description.zh-CN 图标未选中时的 CSS 类名
+     * @description.zh-TW 圖標未選中時的 CSS 類名
      */
     uncheckedClazz?: string;
 
     /**
      * @description The CSS style of the icon when unchecked
-     * @description.zh-CN 拇指图标未选中时的 CSS 样式
-     * @description.zh-TW 拇指圖標未選中時的 CSS 樣式
+     * @description.zh-CN 图标未选中时的 CSS 样式
+     * @description.zh-TW 圖標未選中時的 CSS 樣式
      */
     uncheckedStyle?: React.CSSProperties;
 
@@ -127,15 +142,14 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description.zh-CN 计数的属性
      * @description.zh-TW 計數的屬性
      */
-    countProps?: Omit<BadgeProps, 'count' | 'showZero'>;
+    countProps?: Pick<BadgeProps, 'overflowCount' | 'title'>;
 
     /**
-     * @description The direction of the thumb
-     * @description.zh-CN 拇指的方向
-     * @description.zh-TW 拇指的方向
-     * @default 'up'
+     * @description The layout of the icon and the field
+     * @description.zh-CN 图标和内容的布局样式
+     * @description.zh-TW 圖標和內容的布局樣式
      */
-    direction?: ThumbDirection;
+    layout?: AxisDirectionType;
 
     /**
      * @description Whether to show the count or not
@@ -147,8 +161,8 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
 
     /**
      * @description Whether to show the zero count or not
-     * @description.zh-CN 是否显示为 0 的计数
-     * @description.zh-TW 是否顯示為 0 的計數
+     * @description.zh-CN 是否显示计数 0
+     * @description.zh-TW 是否顯示計數 0
      * @default true
      */
     showZero?: boolean;
@@ -207,20 +221,27 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
 
     // Initialize the default props
     const {
-        direction = 'up',
         showCount = true,
         showZero = true,
         tooltipCtrl = false,
     } = props ?? {};
 
+    ConsoleUtils.warn(props?.actionType !== undefined, true, 'ThumbToggle', `Prop 'actionType' must not be undefined`);
     ConsoleUtils.warn(props?.count === undefined || props.count >= 0, true, 'ThumbToggle', `Prop 'count' must be equal or greater than 0`);
 
     const fieldRef = React.useRef<HTMLDivElement>();
+    const countFieldRef = React.useRef<CountFieldRef>(null);
+    const [checkable, setCheckable] = React.useState<boolean>(props?.checkable || false);
     const [checked, setChecked] = React.useState<boolean>(props?.checked || props?.defaultChecked || false);
-    const [count, setCount] = React.useState<number>(props?.count ?? (checked ? 1 : 0));
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
+        isCheckable: (): boolean => {
+            return checkable;
+        },
+        setCheckable: (checkable: boolean): void => {
+            setCheckable(checkable);
+        },
         isChecked: (): boolean => {
             return checked;
         },
@@ -231,88 +252,100 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
             await handleToggle();
         },
         getCount: (): number => {
-            return count;
+            return countFieldRef.current?.getCount() ?? 0;
         },
         setCount: (count: number): void => {
-            setCount(Math.max(0, count));
+            countFieldRef.current?.setCount(count);
         },
         increaseCount: (): void => {
-            setCount(Math.max(0, count + 1));
+            countFieldRef.current?.increaseCount();
         },
         decreaseCount: (): void => {
-            setCount(Math.max(0, count - 1));
+            countFieldRef.current?.decreaseCount();
         }
     }));
 
     React.useEffect(() => {
-        props?.onChange?.(checked, count);
-    }, [checked, count]);
+        props?.onChange?.(checked, countFieldRef.current?.getCount());
+    }, [checked, countFieldRef.current?.getCount()]);
 
     const handleToggle = async () => {
         if (props?.onToggle) {
             try {
-                const value = await props.onToggle(checked, count);
+                const value = await props.onToggle(checked, (countFieldRef.current?.getCount() ?? 0));
                 if (typeof value === 'number') {
-                    setCount(value);
+                    countFieldRef.current?.setCount(value);
                 } else if (value === true) {
-                    setCount(Math.max(0, (checked ? ((count ?? 1) - 1) : ((count ?? 0) + 1))));
+                    const count = checked ? ((countFieldRef.current?.getCount() ?? 1) - 1) : ((countFieldRef.current?.getCount() ?? 0) + 1);
+                    countFieldRef.current?.setCount(Math.max(0, count));
                 }
             } catch (ignored) {
             }
         } else {
-            setCount(Math.max(0, (checked ? ((count ?? 1) - 1) : ((count ?? 0) + 1))));
+            const count = checked ? ((countFieldRef.current?.getCount() ?? 1) - 1) : ((countFieldRef.current?.getCount() ?? 0) + 1);
+            countFieldRef.current?.setCount(Math.max(0, count));
         }
         setChecked(!checked);
     };
 
     const buildIconDom = () => {
-        const icon = (direction === 'up') ? (checked ? LikeFilled : LikeOutlined) : (checked ? DislikeFilled : DislikeOutlined);
+        let icon = undefined;
+        switch (props?.actionType) {
+            case 'like':
+                icon = checked ? LikeFilled : LikeOutlined;
+                break;
+            case 'dislike':
+                icon = checked ? DislikeFilled : DislikeOutlined;
+                break;
+            case 'favorite':
+                icon = checked ? StarFilled : StarOutlined;
+                break;
+            default:
+                break;
+        }
+        if (!icon) {
+            return undefined;
+        }
         return React.createElement(icon, {
-            className: classNames(`${clazzPrefix}-icon-${direction}`, (checked ? props?.checkedClazz : props?.uncheckedClazz)),
+            className: classNames(`${clazzPrefix}-icon`, (checked ? props?.checkedClazz : props?.uncheckedClazz)),
             style: checked ? props?.checkedStyle : props?.uncheckedStyle,
-            onClick: !props?.checkable ? undefined : async () => handleToggle(),
+            onClick: !checkable ? undefined : async () => handleToggle(),
         });
     };
 
-    const buildIconWrap = () => {
-        const like = intlLocales.get([intlType.locale, 'like']) || intlLocales.get(['en_US', 'like']);
-        const dislike = intlLocales.get([intlType.locale, 'dislike']) || intlLocales.get(['en_US', 'dislike']);
-        if (!tooltipCtrl) {
-            return (
-                <span title={direction === 'up' ? (props?.localeProps?.like ?? like) : (props?.localeProps?.dislike ?? dislike)}>
-                    {buildIconDom()}
-                </span>
-            );
+    const detectIconTooltip = () => {
+        switch (props?.actionType) {
+            case 'like':
+                return props?.localeProps?.like || intlLocales.get([intlType.locale, 'like']) || intlLocales.get(['en_US', 'like']);
+            case 'dislike':
+                return props?.localeProps?.dislike || intlLocales.get([intlType.locale, 'dislike']) || intlLocales.get(['en_US', 'dislike']);
+            case 'favorite':
+                return props?.localeProps?.favorite || intlLocales.get([intlType.locale, 'favorite']) || intlLocales.get(['en_US', 'favorite']);
+            default:
+                return undefined;
         }
-        return (
-            <Tooltip
-                title={direction === 'up' ? (props?.localeProps?.like ?? like) : (props?.localeProps?.dislike ?? dislike)}
-                {...props?.tooltipProps}
-            >
-                {buildIconDom()}
-            </Tooltip>
-        );
-    };
-
-    const buildTextDom = () => {
-        return (!showCount || (count <= 0 && !showZero)) ? undefined : (
-            <Badge
-                className={`${clazzPrefix}-count`}
-                count={count}
-                showZero={showZero}
-                {...props?.countProps}
-            />
-        );
     };
 
     return (
         <div
             ref={(div) => fieldRef.current = div ?? undefined}
-            className={classNames(clazzPrefix, (props?.checkable ? `${clazzPrefix}-checkable` : undefined), `${clazzPrefix}-${checked ? 'checked' : 'unchecked'}`, props?.containerClazz)}
+            className={classNames(clazzPrefix, (checkable ? `${clazzPrefix}-checkable` : undefined), `${clazzPrefix}-${checked ? 'checked' : 'unchecked'}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
-            {buildIconWrap()}
-            {buildTextDom()}
+            <CountField
+                ref={countFieldRef}
+                field={buildIconDom()}
+                count={props?.count}
+                countProps={props?.countProps}
+                layout={props?.layout}
+                showCount={showCount}
+                showZero={showZero}
+                tooltipCtrl={tooltipCtrl}
+                tooltipProps={{
+                    title: detectIconTooltip(),
+                    ...props?.tooltipProps,
+                }}
+            />
         </div>
     );
 });

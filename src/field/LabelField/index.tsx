@@ -94,9 +94,9 @@ export type LabelFieldProps = React.PropsWithChildren<{
     field?: React.ReactNode | (() => React.ReactNode);
 
     /**
-     * @description The field element
-     * @description.zh-CN 内容节点
-     * @description.zh-TW 内容節點
+     * @description The space size
+     * @description.zh-CN 间距大小
+     * @description.zh-TW 間距大小
      */
     spaceSize?: SpaceSize;
 

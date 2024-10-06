@@ -23,8 +23,8 @@ import {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from '@/field/T
 
 
 export type ThumbTupleRef = {
-    getThumbUpRef: () => React.MutableRefObject<ThumbToggleRef | undefined>;
-    getThumbDownRef: () => React.MutableRefObject<ThumbToggleRef | undefined>;
+    getThumbLikeRef: () => React.MutableRefObject<ThumbToggleRef | undefined>;
+    getThumbDislikeRef: () => React.MutableRefObject<ThumbToggleRef | undefined>;
 };
 
 
@@ -33,7 +33,7 @@ export type ThumbTupleProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-thumb-tuple'
+     * @default 'buddy-thumb-group'
      */
     clazzPrefix?: string;
 
@@ -59,18 +59,18 @@ export type ThumbTupleProps = {
     spaceProps?: SpaceProps;
 
     /**
-     * @description The props for liking
-     * @description.zh-CN 喜欢的属性
-     * @description.zh-TW 喜歡的屬性
+     * @description The props for thumb liking
+     * @description.zh-CN 拇指喜欢的属性
+     * @description.zh-TW 拇指喜歡的屬性
      */
-    thumbUpProps?: Omit<ThumbToggleProps, 'ref' | 'direction'>;
+    thumbLikeProps?: Omit<ThumbToggleProps, 'ref' | 'actionType'>;
 
     /**
-     * @description The props for disliking
-     * @description.zh-CN 不喜欢的属性
-     * @description.zh-TW 不喜歡的屬性
+     * @description The props for thumb disliking
+     * @description.zh-CN 拇指不喜欢的属性
+     * @description.zh-TW 拇指不喜歡的屬性
      */
-    thumbDownProps?: Omit<ThumbToggleProps, 'ref' | 'direction'>;
+    thumbDislikeProps?: Omit<ThumbToggleProps, 'ref' | 'actionType'>;
 };
 
 
@@ -85,25 +85,25 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-tuple');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-group');
 
     const fieldRef = React.useRef<HTMLDivElement>();
-    const thumbUpRef = React.useRef<ThumbToggleRef>(null);
-    const thumbDownRef = React.useRef<ThumbToggleRef>(null);
+    const thumbLikeRef = React.useRef<ThumbToggleRef>(null);
+    const thumbDislikeRef = React.useRef<ThumbToggleRef>(null);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getThumbUpRef: (): React.MutableRefObject<ThumbToggleRef | null> => {
-            return thumbUpRef;
+        getThumbLikeRef: (): React.MutableRefObject<ThumbToggleRef | null> => {
+            return thumbLikeRef;
         },
-        getThumbDownRef: (): React.MutableRefObject<ThumbToggleRef | null> => {
-            return thumbDownRef;
+        getThumbDislikeRef: (): React.MutableRefObject<ThumbToggleRef | null> => {
+            return thumbDislikeRef;
         }
     }));
 
     const omitSpaceProps = !props?.spaceProps ? {} : omit(props.spaceProps, ['size']);
-    const omitUpProps = !props?.thumbUpProps ? {} : omit(props.thumbUpProps, ['onChange']);
-    const omitDownProps = !props?.thumbUpProps ? {} : omit(props.thumbUpProps, ['onChange']);
+    const omitLikeProps = !props?.thumbLikeProps ? {} : omit(props.thumbLikeProps, ['onChange']);
+    const omitDislikeProps = !props?.thumbLikeProps ? {} : omit(props.thumbLikeProps, ['onChange']);
 
     return (
         <div
@@ -116,25 +116,25 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
                 {...omitSpaceProps}
             >
                 <ThumbToggle
-                    ref={thumbUpRef}
-                    direction='up'
-                    {...omitUpProps}
+                    ref={thumbLikeRef}
+                    actionType='like'
+                    {...omitLikeProps}
                     onChange={async (checked) => {
-                        if (checked && thumbDownRef.current?.isChecked()) {
-                            await thumbDownRef.current?.toggleChecked();
+                        if (checked && thumbDislikeRef.current?.isChecked()) {
+                            await thumbDislikeRef.current?.toggleChecked();
                         }
-                        props?.thumbUpProps?.onChange?.(thumbUpRef.current?.isChecked(), thumbUpRef.current?.getCount());
+                        props?.thumbLikeProps?.onChange?.(thumbLikeRef.current?.isChecked(), thumbLikeRef.current?.getCount());
                     }}
                 />
                 <ThumbToggle
-                    ref={thumbDownRef}
-                    direction='down'
-                    {...omitDownProps}
+                    ref={thumbDislikeRef}
+                    actionType='dislike'
+                    {...omitDislikeProps}
                     onChange={async (checked) => {
-                        if (checked && thumbUpRef.current?.isChecked()) {
-                            await thumbUpRef.current?.toggleChecked();
+                        if (checked && thumbLikeRef.current?.isChecked()) {
+                            await thumbLikeRef.current?.toggleChecked();
                         }
-                        props?.thumbDownProps?.onChange?.(thumbDownRef.current?.isChecked(), thumbUpRef.current?.getCount());
+                        props?.thumbDislikeProps?.onChange?.(thumbDislikeRef.current?.isChecked(), thumbLikeRef.current?.getCount());
                     }}
                 />
             </Space>

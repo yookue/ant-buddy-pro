@@ -21,8 +21,11 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'like'], 'Like'],
     [['en_US', 'dislike'], 'Dislike'],
+    [['en_US', 'favorite'], 'Favorite'],
     [['zh_CN', 'like'], '喜欢'],
     [['zh_CN', 'dislike'], '不喜欢'],
+    [['zh_CN', 'favorite'], '收藏'],
     [['zh_TW', 'like'], '喜歡'],
     [['zh_TW', 'dislike'], '不喜歡'],
+    [['zh_TW', 'favorite'], '收藏'],
 ]);

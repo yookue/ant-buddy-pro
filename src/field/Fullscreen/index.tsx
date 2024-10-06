@@ -20,6 +20,7 @@ import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
+import omit from 'rc-util/es/omit';
 import screenfull from 'screenfull';
 import {intlLocales} from './intl-locales';
 
@@ -208,7 +209,10 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
         const exitFullscreen = intlLocales.get([intlType.locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
         if (!tooltipCtrl) {
             return (
-                <span title={fullscreen ? (props?.localeProps?.exitFullscreen ?? exitFullscreen) : (props?.localeProps?.requestFullscreen ?? requestFullscreen)}>
+                <span
+                    className={`${clazzPrefix}-tooltip`}
+                    title={fullscreen ? (props?.localeProps?.exitFullscreen ?? exitFullscreen) : (props?.localeProps?.requestFullscreen ?? requestFullscreen)}
+                >
                     {iconDom}
                 </span>
             );
@@ -218,7 +222,9 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
                 title={fullscreen ? (props?.localeProps?.exitFullscreen ?? exitFullscreen) : (props?.localeProps?.requestFullscreen ?? requestFullscreen)}
                 {...props?.tooltipProps}
             >
-                {iconDom}
+                <span className={`${clazzPrefix}-tooltip`}>
+                    {iconDom}
+                </span>
             </Tooltip>
         );
     };
