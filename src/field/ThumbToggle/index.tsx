@@ -142,7 +142,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description.zh-CN 计数的属性
      * @description.zh-TW 計數的屬性
      */
-    countProps?: Pick<BadgeProps, 'overflowCount' | 'title'>;
+    countProps?: Omit<BadgeProps, 'color' | 'count' | 'dot' | 'showZero' | 'size' | 'status' | 'text'>;
 
     /**
      * @description The layout of the icon and the field

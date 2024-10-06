@@ -59,8 +59,8 @@ export type CountFieldProps = React.PropsWithChildren<{
 
     /**
      * @description The field element
-     * @description.zh-CN 内容节点
-     * @description.zh-TW 内容節點
+     * @description.zh-CN 字段节点
+     * @description.zh-TW 字段節點
      */
     field?: React.ReactNode | (() => React.ReactNode);
 
@@ -77,7 +77,7 @@ export type CountFieldProps = React.PropsWithChildren<{
      * @description.zh-CN 计数的属性
      * @description.zh-TW 計數的屬性
      */
-    countProps?: Pick<BadgeProps, 'overflowCount' | 'title'>;
+    countProps?: Omit<BadgeProps, 'color' | 'count' | 'dot' | 'showZero' | 'size' | 'status' | 'text'>;
 
     /**
      * @description The layout of the label and the field

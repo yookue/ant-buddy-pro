@@ -112,7 +112,7 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
             style={props?.containerStyle}
         >
             <Space
-                size={props?.spaceProps?.size ?? 12}
+                size={props?.spaceProps?.size ?? 'middle'}
                 {...omitSpaceProps}
             >
                 <ThumbToggle
