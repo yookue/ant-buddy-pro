@@ -15,6 +15,7 @@
  */
 
 
+export {BadgeRibbon, type BadgeRibbonProps} from './field/BadgeRibbon';
 export {BorderBox, type BorderBoxProps} from './field/BorderBox';
 export {CountField, type CountFieldProps, type CountFieldRef} from './field/CountField';
 export {DelayModal, type DelayModalProps} from './field/DelayModal';

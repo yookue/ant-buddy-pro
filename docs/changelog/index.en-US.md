@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.114** [2024-10-09]
+    - Add 'field/BadgeRibbon'
+
   - **v0.1.112** [2024-10-06]
     - Add 'field/CountField'
 
