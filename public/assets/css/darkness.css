@@ -23,13 +23,6 @@
 }
 
 
-/* ant-form-item */
-
-[data-prefers-color='dark'] .ant-form-item-label > label {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-
 /* ant-badge */
 
 [data-prefers-color='dark'] .ant-badge {
@@ -81,6 +74,22 @@
     color: #fff;
     border-color: #3c9be8;
     background: #3c9be8;
+}
+
+
+/* ant-card */
+
+[data-prefers-color='dark'] .ant-card {
+    color: rgba(255, 255, 255, 0.85);
+    background: #141414;
+}
+[data-prefers-color='dark'] .ant-card-bordered {
+    border: 1px solid #303030;
+}
+[data-prefers-color='dark'] .ant-card-head {
+    color: rgba(255, 255, 255, 0.85);
+    background: transparent;
+    border-bottom: 1px solid #303030;
 }
 
 
@@ -159,6 +168,13 @@
 [data-prefers-color='dark'] .ant-dropdown-menu-submenu-title.ant-dropdown-menu-submenu-title-disabled:hover {
     color: rgba(255, 255, 255, 0.3);
     background-color: transparent;
+}
+
+
+/* ant-form-item */
+
+[data-prefers-color='dark'] .ant-form-item-label > label {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 
