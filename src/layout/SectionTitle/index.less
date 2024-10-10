@@ -29,20 +29,24 @@
     border-radius: @border-radius-base;
     align-items: center;
 
-    &-ornament-before,
-    &-ornament-after {
+    &-ornament {
         display: flex;
         flex: none;
         width: fit-content;
+        align-items: center;
         justify-content: center;
     }
 
-    &-ornament-before {
-        margin-right: @padding-xss;
+    &-ornament-before &-ornament {
+        margin-right: @margin-xss;
+        border-top-left-radius: @border-radius-base;
+        border-bottom-left-radius: @border-radius-base;
     }
 
-    &-ornament-after {
-        margin-left: @padding-xss;
+    &-ornament-after &-ornament {
+        margin-left: @margin-xss;
+        border-top-right-radius: @border-radius-base;
+        border-bottom-right-radius: @border-radius-base;
     }
 
     &-content {
@@ -57,15 +61,21 @@
 .@{buddy-section-title}-processing,
 .@{buddy-section-title}-warning,
 .@{buddy-section-title}-error {
-    .@{buddy-section-title}-ornament-before,
-    .@{buddy-section-title}-ornament-after {
+    .@{buddy-section-title}-ornament {
         color: @white;
         font-weight: 500;
-        padding: @padding-xs 18px;
+        font-size: @font-size-lg;
+        padding: 0.2148em @padding-md;
     }
 
-    .@{buddy-section-title}-content {
-        padding: @padding-xs @padding-sm;
+    &.@{buddy-section-title}-ornament-before .@{buddy-section-title}-content,
+    &.@{buddy-section-title}-ornament-after .@{buddy-section-title}-content {
+        align-items: center;
+        padding: 0 @padding-md;
+    }
+
+    &:not(.@{buddy-section-title}-ornament-before):not(.@{buddy-section-title}-ornament-after) .@{buddy-section-title}-content {
+        padding: 5px @padding-md;
     }
 }
 
@@ -73,8 +83,7 @@
 .@{buddy-section-title}-default {
     background: @gray-2;
 
-    .@{buddy-section-title}-ornament-before,
-    .@{buddy-section-title}-ornament-after {
+    .@{buddy-section-title}-ornament {
         background: @gray-6;
     }
 }
@@ -83,8 +92,7 @@
 .@{buddy-section-title}-success {
     background: @green-2;
 
-    .@{buddy-section-title}-ornament-before,
-    .@{buddy-section-title}-ornament-after {
+    .@{buddy-section-title}-ornament {
         background: @success-color;
     }
 }
@@ -93,8 +101,7 @@
 .@{buddy-section-title}-processing {
     background: @blue-2;
 
-    .@{buddy-section-title}-ornament-before,
-    .@{buddy-section-title}-ornament-after {
+    .@{buddy-section-title}-ornament {
         background: @processing-color;
     }
 }
@@ -103,8 +110,7 @@
 .@{buddy-section-title}-warning {
     background: @orange-2;
 
-    .@{buddy-section-title}-ornament-before,
-    .@{buddy-section-title}-ornament-after {
+    .@{buddy-section-title}-ornament {
         background: @warning-color;
     }
 }
@@ -113,8 +119,7 @@
 .@{buddy-section-title}-error {
     background: @red-2;
 
-    .@{buddy-section-title}-ornament-before,
-    .@{buddy-section-title}-ornament-after {
+    .@{buddy-section-title}-ornament {
         background: @error-color;
     }
 }

@@ -126,13 +126,13 @@ export const SectionTitle: React.FC<SectionTitleProps> = (props?: SectionTitlePr
         presetStyle = 'default',
     } = props ?? {};
 
-    const buildOrnamentDom = (before: boolean) => {
+    const buildOrnamentDom = () => {
         if (!props?.ornament || !ornamentPos) {
             return undefined;
         }
         return (
             <div
-                className={classNames(`${clazzPrefix}-ornament-${before ? 'before' : 'after'}`, props?.ornamentClazz)}
+                className={classNames(`${clazzPrefix}-ornament`, props?.ornamentClazz)}
                 style={props?.ornamentStyle}
             >
                 {props?.ornament}
@@ -142,17 +142,17 @@ export const SectionTitle: React.FC<SectionTitleProps> = (props?: SectionTitlePr
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))}
+            className={classNames(`${clazzPrefix}`, (ornamentPos ? `${clazzPrefix}-ornament-${ornamentPos}` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <If condition={ornamentPos === 'before'} validation={false}>
-                {buildOrnamentDom(true)}
+                {buildOrnamentDom()}
             </If>
             <div className={classNames(`${clazzPrefix}-content`, props?.contentClazz)} style={props?.contentStyle}>
                 {props?.content}
             </div>
             <If condition={ornamentPos === 'after'} validation={false}>
-                {buildOrnamentDom(false)}
+                {buildOrnamentDom()}
             </If>
         </div>
     );
