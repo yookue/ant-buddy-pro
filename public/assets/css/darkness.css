@@ -15,6 +15,23 @@
  */
 
 
+/* scrollbar */
+
+[data-prefers-color='dark'] *::-webkit-scrollbar-track {
+    background-color: #8c8c8c;
+}
+[data-prefers-color='dark'] *::-webkit-scrollbar-track:hover,
+[data-prefers-color='dark'] *::-webkit-scrollbar-track:active {
+    background-color: #8c8c8c;
+}
+[data-prefers-color='dark'] *::-webkit-scrollbar-thumb {
+    background-color: #595959;
+}
+[data-prefers-color='dark'] *::-webkit-scrollbar-thumb:hover,
+[data-prefers-color='dark'] *::-webkit-scrollbar-thumb:active {
+    background-color: #595959;
+}
+
 
 /* anticon */
 

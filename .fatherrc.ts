@@ -31,8 +31,7 @@ export default defineConfig({
         externals: {
             'react': 'React',
             'react-dom': 'ReactDOM',
-            'react/jsx-runtime': 'jsxRuntime',
-            'prop-types': 'PropTypes',
+            'moment': 'moment',
             'antd': 'antd',
             'classnames': 'classNames',
         }

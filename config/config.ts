@@ -51,6 +51,7 @@ export default {
         { rel: 'fluid-icon', type: 'image/svg+xml', href: `${globalSettings.context?.assets}/ico/logo-icon.svg` },
         { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.font.im/css?family=Comfortaa' },
         { rel: 'stylesheet', type: 'text/css', href: `${globalSettings.context?.assets}/css/darkness.css` },
+        { rel: 'stylesheet', type: 'text/css', href: `${globalSettings.context?.assets}/css/overlay.css` },
     ],
     navs: {
         'en-US': [
@@ -89,16 +90,20 @@ export default {
         'antd': 'antd',
     },
     headScripts: [
-        // 'https://unpkg.com/react@18.2.0/umd/react.production.min.js',
-        // 'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js',
-        // 'https://unpkg.com/classnames@2.5.2/index.js',
-        // 'https://unpkg.com/moment@2.30.1/min/moment.min.js',
-        // 'https://unpkg.com/antd@4.24.15/dist/antd.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/classnames/2.5.2/index.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/moment.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/antd/4.24.16/antd.min.js',
+        // Whether use unpkg
+        // {src: 'https://unpkg.com/react@18.2.0/umd/react.production.min.js'},
+        // {src: 'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js'},
+        // {src: 'https://unpkg.com/classnames@2.5.1/index.js'},
+        // {src: 'https://unpkg.com/moment@2.30.1/min/moment.min.js'},
+        // {src: 'https://unpkg.com/antd@4.24.16/dist/antd.min.js'},
+        // {src: 'https://unpkg.com/smooth-scrollbar@8.8.4/dist/smooth-scrollbar.js'},
+
+        // Or use bootcdn
+        {src: 'https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js'},
+        {src: 'https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js'},
+        {src: 'https://cdn.bootcdn.net/ajax/libs/classnames/2.5.2/index.min.js'},
+        {src: 'https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/moment.min.js'},
+        {src: 'https://cdn.bootcdn.net/ajax/libs/antd/4.24.16/antd.min.js'},
     ],
     extraBabelPlugins: [
         ['babel-plugin-import', {
@@ -123,14 +128,8 @@ export default {
     },
     styles: [
         `
-        .__dumi-default-navbar-logo {
-            font-family: Comfortaa, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, cursive;
-        }
         .__dumi-default-layout-hero {
             background: url("${globalSettings.context?.assets}/img/home/hero-bg-1.svg") !important
-        }
-        .__dumi-default-layout-hero h1, .__dumi-default-layout-hero .markdown, .__dumi-default-layout-hero button {
-            color: #fff !important;
         }
         `,
     ],
