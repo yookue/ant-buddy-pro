@@ -98,7 +98,7 @@ export default {
         'https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
         'https://cdn.bootcdn.net/ajax/libs/classnames/2.5.2/index.min.js',
         'https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/moment.min.js',
-        'https://cdn.bootcdn.net/ajax/libs/antd/4.24.15/antd.min.js',
+        'https://cdn.bootcdn.net/ajax/libs/antd/4.24.16/antd.min.js',
     ],
     extraBabelPlugins: [
         ['babel-plugin-import', {
