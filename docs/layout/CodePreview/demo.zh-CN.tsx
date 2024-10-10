@@ -37,7 +37,7 @@ export default () => {
                     label='预设样式'
                     radioType='button'
                     fieldProps={{
-                        value: presetStyle?.toString(),
+                        value: presetStyle,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setPresetStyle(event.target?.value);

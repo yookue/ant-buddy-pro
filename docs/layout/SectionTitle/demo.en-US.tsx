@@ -24,7 +24,7 @@ import {type TitlePresetStyle} from 'src/layout/SectionTitle';
 
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
-    const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle>('default');
+    const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle>('success');
 
     return (
         <>
@@ -38,7 +38,7 @@ export default () => {
                     label='Ornament Position'
                     radioType='button'
                     fieldProps={{
-                        value: ornamentPos?.toString(),
+                        value: ornamentPos,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setOrnamentPos(event.target?.value);
@@ -54,7 +54,7 @@ export default () => {
                     label='Preset Style'
                     radioType='button'
                     fieldProps={{
-                        value: presetStyle?.toString(),
+                        value: presetStyle,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setPresetStyle(event.target?.value);

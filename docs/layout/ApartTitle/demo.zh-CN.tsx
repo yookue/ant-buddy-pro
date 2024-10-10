@@ -39,7 +39,7 @@ export default () => {
                     label='装饰物位置'
                     radioType='button'
                     fieldProps={{
-                        value: ornamentPos?.toString(),
+                        value: ornamentPos,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setOrnamentPos(event.target?.value);
@@ -55,7 +55,7 @@ export default () => {
                     label='预设样式'
                     radioType='button'
                     fieldProps={{
-                        value: presetStyle?.toString(),
+                        value: presetStyle,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setPresetStyle(event.target?.value);

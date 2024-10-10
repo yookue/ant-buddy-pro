@@ -41,7 +41,7 @@ export default () => {
                     label='Ornament Position'
                     radioType='button'
                     fieldProps={{
-                        value: ornamentPos?.toString(),
+                        value: ornamentPos,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setOrnamentPos(event.target?.value);
@@ -57,7 +57,7 @@ export default () => {
                     label='Collapse Position'
                     radioType='button'
                     fieldProps={{
-                        value: collapsePos?.toString(),
+                        value: collapsePos,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setCollapsePos(event.target?.value);
@@ -73,7 +73,7 @@ export default () => {
                     label='Preset Style'
                     radioType='button'
                     fieldProps={{
-                        value: presetStyle?.toString(),
+                        value: presetStyle,
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setPresetStyle(event.target?.value);
