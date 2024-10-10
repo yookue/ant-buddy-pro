@@ -20,10 +20,10 @@
 @import (reference) '~antd/es/style/themes/index.less';
 @import (reference) '../../style/color/index.less';
 
-@buddy-segment-title: ~'@{ant-prefix}-buddy-segment-title';
+@buddy-section-title: ~'@{ant-prefix}-buddy-section-title';
 
 
-.@{buddy-segment-title} {
+.@{buddy-section-title} {
     display: flex;
     flex-flow: row nowrap;
     border-radius: @border-radius-base;
@@ -52,69 +52,69 @@
 }
 
 
-.@{buddy-segment-title}-default,
-.@{buddy-segment-title}-success,
-.@{buddy-segment-title}-processing,
-.@{buddy-segment-title}-warning,
-.@{buddy-segment-title}-error {
-    .@{buddy-segment-title}-ornament-before,
-    .@{buddy-segment-title}-ornament-after {
+.@{buddy-section-title}-default,
+.@{buddy-section-title}-success,
+.@{buddy-section-title}-processing,
+.@{buddy-section-title}-warning,
+.@{buddy-section-title}-error {
+    .@{buddy-section-title}-ornament-before,
+    .@{buddy-section-title}-ornament-after {
         color: @white;
         font-weight: 500;
         padding: @padding-xs 18px;
     }
 
-    .@{buddy-segment-title}-content {
+    .@{buddy-section-title}-content {
         padding: @padding-xs @padding-sm;
     }
 }
 
 
-.@{buddy-segment-title}-default {
+.@{buddy-section-title}-default {
     background: @gray-2;
 
-    .@{buddy-segment-title}-ornament-before,
-    .@{buddy-segment-title}-ornament-after {
+    .@{buddy-section-title}-ornament-before,
+    .@{buddy-section-title}-ornament-after {
         background: @gray-6;
     }
 }
 
 
-.@{buddy-segment-title}-success {
+.@{buddy-section-title}-success {
     background: @green-2;
 
-    .@{buddy-segment-title}-ornament-before,
-    .@{buddy-segment-title}-ornament-after {
+    .@{buddy-section-title}-ornament-before,
+    .@{buddy-section-title}-ornament-after {
         background: @success-color;
     }
 }
 
 
-.@{buddy-segment-title}-processing {
+.@{buddy-section-title}-processing {
     background: @blue-2;
 
-    .@{buddy-segment-title}-ornament-before,
-    .@{buddy-segment-title}-ornament-after {
+    .@{buddy-section-title}-ornament-before,
+    .@{buddy-section-title}-ornament-after {
         background: @processing-color;
     }
 }
 
 
-.@{buddy-segment-title}-warning {
+.@{buddy-section-title}-warning {
     background: @orange-2;
 
-    .@{buddy-segment-title}-ornament-before,
-    .@{buddy-segment-title}-ornament-after {
+    .@{buddy-section-title}-ornament-before,
+    .@{buddy-section-title}-ornament-after {
         background: @warning-color;
     }
 }
 
 
-.@{buddy-segment-title}-error {
+.@{buddy-section-title}-error {
     background: @red-2;
 
-    .@{buddy-segment-title}-ornament-before,
-    .@{buddy-segment-title}-ornament-after {
+    .@{buddy-section-title}-ornament-before,
+    .@{buddy-section-title}-ornament-after {
         background: @error-color;
     }
 }

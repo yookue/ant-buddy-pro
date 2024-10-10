@@ -26,12 +26,12 @@ import './index.less';
 export type TitlePresetStyle = WithFalse<'default' | 'success' | 'processing' | 'warning' | 'error'>;
 
 
-export type SegmentTitleProps = {
+export type SectionTitleProps = {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-segment-title'
+     * @default 'buddy-section-title'
      */
     clazzPrefix?: string;
 
@@ -114,11 +114,11 @@ export type SegmentTitleProps = {
  *
  * @author David Hsing
  */
-export const SegmentTitle: React.FC<SegmentTitleProps> = (props?: SegmentTitleProps) => {
+export const SectionTitle: React.FC<SectionTitleProps> = (props?: SectionTitleProps) => {
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-title');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-section-title');
 
     // Initialize the default props
     const {

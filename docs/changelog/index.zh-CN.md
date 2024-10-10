@@ -54,7 +54,7 @@ nav:
     - 增加 'field/DelayModal'
 
   - **v0.1.73** [2024-05-22]
-    - 增加 'layout/SegmentTitle'
+    - 增加 'layout/SectionTitle'
 
   - **v0.1.68** [2024-04-27]
     - 增加 'form/MaskInput'

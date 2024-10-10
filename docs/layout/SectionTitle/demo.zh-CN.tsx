@@ -18,8 +18,8 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {SegmentTitle, type BeforeAfterType} from '@yookue/ant-buddy-pro';
-import {type TitlePresetStyle} from '@yookue/ant-buddy-pro/layout/SegmentTitle';
+import {SectionTitle, type BeforeAfterType} from '@yookue/ant-buddy-pro';
+import {type TitlePresetStyle} from 'src/layout/SectionTitle';
 
 
 export default () => {
@@ -29,7 +29,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='SegmentTitle_demo'
+                name='SectionTitle_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
@@ -71,10 +71,10 @@ export default () => {
                 />
             </ProForm>
             <Divider/>
-            <SegmentTitle
+            <SectionTitle
                 ornament='1'
                 ornamentPos={ornamentPos}
-                content='SegmentTitle 标题内容'
+                content='SectionTitle 标题内容'
                 presetStyle={presetStyle}
             />
         </>

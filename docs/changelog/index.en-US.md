@@ -54,7 +54,7 @@ Here are some milestone versions of the changelog:
     - Add 'field/DelayModal'
 
   - **v0.1.73** [2024-05-22]
-    - Add 'layout/SegmentTitle'
+    - Add 'layout/SectionTitle'
 
   - **v0.1.68** [2024-04-27]
     - Add 'form/MaskInput'
