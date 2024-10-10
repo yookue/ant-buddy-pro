@@ -106,7 +106,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
 
     const omitProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'presetStyle']);
     return (
-        <div className={classNames(clazzPrefix, props?.containerClazz, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined))} style={props?.containerStyle}>
+        <div className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)} style={props?.containerStyle}>
             <Input.Group compact={true}>
                 {digitNode}
                 <ChronoSelect

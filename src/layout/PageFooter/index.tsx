@@ -222,7 +222,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
 
     return (
         <Layout.Footer
-            className={classNames(clazzPrefix, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))}
+            className={classNames(clazzPrefix, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>

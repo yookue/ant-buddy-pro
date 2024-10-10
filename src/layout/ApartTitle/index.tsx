@@ -142,7 +142,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))}
+            className={classNames(`${clazzPrefix}`, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <If condition={ornamentPos === 'before'} validation={false}>

@@ -338,7 +338,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     return (
         <section
-            className={classNames(clazzPrefix, props?.containerClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`)}
+            className={classNames(clazzPrefix, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
