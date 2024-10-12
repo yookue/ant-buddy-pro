@@ -26,7 +26,7 @@ export default () => {
     const [optionMode, setOptionMode] = React.useState<IconOptionMode>('icon');
     const [themeInkBar, setThemeInkBar] = React.useState<boolean>(true);
     const [sceneInkBar, setSceneInkBar] = React.useState<boolean>(true);
-    const [searchBox, setSearchBox] = React.useState<boolean>(true);
+    const [showSearch, setShowSearch] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
@@ -84,10 +84,10 @@ export default () => {
                         checkedChildren='True'
                         unCheckedChildren='False'
                         fieldProps={{
-                            checked: searchBox,
+                            checked: showSearch,
                             disabled: optionMode === 'text',
                             onChange: (value) => {
-                                setSearchBox(value);
+                                setShowSearch(value);
                             }
                         }}
                     />
@@ -111,22 +111,22 @@ export default () => {
                     optionMode={optionMode}
                     themeInkBar={themeInkBar}
                     sceneInkBar={sceneInkBar}
-                    searchBox={searchBox}
                     fieldProps={{
                         notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>),
+                        showSearch: showSearch,
                     }}
                     tooltipCtrl={tooltipCtrl}
                     localeProps={{
-                        searchBox: 'Search',
-                        outlinedTheme: 'Outlined',
-                        filledTheme: 'Filled',
-                        twotoneTheme: 'Two Tone',
-                        directionScene: 'Direction',
-                        suggestionScene: 'Suggestion',
-                        editorScene: 'Editor',
-                        dataScene: 'Data',
-                        logoScene: 'Logo',
-                        webScene: 'Web',
+                        search: 'Search',
+                        outlined: 'Outlined',
+                        filled: 'Filled',
+                        twotone: 'Two Tone',
+                        direction: 'Direction',
+                        suggestion: 'Suggestion',
+                        editor: 'Editor',
+                        data: 'Data',
+                        logo: 'Logo',
+                        web: 'Web',
                     }}
                 />
             </ProForm>

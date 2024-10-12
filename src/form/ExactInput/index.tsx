@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Checkbox, Space, Tooltip, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Input, Checkbox, Space, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {useIntl} from '@ant-design/pro-provider';
@@ -24,10 +24,20 @@ import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {NodeUtils} from '@/util/NodeUtils';
+import {TooltipRender} from '@/render/TooltipRender';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
+
+
+export type IntlLocaleProps = {
+    /**
+     * @description Match Exactly
+     * @description.zh-CN 全字匹配
+     * @description.zh-TW 全字匹配
+     */
+    exactMatch?: React.ReactNode;
+};
 
 
 export type AddonCheckProps = CheckboxProps & React.PropsWithChildren<{
@@ -96,19 +106,18 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     checkProps?: AddonCheckProps;
 
     /**
-     * @description Whether to use tooltip
+     * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
-     * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The prop for tooltip of the checkbox
-     * @description.zh-CN 复选框的 Tooltip 属性
-     * @description.zh-TW 复选框的 Tooltip 屬性
+     * @description The props for Tooltip
+     * @description.zh-CN Tooltip 属性
+     * @description.zh-TW Tooltip 屬性
      */
-    tooltipProps?: TooltipProps;
+    tooltipProps?: Omit<TooltipProps, 'title'>;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -117,6 +126,13 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @default true
      */
     proField?: boolean;
+
+    /**
+     * @description The props for locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 };
 
 
@@ -140,7 +156,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             nameSuffix: 'Exact',
             idSuffix: 'Exact',
         },
-        tooltipCtrl = false,
         proField = true,
     } = props ?? {};
 
@@ -164,27 +179,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         return undefined;
     };
 
-    const buildTooltipDom = (actionDom: React.ReactNode) => {
-        const matchExactly = intlLocales.get([intlType.locale, 'matchExactly']) || intlLocales.get(['en_US', 'matchExactly']);
-        if (!tooltipCtrl) {
-            return (
-                <span className={`${clazzPrefix}-addon-tooltip`} title={NodeUtils.toString(props?.tooltipProps?.title) ?? matchExactly}>
-                    {actionDom}
-                </span>
-            );
-        }
-        return (
-            <Tooltip
-                title={props?.tooltipProps?.title ?? matchExactly}
-                {...(!props?.tooltipProps ? {} : omit(props.tooltipProps, ['title']))}
-            >
-                <span className={`${clazzPrefix}-addon-tooltip`}>
-                    {actionDom}
-                </span>
-            </Tooltip>
-        );
-    };
-
     const buildAddonDom = (before: boolean) => {
         if (((before && addonPos !== 'before') || (!before && addonPos !== 'after')) && ((before && !props?.fieldProps?.addonBefore) || (!before && !props?.fieldProps?.addonAfter))) {
             return undefined;
@@ -192,7 +186,11 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         const checkboxName = generateCheckName();
         const checkboxId = generateCheckId();
         const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']);
-        const actionDom = (
+        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && addonPos === 'before') || (!before && addonPos === 'after'))].filter(object => !!object).length;
+        if (nodeCount === 0) {
+            return undefined;
+        }
+        const innerDom = (
             <Checkbox
                 name={checkboxName}
                 id={checkboxId ?? checkboxName}
@@ -201,11 +199,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 {checkProps?.children}
             </Checkbox>
         );
-        const tooltipDom = buildTooltipDom(actionDom);
-        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && addonPos === 'before') || (!before && addonPos === 'after'))].filter(object => !!object).length;
-        if (nodeCount === 0) {
-            return undefined;
-        }
         const combineDom = (
             <>
                 <If condition={before && props?.fieldProps?.addonBefore} validation={false}>
@@ -215,7 +208,10 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                     {props?.fieldProps?.addonAfter}
                 </If>
                 <If condition={(before && addonPos === 'before') || (!before && addonPos === 'after')} validation={false}>
-                    {tooltipDom}
+                    {TooltipRender.renderTooltip(props?.tooltipCtrl, {
+                        title: props?.localeProps?.exactMatch || intlLocales.get([intlType.locale, 'exactMatch']) || intlLocales.get(['en_US', 'exactMatch']),
+                        ...props?.tooltipProps,
+                    }, innerDom)}
                 </If>
             </>
         );

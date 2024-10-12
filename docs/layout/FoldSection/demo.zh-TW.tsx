@@ -99,15 +99,17 @@ export default () => {
             </ProForm>
             <Divider/>
             <FoldSection
-                headerOrnament={<AppstoreOutlined/>}
+                headerOrnamentDom={<AppstoreOutlined/>}
                 headerOrnamentPos={ornamentPos}
-                headerContent='FoldSection 頭部標題'
+                headerContentDom='FoldSection 頭部標題'
                 headerCollapsePos={collapsePos}
-                headerOpenedHint='摺叠'
-                headerClosedHint='展開'
                 panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='無數據'/>}
                 presetStyle={presetStyle}
                 tooltipCtrl={tooltipCtrl}
+                localeProps={{
+                    collapse: '摺叠',
+                    expend: '展開',
+                }}
             />
         </>
     );

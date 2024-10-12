@@ -16,12 +16,12 @@
 
 
 import React from 'react';
-import {ConfigProvider, Tooltip, type TooltipProps} from 'antd';
+import {ConfigProvider, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import screenfull from 'screenfull';
+import {TooltipRender} from '@/render/TooltipRender';
 import {intlLocales} from './intl-locales';
 
 
@@ -39,14 +39,14 @@ export type IntlLocaleProps = {
      * @description.zh-CN 全屏
      * @description.zh-TW 全屏
      */
-    requestFullscreen?: string;
+    requestFullscreen?: React.ReactNode;
 
     /**
      * @description Exit Fullscreen
      * @description.zh-CN 退出全屏
      * @description.zh-TW 退出全屏
      */
-    exitFullscreen?: string;
+    exitFullscreen?: React.ReactNode;
 };
 
 
@@ -89,15 +89,14 @@ export type FullscreenProps = {
     triggerElement?: HTMLElement;
 
     /**
-     * @description Whether to use tooltip
+     * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
-     * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The prop for tooltip
+     * @description The props for Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -129,7 +128,6 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     // Initialize the default props
     const {
         triggerElement = document.documentElement,
-        tooltipCtrl = false,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>();
@@ -200,33 +198,16 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
         }
     };
 
-    const iconDom = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
-        onClick: handleToggleScreen,
-    });
-
-    const buildIconWrap = () => {
-        const requestFullscreen = intlLocales.get([intlType.locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
-        const exitFullscreen = intlLocales.get([intlType.locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
-        if (!tooltipCtrl) {
-            return (
-                <span
-                    className={`${clazzPrefix}-tooltip`}
-                    title={fullscreen ? (props?.localeProps?.exitFullscreen ?? exitFullscreen) : (props?.localeProps?.requestFullscreen ?? requestFullscreen)}
-                >
-                    {iconDom}
-                </span>
-            );
-        }
-        return (
-            <Tooltip
-                title={fullscreen ? (props?.localeProps?.exitFullscreen ?? exitFullscreen) : (props?.localeProps?.requestFullscreen ?? requestFullscreen)}
-                {...props?.tooltipProps}
-            >
-                <span className={`${clazzPrefix}-tooltip`}>
-                    {iconDom}
-                </span>
-            </Tooltip>
-        );
+    const buildIconDom = () => {
+        const requestFullscreen = props?.localeProps?.requestFullscreen || intlLocales.get([intlType.locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
+        const exitFullscreen = props?.localeProps?.exitFullscreen || intlLocales.get([intlType.locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
+        const innerDom = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
+            onClick: handleToggleScreen,
+        });
+        return TooltipRender.renderTooltip(props?.tooltipCtrl, {
+            title: fullscreen ? exitFullscreen : requestFullscreen,
+            ...props?.tooltipProps,
+        }, innerDom);
     };
 
     return (
@@ -235,7 +216,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >
-            {buildIconWrap()}
+            {buildIconDom()}
         </div>
     );
 });

@@ -193,18 +193,18 @@ export type MixinTabsProps = Omit<TabsProps, 'addIcon' | 'hideAdd' | 'items' | '
 
 export type IntlLocaleProps = {
     /**
-     * @description The content of the clear button
-     * @description.zh-CN 清空按钮的内容节点
-     * @description.zh-TW 清空按鈕的內容節點
+     * @description Clear
+     * @description.zh-CN 清空
+     * @description.zh-TW 清空
      */
-    clearButton?: React.ReactNode;
+    clear?: React.ReactNode;
 
     /**
-     * @description The content of the more button
-     * @description.zh-CN 更多按钮的内容节点
-     * @description.zh-TW 更多按鈕的內容節點
+     * @description More
+     * @description.zh-CN 更多
+     * @description.zh-TW 更多
      */
-    moreButton?: React.ReactNode;
+    more?: React.ReactNode;
 };
 
 
@@ -389,7 +389,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onClear?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.clearButton || intlLocales.get([intlType.locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
+                            {props?.localeProps?.clear || intlLocales.get([intlType.locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
                         </div>
                     </If>
                     <If condition={showMore} validation={false}>
@@ -397,7 +397,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onMore?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.moreButton || intlLocales.get([intlType.locale, 'more']) || intlLocales.get(['en_US', 'more'])}
+                            {props?.localeProps?.more || intlLocales.get([intlType.locale, 'more']) || intlLocales.get(['en_US', 'more'])}
                         </div>
                     </If>
                 </div>

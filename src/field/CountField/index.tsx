@@ -16,13 +16,13 @@
 
 
 import React from 'react';
-import {ConfigProvider, Badge, Space, Tooltip, type BadgeProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Badge, Space, type BadgeProps, type TooltipProps} from 'antd';
 import {type SpaceSize} from 'antd/es/space';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type AxisDirectionType} from '@/type/declaration';
+import {TooltipRender} from '@/render/TooltipRender';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {NodeUtils} from '@/util/NodeUtils';
 import './index.less';
 
 
@@ -110,15 +110,14 @@ export type CountFieldProps = React.PropsWithChildren<{
     spaceSize?: SpaceSize;
 
     /**
-     * @description Whether to use tooltip
+     * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
-     * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The prop for tooltip
+     * @description The props for Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -152,7 +151,6 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
         showCount = true,
         showZero = true,
         spaceSize = 0,
-        tooltipCtrl = false,
     } = props ?? {};
 
     ConsoleUtils.warn(props?.count === undefined || props.count >= 0, true, 'CountField', `Prop 'count' must be equal or greater than 0`);
@@ -182,32 +180,20 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
 
     const buildFieldDom = () => {
         const content = !props?.field ? props?.children : (typeof props.field === 'function' ? props.field() : props.field);
-        const innerDom = !tooltipCtrl ? (
-            <span className={`${clazzPrefix}-field-tooltip`} title={NodeUtils.toString(props?.tooltipProps?.title)}>
-                {content}
-            </span>
-        ) : (
-            <Tooltip {...props?.tooltipProps}>
-                <span className={`${clazzPrefix}-field-tooltip`}>
-                    {content}
-                </span>
-            </Tooltip>
-        );
-        return (
-            <div className={`${clazzPrefix}-field`}>
-                {innerDom}
-            </div>
-        );
+        return TooltipRender.renderTooltip(props?.tooltipCtrl, props?.tooltipProps, content, `${clazzPrefix}-field`);
     };
 
     const buildCountDom = () => {
+        if (!showCount || (count <= 0 && !showZero)) {
+            return undefined;
+        }
         const omitProps = !props?.countProps ? {} : omit(props.countProps, ['overflowCount']);
-        return (!showCount || (count <= 0 && !showZero)) ? undefined : (
+        return (
             <div className={`${clazzPrefix}-count`}>
                 <Badge
                     count={count}
                     showZero={showZero}
-                    overflowCount={props?.countProps?.overflowCount ?? 999999999}
+                    overflowCount={props?.countProps?.overflowCount ?? 99999999}
                     {...omitProps}
                 />
             </div>

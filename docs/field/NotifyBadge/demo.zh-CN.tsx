@@ -120,8 +120,8 @@ export default () => {
                 }
             }}
             localeProps={{
-                clearButton: '清除',
-                moreButton: '更多',
+                clear: '清除',
+                more: '更多',
             }}
         />
     );

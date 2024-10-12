@@ -38,67 +38,67 @@ export type ChronoPresetStyle = WithFalse<'addon'>;
 
 export type IntlLocaleProps = {
     /**
-     * @description The label of the millis option
-     * @description.zh-CN 毫秒选项的标签
-     * @description.zh-TW 毫秒選項的標簽
+     * @description Millis
+     * @description.zh-CN 毫秒
+     * @description.zh-TW 毫秒
      */
-    millis?: string;
+    millis?: React.ReactNode;
 
     /**
-     * @description The label of the seconds option
-     * @description.zh-CN 秒选项的标签
-     * @description.zh-TW 秒選項的標簽
+     * @description Seconds
+     * @description.zh-CN 秒
+     * @description.zh-TW 秒
      */
-    seconds?: string;
+    seconds?: React.ReactNode;
 
     /**
-     * @description The label of the minutes option
-     * @description.zh-CN 分选项的标签
-     * @description.zh-TW 分選項的標簽
+     * @description Minutes
+     * @description.zh-CN 分钟
+     * @description.zh-TW 分鐘
      */
-    minutes?: string;
+    minutes?: React.ReactNode;
 
     /**
-     * @description The label of the hours option
-     * @description.zh-CN 小时选项的标签
-     * @description.zh-TW 小時選項的標簽
+     * @description Hours
+     * @description.zh-CN 小时
+     * @description.zh-TW 小時
      */
-    hours?: string;
+    hours?: React.ReactNode;
 
     /**
-     * @description The label of the days option
-     * @description.zh-CN 天选项的标签
-     * @description.zh-TW 天選項的標簽
+     * @description Days
+     * @description.zh-CN 天
+     * @description.zh-TW 天
      */
-    days?: string;
+    days?: React.ReactNode;
 
     /**
-     * @description The label of the weeks option
-     * @description.zh-CN 周选项的标签
-     * @description.zh-TW 周選項的標簽
+     * @description Weeks
+     * @description.zh-CN 周
+     * @description.zh-TW 周
      */
-    weeks?: string;
+    weeks?: React.ReactNode;
 
     /**
-     * @description The label of the months option
-     * @description.zh-CN 月选项的标签
-     * @description.zh-TW 月選項的標簽
+     * @description Months
+     * @description.zh-CN 月
+     * @description.zh-TW 月
      */
-    months?: string;
+    months?: React.ReactNode;
 
     /**
-     * @description The label of the years option
-     * @description.zh-CN 年选项的标签
-     * @description.zh-TW 年選項的標簽
+     * @description Years
+     * @description.zh-CN 年
+     * @description.zh-TW 年
      */
-    years?: string;
+    years?: React.ReactNode;
 
     /**
-     * @description The label of the forever option
-     * @description.zh-CN 永久选项的标签
-     * @description.zh-TW 永久選項的標簽
+     * @description Forever
+     * @description.zh-CN 永久
+     * @description.zh-TW 永久
      */
-    forever?: string;
+    forever?: React.ReactNode;
 };
 
 

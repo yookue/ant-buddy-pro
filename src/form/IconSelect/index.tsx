@@ -47,80 +47,80 @@ export type IconOptionMode = 'icon' | 'text';
 
 
 export type SelectFieldProps = Omit<ProFormFieldItemProps<SelectProps, RefSelectProps>, 'fieldProps'> & {
-    fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'dropdownRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'showSearch' | 'onPopupScroll'>;
+    fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'dropdownRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'onPopupScroll'>;
 };
 
 
 export type IntlLocaleProps = {
     /**
-     * @description The placeholder of the search box
-     * @description.zh-CN 搜索框的占位符
-     * @description.zh-TW 搜索框的占位符
+     * @description Search
+     * @description.zh-CN 搜索
+     * @description.zh-TW 搜索
      */
-    searchBox?: string;
+    search?: string;
 
     /**
-     * @description The display name of 'Outlined' theme type
-     * @description.zh-CN 线框风格的显示名称
-     * @description.zh-TW 線框風格的顯示名稱
+     * @description Outlined
+     * @description.zh-CN 线框风格
+     * @description.zh-TW 線框風格
      */
-    outlinedTheme?: string;
+    outlined?: string;
 
     /**
-     * @description The display name of 'Filled' theme type
-     * @description.zh-CN 实底风格的显示名称
-     * @description.zh-TW 實底風格的顯示名稱
+     * @description Filled
+     * @description.zh-CN 实底风格
+     * @description.zh-TW 實底風格
      */
-    filledTheme?: string;
+    filled?: string;
 
     /**
-     * @description The display name of 'TwoTone' theme type
-     * @description.zh-CN 双色风格的显示名称
-     * @description.zh-TW 雙色風格的顯示名稱
+     * @description TwoTone
+     * @description.zh-CN 双色风格
+     * @description.zh-TW 雙色風格
      */
-    twotoneTheme?: string;
+    twotone?: string;
 
     /**
-     * @description The display name of 'Direction' scene type
-     * @description.zh-CN 方向场景的显示名称
-     * @description.zh-TW 方向場景的顯示名稱
+     * @description Direction
+     * @description.zh-CN 方向类
+     * @description.zh-TW 方向類
      */
-    directionScene?: string;
+    direction?: string;
 
     /**
-     * @description The display name of 'Suggestion' scene type
-     * @description.zh-CN 建议场景的显示名称
-     * @description.zh-TW 建議場景的顯示名稱
+     * @description Suggestion
+     * @description.zh-CN 建议类
+     * @description.zh-TW 建議類
      */
-    suggestionScene?: string;
+    suggestion?: string;
 
     /**
-     * @description The display name of 'Editor' scene type
-     * @description.zh-CN 编辑场景的显示名称
-     * @description.zh-TW 編輯場景的顯示名稱
+     * @description Editor
+     * @description.zh-CN 编辑类
+     * @description.zh-TW 編輯類
      */
-    editorScene?: string;
+    editor?: string;
 
     /**
-     * @description The display name of 'Data' scene type
-     * @description.zh-CN 数据场景的显示名称
-     * @description.zh-TW 數據場景的顯示名稱
+     * @description Data
+     * @description.zh-CN 数据类
+     * @description.zh-TW 數據類
      */
-    dataScene?: string;
+    data?: string;
 
     /**
-     * @description The display name of 'Logo' scene type
-     * @description.zh-CN 品牌场景的显示名称
-     * @description.zh-TW 品牌場景的顯示名稱
+     * @description Logo
+     * @description.zh-CN 品牌类
+     * @description.zh-TW 品牌類
      */
-    logoScene?: string;
+    logo?: string;
 
     /**
-     * @description The display name of 'Web' scene type
-     * @description.zh-CN 网站场景的显示名称
-     * @description.zh-TW 網站場景的顯示名稱
+     * @description Web
+     * @description.zh-CN 网站类
+     * @description.zh-TW 網站類
      */
-    webScene?: string;
+    web?: string;
 };
 
 
@@ -242,14 +242,6 @@ export type IconSelectProps = SelectFieldProps & {
     optionIconStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to display the search box
-     * @description.zh-CN 是否显示搜索框
-     * @description.zh-TW 是否顯示搜索框
-     * @default true
-     */
-    searchBox?: boolean;
-
-    /**
      * @description The props for locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -257,7 +249,7 @@ export type IconSelectProps = SelectFieldProps & {
     localeProps?: IntlLocaleProps;
 
     /**
-     * @description Whether to use tooltip
+     * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
      * @default false
@@ -265,7 +257,7 @@ export type IconSelectProps = SelectFieldProps & {
     tooltipCtrl?: boolean;
 
     /**
-     * @description The prop for tooltip
+     * @description The props for Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -301,7 +293,6 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         defaultSceneType = 'direction',
         sceneInkBar = true,
         sceneEntryWidth = '150px',
-        searchBox = true,
         tooltipCtrl = false,
     } = props ?? {};
 
@@ -614,7 +605,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     event.preventDefault();
                     event.stopPropagation();
                 }}
-                onClick={!searchBox ? undefined : (event) => {
+                onClick={!props?.fieldProps?.showSearch ? undefined : (event) => {
                     if (event.target !== searchRef.current?.input && searchRef.current?.input === document.activeElement) {
                         // Disabled and re-enable the search box to restore non-focus state
                         setSearchDisabled(true);
@@ -632,10 +623,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         onChange: (activeKey: string) => {
                             setActiveTab(activeKey as IconThemeType);
                         },
-                        tabBarExtraContent: !searchBox ? undefined : (
+                        tabBarExtraContent: !props?.fieldProps?.showSearch ? undefined : (
                             <Input.Search
                                 ref={searchRef}
-                                placeholder={props?.localeProps?.searchBox || intlLocales.get([intlType.locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
+                                placeholder={props?.localeProps?.search || intlLocales.get([intlType.locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
                                 allowClear={true}
                                 size='small'
                                 disabled={searchDisabled}

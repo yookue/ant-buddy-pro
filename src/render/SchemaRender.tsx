@@ -40,7 +40,7 @@ export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'plac
  * @author David Hsing
  */
 // noinspection JSUnusedGlobalSymbols
-export abstract class SchemaRenders {
+export abstract class SchemaRender {
     /**
      * Returns the rendered `ExactInput` DOM for the given schema form column
      *

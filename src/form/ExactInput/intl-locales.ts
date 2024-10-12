@@ -19,7 +19,7 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 
 
 export const intlLocales = ReadonlyMultiKeyMap.of([
-    [['en_US', 'matchExactly'], 'Match Exactly'],
-    [['zh_CN', 'matchExactly'], '全字匹配'],
-    [['zh_TW', 'matchExactly'], '全字匹配'],
+    [['en_US', 'exactMatch'], 'Match Exactly'],
+    [['zh_CN', 'exactMatch'], '全字匹配'],
+    [['zh_TW', 'exactMatch'], '全字匹配'],
 ]);

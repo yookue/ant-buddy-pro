@@ -11,6 +11,10 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.115** [2024-10-12]
+    - Add 'field/TooltipField'
+    - Add 'render/TooltipRender'
+
   - **v0.1.114** [2024-10-09]
     - Add 'field/BadgeRibbon'
 
@@ -92,10 +96,10 @@ Here are some milestone versions of the changelog:
     - Add 'util/PropsUtils'
 
   - **v0.1.30** [2023-12-22]
-    - Add 'render/SchemaRenders'
+    - Add 'render/SchemaRender'
 
   - **v0.1.27** [2023-12-16]
-    - Add 'render/SelectRenders'
+    - Add 'render/SelectRender'
 
   - **v0.1.22** [2023-11-29]
     - Add 'form/DivideSelect'

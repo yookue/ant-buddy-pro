@@ -9,7 +9,7 @@ Similar to [Collapse](https://4x.ant.design/components/collapse/) of [Ant Design
 ### Premise
 
 <Alert type='info'>
-  Before use this component, you need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first if you're using the default <b><i>`headerOpenedDom`/`headerClosedDom`</i></b> attribute:
+  Before use this component, you need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first if you're using the default <b><i>`headerCollapseDom`/`headerExpandDom`</i></b> attribute:
 </Alert>
 
 ```bash

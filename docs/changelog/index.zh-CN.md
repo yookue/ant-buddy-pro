@@ -11,6 +11,10 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.115** [2024-10-11]
+    - 增加 'field/TooltipField'
+    - 增加 'render/TooltipRender'
+
   - **v0.1.114** [2024-10-09]
     - 增加 'field/BadgeRibbon'
 
@@ -92,10 +96,10 @@ nav:
     - 增加 'util/PropsUtils'
 
   - **v0.1.30** [2023-12-22]
-    - 增加 'render/SchemaRenders'
+    - 增加 'render/SchemaRender'
 
   - **v0.1.27** [2023-12-16]
-    - 增加 'render/SelectRenders'
+    - 增加 'render/SelectRender'
 
   - **v0.1.22** [2023-11-29]
     - 增加 'form/DivideSelect'

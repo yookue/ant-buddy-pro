@@ -120,8 +120,8 @@ export default () => {
                 }
             }}
             localeProps={{
-                clearButton: 'Clear',
-                moreButton: 'More',
+                clear: 'Clear',
+                more: 'More',
             }}
         />
     );

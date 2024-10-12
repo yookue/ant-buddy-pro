@@ -25,7 +25,7 @@ import {type LabeledValue} from 'antd/es/select';
  * @author David Hsing
  */
 // noinspection JSUnusedGlobalSymbols
-export abstract class SelectRenders {
+export abstract class SelectRender {
     /**
      * Returns the rendered DOM for the given select option, value first, label align right
      *

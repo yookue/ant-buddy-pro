@@ -51,6 +51,9 @@ export default () => {
                         addonBefore: '前綴',
                     }}
                     tooltipCtrl={tooltipCtrl}
+                    localeProps={{
+                        exactMatch: '全字匹配',
+                    }}
                 />
             </ProForm>
         </>

@@ -17,9 +17,9 @@
 
 import objectHash from 'object-hash';
 import {noteOnce as rcNote, warningOnce as rcWarning} from 'rc-util/es/warning';
-import packageJson from '#/package.json';
 
 
+const productName: string = '@yookue/ant-buddy-pro';
 const loggedHashes: string[] = [];
 
 
@@ -50,7 +50,7 @@ export abstract class ConsoleUtils {
         if (!message) {
             return;
         }
-        const result = (component ? `[${product ?? packageJson.name}: ${component}] ` : '').concat(message);
+        const result = (component ? `[${product ?? productName}: ${component}] ` : '').concat(message);
         const hash = objectHash(result);
         if (once && loggedHashes.includes(hash)) {
             return;
@@ -81,7 +81,7 @@ export abstract class ConsoleUtils {
         if (!message) {
             return;
         }
-        const result = (component ? `[${product ?? packageJson.name}: ${component}] ` : '').concat(message);
+        const result = (component ? `[${product ?? productName}: ${component}] ` : '').concat(message);
         if (once) {
             rcNote(valid, result);
         } else {
@@ -109,7 +109,7 @@ export abstract class ConsoleUtils {
         if (!message) {
             return;
         }
-        const result = (component ? `[${product ?? packageJson.name}: ${component}] ` : '').concat(message);
+        const result = (component ? `[${product ?? productName}: ${component}] ` : '').concat(message);
         if (once) {
             rcWarning(valid, result);
         } else {

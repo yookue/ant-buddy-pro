@@ -24,8 +24,14 @@
 
 .@{buddy-avatar-upload} {
     &-action-circle .@{ant-prefix}-upload-select {
-        border-radius: 50%;
+        border-radius: 50% !important;
         overflow: hidden;
+
+        .@{buddy-avatar-upload}-upload-space {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
     }
 
     &-image {

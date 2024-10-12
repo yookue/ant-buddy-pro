@@ -26,7 +26,7 @@ export default () => {
     const [optionMode, setOptionMode] = React.useState<IconOptionMode>('icon');
     const [themeInkBar, setThemeInkBar] = React.useState<boolean>(true);
     const [sceneInkBar, setSceneInkBar] = React.useState<boolean>(true);
-    const [searchBox, setSearchBox] = React.useState<boolean>(true);
+    const [showSearch, setShowSearch] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
@@ -84,10 +84,10 @@ export default () => {
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
-                            checked: searchBox,
+                            checked: showSearch,
                             disabled: optionMode === 'text',
                             onChange: (value) => {
-                                setSearchBox(value);
+                                setShowSearch(value);
                             }
                         }}
                     />
@@ -111,22 +111,22 @@ export default () => {
                     optionMode={optionMode}
                     themeInkBar={themeInkBar}
                     sceneInkBar={sceneInkBar}
-                    searchBox={searchBox}
                     fieldProps={{
                         notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='無數據'/>),
+                        showSearch: showSearch,
                     }}
                     tooltipCtrl={tooltipCtrl}
                     localeProps={{
-                        searchBox: '搜索',
-                        outlinedTheme: '線框風格',
-                        filledTheme: '實底風格',
-                        twotoneTheme: '雙色風格',
-                        directionScene: '方向類',
-                        suggestionScene: '建議類',
-                        editorScene: '編輯類',
-                        dataScene: '數據類',
-                        logoScene: '品牌類',
-                        webScene: '網站類',
+                        search: '搜索',
+                        outlined: '線框風格',
+                        filled: '實底風格',
+                        twotone: '雙色風格',
+                        direction: '方向類',
+                        suggestion: '建議類',
+                        editor: '編輯類',
+                        data: '數據類',
+                        logo: '品牌類',
+                        web: '網站類',
                     }}
                 />
             </ProForm>

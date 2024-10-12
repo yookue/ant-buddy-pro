@@ -16,18 +16,36 @@
 
 
 import React from 'react';
-import {ConfigProvider, Empty, Tooltip, type TooltipProps} from 'antd';
+import {ConfigProvider, Empty, type TooltipProps} from 'antd';
 import {DownOutlined, UpOutlined} from '@ant-design/icons';
+import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
 import classNames from 'classnames';
 import CssMotion from 'rc-motion';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {NodeUtils} from '@/util/NodeUtils';
+import {TooltipRender} from '@/render/TooltipRender';
+import {intlLocales} from './intl-locales';
 import './index.less';
 
 
 export type SectionPresetStyle = WithFalse<'default' | 'classic'>;
+
+
+export type IntlLocaleProps = {
+    /**
+     * @description Collapse
+     * @description.zh-CN 折叠
+     * @description.zh-TW 摺叠
+     */
+    collapse?: React.ReactNode;
+
+    /**
+     * @description Expend
+     * @description.zh-CN 展开
+     * @description.zh-TW 展開
+     */
+    expend?: React.ReactNode;
+};
 
 
 export type FoldSectionProps = React.PropsWithChildren<{
@@ -72,21 +90,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-CN 头部装饰 span 的内容
      * @description.zh-TW 頭部裝飾 span 的内容
      */
-    headerOrnament?: React.ReactNode;
-
-    /**
-     * @description The CSS class name of ornament span that under the header div
-     * @description.zh-CN 头部装饰 span 的 CSS 类名
-     * @description.zh-TW 頭部裝飾 span 的 CSS 類名
-     */
-    headerOrnamentClazz?: string;
-
-    /**
-     * @description The CSS style of ornament span that under the header div
-     * @description.zh-CN 头部装饰 span 的 CSS 样式
-     * @description.zh-TW 頭部裝飾 span 的 CSS 樣式
-     */
-    headerOrnamentStyle?: React.CSSProperties;
+    headerOrnamentDom?: React.ReactNode;
 
     /**
      * @description The position of ornament span that under the header div
@@ -101,35 +105,15 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description.zh-CN 头部标题 span 的内容
      * @description.zh-TW 頭部標題 span 的内容
      */
-    headerContent?: React.ReactNode;
+    headerContentDom?: React.ReactNode;
 
     /**
-     * @description The CSS class name of content span that under the header div
-     * @description.zh-CN 头部标题 span 的 CSS 类名
-     * @description.zh-TW 頭部標題 span 的 CSS 類名
+     * @description The DOM of collapse span that under the header div when expanded
+     * @description.zh-CN 头部折叠 span 的节点内容(面板展开时)
+     * @description.zh-TW 頭部折叠 span 的節點內容(面板展開時)
+     * @default <DownOutlined/>
      */
-    headerContentClazz?: string;
-
-    /**
-     * @description The CSS style of content span that under the header div
-     * @description.zh-CN 头部标题 span 的 CSS 样式
-     * @description.zh-TW 頭部標題 span 的 CSS 樣式
-     */
-    headerContentStyle?: React.CSSProperties;
-
-    /**
-     * @description The CSS class name of collapse span that under the header div
-     * @description.zh-CN 头部折叠 span 的 CSS 类名
-     * @description.zh-TW 頭部折叠 span 的 CSS 類名
-     */
-    headerCollapseClazz?: string;
-
-    /**
-     * @description The CSS style of collapse span that under the header div
-     * @description.zh-CN 头部折叠 span 的 CSS 样式
-     * @description.zh-TW 頭部折叠 span 的 CSS 樣式
-     */
-    headerCollapseStyle?: React.CSSProperties;
+    headerCollapseDom?: React.ReactNode;
 
     /**
      * @description The position of collapse span that under the header div
@@ -140,45 +124,22 @@ export type FoldSectionProps = React.PropsWithChildren<{
     headerCollapsePos?: WithFalse<BeforeAfterType>;
 
     /**
-     * @description The DOM of collapse span that under the header div when expanded
-     * @description.zh-CN 头部折叠 span 的节点内容(面板展开时)
-     * @description.zh-TW 頭部折叠 span 的節點內容(面板展開時)
-     * @default <DownOutlined/>
-     */
-    headerOpenedDom?: React.ReactNode;
-
-    /**
-     * @description The hint of collapse span that under the header div when expanded
-     * @description.zh-CN 头部折叠 span 的提示(面板展开时)
-     * @description.zh-TW 頭部折叠 span 的提示(面板展開時)
-     */
-    headerOpenedHint?: React.ReactNode;
-
-    /**
      * @description The DOM of collapse that under the header div when collapsed
      * @description.zh-CN 头部折叠 span 的节点内容(面板折叠时)
      * @description.zh-TW 頭部折叠 span 的節點內容(面板摺叠時)
      * @default <UpOutlined/>
      */
-    headerClosedDom?: React.ReactNode;
+    headerExpandDom?: React.ReactNode;
 
     /**
-     * @description The hint of collapse span that under the header div when collapsed
-     * @description.zh-CN 头部折叠 span 的提示(面板折叠时)
-     * @description.zh-TW 頭部折叠 span 的提示(面板摺叠時)
-     */
-    headerClosedHint?: React.ReactNode;
-
-    /**
-     * @description Whether to use tooltip
+     * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
-     * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The prop for tooltip
+     * @description The props for Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -233,7 +194,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description The DOM of placeholder for the panel div
      * @description.zh-CN 面板 div 的占位符
      * @description.zh-TW 面板 div 的佔位符
-     * @default <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>
+     * @default <Empty/>
      */
     panelPlaceholder?: React.ReactNode;
 
@@ -251,6 +212,13 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @default 'default'
      */
     presetStyle?: SectionPresetStyle;
+
+    /**
+     * @description The props for locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 }>;
 
 
@@ -264,14 +232,14 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fold-section');
+    const intlType = useIntl();
 
     // Initialize the default props
     const {
         headerOrnamentPos = 'before',
+        headerCollapseDom = <DownOutlined/>,
         headerCollapsePos = 'after',
-        headerClosedDom = <UpOutlined/>,
-        headerOpenedDom = <DownOutlined/>,
-        tooltipCtrl = false,
+        headerExpandDom = <UpOutlined/>,
         panelInitialOpen = true,
         panelForceRender = false,
         panelDestroyOnClose = false,
@@ -281,45 +249,35 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     const [panelOpen, setPanelOpen] = React.useState<boolean>(panelInitialOpen);
 
-    const buildOrnamentDom = (before: boolean) => {
-        if (!props?.headerOrnament || !headerOrnamentPos) {
+    const buildOrnamentDom = () => {
+        if (!props?.headerOrnamentDom || !headerOrnamentPos) {
             return undefined;
         }
         return (
-            <span
-                className={classNames(`${clazzPrefix}-header-ornament-${before ? 'before' : 'after'}`, props?.headerOrnamentClazz)}
-                style={props?.headerOrnamentStyle}
-            >
-                {props?.headerOrnament}
+            <span className={`${clazzPrefix}-header-ornament-${headerOrnamentPos}`}>
+                {props?.headerOrnamentDom}
             </span>
         );
     }
 
-    const buildCollapseDom = (before: boolean) => {
-        if ((!headerOpenedDom && !headerClosedDom) || !headerCollapsePos) {
+    const buildCollapseDom = () => {
+        if ((!headerCollapseDom && !headerExpandDom) || !headerCollapsePos) {
             return undefined;
         }
-        const content = (
+        const collapse = props?.localeProps?.collapse || intlLocales.get([intlType.locale, 'collapse']) || intlLocales.get(['en_US', 'collapse']);
+        const expend = props?.localeProps?.expend || intlLocales.get([intlType.locale, 'expend']) || intlLocales.get(['en_US', 'expend']);
+        const innerDom = (
             <span
-                className={classNames(`${clazzPrefix}-header-collapse-${before ? 'before' : 'after'}`, props?.headerCollapseClazz)}
-                style={props?.headerCollapseStyle}
-                title={tooltipCtrl ? undefined : NodeUtils.toString(panelOpen ? props?.headerOpenedHint : props?.headerClosedHint)}
+                className={`${clazzPrefix}-header-collapse-${headerCollapsePos}`}
                 onClick={handleCollapse}
             >
-                {panelOpen ? headerOpenedDom : headerClosedDom}
+                {panelOpen ? headerCollapseDom : headerExpandDom}
             </span>
         );
-        if (!tooltipCtrl) {
-            return content;
-        }
-        return (
-            <Tooltip
-                title={NodeUtils.toString(panelOpen ? props?.headerOpenedHint : props?.headerClosedHint)}
-                {...props?.tooltipProps}
-            >
-                {content}
-            </Tooltip>
-        );
+        return TooltipRender.renderTooltip(props?.tooltipCtrl, {
+            title: panelOpen ? collapse : expend,
+            ...props?.tooltipProps,
+        }, innerDom);
     }
 
     const handleCollapse = () => {
@@ -334,6 +292,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
             setPanelRendered(true);
         }
     }, [panelForceRender]);
+
     const panelVisible = (panelRendered || !!props?.panelContent || !!panelPlaceholder) && (panelOpen || (!panelOpen && !panelDestroyOnClose));
 
     return (
@@ -343,19 +302,19 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
                 <If condition={headerCollapsePos === 'before'} validation={false}>
-                    {buildCollapseDom(true)}
+                    {buildCollapseDom()}
                 </If>
                 <If condition={headerOrnamentPos === 'before'} validation={false}>
-                    {buildOrnamentDom(true)}
+                    {buildOrnamentDom()}
                 </If>
-                <span className={classNames(`${clazzPrefix}-header-content`, props?.headerContentClazz)} style={props?.headerContentStyle}>
-                    {props?.headerContent}
+                <span className={`${clazzPrefix}-header-content`}>
+                    {props?.headerContentDom}
                 </span>
                 <If condition={headerOrnamentPos === 'after'} validation={false}>
-                    {buildOrnamentDom(false)}
+                    {buildOrnamentDom()}
                 </If>
                 <If condition={headerCollapsePos === 'after'} validation={false}>
-                    {buildCollapseDom(false)}
+                    {buildCollapseDom()}
                 </If>
             </div>
             <CssMotion visible={panelVisible}>

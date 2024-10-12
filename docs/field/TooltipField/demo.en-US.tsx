@@ -17,8 +17,9 @@
 
 import React from 'react';
 import {Divider} from 'antd';
+import {GithubOutlined} from '@ant-design/icons';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ExactInput} from '@yookue/ant-buddy-pro';
+import {TooltipField} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
@@ -27,15 +28,15 @@ export default () => {
     return (
         <>
             <ProForm
-                name='ExactInput_demo'
+                name='TooltipField_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
                 <ProFormSwitch
-                    label='Tooltip 控件'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
+                    label='Tooltip Ctrl'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
                     fieldProps={{
                         checked: tooltipCtrl,
                         onChange: (value) => {
@@ -43,19 +44,17 @@ export default () => {
                         }
                     }}
                 />
-                <Divider/>
-                <ExactInput
-                    name='foobar'
-                    placeholder='请输入此项'
-                    fieldProps={{
-                        addonBefore: '前缀',
-                    }}
-                    tooltipCtrl={tooltipCtrl}
-                    localeProps={{
-                        exactMatch: '全字匹配',
-                    }}
-                />
             </ProForm>
-        </>
-    );
+            <Divider/>
+            <TooltipField
+                tooltipCtrl={tooltipCtrl}
+                tooltipProps={{
+                    title: 'Github',
+                }}
+            >
+                <a href='https://github.com/yookue/ant-buddy-pro' target='_blank' style={{color: 'inherit'}}>
+                    <GithubOutlined style={{fontSize: '24px'}}/>
+                </a>
+            </TooltipField>
+        </>);
 }

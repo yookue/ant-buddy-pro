@@ -15,24 +15,14 @@
  */
 
 
-@root-entry-name: default;
-// noinspection CssUnknownTarget
-@import (reference) '~antd/es/style/themes/index.less';
-
-@buddy-count-field: ~'@{ant-prefix}-buddy-count-field';
+import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 
 
-.@{buddy-count-field} {
-    .@{buddy-count-field}-field > .@{iconfont-css-prefix} {
-        min-width: 15px;
-        min-height: 15px;
-        vertical-align: middle;
-    }
-
-    .@{ant-prefix}-badge .@{ant-prefix}-badge-count {
-        background: inherit;
-        box-shadow: inherit;
-        color: inherit;
-        font-size: @font-size-base;
-    }
-}
+export const intlLocales = ReadonlyMultiKeyMap.of([
+    [['en_US', 'collapse'], 'Collapse'],
+    [['en_US', 'expend'], 'Expend'],
+    [['zh_CN', 'collapse'], '折叠'],
+    [['zh_CN', 'expend'], '展开'],
+    [['zh_TW', 'collapse'], '摺叠'],
+    [['zh_TW', 'expend'], '展開'],
+]);

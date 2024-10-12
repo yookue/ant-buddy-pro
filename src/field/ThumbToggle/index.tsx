@@ -45,21 +45,21 @@ export type IntlLocaleProps = {
      * @description.zh-CN 喜欢
      * @description.zh-TW 喜歡
      */
-    like?: string;
+    like?: React.ReactNode;
 
     /**
      * @description Dislike
      * @description.zh-CN 不喜欢
      * @description.zh-TW 不喜歡
      */
-    dislike?: string;
+    dislike?: React.ReactNode;
 
     /**
      * @description Favorite
      * @description.zh-CN 收藏
      * @description.zh-TW 收藏
      */
-    favorite?: string;
+    favorite?: React.ReactNode;
 };
 
 
@@ -168,15 +168,14 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     showZero?: boolean;
 
     /**
-     * @description Whether to use tooltip
+     * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
-     * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The prop for tooltip
+     * @description The props for Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -223,7 +222,6 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     const {
         showCount = true,
         showZero = true,
-        tooltipCtrl = false,
     } = props ?? {};
 
     ConsoleUtils.warn(props?.actionType !== undefined, true, 'ThumbToggle', `Prop 'actionType' must not be undefined`);
@@ -340,7 +338,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
                 layout={props?.layout}
                 showCount={showCount}
                 showZero={showZero}
-                tooltipCtrl={tooltipCtrl}
+                tooltipCtrl={props?.tooltipCtrl}
                 tooltipProps={{
                     title: detectIconTooltip(),
                     ...props?.tooltipProps,

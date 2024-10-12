@@ -9,7 +9,7 @@ toc: content
 ### Premise
 
 <Alert type='info'>
-  如果您使用默認的 <b><i>`headerOpenedDom`/`headerClosedDom`</i></b> 屬性，要使用此組件，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
+  如果您使用默認的 <b><i>`headerCollapseDom`/`headerExpandDom`</i></b> 屬性，要使用此組件，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
 </Alert>
 
 ```bash

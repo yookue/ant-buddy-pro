@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Avatar, Image, Tooltip, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps, message as messageApi} from 'antd';
+import {ConfigProvider, Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps, message as messageApi} from 'antd';
 import {type RcFile} from 'antd/es/upload/interface';
 import {UserOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
@@ -28,8 +28,8 @@ import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type CircleSquareShape, type FileSizeUint} from '@/type/declaration';
+import {TooltipRender} from '@/render/TooltipRender';
 import {FileUtils} from '@/util/FileUtils';
-import {NodeUtils} from '@/util/NodeUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -40,6 +40,44 @@ export type AvatarUploadRef = {
     setImageSrc: (src?: string) => void;
     getFallbackSrc: () => string | undefined;
     setFallbackSrc: (src?: string) => void;
+};
+
+
+export type IntlLocaleProps = {
+    /**
+     * @description Upload
+     * @description.zh-CN 上传
+     * @description.zh-TW 上傳
+     */
+    upload?: React.ReactNode;
+
+    /**
+     * @description Only allowed some files
+     * @description.zh-CN 只允许特定类型的文件
+     * @description.zh-TW 只允許特定類型的文件
+     */
+    allowTypes?: string;
+
+    /**
+     * @description File type is disallowed
+     * @description.zh-CN 不允许的文件类型
+     * @description.zh-TW 不允許的文件類型
+     */
+    disallowType?: string;
+
+    /**
+     * @description The title of image crop modal
+     * @description.zh-CN 头像裁剪对话框的标题
+     * @description.zh-TW 頭像裁剪對話框的標題
+     */
+    cropModalTitle?: string;
+
+    /**
+     * @description File size cant not be greater than {}{}
+     * @description.zh-CN 文件大小不能超过 {}{}
+     * @description.zh-TW 文件大小不能超過 {}{}
+     */
+    maxFileSize?: string;
 };
 
 
@@ -78,44 +116,6 @@ export type FileUploadProps = Omit<UploadProps, 'name' | 'maxCount' | 'showUploa
      * @description.zh-TW 上傳組件的占位符
      */
     placeholder?: React.ReactNode | (() => React.ReactNode);
-};
-
-
-export type IntlLocaleProps = {
-    /**
-     * @description Upload
-     * @description.zh-CN 上传
-     * @description.zh-TW 上傳
-     */
-    upload?: string;
-
-    /**
-     * @description Only allowed some files
-     * @description.zh-CN 只允许特定类型的文件
-     * @description.zh-TW 只允許特定類型的文件
-     */
-    allowTypes?: string;
-
-    /**
-     * @description File type is disallowed
-     * @description.zh-CN 不允许的文件类型
-     * @description.zh-TW 不允許的文件類型
-     */
-    disallowType?: string;
-
-    /**
-     * @description The title of image crop modal
-     * @description.zh-CN 头像裁剪对话框的标题
-     * @description.zh-TW 頭像裁剪對話框的標題
-     */
-    cropModalTitle?: string;
-
-    /**
-     * @description File size cant not be greater than {}{}
-     * @description.zh-CN 文件大小不能超过 {}{}
-     * @description.zh-TW 文件大小不能超過 {}{}
-     */
-    maxFileSize?: string;
 };
 
 
@@ -216,15 +216,14 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     cropProps?: Omit<ImgCropProps, 'children'>;
 
     /**
-     * @description Whether to use tooltip
+     * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
-     * @default false
      */
     tooltipCtrl?: boolean;
 
     /**
-     * @description The prop for tooltip
+     * @description The props for Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -250,7 +249,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
      * @description.zh-TW 備用圖片源變化時的回調函數
      */
     onFallbackSrcChange?: (src?: string) => void;
-}  & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
+} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
 
 
 /**
@@ -273,7 +272,6 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         shape = 'circle',
         cropEnabled = true,
         uploadEnabled = false,
-        tooltipCtrl = false,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>();
@@ -362,24 +360,31 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         props?.uploadProps?.onChange?.(info);
     };
 
+    const buildImageDom = () => {
+        if (!imageSrc) {
+            return undefined;
+        }
+        const innerDom = (
+            <Image
+                src={imageSrc}
+                fallback={fallbackSrc}
+                preview={false}
+                {...props?.imageProps}
+            />
+        );
+        return TooltipRender.renderTooltip(props?.tooltipCtrl, props?.tooltipProps, innerDom);
+    };
+
     const buildAvatarPlaceholder = () => {
         if (props?.avatarProps?.icon) {
             return props.avatarProps.icon;
         }
-        return !tooltipCtrl ? (
-            <span
-                className={`${clazzPrefix}-avatar-tooltip`}
-                title={NodeUtils.toString(props?.tooltipProps?.title)}
-            >
+        const innerDom = (
+            <div className={`${clazzPrefix}-avatar-placeholder`}>
                 <UserOutlined/>
-            </span>
-        ) : (
-            <Tooltip {...props?.tooltipProps}>
-                <span className={`${clazzPrefix}-avatar-tooltip`}>
-                    <UserOutlined/>
-                </span>
-            </Tooltip>
+            </div>
         );
+        return TooltipRender.renderTooltip(props?.tooltipCtrl, props?.tooltipProps, innerDom);
     };
 
     const buildUploadPlaceholder = () => {
@@ -390,56 +395,12 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             return props.uploadProps.placeholder;
         }
         const innerDom = (
-            <>
+            <Space className={`${clazzPrefix}-upload-space`} size={4}>
                 {loading ? <LoadingOutlined/> : <PlusOutlined/>}
-                <div style={{marginTop: 8}}>
-                    {props?.localeProps?.upload || intlLocales.get([intlType.locale, 'upload']) || intlLocales.get(['en_US', 'upload'])}
-                </div>
-            </>
+                {props?.localeProps?.upload || intlLocales.get([intlType.locale, 'upload']) || intlLocales.get(['en_US', 'upload'])}
+            </Space>
         );
-        return !tooltipCtrl ? (
-            <span
-                className={`${clazzPrefix}-upload-tooltip`}
-                title={NodeUtils.toString(props?.tooltipProps?.title)}
-            >
-                {innerDom}
-            </span>
-        ) : (
-            <Tooltip {...props?.tooltipProps}>
-                <span className={`${clazzPrefix}-upload-tooltip`}>
-                    {innerDom}
-                </span>
-            </Tooltip>
-        );
-    };
-
-    const buildImageDom = () => {
-        if (!imageSrc) {
-            return undefined;
-        }
-        const omitProps = !props?.imageProps ? {} : omit(props.imageProps, ['className', 'rootClassName']);
-        return !tooltipCtrl ? (
-            <Image
-                className={classNames(`${clazzPrefix}-image`, props?.imageProps?.className)}
-                src={imageSrc}
-                fallback={fallbackSrc}
-                rootClassName={classNames(`${clazzPrefix}-image-root`, props?.imageProps?.rootClassName)}
-                preview={false}
-                title={NodeUtils.toString(props?.tooltipProps?.title)}
-                {...omitProps}
-            />
-        ) : (
-            <Tooltip {...props?.tooltipProps}>
-                <Image
-                    className={classNames(`${clazzPrefix}-image`, props?.imageProps?.className)}
-                    src={imageSrc}
-                    fallback={fallbackSrc}
-                    rootClassName={classNames(`${clazzPrefix}-image-root`, props?.imageProps?.rootClassName)}
-                    preview={false}
-                    {...omitProps}
-                />
-            </Tooltip>
-        );
+        return TooltipRender.renderTooltip(props?.tooltipCtrl, props?.tooltipProps, innerDom);
     };
 
     const buildAvatarDom = () => {
