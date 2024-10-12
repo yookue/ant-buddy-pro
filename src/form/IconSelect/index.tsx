@@ -615,7 +615,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 data-icon-select-dropdown={entryId}
             >
                 <ProCard
-                    className={classNames(themeInkBar ? `${clazzPrefix}-ink-bar` : undefined)}
+                    className={classNames(`${clazzPrefix}-dropdown-card`, (themeInkBar ? `${clazzPrefix}-ink-bar` : undefined))}
                     tabs={{
                         activeKey: activeTab,
                         type: 'card',
@@ -680,7 +680,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     options: textOptions,
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
-                    popupClassName: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName) : undefined,
+                    popupClassName: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-popup`, props?.fieldProps?.popupClassName) : undefined,
                     onClear: handleOptionClear,
                     onDeselect: handleOptionDeselect,
                     onDropdownVisibleChange: handleDropdownOpenChange,
@@ -699,7 +699,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 options={textOptions}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}
-                popupClassName={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-dropdown`, props?.fieldProps?.popupClassName) : undefined}
+                popupClassName={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-popup`, props?.fieldProps?.popupClassName) : undefined}
                 onClear={handleOptionClear}
                 onDeselect={handleOptionDeselect}
                 onDropdownVisibleChange={handleDropdownOpenChange}
