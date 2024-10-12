@@ -18,7 +18,7 @@
 import React from 'react';
 import {Divider, Empty} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {IconSelect} from '@yookue/ant-buddy-pro';
+import {IconSelect, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {IconOptionMode} from '@yookue/ant-buddy-pro/form/IconSelect';
 
 
@@ -114,6 +114,9 @@ export default () => {
                     fieldProps={{
                         notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='无数据'/>),
                         showSearch: showSearch,
+                        onChange: (value) => {
+                            ConsoleUtils.log(false, false, 'IconSelect', 'onChange 的值是 ' + value);
+                        }
                     }}
                     tooltipCtrl={tooltipCtrl}
                     localeProps={{

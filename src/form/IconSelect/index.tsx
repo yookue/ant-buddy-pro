@@ -383,8 +383,12 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             return;
         }
         if (isIconSelected(iconName)) {
+            changeIconBadge(iconName, false);
             if (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') {
-                changeIconBadge(iconName, false);
+                props?.fieldProps?.onDeselect?.(iconName, {
+                    label: iconName,
+                    value: iconName,
+                } as DefaultOptionType);
                 const fieldValue = formContext?.form?.getFieldValue(props?.name);
                 if (fieldValue) {
                     const result = !props?.fieldProps?.labelInValue ? fieldValue.filter((item: any) => {
@@ -393,14 +397,32 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         return !StringUtils.equalsIgnoreCase(item?.value as string, iconName);
                     });
                     formContext?.form?.setFieldValue(props?.name, result);
+                    props?.fieldProps?.onChange?.(result, {
+                        label: iconName,
+                        value: iconName,
+                    } as DefaultOptionType);
                 } else {
                     formContext?.form?.setFieldValue(props?.name, undefined);
+                    props?.fieldProps?.onChange?.(undefined, {
+                        label: iconName,
+                        value: iconName,
+                    } as DefaultOptionType);
                 }
             } else {
+                formContext?.form?.setFieldValue(props?.name, undefined);
+                props?.fieldProps?.onChange?.(undefined, {
+                    label: iconName,
+                    value: iconName,
+                } as DefaultOptionType);
                 setDropdownOpen(false);
             }
         } else {
-            if (props?.fieldProps?.mode !== 'multiple' && props?.fieldProps?.mode !== 'tags') {
+            if (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') {
+                props?.fieldProps?.onSelect?.(iconName, {
+                    label: iconName,
+                    value: iconName,
+                } as DefaultOptionType);
+            } else {
                 clearIconsBadge();
             }
             changeIconBadge(iconName, true);
@@ -411,22 +433,36 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         label: iconName,
                         value: iconName,
                     };
-                    formContext?.form?.setFieldValue(props?.name, [...fieldValue, value]);
+                    const newValue = [...fieldValue, value];
+                    formContext?.form?.setFieldValue(props?.name, newValue);
+                    props?.fieldProps?.onChange?.(newValue, {
+                        label: iconName,
+                        value: iconName,
+                    } as DefaultOptionType);
                 } else {
-                    formContext?.form?.setFieldValue(props?.name, [...fieldValue, iconName]);
+                    const newValue = [...fieldValue, iconName];
+                    formContext?.form?.setFieldValue(props?.name, newValue);
+                    props?.fieldProps?.onChange?.(newValue, {
+                        label: iconName,
+                        value: iconName,
+                    } as DefaultOptionType);
                 }
             } else {
+                let newValue: any | any[];
                 if (props?.fieldProps?.labelInValue) {
                     const value: LabeledValue = {
                         label: iconName,
                         value: iconName,
                     };
-                    const result = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [value] : value;
-                    formContext?.form?.setFieldValue(props?.name, result);
+                    newValue = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [value] : value;
                 } else {
-                    const result = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [iconName] : iconName;
-                    formContext?.form?.setFieldValue(props?.name, result);
+                    newValue = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [iconName] : iconName;
                 }
+                formContext?.form?.setFieldValue(props?.name, newValue);
+                props?.fieldProps?.onChange?.(newValue, {
+                    label: iconName,
+                    value: iconName,
+                } as DefaultOptionType);
             }
             if (props?.fieldProps?.mode !== 'multiple' && props?.fieldProps?.mode !== 'tags') {
                 setDropdownOpen(false);
