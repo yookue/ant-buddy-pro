@@ -53,8 +53,8 @@ export type IntlLocaleProps = {
 
     /**
      * @description Minutes
-     * @description.zh-CN 分钟
-     * @description.zh-TW 分鐘
+     * @description.zh-CN 分
+     * @description.zh-TW 分
      */
     minutes?: React.ReactNode;
 

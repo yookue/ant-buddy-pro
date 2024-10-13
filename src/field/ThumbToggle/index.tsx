@@ -160,14 +160,6 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     showCount?: boolean;
 
     /**
-     * @description Whether to show the zero count or not
-     * @description.zh-CN 是否显示计数 0
-     * @description.zh-TW 是否顯示計數 0
-     * @default true
-     */
-    showZero?: boolean;
-
-    /**
      * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
@@ -201,7 +193,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
-};
+} & Pick<BadgeProps, 'showZero'>;
 
 
 /**

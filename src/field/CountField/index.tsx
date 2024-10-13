@@ -95,14 +95,6 @@ export type CountFieldProps = React.PropsWithChildren<{
     showCount?: boolean;
 
     /**
-     * @description Whether to show the zero count or not
-     * @description.zh-CN 是否显示计数 0
-     * @description.zh-TW 是否顯示計數 0
-     * @default true
-     */
-    showZero?: boolean;
-
-    /**
      * @description The space size
      * @description.zh-CN 间距大小
      * @description.zh-TW 間距大小
@@ -129,7 +121,7 @@ export type CountFieldProps = React.PropsWithChildren<{
      * @description.zh-TW 計數更改後的回調函數
      */
     onChange?: (count?: number) => void;
-}>;
+}> & Pick<BadgeProps, 'showZero'>;
 
 
 /**
