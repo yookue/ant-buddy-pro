@@ -115,7 +115,7 @@ export default () => {
                         notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>),
                         showSearch: showSearch,
                         onChange: (value) => {
-                            ConsoleUtils.log(false, false, 'IconSelect', 'onChange value is ' + value);
+                            ConsoleUtils.log(false, false, 'IconSelect', 'onChange value = ' + value);
                         }
                     }}
                     tooltipCtrl={tooltipCtrl}

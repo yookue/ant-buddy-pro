@@ -90,14 +90,27 @@
         background-color: @primary-1;
 
         &::before {
-            position: absolute;
             content: '';
+            position: absolute;
+            bottom: 0;
             right: 0;
             width: 0;
             height: 0;
-            border-top: @font-size-base @border-style-base @green-6;
-            border-left: @font-size-base @border-style-base transparent;
+            border-bottom: 16px @border-style-base @green-6;
+            border-left: 16px @border-style-base transparent;
             border-radius: @border-radius-base;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 1px;
+            right: 3px;
+            width: 4px;
+            height: 8px;
+            border-right: 2px @border-style-base @white;
+            border-bottom: 2px @border-style-base @white;
+            transform: rotate(45deg);
         }
     }
 
