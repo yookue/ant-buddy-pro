@@ -139,36 +139,37 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
 
     // Initialize the default props
     const {
+        count = 0,
         layout = 'horizontal',
         showCount = true,
         showZero = true,
         spaceSize = 0,
     } = props ?? {};
 
-    ConsoleUtils.warn(props?.count === undefined || props.count >= 0, true, 'CountField', `Prop 'count' must be equal or greater than 0`);
+    ConsoleUtils.warn(count >= 0, true, 'CountField', `Prop 'count' must be equal or greater than 0`);
 
     const fieldRef = React.useRef<HTMLDivElement>();
-    const [count, setCount] = React.useState<number>(props?.count ?? 0);
+    const [counting, setCounting] = React.useState<number>(count);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
         getCount: (): number => {
-            return count;
+            return counting;
         },
         setCount: (count: number): void => {
-            setCount(Math.max(0, count));
+            setCounting(Math.max(0, count));
         },
         increaseCount: (): void => {
-            setCount(Math.max(0, count + 1));
+            setCounting(Math.max(0, counting + 1));
         },
         decreaseCount: (): void => {
-            setCount(Math.max(0, count - 1));
+            setCounting(Math.max(0, counting - 1));
         }
     }));
 
     React.useEffect(() => {
-        props?.onChange?.(count);
-    }, [count]);
+        props?.onChange?.(counting);
+    }, [counting]);
 
     const buildFieldDom = () => {
         const content = !props?.field ? props?.children : (typeof props.field === 'function' ? props.field() : props.field);
@@ -176,14 +177,14 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
     };
 
     const buildCountDom = () => {
-        if (!showCount || (count <= 0 && !showZero)) {
+        if (!showCount || (counting <= 0 && !showZero)) {
             return undefined;
         }
         const omitProps = !props?.countProps ? {} : omit(props.countProps, ['overflowCount']);
         return (
             <div className={`${clazzPrefix}-count`}>
                 <Badge
-                    count={count}
+                    count={counting}
                     showZero={showZero}
                     overflowCount={props?.countProps?.overflowCount ?? 99999999}
                     {...omitProps}

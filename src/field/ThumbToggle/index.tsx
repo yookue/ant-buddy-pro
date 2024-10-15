@@ -91,7 +91,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description.zh-CN 动作类型
      * @description.zh-TW 動作類型
      */
-    actionType: ThumbActionType;
+    actionType?: ThumbActionType;
 
     /**
      * @description Whether can checked the icon or not
@@ -212,12 +212,13 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
 
     // Initialize the default props
     const {
+        actionType = 'like',
+        count = 0,
         showCount = true,
         showZero = true,
     } = props ?? {};
 
-    ConsoleUtils.warn(props?.actionType !== undefined, true, 'ThumbToggle', `Prop 'actionType' must not be undefined`);
-    ConsoleUtils.warn(props?.count === undefined || props.count >= 0, true, 'ThumbToggle', `Prop 'count' must be equal or greater than 0`);
+    ConsoleUtils.warn(count >= 0, true, 'ThumbToggle', `Prop 'count' must be equal or greater than 0`);
 
     const fieldRef = React.useRef<HTMLDivElement>();
     const countFieldRef = React.useRef<CountFieldRef>(null);
@@ -280,7 +281,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
 
     const buildIconDom = () => {
         let icon = undefined;
-        switch (props?.actionType) {
+        switch (actionType) {
             case 'like':
                 icon = checked ? LikeFilled : LikeOutlined;
                 break;
@@ -304,7 +305,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     };
 
     const detectIconTooltip = () => {
-        switch (props?.actionType) {
+        switch (actionType) {
             case 'like':
                 return props?.localeProps?.like || intlLocales.get([intlType.locale, 'like']) || intlLocales.get(['en_US', 'like']);
             case 'dislike':

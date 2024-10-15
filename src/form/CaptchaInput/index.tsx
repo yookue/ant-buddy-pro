@@ -160,7 +160,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     ConsoleUtils.warn(timerInterval > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'timerInterval' must be greater than 0`);
 
     const fieldRef = React.useRef<HTMLDivElement>();
-    const [count, setCount] = React.useState<number>(countDown);
+    const [counting, setCounting] = React.useState<number>(countDown);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [timing, setTiming] = React.useState<boolean>(false);
 
@@ -186,7 +186,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         if (timing) {
             props?.onTimerBegin?.();
             interval = window.setInterval(() => {
-                setCount((previous) => {
+                setCounting((previous) => {
                     if (previous <= 1) {
                         setTiming(false);
                         window.clearInterval(interval);
@@ -202,9 +202,9 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
 
     React.useEffect(() => {
         if (timing) {
-            props?.onTimer?.(count);
+            props?.onTimer?.(counting);
         }
-    }, [timing, count]);
+    }, [timing, counting]);
 
     const buildCaptcha = async (mobile?: string) => {
         if (!mobile || !props?.onGenerate) {
@@ -252,7 +252,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
                 {...props?.captchaProps}
                 onClick={handleClick}
             >
-                {captchaTextRender(timing, count)}
+                {captchaTextRender(timing, counting)}
             </Button>
         </div>
     );
