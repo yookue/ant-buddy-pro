@@ -131,7 +131,7 @@ export default () => {
                         }],
                     }}
                     onTagContentsChange={(contents: any) => {
-                        ConsoleUtils.log(false, false, 'TagInput', '标签内容是 ' + JSON.stringify(contents));
+                        ConsoleUtils.log(false, false, 'TagInput', 'onTagContentsChange contents = ' + JSON.stringify(contents));
                     }}
                 />
             </ProForm>
