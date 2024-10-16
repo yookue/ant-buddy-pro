@@ -59,9 +59,7 @@ export default () => {
                     unCheckedChildren='False'
                     fieldProps={{
                         checked: required,
-                        onChange: (value) => {
-                            setRequired(value);
-                        }
+                        onChange: setRequired,
                     }}
                 />
                 <ProFormRadio.Group

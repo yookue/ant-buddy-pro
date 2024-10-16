@@ -64,9 +64,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: uploadEnabled,
-                            onChange: (value) => {
-                                setUploadEnabled(value);
-                            }
+                            onChange: setUploadEnabled,
                         }}
                     />
                     <ProFormSwitch
@@ -76,9 +74,7 @@ export default () => {
                         fieldProps={{
                             checked: cropEnabled,
                             disabled: !uploadEnabled,
-                            onChange: (value) => {
-                                setCropEnabled(value);
-                            }
+                            onChange: setCropEnabled,
                         }}
                     />
                     <ProFormSwitch
@@ -87,9 +83,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: tooltipCtrl,
-                            onChange: (value) => {
-                                setTooltipCtrl(value);
-                            }
+                            onChange: setTooltipCtrl,
                         }}
                     />
                 </ProForm.Group>

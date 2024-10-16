@@ -43,9 +43,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: showCount,
-                            onChange: (value) => {
-                                setShowCount(value);
-                            }
+                            onChange: setShowCount,
                         }}
                     />
                     <ProFormSwitch
@@ -55,9 +53,7 @@ export default () => {
                         fieldProps={{
                             checked: showZero,
                             disabled: !showCount,
-                            onChange: (value) => {
-                                setShowZero(value);
-                            }
+                            onChange: setShowZero,
                         }}
                     />
                     <ProFormSwitch
@@ -66,9 +62,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: tooltipCtrl,
-                            onChange: (value) => {
-                                setTooltipCtrl(value);
-                            }
+                            onChange: setTooltipCtrl,
                         }}
                     />
                 </ProForm.Group>

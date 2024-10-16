@@ -39,9 +39,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: widthBlock,
-                            onChange: (value) => {
-                                setWidthBlock(value);
-                            }
+                            onChange: setWidthBlock,
                         }}
                     />
                 </ProForm.Group>

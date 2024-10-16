@@ -53,9 +53,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: inkBar,
-                            onChange: (value) => {
-                                setInkBar(value);
-                            }
+                            onChange: setInkBar,
                         }}
                     />
                     <ProFormSwitch
@@ -64,9 +62,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: selectionBold,
-                            onChange: (value) => {
-                                setSelectionBold(value);
-                            }
+                            onChange: setSelectionBold,
                         }}
                     />
                 </ProForm.Group>

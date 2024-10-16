@@ -40,9 +40,7 @@ export default () => {
                     unCheckedChildren='False'
                     fieldProps={{
                         checked: copyrightIcon,
-                        onChange: (value) => {
-                            setCopyrightIcon(value);
-                        }
+                        onChange: setCopyrightIcon,
                     }}
                 />
                 <ProFormRadio.Group

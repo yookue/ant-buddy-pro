@@ -39,9 +39,7 @@ export default () => {
                     unCheckedChildren='False'
                     fieldProps={{
                         checked: tooltipCtrl,
-                        onChange: (value) => {
-                            setTooltipCtrl(value);
-                        }
+                        onChange: setTooltipCtrl,
                     }}
                 />
             </ProForm>

@@ -42,9 +42,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: borderTop,
-                            onChange: (value) => {
-                                setBorderTop(value);
-                            }
+                            onChange: setBorderTop,
                         }}
                     />
                     <ProFormSwitch
@@ -53,9 +51,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: borderRight,
-                            onChange: (value) => {
-                                setBorderRight(value);
-                            }
+                            onChange: setBorderRight,
                         }}
                     />
                     <ProFormSwitch
@@ -64,9 +60,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: borderBottom,
-                            onChange: (value) => {
-                                setBorderBottom(value);
-                            }
+                            onChange: setBorderBottom,
                         }}
                     />
                     <ProFormSwitch
@@ -75,9 +69,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: borderLeft,
-                            onChange: (value) => {
-                                setBorderLeft(value);
-                            }
+                            onChange: setBorderLeft,
                         }}
                     />
                 </ProForm.Group>

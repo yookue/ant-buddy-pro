@@ -62,9 +62,7 @@ export default () => {
                         fieldProps={{
                             checked: themeInkBar,
                             disabled: optionMode === 'text',
-                            onChange: (value) => {
-                                setThemeInkBar(value);
-                            }
+                            onChange: setThemeInkBar,
                         }}
                     />
                     <ProFormSwitch
@@ -74,9 +72,7 @@ export default () => {
                         fieldProps={{
                             checked: sceneInkBar,
                             disabled: optionMode === 'text',
-                            onChange: (value) => {
-                                setSceneInkBar(value);
-                            }
+                            onChange: setSceneInkBar,
                         }}
                     />
                     <ProFormSwitch
@@ -86,9 +82,7 @@ export default () => {
                         fieldProps={{
                             checked: showSearch,
                             disabled: optionMode === 'text',
-                            onChange: (value) => {
-                                setShowSearch(value);
-                            }
+                            onChange: setShowSearch,
                         }}
                     />
                     <ProFormSwitch
@@ -98,9 +92,7 @@ export default () => {
                         fieldProps={{
                             checked: tooltipCtrl,
                             disabled: optionMode === 'text',
-                            onChange: (value) => {
-                                setTooltipCtrl(value);
-                            }
+                            onChange: setTooltipCtrl,
                         }}
                     />
                 </ProForm.Group>

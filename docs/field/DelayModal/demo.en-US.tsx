@@ -60,9 +60,7 @@ export default () => {
                     unCheckedChildren='False'
                     fieldProps={{
                         checked: onceOnly,
-                        onChange: (value) => {
-                            setOnceOnly(value);
-                        }
+                        onChange: setOnceOnly,
                     }}
                 />
             </ProForm>

@@ -43,9 +43,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: addable,
-                            onChange: (value) => {
-                                setAddable(value);
-                            }
+                            onChange: setAddable,
                         }}
                     />
                     <ProFormSwitch
@@ -54,9 +52,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: removable,
-                            onChange: (value) => {
-                                setRemovable(value);
-                            }
+                            onChange: setRemovable,
                         }}
                     />
                     <ProFormSwitch
@@ -66,9 +62,7 @@ export default () => {
                         fieldProps={{
                             checked: tweenOneAnim,
                             disabled: !removable,
-                            onChange: (value) => {
-                                setTweenOneAnim(value);
-                            }
+                            onChange: setTweenOneAnim,
                         }}
                     />
                 </ProForm.Group>
