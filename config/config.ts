@@ -91,19 +91,18 @@ export default {
     },
     headScripts: [
         // Whether use unpkg
-        // {src: 'https://unpkg.com/react@18.2.0/umd/react.production.min.js'},
-        // {src: 'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js'},
-        // {src: 'https://unpkg.com/classnames@2.5.1/index.js'},
-        // {src: 'https://unpkg.com/moment@2.30.1/min/moment.min.js'},
-        // {src: 'https://unpkg.com/antd@4.24.16/dist/antd.min.js'},
-        // {src: 'https://unpkg.com/smooth-scrollbar@8.8.4/dist/smooth-scrollbar.js'},
+        {src: 'https://unpkg.com/react@18.2.0/umd/react.production.min.js'},
+        {src: 'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js'},
+        {src: 'https://unpkg.com/classnames@2.5.1/index.js'},
+        {src: 'https://unpkg.com/moment@2.30.1/min/moment.min.js'},
+        {src: 'https://unpkg.com/antd@4.24.16/dist/antd.min.js'},
 
         // Or use bootcdn
-        {src: 'https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js'},
-        {src: 'https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js'},
-        {src: 'https://cdn.bootcdn.net/ajax/libs/classnames/2.5.2/index.min.js'},
-        {src: 'https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/moment.min.js'},
-        {src: 'https://cdn.bootcdn.net/ajax/libs/antd/4.24.16/antd.min.js'},
+        // {src: 'https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js'},
+        // {src: 'https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js'},
+        // {src: 'https://cdn.bootcdn.net/ajax/libs/classnames/2.5.2/index.min.js'},
+        // {src: 'https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/moment.min.js'},
+        // {src: 'https://cdn.bootcdn.net/ajax/libs/antd/4.24.16/antd.min.js'},
     ],
     extraBabelPlugins: [
         ['babel-plugin-import', {
