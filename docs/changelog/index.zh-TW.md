@@ -11,6 +11,9 @@ nav:
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v0.1.116** [2024-10-17]
+    - 增加 'field/CornerStamp'
+
   - **v0.1.115** [2024-10-11]
     - 增加 'field/TooltipField'
     - 增加 'render/TooltipRender'

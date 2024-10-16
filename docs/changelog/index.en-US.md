@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.116** [2024-10-17]
+    - Add 'field/CornerStamp'
+
   - **v0.1.115** [2024-10-12]
     - Add 'field/TooltipField'
     - Add 'render/TooltipRender'
