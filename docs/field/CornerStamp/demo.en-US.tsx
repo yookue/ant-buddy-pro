@@ -101,7 +101,11 @@ export default () => {
                 )}
                 rotateAddon={rotateAddon}
             >
-                <Card title='CornerStamp' bodyStyle={{paddingBottom: '56px'}}>
+                <Card
+                    title='CornerStamp'
+                    headStyle={{textAlign: 'center'}}
+                    bodyStyle={{textAlign: 'center'}}
+                >
                     The quick brown fox jumps over a lazy dog.
                     <Divider/>
                     I'LL BE BACK

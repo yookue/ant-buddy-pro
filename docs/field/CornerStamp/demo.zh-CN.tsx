@@ -101,7 +101,11 @@ export default () => {
                 )}
                 rotateAddon={rotateAddon}
             >
-                <Card title='CornerStamp' bodyStyle={{paddingBottom: '56px'}}>
+                <Card
+                    title='CornerStamp'
+                    headStyle={{textAlign: 'center'}}
+                    bodyStyle={{textAlign: 'center'}}
+                >
                     一只棕色敏捷的狐狸跳过了一只懒洋洋的狗。
                     <Divider/>
                     I'LL BE BACK
