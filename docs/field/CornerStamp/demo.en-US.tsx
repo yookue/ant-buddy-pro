@@ -25,8 +25,9 @@ import {type StampPlacement} from 'src/field/CornerStamp';
 
 export default () => {
     const [placement, setPlacement] = React.useState<StampPlacement>('topRight');
+    const [showAddon, setShowAddon] = React.useState<boolean>(true);
+    const [rotateAddon, setRotateAddon] = React.useState<boolean>(true);
     const [size, setSize] = React.useState<number>(40);
-    const [rotateAddon, setRotateAddont] = React.useState<boolean>(true);
 
     return (
         <>
@@ -53,6 +54,27 @@ export default () => {
                         {label: 'Bottom-Right', value: 'bottomRight'},
                     ]}
                 />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='Show Addon'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: showAddon,
+                            onChange: setShowAddon,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Rotate Addon'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: rotateAddon,
+                            disabled: !showAddon,
+                            onChange: setRotateAddon,
+                        }}
+                    />
+                </ProForm.Group>
                 <ProFormSlider
                     label='Size'
                     min={20}
@@ -69,26 +91,20 @@ export default () => {
                         onChange: setSize,
                     }}
                 />
-                <ProFormSwitch
-                    label='Rotate Addon'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: rotateAddon,
-                        onChange: setRotateAddont,
-                    }}
-                />
             </ProForm>
             <Divider/>
             <CornerStamp
                 placement={placement}
                 size={size}
-                addon={<SmileOutlined/>}
+                addon={!showAddon ? undefined : (
+                    <SmileOutlined style={{color: 'white', fontSize: `${8 + size / 5}px`}}/>
+                )}
                 rotateAddon={rotateAddon}
             >
-
-                <Card title='CornerStamp'>
+                <Card title='CornerStamp' bodyStyle={{paddingBottom: '56px'}}>
                     The quick brown fox jumps over a lazy dog.
+                    <Divider/>
+                    I'LL BE BACK
                 </Card>
             </CornerStamp>
         </>

@@ -96,14 +96,6 @@ export type CornerStampProps = React.PropsWithChildren<{
     addonStyle?: React.CSSProperties;
 
     /**
-     * @description The side length of the component
-     * @description.zh-CN 组件的边长
-     * @description.zh-TW 組件的邊長
-     * @default 16
-     */
-    size?: number;
-
-    /**
      * @description The shape of the component
      * @description.zh-CN 组件的形状
      * @description.zh-TW 組件的形狀
@@ -117,7 +109,7 @@ export type CornerStampProps = React.PropsWithChildren<{
      * @description.zh-TW 組件的邊長
      * @default 16
      */
-    secondaryColor?: BadgeProps['color'];
+    size?: number;
 
     /**
      * @description The z-index of the component
@@ -144,16 +136,14 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
     const {
         color = 'green',
         placement = 'topRight',
-        size = 16,
         rotateAddon = true,
-        secondaryColor = 'white',
+        size = 16,
         zIndex = 9,
     } = props ?? {};
 
     ConsoleUtils.warn(size > 0, true, 'CornerStamp',  `Prop 'size' must be greater than 0`);
 
     const bgColor = !isPresetColor(color) ? color : presetPrimaryColors[color];
-    const addonColor = !isPresetColor(secondaryColor) ? secondaryColor : presetPrimaryColors[secondaryColor];
 
     const buildCornerClazz = () => {
         let result = undefined;
@@ -264,7 +254,6 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                 break;
         }
         return css({
-            color: addonColor,
             width: `${size + size * ratio}px`,
             height: `${size + size * ratio}px`,
             zIndex: zIndex + 1,
@@ -316,7 +305,6 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                 break;
         }
         return css({
-            color: addonColor,
             width: `${hypotenuse}px`,
             height: `${perpendicular}px`,
             transform: `rotate(${rotation}deg)`,
