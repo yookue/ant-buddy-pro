@@ -23,6 +23,7 @@ import {nanoid} from '@ant-design/pro-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {PropsUtils} from '@/util/PropsUtils';
+import './index.less';
 
 
 export type StretchTriggerType = 'click' | 'hover';
@@ -42,7 +43,7 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-CN 文本框折叠（失去焦点）时的替代节点内容
      * @description.zh-TW 文本框折疊（失去焦點）時的替代節點內容
      */
-    collapseDom?: React.ReactNode;
+    miniature?: React.ReactNode;
 
     /**
      * @description The CSS class name when stretched
@@ -59,12 +60,12 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     stretchStyle?: React.CSSProperties;
 
     /**
-     * @description The trigger method when stretch the collapsed DOM
+     * @description The trigger type when stretch the collapsed DOM
      * @description.zh-CN 当需要拉伸已折叠的 DOM 时的触发方式
      * @description.zh-TW 當需要拉伸已折疊的 DOM 時的觸發方式
      * @default 'click'
      */
-    stretchTrigger?: StretchTriggerType;
+    triggerType?: StretchTriggerType;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -95,72 +96,72 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
 
     // Initialize the default props
     const {
-        stretchTrigger = 'click',
+        triggerType = 'click',
     } = props ?? {};
 
     const entryId = nanoid();
-    const [stretchMe, setStretchMe] = React.useState<boolean>(false);
+    const [stretch, setStretch] = React.useState<boolean>(false);
 
-    const restoreCollapse = (event: any) => {
-        if (!props?.collapseDom || !stretchMe) {
+    const restoreMiniature = (event: any) => {
+        if (!props?.miniature || !stretch) {
             return;
         }
         const entry = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`);
         if (entry && !entry.contains(event.target)) {
-            setStretchMe(false);
+            setStretch(false);
         }
     };
 
     React.useEffect(() => {
-        if (stretchMe && props?.collapseDom) {
+        if (stretch && props?.miniature) {
             document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`)?.focus();
         }
-        props?.onStretchChange?.(stretchMe);
-    }, [stretchMe]);
+        props?.onStretchChange?.(stretch);
+    }, [stretch]);
 
     React.useLayoutEffect(() => {
-        document.addEventListener('keydown', restoreCollapse);
-        document.addEventListener('mousedown', restoreCollapse);
+        document.addEventListener('keydown', restoreMiniature);
+        document.addEventListener('mousedown', restoreMiniature);
         return () => {
-            document.removeEventListener('keydown', restoreCollapse);
-            document.removeEventListener('mousedown', restoreCollapse);
+            document.removeEventListener('keydown', restoreMiniature);
+            document.removeEventListener('mousedown', restoreMiniature);
         }
     }, []);
 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-        setStretchMe(true);
+        setStretch(true);
         props?.fieldProps?.onFocus?.(event);
     };
 
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        setStretchMe(false);
+        setStretch(false);
         props?.fieldProps?.onBlur?.(event);
     };
 
-    if (props?.collapseDom && !stretchMe) {
+    if (props?.miniature && !stretch) {
         return (
             <span
-                className={`${clazzPrefix}-collapsed`}
-                onClick={stretchTrigger !== 'click' ? undefined : () => setStretchMe(true)}
-                onMouseOver={stretchTrigger !== 'hover' ? undefined : () => setStretchMe(true)}
+                className={`${clazzPrefix}-miniature`}
+                onClick={triggerType !== 'click' ? undefined : () => setStretch(true)}
+                onMouseOver={triggerType !== 'hover' ? undefined : () => setStretch(true)}
             >
-                {props.collapseDom}
+                {props.miniature}
             </span>
         );
     }
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'style', 'onFocus', 'onBlur']);
     if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'collapseDom', 'stretchTrigger', 'stretchClazz', 'stretchStyle', 'proField']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'miniature', 'stretchClazz', 'stretchStyle', 'triggerType', 'proField']);
         return (
             <ProFormText
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, (stretchMe ? props?.stretchClazz : props?.fieldProps?.className)),
+                    className: classNames(clazzPrefix, (stretch ? props?.stretchClazz : props?.fieldProps?.className)),
                     ...omitFieldProps,
                     onFocus: handleFocus,
                     onBlur: handleBlur,
-                    style: stretchMe ? props?.stretchStyle : props?.fieldProps?.style,
+                    style: stretch ? props?.stretchStyle : props?.fieldProps?.style,
                     'data-stretch-input-id': entryId,
                 }}
             />
@@ -169,12 +170,12 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         const restProps = PropsUtils.pickForwardProps(props);
         return (
             <Input
-                className={classNames(clazzPrefix, (stretchMe ? props?.stretchClazz : props?.fieldProps?.className))}
+                className={classNames(clazzPrefix, (stretch ? props?.stretchClazz : props?.fieldProps?.className))}
                 {...restProps}
                 {...omitFieldProps}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                style={stretchMe ? props?.stretchStyle : props?.fieldProps?.style}
+                style={stretch ? props?.stretchStyle : props?.fieldProps?.style}
                 data-stretch-input-id={entryId}
             />
         );
