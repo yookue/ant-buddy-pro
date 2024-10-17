@@ -41,7 +41,7 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='Demo Field With Validation'
-                    popupActionPos='before'
+                    popupAddonPos='before'
                     rules={[
                         {
                             required: true,

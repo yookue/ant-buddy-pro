@@ -110,20 +110,20 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     clazzPrefix?: string;
 
     /**
-     * @description The DOM of action for the primary input box
+     * @description The DOM of addon for the primary input box
      * @description.zh-CN 默认文本框的附属节点内容
      * @description.zh-TW 默認文本框的標簽節點內容
      * @default <TranslationOutlined/>
      */
-    actionDom?: React.ReactNode;
+    addon?: React.ReactNode;
 
     /**
-     * @description The position of action for the primary input box
+     * @description The position of addon for the primary input box
      * @description.zh-CN 默认文本框的附属节点位置
      * @description.zh-TW 默認文本框的附属節點位置
      * @default 'after'
      */
-    actionPos?: WithFalse<BeforeAfterType>;
+    addonPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description The properties of the dropdown div
@@ -138,7 +138,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 是否啓用多語言輸入
      * @default true
      */
-    multilingualism?: boolean;
+    multilingual?: boolean;
 
     /**
      * @description Whether to use ProFormField instead of Antd for the primary input box
@@ -176,7 +176,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 語言輸入項的附屬節點內容
      * @default <SelectOutlined/>
      */
-    popupActionDom?: React.ReactNode;
+    popupAddon?: React.ReactNode;
 
     /**
      * @description The position of language addons for the locale items
@@ -184,7 +184,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 語言輸入項的附屬節點位置
      * @default 'after'
      */
-    popupActionPos?: WithFalse<BeforeAfterType>;
+    popupAddonPos?: WithFalse<BeforeAfterType>;
 
     /**
      * @description Whether to use the same max length as entry field for the locale items
@@ -246,13 +246,13 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     // Initialize the default props
     const {
-        actionDom = <TranslationOutlined/>,
-        actionPos = 'after',
-        multilingualism = true,
+        addon = <TranslationOutlined/>,
+        addonPos = 'after',
+        multilingual = true,
         proField = true,
         popupTagPos = 'before',
-        popupActionDom = <SelectOutlined/>,
-        popupActionPos = 'after',
+        popupAddon = <SelectOutlined/>,
+        popupAddonPos = 'after',
         popupConfirmProps = {
             enabled: true,
         },
@@ -270,10 +270,10 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     };
 
     const buildItemAddonDom = (tag: string, before: boolean, elementId: string, inputProps?: PopupInputProps) => {
-        if (before && popupTagPos !== 'before' && !inputProps?.fieldProps?.addonBefore && popupActionPos === 'before' && !popupActionDom) {
+        if (before && popupTagPos !== 'before' && !inputProps?.fieldProps?.addonBefore && popupAddonPos === 'before' && !popupAddon) {
             return undefined;
         }
-        if (!before && popupTagPos !== 'after' && !inputProps?.fieldProps?.addonAfter && popupActionPos === 'after' && !popupActionDom) {
+        if (!before && popupTagPos !== 'after' && !inputProps?.fieldProps?.addonAfter && popupAddonPos === 'after' && !popupAddon) {
             return undefined;
         }
         const itemDisabled = props?.fieldProps?.disabled || inputProps?.fieldProps?.disabled;
@@ -285,8 +285,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             </span>
         ) : undefined;
 
-        const actionClazz = classNames(`${clazzPrefix}-action-${popupActionPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined));
-        const actionDom = (popupActionDom && ((before && popupActionPos === 'before') || (!before && popupActionPos === 'after'))) ? (
+        const actionClazz = classNames(`${clazzPrefix}-action-${popupAddonPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-disabled` : undefined));
+        const addon = (popupAddon && ((before && popupAddonPos === 'before') || (!before && popupAddonPos === 'after'))) ? (
             <If condition={BooleanUtils.isNotFalse(popupConfirmProps?.enabled)} validation={false}>
                 <If.Then>
                     <Popconfirm
@@ -297,19 +297,19 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         onConfirm={() => handleSetAsDefault(elementId)}
                     >
                         <span className={actionClazz}>
-                            {popupActionDom}
+                            {popupAddon}
                         </span>
                     </Popconfirm>
                 </If.Then>
                 <If.Else>
                     <span className={actionClazz} onClick={() => handleSetAsDefault(elementId)}>
-                        {popupActionDom}
+                        {popupAddon}
                     </span>
                 </If.Else>
             </If>
         ) : undefined;
 
-        const nodeCount = [(before && inputProps?.fieldProps?.addonBefore), (!before && inputProps?.fieldProps?.addonAfter), tagDom, actionDom].filter(object => !!object).length;
+        const nodeCount = [(before && inputProps?.fieldProps?.addonBefore), (!before && inputProps?.fieldProps?.addonAfter), tagDom, addon].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
         }
@@ -322,7 +322,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                     {inputProps?.fieldProps?.addonAfter}
                 </If>
                 {tagDom}
-                {actionDom}
+                {addon}
             </>
         );
         return (nodeCount === 1) ? combineDom : (<Space>{combineDom}</Space>);
@@ -479,13 +479,13 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     }
 
     const buildEntryAddonDom = (before: boolean) => {
-        if (before && !props?.fieldProps?.addonBefore && actionPos === 'before' && !actionDom) {
+        if (before && !props?.fieldProps?.addonBefore && addonPos === 'before' && !addon) {
             return undefined;
         }
-        if (!before && !props?.fieldProps?.addonAfter && actionPos === 'after' && !actionDom) {
+        if (!before && !props?.fieldProps?.addonAfter && addonPos === 'after' && !addon) {
             return undefined;
         }
-        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (multilingualism && actionDom && ((before && actionPos === 'before') || (!before && actionPos === 'after')))].filter(object => !!object).length;
+        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (multilingual && addon && ((before && addonPos === 'before') || (!before && addonPos === 'after')))].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
         }
@@ -497,8 +497,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 <If condition={!before && props?.fieldProps?.addonAfter} validation={false}>
                     {props?.fieldProps?.addonAfter}
                 </If>
-                <If condition={multilingualism && actionDom && ((before && actionPos === 'before') || (!before && actionPos === 'after'))} validation={false}>
-                    {actionDom}
+                <If condition={multilingual && addon && ((before && addonPos === 'before') || (!before && addonPos === 'after'))} validation={false}>
+                    {addon}
                 </If>
             </>
         );
@@ -512,7 +512,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     const buildEntryDom = () => {
         if (proField) {
-            const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'clazzPrefix', 'actionDom', 'actionPos', 'dropdownProps', 'multilingualism', 'proField', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupActionDom', 'popupActionPos', 'popupCloneMaxLength', 'popupClonePlaceholder', 'popupCloneRules', 'popupConfirmProps', 'popupShareProps', 'popupProField']);
+            const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'clazzPrefix', 'addon', 'addonPos', 'dropdownProps', 'multilingual', 'proField', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupAddon', 'popupAddonPos', 'popupCloneMaxLength', 'popupClonePlaceholder', 'popupCloneRules', 'popupConfirmProps', 'popupShareProps', 'popupProField']);
             return (
                 <ProFormText
                     {...restProps}
@@ -540,7 +540,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         }
     };
 
-    if (!multilingualism) {
+    if (!multilingual) {
         return buildEntryDom();
     }
 

@@ -41,7 +41,7 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='示例字段-帶校驗'
-                    popupActionPos='before'
+                    popupAddonPos='before'
                     rules={[
                         {
                             required: true,
