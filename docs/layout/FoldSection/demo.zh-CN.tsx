@@ -97,9 +97,9 @@ export default () => {
             </ProForm>
             <Divider/>
             <FoldSection
-                headerOrnamentDom={<AppstoreOutlined/>}
+                headerOrnament={<AppstoreOutlined/>}
                 headerOrnamentPos={ornamentPos}
-                headerContentDom='FoldSection 头部标题'
+                headerContent='FoldSection 头部标题'
                 headerCollapsePos={collapsePos}
                 panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='无数据'/>}
                 presetStyle={presetStyle}
