@@ -23,7 +23,7 @@ import {StretchInput} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
-    const [collapseType, setCollapseType] = React.useState<string>('default');
+    const [miniatureType, setMiniatureType] = React.useState<string>('default');
 
     return (
         <>
@@ -34,13 +34,13 @@ export default () => {
                 submitter={false}
             >
                 <ProFormRadio.Group
-                    label='Collapse Type'
+                    label='Miniature Type'
                     radioType='button'
                     fieldProps={{
-                        value: collapseType,
+                        value: miniatureType,
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setCollapseType(event.target?.value);
+                            setMiniatureType(event.target?.value);
                         }
                     }}
                     options={[
@@ -61,10 +61,8 @@ export default () => {
                             width: '50%',
                         }
                     }}
-                    collapseDom={collapseType !== 'custom' ? undefined : (
-                        <span style={{cursor: 'pointer'}}>
-                            <SearchOutlined style={{width: '32px', height: '32px'}}/>
-                        </span>
+                    miniature={miniatureType !== 'custom' ? undefined : (
+                        <SearchOutlined style={{width: '32px', height: '32px'}}/>
                     )}
                     stretchStyle={{
                         borderRadius: '16px',
