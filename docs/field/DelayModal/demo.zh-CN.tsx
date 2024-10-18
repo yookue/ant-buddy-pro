@@ -18,14 +18,14 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {DelayModal} from '@yookue/ant-buddy-pro';
+import {DelayModal, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {type ModalActionType} from '@yookue/ant-buddy-pro/field/DelayModal';
 
 
 export default () => {
     const [actionType, setActionType] = React.useState<ModalActionType>('info');
     const [onceOnly, setOnceOnly] = React.useState<boolean>(true);
-    const [onceShown, setOnceShown] = React.useState<boolean>(false);
+    const [hasOpened, setHasOpened] = React.useState<boolean>(false);
 
     return (
         <>
@@ -51,7 +51,7 @@ export default () => {
                         {label: '警告', value: 'warn'},
                         {label: '成功', value: 'success'},
                         {label: '错误', value: 'error'},
-                        {label: '模态', value: 'modal'},
+                        {label: '自定义', value: 'custom'},
                     ]}
                 />
                 <ProFormSwitch
@@ -66,29 +66,34 @@ export default () => {
             </ProForm>
             <Divider/>
             <span>
-                空闲（鼠标键盘无动作）10 秒钟后弹出。{(onceOnly && onceShown) ? '已弹出' : '请稍候'}。
+                空闲（鼠标键盘无动作）15 秒钟后弹出。{(onceOnly && hasOpened) ? '已弹出' : '请稍候'}。
             </span>
             <DelayModal
                 actionType={actionType}
                 onceOnly={onceOnly}
-                timeoutMillis={1000 * 10}
+                timeout={1000 * 15}
                 modalProps={{
-                    title: '搭载 modalProps',
-                    children: '咦，这是一条来自 DelayModal 的消息',
+                    title: 'DelayModal',
+                    children: '咦，这是一条来自 modalProps 的消息',
                     closable: false,
                     maskClosable: false,
                     okText: '确定',
                     cancelText: '取消',
                 }}
                 modalFunProps={{
-                    title: '搭载 modalFunProps',
-                    content: '咦，这是一条来自 DelayModal 的消息',
+                    title: 'DelayModal',
+                    content: '咦，这是一条来自 modalFunProps 的消息',
                     closable: false,
+                    maskClosable: false,
                     okText: '确定',
                     cancelText: '取消',
-                    preprocess: true,
                 }}
-                onOpen={() => setOnceShown(true)}
+                onOpenChange={(open: boolean) => {
+                    if (open && !hasOpened) {
+                        setHasOpened(true);
+                    }
+                    ConsoleUtils.logTimestamp(false, false, 'DelayModal', 'onOpenChange open = ' + open);
+                }}
             />
         </>
     );

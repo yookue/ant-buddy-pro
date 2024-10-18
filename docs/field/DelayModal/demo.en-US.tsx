@@ -18,14 +18,14 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {DelayModal} from '@yookue/ant-buddy-pro';
+import {DelayModal, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {type ModalActionType} from '@yookue/ant-buddy-pro/field/DelayModal';
 
 
 export default () => {
     const [actionType, setActionType] = React.useState<ModalActionType>('info');
     const [onceOnly, setOnceOnly] = React.useState<boolean>(true);
-    const [onceShown, setOnceShown] = React.useState<boolean>(false);
+    const [hasOpened, setHasOpened] = React.useState<boolean>(false);
 
     return (
         <>
@@ -51,7 +51,7 @@ export default () => {
                         {label: 'Warn', value: 'warn'},
                         {label: 'Success', value: 'success'},
                         {label: 'Error', value: 'error'},
-                        {label: 'Modal', value: 'modal'},
+                        {label: 'Custom', value: 'custom'},
                     ]}
                 />
                 <ProFormSwitch
@@ -66,29 +66,34 @@ export default () => {
             </ProForm>
             <Divider/>
             <span>
-                Popup a modal dialog after idle 10 seconds. {(onceOnly && onceShown) ? 'Already shown' : 'Please wait'}.
+                Popup a modal dialog after idle 15 seconds. {(onceOnly && hasOpened) ? 'Already shown' : 'Please wait'}.
             </span>
             <DelayModal
                 actionType={actionType}
                 onceOnly={onceOnly}
-                timeoutMillis={1000 * 10}
+                timeout={1000 * 15}
                 modalProps={{
-                    title: 'With modalProps',
-                    children: 'Oops! This is a message from DelayModal',
+                    title: 'DelayModal',
+                    children: 'Oops! This is a message from modalProps',
                     closable: false,
                     maskClosable: false,
                     okText: 'OK',
                     cancelText: 'Cancel',
                 }}
                 modalFunProps={{
-                    title: 'With modalFunProps',
-                    content: 'Oops! This is a message from DelayModal',
+                    title: 'DelayModal',
+                    content: 'Oops! This is a message from modalFunProps',
                     closable: false,
+                    maskClosable: false,
                     okText: 'OK',
                     cancelText: 'Cancel',
-                    preprocess: true,
                 }}
-                onOpen={() => setOnceShown(true)}
+                onOpenChange={(open: boolean) => {
+                    if (open && !hasOpened) {
+                        setHasOpened(true);
+                    }
+                    ConsoleUtils.logTimestamp(false, false, 'DelayModal', 'onOpenChange open = ' + open);
+                }}
             />
         </>
     );
