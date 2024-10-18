@@ -15,12 +15,14 @@
  */
 
 
+import dayjs from 'dayjs';
 import objectHash from 'object-hash';
 import {noteOnce as rcNote, warningOnce as rcWarning} from 'rc-util/es/warning';
 
 
-const productName: string = '@yookue/ant-buddy-pro';
 const loggedHashes: string[] = [];
+const productName: string = '@yookue/ant-buddy-pro';
+const timeFormat: string = 'YYYY-MM-DD HH:mm:ss';
 
 
 /**
@@ -30,6 +32,17 @@ const loggedHashes: string[] = [];
  */
 // noinspection JSUnusedGlobalSymbols
 export abstract class ConsoleUtils {
+    /**
+     * Log if condition not match
+     *
+     * @param component The component name to prefix
+     * @param message The message to print
+     * @param product The package name to prefix
+     */
+    protected static build(component?: string, message?: string, product?: string): string | undefined {
+        return !message ? undefined : (component ? `[${product ?? productName}: ${component}] - ` : '').concat(message);
+    }
+
     /**
      * Log if condition not match
      *
@@ -47,17 +60,48 @@ export abstract class ConsoleUtils {
      *  ```
      */
     public static log(valid: boolean, once: boolean, component?: string, message?: string, product?: string): void {
-        if (!message) {
+        const built = this.build(component, message, product);
+        if (!built) {
             return;
         }
-        const result = (component ? `[${product ?? productName}: ${component}] ` : '').concat(message);
-        const hash = objectHash(result);
+        const hash = objectHash(built);
         if (once && loggedHashes.includes(hash)) {
             return;
         }
         if (!valid) {
             loggedHashes.push(hash);
-            console.log(result);
+            console.log(built);
+        }
+    }
+
+    /**
+     * Log if condition not match, with timestamp
+     *
+     * @param valid The condition to match
+     * @param once Whether print once only
+     * @param component The component name to prefix
+     * @param message The message to print
+     * @param product The package name to prefix
+     *
+     * @example
+     * ```ts
+     *  ConsoleUtils.logTimestamp(true, false, 'Foobar', 'some log');    // print nothing
+     *  ConsoleUtils.logTimestamp(false, false, 'Foobar', 'some log');    // print some error
+     *  ConsoleUtils.logTimestamp(1 === 2, false, 'Foobar', 'some log');    // print some error
+     *  ```
+     */
+    public static logTimestamp(valid: boolean, once: boolean, component?: string, message?: string, product?: string): void {
+        const built = this.build(component, message, product);
+        if (!built) {
+            return;
+        }
+        const hash = objectHash(built);
+        if (once && loggedHashes.includes(hash)) {
+            return;
+        }
+        if (!valid) {
+            loggedHashes.push(hash);
+            console.log(`[${dayjs().format(timeFormat)}] ${built}`);
         }
     }
 
@@ -78,14 +122,14 @@ export abstract class ConsoleUtils {
      *  ```
      */
     public static note(valid: boolean, once: boolean, component?: string, message?: string, product?: string): void {
-        if (!message) {
+        const built = this.build(component, message, product);
+        if (!built) {
             return;
         }
-        const result = (component ? `[${product ?? productName}: ${component}] ` : '').concat(message);
         if (once) {
-            rcNote(valid, result);
+            rcNote(valid, built);
         } else {
-            console.warn('Note: ' + result);
+            console.warn(`Note: ${built}`);
         }
     }
 
@@ -106,14 +150,14 @@ export abstract class ConsoleUtils {
      *  ```
      */
     public static warn(valid: boolean, once: boolean, component?: string, message?: string, product?: string): void {
-        if (!message) {
+        const built = this.build(component, message, product);
+        if (!built) {
             return;
         }
-        const result = (component ? `[${product ?? productName}: ${component}] ` : '').concat(message);
         if (once) {
-            rcWarning(valid, result);
+            rcWarning(valid, built);
         } else {
-            console.warn('Warning: ' + result);
+            console.warn(`Warning: ${built}`);
         }
     }
 }
