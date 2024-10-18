@@ -154,20 +154,14 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     }));
 
     const onTimer = () => {
-        if (props?.onceOnly) {
-            preventEvents.forEach(item => {
-                triggerElement.removeEventListener(item, startTimer);
-            });
-            clearTimer();
-        }
-        if (!props?.onceOnly || !openedRef.current) {
-            const previous = opening;
+        clearTimer();
+        if (!opening && ((props?.onceOnly && !openedRef.current) || !props?.onceOnly)) {
             setOpening(true);
-            if (actionType !== 'custom' && !previous) {
+            if (actionType !== 'custom') {
                 popupFuncModal();
             }
+            openedRef.current = true;
         }
-        openedRef.current = true;
     };
 
     const clearTimer = () => {
@@ -178,8 +172,7 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     };
 
     const startTimer = () => {
-        clearTimer();
-        if (!props?.onceOnly || !opening) {
+        if (!timerRef.current) {
             timerRef.current = window.setTimeout(onTimer, timeout);
         }
     };
@@ -202,13 +195,23 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     }, [opening]);
 
     const popupFuncModal = () => {
-        const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'afterClose', 'preprocess']);
+        const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'onOk', 'onCancel', 'afterClose', 'preprocess']);
         const fullProps: ModalFuncProps = {
             className: classNames(clazzPrefix, props?.modalFunProps?.className),
             wrapClassName: classNames(`${clazzPrefix}-wrapper`, props?.modalFunProps?.wrapClassName),
             open: opening,
-            afterClose: () => {
+            onOk: (event: React.MouseEvent<HTMLElement>) => {
                 setOpening(false);
+                props?.modalFunProps?.onOk?.(event);
+            },
+            onCancel: (event: React.MouseEvent<HTMLElement>) => {
+                setOpening(false);
+                props?.modalFunProps?.onCancel?.(event);
+            },
+            afterClose: () => {
+                if (!props?.onceOnly) {
+                    startTimer();
+                }
                 props?.modalFunProps?.afterClose?.();
             },
             ...omitProps,
@@ -254,7 +257,9 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
                 props?.modalProps?.onCancel?.(event);
             }}
             afterClose={() => {
-                setOpening(false);
+                if (!props?.onceOnly) {
+                    startTimer();
+                }
                 props?.modalProps?.afterClose?.();
             }}
             {...omitProps}
