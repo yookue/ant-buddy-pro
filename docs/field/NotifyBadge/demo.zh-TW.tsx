@@ -116,7 +116,7 @@ export default () => {
                     }
                 ],
                 onChange: (activeKey) => {
-                    ConsoleUtils.log(false, false, 'NotifyBadge', '標籤頁切換到 ' + activeKey);
+                    ConsoleUtils.logTimestamp(false, false, 'NotifyBadge', '標籤頁切換到 ' + activeKey);
                 }
             }}
             localeProps={{

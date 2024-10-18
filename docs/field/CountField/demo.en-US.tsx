@@ -98,7 +98,7 @@ export default () => {
                     title: 'Comments',
                 }}
                 onChange={(count) => {
-                    ConsoleUtils.log(false, false, 'CountField', 'onChange count = ' + count);
+                    ConsoleUtils.logTimestamp(false, false, 'CountField', 'onChange count = ' + count);
                 }}
             />
         </>

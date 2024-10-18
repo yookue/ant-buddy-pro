@@ -61,7 +61,7 @@ export default () => {
                         messageApi.success('Captcha sent successfully');
                     }}
                     onTimer={count => {
-                        ConsoleUtils.log(false, false, 'CaptchaInput', 'onTimer count = ' + count);
+                        ConsoleUtils.logTimestamp(false, false, 'CaptchaInput', 'onTimer count = ' + count);
                     }}
                     onTimerBegin={() => setTiming(true)}
                     onTimerEnd={() => setTiming(false)}

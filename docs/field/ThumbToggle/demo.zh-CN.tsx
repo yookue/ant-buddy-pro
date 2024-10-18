@@ -114,7 +114,7 @@ export default () => {
                 showZero={showZero}
                 tooltipCtrl={tooltipCtrl}
                 onToggle={async () => {
-                    ConsoleUtils.log(false, false, 'ThumbToggle', 'onToggle 返回 true 以允许变更计数');
+                    ConsoleUtils.logTimestamp(false, false, 'ThumbToggle', 'onToggle 返回 true 以允许变更计数');
                     return true;
                 }}
                 localeProps={{

@@ -116,7 +116,7 @@ export default () => {
                     }
                 ],
                 onChange: (activeKey) => {
-                    ConsoleUtils.log(false, false, 'NotifyBadge', 'Tabs switched to ' + activeKey);
+                    ConsoleUtils.logTimestamp(false, false, 'NotifyBadge', 'Tabs switched to ' + activeKey);
                 }
             }}
             localeProps={{

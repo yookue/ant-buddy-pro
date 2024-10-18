@@ -136,7 +136,7 @@ export default () => {
                         'maxFileSize': '文件大小不能超過 {}{}',
                     }}
                     onImageSrcChange={() => {
-                        ConsoleUtils.log(false, false, 'AvatarUpload', '圖片源已更改');
+                        ConsoleUtils.logTimestamp(false, false, 'AvatarUpload', '圖片源已更改');
                     }}
                 />
             </ProForm>

@@ -61,7 +61,7 @@ export default () => {
                         messageApi.success('驗證碼發送成功');
                     }}
                     onTimer={count => {
-                        ConsoleUtils.log(false, false, 'CaptchaInput', 'onTimer count = ' + count);
+                        ConsoleUtils.logTimestamp(false, false, 'CaptchaInput', 'onTimer count = ' + count);
                     }}
                     onTimerBegin={() => setTiming(true)}
                     onTimerEnd={() => setTiming(false)}

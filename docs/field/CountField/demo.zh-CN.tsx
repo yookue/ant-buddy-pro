@@ -98,7 +98,7 @@ export default () => {
                     title: '评论',
                 }}
                 onChange={(count) => {
-                    ConsoleUtils.log(false, false, 'CountField', 'onChange count = ' + count);
+                    ConsoleUtils.logTimestamp(false, false, 'CountField', 'onChange count = ' + count);
                 }}
             />
         </>
