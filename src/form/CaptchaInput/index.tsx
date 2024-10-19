@@ -32,7 +32,7 @@ export type CaptchaInputRef = {
     isLoading: boolean;
     isTiming: () => boolean;
     startTimer: () => void;
-    endTimer: () => void;
+    stopTimer: () => void;
 };
 
 
@@ -175,7 +175,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         startTimer: (): void => {
             validatePhoneName().then(() => setTiming(true)).catch(() => {});
         },
-        endTimer: (): void => {
+        stopTimer: (): void => {
             setTiming(false);
         }
     }));

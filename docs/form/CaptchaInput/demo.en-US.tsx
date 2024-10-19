@@ -17,14 +17,14 @@
 
 import React from 'react';
 import {Button, Divider, message as messageApi} from 'antd';
-import {MobileOutlined, SafetyCertificateOutlined, ClockCircleOutlined} from '@ant-design/icons';
+import {MobileOutlined, SafetyCertificateOutlined, FireOutlined, StopOutlined} from '@ant-design/icons';
 import {ProForm, ProFormText} from '@ant-design/pro-form';
 import {CaptchaInput, ConsoleUtils, type CaptchaInputRef} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
-    const [timing, setTiming] = React.useState<boolean>(false);
     const captchaInputRef = React.useRef<CaptchaInputRef>(null);
+    const [timing, setTiming] = React.useState<boolean>(false);
 
     return (
         <>
@@ -71,17 +71,29 @@ export default () => {
                     }}
                 />
                 <Divider/>
-                <Button
-                    icon={<ClockCircleOutlined/>}
-                    disabled={timing}
-                    onClick={() => {
-                        if (!captchaInputRef.current?.isTiming()) {
-                            captchaInputRef.current?.startTimer();
-                        }
-                    }}
-                >
-                    Manual Start
-                </Button>
+                <ProForm.Group>
+                    <Button
+                        icon={<FireOutlined/>}
+                        disabled={timing}
+                        onClick={() => {
+                            if (!captchaInputRef.current?.isTiming()) {
+                                captchaInputRef.current?.startTimer();
+                            }
+                        }}
+                    >
+                        Manual Start
+                    </Button>
+                    <Button
+                        icon={<StopOutlined/>}
+                        disabled={!timing}
+                        onClick={() => {
+                            captchaInputRef.current?.stopTimer();
+                            setTiming(false);
+                        }}
+                    >
+                        Manual Stop
+                    </Button>
+                </ProForm.Group>
             </ProForm>
         </>
     );
