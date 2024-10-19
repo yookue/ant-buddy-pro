@@ -45,7 +45,7 @@ export type BorderBoxProps = React.PropsWithChildren<{
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description Whether border top or not
+     * @description Whether to border top or not
      * @description.zh-CN 顶部是否有边框
      * @description.zh-TW 頂部是否有邊框
      * @default true
@@ -53,7 +53,7 @@ export type BorderBoxProps = React.PropsWithChildren<{
     borderTop?: boolean;
 
     /**
-     * @description Whether border right or not
+     * @description Whether to border right or not
      * @description.zh-CN 右侧是否有边框
      * @description.zh-TW 右側是否有邊框
      * @default true
@@ -61,7 +61,7 @@ export type BorderBoxProps = React.PropsWithChildren<{
     borderRight?: boolean;
 
     /**
-     * @description Whether border bottom or not
+     * @description Whether to border bottom or not
      * @description.zh-CN 底部是否有边框
      * @description.zh-TW 底部是否有邊框
      * @default true
@@ -69,7 +69,7 @@ export type BorderBoxProps = React.PropsWithChildren<{
     borderBottom?: boolean;
 
     /**
-     * @description Whether border left or not
+     * @description Whether to border left or not
      * @description.zh-CN 左侧是否有边框
      * @description.zh-TW 左側是否有邊框
      * @default true
@@ -97,9 +97,11 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
         borderLeft = true,
     } = props ?? {};
 
+    const borderClazz = classNames((!borderTop ? undefined : `${clazzPrefix}-border-top`), (!borderRight ? undefined : `${clazzPrefix}-border-right`), (!borderBottom ? undefined : `${clazzPrefix}-border-bottom`), (!borderLeft ? undefined : `${clazzPrefix}-border-left`));
+
     return (
         <div
-            className={classNames(clazzPrefix, (!borderTop ? undefined : `${clazzPrefix}-top`), (!borderRight ? undefined : `${clazzPrefix}-right`), (!borderBottom ? undefined : `${clazzPrefix}-bottom`), (!borderLeft ? undefined : `${clazzPrefix}-left`), props?.containerClazz)}
+            className={classNames(clazzPrefix, borderClazz, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}
