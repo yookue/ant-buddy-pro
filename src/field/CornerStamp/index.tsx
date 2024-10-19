@@ -318,7 +318,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
             return undefined;
         }
         const extraClazz = rotateAddon ? buildAddonRotateClazz() : buildAddonRectClazz();
-        return !props?.addon ? undefined : (
+        return (
             <div className={classNames(`${clazzPrefix}-addon`, (rotateAddon ? `${clazzPrefix}-addon-rotate` : undefined), extraClazz, props?.addonClazz)} style={props?.addonStyle}>
                 {typeof props.addon === 'function' ? props.addon() : props.addon}
             </div>
