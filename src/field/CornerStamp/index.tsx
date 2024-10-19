@@ -82,23 +82,23 @@ export type CornerStampProps = React.PropsWithChildren<{
     addon?: React.ReactNode | (() => React.ReactNode);
 
     /**
-     * @description The CSS class name of the addon addon div
+     * @description The CSS class name of the addon wrapper div
      * @description.zh-CN 包裹角标附加节点 div 的 CSS 类名
      * @description.zh-TW 包裹角標附加節點 div 的 CSS 類名
      */
     addonClazz?: string;
 
     /**
-     * @description The CSS style of the addon addon div
+     * @description The CSS style of the addon wrapper div
      * @description.zh-CN 包裹角标附加节点 div 的 CSS 样式
      * @description.zh-TW 包裹角標附加節點 div 的 CSS 樣式
      */
     addonStyle?: React.CSSProperties;
 
     /**
-     * @description The shape of the component
-     * @description.zh-CN 组件的形状
-     * @description.zh-TW 組件的形狀
+     * @description Whether to rotate the addon element inside the stamp
+     * @description.zh-CN 是否旋转角标里的附加节点
+     * @description.zh-TW 是否旋轉角標裏的附加節點
      * @default true
      */
     rotateAddon?: boolean;
