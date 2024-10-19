@@ -75,30 +75,30 @@ export type CornerStampProps = React.PropsWithChildren<{
     fieldStyle?: React.CSSProperties;
 
     /**
-     * @description The addon element inside stamp
-     * @description.zh-CN 角标里的附加节点
-     * @description.zh-TW 角標裏的附加節點
+     * @description The addon element
+     * @description.zh-CN 附加节点
+     * @description.zh-TW 附加節點
      */
     addon?: React.ReactNode | (() => React.ReactNode);
 
     /**
      * @description The CSS class name of the addon wrapper div
-     * @description.zh-CN 包裹角标附加节点 div 的 CSS 类名
-     * @description.zh-TW 包裹角標附加節點 div 的 CSS 類名
+     * @description.zh-CN 包裹附加节点 div 的 CSS 类名
+     * @description.zh-TW 包裹附加節點 div 的 CSS 類名
      */
     addonClazz?: string;
 
     /**
      * @description The CSS style of the addon wrapper div
-     * @description.zh-CN 包裹角标附加节点 div 的 CSS 样式
-     * @description.zh-TW 包裹角標附加節點 div 的 CSS 樣式
+     * @description.zh-CN 包裹附加节点 div 的 CSS 样式
+     * @description.zh-TW 包裹附加節點 div 的 CSS 樣式
      */
     addonStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to rotate the addon element inside the stamp
-     * @description.zh-CN 是否旋转角标里的附加节点
-     * @description.zh-TW 是否旋轉角標裏的附加節點
+     * @description Whether to rotate the addon element or not
+     * @description.zh-CN 是否旋转附加节点
+     * @description.zh-TW 是否旋轉附加節點
      * @default true
      */
     rotateAddon?: boolean;
