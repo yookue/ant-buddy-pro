@@ -16,16 +16,19 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
+import {Button, Divider} from 'antd';
+import {FireOutlined, StopOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {DelayModal, ConsoleUtils} from '@yookue/ant-buddy-pro';
+import {DelayModal, ConsoleUtils, type DelayModalRef} from '@yookue/ant-buddy-pro';
 import {type ModalActionType} from '@yookue/ant-buddy-pro/field/DelayModal';
 
 
 export default () => {
-    const [actionType, setActionType] = React.useState<ModalActionType>('info');
+    const delayModalRef = React.useRef<DelayModalRef>(null);
+    const [autoStart, setAutoStart] = React.useState<boolean>(true);
     const [onceOnly, setOnceOnly] = React.useState<boolean>(true);
-    const [hasOpened, setHasOpened] = React.useState<boolean>(false);
+    const [actionType, setActionType] = React.useState<ModalActionType>('info');
+    const [timing, setTiming] = React.useState<boolean>(autoStart);
 
     return (
         <>
@@ -35,12 +38,38 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='Auto Start'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: autoStart,
+                            onChange: (value: boolean) => {
+                                setAutoStart(value);
+                                setTiming(value);
+                                value ? delayModalRef.current?.startTimer() : delayModalRef.current?.stopTimer();
+                            },
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Once Only'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: onceOnly,
+                            disabled: autoStart || timing,
+                            onChange: setOnceOnly,
+                        }}
+                    />
+                </ProForm.Group>
                 <ProFormRadio.Group
                     label='Action Type'
                     radioType='button'
                     fieldProps={{
                         value: actionType,
                         buttonStyle: 'solid',
+                        disabled: autoStart || timing,
                         onChange: (event) => {
                             setActionType(event.target?.value);
                         }
@@ -54,24 +83,39 @@ export default () => {
                         {label: 'Custom', value: 'custom'},
                     ]}
                 />
-                <ProFormSwitch
-                    label='Once Only'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: onceOnly,
-                        onChange: setOnceOnly,
-                    }}
-                />
+                <ProForm.Group>
+                    <Button
+                        icon={<FireOutlined/>}
+                        disabled={autoStart || timing}
+                        onClick={() => {
+                            delayModalRef.current?.startTimer();
+                            setTiming(true);
+                        }}
+                    >
+                        Manual Start
+                    </Button>
+                    <Button
+                        icon={<StopOutlined/>}
+                        disabled={autoStart || !timing}
+                        onClick={() => {
+                            delayModalRef.current?.stopTimer();
+                            setTiming(false);
+                        }}
+                    >
+                        Manual Stop
+                    </Button>
+                </ProForm.Group>
             </ProForm>
             <Divider/>
             <span>
-                Popup a modal dialog after idle 15 seconds. {(onceOnly && hasOpened) ? 'Already shown' : 'Please wait'}.
+                Popup a modal dialog after idle 10 seconds.
             </span>
             <DelayModal
+                ref={delayModalRef}
                 actionType={actionType}
+                autoStart={autoStart}
                 onceOnly={onceOnly}
-                timeout={1000 * 15}
+                timeout={1000 * 10}
                 modalProps={{
                     title: 'DelayModal',
                     children: 'Oops! This is a message from modalProps',
@@ -89,9 +133,6 @@ export default () => {
                     cancelText: 'Cancel',
                 }}
                 onOpenChange={(open: boolean) => {
-                    if (open && !hasOpened) {
-                        setHasOpened(true);
-                    }
                     ConsoleUtils.logTimestamp(false, false, 'DelayModal', 'onOpenChange open = ' + open);
                 }}
             />

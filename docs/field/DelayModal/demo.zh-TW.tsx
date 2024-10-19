@@ -16,16 +16,19 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
+import {Button, Divider} from 'antd';
+import {FireOutlined, StopOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {DelayModal, ConsoleUtils} from '@yookue/ant-buddy-pro';
+import {DelayModal, ConsoleUtils, type DelayModalRef} from '@yookue/ant-buddy-pro';
 import {type ModalActionType} from '@yookue/ant-buddy-pro/field/DelayModal';
 
 
 export default () => {
-    const [actionType, setActionType] = React.useState<ModalActionType>('info');
+    const delayModalRef = React.useRef<DelayModalRef>(null);
+    const [autoStart, setAutoStart] = React.useState<boolean>(true);
     const [onceOnly, setOnceOnly] = React.useState<boolean>(true);
-    const [hasOpened, setHasOpened] = React.useState<boolean>(false);
+    const [actionType, setActionType] = React.useState<ModalActionType>('info');
+    const [timing, setTiming] = React.useState<boolean>(autoStart);
 
     return (
         <>
@@ -35,12 +38,37 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='自動開始'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: autoStart,
+                            onChange: (value: boolean) => {
+                                setAutoStart(value);
+                                value ? delayModalRef.current?.startTimer() : delayModalRef.current?.stopTimer();
+                            },
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='僅彈一次'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: onceOnly,
+                            disabled: autoStart || timing,
+                            onChange: setOnceOnly,
+                        }}
+                    />
+                </ProForm.Group>
                 <ProFormRadio.Group
                     label='動作類型'
                     radioType='button'
                     fieldProps={{
                         value: actionType,
                         buttonStyle: 'solid',
+                        disabled: autoStart || timing,
                         onChange: (event) => {
                             setActionType(event.target?.value);
                         }
@@ -54,24 +82,39 @@ export default () => {
                         {label: '自定義', value: 'custom'},
                     ]}
                 />
-                <ProFormSwitch
-                    label='僅彈出一次'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: onceOnly,
-                        onChange: setOnceOnly,
-                    }}
-                />
+                <ProForm.Group>
+                    <Button
+                        icon={<FireOutlined/>}
+                        disabled={autoStart || timing}
+                        onClick={() => {
+                            delayModalRef.current?.startTimer();
+                            setTiming(true);
+                        }}
+                    >
+                        手動開始
+                    </Button>
+                    <Button
+                        icon={<StopOutlined/>}
+                        disabled={autoStart || !timing}
+                        onClick={() => {
+                            delayModalRef.current?.stopTimer();
+                            setTiming(false);
+                        }}
+                    >
+                        手動停止
+                    </Button>
+                </ProForm.Group>
             </ProForm>
             <Divider/>
             <span>
-                空閑（鼠標鍵盤無動作）15 秒鐘後彈出。{(onceOnly && hasOpened) ? '已彈出' : '請稍候'}。
+                空閑（鼠標鍵盤無動作）10 秒鐘後彈出。
             </span>
             <DelayModal
+                ref={delayModalRef}
                 actionType={actionType}
+                autoStart={autoStart}
                 onceOnly={onceOnly}
-                timeout={1000 * 15}
+                timeout={1000 * 10}
                 modalProps={{
                     title: 'DelayModal',
                     children: '咦，這是一條來自 modalProps 的消息',
@@ -89,9 +132,6 @@ export default () => {
                     cancelText: '取消',
                 }}
                 onOpenChange={(open: boolean) => {
-                    if (open && !hasOpened) {
-                        setHasOpened(true);
-                    }
                     ConsoleUtils.logTimestamp(false, false, 'DelayModal', 'onOpenChange open = ' + open);
                 }}
             />
