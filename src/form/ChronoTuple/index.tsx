@@ -68,6 +68,7 @@ export type ChronoTupleProps = {
      * @description Whether to match the width of parent element
      * @description.zh-CN 是否匹配父节点的宽度
      * @description.zh-TW 是否匹配父節點的寬度
+     * @default true
      */
     widthBlock?: boolean;
 
@@ -95,6 +96,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
 
     // Initialize the default props
     const {
+        widthBlock = true,
         proField = true,
     } = props ?? {};
 
@@ -106,7 +108,10 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
 
     const omitProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'presetStyle']);
     return (
-        <div className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            className={classNames(clazzPrefix, (widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             <Input.Group compact={true}>
                 {digitNode}
                 <ChronoSelect
