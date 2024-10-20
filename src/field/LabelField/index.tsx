@@ -24,7 +24,7 @@ import {type WithFalse, type AxisDirectionType} from '@/type/declaration';
 import './index.less';
 
 
-export type LabelPresetStyle = WithFalse<'before-prior' | 'after-prior'>;
+export type LabelPresetStyle = WithFalse<'label-prior' | 'field-prior'>;
 
 
 export type LabelFieldProps = React.PropsWithChildren<{
@@ -111,7 +111,7 @@ export type LabelFieldProps = React.PropsWithChildren<{
      * @description The preset style of the component
      * @description.zh-CN 预设样式
      * @description.zh-TW 預設樣式
-     * @default 'after-prior'
+     * @default 'field-prior'
      */
     presetStyle?: LabelPresetStyle;
 }>;
@@ -132,7 +132,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
     // Initialize the default props
     const {
         delimiter = ':',
-        presetStyle = 'after-prior',
+        presetStyle = 'field-prior',
     } = props ?? {};
 
     const layout = formContext?.vertical ? 'vertical' : (props?.layout ?? 'horizontal');

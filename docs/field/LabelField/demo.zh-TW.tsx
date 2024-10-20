@@ -25,7 +25,7 @@ import {type LabelPresetStyle} from '@yookue/ant-buddy-pro/field/LabelField';
 export default () => {
     const [layout, setLayout] = React.useState<AxisDirectionType>('horizontal');
     const [required, setRequired] = React.useState<boolean>(false);
-    const [presetStyle, setPresetStyle] = React.useState<LabelPresetStyle>('after-prior');
+    const [presetStyle, setPresetStyle] = React.useState<LabelPresetStyle>('field-prior');
 
     return (
         <>
@@ -74,8 +74,8 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '左側優先', value: 'before-prior'},
-                        {label: '右側優先', value: 'after-prior'},
+                        {label: '標簽優先', value: 'label-prior'},
+                        {label: '字段優先', value: 'field-prior'},
                         {label: '無', value: false},
                     ]}
                 />
