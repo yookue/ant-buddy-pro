@@ -15,6 +15,10 @@
  */
 
 
+import React from 'react';
+import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+
+
 /**
  * Utilities for HTML elements
  *
@@ -23,49 +27,106 @@
 // noinspection JSUnusedGlobalSymbols
 export abstract class ElementUtils {
     /**
-     * Appends the given class name to the given html element
+     * Adds the class name(s) to the given element
      *
-     * @param element the html element to inspect
-     * @param className the class name to append
+     * @param element the element to inspect
+     * @param className the class name(s) to add
      */
-    public static appendClassName(element?: HTMLElement | null, className?: string | null): void {
+    public static addClazz(element?: HTMLElement | null, className?: string | string[] | null): void {
         if (!element || !className || className.length === 0) {
             return;
         }
-        const clazzNames = element.className?.split(' ')?.filter(item => !!item);
-        if (!clazzNames || clazzNames.length === 0) {
-            element.className = className;
-            return;
-        }
-        if (!clazzNames.includes(className)) {
-            clazzNames.push(className);
-            element.className = clazzNames.join(' ');
+        if (Array.isArray(className)) {
+            element.classList.add(...className);
+        } else {
+            element.classList.add(className);
         }
     }
 
     /**
-     * Removes the given class name from the given html element
+     * Removes the class name(s) from the given element
      *
-     * @param element the html element to inspect
-     * @param className the class name to remove
+     * @param element the element to inspect
+     * @param className the class name(s) to remove
      */
-    public static removeClassName(element?: HTMLElement | null, className?: string | null): void {
+    public static removeClazz(element?: HTMLElement | null, className?: string | null): void {
         if (!element || !className || className.length === 0) {
             return;
         }
-        let clazzNames = element.className?.split(' ')?.filter(item => !!item);
-        if (clazzNames?.includes(className)) {
-            clazzNames = clazzNames.filter(item => item !== className);
-            element.className = (!clazzNames || clazzNames.length === 0) ? '' : clazzNames.join(' ');
+        if (Array.isArray(className)) {
+            element.classList.remove(...className);
+        } else {
+            element.classList.remove(className);
         }
     }
 
     /**
-     * Returns the value property descriptor of the given html element
+     * Adds the style to the given element
      *
-     * @param element the html element to inspect
+     * @param element the element to inspect
+     * @param key the style key
+     * @param value the style key
+     */
+    public static addStyle(element?: HTMLElement | null, key?: string | null, value?: string | null): void {
+        if (!element || !key || !value) {
+            return;
+        }
+        element.style.setProperty(key, value);
+    }
+
+    /**
+     * Adds the styles to the given element
      *
-     * @returns the value property descriptor of the given html element
+     * @param element the element to inspect
+     * @param style the styles to add
+     */
+    public static addStyles(element?: HTMLElement | null, style?: React.CSSProperties | null): void {
+        if (!element || !style) {
+            return;
+        }
+        for (const prop in style) {
+            if (Object.prototype.hasOwnProperty.call(style, prop)) {
+                element.style.setProperty(StringUtils.toKebabCase(prop) as string, ObjectUtils.getProp(style, prop));
+            }
+        }
+    }
+
+    /**
+     * Removes the style from the given element
+     *
+     * @param element the element to inspect
+     * @param key the style key
+     */
+    public static removeStyle(element?: HTMLElement | null, key?: string | null): void {
+        if (!element || !key) {
+            return;
+        }
+        element.style.setProperty(key, '');
+    }
+
+    /**
+     * Removes the styles from the given element
+     *
+     * @param element the element to inspect
+     * @param style the styles to remove
+     */
+    public static removeStyles(element?: HTMLElement | null, style?: React.CSSProperties | null): void {
+        if (!element || !style) {
+            return;
+        }
+        for (const prop in style) {
+            if (Object.prototype.hasOwnProperty.call(style, prop)) {
+                element.style.setProperty(StringUtils.toKebabCase(prop) as string, '');
+            }
+        }
+    }
+
+    /**
+     * Returns the value property descriptor of the given element
+     *
+     * @param element the element to inspect
+     *
+     * @returns the value property descriptor of the given element
      *
      * @see "https://coryrylan.com/blog/trigger-input-updates-with-react-controlled-inputs"
      */
@@ -84,11 +145,11 @@ export abstract class ElementUtils {
     }
 
     /**
-     * Returns the value of the given html element
+     * Returns the value of the given element
      *
-     * @param element the html element to inspect
+     * @param element the element to inspect
      *
-     * @returns the value of the given html element
+     * @returns the value of the given element
      *
      * @see "https://coryrylan.com/blog/trigger-input-updates-with-react-controlled-inputs"
      */
@@ -98,9 +159,9 @@ export abstract class ElementUtils {
     }
 
     /**
-     * Clears value for the given html element
+     * Clears value for the given element
      *
-     * @param element the html element to inspect
+     * @param element the element to inspect
      * @param callback the function to execute after value been set
      */
     public static clearElementValue = (element?: HTMLElement | null, callback?: ((previous?: string) => void)): void => {
@@ -108,9 +169,9 @@ export abstract class ElementUtils {
     }
 
     /**
-     * Sets value for the given html element
+     * Sets value for the given element
      *
-     * @param element the html element to inspect
+     * @param element the element to inspect
      * @param value the value to set
      * @param callback the function to execute after value been set
      *

@@ -32,7 +32,7 @@ export abstract class NodeUtils {
      *
      * @returns the string representation of the node
      */
-    public static toString(node?: React.ReactNode | (() => React.ReactNode) | null): string | undefined {
+    public static toString(node?: React.ReactNode | (() => React.ReactNode | undefined) | null): string | undefined {
         if (!node) {
             return undefined;
         }
@@ -55,7 +55,7 @@ export abstract class NodeUtils {
      *
      * @see "https://github.com/sunknudsen/react-node-to-string"
      */
-    public static toStringRecursive(node?: React.ReactNode | (() => React.ReactNode) | null): string | undefined {
+    public static toStringRecursive(node?: React.ReactNode | (() => React.ReactNode | undefined) | null): string | undefined {
         if (!node) {
             return undefined;
         }
