@@ -62,7 +62,7 @@ export type CountFieldProps = React.PropsWithChildren<{
      * @description.zh-CN 字段节点
      * @description.zh-TW 字段節點
      */
-    field?: React.ReactNode | (() => React.ReactNode);
+    field?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description The thumbs count
@@ -73,7 +73,7 @@ export type CountFieldProps = React.PropsWithChildren<{
     count?: number;
 
     /**
-     * @description The props for the count
+     * @description The props of the count
      * @description.zh-CN 计数的属性
      * @description.zh-TW 計數的屬性
      */
@@ -109,7 +109,7 @@ export type CountFieldProps = React.PropsWithChildren<{
     tooltipCtrl?: boolean;
 
     /**
-     * @description The props for Tooltip
+     * @description The props of Antd Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */

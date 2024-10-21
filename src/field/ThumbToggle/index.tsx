@@ -138,7 +138,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     count?: number;
 
     /**
-     * @description The props for the count
+     * @description The props of count
      * @description.zh-CN 计数的属性
      * @description.zh-TW 計數的屬性
      */
@@ -167,7 +167,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     tooltipCtrl?: boolean;
 
     /**
-     * @description The props for Tooltip
+     * @description The props of Antd Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -188,7 +188,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     onToggle?: (checked?: boolean, count?: number) => boolean | number | void | Promise<boolean | number | void>;
 
     /**
-     * @description The props for locale
+     * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */

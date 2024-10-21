@@ -83,7 +83,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-CN 下拉选项左侧 span 的渲染方法
      * @description.zh-TW 下拉選項左側 span 的渲染方法
      */
-    optionBeforeRender?: (origin: React.ReactNode) => React.ReactNode;
+    optionBeforeRender?: (dom?: React.ReactNode) => React.ReactNode | undefined;
 
     /**
      * @description The CSS class name of the option item after
@@ -112,7 +112,7 @@ export type DivideSelectProps = ProFormSelectProps & {
      * @description.zh-CN 下拉选项右侧 span 的渲染方法
      * @description.zh-TW 下拉選項右側 span 的渲染方法
      */
-    optionAfterRender?: (origin: React.ReactNode) => React.ReactNode;
+    optionAfterRender?: (dom?: React.ReactNode) => React.ReactNode | undefined;
 
     /**
      * @description Whether to keep the `options` or `valueEnum` data when using the `request` data

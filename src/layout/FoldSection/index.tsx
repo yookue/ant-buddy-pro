@@ -139,7 +139,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
     tooltipCtrl?: boolean;
 
     /**
-     * @description The props for Tooltip
+     * @description The props of Antd Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -214,7 +214,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
     presetStyle?: SectionPresetStyle;
 
     /**
-     * @description The props for locale
+     * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */

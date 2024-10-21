@@ -196,7 +196,7 @@ export type MenuTabsProps = {
      * @description.zh-CN 选项卡标题内容的渲染方式
      * @description.zh-TW 選項卡標題内容的渲染方式
      */
-    tabTitleRender?: (dom: React.ReactNode) => React.ReactNode;
+    tabTitleRender?: (dom?: React.ReactNode) => React.ReactNode | undefined;
 
     /**
      * @description Whether to show the title of the tab div

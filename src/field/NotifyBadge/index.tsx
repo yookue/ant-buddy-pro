@@ -261,7 +261,7 @@ export type NotifyBadgeProps = {
     tabsProps?: MixinTabsProps;
 
     /**
-     * @description The props for locale
+     * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */

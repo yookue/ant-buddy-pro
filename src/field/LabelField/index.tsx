@@ -62,7 +62,7 @@ export type LabelFieldProps = React.PropsWithChildren<{
      * @description.zh-CN 标签节点
      * @description.zh-TW 標簽節點
      */
-    label?: React.ReactNode | (() => React.ReactNode);
+    label?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description The CSS class name of the label
@@ -91,7 +91,7 @@ export type LabelFieldProps = React.PropsWithChildren<{
      * @description.zh-CN 字段节点
      * @description.zh-TW 字段節點
      */
-    field?: React.ReactNode | (() => React.ReactNode);
+    field?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description The space size

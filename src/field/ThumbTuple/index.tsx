@@ -52,21 +52,21 @@ export type ThumbTupleProps = {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The props for the space
+     * @description The props of the space
      * @description.zh-CN 间距的属性
      * @description.zh-TW 間距的屬性
      */
     spaceProps?: SpaceProps;
 
     /**
-     * @description The props for thumb liking
+     * @description The props of the thumb liking
      * @description.zh-CN 拇指喜欢的属性
      * @description.zh-TW 拇指喜歡的屬性
      */
     thumbLikeProps?: Omit<ThumbToggleProps, 'ref' | 'actionType'>;
 
     /**
-     * @description The props for thumb disliking
+     * @description The props of the thumb disliking
      * @description.zh-CN 拇指不喜欢的属性
      * @description.zh-TW 拇指不喜歡的屬性
      */

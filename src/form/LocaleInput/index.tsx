@@ -110,7 +110,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     clazzPrefix?: string;
 
     /**
-     * @description The DOM of addon for the primary input box
+     * @description The DOM of the addon for the primary input box
      * @description.zh-CN 默认文本框的附属节点内容
      * @description.zh-TW 默認文本框的標簽節點內容
      * @default <TranslationOutlined/>
@@ -118,7 +118,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     addon?: React.ReactNode;
 
     /**
-     * @description The position of addon for the primary input box
+     * @description The position of the addon for the primary input box
      * @description.zh-CN 默认文本框的附属节点位置
      * @description.zh-TW 默認文本框的附属節點位置
      * @default 'after'
@@ -424,7 +424,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         }
     } else if (!props?.popupInputProps && props?.popupQuickTags) {
         for (const tag of props.popupQuickTags) {
-            if (!tag || tag.length === 0) {
+            if (!tag) {
                 continue;
             }
             const elementId = nanoid();

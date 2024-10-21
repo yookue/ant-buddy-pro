@@ -49,7 +49,7 @@ export type TooltipFieldProps = React.PropsWithChildren<{
      * @description.zh-CN 字段节点
      * @description.zh-TW 字段節點
      */
-    field?: React.ReactNode | (() => React.ReactNode);
+    field?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description The CSS class name of the field wrapper div
@@ -73,7 +73,7 @@ export type TooltipFieldProps = React.PropsWithChildren<{
     tooltipCtrl?: boolean;
 
     /**
-     * @description The props for Tooltip
+     * @description The props of Antd Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */

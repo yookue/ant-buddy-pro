@@ -58,7 +58,7 @@ export type CornerStampProps = React.PropsWithChildren<{
      * @description.zh-CN 字段节点
      * @description.zh-TW 字段節點
      */
-    field?: React.ReactNode | (() => React.ReactNode);
+    field?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description The CSS class name of the field wrapper div
@@ -79,7 +79,7 @@ export type CornerStampProps = React.PropsWithChildren<{
      * @description.zh-CN 附加节点
      * @description.zh-TW 附加節點
      */
-    addon?: React.ReactNode | (() => React.ReactNode);
+    addon?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description The CSS class name of the addon wrapper div

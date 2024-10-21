@@ -242,7 +242,7 @@ export type IconSelectProps = SelectFieldProps & {
     optionIconStyle?: React.CSSProperties;
 
     /**
-     * @description The props for locale
+     * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */
@@ -257,7 +257,7 @@ export type IconSelectProps = SelectFieldProps & {
     tooltipCtrl?: boolean;
 
     /**
-     * @description The props for Tooltip
+     * @description The props of Antd Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
@@ -365,7 +365,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     const clearIconsBadge = () => {
         const elements = document.querySelectorAll<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option]`);
-        elements?.forEach(item => ElementUtils.removeClassName(item as HTMLElement, `${clazzPrefix}-icon-selected`));
+        elements?.forEach(item => ElementUtils.removeClazz(item as HTMLElement, `${clazzPrefix}-icon-selected`));
     };
 
     const changeIconBadge = (iconName: string, selected: boolean) => {
@@ -374,7 +374,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         }
         const element = document.querySelector<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option='${iconName}']`);
         if (element) {
-            selected ? ElementUtils.appendClassName(element, `${clazzPrefix}-icon-selected`) : ElementUtils.removeClassName(element, `${clazzPrefix}-icon-selected`);
+            selected ? ElementUtils.addClazz(element, `${clazzPrefix}-icon-selected`) : ElementUtils.removeClazz(element, `${clazzPrefix}-icon-selected`);
         }
     };
 

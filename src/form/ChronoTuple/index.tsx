@@ -51,14 +51,14 @@ export type ChronoTupleProps = {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The props for the digit component
+     * @description The props of the digit component
      * @description.zh-CN 数字组件的属性
      * @description.zh-TW 數字組件的屬性
      */
     digitProps?: ProFormDigitProps;
 
     /**
-     * @description The props for the select component
+     * @description The props of the select component
      * @description.zh-CN 选择组件的属性
      * @description.zh-TW 選擇組件的屬性
      */

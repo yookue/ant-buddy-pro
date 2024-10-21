@@ -66,7 +66,7 @@ export type IntlLocaleProps = {
     disallowType?: string;
 
     /**
-     * @description The title of image crop modal
+     * @description The title of the image crop modal
      * @description.zh-CN 头像裁剪对话框的标题
      * @description.zh-TW 頭像裁剪對話框的標題
      */
@@ -115,7 +115,7 @@ export type FileUploadProps = Omit<UploadProps, 'name' | 'maxCount' | 'showUploa
      * @description.zh-CN 上传组件的占位符
      * @description.zh-TW 上傳組件的占位符
      */
-    placeholder?: React.ReactNode | (() => React.ReactNode);
+    placeholder?: React.ReactNode | (() => React.ReactNode | undefined);
 };
 
 
@@ -172,14 +172,14 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     shape?: CircleSquareShape;
 
     /**
-     * @description The props for the avatar
+     * @description The props of the avatar
      * @description.zh-CN 头像属性
      * @description.zh-TW 頭像屬性
      */
     avatarProps?: Omit<AvatarProps, 'src' | 'srcSet' | 'shape' | 'children'>;
 
     /**
-     * @description The props for the image
+     * @description The props of the image
      * @description.zh-CN 图像属性
      * @description.zh-TW 圖像屬性
      */
@@ -194,7 +194,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     uploadEnabled?: boolean;
 
     /**
-     * @description The props for uploading
+     * @description The props of uploading
      * @description.zh-CN 上传属性
      * @description.zh-TW 上傳屬性
      */
@@ -209,7 +209,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     cropEnabled?: boolean;
 
     /**
-     * @description The props for cropping
+     * @description The props of cropping
      * @description.zh-CN 裁剪属性
      * @description.zh-TW 裁剪屬性
      */
@@ -223,14 +223,14 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
     tooltipCtrl?: boolean;
 
     /**
-     * @description The props for Tooltip
+     * @description The props of Antd Tooltip
      * @description.zh-CN Tooltip 属性
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: TooltipProps;
 
     /**
-     * @description The props for locale
+     * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
      */
