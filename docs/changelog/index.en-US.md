@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.119** [2024-10-21]
+    - Add 'field/CompactTuple'
+
   - **v0.1.116** [2024-10-17]
     - Add 'field/CornerStamp'
 

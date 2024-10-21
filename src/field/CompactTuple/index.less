@@ -1,0 +1,111 @@
+/*
+ * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License")
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+@root-entry-name: default;
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@buddy-compact-tuple: ~'@{ant-prefix}-buddy-compact-tuple';
+
+
+.@{buddy-compact-tuple}:not(.@{buddy-compact-tuple}-readonly-borderless) {
+    .@{buddy-compact-tuple}-field {
+        &.@{buddy-compact-tuple}-field-border-top .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-top: @border-width-base @border-style-base @border-color-base;
+        }
+
+        &.@{buddy-compact-tuple}-field-border-right .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-right: @border-width-base @border-style-base @border-color-base;
+        }
+
+        &.@{buddy-compact-tuple}-field-border-bottom .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+        }
+
+        &.@{buddy-compact-tuple}-field-border-left .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-left: @border-width-base @border-style-base @border-color-base;
+        }
+    }
+
+    .@{buddy-compact-tuple}-addon {
+        &.@{buddy-compact-tuple}-addon-border-top .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-top: @border-width-base @border-style-base @border-color-base;
+        }
+
+        &.@{buddy-compact-tuple}-addon-border-right .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-right: @border-width-base @border-style-base @border-color-base;
+        }
+
+        &.@{buddy-compact-tuple}-addon-border-bottom .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-bottom: @border-width-base @border-style-base @border-color-base;
+        }
+
+        &.@{buddy-compact-tuple}-addon-border-left .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+            border-left: @border-width-base @border-style-base @border-color-base;
+        }
+    }
+}
+
+
+.@{buddy-compact-tuple}.@{buddy-compact-tuple}-field-prior .@{ant-prefix}-space-compact {
+    display: flex;
+
+    .@{buddy-compact-tuple}-field {
+        display: flex;
+        flex: 1;
+    }
+
+    .@{buddy-compact-tuple}-addon {
+        display: flex;
+        flex: none;
+        width: fit-content;
+    }
+}
+
+
+.@{buddy-compact-tuple}.@{buddy-compact-tuple}-addon-prior .@{ant-prefix}-space-compact {
+    display: flex;
+
+    .@{buddy-compact-tuple}-field {
+        display: flex;
+        flex: none;
+        width: fit-content;
+    }
+
+    .@{buddy-compact-tuple}-addon {
+        display: flex;
+        flex: 1;
+    }
+}
+
+
+.@{buddy-compact-tuple}.@{buddy-compact-tuple}-field-prior,
+.@{buddy-compact-tuple}.@{buddy-compact-tuple}-addon-prior {
+    .@{buddy-compact-tuple}-field, .@{buddy-compact-tuple}-addon {
+        > .@{ant-prefix}-form-item {
+            width: 100%;
+        }
+    }
+}
+
+
+.@{buddy-compact-tuple} .@{buddy-compact-tuple}-field,
+.@{buddy-compact-tuple} .@{buddy-compact-tuple}-addon {
+    > .@{ant-prefix}-form-item > .@{ant-prefix}-form-item-row > .@{ant-prefix}-form-item-control > .@{ant-prefix}-form-item-control-input {
+        min-height: 30px;
+    }
+}

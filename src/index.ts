@@ -17,6 +17,7 @@
 
 export {BadgeRibbon, type BadgeRibbonProps} from './field/BadgeRibbon';
 export {BorderBox, type BorderBoxProps} from './field/BorderBox';
+export {CompactTuple, type CompactTupleProps} from './field/CompactTuple';
 export {CornerStamp, type CornerStampProps} from './field/CornerStamp';
 export {CountField, type CountFieldProps, type CountFieldRef} from './field/CountField';
 export {DelayModal, type DelayModalProps, type DelayModalRef} from './field/DelayModal';
