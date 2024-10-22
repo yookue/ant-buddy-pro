@@ -40,7 +40,7 @@ export default () => {
                         unCheckedChildren='否'
                         fieldProps={{
                             checked: emptyText,
-                            onChange: setRenderEmpty,
+                            onChange: setEmptyText,
                         }}
                     />
                     <ProFormSwitch
