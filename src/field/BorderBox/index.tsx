@@ -75,6 +75,13 @@ export type BorderBoxProps = React.PropsWithChildren<{
      * @default true
      */
     borderLeft?: boolean;
+
+    /**
+     * @description Whether to shadow the borders or not
+     * @description.zh-CN 是否给边框添加阴影
+     * @description.zh-TW 是否給邊框添加陰影
+     */
+    boxShadow?: boolean;
 }>;
 
 
@@ -101,7 +108,7 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
 
     return (
         <div
-            className={classNames(clazzPrefix, borderClazz, props?.containerClazz)}
+            className={classNames(clazzPrefix, borderClazz, (props?.boxShadow ? `${clazzPrefix}-box-shadow` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}

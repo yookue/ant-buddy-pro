@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Checkbox, Divider} from 'antd';
+import {Divider} from 'antd';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {BorderBox} from '@yookue/ant-buddy-pro';
 
@@ -26,6 +26,7 @@ export default () => {
     const [borderRight, setBorderRight] = React.useState<boolean>(true);
     const [borderBottom, setBorderBottom] = React.useState<boolean>(true);
     const [borderLeft, setBorderLeft] = React.useState<boolean>(true);
+    const [boxShadow, setBoxShadow] = React.useState<boolean>(false);
 
     return (
         <>
@@ -73,6 +74,15 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
+                <ProFormSwitch
+                    label='邊框陰影'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: boxShadow,
+                        onChange: setBoxShadow,
+                    }}
+                />
             </ProForm>
             <Divider/>
             <BorderBox
@@ -80,9 +90,10 @@ export default () => {
                 borderRight={borderRight}
                 borderBottom={borderBottom}
                 borderLeft={borderLeft}
+                boxShadow={boxShadow}
                 containerStyle={{padding: '12px'}}
             >
-                <Checkbox>復選框</Checkbox>
+                壹只棕色敏捷的狐貍跳過了壹只懶洋洋的狗。
             </BorderBox>
         </>
     );
