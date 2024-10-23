@@ -4,7 +4,7 @@ toc: content
 
 ## SettingDrawer
 
-与 [Ant Design Pro](https://pro.ant.design/) 的 [SettingDrawer](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/SettingDrawer/index.tsx) 类似, 但可以放置在任何位置，比如全局顶栏。
+与 [Ant Design ProComponents](https://procomponents.ant.design) 的 [SettingDrawer](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/SettingDrawer/index.tsx) 类似, 但可以放置在任何位置，比如全局顶栏。
 
 ### 导入组件
 

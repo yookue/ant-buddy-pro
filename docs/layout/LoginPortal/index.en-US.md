@@ -4,7 +4,7 @@ toc: content
 
 ## LoginPortal
 
-Similar to [LoginFormPage](https://github.com/ant-design/pro-components/blob/v1/packages/form/src/components/LoginForm/index.md) of [Ant Design Pro](https://pro.ant.design/), with more customization for CSS classes and styles.
+Similar to [LoginFormPage](https://github.com/ant-design/pro-components/blob/v1/packages/form/src/components/LoginForm/index.md) of [Ant Design ProComponents](https://procomponents.ant.design), with more customization for CSS classes and styles.
 
 ### Snapshot
 

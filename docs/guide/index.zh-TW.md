@@ -9,7 +9,7 @@ nav:
 
 ## 什麽是 `ant-buddy-pro`？
 
-`ant-buddy-pro` 是一款基於 React 和 [Ant Design ProComponents](https://pro-components.antdigital.dev) 的增強組件庫，提供更多自定義樣式和獨立組件，為 React 開發者提供更好的的組件開發體驗。
+`ant-buddy-pro` 是一款基於 React 和 [Ant Design ProComponents](https://procomponents.ant.design) 的增強組件庫，提供更多自定義樣式和獨立組件，為 React 開發者提供更好的的組件開發體驗。
 
 ## 特性
 

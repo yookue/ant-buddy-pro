@@ -4,7 +4,7 @@ toc: content
 
 ## LoginPortal
 
-与 [Ant Design Pro](https://pro.ant.design/) 的 [LoginFormPage](https://github.com/ant-design/pro-components/blob/v1/packages/form/src/components/LoginForm/index.md) 类似, 但支持更多的自定义 CSS 样式。
+与 [Ant Design ProComponents](https://procomponents.ant.design) 的 [LoginFormPage](https://github.com/ant-design/pro-components/blob/v1/packages/form/src/components/LoginForm/index.md) 类似, 但支持更多的自定义 CSS 样式。
 
 ### 效果截图
 

@@ -9,4 +9,4 @@ nav:
 
 ## Layout Overview
 
-Layout of `ant-buddy-pro`, base on [ProLayout](https://github.com/ant-design/pro-components/tree/master/packages/layout) of [Ant Design Pro](https://pro.ant.design/), provides some standard, flexible layouts, with more customizable abilities.
+Layout of `ant-buddy-pro`, base on [ProLayout](https://github.com/ant-design/pro-components/tree/master/packages/layout) of [Ant Design ProComponents](https://procomponents.ant.design), provides some standard, flexible layouts, with more customizable abilities.

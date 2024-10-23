@@ -9,4 +9,4 @@ nav:
 
 ## 控件總覽
 
-`ant-buddy-pro` 控件，作為 [Ant Design Pro](https://pro.ant.design/) 的 [ProField](https://github.com/ant-design/pro-components/tree/master/packages/field) 的補充，提供壹些獨立的、實用的控件。
+`ant-buddy-pro` 控件，作為 [Ant Design ProComponents](https://procomponents.ant.design) 的 [ProField](https://github.com/ant-design/pro-components/tree/master/packages/field) 的補充，提供壹些獨立的、實用的控件。
