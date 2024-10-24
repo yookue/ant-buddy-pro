@@ -183,7 +183,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             } else if (props?.requestOptionPlace === 'after') {
                 setOptionItems([...(optionItems ?? []), ...values]);
             }
-        }).catch();
+        }).catch(() => {});
     }
 
     const renderContent = (item: any, before: boolean) => {

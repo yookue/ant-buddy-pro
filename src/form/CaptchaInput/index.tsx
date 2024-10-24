@@ -173,7 +173,9 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
             return timing;
         },
         startTimer: (): void => {
-            validatePhoneName().then(() => setTiming(true)).catch(() => {});
+            validatePhoneName().then(() => {
+                setTiming(true);
+            }).catch(() => {});
         },
         stopTimer: (): void => {
             setTiming(false);

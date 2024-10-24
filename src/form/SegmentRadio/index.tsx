@@ -127,7 +127,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
                 } else if (props?.requestOptionPlace === 'after') {
                     setOptionItems([...(optionItems ?? []), ...values]);
                 }
-            }).catch();
+            }).catch(() => {});
         }, []);
     }
 

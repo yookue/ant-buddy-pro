@@ -282,7 +282,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 } else if (props?.requestOptionPlace === 'after') {
                     setTagContents([...(tagContents ?? []), ...result]);
                 }
-            }).catch();
+            }).catch(() => {});
         }, []);
     }
 

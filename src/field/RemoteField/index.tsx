@@ -122,13 +122,13 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
             if (autoStart) {
                 run(props?.params).then((data: any) => {
                     setOutcome(data);
-                }).catch();
+                }).catch(() => {});
             }
         }, []);
         React.useEffect(() => {
             run(props?.params).then((data: any) => {
                 setOutcome(data);
-            }).catch();
+            }).catch(() => {});
         }, [refreshId]);
     }
 
