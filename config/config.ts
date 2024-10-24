@@ -128,7 +128,7 @@ export default {
     styles: [
         `
         .__dumi-default-layout-hero {
-            background: url("${globalSettings.context?.assets}/img/home/hero-bg-1.svg") !important
+            background: url("${globalSettings.context?.assets}/img/home/hero-bg-1.svg") !important;
         }
         `,
     ],
