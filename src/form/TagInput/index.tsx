@@ -303,7 +303,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             const targetClazz = `${clazzPrefix}-compact-margin`;
             fieldRef.current?.closest(`.${parentClazz}`)?.classList?.add(targetClazz);
         }
-    }, [fieldRef.current]);
+    }, []);
 
     const buildTweenOneProps = () => {
         return props?.tweenOneProps ?? {

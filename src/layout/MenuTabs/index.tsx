@@ -276,14 +276,12 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         };
 
         React.useLayoutEffect(() => {
-            if (containerRef.current) {
-                window.addEventListener('resize', handleWindowResize);
-                handleWindowResize();
-            }
+            window.addEventListener('resize', handleWindowResize);
+            handleWindowResize();
             return () => {
                 window.removeEventListener('resize', handleWindowResize);
             };
-        }, [containerRef.current]);
+        }, []);
     }
 
     const buildTabsDom = () => {
