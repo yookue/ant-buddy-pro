@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.121** [2024-10-24]
+    - Add 'field/RemoteField'
+
   - **v0.1.119** [2024-10-22]
     - Add 'field/CompactTuple'
 

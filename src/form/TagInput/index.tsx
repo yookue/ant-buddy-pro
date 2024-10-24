@@ -24,7 +24,7 @@ import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProp
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {nanoid} from '@ant-design/pro-utils';
+import {nanoid, useDebounceFn} from '@ant-design/pro-utils';
 import {ArrayUtils, NumberUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import objectHash from 'object-hash';
@@ -240,27 +240,6 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         ConsoleUtils.warn(!props?.fulfilTagItems || (result.length === props?.fulfilTagItems?.length), true, 'TagInput', `Field '${props?.name}' prop 'fulfilTagItems' must includes unique contents`);
         return result;
     });
-    if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, (values?: (string | number | TextTagProps)[]) => {
-            if (!values) {
-                if (props?.requestOptionPlace === 'override') {
-                    setTagContents(undefined);
-                }
-                return;
-            }
-            const result = [...new Set(values?.map(item => {
-                return (typeof item === 'string' || typeof item === 'number') ? item : item.content;
-            }))] as (string | number)[];
-            ConsoleUtils.warn(result.length === values.length, true, 'TagInput', `Field '${props?.name}' prop 'request' must includes unique response`);
-            if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
-                setTagContents(result);
-            } else if (props?.requestOptionPlace === 'before') {
-                setTagContents([...result, ...(tagContents ?? [])]);
-            } else if (props?.requestOptionPlace === 'after') {
-                setTagContents([...(tagContents ?? []), ...result]);
-            }
-        }, []);
-    }
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -281,6 +260,31 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             }
         }
     }));
+
+    if (props?.request && props?.requestOptionPlace !== false) {
+        const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        React.useEffect(() => {
+            run(props?.params).then((values?: (string | number | TextTagProps)[]) => {
+                if (!values) {
+                    if (props?.requestOptionPlace === 'override') {
+                        setTagContents(undefined);
+                    }
+                    return;
+                }
+                const result = [...new Set(values?.map(item => {
+                    return (typeof item === 'string' || typeof item === 'number') ? item : item.content;
+                }))] as (string | number)[];
+                ConsoleUtils.warn(result.length === values.length, true, 'TagInput', `Field '${props?.name}' prop 'request' must includes unique response`);
+                if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
+                    setTagContents(result);
+                } else if (props?.requestOptionPlace === 'before') {
+                    setTagContents([...result, ...(tagContents ?? [])]);
+                } else if (props?.requestOptionPlace === 'after') {
+                    setTagContents([...(tagContents ?? []), ...result]);
+                }
+            }).catch();
+        }, []);
+    }
 
     React.useEffect(() => {
         setInputName(inputVisible ? (formContext?.name ? `${formContext.name}_${entryId}` : entryId) : undefined);

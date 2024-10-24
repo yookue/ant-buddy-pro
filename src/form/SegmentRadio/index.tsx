@@ -20,6 +20,7 @@ import {type SegmentedLabeledOption} from 'antd/es/segmented';
 import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {useDebounceFn} from '@ant-design/pro-utils';
 import pickProFormItemProps from '@ant-design/pro-utils/es/pickProFormItemProps';
 import classNames from 'classnames';
 import {type SegmentedRawOption} from 'rc-segmented';
@@ -107,22 +108,26 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
         const enumOptions = FieldUtils.valueEnumToSegmentOptions(props?.valueEnum) ?? [];
         return [...rawOptions, ...enumOptions];
     });
+
     if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, (values?: (SegmentedRawOption | SegmentedLabeledOption)[]) => {
-            // noinspection DuplicatedCode
-            if (!values) {
-                if (props?.requestOptionPlace === 'override') {
-                    setOptionItems(undefined);
+        const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        React.useEffect(() => {
+            run(props?.params).then((values?: (SegmentedRawOption | SegmentedLabeledOption)[]) => {
+                // noinspection DuplicatedCode
+                if (!values) {
+                    if (props?.requestOptionPlace === 'override') {
+                        setOptionItems(undefined);
+                    }
+                    return;
                 }
-                return;
-            }
-            if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
-                setOptionItems(values);
-            } else if (props?.requestOptionPlace === 'before') {
-                setOptionItems([...values, ...(optionItems ?? [])]);
-            } else if (props?.requestOptionPlace === 'after') {
-                setOptionItems([...(optionItems ?? []), ...values]);
-            }
+                if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
+                    setOptionItems(values);
+                } else if (props?.requestOptionPlace === 'before') {
+                    setOptionItems([...values, ...(optionItems ?? [])]);
+                } else if (props?.requestOptionPlace === 'after') {
+                    setOptionItems([...(optionItems ?? []), ...values]);
+                }
+            }).catch();
         }, []);
     }
 

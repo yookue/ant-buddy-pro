@@ -20,6 +20,7 @@ import {ConfigProvider, Select} from 'antd';
 import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {type RequestOptionsType} from '@ant-design/pro-utils';
+import {useDebounceFn} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -164,8 +165,10 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         const enumOptions = FieldUtils.valueEnumToSelectOptions(props?.valueEnum) ?? [];
         return [...rawOptions, ...enumOptions];
     });
+
     if (props?.request && props?.requestOptionPlace !== false) {
-        FieldUtils.fetchRemoteRequest(props, (values?: RequestOptionsType[]) => {
+        const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        run(props?.params).then((values?: RequestOptionsType[]) => {
             // noinspection DuplicatedCode
             if (!values) {
                 if (props?.requestOptionPlace === 'override') {
@@ -180,7 +183,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             } else if (props?.requestOptionPlace === 'after') {
                 setOptionItems([...(optionItems ?? []), ...values]);
             }
-        }, []);
+        }).catch();
     }
 
     const renderContent = (item: any, before: boolean) => {
