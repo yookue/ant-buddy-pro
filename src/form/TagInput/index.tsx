@@ -32,7 +32,6 @@ import omit from 'rc-util/es/omit';
 import {TweenOneGroup, type IGroupProps as TweenOneGroupProps} from 'rc-tween-one';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {FieldUtils} from '@/util/FieldUtils';
 import {PropsUtils} from '@/util/PropsUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
