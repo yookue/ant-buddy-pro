@@ -159,7 +159,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     ConsoleUtils.warn(countDown > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'countDown' must be greater than 0`);
     ConsoleUtils.warn(timerInterval > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'timerInterval' must be greater than 0`);
 
-    const fieldRef = React.useRef<HTMLDivElement>();
+    const fieldRef = React.useRef<HTMLDivElement>(null);
     const [counting, setCounting] = React.useState<number>(countDown);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [timing, setTiming] = React.useState<boolean>(false);
@@ -237,7 +237,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'value', 'onChange']);
     return (
         <div
-            ref={(div) => fieldRef.current = div ?? undefined}
+            ref={fieldRef}
             className={classNames(`${clazzPrefix}-container`, props?.containerClazz)}
             style={props?.containerStyle}
         >

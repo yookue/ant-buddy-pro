@@ -87,7 +87,7 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-group');
 
-    const fieldRef = React.useRef<HTMLDivElement>();
+    const fieldRef = React.useRef<HTMLDivElement>(null);
     const thumbLikeRef = React.useRef<ThumbToggleRef>(null);
     const thumbDislikeRef = React.useRef<ThumbToggleRef>(null);
 
@@ -107,7 +107,7 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
 
     return (
         <div
-            ref={(div) => fieldRef.current = div ?? undefined}
+            ref={fieldRef}
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >

@@ -130,7 +130,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
         triggerElement = document.documentElement,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>();
+    const fieldRef = React.useRef<HTMLDivElement>(null);
     const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === triggerElement);
 
     // noinspection JSUnusedGlobalSymbols
@@ -212,7 +212,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
 
     return (
         <div
-            ref={(div) => fieldRef.current = div ?? undefined}
+            ref={fieldRef}
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >

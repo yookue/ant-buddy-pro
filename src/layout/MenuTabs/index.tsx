@@ -252,7 +252,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         }
     } = props ?? {};
 
-    const containerRef = React.useRef<HTMLDivElement>();
+    const fieldRef = React.useRef<HTMLDivElement>(null);
     const themeClazz = (props?.menuProps?.theme === 'dark') ? `${clazzPrefix}-dark` : `${clazzPrefix}-light`;
     const [activeKey, setActiveKey] = React.useState<string | undefined>(props?.menuProps?.defaultActiveKey);
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
@@ -260,12 +260,12 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     if (BooleanUtils.isNotFalse(adjustLayoutProps?.adjustOnResize)) {
         const handleWindowResize = () => {
             requestAnimationFrame(() => {
-                if (!containerRef.current) {
+                if (!fieldRef.current) {
                     return;
                 }
                 let shouldMode: MenuMode = 'inline';
-                const {offsetWidth} = containerRef.current;
-                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && containerRef.current?.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
+                const {offsetWidth} = fieldRef.current;
+                if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && fieldRef.current?.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
                     shouldMode = 'horizontal';
                 }
                 if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && window.innerWidth < (adjustLayoutProps?.maxWindowWidth ?? 768)) {
@@ -322,7 +322,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     return (
         <div
-            ref={(div) => containerRef.current = div ?? undefined}
+            ref={fieldRef}
             className={classNames(clazzPrefix, themeClazz, props?.containerClazz)}
             style={props?.containerStyle}
         >

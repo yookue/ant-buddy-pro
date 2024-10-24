@@ -229,7 +229,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     } = props ?? {};
 
     const entryId = nanoid();
-    const fieldRef = React.useRef<HTMLDivElement>();
+    const fieldRef = React.useRef<HTMLDivElement>(null);
     const [inputName, setInputName] = React.useState<string>();
     const [inputValue, setInputValue] = React.useState<string>();
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
@@ -531,7 +531,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
 
     return (
         <div
-            ref={(div) => fieldRef.current = div ?? undefined}
+            ref={fieldRef}
             className={classNames(clazzPrefix, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >

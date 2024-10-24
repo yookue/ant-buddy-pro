@@ -102,7 +102,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
         autoStart = true,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>();
+    const fieldRef = React.useRef<HTMLDivElement>(null);
     const [refreshId, setRefreshId] = React.useState<string>(nanoid());
     const [outcome, setOutcome] = React.useState<any>();
 
@@ -141,7 +141,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
 
     return (
         <div
-            ref={(div) => fieldRef.current = div ?? undefined}
+            ref={fieldRef}
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >
