@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.123** [2024-10-25]
+    - Add 'util/ParticleUtils'
+
   - **v0.1.121** [2024-10-24]
     - Add 'field/RemoteField'
 
