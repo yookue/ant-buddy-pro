@@ -112,13 +112,6 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         }
     };
 
-    React.useEffect(() => {
-        if (stretch && props?.miniature) {
-            document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`)?.focus();
-        }
-        props?.onStretchChange?.(stretch);
-    }, [stretch]);
-
     React.useLayoutEffect(() => {
         document.addEventListener('keydown', restoreMiniature);
         document.addEventListener('mousedown', restoreMiniature);
@@ -127,6 +120,13 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
             document.removeEventListener('mousedown', restoreMiniature);
         }
     }, []);
+
+    React.useEffect(() => {
+        if (stretch && props?.miniature) {
+            document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`)?.focus();
+        }
+        props?.onStretchChange?.(stretch);
+    }, [stretch]);
 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setStretch(true);

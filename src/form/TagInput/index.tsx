@@ -260,6 +260,14 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         }
     }));
 
+    React.useLayoutEffect(() => {
+        if (props?.compactMargin) {
+            const parentClazz = configContext.getPrefixCls('form-item');
+            const targetClazz = `${clazzPrefix}-compact-margin`;
+            fieldRef.current?.closest(`.${parentClazz}`)?.classList?.add(targetClazz);
+        }
+    }, []);
+
     if (props?.request && props?.requestOptionPlace !== false) {
         const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
         React.useEffect(() => {
@@ -295,14 +303,6 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         }
         props?.onTagContentsChange?.(tagContents);
     }, [tagContents]);
-
-    React.useLayoutEffect(() => {
-        if (props?.compactMargin) {
-            const parentClazz = configContext.getPrefixCls('form-item');
-            const targetClazz = `${clazzPrefix}-compact-margin`;
-            fieldRef.current?.closest(`.${parentClazz}`)?.classList?.add(targetClazz);
-        }
-    }, []);
 
     const buildTweenOneProps = () => {
         return props?.tweenOneProps ?? {
