@@ -101,7 +101,7 @@ export default () => {
                 headerOrnamentPos={ornamentPos}
                 headerContent='FoldSection header caption'
                 headerCollapsePos={collapsePos}
-                panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>}
+                panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No Data'/>}
                 presetStyle={presetStyle}
                 tooltipCtrl={tooltipCtrl}
                 localeProps={{

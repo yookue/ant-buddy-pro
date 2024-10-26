@@ -104,7 +104,7 @@ export default () => {
                     themeInkBar={themeInkBar}
                     sceneInkBar={sceneInkBar}
                     fieldProps={{
-                        notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data'/>),
+                        notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No Data'/>),
                         showSearch: showSearch,
                         onChange: (value) => {
                             ConsoleUtils.logTimestamp(false, false, 'IconSelect', 'onChange value = ' + value);
