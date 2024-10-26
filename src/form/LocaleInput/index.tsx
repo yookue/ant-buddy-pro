@@ -259,7 +259,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         popupProField = true,
     } = props ?? {};
 
-    const entryId = nanoid();
+    const entryId = nanoid().replace(/-/g, '');
 
     const handleSetAsDefault = (tagId: string) => {
         const entry = document.querySelector<HTMLInputElement>(`input[data-locale-input-id='${entryId}']`);
@@ -367,7 +367,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             const restProps = omit(itemProp, ['tag', 'name', 'id', 'disabled', 'readonly', 'fieldProps', 'proFieldProps', 'rules']);
             const antdInputProps = restProps as InputProps;
             const omitFieldProps = !fieldProps ? {} : omit(fieldProps, ['className', 'addonBefore', 'addonAfter', 'maxLength', 'placeholder']);
-            const elementId = nanoid();
+            const elementId = nanoid().replace(/-/g, '');
             const beforeDom = buildItemAddonDom(tag, true, elementId, itemProp);
             const afterDom = buildItemAddonDom(tag, false, elementId, itemProp);
             const itemDom = (
@@ -427,7 +427,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             if (!tag) {
                 continue;
             }
-            const elementId = nanoid();
+            const elementId = nanoid().replace(/-/g, '');
             const beforeDom = buildItemAddonDom(tag, true, elementId);
             const afterDom = buildItemAddonDom(tag, false, elementId);
             const itemDom = (

@@ -296,7 +296,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         tooltipCtrl = false,
     } = props ?? {};
 
-    const entryId = nanoid();
+    const entryId = nanoid().replace(/-/g, '');
     const [dropdownOpen, setDropdownOpen] = React.useState<boolean>((props?.fieldProps?.open || props?.fieldProps?.defaultOpen) ?? false);
     const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);
     const [activeTab, setActiveTab] = React.useState<IconThemeType | undefined>(defaultTheme);

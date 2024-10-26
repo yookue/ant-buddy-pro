@@ -103,7 +103,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const [refreshId, setRefreshId] = React.useState<string>(nanoid());
+    const [refreshId, setRefreshId] = React.useState<string>(nanoid().replace(/-/g, ''));
     const [outcome, setOutcome] = React.useState<any>();
 
     // noinspection JSUnusedGlobalSymbols
@@ -112,7 +112,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
             return outcome;
         },
         refreshOutcome: (): void => {
-            setRefreshId(nanoid());
+            setRefreshId(nanoid().replace(/-/g, ''));
         }
     }));
 

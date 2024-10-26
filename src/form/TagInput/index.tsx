@@ -228,7 +228,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         proField = true,
     } = props ?? {};
 
-    const entryId = nanoid();
+    const entryId = nanoid().replace(/-/g, '');
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [inputName, setInputName] = React.useState<string>();
     const [inputValue, setInputValue] = React.useState<string>();

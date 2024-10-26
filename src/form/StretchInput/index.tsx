@@ -99,7 +99,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         triggerType = 'click',
     } = props ?? {};
 
-    const entryId = nanoid();
+    const entryId = nanoid().replace(/-/g, '');
     const [stretch, setStretch] = React.useState<boolean>(false);
 
     const restoreMiniature = (event: any) => {
