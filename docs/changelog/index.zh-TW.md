@@ -11,6 +11,9 @@ nav:
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v0.1.125** [2024-10-27]
+    - 增加 'field/PreviewImage'
+
   - **v0.1.124** [2024-10-26]
     - 增加 'layout/WontDrawer'
     - 增加 'form/DrawerForm'
