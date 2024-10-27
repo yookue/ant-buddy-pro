@@ -58,7 +58,7 @@ export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
      * @description.zh-CN 图片刷新后的回调函数
      * @description.zh-TW 圖片刷新後的回調函數
      */
-    onRefresh?: (previousSrc?: string, currentSrc?: string) => void;
+    onRefresh?: (currentSrc?: string, previousSrc?: string) => void;
 };
 
 
@@ -84,7 +84,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         }
         const currentSrc = imageSource;
         props?.onClick?.(event);
-        props?.onRefresh?.(previousSrc, currentSrc);
+        props?.onRefresh?.(currentSrc, previousSrc);
     };
 
     const handleError = (event: React.SyntheticEvent<any>) => {
