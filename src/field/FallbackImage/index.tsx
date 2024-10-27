@@ -18,12 +18,12 @@
 import React from 'react';
 import {ConfigProvider} from 'antd';
 import classNames from 'classnames';
-import RcImage, {type ImageProps} from 'rc-image';
+import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
 import {ImageUtils} from '@/util/ImageUtils';
 
 
-export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
+export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -44,12 +44,12 @@ export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
      * @description.zh-CN 备用图片源
      * @description.zh-TW 備用圖片源
      */
-    fallback?: string | (() => string | undefined);
+    fallback?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>);
 };
 
 
 /**
- * Component for displaying an img with fallback capability
+ * Component for displaying an image with fallback capability
  *
  * @author David Hsing
  */
@@ -74,9 +74,9 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
 
     return (
         <RcImage
-            {...omitProps}
             className={classNames(clazzPrefix, props?.className)}
             src={imageSource}
+            {...omitProps}
             onError={handleError}
         />
     );

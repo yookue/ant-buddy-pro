@@ -18,12 +18,12 @@
 import React from 'react';
 import {ConfigProvider} from 'antd';
 import classNames from 'classnames';
-import RcImage, {type ImageProps} from 'rc-image';
+import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
 import {ImageUtils} from '@/util/ImageUtils';
 
 
-export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
+export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -48,10 +48,10 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
 
     /**
      * @description The fallback source of the image
-     * @description.zh-CN 图片出错后的备用源
-     * @description.zh-TW 圖片出錯後的備用源
+     * @description.zh-CN 备用图片源
+     * @description.zh-TW 備用圖片源
      */
-    fallback?: string | (() => string | undefined);
+    fallback?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>);
 
     /**
      * @description The callback function when the image is refreshed
@@ -63,7 +63,7 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
 
 
 /**
- * Component for displaying an img with refresh capability
+ * Component for displaying an image with refresh capability
  *
  * @author David Hsing
  */
@@ -98,15 +98,15 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
 
     return (
         <RcImage
-            {...omitProps}
             className={classNames(clazzPrefix, props?.className)}
             src={imageSource}
-            onClick={handleClick}
-            onError={handleError}
+            {...omitProps}
             style={{
                 ...(!props?.autoCursor ? {} : {cursor: 'pointer'}),
                 ...props?.style,
             }}
+            onClick={handleClick}
+            onError={handleError}
         />
     );
 };

@@ -24,7 +24,7 @@ export default () => {
         <FallbackImage
             width={120}
             height={120}
-            src='does-not-exists.png'
+            src='error'
             fallback={() => {
                 return `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`;
             }}

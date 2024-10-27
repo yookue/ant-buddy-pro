@@ -65,7 +65,7 @@ export const WontDrawer: React.FC<WontDrawerProps> = (props?: WontDrawerProps) =
         // noinspection DuplicatedCode
         React.useLayoutEffect(() => {
             const selector = `.${clazzPrefix}-id-${entryId} > .${configContext.getPrefixCls('drawer-content-wrapper')} > .${configContext.getPrefixCls('drawer-content')} > .${configContext.getPrefixCls('drawer-wrapper-body')} > .${configContext.getPrefixCls('drawer-header')}`;
-            const header = document.querySelector<HTMLDivElement>(`${selector}`);
+            const header = document.querySelector<HTMLDivElement>(selector);
             const button = document.querySelector<HTMLButtonElement>(`${selector} .${configContext.getPrefixCls('drawer-close')}`);
             if (header && button) {
                 button.parentNode?.removeChild(button);
