@@ -14,10 +14,6 @@ Here are some milestone versions of the changelog:
   - **v0.1.125** [2024-10-27]
     - Add 'field/PreviewImage'
 
-  - **v0.1.124** [2024-10-26]
-    - Add 'layout/WontDrawer'
-    - Add 'form/DrawerForm'
-
   - **v0.1.123** [2024-10-25]
     - Add 'util/ParticleUtils'
 

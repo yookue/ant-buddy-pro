@@ -14,10 +14,6 @@ nav:
   - **v0.1.125** [2024-10-27]
     - 增加 'field/PreviewImage'
 
-  - **v0.1.124** [2024-10-26]
-    - 增加 'layout/WontDrawer'
-    - 增加 'form/DrawerForm'
-
   - **v0.1.123** [2024-10-25]
     - 增加 'util/ParticleUtils'
 
