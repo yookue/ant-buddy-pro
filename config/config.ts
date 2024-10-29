@@ -125,6 +125,11 @@ export default {
             skipNodeModules: true,
         }
     },
+    // chainWebpack: function (config: any) {
+    //     config.merge({
+    //         compact: false,
+    //     });
+    // },
     styles: [
         `
         .__dumi-default-layout-hero {
