@@ -104,11 +104,17 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
         borderLeft = true,
     } = props ?? {};
 
-    const borderClazz = classNames((!borderTop ? undefined : `${clazzPrefix}-border-top`), (!borderRight ? undefined : `${clazzPrefix}-border-right`), (!borderBottom ? undefined : `${clazzPrefix}-border-bottom`), (!borderLeft ? undefined : `${clazzPrefix}-border-left`));
+    const sideClazz = classNames({
+        [`${clazzPrefix}-border-top`]: borderTop,
+        [`${clazzPrefix}-border-right`]: borderRight,
+        [`${clazzPrefix}-border-bottom`]: borderBottom,
+        [`${clazzPrefix}-border-left`]: borderLeft,
+        [`${clazzPrefix}-box-shadow`]: props?.boxShadow,
+    });
 
     return (
         <div
-            className={classNames(clazzPrefix, borderClazz, (props?.boxShadow ? `${clazzPrefix}-box-shadow` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, sideClazz, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}
