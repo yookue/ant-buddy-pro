@@ -15,10 +15,6 @@
  */
 
 
-import React from 'react';
-import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
-
-
 /**
  * Utilities for HTML elements
  *
@@ -26,101 +22,6 @@ import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
  */
 // noinspection JSUnusedGlobalSymbols
 export abstract class ElementUtils {
-    /**
-     * Adds the class name(s) to the given element
-     *
-     * @param element the element to inspect
-     * @param className the class name(s) to add
-     */
-    public static addClazz(element?: HTMLElement | null, className?: string | string[] | null): void {
-        if (!element || !className || className.length === 0) {
-            return;
-        }
-        if (Array.isArray(className)) {
-            element.classList.add(...className);
-        } else {
-            element.classList.add(className);
-        }
-    }
-
-    /**
-     * Removes the class name(s) from the given element
-     *
-     * @param element the element to inspect
-     * @param className the class name(s) to remove
-     */
-    public static removeClazz(element?: HTMLElement | null, className?: string | null): void {
-        if (!element || !className || className.length === 0) {
-            return;
-        }
-        if (Array.isArray(className)) {
-            element.classList.remove(...className);
-        } else {
-            element.classList.remove(className);
-        }
-    }
-
-    /**
-     * Adds the style to the given element
-     *
-     * @param element the element to inspect
-     * @param key the style key
-     * @param value the style key
-     */
-    public static addStyle(element?: HTMLElement | null, key?: string | null, value?: string | null): void {
-        if (!element || !key || !value) {
-            return;
-        }
-        element.style.setProperty(key, value);
-    }
-
-    /**
-     * Adds the styles to the given element
-     *
-     * @param element the element to inspect
-     * @param style the styles to add
-     */
-    public static addStyles(element?: HTMLElement | null, style?: React.CSSProperties | null): void {
-        if (!element || !style) {
-            return;
-        }
-        for (const prop in style) {
-            if (Object.prototype.hasOwnProperty.call(style, prop)) {
-                element.style.setProperty(StringUtils.toKebabCase(prop) as string, ObjectUtils.getProp(style, prop));
-            }
-        }
-    }
-
-    /**
-     * Removes the style from the given element
-     *
-     * @param element the element to inspect
-     * @param key the style key
-     */
-    public static removeStyle(element?: HTMLElement | null, key?: string | null): void {
-        if (!element || !key) {
-            return;
-        }
-        element.style.setProperty(key, '');
-    }
-
-    /**
-     * Removes the styles from the given element
-     *
-     * @param element the element to inspect
-     * @param style the styles to remove
-     */
-    public static removeStyles(element?: HTMLElement | null, style?: React.CSSProperties | null): void {
-        if (!element || !style) {
-            return;
-        }
-        for (const prop in style) {
-            if (Object.prototype.hasOwnProperty.call(style, prop)) {
-                element.style.setProperty(StringUtils.toKebabCase(prop) as string, '');
-            }
-        }
-    }
-
     /**
      * Returns the value property descriptor of the given element
      *

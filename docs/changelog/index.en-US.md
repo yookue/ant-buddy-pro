@@ -108,7 +108,7 @@ Here are some milestone versions of the changelog:
     - Add 'util/ElementUtils'
     - Add 'util/FileUtils'
     - Add 'util/IconUtils'
-    - Add 'util/PropsUtils'
+    - Add 'util/PropUtils'
 
   - **v0.1.30** [2023-12-22]
     - Add 'render/SchemaRender'

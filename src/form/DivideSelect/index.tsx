@@ -27,7 +27,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type LabelValueType, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 import './index.less';
 
 
@@ -288,7 +288,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             });
         };
 
-        const restProps = PropsUtils.pickForwardProps(props);
+        const restProps = PropUtils.pickForwardProps(props);
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionItemRender', 'popupClassName']);
 
         return (

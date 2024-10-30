@@ -22,7 +22,7 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {nanoid} from '@ant-design/pro-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 import './index.less';
 
 
@@ -167,7 +167,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
             />
         );
     } else {
-        const restProps = PropsUtils.pickForwardProps(props);
+        const restProps = PropUtils.pickForwardProps(props);
         return (
             <Input
                 className={classNames(clazzPrefix, (stretch ? props?.stretchClazz : props?.fieldProps?.className))}

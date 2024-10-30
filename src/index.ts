@@ -67,7 +67,7 @@ export {FileUtils} from './util/FileUtils';
 export {IconUtils} from './util/IconUtils';
 export {ImageUtils} from './util/ImageUtils';
 export {ParticleUtils} from './util/ParticleUtils';
-export {PropsUtils} from './util/PropsUtils';
+export {PropUtils} from './util/PropUtils';
 export {StyleUtils} from './util/StyleUtils';
 export {type IconSceneType} from './type/antd-icons';
 export * from './type/declaration';

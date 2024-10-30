@@ -32,7 +32,7 @@ import omit from 'rc-util/es/omit';
 import {TweenOneGroup, type IGroupProps as TweenOneGroupProps} from 'rc-tween-one';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -474,7 +474,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                     </div>
                 );
             } else {
-                const restProps = PropsUtils.pickForwardProps(props);
+                const restProps = PropUtils.pickForwardProps(props);
                 return (
                     <div className={`${clazzPrefix}-action`}>
                         <Input

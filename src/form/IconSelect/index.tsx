@@ -37,8 +37,8 @@ import omit from 'rc-util/es/omit';
 import {allIconTypes, type IconSceneType} from '@/type/antd-icons';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {ElementUtils} from '@/util/ElementUtils';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
+import {StyleUtils} from '@/util/StyleUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -365,7 +365,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     const clearIconsBadge = () => {
         const elements = document.querySelectorAll<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option]`);
-        elements?.forEach(item => ElementUtils.removeClazz(item as HTMLElement, `${clazzPrefix}-icon-selected`));
+        elements?.forEach(item => StyleUtils.removeClazz(item as HTMLElement, `${clazzPrefix}-icon-selected`));
     };
 
     const changeIconBadge = (iconName: string, selected: boolean) => {
@@ -374,7 +374,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         }
         const element = document.querySelector<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option='${iconName}']`);
         if (element) {
-            selected ? ElementUtils.addClazz(element, `${clazzPrefix}-icon-selected`) : ElementUtils.removeClazz(element, `${clazzPrefix}-icon-selected`);
+            selected ? StyleUtils.addClazz(element, `${clazzPrefix}-icon-selected`) : StyleUtils.removeClazz(element, `${clazzPrefix}-icon-selected`);
         }
     };
 
@@ -725,7 +725,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             />
         );
     } else {
-        const restProps = PropsUtils.pickForwardProps(props);
+        const restProps = PropUtils.pickForwardProps(props);
         return (
             <Select
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}

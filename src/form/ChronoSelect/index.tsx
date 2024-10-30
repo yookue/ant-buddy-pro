@@ -25,7 +25,7 @@ import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse} from '@/type/declaration';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -185,7 +185,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
             />
         );
     } else {
-        const restProps = PropsUtils.pickForwardProps(props);
+        const restProps = PropUtils.pickForwardProps(props);
         return (
             <Select
                 className={classNames(clazzPrefix, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className)}

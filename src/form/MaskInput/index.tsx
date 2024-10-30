@@ -24,7 +24,7 @@ import {RegexUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 
 
 export type MaskInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
@@ -125,7 +125,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
             />
         );
     } else {
-        const restProps = PropsUtils.pickForwardProps(props);
+        const restProps = PropUtils.pickForwardProps(props);
         return (
             <Input
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}

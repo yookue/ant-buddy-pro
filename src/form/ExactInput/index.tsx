@@ -25,7 +25,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -242,7 +242,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             />
         );
     } else {
-        const restProps = PropsUtils.pickForwardProps(props);
+        const restProps = PropUtils.pickForwardProps(props);
         return (
             <Input
                 className={classNames(clazzPrefix, posClazz, compactClazz, props?.fieldProps?.className)}

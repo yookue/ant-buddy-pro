@@ -29,7 +29,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
 import {ElementUtils} from '@/util/ElementUtils';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -526,7 +526,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 />
             )
         } else {
-            const restProps = PropsUtils.pickForwardProps(props);
+            const restProps = PropUtils.pickForwardProps(props);
             return (
                 <Input
                     className={classNames(clazzPrefix, props?.fieldProps?.className)}

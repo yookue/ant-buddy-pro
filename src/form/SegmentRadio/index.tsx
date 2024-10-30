@@ -27,7 +27,7 @@ import {type SegmentedRawOption} from 'rc-segmented';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 
 
 export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'placeholder' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request'> & {
@@ -152,7 +152,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
             </div>
         );
     } else {
-        const restProps = PropsUtils.pickForwardProps(props);
+        const restProps = PropUtils.pickForwardProps(props);
         return (
             <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
                 <Segmented

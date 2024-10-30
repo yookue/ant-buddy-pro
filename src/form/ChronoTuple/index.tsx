@@ -23,7 +23,7 @@ import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ChronoSelect, type ChronoSelectProps} from '@/form/ChronoSelect';
-import {PropsUtils} from '@/util/PropsUtils';
+import {PropUtils} from '@/util/PropUtils';
 import './index.less';
 
 
@@ -103,7 +103,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
     const digitNode = proField ? (
         <ProFormDigit {...props?.digitProps}/>
     ) : (
-        <InputNumber {...PropsUtils.pickForwardProps(props?.digitProps)} {...props?.digitProps?.fieldProps}/>
+        <InputNumber {...PropUtils.pickForwardProps(props?.digitProps)} {...props?.digitProps?.fieldProps}/>
     );
 
     const omitProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'presetStyle']);

@@ -108,7 +108,7 @@ nav:
     - 增加 'util/ElementUtils'
     - 增加 'util/FileUtils'
     - 增加 'util/IconUtils'
-    - 增加 'util/PropsUtils'
+    - 增加 'util/PropUtils'
 
   - **v0.1.30** [2023-12-22]
     - 增加 'render/SchemaRender'
