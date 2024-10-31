@@ -144,11 +144,18 @@ export type FlexBoxProps = React.PropsWithChildren<{
      * @see https://developer.mozilla.org/en-US/docs/Web/CSS/gap
      */
     gap?: BoxGapSize;
+
+    /**
+     * @description Whether to shadow the borders or not
+     * @description.zh-CN 是否给边框添加阴影
+     * @description.zh-TW 是否給邊框添加陰影
+     */
+    boxShadow?: boolean;
 }>;
 
 
 /**
- * Component for displaying a title apart
+ * Component for displaying a flex container
  *
  * @author David Hsing
  */
@@ -162,7 +169,7 @@ export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
         if (!props) {
             return undefined;
         }
-        const result = {};
+        const result: Record<string, any> = {};
         Object.keys(props).filter(item => StringUtils.startsWithAny(item, ['align', 'justify', 'flex'])).forEach(item => {
             ObjectUtils.setProp(result, item, props[item as keyof FlexBoxProps]);
         });
@@ -188,7 +195,7 @@ export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, buildClazz(), props?.containerClazz)}
+            className={classNames(`${clazzPrefix}`, (!props?.boxShadow ? undefined : `${clazzPrefix}-box-shadow`), buildClazz(), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}

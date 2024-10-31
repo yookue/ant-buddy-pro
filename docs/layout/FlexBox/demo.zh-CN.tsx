@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Button, Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {FlexBox} from '@yookue/ant-buddy-pro';
 
 
@@ -25,6 +25,7 @@ export default () => {
     const [justifyContent, setJustifyContent] = React.useState<string>('center');
     const [alignItems, setAlignItems] = React.useState<string>('center');
     const [gap, setGap] = React.useState<string>('middle');
+    const [boxShadow, setBoxShadow] = React.useState<boolean>(false);
 
     return (
         <>
@@ -87,12 +88,22 @@ export default () => {
                         {label: '自定义', value: '48px'},
                     ]}
                 />
+                <ProFormSwitch
+                    label='边框阴影'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: boxShadow,
+                        onChange: setBoxShadow,
+                    }}
+                />
             </ProForm>
             <Divider/>
             <FlexBox
                 justifyContent={justifyContent}
                 alignItems={alignItems}
                 gap={gap}
+                boxShadow={boxShadow}
                 containerStyle={{
                     height: '160px',
                 }}

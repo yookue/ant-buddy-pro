@@ -20,4 +20,4 @@ import {BorderBox} from '@yookue/ant-buddy-pro';
 
 #### BorderBoxProps
 
-<API src="@/field/BorderBox/index.tsx" hideTitle></API>
+<API src="@/layout/BorderBox/index.tsx" hideTitle></API>
