@@ -168,22 +168,24 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
 
     if (props?.request && props?.requestOptionPlace !== false) {
         const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
-        run(props?.params).then((values?: RequestOptionsType[]) => {
-            // noinspection DuplicatedCode
-            if (!values) {
-                if (props?.requestOptionPlace === 'override') {
-                    setOptionItems(undefined);
+        React.useEffect(() => {
+            run(props?.params).then((values?: RequestOptionsType[]) => {
+                // noinspection DuplicatedCode
+                if (!values) {
+                    if (props?.requestOptionPlace === 'override') {
+                        setOptionItems(undefined);
+                    }
+                    return;
                 }
-                return;
-            }
-            if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
-                setOptionItems(values);
-            } else if (props?.requestOptionPlace === 'before') {
-                setOptionItems([...values, ...(optionItems ?? [])]);
-            } else if (props?.requestOptionPlace === 'after') {
-                setOptionItems([...(optionItems ?? []), ...values]);
-            }
-        }).catch(() => {});
+                if (props?.requestOptionPlace === undefined || props?.requestOptionPlace === 'override') {
+                    setOptionItems(values);
+                } else if (props?.requestOptionPlace === 'before') {
+                    setOptionItems([...values, ...(optionItems ?? [])]);
+                } else if (props?.requestOptionPlace === 'after') {
+                    setOptionItems([...(optionItems ?? []), ...values]);
+                }
+            }).catch(() => {});
+        }, []);
     }
 
     const renderContent = (item: any, before: boolean) => {
