@@ -20,6 +20,7 @@ import {ConfigProvider, Space, type SpaceProps} from 'antd';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from '@/field/ThumbToggle';
+import './index.less';
 
 
 export type ThumbTupleRef = {
@@ -33,7 +34,7 @@ export type ThumbTupleProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-thumb-group'
+     * @default 'buddy-thumb-tuple'
      */
     clazzPrefix?: string;
 
@@ -59,16 +60,16 @@ export type ThumbTupleProps = {
     spaceProps?: SpaceProps;
 
     /**
-     * @description The props of the thumb liking
-     * @description.zh-CN 拇指喜欢的属性
-     * @description.zh-TW 拇指喜歡的屬性
+     * @description The props of liking
+     * @description.zh-CN 喜欢的属性
+     * @description.zh-TW 喜歡的屬性
      */
     thumbLikeProps?: Omit<ThumbToggleProps, 'ref' | 'actionType'>;
 
     /**
-     * @description The props of the thumb disliking
-     * @description.zh-CN 拇指不喜欢的属性
-     * @description.zh-TW 拇指不喜歡的屬性
+     * @description The props of disliking
+     * @description.zh-CN 不喜欢的属性
+     * @description.zh-TW 不喜歡的屬性
      */
     thumbDislikeProps?: Omit<ThumbToggleProps, 'ref' | 'actionType'>;
 };
@@ -85,7 +86,7 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
     // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     // noinspection JSUnresolvedReference
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-group');
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-tuple');
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const thumbLikeRef = React.useRef<ThumbToggleRef>(null);
