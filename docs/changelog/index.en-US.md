@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.129** [2024-11-01]
+    - Add 'form/CollapseForm'
+
   - **v0.1.125** [2024-10-27]
     - Add 'field/PreviewImage'
 
