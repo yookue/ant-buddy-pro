@@ -22,11 +22,9 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {nanoid} from '@ant-design/pro-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {type ClickHoverType} from '@/type/declaration';
 import {PropUtils} from '@/util/PropUtils';
 import './index.less';
-
-
-export type StretchTriggerType = 'click' | 'hover';
 
 
 export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
@@ -65,7 +63,7 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 當需要拉伸已折疊的 DOM 時的觸發方式
      * @default 'click'
      */
-    triggerType?: StretchTriggerType;
+    triggerType?: ClickHoverType;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -99,34 +97,34 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         triggerType = 'click',
     } = props ?? {};
 
-    const entryId = nanoid().replace(/-/g, '');
+    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
     const [stretch, setStretch] = React.useState<boolean>(false);
 
-    const restoreMiniature = (event: any) => {
-        if (!props?.miniature || !stretch) {
-            return;
-        }
-        const entry = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`);
-        if (entry && !entry.contains(event.target)) {
-            setStretch(false);
-        }
-    };
-
     React.useLayoutEffect(() => {
-        document.addEventListener('keydown', restoreMiniature);
-        document.addEventListener('mousedown', restoreMiniature);
+        document.addEventListener('keydown', restoreLayout);
+        document.addEventListener('mousedown', restoreLayout);
         return () => {
-            document.removeEventListener('keydown', restoreMiniature);
-            document.removeEventListener('mousedown', restoreMiniature);
+            document.removeEventListener('keydown', restoreLayout);
+            document.removeEventListener('mousedown', restoreLayout);
         }
     }, []);
 
     React.useEffect(() => {
         if (stretch && props?.miniature) {
-            document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${entryId}']`)?.focus();
+            document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${fieldId}']`)?.focus();
         }
         props?.onStretchChange?.(stretch);
     }, [stretch]);
+
+    const restoreLayout = (event: any) => {
+        if (!props?.miniature || !stretch) {
+            return;
+        }
+        const inspect = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${fieldId}']`);
+        if (!inspect?.contains(event.target)) {
+            setStretch(false);
+        }
+    };
 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setStretch(true);
@@ -162,7 +160,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
                     onFocus: handleFocus,
                     onBlur: handleBlur,
                     style: stretch ? props?.stretchStyle : props?.fieldProps?.style,
-                    'data-stretch-input-id': entryId,
+                    'data-stretch-input-id': fieldId,
                 }}
             />
         );
@@ -176,7 +174,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 style={stretch ? props?.stretchStyle : props?.fieldProps?.style}
-                data-stretch-input-id={entryId}
+                data-stretch-input-id={fieldId}
             />
         );
     }

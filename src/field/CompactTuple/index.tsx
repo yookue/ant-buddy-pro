@@ -198,7 +198,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
         const borderClazz = classNames((!props?.fieldBorderProps?.borderTop ? undefined : `${clazzPrefix}-field-border-top`), (!props?.fieldBorderProps?.borderRight ? undefined : `${clazzPrefix}-field-border-right`), (!props?.fieldBorderProps?.borderBottom ? undefined : `${clazzPrefix}-field-border-bottom`), (!props?.fieldBorderProps?.borderLeft ? undefined : `${clazzPrefix}-field-border-left`));
         return (
             <div className={classNames(`${clazzPrefix}-field`, borderClazz, props?.fieldClazz)} style={props?.fieldStyle}>
-                {typeof props.field === 'function' ? props.field() : props.field}
+                {(typeof props.field === 'function') ? props.field() : props.field}
             </div>
         );
     };
@@ -210,7 +210,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
         const borderClazz = classNames((!props?.addonBorderProps?.borderTop ? undefined : `${clazzPrefix}-addon-border-top`), (!props?.addonBorderProps?.borderRight ? undefined : `${clazzPrefix}-addon-border-right`), (!props?.addonBorderProps?.borderBottom ? undefined : `${clazzPrefix}-addon-border-bottom`), (!props?.addonBorderProps?.borderLeft ? undefined : `${clazzPrefix}-addon-border-left`));
         return (
             <div className={classNames(`${clazzPrefix}-addon`, borderClazz, props?.addonClazz)} style={props?.addonStyle}>
-                {typeof props.addon === 'function' ? props.addon() : props.addon}
+                {(typeof props.addon === 'function') ? props.addon() : props.addon}
             </div>
         );
     };

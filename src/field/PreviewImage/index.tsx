@@ -60,7 +60,7 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-preview-image');
 
-    const entryId = nanoid().replace(/-/g, '');
+    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
 
     const [imageSource, setImageSource] = React.useState(() => {
         return ImageUtils.detectSource(props?.src, data => setImageSource(data));
@@ -74,10 +74,10 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
         if (!imageFallback || !props?.visible) {
             return;
         }
-        const selector = `.${clazzPrefix}-id-${entryId} > .${configContext.getPrefixCls('image-preview-content')} > .${configContext.getPrefixCls('image-preview-body')} > .${configContext.getPrefixCls('image-preview-img-wrapper')} > img`;
-        const img = document.querySelector<HTMLImageElement>(selector);
-        if (img && !img.onerror) {
-            img.setAttribute('onerror', `this.src='${imageFallback}'`);
+        const selector = `.${clazzPrefix}-id-${fieldId} > .${configContext.getPrefixCls('image-preview-content')} > .${configContext.getPrefixCls('image-preview-body')} > .${configContext.getPrefixCls('image-preview-img-wrapper')} > img`;
+        const inspect = document.querySelector<HTMLImageElement>(selector);
+        if (inspect && !inspect.onerror) {
+            inspect.setAttribute('onerror', `this.src='${imageFallback}'`);
         }
     }, [props?.visible]);
 
@@ -88,8 +88,8 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
             width={0}
             height={0}
             preview={{
-                className: classNames(clazzPrefix, `${clazzPrefix}-id-${entryId}`, props?.className),
-                rootClassName: classNames(`${clazzPrefix}-root`, `${clazzPrefix}-root-id-${entryId}`, props?.rootClassName),
+                className: classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className),
+                rootClassName: classNames(`${clazzPrefix}-root`, `${clazzPrefix}-root-id-${fieldId}`, props?.rootClassName),
                 src: imageSource,
                 ...omitProps,
             }}

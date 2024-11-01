@@ -21,6 +21,8 @@ export type AxisDirectionType = 'horizontal' | 'vertical';
 
 export type BeforeAfterType = 'before' | 'after';
 
+export type ClickHoverType = 'click' | 'hover';
+
 export type CircleSquareShape = 'circle' | 'square';
 
 export type FileSizeUint = 'KB' | 'MB' | 'GB';

@@ -296,7 +296,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         tooltipCtrl = false,
     } = props ?? {};
 
-    const entryId = nanoid().replace(/-/g, '');
+    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
     const [dropdownOpen, setDropdownOpen] = React.useState<boolean>((props?.fieldProps?.open || props?.fieldProps?.defaultOpen) ?? false);
     const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);
     const [activeTab, setActiveTab] = React.useState<IconThemeType | undefined>(defaultTheme);
@@ -364,17 +364,17 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const clearIconsBadge = () => {
-        const elements = document.querySelectorAll<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option]`);
-        elements?.forEach(item => StyleUtils.removeClazz(item as HTMLElement, `${clazzPrefix}-icon-selected`));
+        const inspects = document.querySelectorAll<HTMLElement>(`[data-icon-select-dropdown='${fieldId}'] [data-icon-select-option]`);
+        inspects?.forEach(item => StyleUtils.removeClazz(item as HTMLElement, `${clazzPrefix}-icon-selected`));
     };
 
     const changeIconBadge = (iconName: string, selected: boolean) => {
         if (StringUtils.isBlank(iconName)) {
             return;
         }
-        const element = document.querySelector<HTMLElement>(`[data-icon-select-dropdown='${entryId}'] [data-icon-select-option='${iconName}']`);
-        if (element) {
-            selected ? StyleUtils.addClazz(element, `${clazzPrefix}-icon-selected`) : StyleUtils.removeClazz(element, `${clazzPrefix}-icon-selected`);
+        const inspect = document.querySelector<HTMLElement>(`[data-icon-select-dropdown='${fieldId}'] [data-icon-select-option='${iconName}']`);
+        if (inspect) {
+            selected ? StyleUtils.addClazz(inspect, `${clazzPrefix}-icon-selected`) : StyleUtils.removeClazz(inspect, `${clazzPrefix}-icon-selected`);
         }
     };
 
@@ -648,7 +648,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         setTimeout(() => setSearchDisabled(false), 50);
                     }
                 }}
-                data-icon-select-dropdown={entryId}
+                data-icon-select-dropdown={fieldId}
             >
                 <ProCard
                     className={classNames(`${clazzPrefix}-dropdown-card`, (themeInkBar ? `${clazzPrefix}-ink-bar` : undefined))}
