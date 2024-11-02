@@ -96,13 +96,15 @@ export default () => {
                         key: id,
                         children: (
                             <>
-                                <p>Content of Tab Pane {id}</p>
-                                <p>Content of Tab Pane {id}</p>
-                                <p>Content of Tab Pane {id}</p>
+                                <span>Content of Tab Pane {id}</span>
+                                <br/><br/>
+                                <span>Content of Tab Pane {id}</span>
+                                <br/><br/>
+                                <span>Content of Tab Pane {id}</span>
                             </>
                         ),
-                    }})
-                }
+                    }
+                })}
             />
         </>
     );

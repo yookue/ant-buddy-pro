@@ -96,13 +96,15 @@ export default () => {
                         key: id,
                         children: (
                             <>
-                                <p>Tab 面板 {id} 的内容</p>
-                                <p>Tab 面板 {id} 的内容</p>
-                                <p>Tab 面板 {id} 的内容</p>
+                                <span>Tab 面板 {id} 的内容</span>
+                                <br/><br/>
+                                <span>Tab 面板 {id} 的内容</span>
+                                <br/><br/>
+                                <span>Tab 面板 {id} 的内容</span>
                             </>
                         ),
-                    }})
-                }
+                    }
+                })}
             />
         </>
     );
