@@ -17,9 +17,9 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {type TabsPosition} from 'antd/es/tabs';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {CardTabs} from '@yookue/ant-buddy-pro';
+import {type TabsPosition} from '@yookue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
@@ -51,6 +51,8 @@ export default () => {
                         {label: 'Bottom', value: 'bottom'},
                         {label: 'Left', value: 'left'},
                         {label: 'Right', value: 'right'},
+                        {label: 'Top-End', value: 'top-end'},
+                        {label: 'Bottom-End', value: 'bottom-end'},
                     ]}
                 />
                 <ProForm.Group>

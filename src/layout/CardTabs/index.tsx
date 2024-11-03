@@ -18,6 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Tabs, type TabsProps} from 'antd';
 import classNames from 'classnames';
+import {type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
 import {type WithFalse} from '@/type/declaration';
 import './index.less';
@@ -26,7 +27,10 @@ import './index.less';
 export type TabsPresetStyle = WithFalse<'padding-0' | 'padding-xss' | 'padding-xs' | 'padding-sm' | 'padding-md' | 'padding-lg' | 'padding-x-0' | 'padding-x-xss' | 'padding-x-xs' | 'padding-x-sm' | 'padding-x-md' | 'padding-x-lg' | 'padding-y-0' | 'padding-y-xss' | 'padding-y-xs' | 'padding-y-sm' | 'padding-y-md' | 'padding-y-lg'>;
 
 
-export type CardTabsProps = Omit<TabsProps, 'type'> & {
+export type TabsPosition = RcTabPosition | 'top-end' | 'bottom-end';
+
+
+export type CardTabsProps = Omit<TabsProps, 'tabPosition' | 'type'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -56,6 +60,14 @@ export type CardTabsProps = Omit<TabsProps, 'type'> & {
      * @default true
      */
     tabBorder?: boolean;
+
+    /**
+     * @description The position of the tabs
+     * @description.zh-CN 标签的位置
+     * @description.zh-TW 標簽的位置
+     * @default 'top'
+     */
+    tabPosition?: TabsPosition;
 
     /**
      * @description Whether to display the content border
@@ -97,18 +109,31 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     // Initialize the default props
     const {
         tabBorder = true,
+        tabPosition= 'top',
         contentBorder = true,
         inkBar = true,
         presetStyle = 'padding-md',
     } = props ?? {};
 
-    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'contentBorder', 'inkBar', 'presetStyle']);
+    const detectTabPosition = () => {
+        switch (tabPosition) {
+            case 'top-end':
+                return 'top';
+            case 'bottom-end':
+                return 'bottom';
+            default:
+                return tabPosition as RcTabPosition;
+        }
+    };
+
+    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPosition', 'contentBorder', 'inkBar', 'presetStyle']);
 
     return (
-        <div className={classNames(clazzPrefix, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classNames(clazzPrefix, `${clazzPrefix}-${tabPosition}`, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)} style={props?.containerStyle}>
             <Tabs
                 className={classNames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (contentBorder ? `${clazzPrefix}-content-border` : undefined), (inkBar ? `${clazzPrefix}-ink-bar` : undefined))}
                 type='card'
+                tabPosition={detectTabPosition()}
                 {...restProps}
             />
         </div>

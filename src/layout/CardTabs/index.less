@@ -28,7 +28,7 @@
         visibility: visible;
     }
 
-    .@{ant-prefix}-tabs-card {
+    > .@{ant-prefix}-tabs {
         &.@{buddy-card-tabs}-tab-border-off  > .@{ant-prefix}-tabs-nav > .@{ant-prefix}-tabs-nav-wrap > .@{ant-prefix}-tabs-nav-list > .@{ant-prefix}-tabs-tab {
             background: transparent;
             border: none;
@@ -100,8 +100,16 @@
     }
 
 
-    /* Preset Styles */
+    /* Tab Positions */
 
+    &.@{buddy-card-tabs}-top-end, &.@{buddy-card-tabs}-bottom-end {
+        > .@{ant-prefix}-tabs:not(.@{ant-prefix}-tabs-centered) > .@{ant-prefix}-tabs-nav > .@{ant-prefix}-tabs-nav-wrap {
+            justify-content: flex-end;
+        }
+    }
+
+
+    /* Preset Styles */
 
     &.@{buddy-card-tabs}-padding-0 > .@{ant-prefix}-tabs-card > .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-tabs-content {
         padding: 0;
