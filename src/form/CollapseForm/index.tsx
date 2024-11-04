@@ -213,8 +213,8 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     }
 
     const restoreLayout = (event: any) => {
-        const entry = document.querySelector<HTMLSpanElement>(`span[data-buddy-collapse-form-entry-id='${fieldId}']`);
-        const content = document.querySelector<HTMLDivElement>(`div[data-buddy-collapse-form-content-id='${fieldId}']`);
+        const entry = document.querySelector<HTMLSpanElement>(`span[data-collapse-form-entry-id='${fieldId}']`);
+        const content = document.querySelector<HTMLDivElement>(`div[data-collapse-form-content-id='${fieldId}']`);
         if (!entry?.contains(event.target) && !content?.contains(event.target)) {
             setFormOpen(false);
         }
@@ -228,7 +228,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
                     style={props?.openedEntryStyle}
                     onClick={triggerType !== 'click' ? undefined : () => setFormOpen(false)}
                     onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(false)}
-                    data-buddy-collapse-form-entry-id={fieldId}
+                    data-collapse-form-entry-id={fieldId}
                 >
                     {(typeof props?.openedEntry === 'function') ? props.openedEntry() : props?.openedEntry}
                 </span>
@@ -240,7 +240,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
                 style={props?.closedEntryStyle}
                 onClick={triggerType !== 'click' ? undefined : () => setFormOpen(true)}
                 onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(true)}
-                data-buddy-collapse-form-entry-id={fieldId}
+                data-collapse-form-entry-id={fieldId}
             >
                 {(typeof props?.closedEntry === 'function') ? props.closedEntry() : props?.closedEntry}
             </span>
@@ -290,7 +290,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
             <div
                 className={classNames(`${clazzPrefix}-content`, (!formOpen ? undefined : `${clazzPrefix}-content-open`), props?.formContentClazz)}
                 style={props?.formContentStyle}
-                data-buddy-collapse-form-content-id={fieldId}
+                data-collapse-form-content-id={fieldId}
             >
                 {buildFormDom()}
             </div>

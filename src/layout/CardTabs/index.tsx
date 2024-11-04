@@ -17,6 +17,7 @@
 
 import React from 'react';
 import {ConfigProvider, Tabs, type TabsProps} from 'antd';
+import {type SizeType} from 'antd/es/config-provider/SizeContext';
 import classNames from 'classnames';
 import {type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
@@ -30,7 +31,10 @@ export type TabsPresetStyle = WithFalse<'padding-0' | 'padding-xss' | 'padding-x
 export type TabsPosition = RcTabPosition | 'top-end' | 'bottom-end';
 
 
-export type CardTabsProps = Omit<TabsProps, 'tabPosition' | 'type'> & {
+export type TabsSizeType = SizeType | 'extra-small';
+
+
+export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition' | 'type'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -86,6 +90,14 @@ export type CardTabsProps = Omit<TabsProps, 'tabPosition' | 'type'> & {
     inkBar?: boolean;
 
     /**
+     * @description The size of the tabs
+     * @description.zh-CN 标签的大小
+     * @description.zh-TW 標簽的大小
+     * @default 'middle'
+     */
+    size?: TabsSizeType;
+
+    /**
      * @description The preset style of the component
      * @description.zh-CN 预设样式
      * @description.zh-TW 預設樣式
@@ -112,8 +124,13 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
         tabPosition= 'top',
         contentBorder = true,
         inkBar = true,
+        size = 'middle',
         presetStyle = 'padding-md',
     } = props ?? {};
+
+    const detectTabSize = () => {
+        return (size === 'extra-small') ? 'small' : size;
+    };
 
     const detectTabPosition = () => {
         switch (tabPosition) {
@@ -126,13 +143,14 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
         }
     };
 
-    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPosition', 'contentBorder', 'inkBar', 'presetStyle']);
+    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPosition', 'contentBorder', 'inkBar', 'size', 'presetStyle']);
 
     return (
-        <div className={classNames(clazzPrefix, `${clazzPrefix}-${tabPosition}`, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classNames(clazzPrefix, `${clazzPrefix}-${size}`, `${clazzPrefix}-${tabPosition}`, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)} style={props?.containerStyle}>
             <Tabs
                 className={classNames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (contentBorder ? `${clazzPrefix}-content-border` : undefined), (inkBar ? `${clazzPrefix}-ink-bar` : undefined))}
                 type='card'
+                size={detectTabSize()}
                 tabPosition={detectTabPosition()}
                 {...restProps}
             />

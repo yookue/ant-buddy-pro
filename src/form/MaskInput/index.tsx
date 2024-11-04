@@ -73,7 +73,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     } = props ?? {};
 
     const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
-    const composeRef = React.useRef<boolean>(false);
+    const compositionRef = React.useRef<boolean>(false);
     const previousRef = React.useRef<string>(formContext?.form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
 
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
@@ -87,7 +87,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (composeRef.current) {
+        if (compositionRef.current) {
             return;
         }
         processValue(event.target.value, () => {
@@ -96,12 +96,12 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     };
 
     const handleCompositionStart = (event: React.CompositionEvent<HTMLInputElement>) => {
-        composeRef.current = true;
+        compositionRef.current = true;
         props?.fieldProps?.onCompositionStart?.(event);
     };
 
     const handleCompositionEnd = (event: React.CompositionEvent<HTMLInputElement>) => {
-        composeRef.current = false;
+        compositionRef.current = false;
         props?.fieldProps?.onCompositionEnd?.(event);
         // WebKit browser (especially Chrome) triggers the `onCompositionEnd` event after `onChange` event
         if (webkitBrowser) {

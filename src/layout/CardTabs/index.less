@@ -28,6 +28,12 @@
         visibility: visible;
     }
 
+    &-extra-small > .@{ant-prefix}-tabs  > .@{ant-prefix}-tabs-nav > .@{ant-prefix}-tabs-nav-wrap > .@{ant-prefix}-tabs-nav-list > .@{ant-prefix}-tabs-tab {
+        padding-top: @padding-xss;
+        padding-bottom: @padding-xss;
+        font-size: @font-size-base - 1px;
+    }
+
     > .@{ant-prefix}-tabs {
         &.@{buddy-card-tabs}-tab-border-off  > .@{ant-prefix}-tabs-nav > .@{ant-prefix}-tabs-nav-wrap > .@{ant-prefix}-tabs-nav-list > .@{ant-prefix}-tabs-tab {
             background: transparent;
