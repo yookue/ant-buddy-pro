@@ -41,7 +41,9 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='Demo Field Without Validation'
-                    disabled
+                    fieldProps={{
+                        disabled: true,
+                    }}
                     popupTagPos='after'
                     popupQuickTags={[
                         'en-US',

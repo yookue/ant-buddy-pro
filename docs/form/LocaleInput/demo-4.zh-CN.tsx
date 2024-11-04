@@ -41,7 +41,9 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='示例字段-无校验'
-                    disabled
+                    fieldProps={{
+                        disabled: true,
+                    }}
                     popupTagPos='after'
                     popupQuickTags={[
                         'en-US',
