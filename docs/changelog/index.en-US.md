@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.130** [2024-11-04]
+    - Add 'form/LocaleTextarea'
+
   - **v0.1.129** [2024-11-01]
     - Add 'form/CollapseForm'
 

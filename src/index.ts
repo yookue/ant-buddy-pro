@@ -39,6 +39,7 @@ export {DivideSelect, type DivideSelectProps} from './form/DivideSelect';
 export {ExactInput, type ExactInputProps} from './form/ExactInput';
 export {IconSelect, type IconSelectProps} from './form/IconSelect';
 export {LocaleInput, type LocaleInputProps} from './form/LocaleInput';
+export {LocaleTextarea, type LocaleTextareaProps} from './form/LocaleTextarea';
 export {MaskInput, type MaskInputProps} from './form/MaskInput';
 export {SegmentRadio, type SegmentRadioProps} from './form/SegmentRadio';
 export {StretchInput, type StretchInputProps} from './form/StretchInput';
