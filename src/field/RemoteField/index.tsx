@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Empty} from 'antd';
+import {ConfigProvider, Spin} from 'antd';
 import {type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
 import {nanoid, useDebounceFn} from '@ant-design/pro-utils';
 import classNames from 'classnames';
@@ -66,12 +66,12 @@ export type RemoteFieldProps = Omit<ProFormFieldRemoteProps, 'request' | 'valueE
     render?: React.ReactNode | ((outcome?: any) => React.ReactNode | undefined);
 
     /**
-     * @description The placeholder of the component
+     * @description The fallback of the component
      * @description.zh-CN 组件的占位符
      * @description.zh-TW 組件的占位符
-     * @default <Empty/>
+     * @default <Spin/>
      */
-    placeholder?: React.ReactNode | (() => React.ReactNode | undefined);
+    fallback?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description Whether auto start the fetching request
@@ -98,7 +98,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
 
     // Initialize the default props
     const {
-        placeholder = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>,
+        fallback = <Spin/>,
         autoStart = true,
     } = props ?? {};
 
@@ -132,20 +132,15 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
         }, [refreshId]);
     }
 
-    const buildOutcomeDom = () => {
-        if (props?.render) {
-            return (typeof props.render === 'function') ? props.render(outcome) : props.render;
-        }
-        return (typeof placeholder === 'function') ? placeholder() : placeholder;
-    };
-
     return (
         <div
             ref={fieldRef}
             className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >
-            {buildOutcomeDom()}
+            <React.Suspense fallback={(typeof fallback === 'function') ? fallback() : fallback}>
+                {(typeof props?.render === 'function') ? props.render(outcome) : props?.render}
+            </React.Suspense>
         </div>
     );
 });
