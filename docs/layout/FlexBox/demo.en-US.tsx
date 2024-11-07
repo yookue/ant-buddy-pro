@@ -82,9 +82,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Small', value: 'small'},
-                        {label: 'Middle', value: 'middle'},
                         {label: 'Large', value: 'large'},
+                        {label: 'Middle', value: 'middle'},
+                        {label: 'Small', value: 'small'},
                         {label: 'Customize', value: '48px'},
                     ]}
                 />

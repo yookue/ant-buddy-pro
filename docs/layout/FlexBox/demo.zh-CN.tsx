@@ -82,9 +82,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '小', value: 'small'},
-                        {label: '中', value: 'middle'},
                         {label: '大', value: 'large'},
+                        {label: '中', value: 'middle'},
+                        {label: '小', value: 'small'},
                         {label: '自定义', value: '48px'},
                     ]}
                 />
