@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.132** [2024-11-08]
+    - Add 'field/ColorPicker'
+
   - **v0.1.130** [2024-11-04]
     - Add 'form/LocaleTextarea'
 

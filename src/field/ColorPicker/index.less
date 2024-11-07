@@ -1,0 +1,228 @@
+/*
+ * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License")
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+@root-entry-name: default;
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+@import (reference) '../../style/color/gray.less';
+
+@buddy-color-picker: ~'@{ant-prefix}-buddy-color-picker';
+
+
+.@{buddy-color-picker} {
+    &.@{buddy-color-picker}-width-block {
+        display: block;
+    }
+
+    &:not(.@{buddy-color-picker}-width-block) {
+        display: inline-block;
+    }
+
+    .@{buddy-color-picker}-button {
+        display: flex;
+        align-items: center;
+
+        > .@{ant-prefix}-space {
+            flex: 1;
+
+            > .@{ant-prefix}-space-item:first-of-type {
+                flex: 1;
+
+                .@{buddy-color-picker}-preview {
+                    border: @border-width-base @border-style-base @border-color-base;
+                    border-radius: @border-radius-base;
+                    min-height: 12px;
+                }
+            }
+        }
+
+        &.@{ant-prefix}-btn-lg .@{buddy-color-picker}-preview {
+            font-size: @font-size-base;
+            min-width: 26px;
+        }
+
+        &.@{ant-prefix}-btn-sm .@{buddy-color-picker}-preview {
+            font-size: @font-size-sm - 4px;
+            min-width: 14px;
+        }
+
+        &:not(.@{ant-prefix}-btn-lg):not(.@{ant-prefix}-btn-sm) .@{buddy-color-picker}-preview {
+            font-size: @font-size-sm;
+            min-width: 20px;
+        }
+    }
+}
+
+
+.@{buddy-color-picker}-dropdown {
+    min-width: 0 !important;
+
+    > .@{ant-prefix}-dropdown-menu {
+        padding: 0;
+
+        > .@{ant-prefix}-dropdown-menu-item {
+            cursor: default;
+            padding: 0;
+
+            > .@{ant-prefix}-dropdown-menu-title-content {
+                /* block-picker  */
+
+                .block-picker {
+                    border-radius: @border-radius-base !important;
+
+                    > div:nth-of-type(2) {
+                        border-top-left-radius: @border-radius-base !important;
+                        border-top-right-radius: @border-radius-base !important;
+                    }
+
+                    > div:last-of-type > div:first-of-type > span > div {
+                        border-radius: @border-radius-base !important;
+                    }
+
+                    > div:last-of-type input {
+                        box-shadow: none !important;
+                        border: @border-width-base @border-style-base @border-color-base !important;
+                        border-radius: @border-radius-base !important;
+
+                        &:focus, &:hover {
+                            border-color: @input-hover-border-color !important;
+                        }
+                    }
+                }
+
+                /* chrome-picker */
+
+                > .chrome-picker {
+                    input {
+                        box-shadow: none !important;
+                        border: @border-width-base @border-style-base @border-color-base !important;
+
+                        &:focus, &:hover {
+                            outline: none !important;
+                            border-color: @input-hover-border-color !important;
+                        }
+                    }
+
+                    svg {
+                        border-radius: @border-radius-base !important;
+
+                        &:hover {
+                            background-color: @primary-1 !important;
+                            border: @border-width-base @border-style-base @primary-6 !important;
+                        }
+                    }
+                }
+
+                /* github-picker  */
+
+                > .github-picker {
+                    > span > div {
+                        width: 26px !important;
+                        height: 26px !important;
+                    }
+                }
+
+                /* material-picker */
+
+                > div > div:last-of-type > .material-picker {
+                    width: 112px !important;
+                    height: 104px !important;
+                    padding: 8px !important;
+                }
+
+                /* sketch-picker */
+
+                > .sketch-picker {
+                    > div:last-of-type > div > span > div {
+                        border-radius: @border-radius-base !important;
+                    }
+
+                    input {
+                         box-shadow: none !important;
+                         border: @border-width-base @border-style-base @border-color-base !important;
+                         border-radius: @border-radius-base !important;
+
+                         &:focus, &:hover {
+                             outline: none !important;
+                             border-color: @input-hover-border-color !important;
+                         }
+                     }
+                }
+
+                /* swatches-picker */
+
+                .swatches-picker {
+                    > div > div:last-of-type > div {
+                        &::-webkit-scrollbar {
+                            height: 8px;
+                            width: 8px;
+                        }
+                        &::-webkit-scrollbar-track {
+                            border-radius: 4px;
+                            background-color: @gray-3;
+                        }
+                        &::-webkit-scrollbar-track:hover,
+                        &::-webkit-scrollbar-track:active {
+                            background-color: @gray-3;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            border-radius: 4px;
+                            background-color: @gray-6;
+                        }
+                        &::-webkit-scrollbar-thumb:hover,
+                        &::-webkit-scrollbar-thumb:active {
+                            background-color: @gray-7;
+                        }
+                    }
+                }
+
+                /* twitter-picker */
+
+                > .twitter-picker {
+                    border-radius: @border-radius-base !important;
+
+                    > div:last-of-type {
+                        > span > div {
+                            border-radius: @border-radius-base !important;
+                        }
+
+                        > div:first-of-type {
+                            border-top: @border-width-base @border-style-base @border-color-base !important;
+                            border-bottom: @border-width-base @border-style-base @border-color-base !important;
+                            border-left: @border-width-base @border-style-base @border-color-base !important;
+                            border-top-left-radius: @border-radius-base !important;
+                            border-bottom-left-radius: @border-radius-base !important;
+                        }
+
+                        > div:nth-of-type(2) input {
+                            height: 27px !important;
+                            box-shadow: none !important;
+                            border: @border-width-base @border-style-base @border-color-base !important;
+                            border-top-right-radius: @border-radius-base !important;
+                            border-bottom-right-radius: @border-radius-base !important;
+
+                            &:focus, &:hover {
+                                outline: none !important;
+                                border-color: @input-hover-border-color !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

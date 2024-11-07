@@ -16,6 +16,7 @@
 
 
 export {BadgeRibbon, type BadgeRibbonProps} from './field/BadgeRibbon';
+export {ColorPicker, type ColorPickerProps, type ColorPickerRef} from './field/ColorPicker';
 export {CompactTuple, type CompactTupleProps} from './field/CompactTuple';
 export {CornerStamp, type CornerStampProps} from './field/CornerStamp';
 export {CountField, type CountFieldProps, type CountFieldRef} from './field/CountField';
