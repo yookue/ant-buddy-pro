@@ -119,7 +119,7 @@ export type FileUploadProps = Omit<UploadProps, 'name' | 'maxCount' | 'showUploa
 };
 
 
-export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled' | 'readonly'> & {
+export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'disabled' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -147,7 +147,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<
      * @description.zh-CN 组件的 ref 句柄
      * @description.zh-TW 組件的 ref 句柄
      */
-    fieldRef?: React.Ref<AvatarUploadRef | null | undefined>;
+    fieldRef?: React.Ref<AvatarUploadRef | undefined | null>;
 
     /**
      * @description The source of the image

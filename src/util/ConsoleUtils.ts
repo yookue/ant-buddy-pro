@@ -39,7 +39,7 @@ export abstract class ConsoleUtils {
      * @param message The message to print
      * @param product The package name to prefix
      */
-    protected static build(component?: string, message?: string, product?: string): string | undefined {
+    public static build(component?: string, message?: string, product?: string): string | undefined {
         return !message ? undefined : (component ? `[${product ?? productName}: ${component}] - ` : '').concat(message);
     }
 

@@ -70,7 +70,7 @@ export type TextTagProps = Omit<TagProps, 'children'> & {
 };
 
 
-export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTMLDivElement>>, 'fieldRef' | 'placeholder' | 'disabled' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
+export type TagInputProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'disabled' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -98,7 +98,7 @@ export type TagInputProps = Omit<ProFormFieldItemProps<React.HTMLAttributes<HTML
      * @description.zh-CN 组件的 ref 句柄
      * @description.zh-TW 組件的 ref 句柄
      */
-    fieldRef?: React.Ref<TagInputRef | null | undefined>;
+    fieldRef?: React.Ref<TagInputRef | undefined | null>;
 
     /**
      * @description The remote request
@@ -260,13 +260,13 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         }
     }));
 
-    React.useLayoutEffect(() => {
-        if (props?.compactMargin) {
+    if (props?.compactMargin) {
+        React.useLayoutEffect(() => {
             const parentClazz = configContext.getPrefixCls('form-item');
             const targetClazz = `${clazzPrefix}-compact-margin`;
             fieldRef.current?.closest(`.${parentClazz}`)?.classList?.add(targetClazz);
-        }
-    }, []);
+        }, []);
+    }
 
     if (props?.request && props?.requestOptionPlace !== false) {
         const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);

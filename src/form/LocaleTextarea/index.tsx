@@ -311,8 +311,8 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                     bordered: fieldProps?.bordered || props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
                                     maxLength: fieldProps?.maxLength || props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
                                     showCount: fieldProps?.showCount || props?.switchShareProps?.showCount || (switchCloneProps.showCount ? props?.fieldProps?.showCount : undefined),
-                                    disabled: props?.fieldProps?.disabled || fieldProps?.disabled,
-                                    readOnly: props?.fieldProps?.readOnly || fieldProps?.readOnly,
+                                    disabled: props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled,
+                                    readOnly: props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly,
                                     ...omitFieldProps,
                                 }}
                                 rules={[
@@ -333,8 +333,8 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 autoSize={fieldProps?.autoSize || props?.switchShareProps?.allowClear || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
                                 maxLength={fieldProps?.maxLength || props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
                                 showCount={fieldProps?.showCount || props?.switchShareProps?.showCount || (switchCloneProps.showCount ? props?.fieldProps?.showCount : undefined)}
-                                disabled={props?.fieldProps?.disabled || fieldProps?.disabled}
-                                readOnly={props?.fieldProps?.readOnly || fieldProps?.readOnly}
+                                disabled={props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled}
+                                readOnly={props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly}
                                 {...omitFieldProps}
                             />
                         </If.Else>
@@ -365,8 +365,8 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                     bordered: props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
                                     maxLength: props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
                                     showCount: props?.switchShareProps?.showCount || (switchCloneProps.showCount ? props?.fieldProps?.showCount : undefined),
-                                    disabled: props?.fieldProps?.disabled,
-                                    readOnly: props?.fieldProps?.readOnly,
+                                    disabled: props.disabled || props?.fieldProps?.disabled,
+                                    readOnly: props.readonly || props?.fieldProps?.readOnly,
                                 }}
                                 rules={[
                                     ...(props?.switchShareProps?.rules || []),
@@ -384,8 +384,8 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 autoSize={props?.switchShareProps?.autoSize || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
                                 maxLength={props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
                                 showCount={props?.switchShareProps?.showCount || (switchCloneProps.showCount ? props?.fieldProps?.showCount : undefined)}
-                                disabled={props?.fieldProps?.disabled}
-                                readOnly={props?.fieldProps?.readOnly}
+                                disabled={props.disabled || props?.fieldProps?.disabled}
+                                readOnly={props.readonly || props?.fieldProps?.readOnly}
                             />
                         </If.Else>
                     </If>
@@ -400,7 +400,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
         return result;
     };
 
-    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+    const entryImmutable = editContext.mode === 'read' || props?.disabled || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.readonly || props?.proFieldProps?.readonly;
     const omitTabsProps = !props?.tabsProps ? {} : omit(props.tabsProps, ['size', 'contentBorder', 'presetStyle']);
 
     return (

@@ -164,11 +164,19 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     addonPos?: WithFalse<BeforeAfterType>;
 
     /**
+     * @description Whether the dropdown div is default open or not
+     * @description.zh-CN 下拉弹出层是否默认展开
+     * @description.zh-TW 下拉彈出層是否默認展開
+     * @default false
+     */
+    defaultOpen?: boolean;
+
+    /**
      * @description The properties of the dropdown div
      * @description.zh-CN 下拉弹出层的属性
      * @description.zh-TW 下拉彈出層的屬性
      */
-    dropdownProps?: Pick<DropdownProps, 'autoAdjustOverflow' | 'autoFocus' | 'destroyPopupOnHide' | 'getPopupContainer' | 'overlayClassName' | 'overlayStyle' | 'placement' | 'trigger' | 'onOpenChange'>;
+    dropdownProps?: Omit<DropdownProps, 'menu' | 'open'>;
 
     /**
      * @description Whether to enable multilingual or not
@@ -272,6 +280,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     const {
         addon = <TranslationOutlined/>,
         addonPos = 'after',
+        defaultOpen = false,
         multilingual = true,
         proField = true,
         popupTagPos = 'before',
@@ -379,7 +388,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     }
 
     const compositionRef = React.useRef<boolean>(false);
-    const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
+    const [menuOpen, setMenuOpen] = React.useState<boolean>(defaultOpen);
 
     const handleSetAsDefault = (tagId: string) => {
         const inspect = document.querySelector<HTMLInputElement>(`input[data-locale-input-id='${fieldId}']`);
@@ -511,8 +520,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                     maxLength: fieldProps?.maxLength || props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
                                     showCount: fieldProps?.showCount || props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined),
                                     size: fieldProps?.size || props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined),
-                                    disabled: props?.fieldProps?.disabled || fieldProps?.disabled,
-                                    readOnly: props?.fieldProps?.readOnly || fieldProps?.readOnly,
+                                    disabled: props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled,
+                                    readOnly: props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly,
                                     onCompositionStart: (event: React.CompositionEvent<HTMLInputElement>) => {
                                         compositionRef.current = true;
                                         fieldProps?.onCompositionStart?.(event);
@@ -548,8 +557,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 maxLength={fieldProps?.maxLength || props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
                                 showCount={fieldProps?.showCount || props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined)}
                                 size={fieldProps?.size || props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined)}
-                                disabled={props?.fieldProps?.disabled || fieldProps?.disabled}
-                                readOnly={props?.fieldProps?.readOnly || fieldProps?.readOnly}
+                                disabled={props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled}
+                                readOnly={props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly}
                                 onCompositionStart={(event: React.CompositionEvent<HTMLInputElement>) => {
                                     compositionRef.current = true;
                                     fieldProps?.onCompositionStart?.(event);
@@ -593,8 +602,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                     maxLength: props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
                                     showCount: props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined),
                                     size: props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined),
-                                    disabled: props?.fieldProps?.disabled,
-                                    readOnly: props?.fieldProps?.readOnly,
+                                    disabled: props.disabled || props?.fieldProps?.disabled,
+                                    readOnly: props.readonly || props?.fieldProps?.readOnly,
                                     onCompositionStart: () => {
                                         compositionRef.current = true;
                                     },
@@ -625,8 +634,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 maxLength={props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
                                 showCount={props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined)}
                                 size={props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined)}
-                                disabled={props?.fieldProps?.disabled}
-                                readOnly={props?.fieldProps?.readOnly}
+                                disabled={props.disabled || props?.fieldProps?.disabled}
+                                readOnly={props.readonly || props?.fieldProps?.readOnly}
                                 onCompositionStart={() => {
                                     compositionRef.current = true;
                                 }}
@@ -647,7 +656,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         return result;
     };
 
-    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+    const entryImmutable = editContext.mode === 'read' || props?.disabled || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.readonly || props?.proFieldProps?.readonly;
+    const restProps = !props?.dropdownProps ? {} : omit(props?.dropdownProps, ['getPopupContainer', 'overlayClassName', 'onOpenChange']);
 
     return (
         <Dropdown
@@ -668,7 +678,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 setMenuOpen(open);
                 props?.dropdownProps?.onOpenChange?.(open);
             }}
-            {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['getPopupContainer', 'overlayClassName', 'onOpenChange']))}
+            {...restProps}
         >
             <Input.Group>
                 {buildEntryDom()}
