@@ -17,14 +17,14 @@
 
 import React from 'react';
 import {Card, Divider} from 'antd';
+import {type SelectCommonPlacement} from 'antd/es/_util/motion';
 import {SmileOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch, ProFormSlider} from '@ant-design/pro-form';
 import {CornerStamp} from '@yookue/ant-buddy-pro';
-import {type StampPlacement} from 'src/field/CornerStamp';
 
 
 export default () => {
-    const [placement, setPlacement] = React.useState<StampPlacement>('topRight');
+    const [placement, setPlacement] = React.useState<SelectCommonPlacement>('topRight');
     const [showAddon, setShowAddon] = React.useState<boolean>(true);
     const [rotateAddon, setRotateAddon] = React.useState<boolean>(true);
     const [size, setSize] = React.useState<number>(40);

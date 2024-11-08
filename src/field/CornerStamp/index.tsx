@@ -17,7 +17,6 @@
 
 import React from 'react';
 import {ConfigProvider, type BadgeProps, type SelectProps} from 'antd';
-import {type SelectCommonPlacement} from 'antd/es/_util/motion';
 import {isPresetColor} from 'antd/es/badge/utils';
 import {presetPrimaryColors} from '@ant-design/colors';
 import {css} from '@emotion/css';
@@ -25,9 +24,6 @@ import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import './index.less';
-
-
-export type StampPlacement = SelectCommonPlacement;
 
 
 export type CornerStampProps = React.PropsWithChildren<{
