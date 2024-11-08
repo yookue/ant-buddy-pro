@@ -44,6 +44,13 @@ export type CollapseFormProps = React.PropsWithChildren<{
     clazzPrefix?: string;
 
     /**
+     * @description Whether to change the cursor automatically
+     * @description.zh-CN 是否自动改变鼠标指针样式
+     * @description.zh-TW 是否自动改变鼠标指针样式
+     */
+    autoEntryCursor?: boolean;
+
+    /**
      * @description The entry element when form closed
      * @description.zh-CN 表单关闭时的入口节点
      * @description.zh-TW 表單關閉時的入口節點
@@ -51,16 +58,16 @@ export type CollapseFormProps = React.PropsWithChildren<{
     closedEntry?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
-     * @description The CSS class name of the entry element span when form closed
-     * @description.zh-CN 表单关闭时的入口节点 span 的 CSS 类名
-     * @description.zh-TW 表單關閉時的入口節點 span 的 CSS 類名
+     * @description The CSS class name of the entry element div when form closed
+     * @description.zh-CN 表单关闭时的入口节点 div 的 CSS 类名
+     * @description.zh-TW 表單關閉時的入口節點 div 的 CSS 類名
      */
     closedEntryClazz?: string;
 
     /**
-     * @description The CSS style of the entry element span when form closed
-     * @description.zh-CN 表单关闭时的入口节点 span 的 CSS 样式
-     * @description.zh-TW 表單關閉時的入口節點 span 的 CSS 樣式
+     * @description The CSS style of the entry element div when form closed
+     * @description.zh-CN 表单关闭时的入口节点 div 的 CSS 样式
+     * @description.zh-TW 表單關閉時的入口節點 div 的 CSS 樣式
      */
     closedEntryStyle?: React.CSSProperties;
 
@@ -72,16 +79,16 @@ export type CollapseFormProps = React.PropsWithChildren<{
     openedEntry?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
-     * @description The CSS class name of the entry element span when form opened
-     * @description.zh-CN 表单展开时的入口节点 span 的 CSS 类名
-     * @description.zh-TW 表單展開時的入口節點 span 的 CSS 類名
+     * @description The CSS class name of the entry element div when form opened
+     * @description.zh-CN 表单展开时的入口节点 div 的 CSS 类名
+     * @description.zh-TW 表單展開時的入口節點 div 的 CSS 類名
      */
     openedEntryClazz?: string;
 
     /**
-     * @description The CSS style of the entry element span when form opened
-     * @description.zh-CN 表单展开时的入口节点 span 的 CSS 样式
-     * @description.zh-TW 表單展開時的入口節點 span 的 CSS 樣式
+     * @description The CSS style of the entry element div when form opened
+     * @description.zh-CN 表单展开时的入口节点 div 的 CSS 样式
+     * @description.zh-TW 表單展開時的入口節點 div 的 CSS 樣式
      */
     openedEntryStyle?: React.CSSProperties;
 
@@ -213,7 +220,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     }
 
     const restoreLayout = (event: any) => {
-        const entry = document.querySelector<HTMLSpanElement>(`span[data-collapse-form-entry-id='${fieldId}']`);
+        const entry = document.querySelector<HTMLDivElement>(`div[data-collapse-form-entry-id='${fieldId}']`);
         const content = document.querySelector<HTMLDivElement>(`div[data-collapse-form-content-id='${fieldId}']`);
         if (!entry?.contains(event.target) && !content?.contains(event.target)) {
             setFormOpen(false);
@@ -223,27 +230,27 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     const buildEntryDom = () => {
         if (formOpen) {
             return (
-                <span
-                    className={classNames(`${clazzPrefix}-entry`, `${clazzPrefix}-entry-open`, props?.openedEntryClazz)}
+                <div
+                    className={classNames(`${clazzPrefix}-entry`, `${clazzPrefix}-entry-open`, (props?.autoEntryCursor ? `${clazzPrefix}-entry-cursor` : undefined), props?.openedEntryClazz)}
                     style={props?.openedEntryStyle}
                     onClick={triggerType !== 'click' ? undefined : () => setFormOpen(false)}
                     onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(false)}
                     data-collapse-form-entry-id={fieldId}
                 >
                     {(typeof props?.openedEntry === 'function') ? props.openedEntry() : props?.openedEntry}
-                </span>
+                </div>
             );
         }
         return (
-            <span
-                className={classNames(`${clazzPrefix}-entry`, props?.closedEntryClazz)}
+            <div
+                className={classNames(`${clazzPrefix}-entry`, (props?.autoEntryCursor ? `${clazzPrefix}-entry-cursor` : undefined), props?.closedEntryClazz)}
                 style={props?.closedEntryStyle}
                 onClick={triggerType !== 'click' ? undefined : () => setFormOpen(true)}
                 onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(true)}
                 data-collapse-form-entry-id={fieldId}
             >
                 {(typeof props?.closedEntry === 'function') ? props.closedEntry() : props?.closedEntry}
-            </span>
+            </div>
         );
     };
 

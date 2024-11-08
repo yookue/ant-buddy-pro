@@ -37,6 +37,7 @@ export default () => {
                     <CollapseForm
                         closedEntry='回复'
                         openedEntry='取消回复'
+                        autoEntryCursor={true}
                         formProps={{
                             submitter: {
                                 searchConfig: {
