@@ -29,6 +29,8 @@ export type FileSizeUint = 'KB' | 'MB' | 'GB';
 
 export type LabelValueType = 'label' | 'value';
 
+export type RectZenithPlace = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+
 export type RequestOptionPlace = 'before' | 'after' | 'override';
 
 export type RuleValidateScope = 'all' | 'required' | 'optional';

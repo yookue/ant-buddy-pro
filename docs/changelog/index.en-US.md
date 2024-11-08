@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.133** [2024-11-09]
+    - Add 'field/AvatarStamp'
+
   - **v0.1.132** [2024-11-08]
     - Add 'field/ColorPicker'
 

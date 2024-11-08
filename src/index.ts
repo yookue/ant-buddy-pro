@@ -15,6 +15,7 @@
  */
 
 
+export {AvatarStamp, type AvatarStampProps} from './field/AvatarStamp';
 export {BadgeRibbon, type BadgeRibbonProps} from './field/BadgeRibbon';
 export {ColorPicker, type ColorPickerProps, type ColorPickerRef} from './field/ColorPicker';
 export {CompactTuple, type CompactTupleProps} from './field/CompactTuple';
