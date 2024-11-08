@@ -39,27 +39,39 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProFormSelect
-                    label='Picker Type'
-                    fieldProps={{
-                        value: pickerType,
-                        options: [
-                            {label: 'Block', value: 'block'},
-                            {label: 'Chrome', value: 'chrome'},
-                            {label: 'Circle', value: 'circle'},
-                            {label: 'Compact', value: 'compact'},
-                            {label: 'Github', value: 'github'},
-                            {label: 'Hue', value: 'hue'},
-                            {label: 'Material', value: 'material'},
-                            {label: 'Sketch', value: 'sketch'},
-                            {label: 'Swatches', value: 'swatches'},
-                            {label: 'Twitter', value: 'twitter'},
-                        ],
-                        onChange: (value) => {
-                            setPickerType(value);
-                        }
-                    }}
-                />
+                <ProForm.Group>
+                    <ProFormSelect
+                        label='Picker Type'
+                        fieldProps={{
+                            allowClear: false,
+                            value: pickerType,
+                            options: [
+                                {label: 'Block', value: 'block'},
+                                {label: 'Chrome', value: 'chrome'},
+                                {label: 'Circle', value: 'circle'},
+                                {label: 'Compact', value: 'compact'},
+                                {label: 'Github', value: 'github'},
+                                {label: 'Hue', value: 'hue'},
+                                {label: 'Material', value: 'material'},
+                                {label: 'Sketch', value: 'sketch'},
+                                {label: 'Swatches', value: 'swatches'},
+                                {label: 'Twitter', value: 'twitter'},
+                            ],
+                            onChange: (value) => {
+                                setPickerType(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Button Block'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: buttonBlock,
+                            onChange: setButtonBlock,
+                        }}
+                    />
+                </ProForm.Group>
                 <ProFormRadio.Group
                     label='Button Size'
                     radioType='button'
@@ -75,15 +87,6 @@ export default () => {
                         {label: 'Middle', value: 'middle'},
                         {label: 'Small', value: 'small'},
                     ]}
-                />
-                <ProFormSwitch
-                    label='Button Block'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: buttonBlock,
-                        onChange: setButtonBlock,
-                    }}
                 />
                 <ProForm.Group>
                     <Button

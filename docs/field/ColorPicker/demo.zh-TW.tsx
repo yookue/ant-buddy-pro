@@ -39,27 +39,39 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProFormSelect
-                    label='拾取器類型'
-                    fieldProps={{
-                        value: pickerType,
-                        options: [
-                            {label: 'Block', value: 'block'},
-                            {label: 'Chrome', value: 'chrome'},
-                            {label: 'Circle', value: 'circle'},
-                            {label: 'Compact', value: 'compact'},
-                            {label: 'Github', value: 'github'},
-                            {label: 'Hue', value: 'hue'},
-                            {label: 'Material', value: 'material'},
-                            {label: 'Sketch', value: 'sketch'},
-                            {label: 'Swatches', value: 'swatches'},
-                            {label: 'Twitter', value: 'twitter'},
-                        ],
-                        onChange: (value) => {
-                            setPickerType(value);
-                        }
-                    }}
-                />
+                <ProForm.Group>
+                    <ProFormSelect
+                        label='拾取器類型'
+                        fieldProps={{
+                            allowClear: false,
+                            value: pickerType,
+                            options: [
+                                {label: 'Block', value: 'block'},
+                                {label: 'Chrome', value: 'chrome'},
+                                {label: 'Circle', value: 'circle'},
+                                {label: 'Compact', value: 'compact'},
+                                {label: 'Github', value: 'github'},
+                                {label: 'Hue', value: 'hue'},
+                                {label: 'Material', value: 'material'},
+                                {label: 'Sketch', value: 'sketch'},
+                                {label: 'Swatches', value: 'swatches'},
+                                {label: 'Twitter', value: 'twitter'},
+                            ],
+                            onChange: (value) => {
+                                setPickerType(value);
+                            }
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='匹配寬度'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: buttonBlock,
+                            onChange: setButtonBlock,
+                        }}
+                    />
+                </ProForm.Group>
                 <ProFormRadio.Group
                     label='按鈕大小'
                     radioType='button'
@@ -75,15 +87,6 @@ export default () => {
                         {label: '中', value: 'middle'},
                         {label: '小', value: 'small'},
                     ]}
-                />
-                <ProFormSwitch
-                    label='匹配寬度'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: buttonBlock,
-                        onChange: setButtonBlock,
-                    }}
                 />
                 <ProForm.Group>
                     <Button
