@@ -16,12 +16,13 @@
 
 
 import React from 'react';
-import {ConfigProvider, type BadgeProps, type SelectProps} from 'antd';
+import {ConfigProvider, type BadgeProps} from 'antd';
 import {isPresetColor} from 'antd/es/badge/utils';
 import {presetPrimaryColors} from '@ant-design/colors';
 import {css} from '@emotion/css';
 import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
+import {type RectZenithPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import './index.less';
 
@@ -100,6 +101,14 @@ export type CornerStampProps = React.PropsWithChildren<{
     rotateAddon?: boolean;
 
     /**
+     * @description The placement of the stamp
+     * @description.zh-CN 角标的位置
+     * @description.zh-TW 角標的位置
+     * @default 'topRight'
+     */
+    placement?: RectZenithPlace;
+
+    /**
      * @description The side length of the component
      * @description.zh-CN 组件的边长
      * @description.zh-TW 組件的邊長
@@ -114,11 +123,11 @@ export type CornerStampProps = React.PropsWithChildren<{
      * @default 9
      */
     zIndex?: number;
-}> & Pick<BadgeProps, 'color'> & Pick<SelectProps, 'placement'>;
+}> & Pick<BadgeProps, 'color'>;
 
 
 /**
- * Component for displaying a corner mask
+ * Component for displaying a corner stamp
  *
  * @author David Hsing
  */

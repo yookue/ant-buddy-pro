@@ -4,7 +4,7 @@ toc: content
 
 ## CornerStamp
 
-CornerStamp 是一個可以可以顯示角標的控件。
+CornerStamp 是一個可以顯示帶角標的控件。
 
 ### 導入組件
 
