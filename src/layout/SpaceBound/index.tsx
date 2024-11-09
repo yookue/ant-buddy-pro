@@ -48,7 +48,15 @@ export type SpaceBoundProps = SpaceProps & {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to match the width of parent element
+     * @description Whether to pad the bound or not
+     * @description.zh-CN 外边框是否填充内边距
+     * @description.zh-TW 外邊框是否填充內邊距
+     * @default true
+     */
+    padBound?: boolean;
+
+    /**
+     * @description Whether to match the width of parent element or not
      * @description.zh-CN 是否匹配父节点的宽度
      * @description.zh-TW 是否匹配父節點的寬度
      */
@@ -70,6 +78,7 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
     // Initialize the default props
     const {
         size = 'small',
+        padBound = true,
     } = props ?? {};
 
     const getNumericSize = function (space: SpaceSize) {
@@ -101,11 +110,11 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
         padding: `${verticalSize}px ${horizontalSize}px`,
     });
 
-    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'widthBlock']);
+    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'padBound', 'widthBlock']);
 
     return (
         <div
-            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), paddingClazz, props?.containerClazz)}
+            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (padBound ? paddingClazz : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space {...restProps}>

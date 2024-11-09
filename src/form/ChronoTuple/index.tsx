@@ -65,7 +65,7 @@ export type ChronoTupleProps = {
     selectProps?: ChronoSelectProps;
 
     /**
-     * @description Whether to match the width of parent element
+     * @description Whether to match the width of parent element or not
      * @description.zh-CN 是否匹配父节点的宽度
      * @description.zh-TW 是否匹配父節點的寬度
      */
