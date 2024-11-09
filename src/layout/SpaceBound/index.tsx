@@ -106,15 +106,17 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
         return ((Array.isArray(size) ? size : [size, size]) as [SpaceSize, SpaceSize]).map(item => getNumericSize(item));
     }, [size]);
 
-    const paddingClazz = css({
-        padding: `${verticalSize}px ${horizontalSize}px`,
-    });
+    const buildContainerCss = () => {
+        return !padBound ? undefined : css({
+            padding: `${verticalSize}px ${horizontalSize}px`,
+        });
+    };
 
     const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'padBound', 'widthBlock']);
 
     return (
         <div
-            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (padBound ? paddingClazz : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), buildContainerCss(), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space {...restProps}>

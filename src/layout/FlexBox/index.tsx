@@ -165,11 +165,11 @@ export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
     // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-flex-box');
 
-    const buildClazz = () => {
+    const buildContainerCss = () => {
         if (!props) {
             return undefined;
         }
-        const result: Record<string, any> = {};
+        const result = {};
         Object.keys(props).filter(item => StringUtils.startsWithAny(item, ['align', 'justify', 'flex'])).forEach(item => {
             ObjectUtils.setProp(result, item, props[item as keyof FlexBoxProps]);
         });
@@ -195,7 +195,7 @@ export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, (!props?.boxShadow ? undefined : `${clazzPrefix}-box-shadow`), buildClazz(), props?.containerClazz)}
+            className={classNames(`${clazzPrefix}`, (!props?.boxShadow ? undefined : `${clazzPrefix}-box-shadow`), buildContainerCss(), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}

@@ -150,7 +150,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
 
     const bgColor = !isPresetColor(color) ? color : presetPrimaryColors[color];
 
-    const buildCornerClazz = () => {
+    const buildCornerCss = () => {
         let result = undefined;
         switch (placement) {
             case 'topLeft':
@@ -221,13 +221,13 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
 
     const buildFieldDom = () => {
         return (
-            <div className={classNames(`${clazzPrefix}-field`, buildCornerClazz(), props?.fieldClazz)} style={props?.fieldStyle}>
+            <div className={classNames(`${clazzPrefix}-field`, buildCornerCss(), props?.fieldClazz)} style={props?.fieldStyle}>
                 {!props?.field ? props?.children : (typeof props.field === 'function' ? props.field() : props.field)}
             </div>
         );
     };
 
-    const buildAddonRectClazz = () => {
+    const buildAddonRectCss = () => {
         const ratio = 1/3;
         let diffProps = {};
         switch (placement) {
@@ -266,7 +266,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
         });
     };
 
-    const buildAddonRotateClazz = () => {
+    const buildAddonRotateCss = () => {
         const rotation = (placement === 'topLeft' || placement === 'bottomRight') ? -45 : 45;
         const hypotenuse = Math.sqrt(Math.pow(size, 2) * 2);
         const perpendicular = size * size / hypotenuse;
@@ -278,32 +278,32 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                 rectCenter = [hypotenuse / 2, -perpendicular / 2];
                 stampCenter = [size / 3, -size / 3];
                 diffProps = {
-                    left: `${stampCenter[0] - rectCenter[0]}px`,
                     top: `${rectCenter[1] - stampCenter[1]}px`,
+                    left: `${stampCenter[0] - rectCenter[0]}px`,
                 };
                 break;
             case 'topRight':
                 rectCenter = [-hypotenuse / 2, -perpendicular / 2];
                 stampCenter = [-size / 3, -size / 3];
                 diffProps = {
-                    right: `${rectCenter[0] - stampCenter[0]}px`,
                     top: `${rectCenter[1] - stampCenter[1]}px`,
+                    right: `${rectCenter[0] - stampCenter[0]}px`,
                 };
                 break;
             case 'bottomLeft':
                 rectCenter = [hypotenuse / 2, perpendicular / 2];
                 stampCenter = [size / 3, size / 3];
                 diffProps = {
-                    left: `${stampCenter[0] - rectCenter[0]}px`,
                     bottom: `${rectCenter[1] - stampCenter[1]}px`,
+                    left: `${stampCenter[0] - rectCenter[0]}px`,
                 };
                 break;
             case 'bottomRight':
                 rectCenter = [-hypotenuse / 2, perpendicular / 2];
                 stampCenter = [-size / 3, size / 3];
                 diffProps = {
-                    right: `${rectCenter[0] - stampCenter[0]}px`,
                     bottom: `${rectCenter[1] - stampCenter[1]}px`,
+                    right: `${rectCenter[0] - stampCenter[0]}px`,
                 };
                 break;
             default:
@@ -322,7 +322,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
         if (!props?.addon) {
             return undefined;
         }
-        const extraClazz = rotateAddon ? buildAddonRotateClazz() : buildAddonRectClazz();
+        const extraClazz = rotateAddon ? buildAddonRotateCss() : buildAddonRectCss();
         return (
             <div className={classNames(`${clazzPrefix}-addon`, (rotateAddon ? `${clazzPrefix}-addon-rotate` : undefined), extraClazz, props?.addonClazz)} style={props?.addonStyle}>
                 {(typeof props.addon === 'function') ? props.addon() : props.addon}

@@ -17,6 +17,7 @@
 
 import React from 'react';
 import {ConfigProvider, Avatar, type AvatarProps} from 'antd';
+import {css} from '@emotion/css';
 import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -69,6 +70,13 @@ export type AvatarStampProps = AvatarProps & {
     addonStyle?: React.CSSProperties;
 
     /**
+     * @description The offset of the addon wrapper div, in pixels
+     * @description.zh-CN 包裹附加节点 div 的偏移, 单位像素
+     * @description.zh-TW 包裹附加節點 div 的偏移，單位像素
+     */
+    offset?: [number, number];
+
+    /**
      * @description The placement of the stamp
      * @description.zh-CN 角标的位置
      * @description.zh-TW 角標的位置
@@ -94,18 +102,51 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
         placement = 'bottomRight',
     } = props ?? {};
 
+    const buildAddonCss = () => {
+        let result = undefined;
+        switch (placement) {
+            case 'topLeft':
+                result = {
+                    top: `${props?.offset?.[1] ?? 0}px`,
+                    left: `${props?.offset?.[0] ?? 0}px`,
+                };
+                break;
+            case 'topRight':
+                result = {
+                    top: `${props?.offset?.[1] ?? 0}px`,
+                    right: `${props?.offset?.[0] ?? 0}px`,
+                };
+                break;
+            case 'bottomLeft':
+                result = {
+                    bottom: `${props?.offset?.[1] ?? 0}px`,
+                    left: `${props?.offset?.[0] ?? 0}px`,
+                };
+                break;
+            case 'bottomRight':
+                result = {
+                    bottom: `${props?.offset?.[1] ?? 0}px`,
+                    right: `${props?.offset?.[0] ?? 0}px`,
+                };
+                break;
+            default:
+                break;
+        }
+        return !result ? undefined : css(result);
+    };
+
     const buildAddonDom = () => {
         if (!props?.addon) {
             return undefined;
         }
         return (
-            <div className={classNames(`${clazzPrefix}-addon`, props?.addonClazz)} style={props?.addonStyle}>
+            <div className={classNames(`${clazzPrefix}-addon`, buildAddonCss(), props?.addonClazz)} style={props?.addonStyle}>
                 {(typeof props?.addon === 'function') ? props.addon() : props?.addon}
             </div>
         );
     };
 
-    const omitAvatarProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'addon', 'addonClazz', 'addonStyle', 'placement']);
+    const omitAvatarProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'addon', 'addonClazz', 'addonStyle', 'offset', 'placement']);
 
     return (
         <div
