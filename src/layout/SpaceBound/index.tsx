@@ -21,6 +21,7 @@ import {type SpaceSize} from 'antd/es/space';
 import {css} from '@emotion/css';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import './index.less';
 
 
 export type SpaceBoundProps = SpaceProps & {
@@ -45,6 +46,13 @@ export type SpaceBoundProps = SpaceProps & {
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
+
+    /**
+     * @description Whether to match the width of parent element
+     * @description.zh-CN 是否匹配父节点的宽度
+     * @description.zh-TW 是否匹配父節點的寬度
+     */
+    widthBlock?: boolean;
 };
 
 
@@ -85,22 +93,21 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
         return 0;
     };
 
-    const [horizontalSize, verticalSize] = React.useMemo(
-        () =>
-            ((Array.isArray(size) ? size : [size, size]) as [SpaceSize, SpaceSize]).map(item =>
-                getNumericSize(item),
-            ),
-        [size],
-    );
+    const [horizontalSize, verticalSize] = React.useMemo(() => {
+        return ((Array.isArray(size) ? size : [size, size]) as [SpaceSize, SpaceSize]).map(item => getNumericSize(item));
+    }, [size]);
 
     const paddingClazz = css({
         padding: `${verticalSize}px ${horizontalSize}px`,
     });
 
-    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle']);
+    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'widthBlock']);
 
     return (
-        <div className={classNames(clazzPrefix, paddingClazz, props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), paddingClazz, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             <Space {...restProps}>
                 {props?.children}
             </Space>

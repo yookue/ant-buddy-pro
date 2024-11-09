@@ -16,14 +16,45 @@
 
 
 import React from 'react';
+import {Divider} from 'antd';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {SpaceBound} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
+    const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
+
     return (
-        <SpaceBound size='middle' containerStyle={{border: '1px solid #f5f2f0'}}>
-            <span>Here is the first child content.</span>
-            <span>Here is the second child content.</span>
-        </SpaceBound>
+        <>
+            <ProForm
+                name='SpaceBound_demo'
+                layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ProFormSwitch
+                    label='Width Block'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: widthBlock,
+                        onChange: setWidthBlock,
+                    }}
+                />
+            </ProForm>
+            <Divider/>
+            <SpaceBound
+                size='middle'
+                widthBlock={widthBlock}
+                containerStyle={{
+                    border: '1px solid #f5f2f0',
+                    borderRadius: '2px',
+                    backgroundColor: '#f5f5f5',
+                }}
+            >
+                <span>Here is the first child content.</span>
+                <span>Here is the second child content.</span>
+            </SpaceBound>
+        </>
     );
 }

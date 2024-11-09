@@ -22,7 +22,7 @@ import {ChronoTuple} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
-    const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
+    const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
 
     return (
         <>
@@ -32,17 +32,15 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProForm.Group>
-                    <ProFormSwitch
-                        label='Width Block'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: widthBlock,
-                            onChange: setWidthBlock,
-                        }}
-                    />
-                </ProForm.Group>
+                <ProFormSwitch
+                    label='Width Block'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: widthBlock,
+                        onChange: setWidthBlock,
+                    }}
+                />
                 <Divider/>
                 <ChronoTuple
                     digitProps={{
