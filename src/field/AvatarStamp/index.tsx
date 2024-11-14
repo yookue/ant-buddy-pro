@@ -22,7 +22,7 @@ import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type RectZenithPlace} from '@/type/declaration';
-import './index.less';
+import {useStyles} from './style';
 
 
 export type AvatarStampProps = AvatarProps & {
@@ -146,11 +146,12 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
         );
     };
 
+    const {styles: meshStyles, cx: meshClazz} = useStyles(clazzPrefix);
     const omitAvatarProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'addon', 'addonClazz', 'addonStyle', 'offset', 'placement']);
 
     return (
         <div
-            className={classNames(clazzPrefix, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
+            className={meshClazz(clazzPrefix, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, meshStyles, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Avatar {...omitAvatarProps}/>

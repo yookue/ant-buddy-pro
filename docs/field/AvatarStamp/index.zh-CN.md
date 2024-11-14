@@ -1,5 +1,6 @@
 ---
 toc: content
+atomId: AvatarStamp
 ---
 
 ## AvatarStamp

@@ -31,9 +31,6 @@ export default defineConfig({
         externals: {
             'react': 'React',
             'react-dom': 'ReactDOM',
-            'moment': 'moment',
-            'antd': 'antd',
-            'classnames': 'classNames',
         }
     },
     alias: {

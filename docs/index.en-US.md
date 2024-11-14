@@ -3,21 +3,20 @@ title: Ant Buddy Pro - Awesome components based on Ant Design ProComponents
 order: 1
 hero:
   title: Ant Buddy Pro
-  desc: 🏅 Awesome components based on React & Ant Design ProComponents ❤️
+  description: 🏅 Awesome components based on React & Ant Design ProComponents ❤️
   actions:
   - text: Getting Started
     link: /guide
 features:
-  - icon: ./assets/img/home/out-box-1.png
+  - emoji: 🪄
     title: Out of the box
-    desc: 🪄 Elegant default configurations assist developers to get started as simple as possible
-  - icon: ./assets/img/home/dev-code-1.png
+    description: Elegant default configurations assist developers to get started as simple as possible
+  - emoji: 💎
     title: More coming components
-    desc: 💎 React components compatible with Ant Design. More components are coming soon
-  - icon: ./assets/img/home/green-leaf-1.png
+    description: React components compatible with Ant Design. More components are coming soon
+  - emoji: 🎨
     title: Theme support
-    desc: 🎨 Theme capabilities, for customizing complete theme components, are up to you
-footer: Open-source MIT Licensed<br/>Copyright © 2023 Yookue Ltd. All rights reserved
+    description: Theme capabilities, for customizing complete theme components, are up to you
 ---
 
 ## Feedback

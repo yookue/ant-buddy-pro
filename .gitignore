@@ -5,9 +5,9 @@ node_modules
 coverage
 dist
 docs-dist
-src/.umi
-src/.umi-test
-src/.umi-production
+.dumi/tmp
+.dumi/tmp-test
+.dumi/tmp-production
 .idea
 .vscode
 npm-debug.log*

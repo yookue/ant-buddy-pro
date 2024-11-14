@@ -15,22 +15,20 @@
  */
 
 
-const ROOT_CONTEXT: string = '/ant-buddy-pro';
+import {createStyles} from 'antd-style';
 
 
-/**
- * Global variables
- *
- * @author David Hsing
- */
-export default {
-    organ: {
-        organTrademark: 'Yookue',
-        organUrl: 'https://yookue.com',
-    },
+export const useStyles = createStyles(({css, prefixCls}) => {
+    const prefix = `${prefixCls}-buddy-avatar-stamp`;
+    return css`
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
 
-    context: {
-        root: ROOT_CONTEXT,
-        assets: `${ROOT_CONTEXT}/assets`,
-    }
-}
+        .${prefix}-addon {
+            display: inline-block;
+            position: absolute;
+            overflow: hidden;
+        }
+    `;
+});
