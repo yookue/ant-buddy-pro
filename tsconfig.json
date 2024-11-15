@@ -12,14 +12,8 @@
         "skipLibCheck": true,
         "strict": true,
         "paths": {
-            "#": [
-                "."
-            ],
             "#/*": [
                 "./*"
-            ],
-            "@": [
-                "./src"
             ],
             "@/*": [
                 "./src/*"
@@ -29,7 +23,6 @@
             ],
             "@yookue/ant-buddy-pro/*": [
                 "./src/*",
-                "*"
             ],
             "@@/*": [
                 "./src/.umi/*"
@@ -38,8 +31,6 @@
     },
     "include": [
         "src/**/*",
-        ".umirc.ts",
-        ".dumi/**/*"
     ],
     "exclude": [
         "node_modules",

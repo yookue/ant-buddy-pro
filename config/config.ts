@@ -104,6 +104,13 @@ export default {
         // {src: 'https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/moment.min.js'},
         // {src: 'https://cdn.bootcdn.net/ajax/libs/antd/4.24.16/antd.min.js'},
     ],
+    styles: [
+        `
+        .__dumi-default-layout-hero {
+            background: url("${globalSettings.context?.assets}/img/home/hero-bg-1.svg") !important;
+        }
+        `,
+    ],
     extraBabelPlugins: [
         ['babel-plugin-import', {
             libraryName: 'antd',
@@ -125,18 +132,6 @@ export default {
             skipNodeModules: true,
         }
     },
-    // chainWebpack: function (config: any) {
-    //     config.merge({
-    //         compact: false,
-    //     });
-    // },
-    styles: [
-        `
-        .__dumi-default-layout-hero {
-            background: url("${globalSettings.context?.assets}/img/home/hero-bg-1.svg") !important;
-        }
-        `,
-    ],
     mode: 'site',
     exportStatic: {},
     fastRefresh: {},
@@ -144,4 +139,6 @@ export default {
     webpack5: {},
     mfsu: {},
     // ssr: {},
+    // chainWebpack: function (config: any) {
+    // },
 };
