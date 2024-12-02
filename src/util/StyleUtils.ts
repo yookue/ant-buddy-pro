@@ -128,7 +128,7 @@ export abstract class StyleUtils {
      *
      * @returns whether the given document is dark color
      */
-    public static isDarkness = (doc: Document = document): boolean => {
+    public static isDarkness(doc: Document = document): boolean {
         const html = doc.querySelector('html');
         if (!html) {
             return false;
@@ -159,7 +159,7 @@ export abstract class StyleUtils {
         groups.forEach(item => {
             const key = StringUtils.trim(StringUtils.substringBeforeLast(item, ':'));
             const value = StringUtils.trim(StringUtils.substringAfterLast(item, ':'));
-            if (key && value) {
+            if (key) {
                 ObjectUtils.setProp(result, key, value);
             }
         });

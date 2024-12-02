@@ -17,13 +17,11 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {type MenuTheme} from 'antd/es/menu/MenuContext';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {MenuTabs} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
-    const [menuTheme, setMenuTheme] = React.useState<MenuTheme>('light');
     const [inkBar, setInkBar] = React.useState<boolean>(true);
     const [selectionBold, setSelectionBold] = React.useState<boolean>(true);
 
@@ -36,17 +34,6 @@ export default () => {
                 submitter={false}
             >
                 <ProForm.Group>
-                    <ProFormSwitch
-                        label='菜單主題'
-                        checkedChildren='暗夜'
-                        unCheckedChildren='明亮'
-                        fieldProps={{
-                            checked: menuTheme === 'dark',
-                            onChange: (value) => {
-                                setMenuTheme(value ? 'dark' : 'light');
-                            }
-                        }}
-                    />
                     <ProFormSwitch
                         label='活躍指示條'
                         checkedChildren='是'
@@ -103,7 +90,6 @@ export default () => {
                         }
                     ],
                     defaultActiveKey: 'general',
-                    theme: menuTheme,
                 }}
                 containerStyle={{
                     minHeight: '300px',

@@ -26,13 +26,13 @@ import omit from 'rc-util/es/omit';
 import './index.less';
 
 
-export type MenuProps = Omit<AntMenuProps, 'items' | 'mode' | 'multiple' | 'selectable' | 'activeKey' | 'selectedKeys' | 'defaultSelectedKeys' | 'onDeselect'> & {
+export type MixinMenuProps = Omit<AntMenuProps, 'activeKey' | 'defaultSelectedKeys' | 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'onDeselect'> & {
     /**
      * @description The content of the menu
      * @description.zh-CN 菜单项数组
      * @description.zh-TW 菜單項數組
      */
-    items?: MenuItemProps[];
+    items?: MixinMenuItemProps[];
 
     /**
      * @description The default active key of the menu
@@ -43,7 +43,7 @@ export type MenuProps = Omit<AntMenuProps, 'items' | 'mode' | 'multiple' | 'sele
 };
 
 
-export type MenuItemProps = AntMenuItemType & {
+export type MixinMenuItemProps = AntMenuItemType & {
     /**
      * @description The content of the menu item
      * @description.zh-CN 菜单项对应的内容
@@ -101,7 +101,7 @@ export type MenuTabsProps = {
      * @description.zh-CN 菜单属性
      * @description.zh-TW 菜單屬性
      */
-    menuProps?: MenuProps;
+    menuProps?: MixinMenuProps;
 
     /**
      * @description The CSS class name of the container div
@@ -253,7 +253,6 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const themeClazz = (props?.menuProps?.theme === 'dark') ? `${clazzPrefix}-dark` : `${clazzPrefix}-light`;
     const [activeKey, setActiveKey] = React.useState<string | undefined>(props?.menuProps?.defaultActiveKey);
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
 
@@ -316,14 +315,14 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     };
 
     const omitMenuItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
-    const restMenuProps = !props?.menuProps ? {} : omit(props?.menuProps, ['items', 'defaultActiveKey', 'onClick']);
+    const restMenuProps = !props?.menuProps ? {} : omit(props?.menuProps, ['defaultActiveKey', 'items', 'onClick']);
     const entryWidthClazz = entryWidth ? css({width: entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
     const omitEntryStyle = props?.entryStyle ? omit(props?.entryStyle, ['width']) : undefined;
 
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, themeClazz, props?.containerClazz)}
+            className={classNames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <div
