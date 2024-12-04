@@ -21,6 +21,7 @@ import {FireOutlined, StopOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {DelayModal, ConsoleUtils, type DelayModalRef} from '@yookue/ant-buddy-pro';
 import {type ModalActionType} from '@yookue/ant-buddy-pro/field/DelayModal';
+import {RandomUtils} from '@yookue/ts-lang-utils';
 
 
 export default () => {
@@ -118,7 +119,7 @@ export default () => {
                 timeout={1000 * 10}
                 modalProps={{
                     title: 'DelayModal',
-                    children: 'Oops! This is a message from modalProps',
+                    children: `Oops! This is a message from modalProps. ${RandomUtils.randomString(6)}`,
                     closable: false,
                     maskClosable: false,
                     okText: 'OK',
@@ -126,7 +127,7 @@ export default () => {
                 }}
                 modalFunProps={{
                     title: 'DelayModal',
-                    content: 'Oops! This is a message from modalFunProps',
+                    content: `Oops! This is a message from modalFunProps. ${RandomUtils.randomString(6)}`,
                     closable: false,
                     maskClosable: false,
                     okText: 'OK',
