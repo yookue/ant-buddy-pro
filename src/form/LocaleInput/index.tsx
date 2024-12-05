@@ -165,16 +165,16 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
 
     /**
      * @description Whether the dropdown div is default open or not
-     * @description.zh-CN 下拉弹出层是否默认展开
-     * @description.zh-TW 下拉彈出層是否默認展開
+     * @description.zh-CN 弹出层是否默认展开
+     * @description.zh-TW 彈出層是否默認展開
      * @default false
      */
     defaultOpen?: boolean;
 
     /**
      * @description The properties of the dropdown div
-     * @description.zh-CN 下拉弹出层的属性
-     * @description.zh-TW 下拉彈出層的屬性
+     * @description.zh-CN 弹出层的属性
+     * @description.zh-TW 彈出層的屬性
      */
     dropdownProps?: Omit<DropdownProps, 'menu' | 'open'>;
 
@@ -665,10 +665,11 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     };
 
     const entryImmutable = editContext.mode === 'read' || props?.disabled || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.readonly || props?.proFieldProps?.readonly;
-    const omitDropdownProps = !props?.dropdownProps ? {} : omit(props?.dropdownProps, ['getPopupContainer', 'overlayClassName', 'onOpenChange']);
+    const omitDropdownProps = !props?.dropdownProps ? {} : omit(props?.dropdownProps, ['className', 'getPopupContainer', 'overlayClassName', 'onOpenChange']);
 
     return (
         <Dropdown
+            className={classNames(`${clazzPrefix}-trigger`, props?.dropdownProps?.className)}
             menu={{
                 items: buildMenuItems(),
                 onClick: () => setMenuOpen(true),
@@ -677,7 +678,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 const container = props?.dropdownProps?.getPopupContainer?.(trigger);
                 return container || trigger?.parentElement || document.body;
             }}
-            overlayClassName={classNames(`${clazzPrefix}-dropdown`, `${clazzPrefix}-dropdown-${fieldId}`, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.dropdownProps?.overlayClassName)}
+            overlayClassName={classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.dropdownProps?.overlayClassName)}
             open={menuOpen}
             onOpenChange={(open: boolean) => {
                 if (!open && compositionRef.current) {
