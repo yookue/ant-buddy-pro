@@ -125,26 +125,4 @@
             transform: scale(1.5);
         }
     }
-
-    /* Override Styles */
-
-    > .@{ant-prefix}-dropdown-menu {
-        padding: 0;
-
-        > .@{ant-prefix}-dropdown-menu-item {
-            cursor: default;
-            padding-left: 0;
-            padding-right: 0;
-
-            &:hover {
-                background-color: @popover-background;
-            }
-        }
-    }
-
-    &.@{ant-prefix}-dropdown-placement-bottom .@{ant-prefix}-dropdown-menu-root,
-    &.@{ant-prefix}-dropdown-placement-bottomLeft .@{ant-prefix}-dropdown-menu-root,
-    &.@{ant-prefix}-dropdown-placement-bottomRight .@{ant-prefix}-dropdown-menu-root {
-        margin-top: -@form-item-margin-bottom;
-    }
 }
