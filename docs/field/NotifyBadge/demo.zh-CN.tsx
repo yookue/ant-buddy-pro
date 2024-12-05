@@ -119,10 +119,7 @@ export default () => {
                     ConsoleUtils.logTimestamp(false, false, 'NotifyBadge', '标签页切换到 ' + activeKey);
                 }
             }}
-            localeProps={{
-                clear: '清除',
-                more: '更多',
-            }}
+            locale='zh_CN'
         />
     );
 }

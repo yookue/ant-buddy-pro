@@ -65,10 +65,7 @@ export default () => {
                     }}
                     onTimerBegin={() => setTiming(true)}
                     onTimerEnd={() => setTiming(false)}
-                    localeProps={{
-                        'generate': 'Get Captcha',
-                        'resend': 'Resend',
-                    }}
+                    locale='en_US'
                 />
                 <Divider/>
                 <ProForm.Group>

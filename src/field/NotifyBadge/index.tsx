@@ -261,6 +261,13 @@ export type NotifyBadgeProps = {
     tabsProps?: MixinTabsProps;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -285,6 +292,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
     const {
         badgeContent = <BellOutlined style={{cursor: 'pointer'}}/>,
         dropdownEnabled = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     const badgeDom = (
@@ -315,7 +323,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
         if (tab.presetStyle !== 'notice' && tab.presetStyle !== 'task') {
             return undefined;
         }
-        const label = intlLocales.get([intlType.locale, tab.presetStyle]) ?? intlLocales.get(['en_US', tab.presetStyle]);
+        const label = intlLocales.get([locale, tab.presetStyle]) ?? intlLocales.get(['en_US', tab.presetStyle]);
         return !tab.labelBadgeProps ? label : (
             <Badge count={unreadCount} {...omitProps}>
                 {label}
@@ -389,7 +397,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onClear?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.clear || intlLocales.get([intlType.locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
+                            {props?.localeProps?.clear || intlLocales.get([locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
                         </div>
                     </If>
                     <If condition={showMore} validation={false}>
@@ -397,7 +405,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onMore?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.more || intlLocales.get([intlType.locale, 'more']) || intlLocales.get(['en_US', 'more'])}
+                            {props?.localeProps?.more || intlLocales.get([locale, 'more']) || intlLocales.get(['en_US', 'more'])}
                         </div>
                     </If>
                 </div>

@@ -188,6 +188,13 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     onToggle?: (checked?: boolean, count?: number) => boolean | number | void | Promise<boolean | number | void>;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -216,6 +223,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
         count = 0,
         showCount = true,
         showZero = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     ConsoleUtils.warn(count >= 0, true, 'ThumbToggle', `Prop 'count' must be equal or greater than 0`);
@@ -307,11 +315,11 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     const detectIconTooltip = () => {
         switch (actionType) {
             case 'like':
-                return props?.localeProps?.like || intlLocales.get([intlType.locale, 'like']) || intlLocales.get(['en_US', 'like']);
+                return props?.localeProps?.like || intlLocales.get([locale, 'like']) || intlLocales.get(['en_US', 'like']);
             case 'dislike':
-                return props?.localeProps?.dislike || intlLocales.get([intlType.locale, 'dislike']) || intlLocales.get(['en_US', 'dislike']);
+                return props?.localeProps?.dislike || intlLocales.get([locale, 'dislike']) || intlLocales.get(['en_US', 'dislike']);
             case 'favorite':
-                return props?.localeProps?.favorite || intlLocales.get([intlType.locale, 'favorite']) || intlLocales.get(['en_US', 'favorite']);
+                return props?.localeProps?.favorite || intlLocales.get([locale, 'favorite']) || intlLocales.get(['en_US', 'favorite']);
             default:
                 return undefined;
         }

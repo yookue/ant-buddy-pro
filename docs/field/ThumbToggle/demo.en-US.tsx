@@ -117,11 +117,7 @@ export default () => {
                     ConsoleUtils.logTimestamp(false, false, 'ThumbToggle', 'onToggle returns true to allow changing count');
                     return true;
                 }}
-                localeProps={{
-                    like: 'Like',
-                    dislike: 'Dislike',
-                    favorite: 'Favorite',
-                }}
+                locale='en_US'
             />
         </>
     );

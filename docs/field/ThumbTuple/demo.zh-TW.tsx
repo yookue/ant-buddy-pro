@@ -54,18 +54,12 @@ export default () => {
                 thumbLikeProps={{
                     checkable: true,
                     tooltipCtrl: true,
-                    localeProps: {
-                        like: '喜歡',
-                        dislike: '不喜歡',
-                    }
+                    locale: 'zh_TW',
                 }}
                 thumbDislikeProps={{
                     checkable: true,
                     tooltipCtrl: true,
-                    localeProps: {
-                        like: '喜歡',
-                        dislike: '不喜歡',
-                    }
+                    locale: 'zh_TW',
                 }}
             />
         </>

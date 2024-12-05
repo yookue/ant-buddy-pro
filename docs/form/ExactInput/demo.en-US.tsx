@@ -49,9 +49,7 @@ export default () => {
                         addonBefore: 'Prefix',
                     }}
                     tooltipCtrl={tooltipCtrl}
-                    localeProps={{
-                        exactMatch: 'Match Exactly',
-                    }}
+                    locale='en_US'
                 />
             </ProForm>
         </>

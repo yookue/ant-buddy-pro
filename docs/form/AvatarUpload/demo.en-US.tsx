@@ -128,16 +128,10 @@ export default () => {
                     tooltipProps={{
                         title: 'User Avatar',
                     }}
-                    localeProps={{
-                        'upload': 'Upload',
-                        'allowTypes': 'Only allowed {} files',
-                        'disallowType': 'File type is disallowed',
-                        'cropModalTitle': 'Avatar Crop',
-                        'maxFileSize': 'File size cant not be greater than {}{}',
-                    }}
                     onImageSrcChange={() => {
                         ConsoleUtils.logTimestamp(false, false, 'AvatarUpload', 'Image source changed');
                     }}
+                    locale='en_US'
                 />
             </ProForm>
         </>

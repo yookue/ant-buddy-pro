@@ -32,17 +32,7 @@ export default () => {
                 <ChronoSelect
                     name='foobar'
                     placeholder='请选择此项'
-                    localeProps={{
-                        millis: '毫秒',
-                        seconds: '秒',
-                        minutes: '分',
-                        hours: '小时',
-                        days: '天',
-                        weeks: '周',
-                        months: '月',
-                        years: '年',
-                        forever: '永久',
-                    }}
+                    locale='zh_CN'
                 />
             </ProForm>
         </>

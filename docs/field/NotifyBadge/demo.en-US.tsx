@@ -119,10 +119,7 @@ export default () => {
                     ConsoleUtils.logTimestamp(false, false, 'NotifyBadge', 'Tabs switched to ' + activeKey);
                 }
             }}
-            localeProps={{
-                clear: 'Clear',
-                more: 'More',
-            }}
+            locale='en_US'
         />
     );
 }

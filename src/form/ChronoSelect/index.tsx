@@ -120,13 +120,6 @@ export type ChronoSelectProps = ProFormSelectProps & {
     unitTypes?: ChronoUintType[];
 
     /**
-     * @description The props of locale
-     * @description.zh-CN 多语言属性
-     * @description.zh-TW 多語言屬性
-     */
-    localeProps?: IntlLocaleProps;
-
-    /**
      * @description Whether to use ProFormField instead of Antd
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
@@ -140,6 +133,20 @@ export type ChronoSelectProps = ProFormSelectProps & {
      * @description.zh-TW 預設樣式
      */
     presetStyle?: ChronoPresetStyle;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
+     * @description The props of locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 };
 
 
@@ -159,13 +166,14 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
     const {
         unitTypes = ['millis', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'],
         proField = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     const optionItems: LabeledValue[] = [];
     if (unitTypes) {
         unitTypes.forEach(item => {
             optionItems.push({
-                label: ObjectUtils.getProp(props?.localeProps, item) || intlLocales.get([intlType.locale, item]) || intlLocales.get(['en_US', item]),
+                label: ObjectUtils.getProp(props?.localeProps, item) || intlLocales.get([locale, item]) || intlLocales.get(['en_US', item]),
                 value: item,
             });
         });
@@ -173,7 +181,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options']);
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'localeProps', 'proField', 'presetStyle']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'unitTypes', 'proField', 'locale', 'localeProps', 'presetStyle']);
         return (
             <ProFormSelect
                 {...restProps}

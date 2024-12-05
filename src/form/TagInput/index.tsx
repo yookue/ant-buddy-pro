@@ -189,18 +189,25 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps
     proField?: boolean;
 
     /**
-     * @description The props of locale
-     * @description.zh-CN 多语言属性
-     * @description.zh-TW 多語言屬性
-     */
-    localeProps?: IntlLocaleProps;
-
-    /**
      * @description The callback function when the tag contents changed
      * @description.zh-CN 标签内容变化时的回调函数
      * @description.zh-TW 標簽内容變化時的回調函數
      */
     onTagContentsChange?: (contents?: (string | number)[]) => void;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
+     * @description The props of locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 } & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
 
 
@@ -226,6 +233,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         tweenOneAnim = true,
         warnDuplicate = true,
         proField = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
@@ -406,7 +414,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 setTagContents(contents);
             } else {
                 if (warnDuplicate && !proField) {
-                    messageApi.warn(props?.localeProps?.duplicateTag || intlLocales.get([intlType.locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
+                    messageApi.warn(props?.localeProps?.duplicateTag || intlLocales.get([locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
                 }
             }
         }
@@ -466,7 +474,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                         if (tagContents?.indexOf(value) === -1 && (valueInteger === undefined || tagContents?.indexOf(valueInteger) === -1)) {
                                             return Promise.resolve();
                                         }
-                                        return Promise.reject(props?.localeProps?.duplicateTag || intlLocales.get([intlType.locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
+                                        return Promise.reject(props?.localeProps?.duplicateTag || intlLocales.get([locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
                                     }
                                 }
                             ]}

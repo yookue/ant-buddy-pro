@@ -45,6 +45,7 @@ export default () => {
                         disabled: true,
                     }}
                     proField={false}
+                    locale='zh_TW'
                     switchQuickTags={[
                         'en-US',
                         'zh-CN',
@@ -53,9 +54,6 @@ export default () => {
                     switchProField={false}
                     switchShareProps={{
                         placeholder: '請輸入此字段',
-                    }}
-                    localeProps={{
-                        default: '默認',
                     }}
                 />
                 <Divider/>

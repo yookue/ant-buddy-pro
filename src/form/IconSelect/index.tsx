@@ -242,13 +242,6 @@ export type IconSelectProps = SelectFieldProps & {
     optionIconStyle?: React.CSSProperties;
 
     /**
-     * @description The props of locale
-     * @description.zh-CN 多语言属性
-     * @description.zh-TW 多語言屬性
-     */
-    localeProps?: IntlLocaleProps;
-
-    /**
      * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
@@ -262,6 +255,20 @@ export type IconSelectProps = SelectFieldProps & {
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: Omit<TooltipProps, 'title'>;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
+     * @description The props of locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 };
 
 
@@ -294,6 +301,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         sceneInkBar = true,
         sceneEntryWidth = '150px',
         tooltipCtrl = false,
+        locale = intlType.locale,
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
@@ -331,8 +339,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     return;
                 }
                 if (optionGroup) {
-                    const themeTitle = ObjectUtils.getProp(props?.localeProps, `${themeType}Theme`) || intlLocales.get([intlType.locale, `${themeType}Theme`]) || intlLocales.get(['en_US', `${themeType}Theme`]);
-                    const sceneTitle = ObjectUtils.getProp(props?.localeProps, `${sceneType}Scene`) || intlLocales.get([intlType.locale, `${sceneType}Scene`]) || intlLocales.get(['en_US', `${sceneType}Scene`]);
+                    const themeTitle = ObjectUtils.getProp(props?.localeProps, `${themeType}Theme`) || intlLocales.get([locale, `${themeType}Theme`]) || intlLocales.get(['en_US', `${themeType}Theme`]);
+                    const sceneTitle = ObjectUtils.getProp(props?.localeProps, `${sceneType}Scene`) || intlLocales.get([locale, `${sceneType}Scene`]) || intlLocales.get(['en_US', `${sceneType}Scene`]);
                     const optGroup = {
                         optionType: 'optGroup',
                         children: children,
@@ -561,7 +569,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             return ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => sceneTypes?.includes(item as IconSceneType)).map(item => {
                 return {
                     key: item,
-                    label: ObjectUtils.getProp(props?.localeProps, `${item}Scene`) || intlLocales.get([intlType.locale, `${item}Scene`]) || intlLocales.get(['en_US', `${item}Scene`]),
+                    label: ObjectUtils.getProp(props?.localeProps, `${item}Scene`) || intlLocales.get([locale, `${item}Scene`]) || intlLocales.get(['en_US', `${item}Scene`]),
                     content: wrapIconOptions(buildIconOptions(themeType, item as IconSceneType)),
                 };
             });
@@ -627,7 +635,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const themeItems = ['outlined', 'filled', 'twotone'].filter(item => themeTypes?.includes(item as IconThemeType)).map(item => {
         return {
             key: item,
-            label: ObjectUtils.getProp(props?.localeProps, `${item}Theme`) || intlLocales.get([intlType.locale, `${item}Theme`]) || intlLocales.get(['en_US', `${item}Theme`]),
+            label: ObjectUtils.getProp(props?.localeProps, `${item}Theme`) || intlLocales.get([locale, `${item}Theme`]) || intlLocales.get(['en_US', `${item}Theme`]),
             children: buildThemeTabs(item as IconThemeType),
         };
     });
@@ -662,7 +670,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         tabBarExtraContent: (props?.fieldProps?.showSearch === false) ? undefined : (
                             <Input.Search
                                 ref={searchRef}
-                                placeholder={props?.localeProps?.search || intlLocales.get([intlType.locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
+                                placeholder={props?.localeProps?.search || intlLocales.get([locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
                                 allowClear={true}
                                 size='small'
                                 disabled={searchDisabled}
@@ -704,7 +712,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'virtual', 'open', 'popupClassName', 'showSearch', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'localeProps', 'tooltipCtrl', 'tooltipProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
         return (
             <ProFormSelect
                 {...restProps}

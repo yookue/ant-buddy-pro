@@ -20,7 +20,7 @@ import {TagInput} from '@yookue/ant-buddy-pro';
 
 #### Initialize With Form
 
-<code src="./demo-2.tsx"></code>
+<code src="./demo-2.en-US.tsx"></code>
 
 ### Properties
 

@@ -47,6 +47,7 @@ export default () => {
                             message: 'Please input demo field',
                         },
                     ]}
+                    locale='en_US'
                     switchQuickTags={[
                         'en-US',
                         'zh-CN',
@@ -62,9 +63,6 @@ export default () => {
                                 message: 'The value length must between 2 and 60',
                             }
                         ]
-                    }}
-                    localeProps={{
-                        default: 'Default',
                     }}
                 />
             </ProForm>

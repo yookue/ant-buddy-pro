@@ -39,6 +39,7 @@ export default () => {
                 <TagInput
                     name='foobar'
                     valuePropName='fulfilTagItems'
+                    locale='zh_CN'
                 />
             </ProForm>
         </>

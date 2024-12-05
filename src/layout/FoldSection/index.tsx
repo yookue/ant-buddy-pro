@@ -214,6 +214,13 @@ export type FoldSectionProps = React.PropsWithChildren<{
     presetStyle?: SectionPresetStyle;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -245,6 +252,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         panelDestroyOnClose = false,
         panelPlaceholder = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>,
         presetStyle = 'default',
+        locale = intlType.locale,
     } = props ?? {};
 
     const [panelOpen, setPanelOpen] = React.useState<boolean>(defaultOpen);
@@ -264,8 +272,8 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         if ((!headerCollapse && !headerExpand) || !headerCollapsePos) {
             return undefined;
         }
-        const collapse = props?.localeProps?.collapse || intlLocales.get([intlType.locale, 'collapse']) || intlLocales.get(['en_US', 'collapse']);
-        const expend = props?.localeProps?.expend || intlLocales.get([intlType.locale, 'expend']) || intlLocales.get(['en_US', 'expend']);
+        const collapse = props?.localeProps?.collapse || intlLocales.get([locale, 'collapse']) || intlLocales.get(['en_US', 'collapse']);
+        const expend = props?.localeProps?.expend || intlLocales.get([locale, 'expend']) || intlLocales.get(['en_US', 'expend']);
         const innerDom = (
             <span
                 className={`${clazzPrefix}-header-collapse-${headerCollapsePos}`}

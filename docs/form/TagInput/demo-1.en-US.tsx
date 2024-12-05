@@ -127,6 +127,7 @@ export default () => {
                     onTagContentsChange={(contents: any) => {
                         ConsoleUtils.logTimestamp(false, false, 'TagInput', 'onTagContentsChange contents = ' + JSON.stringify(contents));
                     }}
+                    locale='en_US'
                 />
             </ProForm>
         </>

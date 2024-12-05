@@ -44,6 +44,7 @@ export default () => {
                     fieldProps={{
                         disabled: true,
                     }}
+                    locale='zh_TW'
                     popupTagPos='after'
                     popupQuickTags={[
                         'en-US',
@@ -53,11 +54,6 @@ export default () => {
                     popupProField={false}
                     popupShareProps={{
                         placeholder: '請輸入此字段',
-                    }}
-                    popupConfirmProps={{
-                        message: '設為默認嗎？',
-                        ok: '是',
-                        cancel: '否',
                     }}
                 />
             </ProForm>

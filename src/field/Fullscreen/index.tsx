@@ -103,6 +103,13 @@ export type FullscreenProps = {
     tooltipProps?: Omit<TooltipProps, 'title'>;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -128,6 +135,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     // Initialize the default props
     const {
         triggerFor = document.documentElement,
+        locale = intlType.locale,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
@@ -199,8 +207,8 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     };
 
     const buildIconDom = () => {
-        const requestFullscreen = props?.localeProps?.requestFullscreen || intlLocales.get([intlType.locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
-        const exitFullscreen = props?.localeProps?.exitFullscreen || intlLocales.get([intlType.locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
+        const requestFullscreen = props?.localeProps?.requestFullscreen || intlLocales.get([locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
+        const exitFullscreen = props?.localeProps?.exitFullscreen || intlLocales.get([locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
         const innerDom = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
             onClick: handleToggleScreen,
         });

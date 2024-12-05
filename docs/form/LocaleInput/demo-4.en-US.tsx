@@ -44,6 +44,7 @@ export default () => {
                     fieldProps={{
                         disabled: true,
                     }}
+                    locale='en_US'
                     popupTagPos='after'
                     popupQuickTags={[
                         'en-US',
@@ -53,11 +54,6 @@ export default () => {
                     popupProField={false}
                     popupShareProps={{
                         placeholder: 'Please input this field',
-                    }}
-                    popupConfirmProps={{
-                        message: 'Set as default?',
-                        ok: 'Yes',
-                        cancel: 'No',
                     }}
                 />
             </ProForm>

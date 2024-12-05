@@ -47,6 +47,7 @@ export default () => {
                             message: '請輸入示例字段',
                         },
                     ]}
+                    locale='zh_TW'
                     switchQuickTags={[
                         'en-US',
                         'zh-CN',
@@ -62,9 +63,6 @@ export default () => {
                                 message: '示例字段的長度必須在 2~60 之間',
                             }
                         ]
-                    }}
-                    localeProps={{
-                        default: '默認',
                     }}
                 />
             </ProForm>

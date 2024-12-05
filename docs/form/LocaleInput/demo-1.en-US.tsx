@@ -47,6 +47,7 @@ export default () => {
                             message: 'Please input demo field',
                         },
                     ]}
+                    locale='en_US'
                     popupInputProps={[
                         {
                             tag: 'en-US',
@@ -74,11 +75,6 @@ export default () => {
                                 message: 'The value length must between 2 and 60',
                             }
                         ]
-                    }}
-                    popupConfirmProps={{
-                        message: 'Set as default?',
-                        ok: 'Yes',
-                        cancel: 'No',
                     }}
                 />
             </ProForm>

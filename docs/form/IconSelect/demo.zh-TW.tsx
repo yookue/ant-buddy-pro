@@ -111,18 +111,7 @@ export default () => {
                         }
                     }}
                     tooltipCtrl={tooltipCtrl}
-                    localeProps={{
-                        search: '搜索',
-                        outlined: '線框風格',
-                        filled: '實底風格',
-                        twotone: '雙色風格',
-                        direction: '方向類',
-                        suggestion: '建議類',
-                        editor: '編輯類',
-                        data: '數據類',
-                        logo: '品牌類',
-                        web: '網站類',
-                    }}
+                    locale='zh_TW'
                 />
             </ProForm>
         </>

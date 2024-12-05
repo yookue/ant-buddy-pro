@@ -162,6 +162,13 @@ export type LocaleTextareaProps = ProFormFieldItemProps<TextAreaProps, TextAreaR
     proField?: boolean;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -223,6 +230,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
     const {
         multilingual = true,
         proField = true,
+        locale = intlType.locale,
         switchCloneProps = {
             placeholder: true,
             allowClear: true,
@@ -240,7 +248,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
     const buildEntryDom = () => {
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className']);
         if (proField) {
-            const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabsProps', 'multilingual', 'proField', 'localeProps', 'switchTextareaProps', 'switchQuickTags', 'switchShareProps', 'switchCloneProps', 'switchProField']);
+            const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabsProps', 'multilingual', 'proField', 'locale', 'localeProps', 'switchTextareaProps', 'switchQuickTags', 'switchShareProps', 'switchCloneProps', 'switchProField']);
             return (
                 <ProFormTextArea
                     {...restProps}
@@ -412,7 +420,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                 items={[
                     {
                         key: 'default',
-                        label: props?.localeProps?.default || intlLocales.get([intlType.locale, 'default']) || intlLocales.get(['en_US', 'default']),
+                        label: props?.localeProps?.default || intlLocales.get([locale, 'default']) || intlLocales.get(['en_US', 'default']),
                         children: buildEntryDom(),
                     },
                     ...buildSwitchItems(),

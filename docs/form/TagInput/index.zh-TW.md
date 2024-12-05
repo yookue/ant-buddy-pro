@@ -20,7 +20,7 @@ import {TagInput} from '@yookue/ant-buddy-pro';
 
 #### 使用表單初始化
 
-<code src="./demo-2.tsx"></code>
+<code src="./demo-2.zh-TW.tsx"></code>
 
 ### 組件屬性
 

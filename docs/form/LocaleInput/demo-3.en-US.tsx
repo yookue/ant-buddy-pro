@@ -41,13 +41,14 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='Demo Field With Validation'
-                    popupAddonPos='before'
                     rules={[
                         {
                             required: true,
                             message: 'Please input demo field',
                         },
                     ]}
+                    locale='en_US'
+                    popupAddonPos='before'
                     popupQuickTags={[
                         'en-US',
                         'zh-CN',
@@ -63,11 +64,6 @@ export default () => {
                                 message: 'The value length must between 2 and 60',
                             }
                         ]
-                    }}
-                    popupConfirmProps={{
-                        message: 'Set as default?',
-                        ok: 'Yes',
-                        cancel: 'No',
                     }}
                 />
             </ProForm>

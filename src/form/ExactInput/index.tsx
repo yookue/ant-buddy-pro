@@ -128,6 +128,13 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     proField?: boolean;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -157,6 +164,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             idSuffix: 'Exact',
         },
         proField = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     const generateCheckName = () => {
@@ -209,7 +217,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 </If>
                 <If condition={(before && addonPos === 'before') || (!before && addonPos === 'after')} validation={false}>
                     {TooltipRender.renderTooltip(props?.tooltipCtrl, {
-                        title: props?.localeProps?.exactMatch || intlLocales.get([intlType.locale, 'exactMatch']) || intlLocales.get(['en_US', 'exactMatch']),
+                        title: props?.localeProps?.exactMatch || intlLocales.get([locale, 'exactMatch']) || intlLocales.get(['en_US', 'exactMatch']),
                         ...props?.tooltipProps,
                     }, innerDom)}
                 </If>
@@ -229,7 +237,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'tooltipCtrl', 'tooltipProps', 'proField']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'tooltipCtrl', 'tooltipProps', 'proField', 'locale', 'localeProps']);
         return (
             <ProFormText
                 {...restProps}

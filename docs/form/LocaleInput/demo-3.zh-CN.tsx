@@ -41,13 +41,14 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='示例字段-带校验'
-                    popupAddonPos='before'
                     rules={[
                         {
                             required: true,
                             message: '请输入示例字段',
                         },
                     ]}
+                    locale='zh_CN'
+                    popupAddonPos='before'
                     popupQuickTags={[
                         'en-US',
                         'zh-CN',
@@ -63,11 +64,6 @@ export default () => {
                                 message: '示例字段的长度必须在 2~60 之间',
                             }
                         ]
-                    }}
-                    popupConfirmProps={{
-                        message: '设为默认吗？',
-                        ok: '是',
-                        cancel: '否',
                     }}
                 />
             </ProForm>

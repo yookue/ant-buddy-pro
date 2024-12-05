@@ -49,9 +49,7 @@ export default () => {
                         addonBefore: '前缀',
                     }}
                     tooltipCtrl={tooltipCtrl}
-                    localeProps={{
-                        exactMatch: '全字匹配',
-                    }}
+                    locale='zh_CN'
                 />
             </ProForm>
         </>

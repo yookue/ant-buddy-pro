@@ -65,10 +65,7 @@ export default () => {
                     }}
                     onTimerBegin={() => setTiming(true)}
                     onTimerEnd={() => setTiming(false)}
-                    localeProps={{
-                        'generate': '获取验证码',
-                        'resend': '重新发送',
-                    }}
+                    locale='zh_CN'
                 />
                 <Divider/>
                 <ProForm.Group>

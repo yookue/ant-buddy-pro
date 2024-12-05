@@ -16,39 +16,29 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ExactInput} from '@yookue/ant-buddy-pro';
+import {ProForm} from '@ant-design/pro-form';
+import {TagInput} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
-    const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
-
     return (
         <>
             <ProForm
-                name='ExactInput_demo'
+                name='TagInput_demo2'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
+                initialValues={{
+                    foobar: [
+                        'ant',
+                        'buddy',
+                        'pro',
+                    ]
+                }}
             >
-                <ProFormSwitch
-                    label='Tooltip 控件'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: tooltipCtrl,
-                        onChange: setTooltipCtrl,
-                    }}
-                />
-                <Divider/>
-                <ExactInput
+                <TagInput
                     name='foobar'
-                    placeholder='請輸入此項'
-                    fieldProps={{
-                        addonBefore: '前綴',
-                    }}
-                    tooltipCtrl={tooltipCtrl}
+                    valuePropName='fulfilTagItems'
                     locale='zh_TW'
                 />
             </ProForm>

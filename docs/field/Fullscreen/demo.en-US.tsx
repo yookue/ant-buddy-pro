@@ -45,10 +45,7 @@ export default () => {
             <Divider/>
             <Fullscreen
                 tooltipCtrl={tooltipCtrl}
-                localeProps={{
-                    requestFullscreen: 'Fullscreen',
-                    exitFullscreen: 'Exit Fullscreen',
-                }}
+                locale='en_US'
             />
         </>
     );

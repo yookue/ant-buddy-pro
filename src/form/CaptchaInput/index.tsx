@@ -120,6 +120,13 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'fieldRef' | 'onGetCap
     onTimerEnd?: () => void;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -148,12 +155,13 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     // Initialize the default props
     const {
         captchaTextRender = (timing: boolean, count: number) => {
-            const generate = props?.localeProps?.generate || intlLocales.get([intlType.locale, 'generate']) || intlLocales.get(['en_US', 'generate']);
-            const resend = props?.localeProps?.resend || intlLocales.get([intlType.locale, 'resend']) || intlLocales.get(['en_US', 'resend']);
+            const generate = props?.localeProps?.generate || intlLocales.get([locale, 'generate']) || intlLocales.get(['en_US', 'generate']);
+            const resend = props?.localeProps?.resend || intlLocales.get([locale, 'resend']) || intlLocales.get(['en_US', 'resend']);
             return (timing && count > 0) ? `${resend}(${count})` : generate;
         },
         countDown = 59,
         timerInterval = 1000,
+        locale = intlType.locale,
     } = props ?? {};
 
     ConsoleUtils.warn(countDown > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'countDown' must be greater than 0`);

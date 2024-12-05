@@ -230,13 +230,6 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldP
     tooltipProps?: TooltipProps;
 
     /**
-     * @description The props of locale
-     * @description.zh-CN 多语言属性
-     * @description.zh-TW 多語言屬性
-     */
-    localeProps?: IntlLocaleProps;
-
-    /**
      * @description The callback function when the image source changed
      * @description.zh-CN 图片源变化时的回调函数
      * @description.zh-TW 圖片源變化時的回調函數
@@ -249,6 +242,20 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldP
      * @description.zh-TW 備用圖片源變化時的回調函數
      */
     onFallbackSrcChange?: (src?: string) => void;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
+     * @description The props of locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 } & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
 
 
@@ -272,6 +279,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         shape = 'circle',
         cropEnabled = true,
         uploadEnabled = false,
+        locale = intlType.locale,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
@@ -309,9 +317,9 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     const handleBeforeUpload = (file: RcFile, fileList: RcFile[]) => {
         if (props?.uploadProps?.allowedFileTypes && !props.uploadProps.allowedFileTypes.some(item => file.type === item)) {
             if (!props?.uploadProps?.warnWithTypes) {
-                messageApi.error(props?.localeProps?.disallowType || intlLocales.get([intlType.locale, 'disallowType']) || intlLocales.get(['en_US', 'disallowType']));
+                messageApi.error(props?.localeProps?.disallowType || intlLocales.get([locale, 'disallowType']) || intlLocales.get(['en_US', 'disallowType']));
             } else {
-                const template = props?.localeProps?.allowTypes || intlLocales.get([intlType.locale, 'allowTypes']) || intlLocales.get(['en_US', 'allowTypes']);
+                const template = props?.localeProps?.allowTypes || intlLocales.get([locale, 'allowTypes']) || intlLocales.get(['en_US', 'allowTypes']);
                 const types = StringUtils.joinWith(props.uploadProps.allowedFileTypes.map(item => (item === 'image/jpeg') ? 'jpg' : StringUtils.substringAfterLast(item, '/')) as string[], '/');
                 messageApi.error(StringUtils.formatBrace(template, types));
             }
@@ -334,7 +342,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             }
             // @ts-ignore
             if (fileSize > props.uploadProps.maxFileSize) {
-                const template = props?.localeProps?.maxFileSize || intlLocales.get([intlType.locale, 'maxFileSize']) || intlLocales.get(['en_US', 'maxFileSize']);
+                const template = props?.localeProps?.maxFileSize || intlLocales.get([locale, 'maxFileSize']) || intlLocales.get(['en_US', 'maxFileSize']);
                 messageApi.error(StringUtils.formatBrace(template, props.uploadProps.maxFileSize, props.uploadProps.fileSizeUint));
                 return false;
             }
@@ -397,7 +405,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         const innerDom = (
             <Space className={`${clazzPrefix}-upload-space`} size={4}>
                 {loading ? <LoadingOutlined/> : <PlusOutlined/>}
-                {props?.localeProps?.upload || intlLocales.get([intlType.locale, 'upload']) || intlLocales.get(['en_US', 'upload'])}
+                {props?.localeProps?.upload || intlLocales.get([locale, 'upload']) || intlLocales.get(['en_US', 'upload'])}
             </Space>
         );
         return TooltipRender.renderTooltip(props?.tooltipCtrl, props?.tooltipProps, innerDom);
@@ -436,7 +444,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             return uploadDom;
         }
         const omitCropProps = !props?.cropProps ? {} : omit(props.cropProps, ['modalClassName', 'modalTitle', 'rotationSlider']);
-        const cropModalTitle = props?.localeProps?.cropModalTitle || intlLocales.get([intlType.locale, 'cropModalTitle']) || intlLocales.get(['en_US', 'cropModalTitle']);
+        const cropModalTitle = props?.localeProps?.cropModalTitle || intlLocales.get([locale, 'cropModalTitle']) || intlLocales.get(['en_US', 'cropModalTitle']);
         return (
             <ImgCrop
                 modalClassName={classNames(`${clazzPrefix}-crop`, props?.cropProps?.modalClassName)}

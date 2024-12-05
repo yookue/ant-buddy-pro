@@ -41,6 +41,7 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='示例字段-無校驗'
+                    locale='zh_TW'
                     popupInputProps={[
                         {
                             tag: 'en-US',
@@ -59,11 +60,6 @@ export default () => {
                         }
                     ]}
                     popupProField={false}
-                    popupConfirmProps={{
-                        message: '設為默認嗎？',
-                        ok: '是',
-                        cancel: '否',
-                    }}
                 />
             </ProForm>
         </>

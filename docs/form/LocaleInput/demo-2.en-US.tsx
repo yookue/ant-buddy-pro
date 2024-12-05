@@ -41,6 +41,7 @@ export default () => {
                 <LocaleInput
                     name='foobar'
                     placeholder='Demo Field Without Validation'
+                    locale='en_US'
                     popupInputProps={[
                         {
                             tag: 'en-US',
@@ -59,11 +60,6 @@ export default () => {
                         }
                     ]}
                     popupProField={false}
-                    popupConfirmProps={{
-                        message: 'Set as default?',
-                        ok: 'Yes',
-                        cancel: 'No',
-                    }}
                 />
             </ProForm>
         </>

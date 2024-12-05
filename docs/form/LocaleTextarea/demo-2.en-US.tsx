@@ -42,6 +42,7 @@ export default () => {
                     name='foobar'
                     placeholder='Demo Field Without Validation'
                     proField={false}
+                    locale='en_US'
                     switchTextareaProps={[
                         {
                             tag: 'en-US',
@@ -60,9 +61,6 @@ export default () => {
                         }
                     ]}
                     switchProField={false}
-                    localeProps={{
-                        default: 'Default',
-                    }}
                 />
                 <Divider/>
             </ProForm>

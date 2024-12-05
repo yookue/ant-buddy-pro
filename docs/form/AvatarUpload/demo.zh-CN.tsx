@@ -128,16 +128,10 @@ export default () => {
                     tooltipProps={{
                         title: '用户头像',
                     }}
-                    localeProps={{
-                        'upload': '上传',
-                        'allowTypes': '只允许 {} 类型的文件',
-                        'disallowType': '文件类型不允许',
-                        'cropModalTitle': '头像裁剪',
-                        'maxFileSize': '文件大小不能超过 {}{}',
-                    }}
                     onImageSrcChange={() => {
                         ConsoleUtils.logTimestamp(false, false, 'AvatarUpload', '图片源已更改');
                     }}
+                    locale='zh_CN'
                 />
             </ProForm>
         </>

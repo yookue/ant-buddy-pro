@@ -195,6 +195,13 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     proField?: boolean;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The properties of locale items (Higher priority than `popupQuickTags`, more customizations)
      * @description.zh-CN 多语言输入项的属性(比 `popupQuickTags` 优先级高，更多自定义)
      * @description.zh-TW 多語言輸入項的屬性(比 `popupQuickTags` 優先級高，更多自定義)
@@ -299,6 +306,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             enabled: true,
         },
         popupProField = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
@@ -351,7 +359,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     const buildEntryDom = () => {
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
         if (proField) {
-            const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'addon', 'addonPos', 'defaultOpen', 'dropdownProps', 'multilingual', 'proField', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupAddon', 'popupAddonPos', 'popupShareProps', 'popupCloneProps', 'popupConfirmProps', 'popupProField']);
+            const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'addon', 'addonPos', 'defaultOpen', 'dropdownProps', 'multilingual', 'proField', 'locale', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupAddon', 'popupAddonPos', 'popupShareProps', 'popupCloneProps', 'popupConfirmProps', 'popupProField']);
             return (
                 <ProFormText
                     {...restProps}
@@ -417,9 +425,9 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             <If condition={BooleanUtils.isNotFalse(popupConfirmProps?.enabled)} validation={false}>
                 <If.Then>
                     <Popconfirm
-                        title={popupConfirmProps?.message || intlLocales.get([intlType.locale, 'setAsDefault']) || intlLocales.get(['en_US', 'setAsDefault'])}
-                        okText={popupConfirmProps?.ok}
-                        cancelText={popupConfirmProps?.cancel}
+                        title={popupConfirmProps?.message || intlLocales.get([locale, 'setAsDefault']) || intlLocales.get(['en_US', 'setAsDefault'])}
+                        okText={popupConfirmProps?.ok || intlLocales.get([locale, 'ok'])}
+                        cancelText={popupConfirmProps?.cancel || intlLocales.get([locale, 'cancel'])}
                         disabled={itemDisabled || itemReadonly}
                         onConfirm={() => handleSetAsDefault(elementId)}
                     >

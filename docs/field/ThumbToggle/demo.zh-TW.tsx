@@ -117,11 +117,7 @@ export default () => {
                     ConsoleUtils.logTimestamp(false, false, 'ThumbToggle', 'onToggle 返回 true 以允許變更計數');
                     return true;
                 }}
-                localeProps={{
-                    like: '喜歡',
-                    dislike: '不喜歡',
-                    favorite: '收藏',
-                }}
+                locale='zh_TW'
             />
         </>
     );

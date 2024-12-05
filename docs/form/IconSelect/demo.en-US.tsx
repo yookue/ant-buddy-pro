@@ -111,18 +111,7 @@ export default () => {
                         }
                     }}
                     tooltipCtrl={tooltipCtrl}
-                    localeProps={{
-                        search: 'Search',
-                        outlined: 'Outlined',
-                        filled: 'Filled',
-                        twotone: 'Two Tone',
-                        direction: 'Direction',
-                        suggestion: 'Suggestion',
-                        editor: 'Editor',
-                        data: 'Data',
-                        logo: 'Logo',
-                        web: 'Web',
-                    }}
+                    locale='en_US'
                 />
             </ProForm>
         </>
