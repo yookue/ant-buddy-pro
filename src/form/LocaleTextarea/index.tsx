@@ -143,7 +143,7 @@ export type LocaleTextareaProps = ProFormFieldItemProps<TextAreaProps, TextAreaR
      * @description.zh-CN 标签页的属性
      * @description.zh-TW 標簽頁的屬性
      */
-    tabsProps?: Omit<CardTabsProps, 'addIcon' | 'hideAdd' | 'items' | 'onEdit' | 'children'>;
+    tabsProps?: Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'>;
 
     /**
      * @description Whether to enable multilingual or not
@@ -313,7 +313,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 fieldProps={{
                                     className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
                                     id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
-                                    placeholder: StringUtils.joinWith(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
+                                    placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     allowClear: fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
                                     autoSize: fieldProps?.autoSize || props?.switchShareProps?.allowClear || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined),
                                     bordered: fieldProps?.bordered || props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
@@ -335,7 +335,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 className={classNames(`${clazzPrefix}-item`, fieldProps?.className)}
                                 name={props?.name ? `${props.name}[${tag}]` : undefined}
                                 id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
-                                placeholder={StringUtils.joinWith(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
+                                placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 allowClear={fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
                                 bordered={fieldProps?.bordered || props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined)}
                                 autoSize={fieldProps?.autoSize || props?.switchShareProps?.allowClear || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
@@ -367,7 +367,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 fieldProps={{
                                     className: `${clazzPrefix}-item`,
                                     id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
-                                    placeholder: props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
+                                    placeholder: props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     allowClear: props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
                                     autoSize: props?.switchShareProps?.autoSize || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined),
                                     bordered: props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
@@ -387,7 +387,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 className={`${clazzPrefix}-item`}
                                 name={props?.name ? `${props.name}[${tag}]` : undefined}
                                 id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
-                                placeholder={props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
+                                placeholder={props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 allowClear={props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
                                 autoSize={props?.switchShareProps?.autoSize || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
                                 maxLength={props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}

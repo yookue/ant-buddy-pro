@@ -23,17 +23,19 @@
 
 
 .@{buddy-icon-select}-popup {
-    .@{buddy-icon-select}-ink-bar .@{ant-prefix}-tabs-ink-bar {
+    > .@{buddy-icon-select}-ink-bar .@{ant-prefix}-tabs-ink-bar {
         visibility: visible;
     }
 
-    .@{ant-prefix}-pro-card-tabs .@{ant-prefix}-tabs-top {
-        padding: 0 1px;
+    > .@{buddy-icon-select}-popup-tabs.@{ant-prefix}-tabs-top {
+        padding: 0;
 
-        & > .@{ant-prefix}-tabs-nav {
+        > .@{ant-prefix}-tabs-nav {
+            margin-bottom: 2px;
+
             .@{ant-prefix}-tabs-nav-wrap .@{ant-prefix}-tabs-nav-list {
-                margin-top: 0 !important;
-                padding-left: 0 !important;
+                margin-top: 0;
+                padding-left: 0;
             }
 
             .@{ant-prefix}-tabs-nav-operations .@{ant-prefix}-tabs-nav-more {
@@ -50,7 +52,7 @@
             }
         }
 
-        & > .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-pro-card-body {
+        > .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-pro-card-body {
             padding: 2px @padding-xss 2px 0;
         }
     }

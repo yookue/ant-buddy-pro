@@ -522,7 +522,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                     id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
                                     addonBefore: beforeDom,
                                     addonAfter: afterDom,
-                                    placeholder: StringUtils.joinWith(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
+                                    placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     allowClear: fieldProps?.allowClear || props?.popupShareProps?.allowClear || (popupCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
                                     bordered: fieldProps?.bordered || props?.popupShareProps?.bordered || (popupCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
                                     maxLength: fieldProps?.maxLength || props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
@@ -559,7 +559,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
                                 addonBefore={beforeDom}
                                 addonAfter={afterDom}
-                                placeholder={StringUtils.joinWith(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
+                                placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 allowClear={fieldProps?.allowClear || props?.popupShareProps?.allowClear || (popupCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
                                 bordered={fieldProps?.bordered || props?.popupShareProps?.bordered || (popupCloneProps.bordered ? props?.fieldProps?.bordered : undefined)}
                                 maxLength={fieldProps?.maxLength || props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
@@ -604,7 +604,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                     id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
                                     addonBefore: beforeDom,
                                     addonAfter: afterDom,
-                                    placeholder: props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
+                                    placeholder: props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     allowClear: props?.popupShareProps?.allowClear || (popupCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
                                     bordered: props?.popupShareProps?.bordered || (popupCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
                                     maxLength: props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
@@ -636,7 +636,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
                                 addonBefore={beforeDom}
                                 addonAfter={afterDom}
-                                placeholder={props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.joinWith(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
+                                placeholder={props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 allowClear={props?.popupShareProps?.allowClear || (popupCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
                                 bordered={props?.popupShareProps?.bordered || (popupCloneProps.bordered ? props?.fieldProps?.bordered : undefined)}
                                 maxLength={props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}

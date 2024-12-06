@@ -16,19 +16,18 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Input, Select, Empty, Space, Tabs, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TabsProps, type TooltipProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {type LabeledValue} from 'antd/es/select';
 import Wave from 'antd/es/_util/wave';
 import {default as Icon} from '@ant-design/icons';
 import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/es/types';
-import {ProCard, type ProCardProps} from '@ant-design/pro-card';
 import {ProFormSelect} from '@ant-design/pro-form';
 import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {nanoid} from '@ant-design/pro-utils';
-import {For, MapIterator} from '@yookue/react-condition';
+import {If, For, MapIterator} from '@yookue/react-condition';
 import {StringUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {Scrollbars} from 'rc-scrollbars';
@@ -158,11 +157,11 @@ export type IconSelectProps = SelectFieldProps & {
     proField?: boolean;
 
     /**
-     * @description The properties of the card tabs
+     * @description The properties of the tabs
      * @description.zh-CN 标签页的属性
-     * @description.zh-TW 標籤頁的屬性
+     * @description.zh-TW 標簽頁的屬性
      */
-    cardProps?: Omit<ProCardProps, 'checked' | 'collapsed' | 'collapsible' | 'collapsibleIconRender' | 'colSpan' | 'defaultCollapsed' | 'hoverable' | 'loading' | 'split' | 'tabs' | 'onChecked' | 'onCollapse'>;
+    tabsProps?: Omit<TabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'>;
 
     /**
      * @description The theme types
@@ -313,8 +312,6 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
     const [dropdownOpen, setDropdownOpen] = React.useState<boolean>((props?.fieldProps?.open || props?.fieldProps?.defaultOpen) ?? false);
-    const defaultTheme = (defaultThemeType && themeTypes?.includes(defaultThemeType)) ? defaultThemeType : (themeTypes ? themeTypes[0] : undefined);
-    const [activeTab, setActiveTab] = React.useState<IconThemeType | undefined>(defaultTheme);
     const [searchWord, setSearchWord] = React.useState<string | undefined>(props?.fieldProps?.searchValue);
     const [searchDisabled, setSearchDisabled] = React.useState<boolean>(false);
     const searchRef = React.useRef<InputRef>(null);
@@ -664,30 +661,30 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 }}
                 data-icon-select-popup={fieldId}
             >
-                <ProCard
-                    className={classNames(`${clazzPrefix}-popup-card`, (themeInkBar ? `${clazzPrefix}-ink-bar` : undefined), props?.cardProps?.className)}
-                    tabs={{
-                        activeKey: activeTab,
-                        type: 'card',
-                        items: themeItems,
-                        onChange: (activeKey: string) => {
-                            setActiveTab(activeKey as IconThemeType);
-                        },
-                        tabBarExtraContent: (props?.fieldProps?.showSearch === false) ? undefined : (
-                            <Input.Search
-                                ref={searchRef}
-                                placeholder={props?.localeProps?.search || intlLocales.get([locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
-                                allowClear={true}
-                                size='small'
-                                disabled={searchDisabled}
-                                onSearch={(value: string) => {
-                                    setSearchWord(value);
-                                    props?.fieldProps?.onSearch?.(value);
-                                }}
-                            />
-                        )
-                    }}
-                    {...(!props?.cardProps ? {} : omit(props, ['className']))}
+                <Tabs
+                    className={classNames(`${clazzPrefix}-popup-tabs`, (themeInkBar ? `${clazzPrefix}-ink-bar` : undefined), props?.tabsProps?.className)}
+                    defaultActiveKey={defaultThemeType}
+                    items={themeItems}
+                    type={props?.tabsProps?.type ?? 'card'}
+                    tabBarExtraContent={(
+                        <>
+                            <If condition={props?.fieldProps?.showSearch !== false} validation={false}>
+                                <Input.Search
+                                    ref={searchRef}
+                                    placeholder={props?.localeProps?.search || intlLocales.get([locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
+                                    allowClear={true}
+                                    size='small'
+                                    disabled={searchDisabled}
+                                    onSearch={(value: string) => {
+                                        setSearchWord(value);
+                                        props?.fieldProps?.onSearch?.(value);
+                                    }}
+                                />
+                            </If>
+                            {props?.tabsProps?.tabBarExtraContent}
+                        </>
+                    )}
+                    {...(!props?.tabsProps ? {} : omit(props.tabsProps, ['className', 'type', 'tabBarExtraContent']))}
                 />
             </div>
         );
@@ -719,7 +716,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'dropdownStyle', 'open', 'showSearch', 'virtual', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'cardProps', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'tabsProps', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
         return (
             <ProFormSelect
                 {...restProps}
