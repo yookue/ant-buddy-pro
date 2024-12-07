@@ -16,8 +16,8 @@
 
 
 import React from 'react';
-import {ConfigProvider, Menu, type MenuProps as AntMenuProps} from 'antd';
-import {type MenuItemType as AntMenuItemType} from 'antd/es/menu/hooks/useItems';
+import {ConfigProvider, Menu, type MenuProps} from 'antd';
+import {type MenuItemType} from 'antd/es/menu/hooks/useItems';
 import {css} from '@emotion/css';
 import {BooleanUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -26,9 +26,9 @@ import omit from 'rc-util/es/omit';
 import './index.less';
 
 
-export type MixinMenuProps = Omit<AntMenuProps, 'activeKey' | 'defaultSelectedKeys' | 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'onDeselect'> & {
+export type MixinMenuProps = Omit<MenuProps, 'activeKey' | 'defaultSelectedKeys' | 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'onDeselect'> & {
     /**
-     * @description The content of the menu
+     * @description The items of the menu
      * @description.zh-CN 菜单项数组
      * @description.zh-TW 菜單項數組
      */
@@ -43,14 +43,7 @@ export type MixinMenuProps = Omit<AntMenuProps, 'activeKey' | 'defaultSelectedKe
 };
 
 
-export type MixinMenuItemProps = AntMenuItemType & {
-    /**
-     * @description The content of the menu item
-     * @description.zh-CN 菜单项对应的内容
-     * @description.zh-TW 菜單項對應的內容
-     */
-    content?: React.ReactNode;
-};
+export type MixinMenuItemProps = React.PropsWithChildren<MenuItemType>;
 
 
 export type AdjustLayoutProps = {
@@ -284,7 +277,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     }
 
     const buildTabsDom = () => {
-        if (!props?.menuProps?.items || props?.menuProps?.items?.length === 0) {
+        if (!props?.menuProps?.items || !props.menuProps.items.length) {
             return undefined;
         }
         return props?.menuProps?.items.map(item => {
@@ -293,7 +286,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                     className={classNames(`${clazzPrefix}-tab-title`, props?.tabTitleClazz)}
                     style={props?.tabTitleStyle}
                 >
-                    {props?.tabTitleRender ? props?.tabTitleRender(item?.label) : item?.label}
+                    {props?.tabTitleRender ? props.tabTitleRender(item?.label) : item?.label}
                 </div>
             );
             return (
@@ -307,14 +300,14 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                         className={classNames(`${clazzPrefix}-tab-content`, props?.tabContentClazz)}
                         style={props?.tabContentStyle}
                     >
-                        {item?.content}
+                        {item?.children}
                     </div>
                 </div>
             );
         });
     };
 
-    const omitMenuItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['content']) as AntMenuItemType) : [];
+    const omitMenuItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['children']) as MenuItemType) : [];
     const restMenuProps = !props?.menuProps ? {} : omit(props?.menuProps, ['defaultActiveKey', 'items', 'onClick']);
     const entryWidthClazz = entryWidth ? css({width: entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
     const omitEntryStyle = props?.entryStyle ? omit(props?.entryStyle, ['width']) : undefined;
@@ -331,10 +324,10 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             >
                 <Menu
                     className={classNames((entryInkBar ? undefined : `${clazzPrefix}-ink-bar-none`), (entrySelectionBold ? `${clazzPrefix}-selection-bold` : undefined))}
+                    defaultSelectedKeys={props?.menuProps?.defaultActiveKey ? [props?.menuProps?.defaultActiveKey] : []}
                     items={omitMenuItems}
                     mode={menuMode}
                     multiple={false}
-                    defaultSelectedKeys={props?.menuProps?.defaultActiveKey ? [props?.menuProps?.defaultActiveKey] : []}
                     onClick={(menuInfo: MenuInfo) => {
                         setActiveKey(menuInfo?.key);
                         props?.menuProps?.onClick?.(menuInfo);

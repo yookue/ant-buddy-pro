@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {MenuTabs} from '@yookue/ant-buddy-pro';
 
 
@@ -61,14 +61,14 @@ export default () => {
                         {
                             key: 'general',
                             label: '常規設置',
-                            content: (
+                            children: (
                                 <span>這裏是常規設置的內容</span>
                             )
                         },
                         {
                             key: 'advanced',
                             label: '高級設置',
-                            content: (
+                            children: (
                                 <span>這裏是高級設置的內容</span>
                             )
                         },
@@ -76,7 +76,7 @@ export default () => {
                             key: 'danger',
                             label: '危險設置',
                             danger: true,
-                            content: (
+                            children: (
                                 <span>這裏是危險設置的內容</span>
                             )
                         },
@@ -84,7 +84,7 @@ export default () => {
                             key: 'disabled',
                             label: '禁用設置',
                             disabled: true,
-                            content: (
+                            children: (
                                 <span>這裏是禁用設置的內容</span>
                             )
                         }

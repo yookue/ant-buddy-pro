@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {MenuTabs} from '@yookue/ant-buddy-pro';
 
 
@@ -61,14 +61,14 @@ export default () => {
                         {
                             key: 'general',
                             label: 'General Settings',
-                            content: (
+                            children: (
                                 <span>Here is the general content</span>
                             )
                         },
                         {
                             key: 'advanced',
                             label: 'Advanced Settings',
-                            content: (
+                            children: (
                                 <span>Here is the advanced content</span>
                             )
                         },
@@ -76,7 +76,7 @@ export default () => {
                             key: 'danger',
                             label: 'Danger Settings',
                             danger: true,
-                            content: (
+                            children: (
                                 <span>Here is the danger content</span>
                             )
                         },
@@ -84,7 +84,7 @@ export default () => {
                             key: 'disabled',
                             label: 'Disabled Settings',
                             disabled: true,
-                            content: (
+                            children: (
                                 <span>Here is the disabled content</span>
                             )
                         }
