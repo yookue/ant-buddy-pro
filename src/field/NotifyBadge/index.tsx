@@ -23,11 +23,17 @@ import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
 import {ArrayUtils, BooleanUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
-import {type Tab as RcTab} from 'rc-tabs/es/interface';
+import {type Tab as RcTab, type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
-import {type WithFalse} from '@/type/declaration';
+import {type WithFalse, type ReadonlyTabsType} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
+
+
+export type NotifyPresetStyle = WithFalse<'notice' | 'task'>;
+
+
+export type NotifyTabPosition = Exclude<RcTabPosition, 'bottom'>;
 
 
 export type NotifyDataItem = Omit<ListItemMetaProps, 'children'> & {
@@ -161,11 +167,11 @@ export type MixinTabProps = Omit<RcTab, 'children'> & {
      * @description.zh-CN 预设样式
      * @description.zh-TW 預設樣式
      */
-    presetStyle?: WithFalse<'notice' | 'task'>;
+    presetStyle?: NotifyPresetStyle;
 };
 
 
-export type MixinTabsProps = Omit<TabsProps, 'addIcon' | 'hideAdd' | 'items' | 'type' | 'onEdit' | 'editable' | 'getPopupContainer' | 'tabPosition'> & {
+export type MixinTabsProps = Omit<TabsProps, 'activeKey' | 'addIcon' | 'hideAdd' | 'items' | 'tabPosition' | 'type' | 'onEdit' | 'children'> & {
     /**
      * @description The contents of the tabs
      * @description.zh-CN 标签页的内容
@@ -179,7 +185,7 @@ export type MixinTabsProps = Omit<TabsProps, 'addIcon' | 'hideAdd' | 'items' | '
      * @description.zh-TW 標籤頁的類型
      * @default 'line'
      */
-    type?: 'line' | 'card';
+    type?: ReadonlyTabsType;
 
     /**
      * @description The position of the tab labels
@@ -187,7 +193,7 @@ export type MixinTabsProps = Omit<TabsProps, 'addIcon' | 'hideAdd' | 'items' | '
      * @description.zh-TW 標籤頁的位置
      * @default 'top'
      */
-    tabPosition?: 'top' | 'left' | 'right';
+    tabPosition?: NotifyTabPosition;
 };
 
 

@@ -30,16 +30,6 @@ import {intlLocales} from './intl-locales';
 import './index.less';
 
 
-export type IntlLocaleProps = {
-    /**
-     * @description Match Exactly
-     * @description.zh-CN 全字匹配
-     * @description.zh-TW 全字匹配
-     */
-    exactMatch?: React.ReactNode;
-};
-
-
 export type AddonCheckProps = CheckboxProps & React.PropsWithChildren<{
     /**
      * @description The prefix of name for the checkbox
@@ -71,6 +61,16 @@ export type AddonCheckProps = CheckboxProps & React.PropsWithChildren<{
      */
     idSuffix?: string;
 }>;
+
+
+export type IntlLocaleProps = {
+    /**
+     * @description Match Exactly
+     * @description.zh-CN 全字匹配
+     * @description.zh-TW 全字匹配
+     */
+    exactMatch?: React.ReactNode;
+};
 
 
 export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {

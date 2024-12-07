@@ -34,16 +34,6 @@ import {intlLocales} from './intl-locales';
 import './index.less';
 
 
-export type IntlLocaleProps = {
-    /**
-     * @description Default
-     * @description.zh-CN 默认
-     * @description.zh-TW 搜索
-     */
-    default?: string;
-};
-
-
 export type MixinTabsProps = Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'> & {
     /**
      * @description The type of the tabs
@@ -131,6 +121,16 @@ export type SwitchShareProps = {
      */
     rules?: FormRule[];
 } & Pick<TextAreaProps, 'placeholder' | 'rows' | 'allowClear' | 'autoSize' | 'bordered' | 'maxLength' | 'showCount'>;
+
+
+export type IntlLocaleProps = {
+    /**
+     * @description Default
+     * @description.zh-CN 默认
+     * @description.zh-TW 搜索
+     */
+    default?: string;
+};
 
 
 export type LocaleTextareaProps = ProFormFieldItemProps<TextAreaProps, TextAreaRef> & {

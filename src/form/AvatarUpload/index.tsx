@@ -337,6 +337,9 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
                 case 'GB':
                     fileSize /= 1024 * 1024 * 1024;
                     break;
+                case 'TB':
+                    fileSize /= 1024 * 1024 * 1024 * 1024;
+                    break;
                 default:
                     break;
             }

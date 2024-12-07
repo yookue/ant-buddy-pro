@@ -34,6 +34,7 @@ import {Scrollbars} from 'rc-scrollbars';
 import {type DefaultOptionType} from 'rc-select/es/select';
 import omit from 'rc-util/es/omit';
 import {allIconTypes, type IconSceneType} from '@/type/antd-icons';
+import {type ReadonlyTabsType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -46,11 +47,18 @@ import './index.less';
 export type IconOptionMode = 'icon' | 'text';
 
 
-export type IconTabsType = 'line' | 'card';
-
-
 export type SelectFieldProps = Omit<ProFormFieldItemProps<SelectProps, RefSelectProps>, 'fieldProps'> & {
     fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'dropdownRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'onPopupScroll'>;
+};
+
+
+export type MixinTabsProps = Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'inkBar' | 'items' | 'onEdit' | 'children'> & {
+    /**
+     * @description The type of the tabs
+     * @description.zh-CN 标签页的类型
+     * @description.zh-TW 標簽頁的類型
+     */
+    type?: ReadonlyTabsType;
 };
 
 
@@ -124,16 +132,6 @@ export type IntlLocaleProps = {
      * @description.zh-TW 網站類
      */
     web?: string;
-};
-
-
-export type MixinTabsProps = Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'inkBar' | 'items' | 'onEdit' | 'children'> & {
-    /**
-     * @description The type of the tabs
-     * @description.zh-CN 标签页的类型
-     * @description.zh-TW 標簽頁的類型
-     */
-    type?: IconTabsType;
 };
 
 
