@@ -18,7 +18,7 @@
 import React from 'react';
 import {ConfigProvider} from 'antd';
 import {css} from '@emotion/css';
-import {StringUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import './index.less';
 
