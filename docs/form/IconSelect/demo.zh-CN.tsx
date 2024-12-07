@@ -20,7 +20,7 @@ import {Divider, Empty} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {IconSelect, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {IconOptionMode} from '@yookue/ant-buddy-pro/form/IconSelect';
-import type {TabsPosition} from '../../../src/layout/CardTabs';
+import {type TabsPosition} from '@yookue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
