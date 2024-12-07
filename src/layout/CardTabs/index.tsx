@@ -34,7 +34,7 @@ export type TabsPosition = RcTabPosition | 'top-end' | 'bottom-end';
 export type TabsSizeType = SizeType | 'extra-small';
 
 
-export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition' | 'type'> & {
+export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -121,7 +121,7 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     // Initialize the default props
     const {
         tabBorder = true,
-        tabPosition= 'top',
+        tabPosition = 'top',
         contentBorder = true,
         inkBar = true,
         size = 'middle',
@@ -143,16 +143,16 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
         }
     };
 
-    const restProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPosition', 'contentBorder', 'inkBar', 'size', 'presetStyle']);
+    const restTabsProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPosition', 'contentBorder', 'inkBar', 'presetStyle', 'type', 'size']);
 
     return (
         <div className={classNames(clazzPrefix, `${clazzPrefix}-${size}`, `${clazzPrefix}-${tabPosition}`, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)} style={props?.containerStyle}>
             <Tabs
                 className={classNames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (contentBorder ? `${clazzPrefix}-content-border` : undefined), (inkBar ? `${clazzPrefix}-ink-bar` : undefined))}
-                type='card'
+                type={props?.type ?? 'card'}
                 size={detectTabSize()}
                 tabPosition={detectTabPosition()}
-                {...restProps}
+                {...restTabsProps}
             />
         </div>
     );
