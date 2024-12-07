@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Select, Empty, Space, Tabs, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TabsProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {type LabeledValue} from 'antd/es/select';
 import Wave from 'antd/es/_util/wave';
@@ -34,6 +34,7 @@ import {Scrollbars} from 'rc-scrollbars';
 import {type DefaultOptionType} from 'rc-select/es/select';
 import omit from 'rc-util/es/omit';
 import {allIconTypes, type IconSceneType} from '@/type/antd-icons';
+import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {PropUtils} from '@/util/PropUtils';
@@ -43,6 +44,9 @@ import './index.less';
 
 
 export type IconOptionMode = 'icon' | 'text';
+
+
+export type IconTabsType = 'line' | 'card';
 
 
 export type SelectFieldProps = Omit<ProFormFieldItemProps<SelectProps, RefSelectProps>, 'fieldProps'> & {
@@ -123,6 +127,16 @@ export type IntlLocaleProps = {
 };
 
 
+export type MixinTabsProps = Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'inkBar' | 'items' | 'onEdit' | 'children'> & {
+    /**
+     * @description The type of the tabs
+     * @description.zh-CN 标签页的类型
+     * @description.zh-TW 標簽頁的類型
+     */
+    type?: IconTabsType;
+};
+
+
 export type IconSelectProps = SelectFieldProps & {
     /**
      * @description The CSS class prefix of the component
@@ -161,7 +175,7 @@ export type IconSelectProps = SelectFieldProps & {
      * @description.zh-CN 标签页的属性
      * @description.zh-TW 標簽頁的屬性
      */
-    tabsProps?: Omit<TabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'>;
+    tabsProps?: MixinTabsProps;
 
     /**
      * @description The theme types
@@ -339,7 +353,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         children.push(optItem);
                     }
                 });
-                if (children.length === 0) {
+                if (!children.length) {
                     return;
                 }
                 if (optionGroup) {
@@ -574,17 +588,17 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 return {
                     key: item,
                     label: ObjectUtils.getProp(props?.localeProps, `${item}Scene`) || intlLocales.get([locale, `${item}Scene`]) || intlLocales.get(['en_US', `${item}Scene`]),
-                    content: wrapIconOptions(buildIconOptions(themeType, item as IconSceneType)),
+                    children: wrapIconOptions(buildIconOptions(themeType, item as IconSceneType)),
                 };
             });
         }
         const classified = ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => sceneTypes?.includes(item as IconSceneType)).map(item => {
             return buildIconOptions(themeType, item as IconSceneType);
         });
-        if (!classified || classified.length === 0 || classified.every(item => ObjectUtils.isNil(item))) {
+        if (!classified || !classified.length || classified.every(item => ObjectUtils.isNil(item))) {
             return [{
                 key: `${themeType}-all`,
-                content: (
+                children: (
                     <div className={`${clazzPrefix}-search-mismatch`}>
                         {props?.fieldProps?.notFoundContent ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
                     </div>
@@ -605,7 +619,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         );
         return [{
             key: `${themeType}-all`,
-            content: wrapIconOptions(merged),
+            children: wrapIconOptions(merged),
         }];
     };
 
@@ -614,16 +628,14 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             return undefined;
         }
         const menuItems = buildIconTabs(themeType);
-        if (!menuItems || menuItems.length === 0) {
+        if (!menuItems || !menuItems.length) {
             return undefined;
         }
-        const activeKey = !optionGroup ? menuItems[0].key : (((defaultSceneType && sceneTypes?.includes(defaultSceneType)) ? defaultSceneType : undefined) || (sceneTypes ? sceneTypes[0] : undefined));
         return (
             <MenuTabs
                 menuProps={{
                     items: menuItems,
-                    defaultActiveKey: activeKey,
-                    defaultActiveFirst: true,
+                    defaultActiveKey: defaultSceneType,
                 }}
                 entryWidth={sceneEntryWidth}
                 entryInkBar={sceneInkBar}
@@ -661,11 +673,11 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 }}
                 data-icon-select-popup={fieldId}
             >
-                <Tabs
-                    className={classNames(`${clazzPrefix}-popup-tabs`, (themeInkBar ? `${clazzPrefix}-ink-bar` : undefined), props?.tabsProps?.className)}
+                <CardTabs
+                    className={classNames(`${clazzPrefix}-popup-tabs`, props?.tabsProps?.className)}
                     defaultActiveKey={defaultThemeType}
                     items={themeItems}
-                    type={props?.tabsProps?.type ?? 'card'}
+                    inkBar={themeInkBar}
                     tabBarExtraContent={(
                         <>
                             <If condition={props?.fieldProps?.showSearch !== false} validation={false}>
@@ -684,7 +696,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                             {props?.tabsProps?.tabBarExtraContent}
                         </>
                     )}
-                    {...(!props?.tabsProps ? {} : omit(props.tabsProps, ['className', 'type', 'tabBarExtraContent']))}
+                    presetStyle={props?.tabsProps?.presetStyle ?? 'padding-0'}
+                    {...(!props?.tabsProps ? {} : omit(props.tabsProps, ['className', 'tabBarExtraContent', 'presetStyle']))}
                 />
             </div>
         );

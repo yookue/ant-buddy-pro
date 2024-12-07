@@ -20,10 +20,12 @@ import {Divider, Empty} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {IconSelect, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {IconOptionMode} from '@yookue/ant-buddy-pro/form/IconSelect';
+import type {TabsPosition} from '../../../src/layout/CardTabs';
 
 
 export default () => {
     const [optionMode, setOptionMode] = React.useState<IconOptionMode>('icon');
+    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
     const [themeInkBar, setThemeInkBar] = React.useState<boolean>(true);
     const [sceneInkBar, setSceneInkBar] = React.useState<boolean>(true);
     const [showSearch, setShowSearch] = React.useState<boolean>(true);
@@ -54,6 +56,26 @@ export default () => {
                         ]}
                     />
                 </ProForm.Group>
+                <ProFormRadio.Group
+                    label='Tab 位置'
+                    radioType='button'
+                    fieldProps={{
+                        value: tabPos,
+                        buttonStyle: 'solid',
+                        disabled: optionMode === 'text',
+                        onChange: (event) => {
+                            setTabPos(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '上', value: 'top'},
+                        {label: '下', value: 'bottom'},
+                        {label: '左', value: 'left'},
+                        {label: '右', value: 'right'},
+                        {label: '上-末尾', value: 'top-end'},
+                        {label: '下-末尾', value: 'bottom-end'},
+                    ]}
+                />
                 <ProForm.Group>
                     <ProFormSwitch
                         label='主题指示条'
@@ -109,6 +131,9 @@ export default () => {
                         onChange: (value) => {
                             ConsoleUtils.logTimestamp(false, false, 'IconSelect', 'onChange value = ' + value);
                         }
+                    }}
+                    tabsProps={{
+                        tabPosition: tabPos,
                     }}
                     tooltipCtrl={tooltipCtrl}
                     locale='zh_CN'

@@ -20,10 +20,12 @@ import {Divider, Empty} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {IconSelect, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {IconOptionMode} from '@yookue/ant-buddy-pro/form/IconSelect';
+import type {TabsPosition} from '../../../src/layout/CardTabs';
 
 
 export default () => {
     const [optionMode, setOptionMode] = React.useState<IconOptionMode>('icon');
+    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
     const [themeInkBar, setThemeInkBar] = React.useState<boolean>(true);
     const [sceneInkBar, setSceneInkBar] = React.useState<boolean>(true);
     const [showSearch, setShowSearch] = React.useState<boolean>(true);
@@ -54,6 +56,26 @@ export default () => {
                         ]}
                     />
                 </ProForm.Group>
+                <ProFormRadio.Group
+                    label='Tab Position'
+                    radioType='button'
+                    fieldProps={{
+                        value: tabPos,
+                        buttonStyle: 'solid',
+                        disabled: optionMode === 'text',
+                        onChange: (event) => {
+                            setTabPos(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Top', value: 'top'},
+                        {label: 'Bottom', value: 'bottom'},
+                        {label: 'Left', value: 'left'},
+                        {label: 'Right', value: 'right'},
+                        {label: 'Top-End', value: 'top-end'},
+                        {label: 'Bottom-End', value: 'bottom-end'},
+                    ]}
+                />
                 <ProForm.Group>
                     <ProFormSwitch
                         label='Theme Ink Bar'
@@ -109,6 +131,9 @@ export default () => {
                         onChange: (value) => {
                             ConsoleUtils.logTimestamp(false, false, 'IconSelect', 'onChange value = ' + value);
                         }
+                    }}
+                    tabsProps={{
+                        tabPosition: tabPos,
                     }}
                     tooltipCtrl={tooltipCtrl}
                     locale='en_US'

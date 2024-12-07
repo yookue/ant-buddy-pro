@@ -23,37 +23,15 @@
 
 
 .@{buddy-icon-select}-popup {
-    > .@{buddy-icon-select}-ink-bar .@{ant-prefix}-tabs-ink-bar {
-        visibility: visible;
-    }
+    .@{buddy-icon-select}-popup-tabs {
+        > .@{ant-prefix}-tabs-nav > .@{ant-prefix}-tabs-extra-content {
+            max-width: 200px;
+            margin: @margin-xss;
 
-    > .@{buddy-icon-select}-popup-tabs.@{ant-prefix}-tabs-top {
-        padding: 0;
-
-        > .@{ant-prefix}-tabs-nav {
-            margin-bottom: 2px;
-
-            .@{ant-prefix}-tabs-nav-wrap .@{ant-prefix}-tabs-nav-list {
-                margin-top: 0;
-                padding-left: 0;
+            > .@{ant-prefix}-input-search > .@{ant-prefix}-input-wrapper > .@{ant-prefix}-input-affix-wrapper {
+                height: 24px;
+                margin-top: 1px;
             }
-
-            .@{ant-prefix}-tabs-nav-operations .@{ant-prefix}-tabs-nav-more {
-                display: none;
-            }
-
-            .@{ant-prefix}-tabs-extra-content {
-                max-width: 200px;
-                margin-right: @margin-xss;
-
-                .@{ant-prefix}-input-affix-wrapper {
-                    height: 24.58px;
-                }
-            }
-        }
-
-        > .@{ant-prefix}-tabs-content-holder .@{ant-prefix}-pro-card-body {
-            padding: 2px @padding-xss 2px 0;
         }
     }
 
