@@ -27,10 +27,11 @@ import {If} from '@yookue/react-condition';
 import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {type WithFalse, type RuleValidateScope} from '@/type/declaration';
+import {type WithFalse, type ReadonlyTabsType, type RuleValidateScope} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
 import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
+import './index.less';
 
 
 export type IntlLocaleProps = {
@@ -40,6 +41,16 @@ export type IntlLocaleProps = {
      * @description.zh-TW 搜索
      */
     default?: string;
+};
+
+
+export type MixinTabsProps = Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'> & {
+    /**
+     * @description The type of the tabs
+     * @description.zh-CN 标签页的类型
+     * @description.zh-TW 標簽頁的類型
+     */
+    type?: ReadonlyTabsType;
 };
 
 
@@ -60,6 +71,13 @@ export type SwitchCloneProps = {
      * @description.zh-TW 語言輸入項使用與默認輸入項相同的占位符
      */
     placeholder?: boolean;
+
+    /**
+     * @description Whether to use the same rows as the entry field for the locale items
+     * @description.zh-CN 语言输入项使用与默认输入项相同的行数
+     * @description.zh-TW 語言輸入項使用與默認輸入項相同的行數
+     */
+    rows?: boolean;
 
     /**
      * @description Whether to use the same allowClear as the entry field for the locale items
@@ -112,7 +130,7 @@ export type SwitchShareProps = {
      * @description.zh-TW 語言輸入項的校驗規則
      */
     rules?: FormRule[];
-} & Pick<TextAreaProps, 'placeholder' | 'allowClear' | 'autoSize' | 'bordered' | 'maxLength' | 'showCount'>;
+} & Pick<TextAreaProps, 'placeholder' | 'rows' | 'allowClear' | 'autoSize' | 'bordered' | 'maxLength' | 'showCount'>;
 
 
 export type LocaleTextareaProps = ProFormFieldItemProps<TextAreaProps, TextAreaRef> & {
@@ -143,7 +161,7 @@ export type LocaleTextareaProps = ProFormFieldItemProps<TextAreaProps, TextAreaR
      * @description.zh-CN 标签页的属性
      * @description.zh-TW 標簽頁的屬性
      */
-    tabsProps?: Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'>;
+    tabsProps?: MixinTabsProps;
 
     /**
      * @description Whether to enable multilingual or not
@@ -233,11 +251,12 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
         locale = intlType.locale,
         switchCloneProps = {
             placeholder: true,
+            rows: true,
             allowClear: true,
-            autoSize: false,
+            autoSize: true,
             bordered: true,
             maxLength: true,
-            showCount: false,
+            showCount: true,
             rules: 'optional',
         },
         switchProField = true,
@@ -314,6 +333,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                     className: classNames(`${clazzPrefix}-item`, fieldProps?.className),
                                     id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
                                     placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
+                                    rows: fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined),
                                     allowClear: fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
                                     autoSize: fieldProps?.autoSize || props?.switchShareProps?.allowClear || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined),
                                     bordered: fieldProps?.bordered || props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
@@ -336,6 +356,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 name={props?.name ? `${props.name}[${tag}]` : undefined}
                                 id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
                                 placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
+                                rows={fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined)}
                                 allowClear={fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
                                 bordered={fieldProps?.bordered || props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined)}
                                 autoSize={fieldProps?.autoSize || props?.switchShareProps?.allowClear || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
@@ -368,6 +389,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                     className: `${clazzPrefix}-item`,
                                     id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
                                     placeholder: props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
+                                    rows: props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined),
                                     allowClear: props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
                                     autoSize: props?.switchShareProps?.autoSize || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined),
                                     bordered: props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
@@ -388,6 +410,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 name={props?.name ? `${props.name}[${tag}]` : undefined}
                                 id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
                                 placeholder={props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
+                                rows={props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined)}
                                 allowClear={props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
                                 autoSize={props?.switchShareProps?.autoSize || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
                                 maxLength={props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}

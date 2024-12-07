@@ -16,12 +16,15 @@
 
 
 import React from 'react';
-import {message as messageApi} from 'antd';
-import {ProForm} from '@ant-design/pro-form';
+import {Divider, message as messageApi} from 'antd';
+import {ProForm, ProFormRadio} from '@ant-design/pro-form';
 import {LocaleTextarea} from '@yookue/ant-buddy-pro';
+import {type TabsPosition} from '@yookue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
+    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
+
     return (
         <>
             <ProForm
@@ -38,15 +41,44 @@ export default () => {
                     messageApi.success('您点击了提交按钮');
                 }}
             >
+                <ProFormRadio.Group
+                    label='Tab 位置'
+                    radioType='button'
+                    fieldProps={{
+                        value: tabPos,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setTabPos(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '上', value: 'top'},
+                        {label: '下', value: 'bottom'},
+                        {label: '左', value: 'left'},
+                        {label: '右', value: 'right'},
+                        {label: '上-末尾', value: 'top-end'},
+                        {label: '下-末尾', value: 'bottom-end'},
+                    ]}
+                />
+                <Divider/>
                 <LocaleTextarea
                     name='foobar'
                     placeholder='示例字段-带校验'
+                    fieldProps={{
+                        autoSize: {
+                            minRows: 6,
+                            maxRows: 8,
+                        }
+                    }}
                     rules={[
                         {
                             required: true,
                             message: '请输入示例字段',
                         },
                     ]}
+                    tabsProps={{
+                        tabPosition: tabPos,
+                    }}
                     locale='zh_CN'
                     switchTextareaProps={[
                         {
