@@ -320,7 +320,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
                 messageApi.error(props?.localeProps?.disallowType || intlLocales.get([locale, 'disallowType']) || intlLocales.get(['en_US', 'disallowType']));
             } else {
                 const template = props?.localeProps?.allowTypes || intlLocales.get([locale, 'allowTypes']) || intlLocales.get(['en_US', 'allowTypes']);
-                const types = StringUtils.joinWith(props.uploadProps.allowedFileTypes.map(item => (item === 'image/jpeg') ? 'jpg' : StringUtils.substringAfterLast(item, '/')) as string[], '/');
+                const types = StringUtils.join(props.uploadProps.allowedFileTypes.map(item => (item === 'image/jpeg') ? 'jpg' : StringUtils.substringAfterLast(item, '/')) as string[], '/');
                 messageApi.error(StringUtils.formatBrace(template, types));
             }
             return false;

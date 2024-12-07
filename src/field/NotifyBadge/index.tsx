@@ -418,7 +418,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
             return undefined;
         }
         return props.tabsProps.items.map((tab: MixinTabProps) => {
-            const empty = !tab.listProps?.dataSource || (Array.isArray(tab.listProps.dataSource) && tab.listProps.dataSource.length === 0);
+            const empty = !tab.listProps?.dataSource || (Array.isArray(tab.listProps.dataSource) && !tab.listProps.dataSource.length);
             const placeholder = tab.listPlaceholder ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>;
             const content = empty ? placeholder : (
                 <List

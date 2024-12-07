@@ -85,7 +85,7 @@ export abstract class IconUtils {
                 }
             });
         });
-        return (result.length === 0) ? undefined : result;
+        return (!result || !result.length) ? undefined : result;
     }
 
     /**
@@ -205,7 +205,7 @@ export abstract class IconUtils {
      * @returns the menu items that has been resolved icons from string to component
      */
     public static resolveMenuIcons(items?: MenuDataItem[]): MenuDataItem[] | undefined {
-        if (!items || items.length === 0) {
+        if (!items || !items.length) {
             return undefined;
         }
         return items.map(item => {

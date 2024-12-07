@@ -216,7 +216,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
         presetStyle = 'default',
     } = props ?? {};
 
-    if ((!props?.links || props?.links?.length === 0) && !props?.copyright) {
+    if ((!props?.links || !props.links.length) && !props?.copyright) {
         return null;
     }
 

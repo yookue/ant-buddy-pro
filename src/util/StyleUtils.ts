@@ -33,7 +33,7 @@ export abstract class StyleUtils {
      * @param className the class name(s) to add
      */
     public static addClazz(element?: HTMLElement | null, className?: string | string[] | null): void {
-        if (!element || !className || className.length === 0) {
+        if (!element || !className || !className.length) {
             return;
         }
         if (Array.isArray(className)) {
@@ -50,7 +50,7 @@ export abstract class StyleUtils {
      * @param className the class name(s) to remove
      */
     public static removeClazz(element?: HTMLElement | null, className?: string | null): void {
-        if (!element || !className || className.length === 0) {
+        if (!element || !className || !className.length) {
             return;
         }
         if (Array.isArray(className)) {
@@ -152,7 +152,7 @@ export abstract class StyleUtils {
             return undefined;
         }
         const groups = styles.split(';');
-        if (!groups || groups.length === 0) {
+        if (!groups || !groups.length) {
             return undefined;
         }
         const result = {};
