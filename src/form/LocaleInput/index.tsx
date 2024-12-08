@@ -689,9 +689,9 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             }}
             {...omitDropdownProps}
         >
-            <div className={`${clazzPrefix}-trigger-entry`}>
+            <Input.Group className={`${clazzPrefix}-wrapper`}>
                 {buildEntryDom()}
-            </div>
+            </Input.Group>
         </Dropdown>
     );
 };

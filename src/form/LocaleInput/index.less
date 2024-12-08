@@ -84,6 +84,12 @@
     > .@{ant-prefix}-dropdown-menu > .@{ant-prefix}-dropdown-menu-item {
         cursor: default;
     }
+
+    &.@{ant-prefix}-dropdown-placement-bottom .@{ant-prefix}-dropdown-menu-root,
+    &.@{ant-prefix}-dropdown-placement-bottomLeft .@{ant-prefix}-dropdown-menu-root,
+    &.@{ant-prefix}-dropdown-placement-bottomRight .@{ant-prefix}-dropdown-menu-root {
+        margin-top: -@form-item-margin-bottom;
+    }
 }
 
 
