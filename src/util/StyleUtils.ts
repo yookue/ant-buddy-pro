@@ -32,7 +32,7 @@ export abstract class StyleUtils {
      * @param element the element to inspect
      * @param className the class name(s) to add
      */
-    public static addClazz(element?: HTMLElement | null, className?: string | string[] | null): void {
+    public static addClazz(element?: Element | null, className?: string | string[] | null): void {
         if (!element || !className || !className.length) {
             return;
         }
@@ -49,7 +49,7 @@ export abstract class StyleUtils {
      * @param element the element to inspect
      * @param className the class name(s) to remove
      */
-    public static removeClazz(element?: HTMLElement | null, className?: string | null): void {
+    public static removeClazz(element?: Element | null, className?: string | string[] | null): void {
         if (!element || !className || !className.length) {
             return;
         }

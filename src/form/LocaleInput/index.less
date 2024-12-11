@@ -23,19 +23,17 @@
 
 
 .@{buddy-locale-input}-popup {
-    .@{buddy-locale-input}-disabled {
+    background-color: @component-background;
+    box-shadow: @box-shadow-base;
+    z-index: @zindex-dropdown;
+
+    &-disabled {
         color: @disabled-color;
     }
 
     .@{buddy-locale-input}-tag-before, .@{buddy-locale-input}-tag-after {
+        color: @text-color-secondary;
         font-size: @font-size-base - 1px;
-    }
-
-    .@{buddy-locale-input}-tag-before:not(.@{buddy-locale-input}-disabled),
-    .@{buddy-locale-input}-tag-after:not(.@{buddy-locale-input}-disabled) {
-        &:hover {
-            color: @icon-color-hover;
-        }
     }
 
     .@{buddy-locale-input}-action-before:not(.@{buddy-locale-input}-disabled),
@@ -44,6 +42,18 @@
             color: @link-hover-color;
             border-color: @link-hover-color;
             cursor: pointer;
+        }
+    }
+
+    .@{buddy-locale-input}-popup-list .@{buddy-locale-input}-popup-list-item {
+        border-radius: @border-radius-base;
+
+        &:hover {
+            background-color: @item-hover-bg;
+        }
+
+        > .@{ant-prefix}-form-item {
+            width: 100%;
         }
     }
 
@@ -73,29 +83,24 @@
             background-color: @tag-default-bg;
             border: @border-width-base @border-style-base @border-color-base;
             border-radius: @tag-border-radius;
+            color: @text-color-secondary;
             padding: @padding-xss 11px;
             font-size: @font-size-base - 1px;
         }
     }
+}
 
 
-    /* Override Styles */
-
-    > .@{ant-prefix}-dropdown-menu > .@{ant-prefix}-dropdown-menu-item {
-        cursor: default;
-    }
-
-    &.@{ant-prefix}-dropdown-placement-bottom .@{ant-prefix}-dropdown-menu-root,
-    &.@{ant-prefix}-dropdown-placement-bottomLeft .@{ant-prefix}-dropdown-menu-root,
-    &.@{ant-prefix}-dropdown-placement-bottomRight .@{ant-prefix}-dropdown-menu-root {
-        margin-top: -@form-item-margin-bottom;
+.@{buddy-locale-input}-popup.@{buddy-locale-input}-popup-pro-field {
+    .@{buddy-locale-input}-popup-list .@{buddy-locale-input}-popup-list-item:first-of-type {
+        padding-top: @padding-md;
     }
 }
 
 
-.@{buddy-locale-input}-immutable {
-    .@{ant-prefix}-dropdown-menu-item .@{ant-prefix}-form-item {
-        margin-bottom: 0;
+.@{buddy-locale-input}-popup:not(.@{buddy-locale-input}-popup-pro-field) {
+    .@{buddy-locale-input}-popup-list .@{buddy-locale-input}-popup-list-item:first-of-type {
+        padding-top: @padding-xs;
     }
 }
 
