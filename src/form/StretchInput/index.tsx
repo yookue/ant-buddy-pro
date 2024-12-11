@@ -111,7 +111,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
 
     React.useEffect(() => {
         if (stretch && props?.miniature) {
-            document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${fieldId}']`)?.focus();
+            document.querySelector<HTMLInputElement>(`[data-stretch-input-id='${fieldId}']`)?.focus();
         }
         props?.onStretchChange?.(stretch);
     }, [stretch]);
@@ -120,7 +120,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         if (!props?.miniature || !stretch) {
             return;
         }
-        const inspect = document.querySelector<HTMLInputElement>(`input[data-stretch-input-id='${fieldId}']`);
+        const inspect = document.querySelector<HTMLInputElement>(`[data-stretch-input-id='${fieldId}']`);
         if (!inspect?.contains(event.target)) {
             setStretch(false);
         }

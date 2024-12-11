@@ -83,7 +83,7 @@ export type ColorPickerProps = {
      * @description.zh-CN 下拉弹出层的属性
      * @description.zh-TW 下拉彈出層的屬性
      */
-    dropdownProps?: Omit<DropdownProps, 'menu' | 'open' | 'children'>;
+    dropdownProps?: Omit<DropdownProps, 'dropdownRender' | 'menu' | 'open' | 'children'>;
 
     /**
      * @description The properties of the button
@@ -389,11 +389,12 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     };
 
     const entryImmutable = editContext.mode === 'read' || props?.dropdownProps?.disabled;
-    const omitDropdownProps = !props?.dropdownProps ? {} : omit(props?.dropdownProps, ['disabled', 'overlayClassName', 'onOpenChange']);
+    const omitDropdownProps = !props?.dropdownProps ? {} : omit(props?.dropdownProps, ['className', 'disabled', 'overlayClassName', 'onOpenChange']);
     const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className']);
 
     return (
         <Dropdown
+            className={classNames(`${clazzPrefix}-trigger`, props?.dropdownProps?.className)}
             menu={{
                 items: [{
                     key: 'picker',
@@ -402,7 +403,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 onClick: () => setMenuOpen(true),
             }}
             disabled={entryImmutable}
-            overlayClassName={classNames(`${clazzPrefix}-dropdown`, `${clazzPrefix}-dropdown-${fieldId}`, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.dropdownProps?.overlayClassName)}
+            overlayClassName={classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.dropdownProps?.overlayClassName)}
             open={menuOpen}
             onOpenChange={(open: boolean) => {
                 setMenuOpen(open);
@@ -414,6 +415,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 ref={fieldRef}
                 className={classNames(clazzPrefix, (props?.buttonProps?.block ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
                 style={props?.containerStyle}
+                data-color-picker-entry={fieldId}
             >
                 <Button
                     className={classNames(`${clazzPrefix}-button`, props?.buttonProps?.className)}

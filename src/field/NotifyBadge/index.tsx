@@ -257,7 +257,7 @@ export type NotifyBadgeProps = {
      * @description.zh-CN 下拉弹出层的属性
      * @description.zh-TW 下拉彈出層的屬性
      */
-    dropdownProps?: Omit<DropdownProps, 'menu' | 'dropdownRender' | 'children'>;
+    dropdownProps?: Omit<DropdownProps, 'dropdownRender' | 'menu' | 'children'>;
 
     /**
      * @description The properties of the tabs
@@ -461,9 +461,10 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
 
     return !dropdownEnabled ? hyperlinkDom : (
         <Dropdown
+            className={classNames(`${clazzPrefix}-trigger`, props?.dropdownProps?.className)}
             menu={{items: menuItems}}
-            overlayClassName={classNames(`${clazzPrefix}-dropdown`, props?.dropdownProps?.overlayClassName)}
-            {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['overlayClassName']))}
+            overlayClassName={classNames(`${clazzPrefix}-popup`, props?.dropdownProps?.overlayClassName)}
+            {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['className', 'overlayClassName']))}
         >
             {hyperlinkDom}
         </Dropdown>

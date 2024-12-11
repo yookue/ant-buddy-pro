@@ -220,8 +220,8 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     }
 
     const restoreLayout = (event: any) => {
-        const inspect = document.querySelector<HTMLDivElement>(`div[data-collapse-form-entry-id='${fieldId}']`);
-        const sponsor = document.querySelector<HTMLDivElement>(`div[data-collapse-form-content-id='${fieldId}']`);
+        const inspect = document.querySelector<HTMLDivElement>(`[data-collapse-form-entry-id='${fieldId}']`);
+        const sponsor = document.querySelector<HTMLDivElement>(`[data-collapse-form-content-id='${fieldId}']`);
         if (!inspect?.contains(event.target) && !sponsor?.contains(event.target)) {
             setFormOpen(false);
         }
