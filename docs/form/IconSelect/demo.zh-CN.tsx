@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Divider, Empty} from 'antd';
+import {Divider, Empty, message as messageApi} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {IconSelect, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {IconOptionMode} from '@yookue/ant-buddy-pro/form/IconSelect';
@@ -28,7 +28,7 @@ export default () => {
     const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
     const [themeInkBar, setThemeInkBar] = React.useState<boolean>(true);
     const [sceneInkBar, setSceneInkBar] = React.useState<boolean>(true);
-    const [showSearch, setShowSearch] = React.useState<boolean>(true);
+    const [searchBox, setSearchBox] = React.useState<boolean>(true);
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
@@ -37,7 +37,15 @@ export default () => {
                 name='IconSelect_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
-                submitter={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: '提交',
+                        resetText: '重置',
+                    }
+                }}
+                onFinish={async () => {
+                    messageApi.success('您点击了提交按钮');
+                }}
             >
                 <ProForm.Group>
                     <ProFormRadio.Group
@@ -102,9 +110,9 @@ export default () => {
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
-                            checked: showSearch,
+                            checked: searchBox,
                             disabled: optionMode === 'text',
-                            onChange: setShowSearch,
+                            onChange: setSearchBox,
                         }}
                     />
                     <ProFormSwitch
@@ -122,19 +130,25 @@ export default () => {
                 <IconSelect
                     name='DemoIcon'
                     placeholder='请选择图标'
-                    optionMode={optionMode}
-                    themeInkBar={themeInkBar}
-                    sceneInkBar={sceneInkBar}
                     fieldProps={{
                         notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='无数据'/>),
-                        showSearch: showSearch,
                         onChange: (value) => {
                             ConsoleUtils.logTimestamp(false, false, 'IconSelect', 'onChange value = ' + value);
                         }
                     }}
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入示例字段',
+                        },
+                    ]}
+                    optionMode={optionMode}
+                    themeInkBar={themeInkBar}
+                    sceneInkBar={sceneInkBar}
                     tabsProps={{
                         tabPosition: tabPos,
                     }}
+                    searchBox={searchBox}
                     tooltipCtrl={tooltipCtrl}
                     locale='zh_CN'
                 />

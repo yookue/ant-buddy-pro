@@ -48,7 +48,7 @@ export type IconOptionMode = 'icon' | 'text';
 
 
 export type SelectFieldProps = Omit<ProFormFieldItemProps<SelectProps, RefSelectProps>, 'fieldProps'> & {
-    fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'dropdownRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'onPopupScroll'>;
+    fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'dropdownRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'showSearch' | 'onPopupScroll'>;
 };
 
 
@@ -260,6 +260,14 @@ export type IconSelectProps = SelectFieldProps & {
     optionIconStyle?: React.CSSProperties;
 
     /**
+     * @description Whether to display the search box or not
+     * @description.zh-CN 是否显示搜索框
+     * @description.zh-TW 是否顯示搜索框
+     * @default true
+     */
+    searchBox?: boolean;
+
+    /**
      * @description Whether to use Tooltip
      * @description.zh-CN 是否使用 Tooltip
      * @description.zh-TW 是否使用 Tooltip
@@ -318,6 +326,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         defaultSceneType = 'direction',
         sceneInkBar = true,
         sceneEntryWidth = '150px',
+        searchBox = true,
         tooltipCtrl = false,
         locale = intlType.locale,
     } = props ?? {};
@@ -662,11 +671,11 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     event.preventDefault();
                     event.stopPropagation();
                 }}
-                onClick={(props?.fieldProps?.showSearch === false) ? undefined : (event) => {
+                onClick={!searchBox ? undefined : (event) => {
                     if (event.target !== searchRef.current?.input && searchRef.current?.input === document.activeElement) {
                         // Disabled and re-enable the search box to restore non-focus state
                         setSearchDisabled(true);
-                        setTimeout(() => setSearchDisabled(false), 50);
+                        window.setTimeout(() => setSearchDisabled(false), 100);
                     }
                 }}
                 data-icon-select-popup={fieldId}
@@ -678,17 +687,23 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     inkBar={themeInkBar}
                     tabBarExtraContent={(
                         <>
-                            <If condition={props?.fieldProps?.showSearch !== false} validation={false}>
+                            <If condition={searchBox} validation={false}>
                                 <Input.Search
                                     ref={searchRef}
                                     placeholder={props?.localeProps?.search || intlLocales.get([locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
                                     allowClear={true}
                                     size='small'
                                     disabled={searchDisabled}
+                                    value={props?.fieldProps?.searchValue}
+                                    onFocus={() => {
+                                        const inspect = searchRef.current?.input?.closest(`.${configContext.getPrefixCls('input-affix-wrapper')}`) as HTMLElement;
+                                        window.setTimeout(() => StyleUtils.removeClazz(inspect, configContext.getPrefixCls('input-affix-wrapper-status-error')), 100);
+                                    }}
                                     onSearch={(value: string) => {
                                         setSearchWord(value);
                                         props?.fieldProps?.onSearch?.(value);
                                     }}
+                                    data-icon-select-search={fieldId}
                                 />
                             </If>
                             {props?.tabsProps?.tabBarExtraContent}
@@ -724,10 +739,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'dropdownStyle', 'open', 'showSearch', 'virtual', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'dropdownStyle', 'open', 'virtual', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'tabsProps', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'tabsProps', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'searchBox', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
         return (
             <ProFormSelect
                 {...restProps}
@@ -736,16 +751,18 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     ...omitFieldProps,
                     disabled: entryImmutable,
                     dropdownRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
-                    dropdownStyle: ObjectUtils.defaultProps((props?.fieldProps?.dropdownStyle ?? {}), {
+                    dropdownStyle: ObjectUtils.defaultProps(props?.fieldProps?.dropdownStyle, {
                         padding: 0,
                     }),
                     options: textOptions,
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
-                    showSearch: props?.fieldProps?.showSearch ?? true,
+                    showSearch: false,
                     onClear: handleOptionClear,
                     onDeselect: handleOptionDeselect,
                     onDropdownVisibleChange: handleDropdownOpenChange,
+                    // @ts-ignore
+                    'data-icon-select-id': fieldId,
                 }}
             />
         );
@@ -758,17 +775,18 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 {...omitFieldProps}
                 disabled={entryImmutable}
                 dropdownRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
-                dropdownStyle={ObjectUtils.defaultProps((props?.fieldProps?.dropdownStyle ?? {}), {
+                dropdownStyle={ObjectUtils.defaultProps(props?.fieldProps?.dropdownStyle, {
                     padding: 0,
                 })}
                 options={textOptions}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}
                 popupClassName={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-popup`, props?.fieldProps?.popupClassName) : undefined}
-                showSearch={props?.fieldProps?.showSearch ?? true}
+                showSearch={false}
                 onClear={handleOptionClear}
                 onDeselect={handleOptionDeselect}
                 onDropdownVisibleChange={handleDropdownOpenChange}
+                data-icon-select-id={fieldId}
             />
         );
     }
