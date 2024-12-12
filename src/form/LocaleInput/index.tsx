@@ -398,6 +398,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         return buildEntryDom();
     }
 
+    const [confirmOpen, setConfirmOpen] = React.useState<boolean>();
+
     const handleSetAsDefault = (tagId: string) => {
         const inspect = document.querySelector<HTMLInputElement>(`[data-locale-input-id='${fieldId}']`);
         const sponsor = document.querySelector<HTMLInputElement>(`[data-locale-input-tag='${tagId}']`);
@@ -430,6 +432,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         cancelText={popupConfirmProps?.cancel || intlLocales.get([locale, 'cancel'])}
                         disabled={itemDisabled || itemReadonly}
                         onConfirm={() => handleSetAsDefault(elementId)}
+                        onOpenChange={setConfirmOpen}
                     >
                         <span className={actionClazz}>
                             {popupAddon}
@@ -702,7 +705,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             popupVisible={triggerOpen}
             stretch={props?.triggerProps?.stretch ?? 'width'}
             onPopupVisibleChange={(open: boolean) => {
-                if (!open && compositionRef.current) {
+                if (!open && (compositionRef.current || confirmOpen)) {
                     return;
                 }
                 setTriggerOpen(open);
