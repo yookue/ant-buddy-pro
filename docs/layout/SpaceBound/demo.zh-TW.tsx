@@ -22,7 +22,8 @@ import {SpaceBound} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
-    const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
+    const [borderBound, setBorderBound] = React.useState<boolean>(true);
+    const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
 
     return (
         <>
@@ -32,25 +33,32 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProFormSwitch
-                    label='匹配寬度'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: widthBlock,
-                        onChange: setWidthBlock,
-                    }}
-                />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='外邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderBound,
+                            onChange: setBorderBound,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='匹配寬度'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: widthBlock,
+                            onChange: setWidthBlock,
+                        }}
+                    />
+                </ProForm.Group>
             </ProForm>
             <Divider/>
             <SpaceBound
                 size='middle'
+                borderBound={borderBound}
                 widthBlock={widthBlock}
-                containerStyle={{
-                    border: '1px solid #f5f2f0',
-                    borderRadius: '2px',
-                    backgroundColor: '#f5f5f5',
-                }}
             >
                 <span>這是第一個子節點。</span>
                 <span>這是第二個子節點。</span>

@@ -48,8 +48,15 @@ export type SpaceBoundProps = SpaceProps & {
     containerStyle?: React.CSSProperties;
 
     /**
+     * @description Whether to border the bound or not
+     * @description.zh-CN 外边界是否有边框
+     * @description.zh-TW 外邊界是否有邊框
+     */
+    borderBound?: boolean;
+
+    /**
      * @description Whether to pad the bound or not
-     * @description.zh-CN 外边框是否填充内边距
+     * @description.zh-CN 外边界是否填充内边距
      * @description.zh-TW 外邊框是否填充內邊距
      * @default true
      */
@@ -106,17 +113,17 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
         return ((Array.isArray(size) ? size : [size, size]) as [SpaceSize, SpaceSize]).map(item => getNumericSize(item));
     }, [size]);
 
-    const buildContainerCss = () => {
+    const buildPaddingCss = () => {
         return !padBound ? undefined : css({
             padding: `${verticalSize}px ${horizontalSize}px`,
         });
     };
 
-    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'padBound', 'widthBlock']);
+    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'borderBound', 'padBound', 'widthBlock']);
 
     return (
         <div
-            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), buildContainerCss(), props?.containerClazz)}
+            className={classNames(clazzPrefix, (props?.borderBound ? `${clazzPrefix}-border-bound` : undefined), (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), buildPaddingCss(), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space {...restProps}>
