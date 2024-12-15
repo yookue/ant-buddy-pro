@@ -24,6 +24,7 @@ import {BadgeRibbon} from '@yookue/ant-buddy-pro';
 export default () => {
     const [emptyText, setEmptyText] = React.useState<boolean>(false);
     const [renderEmpty, setRenderEmpty] = React.useState<boolean>(false);
+    const [transparent, setTransparent] = React.useState<boolean>(false);
 
     return (
         <>
@@ -53,12 +54,26 @@ export default () => {
                             onChange: setRenderEmpty,
                         }}
                     />
+                    <ProFormSwitch
+                        label='透明色'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: transparent,
+                            onChange: setTransparent,
+                        }}
+                    />
                 </ProForm.Group>
             </ProForm>
             <BadgeRibbon
                 color='lime'
                 renderEmpty={renderEmpty}
-                text={emptyText ? undefined : 'ant-buddy-pro'}
+                transparent={transparent}
+                text={emptyText ? undefined : (
+                    <span style={{color: transparent ? 'green' : undefined}}>
+                        ant-buddy-pro
+                    </span>
+                )}
             >
                 <Card title='BadgeRibbon'>
                     壹只棕色敏捷的狐貍跳過了壹只懶洋洋的狗。

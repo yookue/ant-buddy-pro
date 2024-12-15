@@ -24,6 +24,7 @@ import {BadgeRibbon} from '@yookue/ant-buddy-pro';
 export default () => {
     const [emptyText, setEmptyText] = React.useState<boolean>(false);
     const [renderEmpty, setRenderEmpty] = React.useState<boolean>(false);
+    const [transparent, setTransparent] = React.useState<boolean>(false);
 
     return (
         <>
@@ -53,12 +54,26 @@ export default () => {
                             onChange: setRenderEmpty,
                         }}
                     />
+                    <ProFormSwitch
+                        label='Transparent'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: transparent,
+                            onChange: setTransparent,
+                        }}
+                    />
                 </ProForm.Group>
             </ProForm>
             <BadgeRibbon
                 color='lime'
                 renderEmpty={renderEmpty}
-                text={emptyText ? undefined : 'ant-buddy-pro'}
+                transparent={transparent}
+                text={emptyText ? undefined : (
+                    <span style={{color: transparent ? 'green' : undefined}}>
+                        ant-buddy-pro
+                    </span>
+                )}
             >
                 <Card title='BadgeRibbon'>
                     The quick brown fox jumps over a lazy dog.
