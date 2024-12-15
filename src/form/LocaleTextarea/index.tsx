@@ -22,9 +22,8 @@ import {ProFormTextArea} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {nanoid} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
-import {StringUtils} from '@yookue/ts-lang-utils';
+import {NanoidUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type ReadonlyTabsType, type RuleValidateScope} from '@/type/declaration';
@@ -260,7 +259,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
         switchProField = true,
     } = props ?? {};
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
 
     const buildEntryDom = () => {
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className']);

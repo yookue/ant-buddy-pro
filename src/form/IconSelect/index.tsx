@@ -26,9 +26,8 @@ import {ProFormSelect} from '@ant-design/pro-form';
 import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {nanoid} from '@ant-design/pro-utils';
 import {If, For, MapIterator} from '@yookue/react-condition';
-import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {Scrollbars} from 'rc-scrollbars';
 import {type DefaultOptionType} from 'rc-select/es/select';
@@ -329,7 +328,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         locale = intlType.locale,
     } = props ?? {};
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [dropdownOpen, setDropdownOpen] = React.useState<boolean>((props?.fieldProps?.open || props?.fieldProps?.defaultOpen) ?? false);
     const [searchWord, setSearchWord] = React.useState<string | undefined>(props?.fieldProps?.searchValue);
     const [searchDisabled, setSearchDisabled] = React.useState<boolean>(false);

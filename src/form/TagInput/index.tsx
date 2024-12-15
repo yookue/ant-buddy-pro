@@ -24,8 +24,8 @@ import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProp
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {nanoid, useDebounceFn} from '@ant-design/pro-utils';
-import {ArrayUtils, NumberUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {useDebounceFn} from '@ant-design/pro-utils';
+import {ArrayUtils, NanoidUtils, NumberUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import objectHash from 'object-hash';
 import omit from 'rc-util/es/omit';
@@ -234,7 +234,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         locale = intlType.locale,
     } = props ?? {};
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [inputName, setInputName] = React.useState<string>();
     const [inputValue, setInputValue] = React.useState<string>();

@@ -19,7 +19,7 @@ import React from 'react';
 import {ConfigProvider, Input, type InputProps, type InputRef} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
-import {nanoid} from '@ant-design/pro-utils';
+import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type ClickHoverType} from '@/type/declaration';
@@ -95,7 +95,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         triggerType = 'click',
     } = props ?? {};
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [stretch, setStretch] = React.useState<boolean>(false);
 
     React.useLayoutEffect(() => {

@@ -20,8 +20,7 @@ import {ConfigProvider, Button, Dropdown, Space, type ButtonProps, type Dropdown
 import {FormContext} from 'antd/es/form/context';
 import {DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {nanoid} from '@ant-design/pro-utils';
-import {ColorUtils} from '@yookue/ts-lang-utils';
+import {ColorUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {BlockPicker, ChromePicker, CirclePicker, CompactPicker, GithubPicker, HuePicker, MaterialPicker, SketchPicker, SwatchesPicker, TwitterPicker} from 'react-color';
@@ -211,7 +210,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
 
     ConsoleUtils.warn(ColorUtils.isHex(value as string), true, 'ColorPicker',  `Prop 'value' must be a valid hex color`);
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [hexColor, setHexColor] = React.useState<Color>(value as string);
     const [menuOpen, setMenuOpen] = React.useState<boolean>(defaultOpen);

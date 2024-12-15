@@ -18,7 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Form, type FormProps, type FormInstance} from 'antd';
 import {ProForm, type ProFormProps, type ProFormInstance} from '@ant-design/pro-form';
-import {nanoid} from '@ant-design/pro-utils';
+import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type ClickHoverType} from '@/type/declaration';
@@ -182,7 +182,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         proField = true,
     } = props ?? {};
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const formRef = Form.useFormInstance();
     const proFormRef = React.useRef<ProFormInstance>(null);
     const [formOpen, setFormOpen] = React.useState<boolean>(defaultOpen);

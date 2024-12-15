@@ -21,9 +21,8 @@ import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {useIntl} from '@ant-design/pro-provider';
-import {nanoid} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
-import {BooleanUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {BooleanUtils, NanoidUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import Trigger, {type TriggerProps} from 'rc-trigger';
 import 'rc-trigger/assets/index.less';
@@ -308,7 +307,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         locale = intlType.locale,
     } = props ?? {};
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const compositionRef = React.useRef<boolean>(false);
 
     const buildEntryAddonDom = (before: boolean) => {
@@ -509,7 +508,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 const {tag, fieldProps, rules} = itemProp;
                 const restProps = omit(itemProp, ['tag', 'name', 'fieldProps', 'proFieldProps', 'rules']);
                 const omitFieldProps = !fieldProps ? {} : omit(fieldProps, ['className', 'name', 'id', 'placeholder', 'autoComplete', 'addonBefore', 'addonAfter', 'allowClear', 'bordered', 'maxLength', 'showCount', 'size', 'disabled', 'readOnly', 'onCompositionStart', 'onCompositionEnd']);
-                const tagId = nanoid().replace(/-/g, '');
+                const tagId = NanoidUtils.getPopularId();
                 const beforeDom = buildItemAddonDom(tag, true, tagId, itemProp);
                 const afterDom = buildItemAddonDom(tag, false, tagId, itemProp);
                 const itemDom = (
@@ -593,7 +592,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 if (!tag) {
                     continue;
                 }
-                const tagId = nanoid().replace(/-/g, '');
+                const tagId = NanoidUtils.getPopularId();
                 const beforeDom = buildItemAddonDom(tag, true, tagId);
                 const afterDom = buildItemAddonDom(tag, false, tagId);
                 const itemDom = (

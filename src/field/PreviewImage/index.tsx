@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {ConfigProvider, Image} from 'antd';
-import {nanoid} from '@ant-design/pro-utils';
+import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type ImagePreviewType as RcImagePreviewProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
@@ -58,7 +58,7 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-preview-image');
 
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
 
     const [imageSource, setImageSource] = React.useState(() => {
         return ImageUtils.detectSource(props?.src, data => setImageSource(data));
