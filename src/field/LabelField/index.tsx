@@ -123,10 +123,8 @@ export type LabelFieldProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-label-field');
 
     // Initialize the default props

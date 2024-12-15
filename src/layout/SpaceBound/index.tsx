@@ -77,9 +77,7 @@ export type SpaceBoundProps = SpaceProps & {
  * @author David Hsing
  */
 export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-space-bound');
 
     // Initialize the default props

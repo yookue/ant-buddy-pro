@@ -115,9 +115,7 @@ export type ApartTitleProps = {
  * @author David Hsing
  */
 export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-apart-title');
 
     // Initialize the default props

@@ -151,9 +151,7 @@ export type CodePreviewProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-code-preview');
 
     // Initialize the default props

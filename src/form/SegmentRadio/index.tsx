@@ -92,10 +92,8 @@ export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'pla
  * @author David Hsing
  */
 export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-radio');
 
     // Initialize the default props

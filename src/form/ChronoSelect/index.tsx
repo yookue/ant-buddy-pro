@@ -156,9 +156,7 @@ export type ChronoSelectProps = ProFormSelectProps & {
  * @author David Hsing
  */
 export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-chrono-select');
     const intlType = useIntl();
 

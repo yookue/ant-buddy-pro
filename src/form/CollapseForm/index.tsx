@@ -170,9 +170,7 @@ export type CollapseFormProps = React.PropsWithChildren<{
 export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & React.RefAttributes<CollapseFormRef>> = React.forwardRef((props?: CollapseFormProps, ref?: any) => {
     CollapseForm.displayName = 'CollapseForm';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-collapse-form');
 
     // Initialize the default props

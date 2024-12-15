@@ -132,9 +132,7 @@ export type CountFieldProps = React.PropsWithChildren<{
 export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React.RefAttributes<CountFieldRef>> = React.forwardRef((props?: CountFieldProps, ref?: any) => {
     CountField.displayName = 'CountField';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-count-field');
 
     // Initialize the default props

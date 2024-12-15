@@ -228,9 +228,7 @@ export type MenuTabsProps = {
  * @author David Hsing
  */
 export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-menu-tabs');
 
     // Initialize the default props

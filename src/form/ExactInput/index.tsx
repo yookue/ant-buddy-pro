@@ -149,9 +149,7 @@ export type ExactInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @author David Hsing
  */
 export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-exact-input');
     const intlType = useIntl();
 

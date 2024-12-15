@@ -91,9 +91,7 @@ export type BorderBoxProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-border-box');
 
     // Initialize the default props

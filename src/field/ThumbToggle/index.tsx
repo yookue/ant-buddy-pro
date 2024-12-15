@@ -211,9 +211,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
 export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & React.RefAttributes<ThumbToggleRef>> = React.forwardRef((props?: ThumbToggleProps, ref?: any) => {
     ThumbToggle.displayName = 'ThumbToggle';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-toggle');
     const intlType = useIntl();
 

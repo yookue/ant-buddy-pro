@@ -205,9 +205,7 @@ export type PageFooterProps = {
  * @author David Hsing
  */
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-page-footer');
 
     // Initialize the default props

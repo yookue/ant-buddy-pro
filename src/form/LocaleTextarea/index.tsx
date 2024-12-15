@@ -237,10 +237,8 @@ export type LocaleTextareaProps = ProFormFieldItemProps<TextAreaProps, TextAreaR
  * @author David Hsing
  */
 export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleTextareaProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-textarea');
     const intlType = useIntl();
 

@@ -83,9 +83,7 @@ export type ThumbTupleProps = {
 export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React.RefAttributes<ThumbTupleRef>> = React.forwardRef((props?: ThumbTupleProps, ref?: any) => {
     ThumbTuple.displayName = 'ThumbTuple';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-tuple');
 
     const fieldRef = React.useRef<HTMLDivElement>(null);

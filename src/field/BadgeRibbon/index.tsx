@@ -62,9 +62,7 @@ export type BadgeRibbonProps = RibbonProps & {
  * @author David Hsing
  */
 export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-badge-ribbon');
 
     // Initialize the default props

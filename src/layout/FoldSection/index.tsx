@@ -235,9 +235,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fold-section');
     const intlType = useIntl();
 

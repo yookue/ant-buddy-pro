@@ -304,11 +304,9 @@ export type IconSelectProps = SelectFieldProps & {
  * @author David Hsing
  */
 export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
     const intlType = useIntl();
 

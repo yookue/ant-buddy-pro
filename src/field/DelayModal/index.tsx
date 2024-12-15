@@ -136,9 +136,7 @@ export type DelayModalProps = React.PropsWithChildren<{
 export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React.RefAttributes<DelayModalRef>> = React.forwardRef((props?: DelayModalProps, ref?: any) => {
     DelayModal.displayName = 'DelayModal';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-delay-modal');
 
     ConsoleUtils.warn(!!props?.modalProps || !!props?.modalFunProps, true, 'DelayModal', ` Any props of 'modalProps/modalFunProps' is required`);

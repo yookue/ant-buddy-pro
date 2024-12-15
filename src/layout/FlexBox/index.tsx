@@ -160,9 +160,7 @@ export type FlexBoxProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-flex-box');
 
     const buildContainerCss = () => {

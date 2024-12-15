@@ -143,10 +143,8 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'fieldRef' | 'onGetCap
 const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & React.RefAttributes<CaptchaInputRef>> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
     CaptchaInputField.displayName = 'CaptchaInput';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-captcha-input');
     const intlType = useIntl();
 

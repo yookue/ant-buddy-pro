@@ -92,9 +92,7 @@ export type AvatarStampProps = AvatarProps & {
  * @author David Hsing
  */
 export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-avatar-stamp');
 
     // Initialize the default props

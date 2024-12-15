@@ -91,9 +91,7 @@ export type RemoteFieldProps = Omit<ProFormFieldRemoteProps, 'request' | 'valueE
 export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & React.RefAttributes<RemoteFieldRef>> = React.forwardRef((props?: RemoteFieldProps, ref?: any) => {
     RemoteField.displayName = 'RemoteField';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-remote-field');
 
     // Initialize the default props

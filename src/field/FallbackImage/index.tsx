@@ -54,9 +54,7 @@ export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
  * @author David Hsing
  */
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fallback-image');
 
     const [imageSource, setImageSource] = React.useState(() => {

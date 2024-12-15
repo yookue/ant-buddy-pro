@@ -87,10 +87,8 @@ export type ChronoTupleProps = {
  * @author David Hsing
  */
 export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-chrono-tuple');
 
     // Initialize the default props

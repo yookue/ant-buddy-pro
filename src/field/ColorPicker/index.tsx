@@ -196,11 +196,9 @@ export type ColorPickerProps = {
 export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & React.RefAttributes<ColorPickerRef>> = React.forwardRef((props?: ColorPickerProps, ref?: any) => {
     ColorPicker.displayName = 'ColorPicker';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-color-picker');
 
     // Initialize the default props

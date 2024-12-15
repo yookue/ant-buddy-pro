@@ -288,9 +288,7 @@ export type NotifyBadgeProps = {
  * @author David Hsing
  */
 export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-notify-badge');
     const intlType = useIntl();
 

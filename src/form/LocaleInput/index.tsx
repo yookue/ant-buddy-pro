@@ -278,9 +278,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @author David Hsing
  */
 export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
     const intlType = useIntl();
 

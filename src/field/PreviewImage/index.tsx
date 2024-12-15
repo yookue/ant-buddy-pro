@@ -55,9 +55,7 @@ export type PreviewImageProps = Omit<RcImagePreviewProps, 'src' | 'current' | 'c
  * @author David Hsing
  */
 export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImageProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-preview-image');
 
     const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));

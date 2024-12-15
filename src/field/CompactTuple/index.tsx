@@ -177,10 +177,8 @@ export type CompactTupleProps = {
  * @author David Hsing
  */
 export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTupleProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-compact-tuple');
 
     // Initialize the default props

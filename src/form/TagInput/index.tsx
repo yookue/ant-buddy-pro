@@ -219,11 +219,9 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps
 const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAttributes<TagInputRef>> = React.forwardRef((props?: TagInputProps, ref?: any) => {
     TagInputField.displayName = 'TagInput';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-tag-input');
     const intlType = useIntl();
 

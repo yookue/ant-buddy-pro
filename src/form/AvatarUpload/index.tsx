@@ -267,10 +267,8 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldP
 const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & React.RefAttributes<AvatarUploadRef>> = React.forwardRef((props?: AvatarUploadProps, ref?: any) => {
     AvatarUploadField.displayName = 'AvatarUpload';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-avatar-upload');
     const intlType = useIntl();
 

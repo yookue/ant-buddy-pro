@@ -113,9 +113,7 @@ export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition'> & {
  * @author David Hsing
  */
 export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-card-tabs');
 
     // Initialize the default props

@@ -87,9 +87,7 @@ export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @author David Hsing
  */
 export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-stretch-input');
 
     // Initialize the default props

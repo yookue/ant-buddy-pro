@@ -59,10 +59,8 @@ export type MaskInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @author David Hsing
  */
 export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
 
     ConsoleUtils.warn(!!formContext?.form, true, 'MaskInput',  `Field '${props?.name}' needs a Form instance`);

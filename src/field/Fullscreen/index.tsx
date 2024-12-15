@@ -126,9 +126,7 @@ export type FullscreenProps = {
 export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React.RefAttributes<FullscreenRef>> = React.forwardRef((props?: FullscreenProps, ref?: any) => {
     Fullscreen.displayName = 'Fullscreen';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fullscreen');
     const intlType = useIntl();
 

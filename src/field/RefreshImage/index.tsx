@@ -68,9 +68,7 @@ export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
  * @author David Hsing
  */
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-refresh-image');
 
     const [imageSource, setImageSource] = React.useState(() => {

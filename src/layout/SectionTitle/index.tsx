@@ -115,9 +115,7 @@ export type SectionTitleProps = {
  * @author David Hsing
  */
 export const SectionTitle: React.FC<SectionTitleProps> = (props?: SectionTitleProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-section-title');
 
     // Initialize the default props

@@ -47,11 +47,8 @@ export type SettingDrawerProps = ProSettingDrawerProps & {
  * @author David Hsing
  */
 export const SettingDrawer: React.FC<SettingDrawerProps> = (props?: SettingDrawerProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-setting-drawer');
-    // noinspection JSUnresolvedReference
     const handlePrefix = configContext.getPrefixCls('buddy');
 
     const omitProps = !props ? {} : omit(props, ['clazzPrefix', 'entryClazz', 'prefixCls']);

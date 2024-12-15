@@ -150,9 +150,7 @@ export type LoginPortalProps = {
  * @author David Hsing
  */
 export const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-login-portal');
 
     return (

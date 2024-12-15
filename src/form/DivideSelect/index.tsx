@@ -146,9 +146,7 @@ export type DivideSelectProps = ProFormSelectProps & {
  * @author David Hsing
  */
 export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-divide-select');
 
     // Initialize the default props
