@@ -167,8 +167,8 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
 
     /**
      * @description Whether the dropdown div is default open or not
-     * @description.zh-CN 弹出层是否默认展开
-     * @description.zh-TW 彈出層是否默認展開
+     * @description.zh-CN 是否默认展开弹出层
+     * @description.zh-TW 是否默認展開彈出層
      * @default false
      */
     defaultOpen?: boolean;

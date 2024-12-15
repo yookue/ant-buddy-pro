@@ -72,8 +72,8 @@ export type ColorPickerProps = {
 
     /**
      * @description Whether the dropdown div is default open or not
-     * @description.zh-CN 下拉弹出层是否默认展开
-     * @description.zh-TW 下拉彈出層是否默認展開
+     * @description.zh-CN 是否默认展开下拉弹出层
+     * @description.zh-TW 是否默認展開下拉彈出層
      * @default false
      */
     defaultOpen?: boolean;

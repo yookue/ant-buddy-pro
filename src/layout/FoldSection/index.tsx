@@ -192,8 +192,8 @@ export type FoldSectionProps = React.PropsWithChildren<{
 
     /**
      * @description Whether the panel div is opened when initializing
-     * @description.zh-CN 面板 div 初始化时是否展开
-     * @description.zh-TW 面板 div 初始化時是否展開
+     * @description.zh-CN 是否默认展开面板 div
+     * @description.zh-TW 是否默認展開面板 div
      * @default true
      */
     defaultOpen?: boolean;

@@ -138,8 +138,8 @@ export type CollapseFormProps = React.PropsWithChildren<{
 
     /**
      * @description Whether the form is default open or not
-     * @description.zh-CN 表单是否默认展开
-     * @description.zh-TW 表單是否默認展開
+     * @description.zh-CN 是否默认展开表单
+     * @description.zh-TW 是否默認展開表單
      * @default false
      */
     defaultOpen?: boolean;
