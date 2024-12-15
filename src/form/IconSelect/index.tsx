@@ -335,6 +335,25 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const [searchDisabled, setSearchDisabled] = React.useState<boolean>(false);
     const searchRef = React.useRef<InputRef>(null);
 
+    const handleWindowResize = () => {
+        const inspect = document.querySelector<HTMLDivElement>(`[data-icon-select-id='${fieldId}']`);
+        const sponsor = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-popup-${fieldId}`);
+        if (inspect && sponsor) {
+            StyleUtils.addStyle(sponsor, 'width', `${inspect.offsetWidth}px`);
+            StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
+        }
+    };
+
+    if (props?.fieldProps?.dropdownMatchSelectWidth !== false) {
+        React.useLayoutEffect(() => {
+            window.addEventListener('resize', handleWindowResize);
+            handleWindowResize();
+            return () => {
+                window.removeEventListener('resize', handleWindowResize);
+            };
+        }, []);
+    }
+
     const buildTextOptions = () => {
         const result: any[] = [];
         ['outlined', 'filled', 'twotone'].filter(themeType => themeTypes?.includes(themeType as IconThemeType)).forEach(themeType => {
@@ -395,7 +414,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const clearIconsBadge = () => {
-        const inspects = document.querySelectorAll<HTMLElement>(`[data-icon-select-popup='${fieldId}'] [data-icon-select-option]`);
+        const inspects = document.querySelectorAll<HTMLElement>(`[data-icon-select-popup-wrapper='${fieldId}'] [data-icon-select-option]`);
         inspects?.forEach(item => StyleUtils.removeClazz(item as HTMLElement, `${clazzPrefix}-icon-selected`));
     };
 
@@ -403,7 +422,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         if (StringUtils.isBlank(iconName)) {
             return;
         }
-        const inspect = document.querySelector<HTMLElement>(`[data-icon-select-popup='${fieldId}'] [data-icon-select-option='${iconName}']`);
+        const inspect = document.querySelector<HTMLElement>(`[data-icon-select-popup-wrapper='${fieldId}'] [data-icon-select-option='${iconName}']`);
         if (inspect) {
             selected ? StyleUtils.addClazz(inspect, `${clazzPrefix}-icon-selected`) : StyleUtils.removeClazz(inspect, `${clazzPrefix}-icon-selected`);
         }
@@ -664,7 +683,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const renderDropdown = () => {
         return (
             <div
-                className={classNames(`${clazzPrefix}-popup`, props?.fieldProps?.popupClassName)}
+                className={`${clazzPrefix}-popup-wrapper`}
                 onMouseDown={event => {
                     event.preventDefault();
                     event.stopPropagation();
@@ -676,7 +695,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         window.setTimeout(() => setSearchDisabled(false), 100);
                     }
                 }}
-                data-icon-select-popup={fieldId}
+                data-icon-select-popup-wrapper={fieldId}
             >
                 <CardTabs
                     className={classNames(`${clazzPrefix}-popup-tabs`, props?.tabsProps?.className)}
@@ -737,7 +756,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     };
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'dropdownStyle', 'open', 'virtual', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'dropdownStyle', 'open', 'popupClassName', 'virtual', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
 
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'tabsProps', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'searchBox', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
@@ -755,6 +774,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     options: textOptions,
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
+                    popupClassName: classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.popupClassName),
                     showSearch: false,
                     onClear: handleOptionClear,
                     onDeselect: handleOptionDeselect,
@@ -779,7 +799,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 options={textOptions}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}
-                popupClassName={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? classNames(`${clazzPrefix}-popup`, props?.fieldProps?.popupClassName) : undefined}
+                popupClassName={classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.popupClassName)}
                 showSearch={false}
                 onClear={handleOptionClear}
                 onDeselect={handleOptionDeselect}
