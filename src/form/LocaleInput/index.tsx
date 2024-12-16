@@ -30,6 +30,7 @@ import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
 import {ElementUtils} from '@/util/ElementUtils';
 import {PropUtils} from '@/util/PropUtils';
+import {StyleUtils} from '@/util/StyleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
@@ -310,6 +311,24 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const compositionRef = React.useRef<boolean>(false);
 
+    // noinspection DuplicatedCode
+    const handleWindowResize = () => {
+        const inspect = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
+        const sponsor = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-popup-${fieldId}`);
+        if (inspect && sponsor) {
+            StyleUtils.addStyle(sponsor, 'width', `${inspect.offsetWidth}px`);
+            StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
+        }
+    };
+
+    React.useLayoutEffect(() => {
+        window.addEventListener('resize', handleWindowResize);
+        handleWindowResize();
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
     const buildEntryAddonDom = (before: boolean) => {
         if (before && !props?.fieldProps?.addonBefore && addonPos === 'before' && !addon) {
             return undefined;
@@ -364,7 +383,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 <ProFormText
                     {...restProps}
                     fieldProps={{
-                        className: classNames(clazzPrefix, props?.fieldProps?.className),
+                        className: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className),
                         addonBefore: buildEntryAddonDom(true),
                         addonAfter: buildEntryAddonDom(false),
                         ...omitFieldProps,
@@ -380,7 +399,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             const restProps = PropUtils.pickForwardProps(props);
             return (
                 <Input
-                    className={classNames(clazzPrefix, props?.fieldProps?.className)}
+                    className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
                     addonBefore={buildEntryAddonDom(true)}
                     addonAfter={buildEntryAddonDom(false)}
                     {...restProps}

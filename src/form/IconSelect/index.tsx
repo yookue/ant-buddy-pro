@@ -334,8 +334,9 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const [searchDisabled, setSearchDisabled] = React.useState<boolean>(false);
     const searchRef = React.useRef<InputRef>(null);
 
+    // noinspection DuplicatedCode
     const handleWindowResize = () => {
-        const inspect = document.querySelector<HTMLDivElement>(`[data-icon-select-id='${fieldId}']`);
+        const inspect = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
         const sponsor = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-popup-${fieldId}`);
         if (inspect && sponsor) {
             StyleUtils.addStyle(sponsor, 'width', `${inspect.offsetWidth}px`);
@@ -763,7 +764,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, props?.fieldProps?.className),
+                    className: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className),
                     ...omitFieldProps,
                     disabled: entryImmutable,
                     dropdownRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
@@ -787,7 +788,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         const restProps = PropUtils.pickForwardProps(props);
         return (
             <Select
-                className={classNames(clazzPrefix, props?.fieldProps?.className)}
+                className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
                 {...restProps}
                 {...omitFieldProps}
                 disabled={entryImmutable}
