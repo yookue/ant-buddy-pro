@@ -96,19 +96,19 @@ export default () => {
                         設定
                     </Button>
                 </ProForm.Group>
+                <Divider/>
+                <ColorPicker
+                    ref={colorPickerRef}
+                    pickerType={pickerType}
+                    buttonProps={{
+                        size: buttonSize,
+                        block: buttonBlock,
+                    }}
+                    onChange={(color: any) => {
+                        ConsoleUtils.logTimestamp(false, false, 'ColorPicker', 'onChange color = ' + color);
+                    }}
+                />
             </ProForm>
-            <Divider/>
-            <ColorPicker
-                ref={colorPickerRef}
-                pickerType={pickerType}
-                buttonProps={{
-                    size: buttonSize,
-                    block: buttonBlock,
-                }}
-                onChange={(color: any) => {
-                    ConsoleUtils.logTimestamp(false, false, 'ColorPicker', 'onChange color = ' + color);
-                }}
-            />
         </>
     );
 }
