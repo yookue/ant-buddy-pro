@@ -140,7 +140,6 @@ export type CollapseFormProps = React.PropsWithChildren<{
      * @description Whether the form is default open or not
      * @description.zh-CN 是否默认展开表单
      * @description.zh-TW 是否默認展開表單
-     * @default false
      */
     defaultOpen?: boolean;
 
@@ -178,14 +177,13 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         closeOnBlur = true,
         closeOnFinish = true,
         triggerType = 'click',
-        defaultOpen = false,
         proField = true,
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const formRef = Form.useFormInstance();
     const proFormRef = React.useRef<ProFormInstance>(null);
-    const [formOpen, setFormOpen] = React.useState<boolean>(defaultOpen);
+    const [formOpen, setFormOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({

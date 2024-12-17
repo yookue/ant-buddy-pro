@@ -169,7 +169,6 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description Whether the dropdown div is default open or not
      * @description.zh-CN 是否默认展开弹出层
      * @description.zh-TW 是否默認展開彈出層
-     * @default false
      */
     defaultOpen?: boolean;
 
@@ -286,7 +285,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     const {
         addon = <TranslationOutlined/>,
         addonPos = 'after',
-        defaultOpen = false,
         multilingual = true,
         proField = true,
         popupTagPos = 'before',
@@ -697,7 +695,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         );
     };
 
-    const [triggerOpen, setTriggerOpen] = React.useState<boolean>(defaultOpen);
+    const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['className', 'action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
 
     return (
