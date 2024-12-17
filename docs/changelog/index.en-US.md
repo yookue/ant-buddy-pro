@@ -11,6 +11,10 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.137** [2024-12-18]
+    - Add 'form/CronInput'
+    - Add 'util/TriggerUtils'
+
   - **v0.1.133** [2024-11-09]
     - Add 'field/AvatarStamp'
 

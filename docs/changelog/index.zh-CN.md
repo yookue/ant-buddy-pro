@@ -11,6 +11,10 @@ nav:
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v0.1.137** [2024-12-18]
+    - 增加 'form/CronInput'
+    - 增加 'util/TriggerUtils'
+
   - **v0.1.133** [2024-11-09]
     - 增加 'field/AvatarStamp'
 

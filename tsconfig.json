@@ -6,7 +6,7 @@
         "jsx": "react-jsx",
         "moduleResolution": "node",
         "target": "es2015",
-        "lib": ["dom"],
+        "lib": ["dom", "es2019"],
         "removeComments": true,
         "resolveJsonModule": true,
         "skipLibCheck": true,
