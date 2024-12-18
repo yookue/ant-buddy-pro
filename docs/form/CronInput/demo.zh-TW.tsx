@@ -16,12 +16,16 @@
 
 
 import React from 'react';
-import {message as messageApi} from 'antd';
-import {ProForm} from '@ant-design/pro-form';
+import {Divider, message as messageApi} from 'antd';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {CronInput} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
+    const [allowSecond, setAllowSecond] = React.useState(true);
+    const [allowYear, setAllowYear] = React.useState(true);
+    const [allowOkEcho, setAllowOkEcho] = React.useState(true);
+
     return (
         <>
             <ProForm
@@ -38,6 +42,36 @@ export default () => {
                     messageApi.success('您點擊了提交按鈕');
                 }}
             >
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='允許秒'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: allowSecond,
+                            onChange: setAllowSecond,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='允許年'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: allowYear,
+                            onChange: setAllowYear,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='允許確認回顯'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: allowOkEcho,
+                            onChange: setAllowOkEcho,
+                        }}
+                    />
+                </ProForm.Group>
+                <Divider/>
                 <CronInput
                     name='foobar'
                     placeholder='請輸入此項'
@@ -47,6 +81,9 @@ export default () => {
                             message: '請輸入示例字段',
                         },
                     ]}
+                    allowSecond={allowSecond}
+                    allowYear={allowYear}
+                    allowOkEcho={allowOkEcho}
                     locale='zh_TW'
                 />
             </ProForm>

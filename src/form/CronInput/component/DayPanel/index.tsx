@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023- Yookue Ltd. All rights reserved.
+ * Copyright (c) 2024 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -21,6 +21,7 @@ import {type CheckboxValueType} from 'antd/es/checkbox/Group';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
+import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 
 
@@ -160,13 +161,6 @@ export type DayPanelProps = {
     clazzPrefix?: string;
 
     /**
-     * @description The field id of the component
-     * @description.zh-CN 组件的 ID
-     * @description.zh-TW 組件的 ID
-     */
-    fieldId?: string;
-
-    /**
      * @description Whether the parent container is currently open or not
      * @description.zh-CN 父容器是否为打开状态
      * @description.zh-TW 父容器是否為打開狀態
@@ -205,6 +199,7 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
     DayPanel.displayName = 'CronInputDayPanel';
 
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const entryContext = React.useContext(CronInputContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-day-panel');
     // noinspection DuplicatedCode
     const intlType = useIntl();
@@ -328,7 +323,7 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
     return (
         <div ref={fieldRef} className={clazzPrefix}>
             <Form
-                name={`${clazzPrefix}-${props?.fieldId ?? NanoidUtils.getPopularId()}`}
+                name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
                 onCompositionStart={() => compositionRef.current = true}
                 onCompositionEnd={() => compositionRef.current = false}
@@ -346,7 +341,12 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
                             <Radio value={EntryChoiceType.EVERY_DAY}>
                                 {props?.localeProps?.everyDay || intlLocales.get([locale, 'everyDay']) || intlLocales.get(['en_US', 'everyDay'])}
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_TO} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_TO}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromToPrefix || intlLocales.get([locale, 'fromToPrefix']) || intlLocales.get(['en_US', 'fromToPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -389,7 +389,12 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
                                     {props?.localeProps?.fromToSuffix || intlLocales.get([locale, 'fromToSuffix']) || intlLocales.get(['en_US', 'fromToSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_INTERVAL} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_INTERVAL}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromIntervalPrefix || intlLocales.get([locale, 'fromIntervalPrefix']) || intlLocales.get(['en_US', 'fromIntervalPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -432,7 +437,12 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
                                     {props?.localeProps?.fromIntervalSuffix || intlLocales.get([locale, 'fromIntervalSuffix']) || intlLocales.get(['en_US', 'fromIntervalSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.SPECIFY_DAY} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_DAY), 50)}>
+                            <Radio
+                                value={EntryChoiceType.SPECIFY_DAY}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_DAY), 50);
+                                }}
+                            >
                                 <Space direction='vertical'>
                                     {props?.localeProps?.specificDay || intlLocales.get([locale, 'specificDay']) || intlLocales.get(['en_US', 'specificDay'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -443,7 +453,12 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_DAY}
                                                     options={buildSpecificOptions()}
                                                     value={specificDays}
-                                                    onChange={setSpecificDays}
+                                                    onChange={(checks: CheckboxValueType[]) => {
+                                                        setSpecificDays(checks);
+                                                        if (!checks || !checks.length) {
+                                                            window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_DAY), 50);
+                                                        }
+                                                    }}
                                                 />
                                             );
                                         }}
@@ -453,7 +468,12 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
                             <Radio value={EntryChoiceType.LAST_DAY}>
                                 {props?.localeProps?.monthLastDay || intlLocales.get([locale, 'monthLastDay']) || intlLocales.get(['en_US', 'monthLastDay'])}
                             </Radio>
-                            <Radio value={EntryChoiceType.LAST_BEFORE} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.LAST_BEFORE), 50)}>
+                            <Radio
+                                value={EntryChoiceType.LAST_BEFORE}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.LAST_BEFORE), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.monthLastBeforePrefix || intlLocales.get([locale, 'monthLastBeforePrefix']) || intlLocales.get(['en_US', 'monthLastBeforePrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -480,7 +500,12 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
                             <Radio value={EntryChoiceType.LAST_WORKDAY}>
                                 {props?.localeProps?.monthLastWorkday || intlLocales.get([locale, 'monthLastWorkday']) || intlLocales.get(['en_US', 'monthLastWorkday'])}
                             </Radio>
-                            <Radio value={EntryChoiceType.NEAREST_WORKDAY} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.NEAREST_WORKDAY), 50)}>
+                            <Radio
+                                value={EntryChoiceType.NEAREST_WORKDAY}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.NEAREST_WORKDAY), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.nearestWorkdayPrefix || intlLocales.get([locale, 'nearestWorkdayPrefix']) || intlLocales.get(['en_US', 'nearestWorkdayPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>

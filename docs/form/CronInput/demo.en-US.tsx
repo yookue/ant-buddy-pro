@@ -16,12 +16,16 @@
 
 
 import React from 'react';
-import {message as messageApi} from 'antd';
-import {ProForm} from '@ant-design/pro-form';
+import {Divider, message as messageApi} from 'antd';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {CronInput} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
+    const [allowSecond, setAllowSecond] = React.useState(true);
+    const [allowYear, setAllowYear] = React.useState(true);
+    const [allowOkEcho, setAllowOkEcho] = React.useState(true);
+
     return (
         <>
             <ProForm
@@ -38,6 +42,36 @@ export default () => {
                     messageApi.success(`Yep, you've clicked the submit button`);
                 }}
             >
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='Allow Second'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: allowSecond,
+                            onChange: setAllowSecond,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Allow Year'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: allowYear,
+                            onChange: setAllowYear,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Allow Ok Echo'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: allowOkEcho,
+                            onChange: setAllowOkEcho,
+                        }}
+                    />
+                </ProForm.Group>
+                <Divider/>
                 <CronInput
                     name='foobar'
                     placeholder='Please input this field'
@@ -47,6 +81,9 @@ export default () => {
                             message: 'Please input demo field',
                         },
                     ]}
+                    allowSecond={allowSecond}
+                    allowYear={allowYear}
+                    allowOkEcho={allowOkEcho}
                     locale='en_US'
                 />
             </ProForm>

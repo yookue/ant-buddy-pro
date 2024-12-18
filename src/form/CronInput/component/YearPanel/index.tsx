@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023- Yookue Ltd. All rights reserved.
+ * Copyright (c) 2024 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -21,6 +21,7 @@ import {type CheckboxValueType} from 'antd/es/checkbox/Group';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
+import {CronInputContext} from '@/form/CronInput/context';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
 
@@ -107,13 +108,6 @@ export type YearPanelProps = {
     clazzPrefix?: string;
 
     /**
-     * @description The field id of the component
-     * @description.zh-CN 组件的 ID
-     * @description.zh-TW 組件的 ID
-     */
-    fieldId?: string;
-
-    /**
      * @description Whether the parent container is currently open or not
      * @description.zh-CN 父容器是否为打开状态
      * @description.zh-TW 父容器是否為打開狀態
@@ -167,6 +161,7 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
 
     // noinspection DuplicatedCode
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const entryContext = React.useContext(CronInputContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-month-panel');
     const intlType = useIntl();
 
@@ -264,7 +259,7 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
     return (
         <div ref={fieldRef} className={clazzPrefix}>
             <Form
-                name={`${clazzPrefix}-${props?.fieldId ?? NanoidUtils.getPopularId()}`}
+                name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
                 onCompositionStart={() => compositionRef.current = true}
                 onCompositionEnd={() => compositionRef.current = false}
@@ -279,7 +274,12 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
                             <Radio value={EntryChoiceType.EVERY_YEAR}>
                                 {props?.localeProps?.everyYear || intlLocales.get([locale, 'everyYear']) || intlLocales.get(['en_US', 'everyYear'])}
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_TO} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_TO}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromToPrefix || intlLocales.get([locale, 'fromToPrefix']) || intlLocales.get(['en_US', 'fromToPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -322,7 +322,12 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
                                     {props?.localeProps?.fromToSuffix || intlLocales.get([locale, 'fromToSuffix']) || intlLocales.get(['en_US', 'fromToSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_INTERVAL} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_INTERVAL}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromIntervalPrefix || intlLocales.get([locale, 'fromIntervalPrefix']) || intlLocales.get(['en_US', 'fromIntervalPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -365,7 +370,12 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
                                     {props?.localeProps?.fromIntervalSuffix || intlLocales.get([locale, 'fromIntervalSuffix']) || intlLocales.get(['en_US', 'fromIntervalSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.SPECIFY_YEAR} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_YEAR), 50)}>
+                            <Radio
+                                value={EntryChoiceType.SPECIFY_YEAR}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_YEAR), 50);
+                                }}
+                            >
                                 <Space direction='vertical'>
                                     {props?.localeProps?.specificYear || intlLocales.get([locale, 'specificYear']) || intlLocales.get(['en_US', 'specificYear'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -376,7 +386,12 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_YEAR}
                                                     options={buildSpecificOptions()}
                                                     value={specificYears}
-                                                    onChange={setSpecificYears}
+                                                    onChange={(checkeds: CheckboxValueType[]) => {
+                                                        setSpecificYears(checkeds);
+                                                        if (!entryContext?.allowOkEcho && (!checkeds || !checkeds.length)) {
+                                                            window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_YEAR), 50);
+                                                        }
+                                                    }}
                                                 />
                                             );
                                         }}

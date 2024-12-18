@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023- Yookue Ltd. All rights reserved.
+ * Copyright (c) 2024 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Switch, Space, type InputProps, type InputRef, message as messageApi} from 'antd';
+import {ConfigProvider, Button, Input, Switch, Space, type InputProps, type InputRef, message as messageApi} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {FieldTimeOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
@@ -36,6 +36,7 @@ import {ElementUtils} from '@/util/ElementUtils';
 import {PropUtils} from '@/util/PropUtils';
 import {StyleUtils} from '@/util/StyleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
+import {CronInputContext, type CronInputContextProps} from './context';
 import {SecondPanel, type SecondPanelProps, type SecondPanelRef} from './component/SecondPanel';
 import {MinutePanel, type MinutePanelProps, type MinutePanelRef} from './component/MinutePanel';
 import {HourPanel, type HourPanelProps, type HourPanelRef} from './component/HourPanel';
@@ -48,6 +49,13 @@ import './index.less';
 
 
 export type IntlLocaleProps = {
+    /**
+     * @description OK
+     * @description.zh-CN 确定
+     * @description.zh-TW 確定
+     */
+    ok?: string;
+
     /**
      * @description Second
      * @description.zh-CN 秒
@@ -267,7 +275,7 @@ export type CronInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
-};
+} & Pick<CronInputContextProps, 'allowOkEcho'>;
 
 
 /**
@@ -290,6 +298,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
         addonPos = 'after',
         allowSecond = true,
         allowYear = true,
+        allowOkEcho = true,
         validateRule = true,
         proField = true,
         locale = intlType.locale,
@@ -382,7 +391,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
 
-    React.useEffect(() => {
+    const echoToEntry = () => {
         if (entryImmutable) {
             return;
         }
@@ -395,6 +404,13 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             const inspect = document.querySelector<HTMLInputElement>(`[data-cron-input-id='${fieldId}']`);
             ElementUtils.setElementValue(inspect, outcome);
         }
+    };
+
+    React.useEffect(() => {
+        if (allowOkEcho) {
+            return;
+        }
+        echoToEntry();
     }, [outcomeExpresses]);
 
     const buildEntryAddonDom = (before: boolean) => {
@@ -520,7 +536,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                 children: (
                     <MinutePanel
                         ref={minutePanelRef}
-                        fieldId={fieldId}
                         containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={minuteExpress}
@@ -539,7 +554,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                 children: (
                     <HourPanel
                         ref={hourPanelRef}
-                        fieldId={fieldId}
                         containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={hourExpress}
@@ -558,7 +572,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                 children: (
                     <DayPanel
                         ref={dayPanelRef}
-                        fieldId={fieldId}
                         containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={dayExpress}
@@ -577,7 +590,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                 children: (
                     <MonthPanel
                         ref={monthPanelRef}
-                        fieldId={fieldId}
                         containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={monthExpress}
@@ -596,7 +608,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                 children: (
                     <WeekPanel
                         ref={weekPanelRef}
-                        fieldId={fieldId}
                         containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={weekExpress}
@@ -617,7 +628,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                 children: (
                     <SecondPanel
                         ref={secondPanelRef}
-                        fieldId={fieldId}
                         containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={secondExpress}
@@ -638,7 +648,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                 children: (
                     <YearPanel
                         ref={yearPanelRef}
-                        fieldId={fieldId}
                         containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={yearExpress}
@@ -654,52 +663,65 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
         }
         const omitTabsProps = !props?.tabsProps ? {} : omit(props.tabsProps, ['defaultActiveKey', 'tabBarExtraContent']);
         return (
-            <CardTabs
-                items={tabItems}
-                defaultActiveKey={props?.tabsProps?.defaultActiveKey ?? 'minute'}
-                tabBarExtraContent={(
-                    <>
-                        {props?.tabsProps?.tabBarExtraContent}
-                        <If condition={allowSecond || allowYear} validation={false}>
-                            <div className={`${clazzPrefix}-tabs-extra`}>
-                                <Space size={'middle'}>
-                                    <If condition={allowSecond} validation={false}>
-                                        <Switch
-                                            checked={showSecond}
-                                            disabled={entryImmutable}
-                                            size='small'
-                                            checkedChildren={props?.localeProps?.second || intlLocales.get([locale, 'second']) || intlLocales.get(['en_US', 'second'])}
-                                            unCheckedChildren={props?.localeProps?.second || intlLocales.get([locale, 'second']) || intlLocales.get(['en_US', 'second'])}
-                                            onChange={(checked: boolean) => {
-                                                setShowSecond(checked);
-                                                if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
-                                                    formContext.form.validateFields([props.name]);
-                                                }
-                                            }}
-                                        />
-                                    </If>
-                                    <If condition={allowYear} validation={false}>
-                                        <Switch
-                                            checked={showYear}
-                                            disabled={entryImmutable}
-                                            size='small'
-                                            checkedChildren={props?.localeProps?.year || intlLocales.get([locale, 'year']) || intlLocales.get(['en_US', 'year'])}
-                                            unCheckedChildren={props?.localeProps?.year || intlLocales.get([locale, 'year']) || intlLocales.get(['en_US', 'year'])}
-                                            onChange={(checked: boolean) => {
-                                                setShowYear(checked);
-                                                if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
-                                                    formContext.form.validateFields([props.name]);
-                                                }
-                                            }}
-                                        />
-                                    </If>
-                                </Space>
-                            </div>
-                        </If>
-                    </>
-                )}
-                {...omitTabsProps}
-            />
+            <CronInputContext.Provider value={{fieldId: fieldId, allowOkEcho: allowOkEcho}}>
+                <CardTabs
+                    items={tabItems}
+                    defaultActiveKey={props?.tabsProps?.defaultActiveKey ?? 'minute'}
+                    tabBarExtraContent={(
+                        <>
+                            {props?.tabsProps?.tabBarExtraContent}
+                            <If condition={allowSecond || allowYear || allowOkEcho} validation={false}>
+                                <div className={`${clazzPrefix}-tabs-extra`}>
+                                    <Space size={'middle'}>
+                                        <If condition={allowSecond && !entryImmutable} validation={false}>
+                                            <Switch
+                                                checked={showSecond}
+                                                size='small'
+                                                checkedChildren={props?.localeProps?.second || intlLocales.get([locale, 'second']) || intlLocales.get(['en_US', 'second'])}
+                                                unCheckedChildren={props?.localeProps?.second || intlLocales.get([locale, 'second']) || intlLocales.get(['en_US', 'second'])}
+                                                onChange={(checked: boolean) => {
+                                                    setShowSecond(checked);
+                                                    if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
+                                                        formContext.form.validateFields([props.name]);
+                                                    }
+                                                }}
+                                            />
+                                        </If>
+                                        <If condition={allowYear && !entryImmutable} validation={false}>
+                                            <Switch
+                                                checked={showYear}
+                                                size='small'
+                                                checkedChildren={props?.localeProps?.year || intlLocales.get([locale, 'year']) || intlLocales.get(['en_US', 'year'])}
+                                                unCheckedChildren={props?.localeProps?.year || intlLocales.get([locale, 'year']) || intlLocales.get(['en_US', 'year'])}
+                                                onChange={(checked: boolean) => {
+                                                    setShowYear(checked);
+                                                    if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
+                                                        formContext.form.validateFields([props.name]);
+                                                    }
+                                                }}
+                                            />
+                                        </If>
+                                        <If condition={allowOkEcho && !entryImmutable} validation={false}>
+                                            <Button
+                                                className={`${clazzPrefix}-ok-echo`}
+                                                size='small'
+                                                type='primary'
+                                                onClick={() => {
+                                                    echoToEntry();
+                                                    setTriggerOpen(false);
+                                                }}
+                                            >
+                                                {props?.localeProps?.ok || intlLocales.get([locale, 'ok']) || intlLocales.get(['en_US', 'ok'])}
+                                            </Button>
+                                        </If>
+                                    </Space>
+                                </div>
+                            </If>
+                        </>
+                    )}
+                    {...omitTabsProps}
+                />
+            </CronInputContext.Provider>
         );
     };
 

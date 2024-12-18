@@ -118,23 +118,23 @@ export type PopupConfirmProps = {
     enabled?: boolean;
 
     /**
-     * @description The message for confirming a locale item sets as default one
-     * @description.zh-CN 当确认设置某个语言项为默认值时的消息文本
-     * @description.zh-TW 當確認設置某個語言項為默認值時的消息文本
+     * @description Set as default?
+     * @description.zh-CN 设为默认吗？
+     * @description.zh-TW 設爲默認嗎？
      */
-    message?: string;
+    setAsDefault?: string;
 
     /**
-     * @description The ok button for confirming a locale item sets as default one
-     * @description.zh-CN 当确认设置某个语言项为默认值时的确认按钮文本
-     * @description.zh-TW 當確認設置某個語言項為默認值時的確認按鈕文本
+     * @description OK
+     * @description.zh-CN 确定
+     * @description.zh-TW 確定
      */
     ok?: string;
 
     /**
-     * @description The cancel button for confirming a locale item sets as default one
-     * @description.zh-CN 当确认设置某个语言项为默认值时的取消按钮文本
-     * @description.zh-TW 當確認設置某個語言項為默認值時的取消按鈕文本
+     * @description Cancel
+     * @description.zh-CN 取消
+     * @description.zh-TW 取消
      */
     cancel?: string;
 };
@@ -441,7 +441,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             <If condition={BooleanUtils.isNotFalse(popupConfirmProps?.enabled)} validation={false}>
                 <If.Then>
                     <Popconfirm
-                        title={popupConfirmProps?.message || intlLocales.get([locale, 'setAsDefault']) || intlLocales.get(['en_US', 'setAsDefault'])}
+                        title={popupConfirmProps?.setAsDefault || intlLocales.get([locale, 'setAsDefault']) || intlLocales.get(['en_US', 'setAsDefault'])}
                         okText={popupConfirmProps?.ok || intlLocales.get([locale, 'ok'])}
                         cancelText={popupConfirmProps?.cancel || intlLocales.get([locale, 'cancel'])}
                         disabled={itemDisabled || itemReadonly}

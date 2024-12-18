@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023- Yookue Ltd. All rights reserved.
+ * Copyright (c) 2024 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -22,6 +22,7 @@ import {useIntl} from '@ant-design/pro-provider';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@yookue/ts-lang-utils';
 import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
+import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 
 
@@ -130,13 +131,6 @@ export type MonthPanelProps = {
     clazzPrefix?: string;
 
     /**
-     * @description The field id of the component
-     * @description.zh-CN 组件的 ID
-     * @description.zh-TW 組件的 ID
-     */
-    fieldId?: string;
-
-    /**
      * @description Whether the parent container is currently open or not
      * @description.zh-CN 父容器是否为打开状态
      * @description.zh-TW 父容器是否為打開狀態
@@ -191,6 +185,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
 
     // noinspection DuplicatedCode
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const entryContext = React.useContext(CronInputContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-month-panel');
     const intlType = useIntl();
 
@@ -328,7 +323,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                 }}
             >
                 <Form
-                    name={`${clazzPrefix}-${props?.fieldId ?? NanoidUtils.getPopularId()}`}
+                    name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                     disabled={props?.disabled}
                     onCompositionStart={() => compositionRef.current = true}
                     onCompositionEnd={() => compositionRef.current = false}
@@ -343,7 +338,12 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                                 <Radio value={EntryChoiceType.EVERY_MONTH}>
                                     {props?.localeProps?.everyMonth || intlLocales.get([locale, 'everyMonth']) || intlLocales.get(['en_US', 'everyMonth'])}
                                 </Radio>
-                                <Radio value={EntryChoiceType.FROM_TO} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50)}>
+                                <Radio
+                                    value={EntryChoiceType.FROM_TO}
+                                    onClick={() => {
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50);
+                                    }}
+                                >
                                     <Space>
                                         {props?.localeProps?.fromToPrefix || intlLocales.get([locale, 'fromToPrefix']) || intlLocales.get(['en_US', 'fromToPrefix'])}
                                         <Form.Item noStyle={true} shouldUpdate={true}>
@@ -386,7 +386,12 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                                         {props?.localeProps?.fromToSuffix || intlLocales.get([locale, 'fromToSuffix']) || intlLocales.get(['en_US', 'fromToSuffix'])}
                                     </Space>
                                 </Radio>
-                                <Radio value={EntryChoiceType.FROM_INTERVAL} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50)}>
+                                <Radio
+                                    value={EntryChoiceType.FROM_INTERVAL}
+                                    onClick={() => {
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50);
+                                    }}
+                                >
                                     <Space>
                                         {props?.localeProps?.fromIntervalPrefix || intlLocales.get([locale, 'fromIntervalPrefix']) || intlLocales.get(['en_US', 'fromIntervalPrefix'])}
                                         <Form.Item noStyle={true} shouldUpdate={true}>
@@ -429,7 +434,12 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                                         {props?.localeProps?.fromIntervalSuffix || intlLocales.get([locale, 'fromIntervalSuffix']) || intlLocales.get(['en_US', 'fromIntervalSuffix'])}
                                     </Space>
                                 </Radio>
-                                <Radio value={EntryChoiceType.SPECIFY_MONTH} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MONTH), 50)}>
+                                <Radio
+                                    value={EntryChoiceType.SPECIFY_MONTH}
+                                    onClick={() => {
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MONTH), 50);
+                                    }}
+                                >
                                     <Space direction='vertical'>
                                         {props?.localeProps?.specificMonth || intlLocales.get([locale, 'specificMonth']) || intlLocales.get(['en_US', 'specificMonth'])}
                                         <Form.Item noStyle={true} shouldUpdate={true}>
@@ -440,7 +450,12 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                                                         disabled={entryChoice !== EntryChoiceType.SPECIFY_MONTH}
                                                         options={buildSpecificOptions()}
                                                         value={specificMonths}
-                                                        onChange={setSpecificMonths}
+                                                        onChange={(checks: CheckboxValueType[]) => {
+                                                            setSpecificMonths(checks);
+                                                            if (!checks || !checks.length) {
+                                                                window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MONTH), 50);
+                                                            }
+                                                        }}
                                                     />
                                                 );
                                             }}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023- Yookue Ltd. All rights reserved.
+ * Copyright (c) 2024 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -21,6 +21,7 @@ import {type CheckboxValueType} from 'antd/es/checkbox/Group';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
+import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 
 
@@ -106,13 +107,6 @@ export type SecondPanelProps = {
     clazzPrefix?: string;
 
     /**
-     * @description The field id of the component
-     * @description.zh-CN 组件的 ID
-     * @description.zh-TW 組件的 ID
-     */
-    fieldId?: string;
-
-    /**
      * @description Whether the parent container is currently open or not
      * @description.zh-CN 父容器是否为打开状态
      * @description.zh-TW 父容器是否為打開狀態
@@ -152,6 +146,7 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
 
     // noinspection DuplicatedCode
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const entryContext = React.useContext(CronInputContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-month-panel');
     const intlType = useIntl();
 
@@ -246,7 +241,7 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
     return (
         <div ref={fieldRef} className={clazzPrefix}>
             <Form
-                name={`${clazzPrefix}-${props?.fieldId ?? NanoidUtils.getPopularId()}`}
+                name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
                 onCompositionStart={() => compositionRef.current = true}
                 onCompositionEnd={() => compositionRef.current = false}
@@ -261,7 +256,12 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
                             <Radio value={EntryChoiceType.EVERY_SECOND}>
                                 {props?.localeProps?.everySecond || intlLocales.get([locale, 'everySecond']) || intlLocales.get(['en_US', 'everySecond'])}
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_TO} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_TO}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromToPrefix || intlLocales.get([locale, 'fromToPrefix']) || intlLocales.get(['en_US', 'fromToPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -304,7 +304,12 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
                                     {props?.localeProps?.fromToSuffix || intlLocales.get([locale, 'fromToSuffix']) || intlLocales.get(['en_US', 'fromToSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_INTERVAL} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_INTERVAL}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromIntervalPrefix || intlLocales.get([locale, 'fromIntervalPrefix']) || intlLocales.get(['en_US', 'fromIntervalPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -347,7 +352,12 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
                                     {props?.localeProps?.fromIntervalSuffix || intlLocales.get([locale, 'fromIntervalSuffix']) || intlLocales.get(['en_US', 'fromIntervalSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.SPECIFY_SECOND} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_SECOND), 50)}>
+                            <Radio
+                                value={EntryChoiceType.SPECIFY_SECOND}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_SECOND), 50);
+                                }}
+                            >
                                 <Space direction='vertical'>
                                     {props?.localeProps?.specificSecond || intlLocales.get([locale, 'specificSecond']) || intlLocales.get(['en_US', 'specificSecond'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -358,7 +368,12 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_SECOND}
                                                     options={buildSpecificOptions()}
                                                     value={specificSeconds}
-                                                    onChange={setSpecificSeconds}
+                                                    onChange={(checks: CheckboxValueType[]) => {
+                                                        setSpecificSeconds(checks);
+                                                        if (!checks || !checks.length) {
+                                                            window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_SECOND), 50);
+                                                        }
+                                                    }}
                                                 />
                                             );
                                         }}

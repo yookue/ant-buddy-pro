@@ -19,6 +19,7 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 
 
 export const intlLocales = ReadonlyMultiKeyMap.of([
+    [['en_US', 'ok'], 'OK'],
     [['en_US', 'second'], 'Second'],
     [['en_US', 'minute'], 'Minute'],
     [['en_US', 'hour'], 'Hour'],
@@ -29,6 +30,7 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'validExpress'], 'Valid Expression'],
     [['en_US', 'invalidExpress'], 'Invalid Expression'],
 
+    [['zh_CN', 'ok'], '确定'],
     [['zh_CN', 'second'], '秒'],
     [['zh_CN', 'minute'], '分'],
     [['zh_CN', 'hour'], '时'],
@@ -39,6 +41,7 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['zh_CN', 'validExpress'], '表达式有效'],
     [['zh_CN', 'invalidExpress'], '表达式无效'],
 
+    [['zh_TW', 'ok'], '確定'],
     [['zh_TW', 'second'], '秒'],
     [['zh_TW', 'minute'], '分'],
     [['zh_TW', 'hour'], '時'],

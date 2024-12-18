@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023- Yookue Ltd. All rights reserved.
+ * Copyright (c) 2024 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -21,6 +21,7 @@ import {type CheckboxValueType} from 'antd/es/checkbox/Group';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
+import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 
 
@@ -106,13 +107,6 @@ export type MinutePanelProps = {
     clazzPrefix?: string;
 
     /**
-     * @description The field id of the component
-     * @description.zh-CN 组件的 ID
-     * @description.zh-TW 組件的 ID
-     */
-    fieldId?: string;
-
-    /**
      * @description Whether the parent container is currently open or not
      * @description.zh-CN 父容器是否为打开状态
      * @description.zh-TW 父容器是否為打開狀態
@@ -151,6 +145,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
     MinutePanel.displayName = 'CronInputMinutePanel';
 
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const entryContext = React.useContext(CronInputContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-minute-panel');
     // noinspection DuplicatedCode
     const intlType = useIntl();
@@ -246,7 +241,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
     return (
         <div ref={fieldRef} className={clazzPrefix}>
             <Form
-                name={`${clazzPrefix}-${props?.fieldId ?? NanoidUtils.getPopularId()}`}
+                name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
                 onCompositionStart={() => compositionRef.current = true}
                 onCompositionEnd={() => compositionRef.current = false}
@@ -261,7 +256,12 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                             <Radio value={EntryChoiceType.EVERY_MINUTE}>
                                 {props?.localeProps?.everyMinute || intlLocales.get([locale, 'everyMinute']) || intlLocales.get(['en_US', 'everyMinute'])}
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_TO} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_TO}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromToPrefix || intlLocales.get([locale, 'fromToPrefix']) || intlLocales.get(['en_US', 'fromToPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -304,7 +304,12 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                     {props?.localeProps?.fromToSuffix || intlLocales.get([locale, 'fromToSuffix']) || intlLocales.get(['en_US', 'fromToSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.FROM_INTERVAL} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50)}>
+                            <Radio
+                                value={EntryChoiceType.FROM_INTERVAL}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50);
+                                }}
+                            >
                                 <Space>
                                     {props?.localeProps?.fromIntervalPrefix || intlLocales.get([locale, 'fromIntervalPrefix']) || intlLocales.get(['en_US', 'fromIntervalPrefix'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -347,7 +352,12 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                     {props?.localeProps?.fromIntervalSuffix || intlLocales.get([locale, 'fromIntervalSuffix']) || intlLocales.get(['en_US', 'fromIntervalSuffix'])}
                                 </Space>
                             </Radio>
-                            <Radio value={EntryChoiceType.SPECIFY_MINUTE} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MINUTE), 50)}>
+                            <Radio
+                                value={EntryChoiceType.SPECIFY_MINUTE}
+                                onClick={() => {
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MINUTE), 50);
+                                }}
+                            >
                                 <Space direction='vertical'>
                                     {props?.localeProps?.specificMinute || intlLocales.get([locale, 'specificMinute']) || intlLocales.get(['en_US', 'specificMinute'])}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
@@ -358,7 +368,12 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_MINUTE}
                                                     options={buildSpecificOptions()}
                                                     value={specificMinutes}
-                                                    onChange={setSpecificMinutes}
+                                                    onChange={(checks: CheckboxValueType[]) => {
+                                                        setSpecificMinutes(checks);
+                                                        if (!checks || !checks.length) {
+                                                            window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MINUTE), 50);
+                                                        }
+                                                    }}
                                                 />
                                             );
                                         }}
