@@ -20,6 +20,7 @@ import {ConfigProvider, Input, List, Space, Popconfirm, type InputProps, type In
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
 import {BooleanUtils, NanoidUtils, StringUtils} from '@yookue/ts-lang-utils';
@@ -278,6 +279,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  */
 export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
     const intlType = useIntl();
 
@@ -695,13 +697,14 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         );
     };
 
+    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['className', 'action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
 
     return (
         <Trigger
             className={classNames(`${clazzPrefix}-trigger`, props?.triggerProps?.className)}
-            action={props?.triggerProps?.action ?? ['hover']}
+            action={props?.triggerProps?.action ?? (entryImmutable ? ['hover'] : ['click'])}
             builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
             getPopupContainer={(trigger: HTMLElement) => {
                 const income = props?.triggerProps?.getPopupContainer?.(trigger);
@@ -715,7 +718,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 points: ['tl', 'bl'],
                 offset: [0, 4],
             }}
-            popupClassName={classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
+            popupClassName={classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
             stretch={props?.triggerProps?.stretch ?? 'width'}
             onPopupVisibleChange={(open: boolean) => {

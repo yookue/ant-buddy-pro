@@ -730,7 +730,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
     return (
         <Trigger
             className={classNames(`${clazzPrefix}-trigger`, props?.triggerProps?.className)}
-            action={props?.triggerProps?.action ?? ['hover']}
+            action={props?.triggerProps?.action ?? (entryImmutable ? ['hover'] : ['click'])}
             builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
             getTriggerDOMNode={(instance: React.ReactInstance) => {
                 return props?.triggerProps?.getTriggerDOMNode?.(instance) || document.querySelector<HTMLElement>(`[data-cron-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;

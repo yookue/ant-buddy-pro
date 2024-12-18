@@ -20,6 +20,7 @@ import {ConfigProvider, Form, Checkbox, InputNumber, Radio, Space, type RadioCha
 import {type CheckboxValueType} from 'antd/es/checkbox/Group';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+import classNames from 'classnames';
 import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
@@ -107,6 +108,20 @@ export type SecondPanelProps = {
     clazzPrefix?: string;
 
     /**
+     * @description The CSS class name of the container div
+     * @description.zh-CN 容器 div 的 CSS 类名
+     * @description.zh-TW 容器 div 的 CSS 類名
+     */
+    containerClazz?: string;
+
+    /**
+     * @description The CSS style of the container div
+     * @description.zh-CN 容器 div 的 CSS 样式
+     * @description.zh-TW 容器 div 的 CSS 樣式
+     */
+    containerStyle?: React.CSSProperties;
+
+    /**
      * @description Whether the parent container is currently open or not
      * @description.zh-CN 父容器是否为打开状态
      * @description.zh-TW 父容器是否為打開狀態
@@ -151,11 +166,11 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
     const intlType = useIntl();
 
     // Initialize the default props
+    // noinspection DuplicatedCode
     const {
         locale = intlType.locale,
     } = props ?? {};
 
-    // noinspection DuplicatedCode
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
     const [entryChoice, setEntryChoice] = React.useState<EntryChoiceType>();
@@ -239,7 +254,7 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={clazzPrefix}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}

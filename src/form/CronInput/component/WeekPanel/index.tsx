@@ -20,6 +20,7 @@ import {ConfigProvider, Form, Checkbox, InputNumber, Radio, Switch, Space, type 
 import {type CheckboxValueType} from 'antd/es/checkbox/Group';
 import {useIntl} from '@ant-design/pro-provider';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@yookue/ts-lang-utils';
+import classNames from 'classnames';
 import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
@@ -160,6 +161,20 @@ export type WeekPanelProps = {
      * @default 'buddy-cron-input-month-panel'
      */
     clazzPrefix?: string;
+
+    /**
+     * @description The CSS class name of the container div
+     * @description.zh-CN 容器 div 的 CSS 类名
+     * @description.zh-TW 容器 div 的 CSS 類名
+     */
+    containerClazz?: string;
+
+    /**
+     * @description The CSS style of the container div
+     * @description.zh-CN 容器 div 的 CSS 样式
+     * @description.zh-TW 容器 div 的 CSS 樣式
+     */
+    containerStyle?: React.CSSProperties;
 
     /**
      * @description Whether the parent container is currently open or not
@@ -367,7 +382,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={clazzPrefix}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
             <BadgeRibbon
                 text={!allowAlias ? undefined : (
                     <Switch
