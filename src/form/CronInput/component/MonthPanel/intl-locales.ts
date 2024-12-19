@@ -26,12 +26,12 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'fromToSuffix'], ''],
     [['en_US', 'fromIntervalPrefix'], 'Starting at month'],
     [['en_US', 'fromIntervalMiddle'], 'and every'],
-    [['en_US', 'fromIntervalSuffix'], 'months(s)'],
+    [['en_US', 'fromIntervalSuffix'], 'month(s)'],
     [['en_US', 'specificMonth'], 'Specific month(s)'],
 
     [['zh_CN', 'semanticAlias'], '别名'],
     [['zh_CN', 'everyMonth'], '每月'],
-    [['zh_CN', 'fromToPrefix'], '每月，开始于第'],
+    [['zh_CN', 'fromToPrefix'], '每月，从第'],
     [['zh_CN', 'fromToMiddle'], '月，到第'],
     [['zh_CN', 'fromToSuffix'], '月'],
     [['zh_CN', 'fromIntervalPrefix'], '从第'],
@@ -41,7 +41,7 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
 
     [['zh_TW', 'semanticAlias'], '别名'],
     [['zh_TW', 'everyMonth'], '每月'],
-    [['zh_TW', 'fromToPrefix'], '每月，開始於第'],
+    [['zh_TW', 'fromToPrefix'], '每月，從第'],
     [['zh_TW', 'fromToMiddle'], '月，到第'],
     [['zh_TW', 'fromToSuffix'], '月'],
     [['zh_TW', 'fromIntervalPrefix'], '從第'],

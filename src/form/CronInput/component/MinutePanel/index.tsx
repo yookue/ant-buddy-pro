@@ -21,7 +21,7 @@ import {type CheckboxValueType} from 'antd/es/checkbox/Group';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
+import {type ValueType as NumberStringType} from 'rc-input-number/es/utils/MiniDecimal';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 
@@ -49,8 +49,8 @@ export type IntlLocaleProps = {
 
     /**
      * @description Every minute between minute
-     * @description.zh-CN 每分，开始于
-     * @description.zh-TW 每分，開始於
+     * @description.zh-CN 每分，从
+     * @description.zh-TW 每分，從
      */
     fromToPrefix?: string;
 
@@ -83,7 +83,7 @@ export type IntlLocaleProps = {
     fromIntervalMiddle?: string;
 
     /**
-     * @description minutes(s)
+     * @description minute(s)
      * @description.zh-CN 分
      * @description.zh-TW 分
      */
@@ -120,13 +120,6 @@ export type MinutePanelProps = {
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
-
-    /**
-     * @description Whether the parent container is currently open or not
-     * @description.zh-CN 父容器是否为打开状态
-     * @description.zh-TW 父容器是否為打開狀態
-     */
-    containerOpen?: boolean;
 
     /**
      * @description The locale of the component, e.g. 'en_US'
@@ -174,10 +167,10 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
     const [entryChoice, setEntryChoice] = React.useState<EntryChoiceType>();
-    const [fromToStart, setFromToStart] = React.useState<NumberValueType | null>();
-    const [fromToEnd, setFromToEnd] = React.useState<NumberValueType | null>();
-    const [fromIntervalStart, setFromIntervalStart] = React.useState<NumberValueType | null>();
-    const [fromIntervalStep, setFromIntervalStep] = React.useState<NumberValueType | null>();
+    const [fromToStart, setFromToStart] = React.useState<NumberStringType | null>();
+    const [fromToEnd, setFromToEnd] = React.useState<NumberStringType | null>();
+    const [fromIntervalStart, setFromIntervalStart] = React.useState<NumberStringType | null>();
+    const [fromIntervalStep, setFromIntervalStep] = React.useState<NumberStringType | null>();
     const [specificMinutes, setSpecificMinutes] = React.useState<CheckboxValueType[]>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
 
@@ -187,15 +180,6 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
             return compositionRef.current;
         }
     }));
-
-    // noinspection DuplicatedCode
-    React.useEffect(() => {
-        const startAlias = NumberUtils.toInteger(fromToStart);
-        const endAlias = NumberUtils.toInteger(fromToEnd);
-        if (!!startAlias && startAlias < 59 && !!endAlias && startAlias >= endAlias) {
-            setFromToEnd(startAlias + 1);
-        }
-    }, [fromToStart]);
 
     React.useEffect(() => {
         switch (entryChoice) {
@@ -227,15 +211,15 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
             setEntryChoice(EntryChoiceType.EVERY_MINUTE);
         } else if (income && /^\d+-\d+$/g.test(income)) {
             setEntryChoice(EntryChoiceType.FROM_TO);
-            setFromToStart(NumberUtils.toInteger(StringUtils.substringBefore(income, '-')));
-            setFromToEnd(NumberUtils.toInteger(StringUtils.substringAfter(income, '-')));
+            setFromToStart(StringUtils.substringBefore(income, '-'));
+            setFromToEnd(StringUtils.substringAfter(income, '-'));
         } else if (income && /^\d+\/\d+$/g.test(income)) {
             setEntryChoice(EntryChoiceType.FROM_INTERVAL);
-            setFromIntervalStart(NumberUtils.toInteger(StringUtils.substringBefore(income, '/')));
-            setFromIntervalStep(NumberUtils.toInteger(StringUtils.substringAfter(income, '/')));
+            setFromIntervalStart(StringUtils.substringBefore(income, '/'));
+            setFromIntervalStep(StringUtils.substringAfter(income, '/'));
         } else if (income && /^(\d{1,2})(,\d{1,2})*$/g.test(income)) {
             setEntryChoice(EntryChoiceType.SPECIFY_MINUTE);
-            setSpecificMinutes(income.includes(',') ? income.split(',').map(item => NumberUtils.toInteger(item) as number) : [NumberUtils.toInteger(income) as number]);
+            setSpecificMinutes(income.includes(',') ? income.split(',') : [income]);
         } else {
             setEntryChoice(undefined);
         }
@@ -246,7 +230,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
         for (let i = 0; i < 60; i++) {
             result.push({
                 label: (i < 10) ? `0${i}` : i,
-                value: i,
+                value: `${i}`,
             });
         }
         return result;
@@ -269,16 +253,16 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                     >
                         <Space direction='vertical'>
                             <Radio value={EntryChoiceType.EVERY_MINUTE}>
-                                {props?.localeProps?.everyMinute || intlLocales.get([locale, 'everyMinute']) || intlLocales.get(['en_US', 'everyMinute'])}
+                                {ObjectUtils.firstNotNil(props?.localeProps?.everyMinute, intlLocales.get([locale, 'everyMinute']), intlLocales.get(['en_US', 'everyMinute']))}
                             </Radio>
                             <Radio
                                 value={EntryChoiceType.FROM_TO}
                                 onClick={() => {
-                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 50);
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 80);
                                 }}
                             >
                                 <Space>
-                                    {props?.localeProps?.fromToPrefix || intlLocales.get([locale, 'fromToPrefix']) || intlLocales.get(['en_US', 'fromToPrefix'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.fromToPrefix, intlLocales.get([locale, 'fromToPrefix']), intlLocales.get(['en_US', 'fromToPrefix']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {
                                             return (
@@ -287,7 +271,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                                     autoComplete='off'
                                                     disabled={entryChoice !== EntryChoiceType.FROM_TO}
                                                     min={0}
-                                                    max={58}
+                                                    max={59}
                                                     step={1}
                                                     size='small'
                                                     status={(entryChoice === EntryChoiceType.FROM_TO && (ObjectUtils.isEmpty(fromToStart) || NumberUtils.compare(fromToStart, fromToEnd, true) > 0)) ? 'error' : undefined}
@@ -297,7 +281,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                             );
                                         }}
                                     </Form.Item>
-                                    {props?.localeProps?.fromToMiddle || intlLocales.get([locale, 'fromToMiddle']) || intlLocales.get(['en_US', 'fromToMiddle'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.fromToMiddle, intlLocales.get([locale, 'fromToMiddle']), intlLocales.get(['en_US', 'fromToMiddle']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {
                                             return (
@@ -305,7 +289,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                                     name='fromToEnd'
                                                     autoComplete='off'
                                                     disabled={entryChoice !== EntryChoiceType.FROM_TO}
-                                                    min={(NumberUtils.toInteger(fromToStart, 0) as number) + 1}
+                                                    min={fromToStart ?? 0}
                                                     max={59}
                                                     step={1}
                                                     size='small'
@@ -316,17 +300,17 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                             );
                                         }}
                                     </Form.Item>
-                                    {props?.localeProps?.fromToSuffix || intlLocales.get([locale, 'fromToSuffix']) || intlLocales.get(['en_US', 'fromToSuffix'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.fromToSuffix, intlLocales.get([locale, 'fromToSuffix']), intlLocales.get(['en_US', 'fromToSuffix']))}
                                 </Space>
                             </Radio>
                             <Radio
                                 value={EntryChoiceType.FROM_INTERVAL}
                                 onClick={() => {
-                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 50);
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 80);
                                 }}
                             >
                                 <Space>
-                                    {props?.localeProps?.fromIntervalPrefix || intlLocales.get([locale, 'fromIntervalPrefix']) || intlLocales.get(['en_US', 'fromIntervalPrefix'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.fromIntervalPrefix, intlLocales.get([locale, 'fromIntervalPrefix']), intlLocales.get(['en_US', 'fromIntervalPrefix']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {
                                             return (
@@ -345,7 +329,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                             );
                                         }}
                                     </Form.Item>
-                                    {props?.localeProps?.fromIntervalMiddle || intlLocales.get([locale, 'fromIntervalMiddle']) || intlLocales.get(['en_US', 'fromIntervalMiddle'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.fromIntervalMiddle, intlLocales.get([locale, 'fromIntervalMiddle']), intlLocales.get(['en_US', 'fromIntervalMiddle']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {
                                             return (
@@ -364,17 +348,17 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                             );
                                         }}
                                     </Form.Item>
-                                    {props?.localeProps?.fromIntervalSuffix || intlLocales.get([locale, 'fromIntervalSuffix']) || intlLocales.get(['en_US', 'fromIntervalSuffix'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.fromIntervalSuffix, intlLocales.get([locale, 'fromIntervalSuffix']), intlLocales.get(['en_US', 'fromIntervalSuffix']))}
                                 </Space>
                             </Radio>
                             <Radio
                                 value={EntryChoiceType.SPECIFY_MINUTE}
                                 onClick={() => {
-                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MINUTE), 50);
+                                    window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MINUTE), 80);
                                 }}
                             >
                                 <Space direction='vertical'>
-                                    {props?.localeProps?.specificMinute || intlLocales.get([locale, 'specificMinute']) || intlLocales.get(['en_US', 'specificMinute'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.specificMinute, intlLocales.get([locale, 'specificMinute']), intlLocales.get(['en_US', 'specificMinute']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {
                                             return (
@@ -386,7 +370,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                                     onChange={(checks: CheckboxValueType[]) => {
                                                         setSpecificMinutes(checks);
                                                         if (!checks || !checks.length) {
-                                                            window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MINUTE), 50);
+                                                            window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MINUTE), 80);
                                                         }
                                                     }}
                                                 />

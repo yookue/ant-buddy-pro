@@ -16,12 +16,13 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Checkbox, InputNumber, Radio, Switch, Space, type RadioChangeEvent} from 'antd';
+import {ConfigProvider, Form, Checkbox, InputNumber, Radio, Switch, Tooltip, Space, type RadioChangeEvent} from 'antd';
 import {type CheckboxValueType} from 'antd/es/checkbox/Group';
+import {type LabeledValue} from 'antd/es/select';
 import {useIntl} from '@ant-design/pro-provider';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ValueType as NumberValueType} from 'rc-input-number/es/utils/MiniDecimal';
+import {type ValueType as NumberStringType} from 'rc-input-number/es/utils/MiniDecimal';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
@@ -46,6 +47,8 @@ const weekAliases: ReadonlyMap<string, string> = new Map<string, string>([
 export enum EntryChoiceType {
     BLANK_WEEK = 'blank-week',
     EVERY_WEEK = 'every-week',
+    FROM_TO = 'from-to',
+    FROM_INTERVAL = 'from-interval',
     SPECIFY_WEEK = 'specific-week',
     LAST_WEEK = 'last-week',
     ORDER_WEEK = 'order-week',
@@ -124,6 +127,41 @@ export type IntlLocaleProps = {
     everyWeek?: string;
 
     /**
+     * @description Every week between week
+     * @description.zh-CN 每周，从
+     * @description.zh-TW 每周，從
+     */
+    fromToPrefix?: string;
+
+    /**
+     * @description and week
+     * @description.zh-CN ，到
+     * @description.zh-TW ，到
+     */
+    fromToMiddle?: string;
+
+    /**
+     * @description Starting at week
+     * @description.zh-CN 从
+     * @description.zh-TW 從
+     */
+    fromIntervalPrefix?: string;
+
+    /**
+     * @description and every
+     * @description.zh-CN 开始，每
+     * @description.zh-TW 開始，每
+     */
+    fromIntervalMiddle?: string;
+
+    /**
+     * @description day(s)
+     * @description.zh-CN 天
+     * @description.zh-TW 天
+     */
+    fromIntervalSuffix?: string;
+
+    /**
      * @description Specific week(s)
      * @description.zh-CN 到
      * @description.zh-TW 到
@@ -131,11 +169,18 @@ export type IntlLocaleProps = {
     specificWeek?: string;
 
     /**
-     * @description The last bellowing of the month
+     * @description The last
      * @description.zh-CN 月度的最后一个
      * @description.zh-TW 月度的最後壹個
      */
-    monthLastWeek?: string;
+    monthLastWeekPrefix?: string;
+
+    /**
+     * @description of the month
+     * @description.zh-CN ''
+     * @description.zh-TW ''
+     */
+    monthLastWeekSuffix?: string;
 
     /**
      * @description The
@@ -145,9 +190,16 @@ export type IntlLocaleProps = {
     monthOrderWeekPrefix?: string;
 
     /**
-     * @description bellowing of the month
+     * @description ''
      * @description.zh-CN '个'
      * @description.zh-TW '個'
+     */
+    monthOrderWeekMiddle?: string;
+
+    /**
+     * @description of the month
+     * @description.zh-CN ''
+     * @description.zh-TW ''
      */
     monthOrderWeekSuffix?: string;
 };
@@ -175,13 +227,6 @@ export type WeekPanelProps = {
      * @description.zh-TW 容器 div 的 CSS 樣式
      */
     containerStyle?: React.CSSProperties;
-
-    /**
-     * @description Whether the parent container is currently open or not
-     * @description.zh-CN 父容器是否为打开状态
-     * @description.zh-TW 父容器是否為打開狀態
-     */
-    containerOpen?: boolean;
 
     /**
      * @description Whether the alias is allowed or not
@@ -253,11 +298,16 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
     const [showAlias, setShowAlias] = React.useState<boolean>(defaultShowAlias);
+    // noinspection DuplicatedCode
     const [entryChoice, setEntryChoice] = React.useState<EntryChoiceType>();
+    const [fromToStart, setFromToStart] = React.useState<NumberStringType | null>();
+    const [fromToEnd, setFromToEnd] = React.useState<NumberStringType | null>();
+    const [fromIntervalStart, setFromIntervalStart] = React.useState<NumberStringType | null>();
+    const [fromIntervalStep, setFromIntervalStep] = React.useState<NumberStringType | null>();
     const [specificWeeks, setSpecificWeeks] = React.useState<CheckboxValueType[]>();
-    const [lastWeek, setLastWeek] = React.useState<string>();
-    const [orderWeekSort, setOrderWeekSort] = React.useState<NumberValueType | null>();
-    const [orderWeekValue, setOrderWeekValue] = React.useState<NumberValueType | null>();
+    const [lastWeek, setLastWeek] = React.useState<NumberStringType | null>();
+    const [orderWeekSort, setOrderWeekSort] = React.useState<NumberStringType | null>();
+    const [orderWeekValue, setOrderWeekValue] = React.useState<NumberStringType | null>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
 
     // noinspection JSUnusedGlobalSymbols
@@ -275,13 +325,29 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
             case EntryChoiceType.EVERY_WEEK:
                 setUnitExpress('*');
                 break;
+            case EntryChoiceType.FROM_TO:
+                if (ObjectUtils.anyEmpty([fromToStart, fromToEnd])) {
+                    setUnitExpress(undefined);
+                    break;
+                }
+                // @ts-ignore
+                setUnitExpress((allowAlias && showAlias) ? `${weekAliases.get(fromToStart.toString())}-${weekAliases.get(fromToEnd.toString())}` : `${fromToStart}-${fromToEnd}`);
+                break;
+            case EntryChoiceType.FROM_INTERVAL:
+                if (ObjectUtils.anyEmpty([fromIntervalStart, fromIntervalStep])) {
+                    setUnitExpress(undefined);
+                    break;
+                }
+                // @ts-ignore
+                setUnitExpress((allowAlias && showAlias) ? `${weekAliases.get(fromIntervalStart.toString())}/${fromIntervalStep}` : `${fromIntervalStart}/${fromIntervalStep}`);
+                break;
             case EntryChoiceType.SPECIFY_WEEK:
                 if (!specificWeeks || !specificWeeks.length) {
                     setUnitExpress(undefined);
                     break;
                 }
                 if (!allowAlias || !showAlias) {
-                    setUnitExpress(StringUtils.join(specificWeeks.map(item => ((item === 7 || item === '7') && props?.sundayAsZero) ? 0 : item), ','));
+                    setUnitExpress(StringUtils.join(specificWeeks.map(item => ((item === 7 || item === '7') && props?.sundayAsZero) ? '0' : item), ','));
                 } else {
                     setUnitExpress(StringUtils.join(specificWeeks.map(item => weekAliases.get(item.toString())), ','));
                 }
@@ -295,7 +361,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                     break;
                 }
                 if (!allowAlias || !showAlias) {
-                    setUnitExpress(`${((orderWeekValue === 7 || orderWeekValue === '7') && props?.sundayAsZero) ? 0 : orderWeekValue}#${orderWeekSort}`);
+                    setUnitExpress(`${((orderWeekValue === 7 || orderWeekValue === '7') && props?.sundayAsZero) ? '0' : orderWeekValue}#${orderWeekSort}`);
                 } else {
                     setUnitExpress(`${weekAliases.get(orderWeekValue.toString())}#${orderWeekSort}`);
                 }
@@ -316,68 +382,59 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
             setEntryChoice(EntryChoiceType.BLANK_WEEK);
         } else if (income === '*') {
             setEntryChoice(EntryChoiceType.EVERY_WEEK);
-        } else if (income && (/^\d+$/g.test(income) || /^[A-Z]{3}$/g.test(income) || income.includes(','))) {
+        }  else if (income && (/^\d+-\d+$/g.test(income) || /^[A-Z]{3}-[A-Z]{3}$/g.test(income))) {
+            setEntryChoice(EntryChoiceType.FROM_TO);
+            const start = StringUtils.substringBefore(income, '-'), end = StringUtils.substringAfter(income, '-');
+            setFromToStart(RegexUtils.isNumeric(start) ? start : MapUtils.getKey(weekAliases, start));
+            setFromToEnd(RegexUtils.isNumeric(end) ? end : MapUtils.getKey(weekAliases, end));
+        } else if (income && (/^\d+\/\d+$/g.test(income) || /^[A-Z]{3}\/\d+$/g.test(income))) {
+            setEntryChoice(EntryChoiceType.FROM_INTERVAL);
+            const start = StringUtils.substringBefore(income, '/');
+            setFromIntervalStart(RegexUtils.isNumeric(start) ? start : MapUtils.getKey(weekAliases, start));
+            setFromIntervalStep(StringUtils.substringAfter(income, '/'));
+        } else if (income && (/^(\d+)(,\d+)*$/g.test(income) || /^([A-Z]{3})(,[A-Z]{3})*$/g.test(income))) {
             setEntryChoice(EntryChoiceType.SPECIFY_WEEK);
-            if (/^\d+$/g.test(income)) {
-                setSpecificWeeks([NumberUtils.toInteger(income) as number]);
-            } else if (/^[A-Z]{3}$/g.test(income)) {
-                setSpecificWeeks([NumberUtils.toInteger(MapUtils.getKey(weekAliases, income)) as number]);
+            if (/^(\d+)(,\d+)*$/g.test(income)) {
+                setSpecificWeeks(income.split(',').map(item => (item === '0') ? '7' : item));
             } else {
-                setSpecificWeeks(income.split(',').map(item => {
-                    if (RegexUtils.isNumeric(item)) {
-                        return (item === '0') ? 7 : NumberUtils.toInteger(item) as number;
-                    }
-                    return NumberUtils.toInteger(MapUtils.getKey(weekAliases, item)) as number;
-                }));
+                setSpecificWeeks(income.split(',').map(item => MapUtils.getKey(weekAliases, item) as string));
             }
         } else if (income && /^\d+L$/g.test(income)) {
             setEntryChoice(EntryChoiceType.LAST_WEEK);
             setLastWeek(StringUtils.left(income, income.length - 1) as string);
         } else if (income && (/^\d+#\d+$/g.test(income) || /^[A-Z]{3}#\d+$/g.test(income))) {
             setEntryChoice(EntryChoiceType.ORDER_WEEK);
-            setOrderWeekSort(NumberUtils.toInteger(StringUtils.substringAfter(income, '#')));
+            setOrderWeekSort(StringUtils.substringAfter(income, '#'));
             const valueAlias = StringUtils.substringBefore(income, '#');
             if (RegexUtils.isNumeric(valueAlias)) {
-                setOrderWeekValue((valueAlias === '0') ? 7 : NumberUtils.toInteger(valueAlias));
+                setOrderWeekValue((valueAlias === '0') ? '7' : valueAlias);
             } else {
-                setOrderWeekValue(NumberUtils.toInteger(MapUtils.getKey(weekAliases, valueAlias)));
+                setOrderWeekValue(MapUtils.getKey(weekAliases, valueAlias));
             }
         } else {
             setEntryChoice(undefined);
         }
     }, [props?.value]);
 
+    const weekSemantics: ReadonlyMap<string, string | undefined> = new Map<string, string | undefined>([
+        ['1', ObjectUtils.firstNotNil(props?.localeProps?.monday, intlLocales.get([locale, 'monday']), intlLocales.get(['en_US', 'monday']))],
+        ['2', ObjectUtils.firstNotNil(props?.localeProps?.tuesday, intlLocales.get([locale, 'tuesday']), intlLocales.get(['en_US', 'tuesday']))],
+        ['3', ObjectUtils.firstNotNil(props?.localeProps?.wednesday, intlLocales.get([locale, 'wednesday']), intlLocales.get(['en_US', 'wednesday']))],
+        ['4', ObjectUtils.firstNotNil(props?.localeProps?.thursday, intlLocales.get([locale, 'thursday']), intlLocales.get(['en_US', 'thursday']))],
+        ['5', ObjectUtils.firstNotNil(props?.localeProps?.friday, intlLocales.get([locale, 'friday']), intlLocales.get(['en_US', 'friday']))],
+        ['6', ObjectUtils.firstNotNil(props?.localeProps?.saturday, intlLocales.get([locale, 'saturday']), intlLocales.get(['en_US', 'saturday']))],
+        ['7', ObjectUtils.firstNotNil(props?.localeProps?.sunday, intlLocales.get([locale, 'sunday']), intlLocales.get(['en_US', 'sunday']))],
+    ]);
+
     const buildWeekOptions = () => {
-        return [
-            {
-                label: props?.localeProps?.monday || intlLocales.get([locale, 'monday']) || intlLocales.get(['en_US', 'monday']),
-                value: 1,
-            },
-            {
-                label: props?.localeProps?.tuesday || intlLocales.get([locale, 'tuesday']) || intlLocales.get(['en_US', 'tuesday']),
-                value: 2,
-            },
-            {
-                label: props?.localeProps?.wednesday || intlLocales.get([locale, 'wednesday']) || intlLocales.get(['en_US', 'wednesday']),
-                value: 3,
-            },
-            {
-                label: props?.localeProps?.thursday || intlLocales.get([locale, 'thursday']) || intlLocales.get(['en_US', 'thursday']),
-                value: 4,
-            },
-            {
-                label: props?.localeProps?.friday || intlLocales.get([locale, 'friday']) || intlLocales.get(['en_US', 'friday']),
-                value: 5,
-            },
-            {
-                label: props?.localeProps?.saturday || intlLocales.get([locale, 'saturday']) || intlLocales.get(['en_US', 'saturday']),
-                value: 6,
-            },
-            {
-                label: props?.localeProps?.sunday || intlLocales.get([locale, 'sunday']) || intlLocales.get(['en_US', 'sunday']),
-                value: 7,
-            }
-        ];
+        const result: LabeledValue[] = [];
+        weekSemantics.forEach((v, k) => {
+            result.push({
+                label: v,
+                value: k,
+            });
+        });
+        return result;
     };
 
     // noinspection DuplicatedCode
@@ -390,8 +447,8 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                         checked={showAlias}
                         disabled={props?.disabled}
                         size='small'
-                        checkedChildren={props?.localeProps?.semanticAlias || intlLocales.get([locale, 'semanticAlias']) || intlLocales.get(['en_US', 'semanticAlias'])}
-                        unCheckedChildren={props?.localeProps?.semanticAlias || intlLocales.get([locale, 'semanticAlias']) || intlLocales.get(['en_US', 'semanticAlias'])}
+                        checkedChildren={ObjectUtils.firstNotNil(props?.localeProps?.semanticAlias, intlLocales.get([locale, 'semanticAlias']), intlLocales.get(['en_US', 'semanticAlias']))}
+                        unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.semanticAlias, intlLocales.get([locale, 'semanticAlias']), intlLocales.get(['en_US', 'semanticAlias']))}
                         onChange={setShowAlias}
                     />
                 )}
@@ -415,19 +472,135 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                         >
                             <Space direction='vertical'>
                                 <Radio value={EntryChoiceType.BLANK_WEEK}>
-                                    {props?.localeProps?.blankWeek || intlLocales.get([locale, 'blankWeek']) || intlLocales.get(['en_US', 'blankWeek'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.blankWeek, intlLocales.get([locale, 'blankWeek']), intlLocales.get(['en_US', 'blankWeek']))}
                                 </Radio>
                                 <Radio value={EntryChoiceType.EVERY_WEEK}>
-                                    {props?.localeProps?.everyWeek || intlLocales.get([locale, 'everyWeek']) || intlLocales.get(['en_US', 'everyWeek'])}
+                                    {ObjectUtils.firstNotNil(props?.localeProps?.everyWeek, intlLocales.get([locale, 'everyWeek']), intlLocales.get(['en_US', 'everyWeek']))}
+                                </Radio>
+                                <Radio
+                                    value={EntryChoiceType.FROM_TO}
+                                    onClick={() => {
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_TO), 80);
+                                    }}
+                                >
+                                    <Space>
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.fromToPrefix, intlLocales.get([locale, 'fromToPrefix']), intlLocales.get(['en_US', 'fromToPrefix']))}
+                                        <Form.Item noStyle={true} shouldUpdate={true}>
+                                            {() => {
+                                                return (
+                                                    <Tooltip
+                                                        title={MapUtils.getValue(weekSemantics, fromToStart?.toString())}
+                                                        getPopupContainer={(trigger: HTMLElement) => {
+                                                            return trigger?.parentElement || document.body;
+                                                        }}
+                                                    >
+                                                        <InputNumber
+                                                            name='fromToStart'
+                                                            autoComplete='off'
+                                                            disabled={entryChoice !== EntryChoiceType.FROM_TO}
+                                                            min={1}
+                                                            max={7}
+                                                            step={1}
+                                                            size='small'
+                                                            status={(entryChoice === EntryChoiceType.FROM_TO && (ObjectUtils.isEmpty(fromToStart) || NumberUtils.compare(fromToStart, fromToEnd, true) > 0)) ? 'error' : undefined}
+                                                            value={fromToStart}
+                                                            onChange={setFromToStart}
+                                                        />
+                                                    </Tooltip>
+                                                );
+                                            }}
+                                        </Form.Item>
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.fromToMiddle, intlLocales.get([locale, 'fromToMiddle']), intlLocales.get(['en_US', 'fromToMiddle']))}
+                                        <Form.Item noStyle={true} shouldUpdate={true}>
+                                            {() => {
+                                                return (
+                                                    <Tooltip
+                                                        title={MapUtils.getValue(weekSemantics, fromToEnd?.toString())}
+                                                        getPopupContainer={(trigger: HTMLElement) => {
+                                                            return trigger?.parentElement || document.body;
+                                                        }}
+                                                    >
+                                                        <InputNumber
+                                                            name='fromToEnd'
+                                                            autoComplete='off'
+                                                            disabled={entryChoice !== EntryChoiceType.FROM_TO}
+                                                            min={1}
+                                                            max={7}
+                                                            step={1}
+                                                            size='small'
+                                                            status={(entryChoice === EntryChoiceType.FROM_TO && (ObjectUtils.isEmpty(fromToEnd) || NumberUtils.compare(fromToStart, fromToEnd, true) > 0)) ? 'error' : undefined}
+                                                            value={fromToEnd}
+                                                            onChange={setFromToEnd}
+                                                        />
+                                                    </Tooltip>
+                                                );
+                                            }}
+                                        </Form.Item>
+                                    </Space>
+                                </Radio>
+                                <Radio
+                                    value={EntryChoiceType.FROM_INTERVAL}
+                                    onClick={() => {
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.FROM_INTERVAL), 80);
+                                    }}
+                                >
+                                    <Space>
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.fromIntervalPrefix, intlLocales.get([locale, 'fromIntervalPrefix']), intlLocales.get(['en_US', 'fromIntervalPrefix']))}
+                                        <Form.Item noStyle={true} shouldUpdate={true}>
+                                            {() => {
+                                                return (
+                                                    <Tooltip
+                                                        title={MapUtils.getValue(weekSemantics, fromIntervalStart?.toString())}
+                                                        getPopupContainer={(trigger: HTMLElement) => {
+                                                            return trigger?.parentElement || document.body;
+                                                        }}
+                                                    >
+                                                        <InputNumber
+                                                            name='fromIntervalStart'
+                                                            autoComplete='off'
+                                                            disabled={entryChoice !== EntryChoiceType.FROM_INTERVAL}
+                                                            min={1}
+                                                            max={7}
+                                                            step={1}
+                                                            size='small'
+                                                            status={(entryChoice === EntryChoiceType.FROM_INTERVAL && ObjectUtils.isEmpty(fromIntervalStart)) ? 'error' : undefined}
+                                                            value={fromIntervalStart}
+                                                            onChange={setFromIntervalStart}
+                                                        />
+                                                    </Tooltip>
+                                                );
+                                            }}
+                                        </Form.Item>
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.fromIntervalMiddle, intlLocales.get([locale, 'fromIntervalMiddle']), intlLocales.get(['en_US', 'fromIntervalMiddle']))}
+                                        <Form.Item noStyle={true} shouldUpdate={true}>
+                                            {() => {
+                                                return (
+                                                    <InputNumber
+                                                        name='fromIntervalStep'
+                                                        autoComplete='off'
+                                                        disabled={entryChoice !== EntryChoiceType.FROM_INTERVAL}
+                                                        min={1}
+                                                        max={7}
+                                                        step={1}
+                                                        size='small'
+                                                        status={(entryChoice === EntryChoiceType.FROM_INTERVAL && ObjectUtils.isEmpty(fromIntervalStep)) ? 'error' : undefined}
+                                                        value={fromIntervalStep}
+                                                        onChange={setFromIntervalStep}
+                                                    />
+                                                );
+                                            }}
+                                        </Form.Item>
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.fromIntervalSuffix, intlLocales.get([locale, 'fromIntervalSuffix']), intlLocales.get(['en_US', 'fromIntervalSuffix']))}
+                                    </Space>
                                 </Radio>
                                 <Radio
                                     value={EntryChoiceType.SPECIFY_WEEK}
                                     onClick={() => {
-                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_WEEK), 50);
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_WEEK), 80);
                                     }}
                                 >
                                     <Space direction='vertical'>
-                                        {props?.localeProps?.specificWeek || intlLocales.get([locale, 'specificWeek']) || intlLocales.get(['en_US', 'specificWeek'])}
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.specificWeek, intlLocales.get([locale, 'specificWeek']), intlLocales.get(['en_US', 'specificWeek']))}
                                         <Form.Item noStyle={true} shouldUpdate={true}>
                                             {() => {
                                                 return (
@@ -439,7 +612,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                                                         onChange={(checks: CheckboxValueType[]) => {
                                                             setSpecificWeeks(checks);
                                                             if (!checks || !checks.length) {
-                                                                window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_WEEK), 50);
+                                                                window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_WEEK), 80);
                                                             }
                                                         }}
                                                     />
@@ -448,33 +621,51 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                                         </Form.Item>
                                     </Space>
                                 </Radio>
-                                <Radio value={EntryChoiceType.LAST_WEEK} onClick={() => window.setTimeout(() => setEntryChoice(EntryChoiceType.LAST_WEEK), 50)}>
-                                    <Space direction='vertical'>
-                                        {props?.localeProps?.monthLastWeek || intlLocales.get([locale, 'monthLastWeek']) || intlLocales.get(['en_US', 'monthLastWeek'])}
+                                <Radio
+                                    value={EntryChoiceType.LAST_WEEK}
+                                    onClick={() => {
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.LAST_WEEK), 80);
+                                    }}
+                                >
+                                    <Space>
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.monthLastWeekPrefix, intlLocales.get([locale, 'monthLastWeekPrefix']), intlLocales.get(['en_US', 'monthLastWeekPrefix']))}
                                         <Form.Item noStyle={true} shouldUpdate={true}>
                                             {() => {
                                                 return (
-                                                    <Radio.Group
-                                                        name='lastWeek'
-                                                        disabled={entryChoice !== EntryChoiceType.LAST_WEEK}
-                                                        options={buildWeekOptions()}
-                                                        value={lastWeek}
-                                                        onChange={(event: RadioChangeEvent) => setLastWeek(event.target.value)}
-                                                    />
+                                                    <Tooltip
+                                                        title={MapUtils.getValue(weekSemantics, lastWeek?.toString())}
+                                                        getPopupContainer={(trigger: HTMLElement) => {
+                                                            return trigger?.parentElement || document.body;
+                                                        }}
+                                                    >
+                                                        <InputNumber
+                                                            name='lastWeek'
+                                                            autoComplete='off'
+                                                            disabled={entryChoice !== EntryChoiceType.LAST_WEEK}
+                                                            min={1}
+                                                            max={7}
+                                                            step={1}
+                                                            size='small'
+                                                            status={(entryChoice === EntryChoiceType.LAST_WEEK && ObjectUtils.isEmpty(lastWeek)) ? 'error' : undefined}
+                                                            value={lastWeek}
+                                                            onChange={setLastWeek}
+                                                        />
+                                                    </Tooltip>
                                                 );
                                             }}
                                         </Form.Item>
+                                        {ObjectUtils.firstNotNil(props?.localeProps?.monthLastWeekSuffix, intlLocales.get([locale, 'monthLastWeekSuffix']), intlLocales.get(['en_US', 'monthLastWeekSuffix']))}
                                     </Space>
                                 </Radio>
                                 <Radio
                                     value={EntryChoiceType.ORDER_WEEK}
                                     onClick={() => {
-                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.ORDER_WEEK), 50);
+                                        window.setTimeout(() => setEntryChoice(EntryChoiceType.ORDER_WEEK), 80);
                                     }}
                                 >
                                     <Space direction='vertical'>
                                         <Space>
-                                            {props?.localeProps?.monthOrderWeekPrefix || intlLocales.get([locale, 'monthOrderWeekPrefix']) || intlLocales.get(['en_US', 'monthOrderWeekPrefix'])}
+                                            {ObjectUtils.firstNotNil(props?.localeProps?.monthOrderWeekPrefix, intlLocales.get([locale, 'monthOrderWeekPrefix']), intlLocales.get(['en_US', 'monthOrderWeekPrefix']))}
                                             <Form.Item noStyle={true} shouldUpdate={true}>
                                                 {() => {
                                                     return (
@@ -493,21 +684,34 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                                                     );
                                                 }}
                                             </Form.Item>
-                                            {props?.localeProps?.monthOrderWeekSuffix || intlLocales.get([locale, 'monthOrderWeekSuffix']) || intlLocales.get(['en_US', 'monthOrderWeekSuffix'])}
+                                            {ObjectUtils.firstNotNil(props?.localeProps?.monthOrderWeekMiddle, intlLocales.get([locale, 'monthOrderWeekMiddle']), intlLocales.get(['en_US', 'monthOrderWeekMiddle']))}
+                                            <Form.Item noStyle={true} shouldUpdate={true}>
+                                                {() => {
+                                                    return (
+                                                        <Tooltip
+                                                            title={MapUtils.getValue(weekSemantics, orderWeekValue?.toString())}
+                                                            getPopupContainer={(trigger: HTMLElement) => {
+                                                                return trigger?.parentElement || document.body;
+                                                            }}
+                                                        >
+                                                            <InputNumber
+                                                                name='orderWeekValue'
+                                                                autoComplete='off'
+                                                                disabled={entryChoice !== EntryChoiceType.ORDER_WEEK}
+                                                                min={1}
+                                                                max={7}
+                                                                step={1}
+                                                                size='small'
+                                                                status={(entryChoice === EntryChoiceType.ORDER_WEEK && ObjectUtils.isEmpty(orderWeekValue)) ? 'error' : undefined}
+                                                                value={orderWeekValue}
+                                                                onChange={setOrderWeekValue}
+                                                            />
+                                                        </Tooltip>
+                                                    );
+                                                }}
+                                            </Form.Item>
+                                            {ObjectUtils.firstNotNil(props?.localeProps?.monthOrderWeekSuffix, intlLocales.get([locale, 'monthOrderWeekSuffix']), intlLocales.get(['en_US', 'monthOrderWeekSuffix']))}
                                         </Space>
-                                        <Form.Item noStyle={true} shouldUpdate={true}>
-                                            {() => {
-                                                return (
-                                                    <Radio.Group
-                                                        name='orderWeekValue'
-                                                        disabled={entryChoice !== EntryChoiceType.ORDER_WEEK}
-                                                        options={buildWeekOptions()}
-                                                        value={orderWeekValue}
-                                                        onChange={(event: RadioChangeEvent) => setOrderWeekValue(event.target.value)}
-                                                    />
-                                                );
-                                            }}
-                                        </Form.Item>
                                     </Space>
                                 </Radio>
                             </Space>

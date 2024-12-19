@@ -26,7 +26,7 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'fromToSuffix'], ''],
     [['en_US', 'fromIntervalPrefix'], 'Starting at day'],
     [['en_US', 'fromIntervalMiddle'], 'and every'],
-    [['en_US', 'fromIntervalSuffix'], 'days(s)'],
+    [['en_US', 'fromIntervalSuffix'], 'day(s)'],
     [['en_US', 'specificDay'], 'Specific day(s)'],
     [['en_US', 'monthLastDay'], 'The last day of the month'],
     [['en_US', 'monthLastBeforePrefix'], 'The last'],
@@ -37,7 +37,7 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
 
     [['zh_CN', 'blankDay'], '不指定'],
     [['zh_CN', 'everyDay'], '每天'],
-    [['zh_CN', 'fromToPrefix'], '每天，开始于第'],
+    [['zh_CN', 'fromToPrefix'], '每天，从第'],
     [['zh_CN', 'fromToMiddle'], '天，到第'],
     [['zh_CN', 'fromToSuffix'], '天'],
     [['zh_CN', 'fromIntervalPrefix'], '从第'],
@@ -53,7 +53,7 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
 
     [['zh_TW', 'blankDay'], '不指定'],
     [['zh_TW', 'everyDay'], '每天'],
-    [['zh_TW', 'fromToPrefix'], '每天，開始於第'],
+    [['zh_TW', 'fromToPrefix'], '每天，從第'],
     [['zh_TW', 'fromToMiddle'], '天，到第'],
     [['zh_TW', 'fromToSuffix'], '天'],
     [['zh_TW', 'fromIntervalPrefix'], '從第'],

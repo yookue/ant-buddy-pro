@@ -24,7 +24,7 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
-import {NanoidUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import cronValidate from 'cron-validate';
 import Trigger, {type TriggerProps} from 'rc-trigger';
@@ -387,7 +387,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
         setMonthExpress(express.months);
         setWeekExpress(express.daysOfWeek);
         setYearExpress(express.years);
-    }, [incomeExpress, showSecond, showYear]);
+    }, [incomeExpress]);
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
 
@@ -411,7 +411,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             return;
         }
         echoToEntry();
-    }, [outcomeExpresses]);
+    }, [outcomeExpresses, showSecond, showYear]);
 
     const buildEntryAddonDom = (before: boolean) => {
         if (before && !props?.fieldProps?.addonBefore && addonPos === 'before' && !addon) {
@@ -492,9 +492,9 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                                 }
                                 const validate = cronValidate(value, validateOptions);
                                 if (validate.isValid()) {
-                                    return Promise.resolve(props?.localeProps?.validExpress || intlLocales.get([locale, 'validExpress']) || intlLocales.get(['en_US', 'validExpress']));
+                                    return Promise.resolve(ObjectUtils.firstNotNil(props?.localeProps?.validExpress, intlLocales.get([locale, 'validExpress']), intlLocales.get(['en_US', 'validExpress'])));
                                 }
-                                return Promise.reject(props?.localeProps?.invalidExpress || intlLocales.get([locale, 'invalidExpress']) || intlLocales.get(['en_US', 'invalidExpress']));
+                                return Promise.reject(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
                             }
                         }
                     ]}
@@ -517,7 +517,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                         if (validateRule && !!event.target.value) {
                             const validate = cronValidate(event.target.value, validateOptions);
                             if (validate.isError()) {
-                                messageApi.warn(props?.localeProps?.invalidExpress || intlLocales.get([locale, 'invalidExpress']) || intlLocales.get(['en_US', 'invalidExpress']));
+                                messageApi.warn(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
                             }
                         }
                         setIncomeExpress(event.target.value);
@@ -532,11 +532,10 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
         const tabItems: CardTabsProps['items'] = [
             {
                 key: 'minute',
-                label: props?.localeProps?.minute || intlLocales.get([locale, 'minute']) || intlLocales.get(['en_US', 'minute']),
+                label: ObjectUtils.firstNotNil(props?.localeProps?.minute, intlLocales.get([locale, 'minute']), intlLocales.get(['en_US', 'minute'])),
                 children: (
                     <MinutePanel
                         ref={minutePanelRef}
-                        containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={minuteExpress}
                         onChange={(value?: string) => {
@@ -550,11 +549,10 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             },
             {
                 key: 'hour',
-                label: props?.localeProps?.hour || intlLocales.get([locale, 'hour']) || intlLocales.get(['en_US', 'hour']),
+                label: ObjectUtils.firstNotNil(props?.localeProps?.hour, intlLocales.get([locale, 'hour']), intlLocales.get(['en_US', 'hour'])),
                 children: (
                     <HourPanel
                         ref={hourPanelRef}
-                        containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={hourExpress}
                         onChange={(value?: string) => {
@@ -568,11 +566,10 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             },
             {
                 key: 'day',
-                label: props?.localeProps?.day || intlLocales.get([locale, 'day']) || intlLocales.get(['en_US', 'day']),
+                label: ObjectUtils.firstNotNil(props?.localeProps?.day, intlLocales.get([locale, 'day']), intlLocales.get(['en_US', 'day'])),
                 children: (
                     <DayPanel
                         ref={dayPanelRef}
-                        containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={dayExpress}
                         onChange={(value?: string) => {
@@ -586,11 +583,10 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             },
             {
                 key: 'month',
-                label: props?.localeProps?.month || intlLocales.get([locale, 'month']) || intlLocales.get(['en_US', 'month']),
+                label: ObjectUtils.firstNotNil(props?.localeProps?.month, intlLocales.get([locale, 'month']), intlLocales.get(['en_US', 'month'])),
                 children: (
                     <MonthPanel
                         ref={monthPanelRef}
-                        containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={monthExpress}
                         onChange={(value?: string) => {
@@ -604,11 +600,10 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             },
             {
                 key: 'week',
-                label: props?.localeProps?.week || intlLocales.get([locale, 'week']) || intlLocales.get(['en_US', 'week']),
+                label: ObjectUtils.firstNotNil(props?.localeProps?.week, intlLocales.get([locale, 'week']), intlLocales.get(['en_US', 'week'])),
                 children: (
                     <WeekPanel
                         ref={weekPanelRef}
-                        containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={weekExpress}
                         onChange={(value?: string) => {
@@ -624,11 +619,10 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
         if (allowSecond && showSecond) {
             tabItems.unshift({
                 key: 'second',
-                label: props?.localeProps?.second || intlLocales.get([locale, 'second']) || intlLocales.get(['en_US', 'second']),
+                label: ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second'])),
                 children: (
                     <SecondPanel
                         ref={secondPanelRef}
-                        containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={secondExpress}
                         onChange={(value?: string) => {
@@ -638,17 +632,16 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                         locale={props?.secondPanelProps?.locale ?? props?.locale}
                         {...(!props?.secondPanelProps ? {} : omit(props.secondPanelProps, ['value', 'onChange', 'locale']))}
                     />
-                )
+                ),
             });
         }
         if (allowYear && showYear) {
             tabItems.push({
                 key: 'year',
-                label: props?.localeProps?.year || intlLocales.get([locale, 'year']) || intlLocales.get(['en_US', 'year']),
+                label: ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year'])),
                 children: (
                     <YearPanel
                         ref={yearPanelRef}
-                        containerOpen={triggerOpen}
                         disabled={entryImmutable}
                         value={yearExpress}
                         onChange={(value?: string) => {
@@ -658,12 +651,18 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                         locale={props?.yearPanelProps?.locale ?? props?.locale}
                         {...(!props?.yearPanelProps ? {} : omit(props.yearPanelProps, ['value', 'onChange', 'locale']))}
                     />
-                )
+                ),
             });
         }
         const omitTabsProps = !props?.tabsProps ? {} : omit(props.tabsProps, ['defaultActiveKey', 'tabBarExtraContent']);
         return (
-            <CronInputContext.Provider value={{fieldId: fieldId, allowOkEcho: allowOkEcho}}>
+            <CronInputContext.Provider
+                value={{
+                    fieldId: fieldId,
+                    allowOkEcho: allowOkEcho,
+                    popupOpen: triggerOpen,
+                }}
+            >
                 <CardTabs
                     items={tabItems}
                     defaultActiveKey={props?.tabsProps?.defaultActiveKey ?? 'minute'}
@@ -677,8 +676,8 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                                             <Switch
                                                 checked={showSecond}
                                                 size='small'
-                                                checkedChildren={props?.localeProps?.second || intlLocales.get([locale, 'second']) || intlLocales.get(['en_US', 'second'])}
-                                                unCheckedChildren={props?.localeProps?.second || intlLocales.get([locale, 'second']) || intlLocales.get(['en_US', 'second'])}
+                                                checkedChildren={ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second']))}
+                                                unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second']))}
                                                 onChange={(checked: boolean) => {
                                                     setShowSecond(checked);
                                                     if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
@@ -691,8 +690,8 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                                             <Switch
                                                 checked={showYear}
                                                 size='small'
-                                                checkedChildren={props?.localeProps?.year || intlLocales.get([locale, 'year']) || intlLocales.get(['en_US', 'year'])}
-                                                unCheckedChildren={props?.localeProps?.year || intlLocales.get([locale, 'year']) || intlLocales.get(['en_US', 'year'])}
+                                                checkedChildren={ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year']))}
+                                                unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year']))}
                                                 onChange={(checked: boolean) => {
                                                     setShowYear(checked);
                                                     if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
@@ -711,7 +710,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
                                                     setTriggerOpen(false);
                                                 }}
                                             >
-                                                {props?.localeProps?.ok || intlLocales.get([locale, 'ok']) || intlLocales.get(['en_US', 'ok'])}
+                                                {ObjectUtils.firstNotNil(props?.localeProps?.ok, intlLocales.get([locale, 'ok']), intlLocales.get(['en_US', 'ok']))}
                                             </Button>
                                         </If>
                                     </Space>
@@ -725,15 +724,18 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
         );
     };
 
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['className', 'action', 'builtinPlacements', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['className', 'action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
 
     return (
         <Trigger
             className={classNames(`${clazzPrefix}-trigger`, props?.triggerProps?.className)}
             action={props?.triggerProps?.action ?? (entryImmutable ? ['hover'] : ['click'])}
             builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
-            getTriggerDOMNode={(instance: React.ReactInstance) => {
-                return props?.triggerProps?.getTriggerDOMNode?.(instance) || document.querySelector<HTMLElement>(`[data-cron-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
+            getPopupContainer={(trigger: HTMLElement) => {
+                return props?.triggerProps?.getPopupContainer?.(trigger) || trigger?.closest('form')?.parentElement || document.body;
+            }}
+            getTriggerDOMNode={(node: React.ReactInstance) => {
+                return props?.triggerProps?.getTriggerDOMNode?.(node) || document.querySelector<HTMLElement>(`[data-cron-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
             }}
             popup={buildPopupDom()}
             popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {

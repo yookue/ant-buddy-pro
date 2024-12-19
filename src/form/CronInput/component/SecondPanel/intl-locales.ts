@@ -25,11 +25,11 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'fromToSuffix'], ''],
     [['en_US', 'fromIntervalPrefix'], 'Starting at second'],
     [['en_US', 'fromIntervalMiddle'], 'and every'],
-    [['en_US', 'fromIntervalSuffix'], 'seconds(s)'],
+    [['en_US', 'fromIntervalSuffix'], 'second(s)'],
     [['en_US', 'specificSecond'], 'Specific second(s)'],
 
     [['zh_CN', 'everySecond'], '每秒'],
-    [['zh_CN', 'fromToPrefix'], '每秒，开始于第'],
+    [['zh_CN', 'fromToPrefix'], '每秒，从第'],
     [['zh_CN', 'fromToMiddle'], '秒，到第'],
     [['zh_CN', 'fromToSuffix'], '秒'],
     [['zh_CN', 'fromIntervalPrefix'], '从第'],
@@ -38,7 +38,7 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['zh_CN', 'specificSecond'], '指定的秒'],
 
     [['zh_TW', 'everySecond'], '每秒'],
-    [['zh_TW', 'fromToPrefix'], '每秒，開始於第'],
+    [['zh_TW', 'fromToPrefix'], '每秒，從第'],
     [['zh_TW', 'fromToMiddle'], '秒，到第'],
     [['zh_TW', 'fromToSuffix'], '秒'],
     [['zh_TW', 'fromIntervalPrefix'], '從第'],

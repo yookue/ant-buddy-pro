@@ -32,6 +32,13 @@ export type CronInputContextProps = {
      * @description.zh-TW 是否通過確定按鈕來回顯，否則將實時回顯
      */
     allowOkEcho?: boolean;
+
+    /**
+     * @description Whether the popup is currently open or not
+     * @description.zh-CN 弹出层是否为打开状态
+     * @description.zh-TW 彈出層是否為打開狀態
+     */
+    popupOpen?: boolean;
 };
 
 
