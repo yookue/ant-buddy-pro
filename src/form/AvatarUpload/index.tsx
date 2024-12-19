@@ -23,7 +23,7 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {StringUtils, NumberUtils} from '@yookue/ts-lang-utils';
+import {NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -315,9 +315,9 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     const handleBeforeUpload = (file: RcFile, fileList: RcFile[]) => {
         if (props?.uploadProps?.allowedFileTypes && !props.uploadProps.allowedFileTypes.some(item => file.type === item)) {
             if (!props?.uploadProps?.warnWithTypes) {
-                messageApi.error(props?.localeProps?.disallowType || intlLocales.get([locale, 'disallowType']) || intlLocales.get(['en_US', 'disallowType']));
+                messageApi.error(ObjectUtils.firstNotNil(props?.localeProps?.disallowType, intlLocales.get([locale, 'disallowType']), intlLocales.get(['en_US', 'disallowType'])));
             } else {
-                const template = props?.localeProps?.allowTypes || intlLocales.get([locale, 'allowTypes']) || intlLocales.get(['en_US', 'allowTypes']);
+                const template = ObjectUtils.firstNotNil(props?.localeProps?.allowTypes, intlLocales.get([locale, 'allowTypes']), intlLocales.get(['en_US', 'allowTypes']));
                 const types = StringUtils.join(props.uploadProps.allowedFileTypes.map(item => (item === 'image/jpeg') ? 'jpg' : StringUtils.substringAfterLast(item, '/')) as string[], '/');
                 messageApi.error(StringUtils.formatBrace(template, types));
             }
@@ -343,7 +343,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             }
             // @ts-ignore
             if (fileSize > props.uploadProps.maxFileSize) {
-                const template = props?.localeProps?.maxFileSize || intlLocales.get([locale, 'maxFileSize']) || intlLocales.get(['en_US', 'maxFileSize']);
+                const template = ObjectUtils.firstNotNil(props?.localeProps?.maxFileSize, intlLocales.get([locale, 'maxFileSize']), intlLocales.get(['en_US', 'maxFileSize']));
                 messageApi.error(StringUtils.formatBrace(template, props.uploadProps.maxFileSize, props.uploadProps.fileSizeUint));
                 return false;
             }
@@ -406,7 +406,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         const innerDom = (
             <Space className={`${clazzPrefix}-upload-space`} size={4}>
                 {loading ? <LoadingOutlined/> : <PlusOutlined/>}
-                {props?.localeProps?.upload || intlLocales.get([locale, 'upload']) || intlLocales.get(['en_US', 'upload'])}
+                {ObjectUtils.firstNotNil(props?.localeProps?.upload, intlLocales.get([locale, 'upload']), intlLocales.get(['en_US', 'upload']))}
             </Space>
         );
         return TooltipRender.renderTooltip(props?.tooltipCtrl, props?.tooltipProps, innerDom);
@@ -445,7 +445,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             return uploadDom;
         }
         const omitCropProps = !props?.cropProps ? {} : omit(props.cropProps, ['modalClassName', 'modalTitle', 'rotationSlider']);
-        const cropModalTitle = props?.localeProps?.cropModalTitle || intlLocales.get([locale, 'cropModalTitle']) || intlLocales.get(['en_US', 'cropModalTitle']);
+        const cropModalTitle = ObjectUtils.firstNotNil(props?.localeProps?.cropModalTitle, intlLocales.get([locale, 'cropModalTitle']), intlLocales.get(['en_US', 'cropModalTitle']));
         return (
             <ImgCrop
                 modalClassName={classNames(`${clazzPrefix}-crop`, props?.cropProps?.modalClassName)}

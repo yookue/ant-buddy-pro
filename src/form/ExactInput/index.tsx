@@ -21,6 +21,7 @@ import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
@@ -215,7 +216,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 </If>
                 <If condition={(before && addonPos === 'before') || (!before && addonPos === 'after')} validation={false}>
                     {TooltipRender.renderTooltip(props?.tooltipCtrl, {
-                        title: props?.localeProps?.exactMatch || intlLocales.get([locale, 'exactMatch']) || intlLocales.get(['en_US', 'exactMatch']),
+                        title: ObjectUtils.firstNotNil(props?.localeProps?.exactMatch, intlLocales.get([locale, 'exactMatch']), intlLocales.get(['en_US', 'exactMatch'])),
                         ...props?.tooltipProps,
                     }, innerDom)}
                 </If>

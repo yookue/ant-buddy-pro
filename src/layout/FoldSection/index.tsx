@@ -20,6 +20,7 @@ import {ConfigProvider, Empty, type TooltipProps} from 'antd';
 import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import CssMotion from 'rc-motion';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
@@ -270,8 +271,8 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         if ((!headerCollapse && !headerExpand) || !headerCollapsePos) {
             return undefined;
         }
-        const collapse = props?.localeProps?.collapse || intlLocales.get([locale, 'collapse']) || intlLocales.get(['en_US', 'collapse']);
-        const expend = props?.localeProps?.expend || intlLocales.get([locale, 'expend']) || intlLocales.get(['en_US', 'expend']);
+        const collapse = ObjectUtils.firstNotNil(props?.localeProps?.collapse, intlLocales.get([locale, 'collapse']), intlLocales.get(['en_US', 'collapse']));
+        const expend = ObjectUtils.firstNotNil(props?.localeProps?.expend, intlLocales.get([locale, 'expend']), intlLocales.get(['en_US', 'expend']));
         const innerDom = (
             <span
                 className={`${clazzPrefix}-header-collapse-${headerCollapsePos}`}

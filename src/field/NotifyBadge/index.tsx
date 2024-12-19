@@ -21,7 +21,7 @@ import {ListItemMetaProps} from 'antd/es/list/Item';
 import {BellOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
-import {ArrayUtils, BooleanUtils} from '@yookue/ts-lang-utils';
+import {ArrayUtils, BooleanUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type Tab as RcTab, type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
@@ -401,7 +401,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onClear?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.clear || intlLocales.get([locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
+                            {ObjectUtils.firstNotNil(props?.localeProps?.clear, intlLocales.get([locale, 'clear']), intlLocales.get(['en_US', 'clear']))}
                         </div>
                     </If>
                     <If condition={showMore} validation={false}>
@@ -409,7 +409,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onMore?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.more || intlLocales.get([locale, 'more']) || intlLocales.get(['en_US', 'more'])}
+                            {ObjectUtils.firstNotNil(props?.localeProps?.more, intlLocales.get([locale, 'more']), intlLocales.get(['en_US', 'more']))}
                         </div>
                     </If>
                 </div>

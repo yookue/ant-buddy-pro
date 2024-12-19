@@ -19,6 +19,7 @@ import React from 'react';
 import {ConfigProvider, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import screenfull from 'screenfull';
 import {TooltipRender} from '@/render/TooltipRender';
@@ -205,8 +206,8 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     };
 
     const buildIconDom = () => {
-        const requestFullscreen = props?.localeProps?.requestFullscreen || intlLocales.get([locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
-        const exitFullscreen = props?.localeProps?.exitFullscreen || intlLocales.get([locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
+        const requestFullscreen = ObjectUtils.firstNotNil(props?.localeProps?.requestFullscreen, intlLocales.get([locale, 'requestFullscreen']), intlLocales.get(['en_US', 'requestFullscreen']));
+        const exitFullscreen = ObjectUtils.firstNotNil(props?.localeProps?.exitFullscreen, intlLocales.get([locale, 'exitFullscreen']), intlLocales.get(['en_US', 'exitFullscreen']));
         const innerDom = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
             onClick: handleToggleScreen,
         });

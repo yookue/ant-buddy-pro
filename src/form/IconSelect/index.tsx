@@ -381,8 +381,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     return;
                 }
                 if (optionGroup) {
-                    const themeTitle = ObjectUtils.getProp(props?.localeProps, `${themeType}Theme`) || intlLocales.get([locale, `${themeType}Theme`]) || intlLocales.get(['en_US', `${themeType}Theme`]);
-                    const sceneTitle = ObjectUtils.getProp(props?.localeProps, `${sceneType}Scene`) || intlLocales.get([locale, `${sceneType}Scene`]) || intlLocales.get(['en_US', `${sceneType}Scene`]);
+                    const themeTitle = ObjectUtils.firstNotNil(ObjectUtils.getProp(props?.localeProps, `${themeType}Theme`), intlLocales.get([locale, `${themeType}Theme`]), intlLocales.get(['en_US', `${themeType}Theme`]));
+                    const sceneTitle = ObjectUtils.firstNotNil(ObjectUtils.getProp(props?.localeProps, `${sceneType}Scene`), intlLocales.get([locale, `${sceneType}Scene`]), intlLocales.get(['en_US', `${sceneType}Scene`]));
                     const optGroup = {
                         optionType: 'optGroup',
                         children: children,
@@ -611,7 +611,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             return ['direction', 'suggestion', 'editor', 'data', 'logo', 'web'].filter(item => sceneTypes?.includes(item as IconSceneType)).map(item => {
                 return {
                     key: item,
-                    label: ObjectUtils.getProp(props?.localeProps, `${item}Scene`) || intlLocales.get([locale, `${item}Scene`]) || intlLocales.get(['en_US', `${item}Scene`]),
+                    label: ObjectUtils.firstNotNil(ObjectUtils.getProp(props?.localeProps, `${item}Scene`), intlLocales.get([locale, `${item}Scene`]), intlLocales.get(['en_US', `${item}Scene`])),
                     children: wrapIconOptions(buildIconOptions(themeType, item as IconSceneType)),
                 };
             });
@@ -675,7 +675,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const themeItems = ['outlined', 'filled', 'twotone'].filter(item => themeTypes?.includes(item as IconThemeType)).map(item => {
         return {
             key: item,
-            label: ObjectUtils.getProp(props?.localeProps, `${item}Theme`) || intlLocales.get([locale, `${item}Theme`]) || intlLocales.get(['en_US', `${item}Theme`]),
+            label: ObjectUtils.firstNotNil(ObjectUtils.getProp(props?.localeProps, `${item}Theme`), intlLocales.get([locale, `${item}Theme`]), intlLocales.get(['en_US', `${item}Theme`])),
             children: buildThemeTabs(item as IconThemeType),
         };
     });
@@ -707,7 +707,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                             <If condition={searchBox} validation={false}>
                                 <Input.Search
                                     ref={searchRef}
-                                    placeholder={props?.localeProps?.search || intlLocales.get([locale, 'searchBox']) || intlLocales.get(['en_US', 'searchBox'])}
+                                    placeholder={ObjectUtils.firstNotNil(props?.localeProps?.search, intlLocales.get([locale, 'searchBox']), intlLocales.get(['en_US', 'searchBox']))}
                                     allowClear={true}
                                     size='small'
                                     disabled={searchDisabled}

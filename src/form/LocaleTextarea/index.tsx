@@ -23,7 +23,7 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
-import {NanoidUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type ReadonlyTabsType, type RuleValidateScope} from '@/type/declaration';
@@ -440,7 +440,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                 items={[
                     {
                         key: 'default',
-                        label: props?.localeProps?.default || intlLocales.get([locale, 'default']) || intlLocales.get(['en_US', 'default']),
+                        label: ObjectUtils.firstNotNil(props?.localeProps?.default, intlLocales.get([locale, 'default']), intlLocales.get(['en_US', 'default'])),
                         children: buildEntryDom(),
                     },
                     ...buildSwitchItems(),

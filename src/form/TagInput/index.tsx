@@ -412,7 +412,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 setTagContents(contents);
             } else {
                 if (warnDuplicate && !proField) {
-                    messageApi.warn(props?.localeProps?.duplicateTag || intlLocales.get([locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
+                    messageApi.warn(ObjectUtils.firstNotNil(props?.localeProps?.duplicateTag, intlLocales.get([locale, 'duplicateTag']), intlLocales.get(['en_US', 'duplicateTag'])));
                 }
             }
         }
@@ -472,7 +472,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                         if (tagContents?.indexOf(value) === -1 && (valueInteger === undefined || tagContents?.indexOf(valueInteger) === -1)) {
                                             return Promise.resolve();
                                         }
-                                        return Promise.reject(props?.localeProps?.duplicateTag || intlLocales.get([locale, 'duplicateTag']) || intlLocales.get(['en_US', 'duplicateTag']));
+                                        return Promise.reject(ObjectUtils.firstNotNil(props?.localeProps?.duplicateTag, intlLocales.get([locale, 'duplicateTag']), intlLocales.get(['en_US', 'duplicateTag'])));
                                     }
                                 }
                             ]}

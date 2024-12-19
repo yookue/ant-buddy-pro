@@ -19,6 +19,7 @@ import React from 'react';
 import {ConfigProvider, type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, StarOutlined, StarFilled} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type AxisDirectionType} from '@/type/declaration';
 import {CountField, type CountFieldRef} from '@/field/CountField';
@@ -313,11 +314,11 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     const detectIconTooltip = () => {
         switch (actionType) {
             case 'like':
-                return props?.localeProps?.like || intlLocales.get([locale, 'like']) || intlLocales.get(['en_US', 'like']);
+                return ObjectUtils.firstNotNil(props?.localeProps?.like, intlLocales.get([locale, 'like']), intlLocales.get(['en_US', 'like']));
             case 'dislike':
-                return props?.localeProps?.dislike || intlLocales.get([locale, 'dislike']) || intlLocales.get(['en_US', 'dislike']);
+                return ObjectUtils.firstNotNil(props?.localeProps?.dislike, intlLocales.get([locale, 'dislike']), intlLocales.get(['en_US', 'dislike']));
             case 'favorite':
-                return props?.localeProps?.favorite || intlLocales.get([locale, 'favorite']) || intlLocales.get(['en_US', 'favorite']);
+                return ObjectUtils.firstNotNil(props?.localeProps?.favorite, intlLocales.get([locale, 'favorite']), intlLocales.get(['en_US', 'favorite']));
             default:
                 return undefined;
         }

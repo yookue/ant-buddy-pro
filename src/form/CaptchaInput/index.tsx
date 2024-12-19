@@ -21,6 +21,7 @@ import {FormContext} from 'antd/es/form/context';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -153,8 +154,8 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     // Initialize the default props
     const {
         captchaTextRender = (timing: boolean, count: number) => {
-            const generate = props?.localeProps?.generate || intlLocales.get([locale, 'generate']) || intlLocales.get(['en_US', 'generate']);
-            const resend = props?.localeProps?.resend || intlLocales.get([locale, 'resend']) || intlLocales.get(['en_US', 'resend']);
+            const generate = ObjectUtils.firstNotNil(props?.localeProps?.generate, intlLocales.get([locale, 'generate']), intlLocales.get(['en_US', 'generate']));
+            const resend = ObjectUtils.firstNotNil(props?.localeProps?.resend, intlLocales.get([locale, 'resend']), intlLocales.get(['en_US', 'resend']));
             return (timing && count > 0) ? `${resend}(${count})` : generate;
         },
         countDown = 59,

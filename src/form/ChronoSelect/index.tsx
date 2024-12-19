@@ -171,7 +171,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
     if (unitTypes) {
         unitTypes.forEach(item => {
             optionItems.push({
-                label: ObjectUtils.getProp(props?.localeProps, item) || intlLocales.get([locale, item]) || intlLocales.get(['en_US', item]),
+                label: ObjectUtils.firstNotNil(ObjectUtils.getProp(props?.localeProps, item), intlLocales.get([locale, item]), intlLocales.get(['en_US', item])),
                 value: item,
             });
         });

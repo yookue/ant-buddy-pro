@@ -23,7 +23,7 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
-import {BooleanUtils, NanoidUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {BooleanUtils, NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import Trigger, {type TriggerProps} from 'rc-trigger';
 import 'rc-trigger/assets/index.less';
@@ -415,6 +415,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     }
 
     const [confirmOpen, setConfirmOpen] = React.useState<boolean>();
+    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
 
     const handleSetAsDefault = (tagId: string) => {
         const inspect = document.querySelector<HTMLInputElement>(`[data-locale-input-id='${fieldId}']`);
@@ -429,34 +430,31 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         if (!before && popupTagPos !== 'after' && !inputProps?.fieldProps?.addonAfter && popupAddonPos === 'after' && !popupAddon) {
             return undefined;
         }
-        const itemDisabled = props?.fieldProps?.disabled || inputProps?.fieldProps?.disabled;
-        const itemReadonly = props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || inputProps?.fieldProps?.readOnly || inputProps?.proFieldProps?.readonly;
 
         const tagDom = ((before && popupTagPos === 'before') || (!before && popupTagPos === 'after')) ? (
-            <span className={classNames(`${clazzPrefix}-tag-${popupTagPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-popup-disabled` : undefined))}>
+            <span className={`${clazzPrefix}-tag-${popupTagPos}`}>
                 {tag}
             </span>
         ) : undefined;
 
-        const actionClazz = classNames(`${clazzPrefix}-action-${popupAddonPos}`, ((itemDisabled || itemReadonly) ? `${clazzPrefix}-popup-disabled` : undefined));
         const addon = (popupAddon && ((before && popupAddonPos === 'before') || (!before && popupAddonPos === 'after'))) ? (
             <If condition={BooleanUtils.isNotFalse(popupConfirmProps?.enabled)} validation={false}>
                 <If.Then>
                     <Popconfirm
-                        title={popupConfirmProps?.setAsDefault || intlLocales.get([locale, 'setAsDefault']) || intlLocales.get(['en_US', 'setAsDefault'])}
-                        okText={popupConfirmProps?.ok || intlLocales.get([locale, 'ok'])}
-                        cancelText={popupConfirmProps?.cancel || intlLocales.get([locale, 'cancel'])}
-                        disabled={itemDisabled || itemReadonly}
+                        title={ObjectUtils.firstNotNil(popupConfirmProps?.setAsDefault, intlLocales.get([locale, 'setAsDefault']), intlLocales.get(['en_US', 'setAsDefault']))}
+                        okText={popupConfirmProps?.ok ?? intlLocales.get([locale, 'ok'])}
+                        cancelText={popupConfirmProps?.cancel ?? intlLocales.get([locale, 'cancel'])}
+                        disabled={entryImmutable}
                         onConfirm={() => handleSetAsDefault(elementId)}
                         onOpenChange={setConfirmOpen}
                     >
-                        <span className={actionClazz}>
+                        <span className={`${clazzPrefix}-action-${popupAddonPos}`}>
                             {popupAddon}
                         </span>
                     </Popconfirm>
                 </If.Then>
                 <If.Else>
-                    <span className={actionClazz} onClick={() => handleSetAsDefault(elementId)}>
+                    <span className={`${clazzPrefix}-action-${popupAddonPos}`} onClick={() => handleSetAsDefault(elementId)}>
                         {popupAddon}
                     </span>
                 </If.Else>
@@ -549,7 +547,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                     maxLength: fieldProps?.maxLength || props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
                                     showCount: fieldProps?.showCount || props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined),
                                     size: fieldProps?.size || props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined),
-                                    disabled: props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled,
+                                    disabled: props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled || entryImmutable,
                                     readOnly: props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly,
                                     onCompositionStart: (event: React.CompositionEvent<HTMLInputElement>) => {
                                         compositionRef.current = true;
@@ -588,7 +586,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 maxLength={fieldProps?.maxLength || props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
                                 showCount={fieldProps?.showCount || props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined)}
                                 size={fieldProps?.size || props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined)}
-                                disabled={props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled}
+                                disabled={props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled || entryImmutable}
                                 readOnly={props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly}
                                 onCompositionStart={(event: React.CompositionEvent<HTMLInputElement>) => {
                                     compositionRef.current = true;
@@ -632,7 +630,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                     maxLength: props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
                                     showCount: props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined),
                                     size: props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined),
-                                    disabled: props.disabled || props?.fieldProps?.disabled,
+                                    disabled: props.disabled || props?.fieldProps?.disabled || entryImmutable,
                                     readOnly: props.readonly || props?.fieldProps?.readOnly,
                                     onCompositionStart: () => {
                                         compositionRef.current = true;
@@ -666,7 +664,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 maxLength={props?.popupShareProps?.maxLength || (popupCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
                                 showCount={props?.popupShareProps?.showCount || (popupCloneProps.showCount ? props?.fieldProps?.showCount : undefined)}
                                 size={props?.popupShareProps?.size || (popupCloneProps.size ? props?.fieldProps?.size : undefined)}
-                                disabled={props.disabled || props?.fieldProps?.disabled}
+                                disabled={props.disabled || props?.fieldProps?.disabled || entryImmutable}
                                 readOnly={props.readonly || props?.fieldProps?.readOnly}
                                 onCompositionStart={() => {
                                     compositionRef.current = true;
@@ -697,7 +695,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         );
     };
 
-    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['className', 'action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
 
@@ -707,11 +704,10 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             action={props?.triggerProps?.action ?? (entryImmutable ? ['hover'] : ['click'])}
             builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
             getPopupContainer={(trigger: HTMLElement) => {
-                const income = props?.triggerProps?.getPopupContainer?.(trigger);
-                return income || trigger?.parentElement || document.body;
+                return props?.triggerProps?.getPopupContainer?.(trigger) || trigger?.parentElement || document.body;
             }}
-            getTriggerDOMNode={(instance: React.ReactInstance) => {
-                return props?.triggerProps?.getTriggerDOMNode?.(instance) || document.querySelector<HTMLElement>(`[data-locale-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
+            getTriggerDOMNode={(node: React.ReactInstance) => {
+                return props?.triggerProps?.getTriggerDOMNode?.(node) || document.querySelector<HTMLElement>(`[data-locale-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
             }}
             popup={buildPopupDom()}
             popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
