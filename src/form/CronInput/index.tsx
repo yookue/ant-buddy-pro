@@ -309,24 +309,6 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
     const [showYear, setShowYear] = React.useState<boolean>(props?.defaultShowYear ?? false);
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
 
-    // noinspection DuplicatedCode
-    const handleWindowResize = () => {
-        const inspect = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
-        const sponsor = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-popup-${fieldId}`);
-        if (inspect && sponsor) {
-            StyleUtils.addStyle(sponsor, 'width', `${inspect.offsetWidth}px`);
-            StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
-        }
-    };
-
-    React.useLayoutEffect(() => {
-        window.addEventListener('resize', handleWindowResize);
-        handleWindowResize();
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
     const secondPanelRef = React.useRef<SecondPanelRef>(null);
     const minutePanelRef = React.useRef<MinutePanelRef>(null);
     const hourPanelRef = React.useRef<HourPanelRef>(null);
@@ -343,7 +325,7 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
     const [weekExpress, setWeekExpress] = React.useState<string>();
     const [yearExpress, setYearExpress] = React.useState<string>();
 
-    const [incomeExpress, setIncomeExpress] = React.useState<string>();
+    const [incomeExpress, setIncomeExpress] = React.useState<string | undefined>(props?.fieldProps?.value as string);
     const outcomeExpresses = [secondExpress, minuteExpress, hourExpress, dayExpress, monthExpress, weekExpress, yearExpress];
 
     const clearSubExpresses = () => {
@@ -527,6 +509,28 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             );
         }
     };
+
+    if (entryImmutable) {
+        return buildEntryDom();
+    }
+
+    // noinspection DuplicatedCode
+    const handleWindowResize = () => {
+        const inspect = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
+        const sponsor = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-popup-${fieldId}`);
+        if (inspect && sponsor) {
+            StyleUtils.addStyle(sponsor, 'width', `${inspect.offsetWidth}px`);
+            StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
+        }
+    };
+
+    React.useLayoutEffect(() => {
+        window.addEventListener('resize', handleWindowResize);
+        handleWindowResize();
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
 
     const buildPopupDom = () => {
         const tabItems: CardTabsProps['items'] = [
