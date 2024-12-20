@@ -48,6 +48,14 @@ import {intlLocales} from './intl-locales';
 import './index.less';
 
 
+export type CronInputRef = {
+    isShowSecond: () => boolean;
+    isShowYear: () => boolean;
+    setShowSecond: () => void;
+    setShowYear: () => void;
+};
+
+
 export type IntlLocaleProps = {
     /**
      * @description OK
@@ -285,7 +293,9 @@ export type CronInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @see "http://crontab.org/"
  * @see "https://freeformatter.com/cron-expression-generator-quartz.html"
  */
-export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
+export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.RefAttributes<CronInputRef>> = React.forwardRef((props?: CronInputProps, ref?: any) => {
+    CronInput.displayName = 'CronInput';
+
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
@@ -308,6 +318,22 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
     const [showSecond, setShowSecond] = React.useState<boolean>(props?.defaultShowSecond ?? false);
     const [showYear, setShowYear] = React.useState<boolean>(props?.defaultShowYear ?? false);
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
+
+    // noinspection JSUnusedGlobalSymbols
+    React.useImperativeHandle(ref, () => ({
+        isShowSecond: (): boolean => {
+            return showSecond;
+        },
+        isShowYear: (): boolean => {
+            return showYear;
+        },
+        setShowSecond: (show: boolean): void => {
+            setShowSecond(show);
+        },
+        setShowYear: (show: boolean): void => {
+            setShowYear(show);
+        }
+    }));
 
     const secondPanelRef = React.useRef<SecondPanelRef>(null);
     const minutePanelRef = React.useRef<MinutePanelRef>(null);
@@ -763,4 +789,4 @@ export const CronInput: React.FC<CronInputProps> = (props?: CronInputProps) => {
             </div>
         </Trigger>
     );
-};
+});

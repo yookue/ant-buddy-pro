@@ -37,7 +37,7 @@ export {CaptchaInput, type CaptchaInputProps, type CaptchaInputRef} from './form
 export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';
 export {ChronoTuple, type ChronoTupleProps} from './form/ChronoTuple';
 export {CollapseForm, type CollapseFormProps, type CollapseFormRef} from './form/CollapseForm';
-export {CronInput, type CronInputProps} from './form/CronInput';
+export {CronInput, type CronInputProps, type CronInputRef} from './form/CronInput';
 export {DivideSelect, type DivideSelectProps} from './form/DivideSelect';
 export {ExactInput, type ExactInputProps} from './form/ExactInput';
 export {IconSelect, type IconSelectProps} from './form/IconSelect';
