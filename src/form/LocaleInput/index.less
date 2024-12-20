@@ -27,12 +27,6 @@
     box-shadow: @box-shadow-base;
     z-index: @zindex-dropdown;
 
-    .@{buddy-locale-input}-tag-before, .@{buddy-locale-input}-tag-after {
-        color: @text-color-secondary;
-        cursor: default;
-        font-size: @font-size-base - 1px;
-    }
-
     .@{buddy-locale-input}-popup-list .@{buddy-locale-input}-popup-list-item {
         border-radius: @border-radius-base;
 
@@ -42,6 +36,16 @@
 
         > .@{ant-prefix}-form-item {
             width: 100%;
+
+            .@{buddy-locale-input}-locale-tag {
+                color: @text-color-secondary;
+                cursor: default;
+                font-size: @font-size-base - 1px;
+            }
+
+            .@{buddy-locale-input}-locale-action {
+                cursor: pointer;
+            }
         }
     }
 
@@ -52,16 +56,16 @@
 
     /* Item Readonly Styles */
 
-    .@{buddy-locale-input}-item-readonly {
+    .@{buddy-locale-input}-locale-item-readonly {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
 
-        &-before .@{buddy-locale-input}-item-readonly-content {
+        &-before .@{buddy-locale-input}-locale-item-readonly-content {
             padding-left: @padding-xs;
         }
 
-        &-after .@{buddy-locale-input}-item-readonly-content {
+        &-after .@{buddy-locale-input}-locale-item-readonly-content {
             padding-right: @padding-xs;
         }
 
