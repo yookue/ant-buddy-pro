@@ -33,9 +33,13 @@ export type ThumbActionType = 'like' | 'dislike' | 'favorite';
 
 export type ThumbToggleRef = CountFieldRef & {
     isCheckable: () => boolean,
-    setCheckable: (checkable: boolean) => void;
     isChecked: () => boolean;
+    getCount: () => number;
+    setCheckable: (checkable: boolean) => void;
     setChecked: (checked: boolean) => void;
+    setCount: (count: number) => void;
+    increaseCount: ()=> void;
+    decreaseCount: ()=> void;
     toggleChecked: () => Promise<void>;
 };
 
@@ -237,20 +241,17 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
         isCheckable: (): boolean => {
             return checkable;
         },
-        setCheckable: (checkable: boolean): void => {
-            setCheckable(checkable);
-        },
         isChecked: (): boolean => {
             return checked;
         },
-        setChecked: (checked: boolean): void => {
-            setChecked(checked);
-        },
-        toggleChecked: async (): Promise<void> => {
-            await handleToggle();
-        },
         getCount: (): number => {
             return countFieldRef.current?.getCount() ?? 0;
+        },
+        setCheckable: (checkable: boolean): void => {
+            setCheckable(checkable);
+        },
+        setChecked: (checked: boolean): void => {
+            setChecked(checked);
         },
         setCount: (count: number): void => {
             countFieldRef.current?.setCount(count);
@@ -260,6 +261,9 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
         },
         decreaseCount: (): void => {
             countFieldRef.current?.decreaseCount();
+        },
+        toggleChecked: async (): Promise<void> => {
+            await handleToggle();
         }
     }));
 

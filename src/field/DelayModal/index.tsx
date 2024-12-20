@@ -25,8 +25,8 @@ import {ConsoleUtils} from '@/util/ConsoleUtils';
 
 export type DelayModalRef = {
     isOpening: () => boolean;
-    hasOpened: () => boolean;
     isTiming: () => boolean;
+    hasOpened: () => boolean;
     startTimer: () => void;
     stopTimer: () => void;
 };
@@ -160,11 +160,11 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         isOpening: (): boolean => {
             return opening;
         },
-        hasOpened: (): boolean => {
-            return openedRef.current;
-        },
         isTiming: (): boolean => {
             return !!timerRef.current;
+        },
+        hasOpened: (): boolean => {
+            return openedRef.current;
         },
         startTimer: (): void => {
             startTimer();
