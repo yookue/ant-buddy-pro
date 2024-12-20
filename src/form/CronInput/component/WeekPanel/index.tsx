@@ -369,7 +369,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
             default:
                 break;
         }
-    }, [entryChoice, specificWeeks, lastWeek, orderWeekSort, orderWeekValue, allowAlias, showAlias]);
+    }, [entryChoice, fromToStart, fromToEnd, fromIntervalStart, fromIntervalStep, specificWeeks, lastWeek, orderWeekSort, orderWeekValue, showAlias]);
 
     // noinspection DuplicatedCode
     React.useEffect(() => {

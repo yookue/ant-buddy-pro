@@ -253,7 +253,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
             default:
                 break;
         }
-    }, [entryChoice, fromToStart, fromToEnd, fromIntervalStart, fromIntervalStep, specificMonths, allowAlias, showAlias]);
+    }, [entryChoice, fromToStart, fromToEnd, fromIntervalStart, fromIntervalStep, specificMonths, showAlias]);
 
     // noinspection DuplicatedCode
     React.useEffect(() => {
