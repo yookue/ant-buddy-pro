@@ -129,7 +129,9 @@ export abstract class ConsoleUtils {
         if (once) {
             rcNote(valid, built);
         } else {
-            console.warn(`Note: ${built}`);
+            if (!valid) {
+                console.warn(`Note: ${built}`);
+            }
         }
     }
 
@@ -157,7 +159,9 @@ export abstract class ConsoleUtils {
         if (once) {
             rcWarning(valid, built);
         } else {
-            console.warn(`Warning: ${built}`);
+            if (!valid) {
+                console.warn(`Warning: ${built}`);
+            }
         }
     }
 }

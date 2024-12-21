@@ -149,7 +149,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-captcha-input');
     const intlType = useIntl();
 
-    ConsoleUtils.warn(!!formContext?.form, true, 'CaptchaInput', `Field '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formContext?.form, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -163,8 +163,8 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         locale = intlType.locale,
     } = props ?? {};
 
-    ConsoleUtils.warn(countDown > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'countDown' must be greater than 0`);
-    ConsoleUtils.warn(timerInterval > 0, true, 'CaptchaInput', `Field '${props?.name}' prop 'timerInterval' must be greater than 0`);
+    ConsoleUtils.warn(countDown > 0, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' prop 'countDown' must be greater than 0`);
+    ConsoleUtils.warn(timerInterval > 0, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' prop 'timerInterval' must be greater than 0`);
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [counting, setCounting] = React.useState<number>(countDown);

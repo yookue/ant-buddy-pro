@@ -32,6 +32,7 @@ import 'rc-trigger/assets/index.less';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
+import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {ElementUtils} from '@/util/ElementUtils';
 import {PropUtils} from '@/util/PropUtils';
 import {StyleUtils} from '@/util/StyleUtils';
@@ -192,6 +193,13 @@ export type CronInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     defaultShowYear?: boolean;
 
     /**
+     * @description Whether to echo the validation error to console or not
+     * @description.zh-CN 是否回显验证错误到控制台
+     * @description.zh-TW 是否回顯驗證錯誤到控制臺
+     */
+    echoValidateError?: boolean;
+
+    /**
      * @description The properties of the dropdown div
      * @description.zh-CN 弹出层的属性
      * @description.zh-TW 彈出層的屬性
@@ -283,6 +291,13 @@ export type CronInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
+
+    /**
+     * @description The callback function when validation error occurred
+     * @description.zh-CN 验证错误时的回调函数
+     * @description.zh-TW 驗證錯誤時的回調函數
+     */
+    onValidateError?: (express?: string, errors?: string[], income?: boolean) => void;
 } & Pick<CronInputContextProps, 'allowOkEcho'>;
 
 
@@ -384,7 +399,9 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         }
         const validate = cronValidate(incomeExpress, validateOptions);
         if (validate.isError()) {
+            ConsoleUtils.warn(!props?.echoValidateError, false, 'CronInput', `Field '${props?.name ?? props?.fieldProps?.name}' validation error: ${validate.error.join('; ')}`);
             clearSubExpresses();
+            props?.onValidateError?.(incomeExpress, validate.error, true);
             return;
         }
         const express = validate.getValue();
@@ -408,10 +425,13 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
             return;
         }
         const validate = cronValidate(outcome, validateOptions);
-        if (validate.isValid()) {
-            const inspect = document.querySelector<HTMLInputElement>(`[data-cron-input-id='${fieldId}']`);
-            ElementUtils.setElementValue(inspect, outcome);
+        if (validate.isError()) {
+            ConsoleUtils.warn(!props?.echoValidateError, false, 'CronInput', `Field '${props?.name ?? props?.fieldProps?.name}' validation error: ${validate.error.join('; ')}`);
+            props?.onValidateError?.(outcome, validate.error, false);
+            return;
         }
+        const inspect = document.querySelector<HTMLInputElement>(`[data-cron-input-id='${fieldId}']`);
+        ElementUtils.setElementValue(inspect, outcome);
     };
 
     React.useEffect(() => {
@@ -710,8 +730,9 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                                                 unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second']))}
                                                 onChange={(checked: boolean) => {
                                                     setShowSecond(checked);
-                                                    if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
-                                                        formContext.form.validateFields([props.name]);
+                                                    const rawName = props?.name ?? props?.fieldProps?.name;
+                                                    if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
+                                                        formContext.form.validateFields([rawName]);
                                                     }
                                                 }}
                                             />
@@ -724,8 +745,9 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                                                 unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year']))}
                                                 onChange={(checked: boolean) => {
                                                     setShowYear(checked);
-                                                    if (validateRule && props?.name && formContext?.form && formContext.form.getFieldValue(props?.name)) {
-                                                        formContext.form.validateFields([props.name]);
+                                                    const rawName = props?.name ?? props?.fieldProps?.name;
+                                                    if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
+                                                        formContext.form.validateFields([rawName]);
                                                     }
                                                 }}
                                             />

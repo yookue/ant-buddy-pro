@@ -63,7 +63,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     const formContext = React.useContext(FormContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
 
-    ConsoleUtils.warn(!!formContext?.form, true, 'MaskInput',  `Field '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formContext?.form, true, 'MaskInput',  `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {

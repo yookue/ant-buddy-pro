@@ -515,6 +515,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     };
 
     const buildPopupDom = () => {
+        const rawName = props?.name ?? props?.fieldProps?.name;
+        const rawId = props?.id ?? props?.fieldProps?.id;
         const clonedRules = cloneItemRules();
         const tagInputs: React.ReactNode[] = [];
         if (props?.popupInputProps) {
@@ -533,11 +535,11 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         <If.Then>
                             <ProFormText
                                 key={tag}
-                                name={props?.name ? `${props.name}[${tag}]` : undefined}
+                                name={rawName ? `${rawName}[${tag}]` : undefined}
                                 {...restProps}
                                 fieldProps={{
                                     className: classNames(`${clazzPrefix}-locale-item`, fieldProps?.className),
-                                    id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
+                                    id: rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined),
                                     placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     autoComplete: 'off',
                                     addonBefore: beforeDom,
@@ -575,8 +577,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             <Input
                                 key={tag}
                                 className={classNames(`${clazzPrefix}-locale-item`, fieldProps?.className)}
-                                name={props?.name ? `${props.name}[${tag}]` : undefined}
-                                id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
+                                name={rawName ? `${rawName}[${tag}]` : undefined}
+                                id={rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined)}
                                 placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 autoComplete={'off'}
                                 addonBefore={beforeDom}
@@ -617,10 +619,10 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         <If.Then>
                             <ProFormText
                                 key={tag}
-                                name={props?.name ? `${props.name}[${tag}]` : undefined}
+                                name={rawName ? `${rawName}[${tag}]` : undefined}
                                 fieldProps={{
                                     className: `${clazzPrefix}-locale-item`,
-                                    id: props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined),
+                                    id: rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined),
                                     placeholder: props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     autoComplete: 'off',
                                     addonBefore: beforeDom,
@@ -653,8 +655,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             <Input
                                 key={tag}
                                 className={`${clazzPrefix}-locale-item`}
-                                name={props?.name ? `${props.name}[${tag}]` : undefined}
-                                id={props?.id ? `${props.id}[${tag}]` : (props?.name ? `${props.name}[${tag}]` : undefined)}
+                                name={rawName ? `${rawName}[${tag}]` : undefined}
+                                id={rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined)}
                                 placeholder={props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 autoComplete={'off'}
                                 addonBefore={beforeDom}
