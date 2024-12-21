@@ -250,7 +250,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         >
             <Input
                 className={classNames(clazzPrefix, props?.className)}
-                value={props?.value ?? props?.fieldProps?.value}
+                value={ObjectUtils.firstNotNil(props?.initialValue, props?.value, props?.fieldProps?.value)}
                 onChange={props?.onChange ?? props?.fieldProps?.onChange}
                 {...omitFieldProps}
             />

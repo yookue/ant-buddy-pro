@@ -366,7 +366,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     const [weekExpress, setWeekExpress] = React.useState<string>();
     const [yearExpress, setYearExpress] = React.useState<string>();
 
-    const [incomeExpress, setIncomeExpress] = React.useState<string | undefined>(props?.fieldProps?.value as string);
+    const [incomeExpress, setIncomeExpress] = React.useState<string | undefined>(props?.initialValue ?? (props?.fieldProps?.value as string));
     const outcomeExpresses = [secondExpress, minuteExpress, hourExpress, dayExpress, monthExpress, weekExpress, yearExpress];
 
     const clearSubExpresses = () => {
