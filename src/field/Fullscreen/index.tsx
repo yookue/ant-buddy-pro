@@ -87,7 +87,7 @@ export type FullscreenProps = {
      * @description.zh-TW 要切換全屏的 DOM 元素
      * @default document.documentElement
      */
-    triggerFor?: HTMLElement;
+    triggerFor?: HTMLElement | (() => HTMLElement | undefined);
 
     /**
      * @description Whether to use Tooltip
@@ -133,12 +133,12 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
 
     // Initialize the default props
     const {
-        triggerFor = document.documentElement,
         locale = intlType.locale,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === triggerFor);
+    const triggerForRef = React.useRef<HTMLElement>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document.documentElement);
+    const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === triggerForRef.current);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -172,7 +172,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
      * @see "https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event"
      */
     const handleScreenChange = () => {
-        setFullscreen(document.fullscreenElement === triggerFor);
+        setFullscreen(document.fullscreenElement === triggerForRef.current);
     };
 
     /**
@@ -190,17 +190,17 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     };
 
     React.useEffect(() => {
-        triggerFor.addEventListener('fullscreenchange', handleScreenChange, false);
-        triggerFor.addEventListener('keydown', handleKeyDown, false);
+        triggerForRef.current.addEventListener('fullscreenchange', handleScreenChange, false);
+        triggerForRef.current.addEventListener('keydown', handleKeyDown, false);
         return () => {
-            triggerFor.removeEventListener('fullscreenchange', handleScreenChange, false);
-            triggerFor.removeEventListener('keydown', handleKeyDown, false);
+            triggerForRef.current.removeEventListener('fullscreenchange', handleScreenChange, false);
+            triggerForRef.current.removeEventListener('keydown', handleKeyDown, false);
         }
     }, []);
 
     const handleToggleScreen = () => {
         if (screenfull.isEnabled) {
-            screenfull.toggle(triggerFor);
+            screenfull.toggle(triggerForRef.current);
             setFullscreen(!fullscreen);
         }
     };

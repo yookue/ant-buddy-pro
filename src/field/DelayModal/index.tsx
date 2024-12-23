@@ -103,7 +103,7 @@ export type DelayModalProps = React.PropsWithChildren<{
      * @description.zh-TW 要觸發延遲事件的 DOM 元素
      * @default document
      */
-    triggerFor?: HTMLElement;
+    triggerFor?: Document | HTMLElement | (() => Document | HTMLElement | undefined);
 
     /**
      * @description The properties of the modal
@@ -148,12 +148,12 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         onceOnly = true,
         preventEvents = ['keydown', 'mousedown', 'scroll'],
         timeout = 1000 * 60 * 15,
-        triggerFor = document,
     } = props ?? {};
 
     const [opening, setOpening] = React.useState<boolean>(false);
     const openedRef = React.useRef<boolean>(false);
     const timerRef = React.useRef<number>(0);
+    const triggerForRef = React.useRef<Document | HTMLElement>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -222,13 +222,13 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
 
     const addListener = () => {
         preventEvents.forEach(item => {
-            triggerFor.addEventListener(item, resetTimer);
+            triggerForRef.current.addEventListener(item, resetTimer);
         });
     };
 
     const removeListener = () => {
         preventEvents.forEach(item => {
-            triggerFor.removeEventListener(item, resetTimer);
+            triggerForRef.current.removeEventListener(item, resetTimer);
         });
     };
 
