@@ -98,7 +98,7 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps
      * @description.zh-CN 组件的 ref 句柄
      * @description.zh-TW 組件的 ref 句柄
      */
-    fieldRef?: React.Ref<TagInputRef | undefined | null>;
+    fieldRef?: React.Ref<TagInputRef | null | undefined>;
 
     /**
      * @description The remote request

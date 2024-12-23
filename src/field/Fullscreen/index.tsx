@@ -87,7 +87,7 @@ export type FullscreenProps = {
      * @description.zh-TW 要切換全屏的 DOM 元素
      * @default document.documentElement
      */
-    triggerFor?: HTMLElement | (() => HTMLElement | undefined);
+    triggerFor?: HTMLElement | null | (() => HTMLElement | null | undefined);
 
     /**
      * @description Whether to use Tooltip

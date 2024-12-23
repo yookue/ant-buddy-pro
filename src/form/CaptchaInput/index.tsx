@@ -82,7 +82,7 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'fieldRef' | 'onGetCap
      * @description.zh-CN 组件的 ref 句柄
      * @description.zh-TW 組件的 ref 句柄
      */
-    fieldRef?: React.Ref<CaptchaInputRef | undefined | null>;
+    fieldRef?: React.Ref<CaptchaInputRef | null | undefined>;
 
     /**
      * @description The timer interval, in milliseconds

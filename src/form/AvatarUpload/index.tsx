@@ -147,7 +147,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldP
      * @description.zh-CN 组件的 ref 句柄
      * @description.zh-TW 組件的 ref 句柄
      */
-    fieldRef?: React.Ref<AvatarUploadRef | undefined | null>;
+    fieldRef?: React.Ref<AvatarUploadRef | null | undefined>;
 
     /**
      * @description The source of the image

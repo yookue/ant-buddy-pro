@@ -103,7 +103,7 @@ export type DelayModalProps = React.PropsWithChildren<{
      * @description.zh-TW 要觸發延遲事件的 DOM 元素
      * @default document
      */
-    triggerFor?: Document | HTMLElement | (() => Document | HTMLElement | undefined);
+    triggerFor?: Document | HTMLElement | null | (() => Document | HTMLElement | null | undefined);
 
     /**
      * @description The properties of the modal
