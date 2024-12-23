@@ -103,7 +103,7 @@ export type DelayModalProps = React.PropsWithChildren<{
      * @description.zh-TW 要觸發延遲事件的 DOM 元素
      * @default document
      */
-    triggerFor?: Document | HTMLElement | null | (() => Document | HTMLElement | null | undefined);
+    triggerFor?: Document | Element | null | (() => Document | Element | null | undefined);
 
     /**
      * @description The properties of the modal
@@ -153,7 +153,7 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     const [opening, setOpening] = React.useState<boolean>(false);
     const openedRef = React.useRef<boolean>(false);
     const timerRef = React.useRef<number>(0);
-    const triggerForRef = React.useRef<Document | HTMLElement>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document);
+    const triggerForRef = React.useRef<Document | Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({

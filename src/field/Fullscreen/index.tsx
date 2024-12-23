@@ -87,7 +87,7 @@ export type FullscreenProps = {
      * @description.zh-TW 要切換全屏的 DOM 元素
      * @default document.documentElement
      */
-    triggerFor?: HTMLElement | null | (() => HTMLElement | null | undefined);
+    triggerFor?: Element | null | (() => Element | null | undefined);
 
     /**
      * @description Whether to use Tooltip
@@ -137,7 +137,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const triggerForRef = React.useRef<HTMLElement>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document.documentElement);
+    const triggerForRef = React.useRef<Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document.documentElement);
     const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === triggerForRef.current);
 
     // noinspection JSUnusedGlobalSymbols
