@@ -512,7 +512,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                         ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
                     }}
                     rules={[
-                        ...(!props?.rules ? [] : props.rules),
+                        ...(props?.rules ?? []),
                         !validateRule ? {} : {
                             validator: async (_rule: any, value: string) => {
                                 if (!value) {
