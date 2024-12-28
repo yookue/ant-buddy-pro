@@ -18,6 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Modal, type ModalProps, type ModalFuncProps} from 'antd';
 import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
+import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -45,7 +46,7 @@ export type MixinModalFuncProps = Omit<ModalFuncProps, 'open'> & {
 };
 
 
-export type ModalActionType = 'confirm' | 'info' | 'warn' | 'success' | 'error' | 'custom';
+export type ModalActionType = Exclude<ModalFuncProps['type'], 'warning' | undefined> | 'custom';
 
 
 export type DelayModalProps = React.PropsWithChildren<{
@@ -150,6 +151,7 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         timeout = 1000 * 60 * 15,
     } = props ?? {};
 
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [opening, setOpening] = React.useState<boolean>(false);
     const openedRef = React.useRef<boolean>(false);
     const timerRef = React.useRef<number>(0);
@@ -233,10 +235,13 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     };
 
     const popupFuncModal = () => {
+        if (onceOnly && opening) {
+            return;
+        }
         const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'afterClose', 'preprocess']);
         const fullProps: ModalFuncProps = {
-            className: classNames(clazzPrefix, props?.modalFunProps?.className),
-            wrapClassName: classNames(`${clazzPrefix}-wrapper`, props?.modalFunProps?.wrapClassName),
+            className: classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalFunProps?.className),
+            wrapClassName: classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalFunProps?.wrapClassName),
             open: opening,
             afterClose: () => {
                 setOpening(false);
@@ -274,10 +279,11 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     }
 
     const omitProps = !props?.modalProps ? {} : omit(props.modalProps, ['className', 'wrapClassName', 'onOk', 'onCancel', 'afterClose', 'children']);
+
     return (
         <Modal
-            className={classNames(clazzPrefix, props?.modalProps?.className)}
-            wrapClassName={classNames(`${clazzPrefix}-wrapper`, props?.modalProps?.wrapClassName)}
+            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalProps?.className)}
+            wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalProps?.wrapClassName)}
             open={opening}
             onOk={(event: React.MouseEvent<HTMLElement>) => {
                 setOpening(false);
