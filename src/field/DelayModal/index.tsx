@@ -235,7 +235,7 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     };
 
     const popupFuncModal = () => {
-        if (onceOnly && opening) {
+        if (onceOnly && (opening || document.querySelector(`.${clazzPrefix}-${fieldId}`))) {
             return;
         }
         const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'afterClose', 'preprocess']);
