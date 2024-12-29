@@ -11,6 +11,9 @@ nav:
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v0.1.142** [2024-12-29]
+    - 增加 'field/DragModal'
+
   - **v0.1.137** [2024-12-20]
     - 增加 'form/CronInput'
     - 增加 'util/TriggerUtils'

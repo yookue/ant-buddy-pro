@@ -22,6 +22,7 @@ export {CompactTuple, type CompactTupleProps} from './field/CompactTuple';
 export {CornerStamp, type CornerStampProps} from './field/CornerStamp';
 export {CountField, type CountFieldProps, type CountFieldRef} from './field/CountField';
 export {DelayModal, type DelayModalProps, type DelayModalRef} from './field/DelayModal';
+export {DragModal, type DragModalProps} from './field/DragModal';
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {Fullscreen, type FullscreenProps, type FullscreenRef} from './field/Fullscreen';
 export {LabelField, type LabelFieldProps} from './field/LabelField';

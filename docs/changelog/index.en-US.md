@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.142** [2024-12-29]
+    - Add 'field/DragModal'
+
   - **v0.1.137** [2024-12-20]
     - Add 'form/CronInput'
     - Add 'util/TriggerUtils'
