@@ -17,7 +17,7 @@
 
 import dayjs from 'dayjs';
 import objectHash from 'object-hash';
-import {noteOnce as rcNote, warningOnce as rcWarning} from 'rc-util/es/warning';
+import {noteOnce, warningOnce} from 'rc-util/es/warning';
 
 
 const loggedHashes: string[] = [];
@@ -127,7 +127,7 @@ export abstract class ConsoleUtils {
             return;
         }
         if (once) {
-            rcNote(valid, built);
+            noteOnce(valid, built);
         } else {
             if (!valid) {
                 console.warn(`Note: ${built}`);
@@ -157,7 +157,7 @@ export abstract class ConsoleUtils {
             return;
         }
         if (once) {
-            rcWarning(valid, built);
+            warningOnce(valid, built);
         } else {
             if (!valid) {
                 console.warn(`Warning: ${built}`);
