@@ -156,6 +156,12 @@
                 border-color: @input-hover-border-color !important;
             }
         }
+
+        .flexbox-fix:last-of-type > div > span > div {
+            &:focus, &:hover {
+                border: @border-width-base @border-style-base @input-hover-border-color !important;
+            }
+        }
     }
 
     /* swatches-picker */
