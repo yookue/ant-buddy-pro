@@ -17,7 +17,7 @@ features:
   - icon: ./assets/img/home/green-leaf-1.png
     title: 主题支持
     desc: 🎨 支持 Ant Design Pro 主题样式，更多样式，随心控制
-footer: Open-source MIT Licensed<br/>Copyright © 2023 Yookue Ltd. All rights reserved
+footer: Open-source MIT Licensed<br/>版权所有 © 2023 北京攸科网络科技有限公司
 ---
 
 
