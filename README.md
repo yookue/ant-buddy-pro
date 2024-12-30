@@ -35,11 +35,15 @@ Enjoy your coding journey with `ant-buddy-pro` ✌️
 
 ## Document
 
-- GitHub pages: [https://yookue.github.io/ant-buddy-pro](https://yookue.github.io/ant-buddy-pro)
+- GitHub: [https://yookue.github.io/ant-buddy-pro](https://yookue.github.io/ant-buddy-pro)
 
 ## License
 
 This project is under the [MIT License](https://mit-license.org/).
+
+## Copyright
+
+Beijing Yookue Network Technology Ltd.
 
 ## Website
 

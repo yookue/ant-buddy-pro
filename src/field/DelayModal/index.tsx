@@ -30,6 +30,9 @@ export type DelayModalRef = {
     hasOpened: () => boolean;
     startTimer: () => void;
     stopTimer: () => void;
+    resetTimer: () => void;
+    addListener: () => void;
+    removeListener: () => void;
 };
 
 
@@ -136,8 +139,8 @@ export type DelayModalProps = React.PropsWithChildren<{
 
     /**
      * @description The callback function when the opening state changed
-     * @description.zh-CN 模态对话框显示状态变化时的回调函数
-     * @description.zh-TW 模態對話框顯示狀態變化時的回調函數
+     * @description.zh-CN 显示状态变化时的回调函数
+     * @description.zh-TW 顯示狀態變化時的回調函數
      */
     onOpenChange?: (open: boolean) => void;
 }>;
@@ -166,7 +169,9 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
-    const [opening, setOpening] = React.useState<boolean>(false);
+    const [modalOpening, setModalOpening] = React.useState<boolean>(false);
+    const [modalFuncOpening, setModalFuncOpening] = React.useState<boolean>(false);
+    const modalFuncOpeningRef = React.useRef<boolean>(false);
     const openedRef = React.useRef<boolean>(false);
     const timerRef = React.useRef<number>(0);
     const triggerForRef = React.useRef<Document | Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document);
@@ -174,7 +179,7 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
         isOpening: (): boolean => {
-            return opening;
+            return modalOpening || modalFuncOpening;
         },
         isTiming: (): boolean => {
             return !!timerRef.current;
@@ -187,14 +192,23 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         },
         stopTimer: (): void => {
             stopTimer();
+        },
+        resetTimer: (): void => {
+            resetTimer();
+        },
+        addListener: (): void => {
+            addListener();
+        },
+        removeListener: (): void => {
+            removeListener();
         }
     }));
 
     React.useEffect(() => {
+        addListener();
         if (autoStart) {
             startTimer();
         }
-        addListener();
         return () => {
             stopTimer();
             removeListener();
@@ -202,8 +216,12 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     }, []);
 
     React.useEffect(() => {
-        props?.onOpenChange?.(opening);
-    }, [opening]);
+        props?.onOpenChange?.(modalOpening);
+    }, [modalOpening]);
+
+    React.useEffect(() => {
+        props?.onOpenChange?.(modalFuncOpening);
+    }, [modalFuncOpening]);
 
     const onTimer = () => {
         stopTimer();
@@ -214,9 +232,10 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
             stopTimer();
             return;
         }
-        if (!opening && ((onceOnly && !openedRef.current) || !onceOnly)) {
-            setOpening(true);
-            if (actionType !== 'custom') {
+        if (!onceOnly || (onceOnly && !openedRef.current)) {
+            if (actionType === 'custom') {
+                setModalOpening(true);
+            } else {
                 popupFuncModal();
             }
             openedRef.current = true;
@@ -256,16 +275,16 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     };
 
     const popupFuncModal = () => {
-        if (onceOnly && (opening || document.querySelector(`.${clazzPrefix}-${fieldId}`))) {
+        if (modalFuncOpeningRef.current || document.querySelector(`.${clazzPrefix}-${fieldId}`)) {
             return;
         }
         const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'afterClose', 'preprocess']);
         const fullProps: ModalFuncProps = {
             className: classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalFunProps?.className),
             wrapClassName: classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalFunProps?.wrapClassName),
-            open: opening,
             afterClose: () => {
-                setOpening(false);
+                modalFuncOpeningRef.current = false;
+                setModalFuncOpening(false);
                 if (!onceOnly) {
                     startTimer();
                 }
@@ -293,9 +312,9 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
             default:
                 break;
         }
-        if (onceOnly) {
-            stopTimer();
-        }
+        modalFuncOpeningRef.current = true;
+        setModalFuncOpening(true);
+        stopTimer();
     };
 
     if (actionType !== 'custom') {
@@ -308,16 +327,17 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         <Modal
             className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalProps?.className)}
             wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalProps?.wrapClassName)}
-            open={opening}
+            open={modalOpening}
             onOk={(event: React.MouseEvent<HTMLElement>) => {
-                setOpening(false);
+                setModalOpening(false);
                 props?.modalProps?.onOk?.(event);
             }}
             onCancel={(event: React.MouseEvent<HTMLElement>) => {
-                setOpening(false);
+                setModalOpening(false);
                 props?.modalProps?.onCancel?.(event);
             }}
             afterClose={() => {
+                setModalOpening(false);
                 if (!onceOnly) {
                     startTimer();
                 }
