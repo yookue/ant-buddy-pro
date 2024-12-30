@@ -121,6 +121,20 @@ export type DelayModalProps = React.PropsWithChildren<{
     modalFunProps?: MixinModalFuncProps;
 
     /**
+     * @description The condition for skipping timer once
+     * @description.zh-CN 跳过单次计时器的条件
+     * @description.zh-TW 跳過單次計時器的條件
+     */
+    skipCondition?: boolean | (() => boolean | undefined);
+
+    /**
+     * @description The condition for stopping the timer
+     * @description.zh-CN 停止计时器的条件
+     * @description.zh-TW 停止計時器的條件
+     */
+    stopCondition?: boolean | (() => boolean | undefined);
+
+    /**
      * @description The callback function when the opening state changed
      * @description.zh-CN 模态对话框显示状态变化时的回调函数
      * @description.zh-TW 模態對話框顯示狀態變化時的回調函數
@@ -193,6 +207,13 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
 
     const onTimer = () => {
         stopTimer();
+        if ((typeof props?.skipCondition === 'function') ? props.skipCondition() : props?.skipCondition) {
+            return;
+        }
+        if ((typeof props?.stopCondition === 'function') ? props.stopCondition() : props?.stopCondition) {
+            stopTimer();
+            return;
+        }
         if (!opening && ((onceOnly && !openedRef.current) || !onceOnly)) {
             setOpening(true);
             if (actionType !== 'custom') {
@@ -271,6 +292,9 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
                 break;
             default:
                 break;
+        }
+        if (onceOnly) {
+            stopTimer();
         }
     };
 
