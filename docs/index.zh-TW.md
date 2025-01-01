@@ -1,5 +1,5 @@
 ---
-title: Ant Buddy Pro - 開箱即用的 Ant Design ProComponents 增強組件
+title: 首頁
 order: 1
 hero:
   title: Ant Buddy Pro

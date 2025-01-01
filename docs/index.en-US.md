@@ -1,5 +1,5 @@
 ---
-title: Ant Buddy Pro - Awesome components based on Ant Design ProComponents
+title: Home
 order: 1
 hero:
   title: Ant Buddy Pro

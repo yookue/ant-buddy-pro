@@ -1,5 +1,5 @@
 ---
-title: Ant Buddy Pro - 开箱即用的 Ant Design ProComponents 增强组件
+title: 首页
 order: 1
 hero:
   title: Ant Buddy Pro
