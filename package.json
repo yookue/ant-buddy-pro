@@ -46,7 +46,7 @@
         "@yookue/react-condition": "~0.1.19",
         "@yookue/ts-lang-utils": "~0.1.74",
         "@yookue/ts-multi-map": "~0.1.31",
-        "antd-img-crop": "^4.23.0",
+        "antd-img-crop": "^4.24.0",
         "cron-validate": "^1.4.5",
         "object-hash": "^3.0.0",
         "rc-scrollbars": "^1.1.6",
