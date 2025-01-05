@@ -20,6 +20,8 @@ import {ConfigProvider, Button, Space, type ButtonProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {ProFormField} from '@ant-design/pro-form';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {ColorUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import Trigger, {type TriggerProps} from 'rc-trigger';
@@ -28,6 +30,7 @@ import omit from 'rc-util/es/omit';
 import {BlockPicker, ChromePicker, CirclePicker, CompactPicker, GithubPicker, HuePicker, MaterialPicker, SketchPicker, SwatchesPicker, TwitterPicker} from 'react-color';
 import type {BlockPickerProps, ChromePickerProps, CirclePickerProps, CompactPickerProps, GithubPickerProps, HuePickerProps, MaterialPickerProps, SketchPickerProps, SwatchesPickerProps, TwitterPickerProps} from 'react-color';
 import type {Color, ColorResult} from 'react-color';
+import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
 import './index.less';
@@ -42,7 +45,7 @@ export type ColorPickerRef = {
 export type PickerType = 'block' | 'chrome' | 'circle' | 'compact' | 'github' | 'hue' | 'material' | 'sketch' | 'swatches' | 'twitter';
 
 
-export type ColorPickerProps = {
+export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -102,12 +105,28 @@ export type ColorPickerProps = {
     icon?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
+     * @description The position of the addon for the entry field
+     * @description.zh-CN 图标节点的位置
+     * @description.zh-TW 圖標節點的位置
+     * @default 'after'
+     */
+    iconPos?: WithFalse<BeforeAfterType>;
+
+    /**
      * @description The picker type
      * @description.zh-CN 顔色拾取器的类型
      * @description.zh-TW 顏色拾取器的類型
      * @default 'chrome'
      */
     pickerType?: PickerType;
+
+    /**
+     * @description Whether to use ProFormField instead of Antd
+     * @description.zh-CN 是否使用 ProFormField 控件
+     * @description.zh-TW 是否使用 ProFormField 控件
+     * @default true
+     */
+    proField?: boolean;
 
     /**
      * @description The props of the BlockPicker
@@ -185,7 +204,7 @@ export type ColorPickerProps = {
      * @description.zh-TW 顔色值變化時的回調函數
      */
     onChange?: (color?: Color) => void;
-} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name' | 'value'>;
+} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'value'>;
 
 
 /**
@@ -206,7 +225,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     const {
         value = '#d9d9d9',
         icon = <DownOutlined/>,
+        iconPos = 'after',
         pickerType = 'chrome',
+        proField = true,
     } = props ?? {};
 
     ConsoleUtils.warn(ColorUtils.isHex(value as string), true, 'ColorPicker',  `Prop 'value' must be a valid hex color`);
@@ -237,11 +258,11 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         props?.onChange?.(hexColor);
     }, [hexColor]);
 
-    const entryImmutable = props?.buttonProps?.disabled || editContext.mode === 'read';
+    const entryImmutable = props?.disabled || props?.buttonProps?.disabled || editContext.mode === 'read';
 
     const buildEntryDom = () => {
-        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'disabled']);
-        return (
+        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'disabled', 'size']);
+        const fieldDom = (
             <div
                 ref={fieldRef}
                 className={classNames(clazzPrefix, (props?.buttonProps?.block ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
@@ -249,19 +270,38 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 data-color-picker-entry={fieldId}
             >
                 <Button
-                    className={classNames(`${clazzPrefix}-button`, props?.buttonProps?.className)}
+                    className={classNames(`${clazzPrefix}-button`, (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
                     disabled={entryImmutable}
+                    size={props?.buttonProps?.size ?? 'small'}
                     {...omitButtonProps}
                     data-buddy-color-picker-id={fieldId}
                 >
                     <Space>
+                        {(iconPos === 'before') && (
+                            <span className={`${clazzPrefix}-icon`}>
+                                {(typeof icon === 'function') ? icon() : icon}
+                            </span>
+                        )}
                         <div className={`${clazzPrefix}-preview`} style={{backgroundColor: `${hexColor}`}}>
                             <span>&nbsp;</span>
                         </div>
-                        {(typeof icon === 'function') ? icon() : icon}
+                        {(iconPos === 'after') && (
+                            <span className={`${clazzPrefix}-icon`}>
+                                {(typeof icon === 'function') ? icon() : icon}
+                            </span>
+                        )}
                     </Space>
                 </Button>
             </div>
+        );
+        if (!proField) {
+            return fieldDom;
+        }
+        const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+        return (
+            <ProFormField {...omitProps}>
+                {fieldDom}
+            </ProFormField>
         );
     };
 

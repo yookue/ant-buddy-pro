@@ -20,15 +20,16 @@ import {Button, Divider} from 'antd';
 import {type SizeType} from 'antd/es/config-provider/SizeContext';
 import {FireOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch} from '@ant-design/pro-form';
-import {ColorPicker, ConsoleUtils, type ColorPickerRef} from '@yookue/ant-buddy-pro';
+import {ColorPicker, ConsoleUtils, type BeforeAfterType, type ColorPickerRef} from '@yookue/ant-buddy-pro';
 import {type PickerType} from '@yookue/ant-buddy-pro/field/ColorPicker';
 
 
 export default () => {
     const colorPickerRef = React.useRef<ColorPickerRef>(null);
     const [pickerType, setPickerType] = React.useState<PickerType>('chrome');
-    const [buttonSize, setButtonSize] = React.useState<SizeType>('middle');
+    const [buttonSize, setButtonSize] = React.useState<SizeType>('small');
     const [buttonBlock, setButtonBlock] = React.useState<boolean>(false);
+    const [iconPos, setIconPos] = React.useState<BeforeAfterType>('after');
 
     // noinspection DuplicatedCode
     return (
@@ -88,6 +89,22 @@ export default () => {
                         {label: 'Small', value: 'small'},
                     ]}
                 />
+                <ProFormRadio.Group
+                    label='Icon Position'
+                    radioType='button'
+                    fieldProps={{
+                        value: iconPos,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setIconPos(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Before', value: 'before'},
+                        {label: 'After', value: 'after'},
+                        {label: 'False', value: false},
+                    ]}
+                />
                 <ProForm.Group>
                     <Button
                         icon={<FireOutlined/>}
@@ -99,11 +116,14 @@ export default () => {
                 <Divider/>
                 <ColorPicker
                     ref={colorPickerRef}
+                    name='foobar'
+                    label='Choose Color'
                     pickerType={pickerType}
                     buttonProps={{
                         size: buttonSize,
                         block: buttonBlock,
                     }}
+                    iconPos={iconPos}
                     onChange={(color: any) => {
                         ConsoleUtils.logTimestamp(false, false, 'ColorPicker', 'onChange color = ' + color);
                     }}

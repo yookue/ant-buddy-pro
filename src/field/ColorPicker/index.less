@@ -36,33 +36,73 @@
         display: flex;
         align-items: center;
 
-        > .@{ant-prefix}-space {
-            flex: 1;
-
-            > .@{ant-prefix}-space-item:first-of-type {
+        &.@{buddy-color-picker}-icon-before {
+            > .@{ant-prefix}-space {
                 flex: 1;
 
-                .@{buddy-color-picker}-preview {
-                    border: @border-width-base @border-style-base @border-color-base;
-                    border-radius: @border-radius-base;
-                    min-height: 12px;
+                > .@{ant-prefix}-space-item:last-of-type {
+                    flex: 1;
                 }
             }
         }
 
-        &.@{ant-prefix}-btn-lg .@{buddy-color-picker}-preview {
-            font-size: @font-size-base;
-            min-width: 26px;
+        &.@{buddy-color-picker}-icon-after,
+        &:not(.@{buddy-color-picker}-icon-before):not(.@{buddy-color-picker}-icon-after) {
+            > .@{ant-prefix}-space {
+                flex: 1;
+
+                > .@{ant-prefix}-space-item:first-of-type {
+                    flex: 1;
+                }
+            }
         }
 
-        &.@{ant-prefix}-btn-sm .@{buddy-color-picker}-preview {
-            font-size: @font-size-sm - 4px;
-            min-width: 14px;
+        .@{buddy-color-picker}-preview {
+            border: @border-width-base @border-style-base @border-color-base;
+            border-radius: @border-radius-base;
+            min-height: 12px;
         }
 
-        &:not(.@{ant-prefix}-btn-lg):not(.@{ant-prefix}-btn-sm) .@{buddy-color-picker}-preview {
-            font-size: @font-size-sm;
-            min-width: 20px;
+        &.@{ant-prefix}-btn-lg {
+            padding-left: @padding-xs;
+            padding-right: @padding-xs;
+
+            .@{buddy-color-picker}-preview {
+                font-size: @font-size-base;
+                min-width: 26px;
+            }
+
+            .@{buddy-color-picker}-icon {
+                font-size: @font-size-lg;
+            }
+        }
+
+        &.@{ant-prefix}-btn-sm {
+            padding-left: 6px;
+            padding-right: 6px;
+
+            .@{buddy-color-picker}-preview {
+                font-size: @font-size-sm - 4px;
+                min-width: 14px;
+            }
+
+            .@{buddy-color-picker}-icon {
+                font-size: @font-size-sm;
+            }
+        }
+
+        &:not(.@{ant-prefix}-btn-lg):not(.@{ant-prefix}-btn-sm) {
+            padding-left: @padding-xs;
+            padding-right: @padding-xs;
+
+            .@{buddy-color-picker}-preview {
+                font-size: @font-size-sm;
+                min-width: 20px;
+            }
+
+            .@{buddy-color-picker}-icon {
+                font-size: @font-size-base;
+            }
         }
     }
 }
@@ -141,6 +181,9 @@
     /* sketch-picker */
 
     > .sketch-picker {
+        border-radius: @border-radius-base !important;
+        box-shadow: none !important;
+
         > div:last-of-type > div > span > div {
             border-radius: @border-radius-base !important;
         }
