@@ -216,8 +216,8 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     }
 
     const restoreLayout = (event: any) => {
-        const inspect = document.querySelector<HTMLDivElement>(`[data-collapse-form-entry-id='${fieldId}']`);
-        const sponsor = document.querySelector<HTMLDivElement>(`[data-collapse-form-content-id='${fieldId}']`);
+        const inspect = document.querySelector<HTMLDivElement>(`[data-collapse-form-entry='${fieldId}']`);
+        const sponsor = document.querySelector<HTMLDivElement>(`[data-collapse-form-content='${fieldId}']`);
         if (!inspect?.contains(event.target) && !sponsor?.contains(event.target)) {
             setFormOpen(false);
         }
@@ -231,7 +231,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
                     style={props?.openedEntryStyle}
                     onClick={triggerType !== 'click' ? undefined : () => setFormOpen(false)}
                     onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(false)}
-                    data-collapse-form-entry-id={fieldId}
+                    data-collapse-form-entry={fieldId}
                 >
                     {(typeof props?.openedEntry === 'function') ? props.openedEntry() : props?.openedEntry}
                 </div>
@@ -243,7 +243,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
                 style={props?.closedEntryStyle}
                 onClick={triggerType !== 'click' ? undefined : () => setFormOpen(true)}
                 onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(true)}
-                data-collapse-form-entry-id={fieldId}
+                data-collapse-form-entry={fieldId}
             >
                 {(typeof props?.closedEntry === 'function') ? props.closedEntry() : props?.closedEntry}
             </div>
@@ -293,7 +293,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
             <div
                 className={classNames(`${clazzPrefix}-content`, (!formOpen ? undefined : `${clazzPrefix}-content-open`), props?.formContentClazz)}
                 style={props?.formContentStyle}
-                data-collapse-form-content-id={fieldId}
+                data-collapse-form-content={fieldId}
             >
                 {buildFormDom()}
             </div>

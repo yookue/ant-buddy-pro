@@ -309,6 +309,23 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         return buildEntryDom();
     }
 
+    React.useLayoutEffect(() => {
+        document.addEventListener('keydown', restoreLayout);
+        document.addEventListener('mousedown', restoreLayout);
+        return () => {
+            document.removeEventListener('keydown', restoreLayout);
+            document.removeEventListener('mousedown', restoreLayout);
+        }
+    }, []);
+
+    const restoreLayout = (event: any) => {
+        const inspect = document.querySelector<HTMLDivElement>(`[data-color-picker-entry='${fieldId}']`);
+        const sponsor = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-popup-${fieldId}`);
+        if (!inspect?.contains(event.target) && !sponsor?.contains(event.target)) {
+            setTriggerOpen(false);
+        }
+    };
+
     const buildPopupDom = () => {
         switch (pickerType) {
             case 'block':
