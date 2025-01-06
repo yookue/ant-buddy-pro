@@ -118,6 +118,7 @@ export default () => {
                     ref={colorPickerRef}
                     name='foobar'
                     label='Choose Color'
+                    width='xs'
                     pickerType={pickerType}
                     buttonProps={{
                         size: buttonSize,

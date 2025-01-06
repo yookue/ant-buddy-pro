@@ -261,7 +261,13 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     const entryImmutable = props?.disabled || props?.buttonProps?.disabled || editContext.mode === 'read';
 
     const buildEntryDom = () => {
-        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'disabled', 'size']);
+        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'disabled', 'size', 'style']);
+        const buttonStyle = !props?.buttonProps?.style ? {} : props.buttonProps.style;
+        if (typeof props?.width === 'number') {
+            Object.assign(buttonStyle, {
+                width: `${props.width}px`,
+            });
+        }
         const fieldDom = (
             <div
                 ref={fieldRef}
@@ -270,9 +276,10 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 data-color-picker-entry={fieldId}
             >
                 <Button
-                    className={classNames(`${clazzPrefix}-button`, (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
+                    className={classNames(`${clazzPrefix}-button`, ((typeof props?.width === 'string') ? `${clazzPrefix}-button-${props.width}` : undefined), (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
                     disabled={entryImmutable}
                     size={props?.buttonProps?.size ?? 'small'}
+                    style={buttonStyle}
                     {...omitButtonProps}
                     data-buddy-color-picker-id={fieldId}
                 >
@@ -298,6 +305,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             return fieldDom;
         }
         const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+        console.log(omitProps.width);
         return (
             <ProFormField {...omitProps}>
                 {fieldDom}
