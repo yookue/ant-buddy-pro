@@ -4,7 +4,7 @@ toc: content
 
 ## SegmentRadio
 
-Similar to [Segmented](https://4x.ant.design/components/segmented/) of [Ant Design](https://ant.design/), but wraps it with [ProForm](https://github.com/ant-design/pro-components/tree/v1/packages/form) features.
+Similar to [Segmented](https://4x.ant.design/components/segmented) of [Ant Design](https://ant.design), but wraps it with [ProForm](https://github.com/ant-design/pro-components/tree/v1/packages/form) features.
 
 ### Import
 

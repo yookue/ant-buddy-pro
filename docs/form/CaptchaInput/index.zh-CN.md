@@ -6,7 +6,7 @@ toc: content
 
 CaptchaInput，提供了一个可以获取验证码的按钮和一个输入验证码的文本框。
 
-与 [ProComponents](https://procomponents.ant.design/) 的 [ProFormCaptcha](https://procomponents.ant.design/components/field-set#proformcaptcha) 组件类似，但最大的区别是：
+与 [ProComponents](https://procomponents.ant.design) 的 [ProFormCaptcha](https://procomponents.ant.design/components/field-set#proformcaptcha) 组件类似，但最大的区别是：
 
   - ProFormCaptcha 提供了 `onGetCaptcha` 函数来实现获取验证码的逻辑，CaptchaInput 的函数名为 `onGenerate`
   - ProFormCaptcha 的 `onGetCaptcha` 函数定义是 `(phone)=>Promise<any>`，CaptchaInput 的 `onGenerate` 函数定义是 `(mobile?: string) => boolean | void | Promise<boolean | void>`，后者支持更丰富的返回数据类型

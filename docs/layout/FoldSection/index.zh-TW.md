@@ -4,7 +4,7 @@ toc: content
 
 ## FoldSection
 
-與 [Ant Design](https://ant.design/) 的 [Collapse](https://4x.ant.design/components/collapse/) 組件類似，但只有一個標題欄和一個面板。
+與 [Ant Design](https://ant.design) 的 [Collapse](https://4x.ant.design/components/collapse) 組件類似，但只有一個標題欄和一個面板。
 
 ### Premise
 

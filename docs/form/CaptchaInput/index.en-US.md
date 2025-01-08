@@ -6,7 +6,7 @@ toc: content
 
 CaptchaInput, provides a text input box and a button with captcha generation capability.
 
-Similar to [ProFormCaptcha](https://procomponents.ant.design/components/field-set#proformcaptcha) of [ProComponents](https://procomponents.ant.design/), the most differences are:
+Similar to [ProFormCaptcha](https://procomponents.ant.design/components/field-set#proformcaptcha) of [ProComponents](https://procomponents.ant.design), the most differences are:
 
 - ProFormCaptcha provides a function named `onGetCaptcha` to trigger the captcha generation, while CaptchaInput named `onGenerate`
 - The function declaration of ProFormCaptcha `onGetCaptcha` is `(phone)=>Promise<any>`, while the declaration of CaptchaInput `onGenerate` is `(mobile?: string) => boolean | void | Promise<boolean | void>`, the latter one supports much richer return data types

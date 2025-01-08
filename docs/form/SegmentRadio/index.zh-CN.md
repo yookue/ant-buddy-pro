@@ -4,7 +4,7 @@ toc: content
 
 ## SegmentRadio
 
-与 [Ant Design](https://ant.design/) 的 [Segmented](https://4x.ant.design/components/segmented/) 类似，但是包装了一层 [ProForm](https://github.com/ant-design/pro-components/tree/v1/packages/form) 的特有属性。
+与 [Ant Design](https://ant.design) 的 [Segmented](https://4x.ant.design/components/segmented) 类似，但是包装了一层 [ProForm](https://github.com/ant-design/pro-components/tree/v1/packages/form) 的特有属性。
 
 ### 导入组件
 

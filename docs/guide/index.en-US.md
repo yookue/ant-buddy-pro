@@ -23,7 +23,7 @@ nav:
 
 ### Environment Setup
 
-First, you should have [node](https://nodejs.org/en/), and ensure that the node version is 10.13 or above.
+First, you should have [node](https://nodejs.org/en), and ensure that the node version is 10.13 or above.
 
 ```bash
 $ node -v

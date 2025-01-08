@@ -7,7 +7,7 @@
 
 🏅 基于 React 和 Ant Design ProComponents 的优秀组件库 ❤️
 
-**Ant Buddy Pro** 是一个基于 React 和 [Ant Design ProComponents](https://procomponents.ant.design/) 的组件库，提供了很多自定义的独立组件，致力于提高 React 开发者的开发效率和改善开发体验，营造开源友好的环境，共同进步。
+**Ant Buddy Pro** 是一个基于 React 和 [Ant Design ProComponents](https://procomponents.ant.design) 的组件库，提供了很多自定义的独立组件，致力于提高 React 开发者的开发效率和改善开发体验，营造开源友好的环境，共同进步。
 
 ## 特性
 
@@ -39,7 +39,7 @@ import {Foobar} from '@yookue/ant-buddy-pro';
 
 ## 授权
 
-本组件库授权基于 [MIT License](https://mit-license.org/) 协议
+本组件库授权基于 [MIT License](https://mit-license.org) 协议
 
 ## 版权
 

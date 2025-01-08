@@ -23,7 +23,7 @@ nav:
 
 ### 環境準備
 
-首先得有 [node](https://nodejs.org/en/)，並確保 node 版本是 10.13 或以上。
+首先得有 [node](https://nodejs.org/en)，並確保 node 版本是 10.13 或以上。
 
 ```bash
 $ node -v

@@ -7,7 +7,7 @@
 
 🏅 Awesome components based on React & Ant Design ProComponents ❤️
 
-**Ant Buddy Pro** is a React components library based on [Ant Design ProComponents](https://procomponents.ant.design/), providing more customization and individual components, aiming to provide better experience for React developers.
+**Ant Buddy Pro** is a React components library based on [Ant Design ProComponents](https://procomponents.ant.design), providing more customization and individual components, aiming to provide better experience for React developers.
 
 ## Features
 
@@ -39,7 +39,7 @@ Enjoy your coding journey with `ant-buddy-pro` ✌️
 
 ## License
 
-This project is under the [MIT License](https://mit-license.org/).
+This project is under the [MIT License](https://mit-license.org).
 
 ## Copyright
 

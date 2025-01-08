@@ -23,5 +23,5 @@ You can visit us at:
 - [Ant Design](https://ant.design)
 - [Ant Design Pro](https://pro.ant.design)
 - [Ant Design ProComponents](https://procomponents.ant.design)
-- [dumi](https://d.umijs.org/)
+- [dumi](https://d.umijs.org)
 - [umi](https://umijs.org)

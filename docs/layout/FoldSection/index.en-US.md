@@ -4,7 +4,7 @@ toc: content
 
 ## FoldSection
 
-Similar to [Collapse](https://4x.ant.design/components/collapse/) of [Ant Design](https://ant.design/), with only one header and one panel.
+Similar to [Collapse](https://4x.ant.design/components/collapse) of [Ant Design](https://ant.design), with only one header and one panel.
 
 ### Premise
 
