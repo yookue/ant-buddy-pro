@@ -231,8 +231,6 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         proField = true,
     } = props ?? {};
 
-    ConsoleUtils.warn(!props?.value || ColorUtils.isHex(props.value as string), true, 'ColorPicker', `Prop 'value' must be a valid hex color`);
-
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const fieldValue = (props?.name && formContext?.form) ? Form.useWatch(props.name, formContext.form) : props?.value;
@@ -246,19 +244,15 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             return hexColor;
         },
         setColor: (hexColor?: string): void => {
-            if (!hexColor) {
-                setHexColor(undefined);
-                return;
-            }
             const validHex = ColorUtils.isHex(hexColor);
-            ConsoleUtils.warn(validHex, false, 'ColorPicker', `Value '${hexColor}' for 'setColor' is not a valid hex color`);
+            ConsoleUtils.warn(!hexColor || validHex, false, 'ColorPicker', `Value '${hexColor}' for 'setColor' is not a valid hex color`);
             setHexColor(validHex ? hexColor : undefined);
         }
     }));
 
     React.useEffect(() => {
         const validHex = ColorUtils.isHex(fieldValue);
-        ConsoleUtils.warn(validHex, false, 'ColorPicker', `Value '${hexColor}' for '${props?.name}' is not a valid hex color`);
+        ConsoleUtils.warn(!fieldValue || validHex, false, 'ColorPicker', `Value '${hexColor}' for '${props?.name}' is not a valid hex color`);
         setHexColor(validHex ? fieldValue : undefined);
     }, [fieldValue]);
 
