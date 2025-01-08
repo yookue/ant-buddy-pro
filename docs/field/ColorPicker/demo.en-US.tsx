@@ -18,58 +18,70 @@
 import React from 'react';
 import {Button, Divider} from 'antd';
 import {type SizeType} from 'antd/es/config-provider/SizeContext';
-import {FireOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch} from '@ant-design/pro-form';
+import {FireOutlined, FormOutlined} from '@ant-design/icons';
+import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch, type ProFormInstance} from '@ant-design/pro-form';
 import {ColorPicker, ConsoleUtils, type BeforeAfterType, type ColorPickerRef} from '@yookue/ant-buddy-pro';
 import {type PickerType} from '@yookue/ant-buddy-pro/field/ColorPicker';
 
 
 export default () => {
+    const formRef = React.useRef<ProFormInstance>(null);
     const colorPickerRef = React.useRef<ColorPickerRef>(null);
     const [pickerType, setPickerType] = React.useState<PickerType>('chrome');
+    const [allowClear, setAllowClear] = React.useState<boolean>(true);
+    const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
     const [buttonSize, setButtonSize] = React.useState<SizeType>('small');
-    const [buttonBlock, setButtonBlock] = React.useState<boolean>(false);
     const [iconPos, setIconPos] = React.useState<BeforeAfterType>('after');
 
     // noinspection DuplicatedCode
     return (
         <>
             <ProForm
+                formRef={formRef}
                 name='ColorPicker_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProFormSelect
+                    label='Picker Type'
+                    fieldProps={{
+                        allowClear: false,
+                        value: pickerType,
+                        options: [
+                            {label: 'Block', value: 'block'},
+                            {label: 'Chrome', value: 'chrome'},
+                            {label: 'Circle', value: 'circle'},
+                            {label: 'Compact', value: 'compact'},
+                            {label: 'Github', value: 'github'},
+                            {label: 'Hue', value: 'hue'},
+                            {label: 'Material', value: 'material'},
+                            {label: 'Sketch', value: 'sketch'},
+                            {label: 'Swatches', value: 'swatches'},
+                            {label: 'Twitter', value: 'twitter'},
+                        ],
+                        onChange: (value) => {
+                            setPickerType(value);
+                        }
+                    }}
+                />
                 <ProForm.Group>
-                    <ProFormSelect
-                        label='Picker Type'
-                        fieldProps={{
-                            allowClear: false,
-                            value: pickerType,
-                            options: [
-                                {label: 'Block', value: 'block'},
-                                {label: 'Chrome', value: 'chrome'},
-                                {label: 'Circle', value: 'circle'},
-                                {label: 'Compact', value: 'compact'},
-                                {label: 'Github', value: 'github'},
-                                {label: 'Hue', value: 'hue'},
-                                {label: 'Material', value: 'material'},
-                                {label: 'Sketch', value: 'sketch'},
-                                {label: 'Swatches', value: 'swatches'},
-                                {label: 'Twitter', value: 'twitter'},
-                            ],
-                            onChange: (value) => {
-                                setPickerType(value);
-                            }
-                        }}
-                    />
                     <ProFormSwitch
-                        label='Button Block'
+                        label='Allow Clear'
                         checkedChildren='True'
                         unCheckedChildren='False'
                         fieldProps={{
-                            checked: buttonBlock,
-                            onChange: setButtonBlock,
+                            checked: allowClear,
+                            onChange: setAllowClear,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Width Block'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: widthBlock,
+                            onChange: setWidthBlock,
                         }}
                     />
                 </ProForm.Group>
@@ -110,7 +122,13 @@ export default () => {
                         icon={<FireOutlined/>}
                         onClick={() => colorPickerRef.current?.setColor('#1890ff')}
                     >
-                        Set
+                        Set by Ref
+                    </Button>
+                    <Button
+                        icon={<FormOutlined/>}
+                        onClick={() => formRef.current?.setFieldValue('foobar', '#52c41a')}
+                    >
+                        Set by Form
                     </Button>
                 </ProForm.Group>
                 <Divider/>
@@ -120,9 +138,10 @@ export default () => {
                     label='Choose Color'
                     width='xs'
                     pickerType={pickerType}
+                    allowClear={allowClear}
                     buttonProps={{
                         size: buttonSize,
-                        block: buttonBlock,
+                        block: widthBlock,
                     }}
                     iconPos={iconPos}
                     onChange={(color: any) => {

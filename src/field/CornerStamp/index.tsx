@@ -144,7 +144,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
         zIndex = 9,
     } = props ?? {};
 
-    ConsoleUtils.warn(size > 0, true, 'CornerStamp',  `Prop 'size' must be greater than 0`);
+    ConsoleUtils.warn(size > 0, true, 'CornerStamp', `Prop 'size' must be greater than 0`);
 
     const bgColor = !isPresetColor(color) ? color : presetPrimaryColors[color];
 

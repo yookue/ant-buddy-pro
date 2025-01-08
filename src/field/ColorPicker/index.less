@@ -26,6 +26,10 @@
 .@{buddy-color-picker} {
     &.@{buddy-color-picker}-width-block {
         display: block;
+
+        .@{buddy-color-picker}-button {
+            width: 100% !important;
+        }
     }
 
     &:not(.@{buddy-color-picker}-width-block) {
@@ -79,6 +83,10 @@
             border: @border-width-base @border-style-base @border-color-base;
             border-radius: @border-radius-base;
             min-height: 12px;
+
+            &-empty {
+                background: linear-gradient(to bottom right, rgba(247,89,171,0) 0%, rgba(247,89,171,0) calc(50% - 1.5px), rgba(247,89,171,1) 50%, rgba(247,89,171,0) calc(50% + 1.5px), rgba(247,89,171,0) 100%);
+            }
         }
 
         &.@{ant-prefix}-btn-lg {

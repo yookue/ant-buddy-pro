@@ -16,12 +16,13 @@
 
 
 import React from 'react';
-import {ConfigProvider, Button, Space, type ButtonProps} from 'antd';
+import {ConfigProvider, Form, Button, Space, type ButtonProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
-import {DownOutlined} from '@ant-design/icons';
+import {CloseCircleOutlined, DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {ProFormField} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
+import pickProFormItemProps from '@ant-design/pro-utils/es/pickProFormItemProps';
 import {ColorUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import Trigger, {type TriggerProps} from 'rc-trigger';
@@ -223,33 +224,43 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
 
     // Initialize the default props
     const {
-        value = '#d9d9d9',
+        allowClear = true,
         icon = <DownOutlined/>,
         iconPos = 'after',
         pickerType = 'chrome',
         proField = true,
     } = props ?? {};
 
-    ConsoleUtils.warn(ColorUtils.isHex(value as string), true, 'ColorPicker',  `Prop 'value' must be a valid hex color`);
+    ConsoleUtils.warn(!props?.value || ColorUtils.isHex(props.value as string), true, 'ColorPicker', `Prop 'value' must be a valid hex color`);
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const [hexColor, setHexColor] = React.useState<Color>(value as string);
+    const fieldValue = (props?.name && formContext?.form) ? Form.useWatch(props.name, formContext.form) : props?.value;
+    const [hexColor, setHexColor] = React.useState<Color>();
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
+    const [mouseHover, setMouseHover] = React.useState<boolean>(false);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getColor: (): Color => {
+        getColor: (): Color | undefined => {
             return hexColor;
         },
-        setColor: (hexColor: string): void => {
-            const validHex = ColorUtils.isHex(hexColor);
-            ConsoleUtils.warn(validHex, false, 'ColorPicker',  `Value '${hexColor}' for 'setColor' is not a valid hex color`);
-            if (validHex) {
-                setHexColor(hexColor);
+        setColor: (hexColor?: string): void => {
+            if (!hexColor) {
+                setHexColor(undefined);
+                return;
             }
+            const validHex = ColorUtils.isHex(hexColor);
+            ConsoleUtils.warn(validHex, false, 'ColorPicker', `Value '${hexColor}' for 'setColor' is not a valid hex color`);
+            setHexColor(validHex ? hexColor : undefined);
         }
     }));
+
+    React.useEffect(() => {
+        const validHex = ColorUtils.isHex(fieldValue);
+        ConsoleUtils.warn(validHex, false, 'ColorPicker', `Value '${hexColor}' for '${props?.name}' is not a valid hex color`);
+        setHexColor(validHex ? fieldValue : undefined);
+    }, [fieldValue]);
 
     React.useEffect(() => {
         if (props?.name && formContext?.form) {
@@ -259,6 +270,21 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     }, [hexColor]);
 
     const entryImmutable = props?.disabled || props?.buttonProps?.disabled || editContext.mode === 'read';
+
+    const buildEntryIconDom = (before: boolean) => {
+        return ((!before && allowClear && hexColor && mouseHover && iconPos === false) || (before && iconPos === 'before') || (!before && iconPos === 'after')) ? (
+            <span
+                className={`${clazzPrefix}-icon`}
+                onClick={(!allowClear || !hexColor) ? undefined : (event: any) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setHexColor(undefined);
+                }}
+            >
+                {((allowClear && hexColor && mouseHover) || iconPos === false) ? <CloseCircleOutlined/> : ((typeof icon === 'function') ? icon() : icon)}
+            </span>
+        ) : undefined;
+    };
 
     const buildEntryDom = () => {
         const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'disabled', 'size', 'style']);
@@ -274,6 +300,8 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 className={classNames(clazzPrefix, (props?.buttonProps?.block ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
                 style={props?.containerStyle}
                 data-color-picker-entry={fieldId}
+                onMouseOver={() => setMouseHover(true)}
+                onMouseOut={() => setMouseHover(false)}
             >
                 <Button
                     className={classNames(`${clazzPrefix}-button`, ((typeof props?.width === 'string') ? `${clazzPrefix}-button-${props.width}` : undefined), (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
@@ -284,25 +312,29 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                     data-buddy-color-picker-id={fieldId}
                 >
                     <Space>
-                        {(iconPos === 'before') && (
-                            <span className={`${clazzPrefix}-icon`}>
-                                {(typeof icon === 'function') ? icon() : icon}
-                            </span>
-                        )}
-                        <div className={`${clazzPrefix}-preview`} style={{backgroundColor: `${hexColor}`}}>
+                        {buildEntryIconDom(true)}
+                        <div
+                            className={classNames(`${clazzPrefix}-preview`, (hexColor ? undefined : `${clazzPrefix}-preview-empty`))}
+                            style={hexColor ? {backgroundColor: `${hexColor}`} : undefined}
+                        >
                             <span>&nbsp;</span>
                         </div>
-                        {(iconPos === 'after') && (
-                            <span className={`${clazzPrefix}-icon`}>
-                                {(typeof icon === 'function') ? icon() : icon}
-                            </span>
-                        )}
+                        {buildEntryIconDom(false)}
                     </Space>
                 </Button>
             </div>
         );
-        if (!proField) {
+        if (!props?.name || !formContext?.form) {
             return fieldDom;
+        }
+        if (!proField) {
+            // @ts-ignore
+            const itemProps = !props ? {} : omit(pickProFormItemProps(props), ['noStyle']);
+            return (
+                <Form.Item {...itemProps}>
+                    {fieldDom}
+                </Form.Item>
+            );
         }
         const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
         return (

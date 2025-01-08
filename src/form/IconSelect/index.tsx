@@ -309,7 +309,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
     const intlType = useIntl();
 
-    ConsoleUtils.warn(!!formContext?.form, true, 'IconSelect',  `Field '${props?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!formContext?.form, true, 'IconSelect', `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {

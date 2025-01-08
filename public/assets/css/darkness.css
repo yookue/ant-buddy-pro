@@ -1062,13 +1062,6 @@
 }
 
 
-/* ant-buddy-code-preview */
-
-[data-prefers-color='dark'] .ant-buddy-code-preview-default {
-    background: #141414 !important;
-    border-color: #303030 !important;
-}
-
 
 /* ant-buddy-chrono-select */
 
@@ -1081,6 +1074,21 @@
 
 [data-prefers-color='dark'] .ant-buddy-chrono-tuple .ant-buddy-chrono-select .ant-select-selector {
     color: rgba(255, 255, 255, 0.65) !important;
+}
+
+
+/* ant-buddy-color-picker */
+
+[data-prefers-color='dark'] .ant-buddy-color-picker .ant-buddy-color-picker-preview-empty {
+    border: 1px solid #434343 !important;
+}
+
+
+/* ant-buddy-code-preview */
+
+[data-prefers-color='dark'] .ant-buddy-code-preview-default {
+    background: #141414 !important;
+    border-color: #303030 !important;
 }
 
 
