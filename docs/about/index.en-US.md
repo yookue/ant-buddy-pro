@@ -16,7 +16,7 @@ Beijing Yookue Network Technology Ltd.
 You can visit us at:
 
 - Yookue: [https://yookue.com](https://yookue.com)
-- GitHub: [https://github.com/yookue/ant-buddy-pro](https://github.com/yookue/ant-buddy-pro)
+- GitHub: [https://github.com/yookue](https://github.com/yookue)
 
 ## Special Thanks
 

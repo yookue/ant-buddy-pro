@@ -28,6 +28,7 @@ export default () => {
             src={() => {
                 return `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`;
             }}
+            fallback='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
             title='点击刷新图片'
             autoCursor={true}
             onRefresh={() => {

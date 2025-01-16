@@ -15,6 +15,9 @@
  */
 
 
+import {ObjectUtils} from '@yookue/ts-lang-utils';
+
+
 /**
  * Utilities for images
  *
@@ -26,11 +29,12 @@ export abstract class ImageUtils {
      * Returns the detected image src for the given param
      *
      * @param param the parameter to inspect
-     * @param callback the function to execute when the given param is a promise
+     * @param resolve the callback function when the given param is a promise
+     * @param reject the callback function when the given param is a promise
      *
      * @returns the detected image src for the given param
      */
-    public static detectSource = (param?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>), callback?: ((value?: string) => void)): string | undefined => {
+    public static detectSource = (param?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>), resolve?: ((res?: string) => void), reject?: ((err: any) => void)): string | undefined => {
         if (!param) {
             return undefined;
         }
@@ -38,10 +42,10 @@ export abstract class ImageUtils {
             return param;
         }
         if (typeof param === 'function') {
-            return this.detectSource(param(), callback);
+            return this.detectSource(param(), resolve, reject);
         }
-        if (typeof param === 'object' && Object.prototype.toString.call(param) === '[object Promise]' && !!callback) {
-            (param as Promise<string | undefined>).then(data => callback(data));
+        if (ObjectUtils.isPromise(param)) {
+            (param as Promise<string | undefined>).then((res) => resolve?.(res)).catch((err) => reject?.(err));
         }
         return undefined;
     }

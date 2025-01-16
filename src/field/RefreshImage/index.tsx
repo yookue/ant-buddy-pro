@@ -72,14 +72,16 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-refresh-image');
 
     const [imageSource, setImageSource] = React.useState(() => {
-        return ImageUtils.detectSource(props?.src, data => setImageSource(data));
+        return ImageUtils.detectSource(props?.src, (res) => setImageSource(res), () => {
+            setImageSource(ImageUtils.detectSource(props?.fallback, res => setImageSource(res)));
+        });
     });
 
     const handleClick = (event: React.MouseEvent<any>) => {
         const previousSrc = imageSource;
-        if (props?.src) {
-            setImageSource(ImageUtils.detectSource(props?.src, data => setImageSource(data)));
-        }
+        setImageSource(ImageUtils.detectSource(props?.src, res => setImageSource(res), () => {
+            setImageSource(ImageUtils.detectSource(props?.fallback, res => setImageSource(res)));
+        }));
         const currentSrc = imageSource;
         props?.onClick?.(event);
         props?.onRefresh?.(currentSrc, previousSrc);
@@ -87,7 +89,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
 
     const handleError = (event: React.SyntheticEvent<any>) => {
         if (props?.fallback) {
-            setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
+            setImageSource(ImageUtils.detectSource(props.fallback, res => setImageSource(res)));
         }
         props?.onError?.(event);
     };
