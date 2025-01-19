@@ -1062,7 +1062,6 @@
 }
 
 
-
 /* ant-buddy-chrono-select */
 
 [data-prefers-color='dark'] .ant-buddy-chrono-select .ant-select-selector {
@@ -1100,6 +1099,7 @@
 [data-prefers-color='dark'] .ant-buddy-cron-input-popup .ant-buddy-card-tabs {
     background-color: #1f1f1f !important;
 }
+
 
 /* ant-buddy-fold-section */
 
