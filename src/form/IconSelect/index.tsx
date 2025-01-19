@@ -446,20 +446,29 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     }) : fieldValue.filter((item: LabeledValue) => {
                         return !StringUtils.equalsIgnoreCase(item?.value as string, iconName);
                     });
-                    formContext?.form?.setFieldValue(props?.name, result);
+                    if (formContext?.form && props?.name) {
+                        formContext.form.setFieldValue(props.name, result);
+                        formContext.form.validateFields([props.name]);
+                    }
                     props?.fieldProps?.onChange?.(result, {
                         label: iconName,
                         value: iconName,
                     } as DefaultOptionType);
                 } else {
-                    formContext?.form?.setFieldValue(props?.name, undefined);
+                    if (formContext?.form && props?.name) {
+                        formContext.form.setFieldValue(props.name, undefined);
+                        formContext.form.validateFields([props.name]);
+                    }
                     props?.fieldProps?.onChange?.(undefined, {
                         label: iconName,
                         value: iconName,
                     } as DefaultOptionType);
                 }
             } else {
-                formContext?.form?.setFieldValue(props?.name, undefined);
+                if (formContext?.form && props?.name) {
+                    formContext.form.setFieldValue(props.name, undefined);
+                    formContext.form.validateFields([props.name]);
+                }
                 props?.fieldProps?.onChange?.(undefined, {
                     label: iconName,
                     value: iconName,
@@ -484,14 +493,20 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         value: iconName,
                     };
                     const newValue = [...fieldValue, value];
-                    formContext?.form?.setFieldValue(props?.name, newValue);
+                    if (formContext?.form && props?.name) {
+                        formContext.form.setFieldValue(props.name, newValue);
+                        formContext.form.validateFields([props.name]);
+                    }
                     props?.fieldProps?.onChange?.(newValue, {
                         label: iconName,
                         value: iconName,
                     } as DefaultOptionType);
                 } else {
                     const newValue = [...fieldValue, iconName];
-                    formContext?.form?.setFieldValue(props?.name, newValue);
+                    if (formContext?.form && props?.name) {
+                        formContext.form.setFieldValue(props.name, newValue);
+                        formContext.form.validateFields([props.name]);
+                    }
                     props?.fieldProps?.onChange?.(newValue, {
                         label: iconName,
                         value: iconName,
@@ -508,7 +523,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 } else {
                     newValue = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [iconName] : iconName;
                 }
-                formContext?.form?.setFieldValue(props?.name, newValue);
+                if (formContext?.form && props?.name) {
+                    formContext.form.setFieldValue(props.name, newValue);
+                    formContext.form.validateFields([props.name]);
+                }
                 props?.fieldProps?.onChange?.(newValue, {
                     label: iconName,
                     value: iconName,
