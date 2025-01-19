@@ -59,9 +59,9 @@
     },
     "devDependencies": {
         "@types/object-hash": "^3.0.6",
-        "@types/react": "^18.2.64",
+        "@types/react": "^18.2.79",
         "@types/react-color": "^3.0.13",
-        "@types/react-dom": "^18.2.21",
+        "@types/react-dom": "^18.2.25",
         "@typescript-eslint/eslint-plugin": "^7.18.0",
         "@yookue/babel-plugin-remove-comment": "~0.1.5",
         "babel-plugin-import": "^1.13.8",
