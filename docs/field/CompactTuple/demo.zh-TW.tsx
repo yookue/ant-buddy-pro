@@ -27,11 +27,8 @@ import moment from 'moment';
 export default () => {
     // noinspection DuplicatedCode
     const [formReadonly, setFormReadonly] = React.useState<boolean>(false);
+    const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
     const [addonPos, setAddonPos] = React.useState<BeforeAfterType>('after');
-    const [borderTop, setBorderTop] = React.useState<boolean>(true);
-    const [borderRight, setBorderRight] = React.useState<boolean>(true);
-    const [borderBottom, setBorderBottom] = React.useState<boolean>(true);
-    const [borderLeft, setBorderLeft] = React.useState<boolean>(false);
     const [presetStyle, setPresetStyle] = React.useState<TuplePresetStyle>('field-prior');
 
     return (
@@ -42,15 +39,26 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProFormSwitch
-                    label='表單只讀'
-                    checkedChildren='是'
-                    unCheckedChildren='否'
-                    fieldProps={{
-                        checked: formReadonly,
-                        onChange: setFormReadonly,
-                    }}
-                />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='表單只讀'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: formReadonly,
+                            onChange: setFormReadonly,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='匹配寬度'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: widthBlock,
+                            onChange: setWidthBlock,
+                        }}
+                    />
+                </ProForm.Group>
                 <ProFormRadio.Group
                     label='附加物位置'
                     radioType='button'
@@ -68,48 +76,6 @@ export default () => {
                         {label: '無', value: false},
                     ]}
                 />
-                <ProForm.Group>
-                    <ProFormSwitch
-                        label='頂部邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderTop,
-                            disabled: formReadonly,
-                            onChange: setBorderTop,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='右側邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderRight,
-                            disabled: formReadonly,
-                            onChange: setBorderRight,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='底部邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderBottom,
-                            disabled: formReadonly,
-                            onChange: setBorderBottom,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='左側邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderLeft,
-                            disabled: formReadonly,
-                            onChange: setBorderLeft,
-                        }}
-                    />
-                </ProForm.Group>
                 <ProFormRadio.Group
                     label='預設樣式'
                     radioType='button'
@@ -177,16 +143,17 @@ export default () => {
                                         defaultChecked: false,
                                         checkedChildren: '是',
                                         unCheckedChildren: '否',
+                                        style: {
+                                            margin: '2px 6px',
+                                        }
                                     }}
                                 />
                             )}
                             addonPos={addonPos}
-                            addonBorderProps={{
-                                borderTop: borderTop,
-                                borderRight: borderRight,
-                                borderBottom: borderBottom,
-                                borderLeft: borderLeft,
-                            }}
+                            addonBorder={true}
+                            addonMarginLeft={addonPos === 'after'}
+                            addonMarginRight={addonPos === 'before'}
+                            widthBlock={widthBlock}
                             presetStyle={presetStyle}
                         />
                     </Col>

@@ -19,43 +19,13 @@ import React from 'react';
 import {ConfigProvider, Space} from 'antd';
 import {SpaceCompactProps} from 'antd/es/space/Compact';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {css} from '@emotion/css';
 import classNames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import './index.less';
 
 
 export type TuplePresetStyle = WithFalse<'field-prior' | 'addon-prior'>;
-
-
-export type TupleBorderProps = {
-    /**
-     * @description Whether to border top or not
-     * @description.zh-CN 顶部是否有边框
-     * @description.zh-TW 頂部是否有邊框
-     */
-    borderTop?: boolean;
-
-    /**
-     * @description Whether to border right or not
-     * @description.zh-CN 右侧是否有边框
-     * @description.zh-TW 右側是否有邊框
-     */
-    borderRight?: boolean;
-
-    /**
-     * @description Whether to border bottom or not
-     * @description.zh-CN 底部是否有边框
-     * @description.zh-TW 底部是否有邊框
-     */
-    borderBottom?: boolean;
-
-    /**
-     * @description Whether to border left or not
-     * @description.zh-CN 左侧是否有边框
-     * @description.zh-TW 左側是否有邊框
-     */
-    borderLeft?: boolean;
-};
 
 
 export type CompactTupleProps = {
@@ -111,11 +81,11 @@ export type CompactTupleProps = {
     fieldStyle?: React.CSSProperties;
 
     /**
-     * @description The border props for the field element
-     * @description.zh-CN 字段节点的边框属性
-     * @description.zh-TW 字段節點的邊框屬性
+     * @description Whether to border the field element or not
+     * @description.zh-CN 字段节点是否有边框
+     * @description.zh-TW 字段節點是否有邊框
      */
-    fieldBorderProps?: TupleBorderProps;
+    fieldBorder?: boolean;
 
     /**
      * @description The addon element
@@ -125,25 +95,40 @@ export type CompactTupleProps = {
     addon?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
-     * @description The CSS class name of the addon addon div
+     *
+     * @description The CSS class name of the addon div
      * @description.zh-CN 包裹附加节点 div 的 CSS 类名
      * @description.zh-TW 包裹附加節點 div 的 CSS 類名
      */
     addonClazz?: string;
 
     /**
-     * @description The CSS style of the addon addon div
+     * @description The CSS style of the addon div
      * @description.zh-CN 包裹附加节点 div 的 CSS 样式
      * @description.zh-TW 包裹附加節點 div 的 CSS 樣式
      */
     addonStyle?: React.CSSProperties;
 
     /**
-     * @description The border props for the field element
-     * @description.zh-CN 附加节点的边框属性
-     * @description.zh-TW 附加節點的邊框屬性
+     * @description Whether to border the addon element or not
+     * @description.zh-CN 附加节点是否有边框
+     * @description.zh-TW 附加節點是否有邊框
      */
-    addonBorderProps?: TupleBorderProps;
+    addonBorder?: boolean;
+
+    /**
+     * @description The margin left of the addon element
+     * @description.zh-CN 附加节点的左外边距
+     * @description.zh-TW 附加節點的左外邊距
+     */
+    addonMarginLeft?: boolean | number;
+
+    /**
+     * @description The margin right of the addon element
+     * @description.zh-CN 附加节点的右外边距
+     * @description.zh-TW 附加節點的右外邊距
+     */
+    addonMarginRight?: boolean | number;
 
     /**
      * @description The position of addon
@@ -160,6 +145,13 @@ export type CompactTupleProps = {
      * @default false
      */
     readonlyBorder?: boolean;
+
+    /**
+     * @description Whether to match the width of parent element or not
+     * @description.zh-CN 是否匹配父节点的宽度
+     * @description.zh-TW 是否匹配父節點的寬度
+     */
+    widthBlock?: boolean;
 
     /**
      * @description The preset style of the component
@@ -193,9 +185,8 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
         if (!props?.field) {
             return undefined;
         }
-        const borderClazz = classNames((!props?.fieldBorderProps?.borderTop ? undefined : `${clazzPrefix}-field-border-top`), (!props?.fieldBorderProps?.borderRight ? undefined : `${clazzPrefix}-field-border-right`), (!props?.fieldBorderProps?.borderBottom ? undefined : `${clazzPrefix}-field-border-bottom`), (!props?.fieldBorderProps?.borderLeft ? undefined : `${clazzPrefix}-field-border-left`));
         return (
-            <div className={classNames(`${clazzPrefix}-field`, borderClazz, props?.fieldClazz)} style={props?.fieldStyle}>
+            <div className={classNames(`${clazzPrefix}-field`, (!props?.fieldBorder ? undefined : `${clazzPrefix}-field-border`), props?.fieldClazz)} style={props?.fieldStyle}>
                 {(typeof props.field === 'function') ? props.field() : props.field}
             </div>
         );
@@ -205,9 +196,12 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
         if (!props?.addon) {
             return undefined;
         }
-        const borderClazz = classNames((!props?.addonBorderProps?.borderTop ? undefined : `${clazzPrefix}-addon-border-top`), (!props?.addonBorderProps?.borderRight ? undefined : `${clazzPrefix}-addon-border-right`), (!props?.addonBorderProps?.borderBottom ? undefined : `${clazzPrefix}-addon-border-bottom`), (!props?.addonBorderProps?.borderLeft ? undefined : `${clazzPrefix}-addon-border-left`));
+        const marginClazz = css({
+            marginLeft: !props?.addonMarginLeft ? undefined : (typeof props.addonMarginLeft === 'boolean' ? '-1px' : `${props.addonMarginLeft}px`),
+            marginRight: !props?.addonMarginRight ? undefined : (typeof props.addonMarginRight === 'boolean' ? '-1px' : `${props.addonMarginRight}px`),
+        });
         return (
-            <div className={classNames(`${clazzPrefix}-addon`, borderClazz, props?.addonClazz)} style={props?.addonStyle}>
+            <div className={classNames(`${clazzPrefix}-addon`, (!props?.addonBorder ? undefined : `${clazzPrefix}-addon-border`), marginClazz, props?.addonClazz)} style={props?.addonStyle}>
                 {(typeof props.addon === 'function') ? props.addon() : props.addon}
             </div>
         );
@@ -215,7 +209,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
 
     return (
         <div
-            className={classNames(clazzPrefix, (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact {...spaceCompactProps}>
