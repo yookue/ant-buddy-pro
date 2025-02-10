@@ -337,7 +337,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 </Form.Item>
             );
         }
-        const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+        const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
         return (
             <ProFormField {...omitProps}>
                 {fieldDom}
