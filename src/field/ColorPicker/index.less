@@ -41,6 +41,19 @@
         align-items: center;
         width: 100%;
 
+        &.@{buddy-color-picker}-button-immutable {
+            background-color: @component-background;
+            cursor: default;
+
+            &:hover, &:active {
+                background-color: unset;
+            }
+
+            .@{buddy-color-picker}-preview {
+                border: @border-width-base dashed @border-color-base;
+            }
+        }
+
         /* @see "https://procomponents.ant.design/components/field-set#%E5%AE%BD%E5%BA%A6" */
         &.@{buddy-color-picker}-button-xs {
             width: 104px;

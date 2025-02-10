@@ -95,7 +95,7 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldPr
      * @description.zh-CN 按钮的属性
      * @description.zh-TW 按鈕的屬性
      */
-    buttonProps?: Omit<ButtonProps, 'block' | 'href' | 'htmlType' | 'icon' | 'target' | 'children'>;
+    buttonProps?: Omit<ButtonProps, 'block' | 'disabled' | 'href' | 'htmlType' | 'icon' | 'target' | 'children'>;
 
     /**
      * @description The icon element
@@ -270,9 +270,12 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         props?.onChange?.(hexColor);
     }, [hexColor]);
 
-    const entryImmutable = props?.disabled || props?.buttonProps?.disabled || editContext.mode === 'read';
+    const entryImmutable = props?.disabled || editContext.mode === 'read';
 
     const buildEntryIconDom = (before: boolean) => {
+        if (entryImmutable) {
+            return undefined;
+        }
         return ((!before && allowClear && hexColor && mouseHover && iconPos === false) || (before && iconPos === 'before') || (!before && iconPos === 'after')) ? (
             <span
                 className={`${clazzPrefix}-icon`}
@@ -288,7 +291,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     };
 
     const buildEntryDom = () => {
-        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'disabled', 'size', 'style']);
+        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'size', 'style']);
         const buttonStyle = !props?.buttonProps?.style ? {} : props.buttonProps.style;
         if (typeof props?.width === 'number') {
             Object.assign(buttonStyle, {
@@ -305,7 +308,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 onMouseOut={() => setMouseHover(false)}
             >
                 <Button
-                    className={classNames(`${clazzPrefix}-button`, ((typeof props?.width === 'string') ? `${clazzPrefix}-button-${props.width}` : undefined), (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
+                    className={classNames(`${clazzPrefix}-button`, (!entryImmutable ? undefined : `${clazzPrefix}-button-immutable`), ((typeof props?.width === 'string') ? `${clazzPrefix}-button-${props.width}` : undefined), (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
                     disabled={entryImmutable}
                     size={props?.buttonProps?.size ?? 'small'}
                     style={buttonStyle}
