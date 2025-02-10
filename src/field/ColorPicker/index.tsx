@@ -95,7 +95,7 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldPr
      * @description.zh-CN 按钮的属性
      * @description.zh-TW 按鈕的屬性
      */
-    buttonProps?: Omit<ButtonProps, 'href' | 'htmlType' | 'icon' | 'target' | 'children'>;
+    buttonProps?: Omit<ButtonProps, 'block' | 'href' | 'htmlType' | 'icon' | 'target' | 'children'>;
 
     /**
      * @description The icon element
@@ -128,6 +128,13 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldPr
      * @default true
      */
     proField?: boolean;
+
+    /**
+     * @description Whether to match the width of parent element or not
+     * @description.zh-CN 是否匹配父节点的宽度
+     * @description.zh-TW 是否匹配父節點的寬度
+     */
+    widthBlock?: boolean;
 
     /**
      * @description The props of the BlockPicker
@@ -291,7 +298,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         const fieldDom = (
             <div
                 ref={fieldRef}
-                className={classNames(clazzPrefix, (props?.buttonProps?.block ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+                className={classNames(clazzPrefix, (props?.widthBlock? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
                 style={props?.containerStyle}
                 data-color-picker-entry={fieldId}
                 onMouseOver={() => setMouseHover(true)}

@@ -137,11 +137,11 @@ export default () => {
                     name='foobar'
                     label='Choose Color'
                     width='xs'
+                    widthBlock={widthBlock}
                     pickerType={pickerType}
                     allowClear={allowClear}
                     buttonProps={{
                         size: buttonSize,
-                        block: widthBlock,
                     }}
                     iconPos={iconPos}
                     onChange={(color: any) => {
