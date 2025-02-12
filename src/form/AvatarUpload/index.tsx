@@ -23,13 +23,12 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {FileUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type CircleSquareShape, type FileSizeUint} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
-import {FileUtils} from '@/util/FileUtils';
 import {intlLocales} from './intl-locales';
 import './index.less';
 
@@ -360,10 +359,10 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             return;
         }
         if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            FileUtils.readAsDataUrl(info.file.originFileObj as RcFile, url => {
+            // Get the url from response in real world
+            FileUtils.readAsDataUrl(info.file.originFileObj as RcFile, res => {
                 setLoading(false);
-                setImageSrc(url);
+                setImageSrc(res);
             });
         }
         props?.uploadProps?.onChange?.(info);

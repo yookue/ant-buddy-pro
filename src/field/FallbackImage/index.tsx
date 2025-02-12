@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {ConfigProvider} from 'antd';
+import {ImageUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
-import {ImageUtils} from '@/util/ImageUtils';
 
 
 export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {

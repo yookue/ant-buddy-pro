@@ -17,11 +17,10 @@
 
 import React from 'react';
 import {ConfigProvider, Image} from 'antd';
-import {NanoidUtils} from '@yookue/ts-lang-utils';
+import {ImageUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type ImagePreviewType as RcImagePreviewProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
-import {ImageUtils} from '@/util/ImageUtils';
 
 
 export type PreviewImageProps = Omit<RcImagePreviewProps, 'src' | 'current' | 'countRender'> & {
