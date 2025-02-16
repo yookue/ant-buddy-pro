@@ -35,10 +35,10 @@ export default () => {
                 name='AvatarUpload_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
-                submitter={false}
                 initialValues={{
                     avatar: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
                 }}
+                submitter={false}
             >
                 <ProForm.Group>
                     <ProFormRadio.Group

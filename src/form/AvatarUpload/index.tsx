@@ -255,7 +255,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldP
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
-} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
+};
 
 
 /**

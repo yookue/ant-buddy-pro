@@ -326,6 +326,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         {buildEntryIconDom(false)}
                     </Space>
                 </Button>
+                {!!props?.name && <input type='hidden' name={props.name}/>}
             </div>
         );
         if (!props?.name || !formContext?.form) {

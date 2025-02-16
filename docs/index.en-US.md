@@ -17,7 +17,7 @@ features:
   - icon: ./assets/img/home/green-leaf-1.png
     title: Theme support
     desc: 🎨 Theme capabilities, for customizing complete theme components, are up to you
-footer: Open-source MIT Licensed<br/>Copyright © 2023 Yookue Ltd. All rights reserved
+footer: Open-source MIT Licensed<br/>Copyright © 2025 Yookue Ltd. All rights reserved
 ---
 
 ## Feedback

@@ -208,7 +208,7 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
-} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
+};
 
 
 /**
