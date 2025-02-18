@@ -100,6 +100,13 @@ export type ApartTitleProps = {
     contentStyle?: React.CSSProperties;
 
     /**
+     * @description Whether to match the width of parent element or not
+     * @description.zh-CN 是否匹配父节点的宽度
+     * @description.zh-TW 是否匹配父節點的寬度
+     */
+    widthBlock?: boolean;
+
+    /**
      * @description The preset style of the component
      * @description.zh-CN 预设样式
      * @description.zh-TW 預設樣式
@@ -140,7 +147,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classNames(`${clazzPrefix}`, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <If condition={ornamentPos === 'before'} validation={false}>
