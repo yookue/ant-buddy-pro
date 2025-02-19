@@ -21,8 +21,10 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'generate'], 'Get Captcha'],
     [['en_US', 'resend'], 'Resend'],
+
     [['zh_CN', 'generate'], '获取验证码'],
     [['zh_CN', 'resend'], '重新发送'],
+
     [['zh_TW', 'generate'], '獲取驗證碼'],
     [['zh_TW', 'resend'], '重新發送'],
 ]);

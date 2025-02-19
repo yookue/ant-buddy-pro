@@ -21,8 +21,10 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'requestFullscreen'], 'Fullscreen'],
     [['en_US', 'exitFullscreen'], 'Exit Fullscreen'],
+
     [['zh_CN', 'requestFullscreen'], '全屏'],
     [['zh_CN', 'exitFullscreen'], '退出全屏'],
+
     [['zh_TW', 'requestFullscreen'], '全屏'],
     [['zh_TW', 'exitFullscreen'], '退出全屏'],
 ]);

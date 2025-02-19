@@ -26,9 +26,11 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'outlinedTheme'], 'Outlined'],
     [['en_US', 'filledTheme'], 'Filled'],
     [['en_US', 'twotoneTheme'], 'Two Tone'],
+
     [['zh_CN', 'outlinedTheme'], '线框风格'],
     [['zh_CN', 'filledTheme'], '实底风格'],
     [['zh_CN', 'twotoneTheme'], '双色风格'],
+
     [['zh_TW', 'outlinedTheme'], '線框風格'],
     [['zh_TW', 'filledTheme'], '實底風格'],
     [['zh_TW', 'twotoneTheme'], '雙色風格'],
@@ -39,12 +41,14 @@ export const intlLocales = ReadonlyMultiKeyMap.of([
     [['en_US', 'dataScene'], 'Data'],
     [['en_US', 'logoScene'], 'Logo'],
     [['en_US', 'webScene'], 'Web'],
+
     [['zh_CN', 'directionScene'], '方向类'],
     [['zh_CN', 'suggestionScene'], '建议类'],
     [['zh_CN', 'editorScene'], '编辑类'],
     [['zh_CN', 'dataScene'], '数据类'],
     [['zh_CN', 'logoScene'], '品牌类'],
     [['zh_CN', 'webScene'], '网站类'],
+
     [['zh_TW', 'directionScene'], '方向類'],
     [['zh_TW', 'suggestionScene'], '建議類'],
     [['zh_TW', 'editorScene'], '編輯類'],
