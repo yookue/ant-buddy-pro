@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.160** [2025-02-20]
+    - Add 'form/CipherStrength'
+
   - **v0.1.142** [2024-12-29]
     - Add 'field/DragModal'
 

@@ -36,10 +36,10 @@ export default () => {
             >
                 <ProFormText
                     name='mobile'
+                    placeholder='Mobile Number'
                     fieldProps={{
                         prefix: <MobileOutlined/>
                     }}
-                    placeholder='Mobile Number'
                     rules={[
                         {
                             required: true,

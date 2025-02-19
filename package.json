@@ -1,6 +1,6 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "0.1.159",
+    "version": "0.1.160",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on React & Ant Design ProComponents",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
@@ -55,13 +55,15 @@
         "react-color": "^2.19.3",
         "react-dom": "^18.2.0",
         "react-draggable": "^4.4.6",
-        "screenfull": "^6.0.2"
+        "screenfull": "^6.0.2",
+        "zxcvbn": "^4.4.2"
     },
     "devDependencies": {
         "@types/object-hash": "^3.0.6",
         "@types/react": "^18.2.79",
         "@types/react-color": "^3.0.13",
         "@types/react-dom": "^18.2.25",
+        "@types/zxcvbn": "^4.4.5",
         "@typescript-eslint/eslint-plugin": "^7.18.0",
         "@yookue/babel-plugin-remove-comment": "~0.1.5",
         "babel-plugin-import": "^1.13.8",
