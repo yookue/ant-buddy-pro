@@ -83,6 +83,7 @@ export type CountFieldProps = React.PropsWithChildren<{
      * @description The layout of the label and the field
      * @description.zh-CN 标签和内容的布局样式
      * @description.zh-TW 標簽和內容的布局樣式
+     * @default 'horizontal'
      */
     layout?: AxisDirectionType;
 

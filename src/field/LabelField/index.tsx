@@ -54,6 +54,7 @@ export type LabelFieldProps = React.PropsWithChildren<{
      * @description The layout of the label and the field
      * @description.zh-CN 标签和内容的布局样式
      * @description.zh-TW 標簽和內容的布局樣式
+     * @default 'horizontal'
      */
     layout?: AxisDirectionType;
 
@@ -85,6 +86,14 @@ export type LabelFieldProps = React.PropsWithChildren<{
      * @default ':'
      */
     delimiter?: React.ReactNode;
+
+    /**
+     * @description The layouts when should display the delimiter
+     * @description.zh-CN 需要显示分隔符的布局样式
+     * @description.zh-TW 需要顯示分隔符的布局樣式
+     * @default ['horizontal', 'vertical']
+     */
+    delimiterInLayout?: AxisDirectionType[] | false;
 
     /**
      * @description The field element
@@ -130,11 +139,12 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
     // Initialize the default props
     const {
         delimiter = ':',
+        delimiterInLayout = ['horizontal', 'vertical'],
+        layout = 'horizontal',
         presetStyle = 'field-prior',
     } = props ?? {};
 
-    const layout = formContext?.vertical ? 'vertical' : (props?.layout ?? 'horizontal');
-    const required = formContext?.requiredMark !== false && props?.required;
+    const required = (formContext?.requiredMark !== false) && props?.required;
 
     return (
         <div
@@ -147,7 +157,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
                     style={props?.labelStyle}
                 >
                     {!props?.label ? undefined : (typeof props.label === 'function' ? props.label() : props.label)}
-                    {layout === 'horizontal' ? delimiter : undefined}
+                    {!delimiterInLayout ? undefined : (delimiterInLayout.includes(layout) ? delimiter : undefined)}
                 </div>
                 <div className={`${clazzPrefix}-field`}>
                     {!props?.field ? props?.children : (typeof props.field === 'function' ? props.field() : props.field)}

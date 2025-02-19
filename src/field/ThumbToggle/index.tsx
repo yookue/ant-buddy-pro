@@ -153,6 +153,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description The layout of the icon and the field
      * @description.zh-CN 图标和内容的布局样式
      * @description.zh-TW 圖標和內容的布局樣式
+     * @default 'horizontal'
      */
     layout?: AxisDirectionType;
 
@@ -224,6 +225,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     const {
         actionType = 'like',
         count = 0,
+        layout = 'horizontal',
         showCount = true,
         showZero = true,
         locale = intlType.locale,
@@ -339,7 +341,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
                 field={buildIconDom()}
                 count={props?.count}
                 countProps={props?.countProps}
-                layout={props?.layout}
+                layout={layout}
                 showCount={showCount}
                 showZero={showZero}
                 tooltipCtrl={props?.tooltipCtrl}
