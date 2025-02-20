@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Divider, message as messageApi} from 'antd';
+import {Divider} from 'antd';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {CronInput} from '@yookue/ant-buddy-pro';
 
@@ -32,15 +32,7 @@ export default () => {
                 name='CronInput_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
-                submitter={{
-                    searchConfig: {
-                        submitText: '提交',
-                        resetText: '重置',
-                    }
-                }}
-                onFinish={async () => {
-                    messageApi.success('您點擊了提交按鈕');
-                }}
+                submitter={false}
             >
                 <ProForm.Group>
                     <ProFormSwitch

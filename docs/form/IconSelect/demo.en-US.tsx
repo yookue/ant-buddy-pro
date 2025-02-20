@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Divider, Empty, message as messageApi} from 'antd';
+import {Divider, Empty} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {IconSelect, ConsoleUtils} from '@yookue/ant-buddy-pro';
 import {IconOptionMode} from '@yookue/ant-buddy-pro/form/IconSelect';
@@ -37,15 +37,7 @@ export default () => {
                 name='IconSelect_demo'
                 layout='horizontal'
                 autoFocusFirstInput={false}
-                submitter={{
-                    searchConfig: {
-                        submitText: 'Submit',
-                        resetText: 'Reset',
-                    }
-                }}
-                onFinish={async () => {
-                    messageApi.success(`Yep, you've clicked the submit button`);
-                }}
+                submitter={false}
             >
                 <ProForm.Group>
                     <ProFormRadio.Group
