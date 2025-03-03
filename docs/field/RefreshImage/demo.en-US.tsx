@@ -36,7 +36,7 @@ export default () => {
             }}
             fallback='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
             title='Click to refresh'
-            autoCursor={true}
+            handCursor={true}
             onRefresh={() => {
                 messageApi.success('Image has been refreshed');
             }}

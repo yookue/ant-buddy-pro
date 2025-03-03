@@ -36,7 +36,7 @@ export default () => {
             }}
             fallback='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
             title='點擊刷新圖片'
-            autoCursor={true}
+            handCursor={true}
             onRefresh={() => {
                 messageApi.success('圖片已刷新');
             }}

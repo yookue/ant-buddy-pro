@@ -32,11 +32,11 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'>
     clazzPrefix?: string;
 
     /**
-     * @description Whether to change the cursor automatically
-     * @description.zh-CN 是否自动改变鼠标指针样式
-     * @description.zh-TW 是否自动改变鼠标指针样式
+     * @description Whether to change the cursor style or not
+     * @description.zh-CN 是否改变鼠标指针样式
+     * @description.zh-TW 是否改变鼠标指针样式
      */
-    autoCursor?: boolean;
+    handCursor?: boolean;
 
     /**
      * @description The source of the image
@@ -96,7 +96,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         });
     };
 
-    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'autoCursor', 'src', 'fallback', 'style', 'onRefresh', 'onClick']);
+    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'handCursor', 'src', 'fallback', 'style', 'onRefresh', 'onClick']);
 
     return (
         <Image
@@ -105,7 +105,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
             src={imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`}
             {...omitProps}
             style={{
-                ...(!props?.autoCursor ? {} : {cursor: 'pointer'}),
+                ...(!props?.handCursor ? {} : {cursor: 'pointer'}),
                 ...props?.style,
             }}
             onClick={handleClick}
