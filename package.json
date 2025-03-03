@@ -1,6 +1,6 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "0.1.160",
+    "version": "0.1.161",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on React & Ant Design ProComponents",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
@@ -43,9 +43,9 @@
         "@ant-design/pro-components": "^1.1.25",
         "@babel/runtime": "^7.26.9",
         "@emotion/css": "^11.13.5",
-        "@yookue/react-condition": "~0.1.21",
-        "@yookue/ts-lang-utils": "~0.1.77",
-        "@yookue/ts-multi-map": "~0.1.31",
+        "@yookue/react-condition": "~0.1.22",
+        "@yookue/ts-lang-utils": "~0.1.79",
+        "@yookue/ts-multi-map": "~0.1.32",
         "antd-img-crop": "^4.24.0",
         "cron-validate": "^1.4.5",
         "object-hash": "^3.0.0",
@@ -65,11 +65,11 @@
         "@types/react-dom": "^18.2.25",
         "@types/zxcvbn": "^4.4.5",
         "@typescript-eslint/eslint-plugin": "^7.18.0",
-        "@yookue/babel-plugin-remove-comment": "~0.1.5",
+        "@yookue/babel-plugin-remove-comment": "~0.1.6",
         "babel-plugin-import": "^1.13.8",
         "del-cli": "^6.0.0",
         "dumi": "^1.1.54",
-        "father": "^4.5.2",
+        "father": "^4.5.3",
         "gh-pages": "^6.3.0",
         "stylelint-config-standard-less": "^3.0.1",
         "typescript": "^4.9.5"
@@ -80,7 +80,7 @@
         "react-dom": "^18.2.0"
     },
     "peerDependencies": {
-        "typescript": ">= 4"
+        "typescript": ">=4"
     },
     "repository": {
         "type": "git",
@@ -103,7 +103,7 @@
         },
         {
             "type": "individual",
-            "url": "https://yookue.com/public/donate"
+            "url": "https://yookue.com/donation"
         }
     ],
     "browserslist": {

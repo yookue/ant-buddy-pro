@@ -16,14 +16,13 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
-import {ImageUtils} from '@yookue/ts-lang-utils';
+import {ConfigProvider, Image, type ImageProps} from 'antd';
+import {ImageUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
-import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
 
 
-export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
+export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -71,42 +70,45 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-refresh-image');
 
-    const [imageSource, setImageSource] = React.useState(() => {
-        return ImageUtils.detectSource(props?.src, (res) => setImageSource(res), () => {
-            setImageSource(ImageUtils.detectSource(props?.fallback, res => setImageSource(res)));
+    // noinspection DuplicatedCode
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const [imageSrc, setImageSrc] = React.useState<string>();
+
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.src, res => setImageSrc(res));
+    }, [props?.src]);
+
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.fallback, res => {
+            const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
+            if (inspect && !inspect.onerror) {
+                inspect.setAttribute('onerror', `this.src='${res}'`);
+            }
         });
-    });
+    }, [props?.fallback]);
 
     const handleClick = (event: React.MouseEvent<any>) => {
-        const previousSrc = imageSource;
-        setImageSource(ImageUtils.detectSource(props?.src, res => setImageSource(res), () => {
-            setImageSource(ImageUtils.detectSource(props?.fallback, res => setImageSource(res)));
-        }));
-        const currentSrc = imageSource;
         props?.onClick?.(event);
-        props?.onRefresh?.(currentSrc, previousSrc);
+        const previousSrc = imageSrc;
+        ImageUtils.detectSource(props?.src, res => {
+            setImageSrc(res);
+            props?.onRefresh?.(previousSrc, res);
+        });
     };
 
-    const handleError = (event: React.SyntheticEvent<any>) => {
-        if (props?.fallback) {
-            setImageSource(ImageUtils.detectSource(props.fallback, res => setImageSource(res)));
-        }
-        props?.onError?.(event);
-    };
-
-    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']);
+    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'autoCursor', 'src', 'fallback', 'style', 'onRefresh', 'onClick']);
 
     return (
-        <RcImage
-            className={classNames(clazzPrefix, props?.className)}
-            src={imageSource}
+        <Image
+            className={classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className)}
+            preview={false}
+            src={imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`}
             {...omitProps}
             style={{
                 ...(!props?.autoCursor ? {} : {cursor: 'pointer'}),
                 ...props?.style,
             }}
             onClick={handleClick}
-            onError={handleError}
         />
     );
 };

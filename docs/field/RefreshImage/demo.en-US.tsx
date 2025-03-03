@@ -18,6 +18,7 @@
 import React from 'react';
 import {message as messageApi} from 'antd';
 import {RefreshImage} from '@yookue/ant-buddy-pro';
+import {RandomUtils} from '@yookue/ts-lang-utils';
 
 
 export default () => {
@@ -26,7 +27,12 @@ export default () => {
             width={120}
             height={120}
             src={() => {
-                return `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`;
+                const images = [
+                    `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`,
+                    `https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png?timestamp=${Date.now()}`,
+                    `https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg?timestamp=${Date.now()}`,
+                ];
+                return RandomUtils.randomElement(images);
             }}
             fallback='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
             title='Click to refresh'

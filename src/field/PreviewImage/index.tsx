@@ -58,38 +58,35 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-preview-image');
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const [imageSrc, setImageSrc] = React.useState<string>();
 
-    const [imageSource, setImageSource] = React.useState(() => {
-        return ImageUtils.detectSource(props?.src, data => setImageSource(data));
-    });
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.src, res => setImageSrc(res));
+    }, [props?.src]);
 
-    const [imageFallback, setImageFallback] = React.useState(() => {
-        return ImageUtils.detectSource(props?.fallback, data => setImageFallback(data));
-    });
-
-    React.useLayoutEffect(() => {
-        if (!imageFallback || !props?.visible) {
-            return;
-        }
-        const selector = `.${clazzPrefix}-id-${fieldId} > .${configContext.getPrefixCls('image-preview-content')} > .${configContext.getPrefixCls('image-preview-body')} > .${configContext.getPrefixCls('image-preview-img-wrapper')} > img`;
-        const inspect = document.querySelector<HTMLImageElement>(selector);
-        if (inspect && !inspect.onerror) {
-            inspect.setAttribute('onerror', `this.src='${imageFallback}'`);
-        }
-    }, [props?.visible]);
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.fallback, res => {
+            const selector = `.${clazzPrefix}-id-${fieldId} > .${configContext.getPrefixCls('image-preview-content')} > .${configContext.getPrefixCls('image-preview-body')} > .${configContext.getPrefixCls('image-preview-img-wrapper')} > img`;
+            const inspect = document.querySelector<HTMLImageElement>(selector);
+            if (inspect && !inspect.onerror) {
+                inspect.setAttribute('onerror', `this.src='${res}'`);
+            }
+        });
+    }, [props?.fallback]);
 
     const omitProps = !props ? {} : omit(props, ['className', 'rootClassName', 'clazzPrefix', 'src', 'fallback']);
 
     return (
         <Image
+            className={classNames(clazzPrefix, props?.className)}
             width={0}
             height={0}
             preview={{
-                className: classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className),
-                rootClassName: classNames(`${clazzPrefix}-root`, `${clazzPrefix}-root-id-${fieldId}`, props?.rootClassName),
-                src: imageSource,
+                className: classNames(`${clazzPrefix}-preview`, `${clazzPrefix}-id-${fieldId}`),
+                src: imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`,
                 ...omitProps,
             }}
+            rootClassName={classNames(`${clazzPrefix}-root`, `${clazzPrefix}-root-id-${fieldId}`, props?.rootClassName)}
             style={{
                 display: 'none',
             }}
