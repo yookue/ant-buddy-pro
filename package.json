@@ -44,7 +44,7 @@
         "@babel/runtime": "^7.26.9",
         "@emotion/css": "^11.13.5",
         "@yookue/react-condition": "~0.1.22",
-        "@yookue/ts-lang-utils": "~0.1.79",
+        "@yookue/ts-lang-utils": "~0.1.80",
         "@yookue/ts-multi-map": "~0.1.32",
         "antd-img-crop": "^4.24.0",
         "cron-validate": "^1.4.5",

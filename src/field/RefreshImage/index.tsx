@@ -17,9 +17,22 @@
 
 import React from 'react';
 import {ConfigProvider, Image, type ImageProps} from 'antd';
-import {ImageUtils, NanoidUtils} from '@yookue/ts-lang-utils';
+import {useIntl} from '@ant-design/pro-provider';
+import {ImageUtils, NanoidUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {intlLocales} from './intl-locales';
+import './index.less';
+
+
+export type IntlLocaleProps = {
+    /**
+     * @description Click to Refresh
+     * @description.zh-CN 点击刷新
+     * @description.zh-TW 點擊刷新
+     */
+    clickToRefresh?: string;
+};
 
 
 export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'> & {
@@ -32,9 +45,10 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'>
     clazzPrefix?: string;
 
     /**
-     * @description Whether to change the cursor style or not
-     * @description.zh-CN 是否改变鼠标指针样式
-     * @description.zh-TW 是否改变鼠标指针样式
+     * @description Whether to change cursor to pointer or not
+     * @description.zh-CN 是否手型鼠标指针样式
+     * @description.zh-TW 是否手型鼠标指针样式
+     * @default true
      */
     handCursor?: boolean;
 
@@ -58,6 +72,20 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'>
      * @description.zh-TW 圖片刷新後的回調函數
      */
     onRefresh?: (currentSrc?: string, previousSrc?: string) => void;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
+     * @description The props of locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 };
 
 
@@ -69,6 +97,13 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'>
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-refresh-image');
+    const intlType = useIntl();
+
+    // Initialize the default props
+    const {
+        handCursor = true,
+        locale = intlType.locale,
+    } = props ?? {};
 
     // noinspection DuplicatedCode
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
@@ -96,18 +131,15 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         });
     };
 
-    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'handCursor', 'src', 'fallback', 'style', 'onRefresh', 'onClick']);
+    const omitProps = !props ? {} : omit(props, ['className', 'title', 'onClick', 'clazzPrefix', 'handCursor', 'src', 'fallback', 'onRefresh', 'locale', 'localeProps']);
 
     return (
         <Image
-            className={classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className)}
+            className={classNames(clazzPrefix, (!handCursor ? undefined : `${clazzPrefix}-hand-cursor`), `${clazzPrefix}-id-${fieldId}`, props?.className)}
             preview={false}
             src={imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`}
             {...omitProps}
-            style={{
-                ...(!props?.handCursor ? {} : {cursor: 'pointer'}),
-                ...props?.style,
-            }}
+            title={ObjectUtils.firstNotNil(props?.title, props?.localeProps?.clickToRefresh, intlLocales.get([locale, 'clickToRefresh']), intlLocales.get(['en_US', 'clickToRefresh']))}
             onClick={handleClick}
         />
     );
