@@ -20,7 +20,7 @@ import {ConfigProvider, Input, type InputProps, type InputRef} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
-import {RegexUtils} from '@yookue/ts-lang-utils';
+import {ElementUtils, NanoidUtils, RegexUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -70,13 +70,16 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
         proField = true,
     } = props ?? {};
 
-    const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const compositionRef = React.useRef<boolean>(false);
     const previousRef = React.useRef<string>(formContext?.form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
+    const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
 
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
         if (value && props?.pattern && (Array.isArray(props.pattern) ? !props.pattern.some(item => RegexUtils.testResetting(item, value)) : !props.pattern.test(value))) {
-            formContext?.form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
+            // formContext?.form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
+            const inspect = document.querySelector<HTMLInputElement>(`[data-mask-input-id='${fieldId}']`);
+            ElementUtils.setElementValue(inspect, previousRef.current);
             failAction?.();
         } else {
             previousRef.current = value;
@@ -119,6 +122,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
                     onChange: handleChange,
                     onCompositionStart: handleCompositionStart,
                     onCompositionEnd: handleCompositionEnd,
+                    'data-mask-input-id': fieldId,
                 }}
             />
         );
@@ -132,6 +136,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
                 onChange={handleChange}
                 onCompositionStart={handleCompositionStart}
                 onCompositionEnd={handleCompositionEnd}
+                data-mask-input-id={fieldId}
             />
         );
     }
