@@ -11,6 +11,9 @@ nav:
 
 Here are some milestone versions of the changelog:
 
+  - **v0.1.163** [2025-03-31]
+    - Add 'form/ServerTuple'
+
   - **v0.1.160** [2025-02-20]
     - Add 'form/CipherStrength'
 

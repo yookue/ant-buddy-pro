@@ -22,6 +22,7 @@ import {LocaleInput, type LocaleInputProps} from '@/form/LocaleInput';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
 import {IconSelect, type IconSelectProps} from '@/form/IconSelect';
+import {ServerTuple, type ServerTupleProps} from '@/form/ServerTuple';
 
 
 export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
@@ -197,6 +198,27 @@ export abstract class SchemaRender {
                 dependencies={schema?.dependencies}
                 {...restProps}
             />
+        );
+    }
+
+    /**
+     * Returns the rendered `ServerTuple` DOM for the given schema form column
+     *
+     * @param schema the column item of `ProSchema` to render
+     * @param props the `ServerTupleProps` to inspect
+     *
+     * @returns the rendered `ServerTuple` DOM for the given schema form column
+     */
+    public static renderServerTuple = (schema: any, props?: ServerTupleProps): React.ReactNode => {
+        if (!schema || schema?.ignoreFormItem) {
+            return undefined;
+        }
+        const restProps = {
+            proField: props?.proField ?? false,
+            ...(!props ? {} : omit(props, ['proField'])),
+        };
+        return (
+            <ServerTuple {...restProps}/>
         );
     }
 }
