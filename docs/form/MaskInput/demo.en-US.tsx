@@ -35,9 +35,8 @@ export default () => {
                     fieldProps={{
                         addonBefore: 'Alphanumeric',
                     }}
-                    patterns={[
-                        /^[a-zA-Z0-9]+$/,
-                    ]}
+                    pattern={/^[a-zA-Z0-9]+$/}
+                    proField={false}
                 />
             </ProForm>
         </>

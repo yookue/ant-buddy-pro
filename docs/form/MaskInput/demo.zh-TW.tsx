@@ -35,9 +35,7 @@ export default () => {
                     fieldProps={{
                         addonBefore: '數字或字母',
                     }}
-                    patterns={[
-                        /^[a-zA-Z0-9]+$/,
-                    ]}
+                    pattern={/^[a-zA-Z0-9]+$/}
                 />
             </ProForm>
         </>

@@ -37,11 +37,11 @@ export type MaskInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
     clazzPrefix?: string;
 
     /**
-     * @description The allowed regex patterns, either is considered as valid
+     * @description The allowed regex pattern, either is considered as valid
      * @description.zh-CN 允许值的正则表达式，满足任意一个即视为有效
      * @description.zh-TW 允許值的正則表達式，滿足任意一個即視爲有效
      */
-    patterns?: RegExp[];
+    pattern?: RegExp | RegExp[];
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -75,7 +75,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     const previousRef = React.useRef<string>(formContext?.form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
 
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
-        if (value && props?.patterns && !props.patterns.some(item => RegexUtils.testResetting(item, value))) {
+        if (value && props?.pattern && (Array.isArray(props.pattern) ? !props.pattern.some(item => RegexUtils.testResetting(item, value)) : !props.pattern.test(value))) {
             formContext?.form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
             failAction?.();
         } else {
@@ -109,7 +109,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'onChange', 'onCompositionStart', 'onCompositionEnd']);
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'patterns', 'proField']);
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'pattern', 'proField']);
         return (
             <ProFormText
                 {...restProps}
