@@ -139,6 +139,13 @@ export default {
     webpack5: {},
     mfsu: {},
     // ssr: {},
-    // chainWebpack: function (config: any) {
+    // chainWebpack: function (memo: any) {
+    //     ['src'].forEach(rule => {
+    //         memo.module.rule(rule).use('babel-loader').tap((options: any) => {
+    //             options.compact = false;
+    //             return options;
+    //         });
+    //     });
+    //     return memo;
     // }
 };

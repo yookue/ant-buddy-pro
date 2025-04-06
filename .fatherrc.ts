@@ -21,21 +21,22 @@ import {defineConfig} from 'father';
 
 /**
  * @see "https://github.com/umijs/father/blob/master/docs/config.md"
+ * @see "https://github.com/umijs/father/issues/567"
  */
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
     cjs: {},
     esm: {},
-    umd: {
-        name: 'AntBuddyPro',
-        externals: {
-            'react': 'React',
-            'react-dom': 'ReactDOM',
-            'antd': 'antd',
-            'classnames': 'classNames',
-            'moment': 'moment',
-        }
-    },
+    // umd: {
+    //     name: 'AntBuddyPro',
+    //     externals: {
+    //         'react': 'React',
+    //         'react-dom': 'ReactDOM',
+    //         'antd': 'antd',
+    //         'classnames': 'classNames',
+    //         'moment': 'moment',
+    //     }
+    // },
     alias: {
         '@': nodePath.resolve(__dirname, './src'),
         '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
