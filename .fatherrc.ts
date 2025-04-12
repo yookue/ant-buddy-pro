@@ -27,16 +27,16 @@ import {defineConfig} from 'father';
 export default defineConfig({
     cjs: {},
     esm: {},
-    // umd: {
-    //     name: 'AntBuddyPro',
-    //     externals: {
-    //         'react': 'React',
-    //         'react-dom': 'ReactDOM',
-    //         'antd': 'antd',
-    //         'classnames': 'classNames',
-    //         'moment': 'moment',
-    //     }
-    // },
+    umd: {
+        name: 'AntBuddyPro',
+        externals: {
+            'react': 'React',
+            'react-dom': 'ReactDOM',
+            'antd': 'antd',
+            'classnames': 'classNames',
+            'moment': 'moment',
+        }
+    },
     alias: {
         '@': nodePath.resolve(__dirname, './src'),
         '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
