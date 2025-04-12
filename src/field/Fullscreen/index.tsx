@@ -19,6 +19,7 @@ import React from 'react';
 import {ConfigProvider, type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import screenfull from 'screenfull';
 import {TooltipRender} from '@/render/TooltipRender';
@@ -86,7 +87,7 @@ export type FullscreenProps = {
      * @description.zh-TW 要切換全屏的 DOM 元素
      * @default document.documentElement
      */
-    triggerFor?: HTMLElement;
+    triggerFor?: Element | null | (() => Element | null | undefined);
 
     /**
      * @description Whether to use Tooltip
@@ -101,6 +102,13 @@ export type FullscreenProps = {
      * @description.zh-TW Tooltip 屬性
      */
     tooltipProps?: Omit<TooltipProps, 'title'>;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
 
     /**
      * @description The props of locale
@@ -119,19 +127,18 @@ export type FullscreenProps = {
 export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React.RefAttributes<FullscreenRef>> = React.forwardRef((props?: FullscreenProps, ref?: any) => {
     Fullscreen.displayName = 'Fullscreen';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fullscreen');
     const intlType = useIntl();
 
     // Initialize the default props
     const {
-        triggerFor = document.documentElement,
+        locale = intlType.locale,
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === triggerFor);
+    const triggerForRef = React.useRef<Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document.documentElement);
+    const [fullscreen, setFullscreen] = React.useState<boolean>(document.fullscreenElement === triggerForRef.current);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -165,7 +172,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
      * @see "https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event"
      */
     const handleScreenChange = () => {
-        setFullscreen(document.fullscreenElement === triggerFor);
+        setFullscreen(document.fullscreenElement === triggerForRef.current);
     };
 
     /**
@@ -183,24 +190,24 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     };
 
     React.useEffect(() => {
-        triggerFor.addEventListener('fullscreenchange', handleScreenChange, false);
-        triggerFor.addEventListener('keydown', handleKeyDown, false);
+        triggerForRef.current.addEventListener('fullscreenchange', handleScreenChange, false);
+        triggerForRef.current.addEventListener('keydown', handleKeyDown, false);
         return () => {
-            triggerFor.removeEventListener('fullscreenchange', handleScreenChange, false);
-            triggerFor.removeEventListener('keydown', handleKeyDown, false);
+            triggerForRef.current.removeEventListener('fullscreenchange', handleScreenChange, false);
+            triggerForRef.current.removeEventListener('keydown', handleKeyDown, false);
         }
     }, []);
 
     const handleToggleScreen = () => {
         if (screenfull.isEnabled) {
-            screenfull.toggle(triggerFor);
+            screenfull.toggle(triggerForRef.current);
             setFullscreen(!fullscreen);
         }
     };
 
     const buildIconDom = () => {
-        const requestFullscreen = props?.localeProps?.requestFullscreen || intlLocales.get([intlType.locale, 'requestFullscreen']) || intlLocales.get(['en_US', 'requestFullscreen']);
-        const exitFullscreen = props?.localeProps?.exitFullscreen || intlLocales.get([intlType.locale, 'exitFullscreen']) || intlLocales.get(['en_US', 'exitFullscreen']);
+        const requestFullscreen = ObjectUtils.firstNotNil(props?.localeProps?.requestFullscreen, intlLocales.get([locale, 'requestFullscreen']), intlLocales.get(['en_US', 'requestFullscreen']));
+        const exitFullscreen = ObjectUtils.firstNotNil(props?.localeProps?.exitFullscreen, intlLocales.get([locale, 'exitFullscreen']), intlLocales.get(['en_US', 'exitFullscreen']));
         const innerDom = React.createElement(fullscreen ? FullscreenExitOutlined : FullscreenOutlined, {
             onClick: handleToggleScreen,
         });

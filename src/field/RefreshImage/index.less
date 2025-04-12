@@ -15,22 +15,15 @@
  */
 
 
-import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
+@root-entry-name: default;
+// noinspection CssUnknownTarget
+@import (reference) '~antd/es/style/themes/index.less';
+
+@buddy-refresh-image: ~'@{ant-prefix}-buddy-refresh-image';
 
 
-export const intlLocales = ReadonlyMultiKeyMap.of([
-    [['en_US', 'clear'], 'Clear'],
-    [['en_US', 'more'], 'More'],
-    [['en_US', 'notice'], 'Notice'],
-    [['en_US', 'task'], 'Task'],
-
-    [['zh_CN', 'clear'], '清空'],
-    [['zh_CN', 'more'], '更多'],
-    [['zh_CN', 'notice'], '通知'],
-    [['zh_CN', 'task'], '任务'],
-
-    [['zh_TW', 'clear'], '清空'],
-    [['zh_TW', 'more'], '更多'],
-    [['zh_TW', 'notice'], '通知'],
-    [['zh_TW', 'task'], '任務'],
-]);
+.@{buddy-refresh-image} {
+    &.@{buddy-refresh-image}-hand-cursor {
+        cursor: pointer;
+    }
+}

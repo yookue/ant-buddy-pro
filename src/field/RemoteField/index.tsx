@@ -18,7 +18,8 @@
 import React from 'react';
 import {ConfigProvider, Spin} from 'antd';
 import {type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/interface';
-import {nanoid, useDebounceFn} from '@ant-design/pro-utils';
+import {useDebounceFn} from '@ant-design/pro-utils';
+import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 
 
@@ -91,9 +92,7 @@ export type RemoteFieldProps = Omit<ProFormFieldRemoteProps, 'request' | 'valueE
 export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & React.RefAttributes<RemoteFieldRef>> = React.forwardRef((props?: RemoteFieldProps, ref?: any) => {
     RemoteField.displayName = 'RemoteField';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-remote-field');
 
     // Initialize the default props
@@ -103,7 +102,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
     } = props ?? {};
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const [refreshId, setRefreshId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [refreshId, setRefreshId] = React.useState<string>(NanoidUtils.getPopularId());
     const [outcome, setOutcome] = React.useState<any>();
 
     // noinspection JSUnusedGlobalSymbols
@@ -112,7 +111,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
             return outcome;
         },
         refreshOutcome: (): void => {
-            setRefreshId(nanoid().replace(/-/g, ''));
+            setRefreshId(NanoidUtils.getPopularId());
         }
     }));
 

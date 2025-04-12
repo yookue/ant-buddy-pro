@@ -16,14 +16,26 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
+import {ConfigProvider, Image, type ImageProps} from 'antd';
+import {useIntl} from '@ant-design/pro-provider';
+import {ImageUtils, NanoidUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
-import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
-import {ImageUtils} from '@/util/ImageUtils';
+import {intlLocales} from './intl-locales';
+import './index.less';
 
 
-export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
+export type IntlLocaleProps = {
+    /**
+     * @description Click to Refresh
+     * @description.zh-CN 点击刷新
+     * @description.zh-TW 點擊刷新
+     */
+    clickToRefresh?: string;
+};
+
+
+export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -33,11 +45,12 @@ export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
     clazzPrefix?: string;
 
     /**
-     * @description Whether to change the cursor automatically
-     * @description.zh-CN 是否自动改变鼠标指针样式
-     * @description.zh-TW 是否自动改变鼠标指针样式
+     * @description Whether to change cursor to pointer or not
+     * @description.zh-CN 是否手型鼠标指针样式
+     * @description.zh-TW 是否手型鼠标指针样式
+     * @default true
      */
-    autoCursor?: boolean;
+    handCursor?: boolean;
 
     /**
      * @description The source of the image
@@ -59,6 +72,20 @@ export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
      * @description.zh-TW 圖片刷新後的回調函數
      */
     onRefresh?: (currentSrc?: string, previousSrc?: string) => void;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
+     * @description The props of locale
+     * @description.zh-CN 多语言属性
+     * @description.zh-TW 多語言屬性
+     */
+    localeProps?: IntlLocaleProps;
 };
 
 
@@ -68,45 +95,52 @@ export type RefreshImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
  * @author David Hsing
  */
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-refresh-image');
+    const intlType = useIntl();
 
-    const [imageSource, setImageSource] = React.useState(() => {
-        return ImageUtils.detectSource(props?.src, data => setImageSource(data));
-    });
+    // Initialize the default props
+    const {
+        handCursor = true,
+        locale = intlType.locale,
+    } = props ?? {};
+
+    // noinspection DuplicatedCode
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const [imageSrc, setImageSrc] = React.useState<string>();
+
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.src, res => setImageSrc(res));
+    }, [props?.src]);
+
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.fallback, res => {
+            const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
+            if (inspect && !inspect.onerror) {
+                inspect.setAttribute('onerror', `this.src='${res}'`);
+            }
+        });
+    }, [props?.fallback]);
 
     const handleClick = (event: React.MouseEvent<any>) => {
-        const previousSrc = imageSource;
-        if (props?.src) {
-            setImageSource(ImageUtils.detectSource(props?.src, data => setImageSource(data)));
-        }
-        const currentSrc = imageSource;
         props?.onClick?.(event);
-        props?.onRefresh?.(currentSrc, previousSrc);
+        const previousSrc = imageSrc;
+        ImageUtils.detectSource(props?.src, res => {
+            setImageSrc(res);
+            props?.onRefresh?.(previousSrc, res);
+        });
     };
 
-    const handleError = (event: React.SyntheticEvent<any>) => {
-        if (props?.fallback) {
-            setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
-        }
-        props?.onError?.(event);
-    };
-
-    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'autoCursor', 'src', 'fallback', 'onRefresh', 'onClick', 'onError', 'style']);
+    const omitProps = !props ? {} : omit(props, ['className', 'title', 'onClick', 'clazzPrefix', 'handCursor', 'src', 'fallback', 'onRefresh', 'locale', 'localeProps']);
 
     return (
-        <RcImage
-            className={classNames(clazzPrefix, props?.className)}
-            src={imageSource}
+        <Image
+            className={classNames(clazzPrefix, (!handCursor ? undefined : `${clazzPrefix}-hand-cursor`), `${clazzPrefix}-id-${fieldId}`, props?.className)}
+            preview={false}
+            src={imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`}
             {...omitProps}
-            style={{
-                ...(!props?.autoCursor ? {} : {cursor: 'pointer'}),
-                ...props?.style,
-            }}
+            title={ObjectUtils.firstNotNil(props?.title, props?.localeProps?.clickToRefresh, intlLocales.get([locale, 'clickToRefresh']), intlLocales.get(['en_US', 'clickToRefresh']))}
             onClick={handleClick}
-            onError={handleError}
         />
     );
 };

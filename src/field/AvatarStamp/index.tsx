@@ -22,7 +22,7 @@ import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type RectZenithPlace} from '@/type/declaration';
-import {useStyles} from './style';
+import './index.less';
 
 
 export type AvatarStampProps = AvatarProps & {
@@ -92,9 +92,7 @@ export type AvatarStampProps = AvatarProps & {
  * @author David Hsing
  */
 export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-avatar-stamp');
 
     // Initialize the default props
@@ -146,12 +144,11 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
         );
     };
 
-    const {styles: meshStyles, cx: meshClazz} = useStyles(clazzPrefix);
     const omitAvatarProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'addon', 'addonClazz', 'addonStyle', 'offset', 'placement']);
 
     return (
         <div
-            className={meshClazz(clazzPrefix, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, meshStyles, props?.containerClazz)}
+            className={classNames(clazzPrefix, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Avatar {...omitAvatarProps}/>

@@ -22,40 +22,23 @@
 @buddy-compact-tuple: ~'@{ant-prefix}-buddy-compact-tuple';
 
 
+.@{buddy-compact-tuple}.@{buddy-compact-tuple}-width-block {
+    width: 100%;
+}
+
+
 .@{buddy-compact-tuple}:not(.@{buddy-compact-tuple}-readonly-borderless) {
-    .@{buddy-compact-tuple}-field {
-        &.@{buddy-compact-tuple}-field-border-top .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-top: @border-width-base @border-style-base @border-color-base;
+    .@{buddy-compact-tuple}-field-border .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control,
+    .@{buddy-compact-tuple}-addon-border .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
+        border: @border-width-base @border-style-base @border-color-base;
+
+        &:hover {
+            border: @border-width-base @border-style-base @primary-color-hover;
         }
 
-        &.@{buddy-compact-tuple}-field-border-right .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-right: @border-width-base @border-style-base @border-color-base;
-        }
-
-        &.@{buddy-compact-tuple}-field-border-bottom .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-bottom: @border-width-base @border-style-base @border-color-base;
-        }
-
-        &.@{buddy-compact-tuple}-field-border-left .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-left: @border-width-base @border-style-base @border-color-base;
-        }
-    }
-
-    .@{buddy-compact-tuple}-addon {
-        &.@{buddy-compact-tuple}-addon-border-top .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-top: @border-width-base @border-style-base @border-color-base;
-        }
-
-        &.@{buddy-compact-tuple}-addon-border-right .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-right: @border-width-base @border-style-base @border-color-base;
-        }
-
-        &.@{buddy-compact-tuple}-addon-border-bottom .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-bottom: @border-width-base @border-style-base @border-color-base;
-        }
-
-        &.@{buddy-compact-tuple}-addon-border-left .@{ant-prefix}-form-item .@{ant-prefix}-form-item-control {
-            border-left: @border-width-base @border-style-base @border-color-base;
+        &:focus {
+            box-shadow: 0 0 0 2px @primary-color-outline;
+            outline: none;
         }
     }
 }

@@ -19,18 +19,9 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 
 
 export const intlLocales = ReadonlyMultiKeyMap.of([
-    [['en_US', 'clear'], 'Clear'],
-    [['en_US', 'more'], 'More'],
-    [['en_US', 'notice'], 'Notice'],
-    [['en_US', 'task'], 'Task'],
+    [['en_US', 'clickToRefresh'], 'Click to Refresh'],
 
-    [['zh_CN', 'clear'], '清空'],
-    [['zh_CN', 'more'], '更多'],
-    [['zh_CN', 'notice'], '通知'],
-    [['zh_CN', 'task'], '任务'],
+    [['zh_CN', 'clickToRefresh'], '点击刷新'],
 
-    [['zh_TW', 'clear'], '清空'],
-    [['zh_TW', 'more'], '更多'],
-    [['zh_TW', 'notice'], '通知'],
-    [['zh_TW', 'task'], '任務'],
+    [['zh_TW', 'clickToRefresh'], '點擊刷新'],
 ]);

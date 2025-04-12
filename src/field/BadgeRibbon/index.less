@@ -26,4 +26,16 @@
     &-content > .@{ant-prefix}-ribbon-text {
         font-size: @font-size-sm;
     }
+
+    &.@{buddy-badge-ribbon}-transparent > .@{ant-prefix}-ribbon-wrapper > .@{buddy-badge-ribbon}-content {
+        background-color: transparent;
+
+        .@{ant-prefix}-ribbon-corner {
+            border-color: transparent;
+
+            &::after {
+                color: transparent;
+            }
+        }
+    }
 }

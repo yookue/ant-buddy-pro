@@ -41,6 +41,10 @@ Enjoy your coding journey with `ant-buddy-pro` ✌️
 
 This project is under the [MIT License](https://mit-license.org/).
 
+## Copyright
+
+Beijing Yookue Network Technology Ltd.
+
 ## Website
 
 - Yookue: [https://yookue.com](https://yookue.com)

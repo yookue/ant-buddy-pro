@@ -83,6 +83,7 @@ export type CountFieldProps = React.PropsWithChildren<{
      * @description The layout of the label and the field
      * @description.zh-CN 标签和内容的布局样式
      * @description.zh-TW 標簽和內容的布局樣式
+     * @default 'horizontal'
      */
     layout?: AxisDirectionType;
 
@@ -132,9 +133,7 @@ export type CountFieldProps = React.PropsWithChildren<{
 export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React.RefAttributes<CountFieldRef>> = React.forwardRef((props?: CountFieldProps, ref?: any) => {
     CountField.displayName = 'CountField';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-count-field');
 
     // Initialize the default props

@@ -103,9 +103,7 @@ export type TooltipFieldProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const TooltipField: React.FC<TooltipFieldProps> = (props?: TooltipFieldProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-tooltip-field');
 
     // Initialize the default props

@@ -16,18 +16,24 @@
 
 
 import React from 'react';
-import {ConfigProvider, Button, Dropdown, Space, type ButtonProps, type DropdownProps} from 'antd';
+import {ConfigProvider, Form, Button, Space, type ButtonProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
-import {DownOutlined} from '@ant-design/icons';
+import {CloseCircleOutlined, DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {nanoid} from '@ant-design/pro-utils';
-import {ColorUtils} from '@yookue/ts-lang-utils';
+import {ProFormField} from '@ant-design/pro-form';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
+import pickProFormItemProps from '@ant-design/pro-utils/es/pickProFormItemProps';
+import {ColorUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
+import Trigger, {type TriggerProps} from 'rc-trigger';
+import 'rc-trigger/assets/index.less';
 import omit from 'rc-util/es/omit';
 import {BlockPicker, ChromePicker, CirclePicker, CompactPicker, GithubPicker, HuePicker, MaterialPicker, SketchPicker, SwatchesPicker, TwitterPicker} from 'react-color';
 import type {BlockPickerProps, ChromePickerProps, CirclePickerProps, CompactPickerProps, GithubPickerProps, HuePickerProps, MaterialPickerProps, SketchPickerProps, SwatchesPickerProps, TwitterPickerProps} from 'react-color';
 import type {Color, ColorResult} from 'react-color';
+import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
+import {TriggerUtils} from '@/util/TriggerUtils';
 import './index.less';
 
 
@@ -40,7 +46,7 @@ export type ColorPickerRef = {
 export type PickerType = 'block' | 'chrome' | 'circle' | 'compact' | 'github' | 'hue' | 'material' | 'sketch' | 'swatches' | 'twitter';
 
 
-export type ColorPickerProps = {
+export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -72,25 +78,24 @@ export type ColorPickerProps = {
 
     /**
      * @description Whether the dropdown div is default open or not
-     * @description.zh-CN 下拉弹出层是否默认展开
-     * @description.zh-TW 下拉彈出層是否默認展開
-     * @default false
+     * @description.zh-CN 是否默认展开下拉弹出层
+     * @description.zh-TW 是否默認展開下拉彈出層
      */
     defaultOpen?: boolean;
 
     /**
      * @description The properties of the dropdown div
-     * @description.zh-CN 下拉弹出层的属性
-     * @description.zh-TW 下拉彈出層的屬性
+     * @description.zh-CN 弹出层的属性
+     * @description.zh-TW 彈出層的屬性
      */
-    dropdownProps?: Omit<DropdownProps, 'menu' | 'open' | 'children'>;
+    triggerProps?: Omit<TriggerProps, 'popup' | 'popupVisible' | 'children'>;
 
     /**
      * @description The properties of the button
      * @description.zh-CN 按钮的属性
      * @description.zh-TW 按鈕的屬性
      */
-    buttonProps?: Omit<ButtonProps, 'disabled' | 'href' | 'htmlType' | 'icon' | 'target' | 'children'>;
+    buttonProps?: Omit<ButtonProps, 'block' | 'disabled' | 'href' | 'htmlType' | 'icon' | 'target' | 'children'>;
 
     /**
      * @description The icon element
@@ -101,12 +106,35 @@ export type ColorPickerProps = {
     icon?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
+     * @description The position of the addon for the entry field
+     * @description.zh-CN 图标节点的位置
+     * @description.zh-TW 圖標節點的位置
+     * @default 'after'
+     */
+    iconPos?: WithFalse<BeforeAfterType>;
+
+    /**
      * @description The picker type
      * @description.zh-CN 顔色拾取器的类型
      * @description.zh-TW 顏色拾取器的類型
      * @default 'chrome'
      */
     pickerType?: PickerType;
+
+    /**
+     * @description Whether to use ProFormField instead of Antd
+     * @description.zh-CN 是否使用 ProFormField 控件
+     * @description.zh-TW 是否使用 ProFormField 控件
+     * @default true
+     */
+    proField?: boolean;
+
+    /**
+     * @description Whether to match the width of parent element or not
+     * @description.zh-CN 是否匹配父节点的宽度
+     * @description.zh-TW 是否匹配父節點的寬度
+     */
+    widthBlock?: boolean;
 
     /**
      * @description The props of the BlockPicker
@@ -184,7 +212,7 @@ export type ColorPickerProps = {
      * @description.zh-TW 顔色值變化時的回調函數
      */
     onChange?: (color?: Color) => void;
-} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name' | 'value'>;
+} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'value'>;
 
 
 /**
@@ -196,41 +224,44 @@ export type ColorPickerProps = {
 export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & React.RefAttributes<ColorPickerRef>> = React.forwardRef((props?: ColorPickerProps, ref?: any) => {
     ColorPicker.displayName = 'ColorPicker';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-color-picker');
 
     // Initialize the default props
     const {
-        value = '#d9d9d9',
-        defaultOpen = false,
+        allowClear = true,
         icon = <DownOutlined/>,
+        iconPos = 'after',
         pickerType = 'chrome',
+        proField = true,
     } = props ?? {};
 
-    ConsoleUtils.warn(ColorUtils.isHex(value as string), true, 'ColorPicker',  `Prop 'value' must be a valid hex color`);
-
-    const [fieldId] = React.useState<string>(nanoid().replace(/-/g, ''));
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const [hexColor, setHexColor] = React.useState<Color>(value as string);
-    const [menuOpen, setMenuOpen] = React.useState<boolean>(defaultOpen);
+    const fieldValue = (props?.name && formContext?.form) ? Form.useWatch(props.name, formContext.form) : props?.value;
+    const [hexColor, setHexColor] = React.useState<Color>();
+    const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
+    const [mouseHover, setMouseHover] = React.useState<boolean>(false);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getColor: (): Color => {
+        getColor: (): Color | undefined => {
             return hexColor;
         },
-        setColor: (hexColor: string): void => {
+        setColor: (hexColor?: string): void => {
             const validHex = ColorUtils.isHex(hexColor);
-            ConsoleUtils.warn(validHex, false, 'ColorPicker',  `Value '${hexColor}' for 'setColor' is not a valid hex color`);
-            if (validHex) {
-                setHexColor(hexColor);
-            }
+            ConsoleUtils.warn(!hexColor || validHex, false, 'ColorPicker', `Value '${hexColor}' for 'setColor' is not a valid hex color`);
+            setHexColor(validHex ? hexColor : undefined);
         }
     }));
+
+    React.useEffect(() => {
+        const validHex = ColorUtils.isHex(fieldValue);
+        ConsoleUtils.warn(!fieldValue || validHex, false, 'ColorPicker', `Value '${hexColor}' for '${props?.name}' is not a valid hex color`);
+        setHexColor(validHex ? fieldValue : undefined);
+    }, [fieldValue]);
 
     React.useEffect(() => {
         if (props?.name && formContext?.form) {
@@ -239,7 +270,107 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         props?.onChange?.(hexColor);
     }, [hexColor]);
 
-    const buildPickerDom = () => {
+    const entryImmutable = props?.disabled || editContext.mode === 'read';
+
+    const buildEntryIconDom = (before: boolean) => {
+        if (entryImmutable) {
+            return undefined;
+        }
+        return ((!before && allowClear && hexColor && mouseHover && iconPos === false) || (before && iconPos === 'before') || (!before && iconPos === 'after')) ? (
+            <span
+                className={`${clazzPrefix}-icon`}
+                onClick={(!allowClear || !hexColor) ? undefined : (event: any) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setHexColor(undefined);
+                }}
+            >
+                {((allowClear && hexColor && mouseHover) || iconPos === false) ? <CloseCircleOutlined/> : ((typeof icon === 'function') ? icon() : icon)}
+            </span>
+        ) : undefined;
+    };
+
+    const buildEntryDom = () => {
+        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'size', 'style']);
+        const buttonStyle = !props?.buttonProps?.style ? {} : props.buttonProps.style;
+        if (typeof props?.width === 'number') {
+            Object.assign(buttonStyle, {
+                width: `${props.width}px`,
+            });
+        }
+        const fieldDom = (
+            <div
+                ref={fieldRef}
+                className={classNames(clazzPrefix, (props?.widthBlock? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+                style={props?.containerStyle}
+                data-color-picker-entry={fieldId}
+                onMouseOver={() => setMouseHover(true)}
+                onMouseOut={() => setMouseHover(false)}
+            >
+                <Button
+                    className={classNames(`${clazzPrefix}-button`, (!entryImmutable ? undefined : `${clazzPrefix}-button-immutable`), ((typeof props?.width === 'string') ? `${clazzPrefix}-button-${props.width}` : undefined), (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
+                    disabled={entryImmutable}
+                    size={props?.buttonProps?.size ?? 'small'}
+                    style={buttonStyle}
+                    {...omitButtonProps}
+                    data-buddy-color-picker-id={fieldId}
+                >
+                    <Space>
+                        {buildEntryIconDom(true)}
+                        <div
+                            className={classNames(`${clazzPrefix}-preview`, (hexColor ? undefined : `${clazzPrefix}-preview-empty`))}
+                            style={hexColor ? {backgroundColor: `${hexColor}`} : undefined}
+                        >
+                            <span>&nbsp;</span>
+                        </div>
+                        {buildEntryIconDom(false)}
+                    </Space>
+                </Button>
+                {!!props?.name && <input type='hidden' name={props.name}/>}
+            </div>
+        );
+        if (!props?.name || !formContext?.form) {
+            return fieldDom;
+        }
+        if (!proField) {
+            // @ts-ignore
+            const itemProps = !props ? {} : omit(pickProFormItemProps(props), ['noStyle']);
+            return (
+                <Form.Item {...itemProps}>
+                    {fieldDom}
+                </Form.Item>
+            );
+        }
+        const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+        return (
+            <ProFormField {...omitProps}>
+                {fieldDom}
+            </ProFormField>
+        );
+    };
+
+    if (entryImmutable) {
+        return buildEntryDom();
+    }
+
+    React.useLayoutEffect(() => {
+        document.addEventListener('keydown', restoreLayout);
+        document.addEventListener('mousedown', restoreLayout);
+        return () => {
+            document.removeEventListener('keydown', restoreLayout);
+            document.removeEventListener('mousedown', restoreLayout);
+        }
+    }, []);
+
+    const restoreLayout = (event: any) => {
+        const inspect = document.querySelector<HTMLDivElement>(`[data-color-picker-entry='${fieldId}']`);
+        const sponsor = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-popup-${fieldId}`);
+        if (!inspect?.contains(event.target) && !sponsor?.contains(event.target)) {
+            setTriggerOpen(false);
+        }
+    };
+
+    const buildPopupDom = () => {
         switch (pickerType) {
             case 'block':
                 return (
@@ -249,7 +380,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.blockPickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -263,7 +394,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.circlePickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -277,7 +408,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.compactPickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -292,7 +423,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.githubPickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -306,7 +437,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.huePickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -320,7 +451,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.materialPickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -334,7 +465,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.sketchPickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -348,7 +479,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.swatchesPickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -363,7 +494,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.twitterPickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -378,7 +509,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
                             setHexColor(color.hex);
                             if (props?.closeAfterPicked) {
-                                setMenuOpen(false);
+                                setTriggerOpen(false);
                             }
                             props?.chromePickerProps?.onChangeComplete?.(color, event);
                         }}
@@ -388,46 +519,27 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         }
     };
 
-    const entryImmutable = editContext.mode === 'read' || props?.dropdownProps?.disabled;
-    const omitDropdownProps = !props?.dropdownProps ? {} : omit(props?.dropdownProps, ['disabled', 'overlayClassName', 'onOpenChange']);
-    const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['className', 'action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onPopupVisibleChange']);
 
     return (
-        <Dropdown
-            menu={{
-                items: [{
-                    key: 'picker',
-                    label: buildPickerDom(),
-                }],
-                onClick: () => setMenuOpen(true),
+        <Trigger
+            className={classNames(`${clazzPrefix}-trigger`, props?.triggerProps?.className)}
+            action={props?.triggerProps?.action ?? ['click']}
+            builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
+            popup={buildPopupDom()}
+            popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
+                points: ['tl', 'bl'],
+                offset: [0, 4],
             }}
-            disabled={entryImmutable}
-            overlayClassName={classNames(`${clazzPrefix}-dropdown`, `${clazzPrefix}-dropdown-${fieldId}`, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.dropdownProps?.overlayClassName)}
-            open={menuOpen}
-            onOpenChange={(open: boolean) => {
-                setMenuOpen(open);
-                props?.dropdownProps?.onOpenChange?.(open);
+            popupClassName={classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
+            popupVisible={triggerOpen}
+            onPopupVisibleChange={(open: boolean) => {
+                setTriggerOpen(open);
+                props?.triggerProps?.onPopupVisibleChange?.(open);
             }}
-            {...omitDropdownProps}
+            {...omitTriggerProps}
         >
-            <div
-                ref={fieldRef}
-                className={classNames(clazzPrefix, (props?.buttonProps?.block ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
-                style={props?.containerStyle}
-            >
-                <Button
-                    className={classNames(`${clazzPrefix}-button`, props?.buttonProps?.className)}
-                    {...omitButtonProps}
-                    data-buddy-color-picker-id={fieldId}
-                >
-                    <Space>
-                        <div className={`${clazzPrefix}-preview`} style={{backgroundColor: `${hexColor}`}}>
-                            <span>&nbsp;</span>
-                        </div>
-                        {(typeof icon === 'function') ? icon() : icon}
-                    </Space>
-                </Button>
-            </div>
-        </Dropdown>
+            {buildEntryDom()}
+        </Trigger>
     );
 });

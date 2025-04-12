@@ -4,6 +4,7 @@
         "declaration": true,
         "esModuleInterop": true,
         "jsx": "react-jsx",
+        "module": "esnext",
         "moduleResolution": "node",
         "target": "es2015",
         "lib": ["dom"],
@@ -30,8 +31,8 @@
         }
     },
     "include": [
-        "src/**/*",
-        ".dumi/**/*"
+        "src",
+        ".dumi"
     ],
     "exclude": [
         "node_modules",

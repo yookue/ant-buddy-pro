@@ -17,9 +17,11 @@
 
 import nodePath from 'node:path';
 import {defineConfig} from 'dumi';
+import antdTheme from './antd-theme';
 
 
-const ROOT_CONTEXT: string = '/ant-buddy-pro';
+const {APP_ENV = 'dev'} = process.env;
+const ROOT_CONTEXT: string = (APP_ENV === 'dev') ? '' : '/ant-buddy-pro';
 
 
 /**
@@ -27,28 +29,19 @@ const ROOT_CONTEXT: string = '/ant-buddy-pro';
  *
  * @author David Hsing
  *
- * @see "https://v1.d.umijs.org/config"
+ * @see "https://d.umijs.org/config"
  */
 export default defineConfig({
     base: `${ROOT_CONTEXT}/`,
     publicPath: `${ROOT_CONTEXT}/`,
     locales: [
-        {id: 'en-US', name: 'English'},
-        {id: 'zh-CN', name: '简体中文'},
-        {id: 'zh-TW', name: '繁體中文'},
+        {id: 'en-US', name: 'English', suffix: ''},
+        {id: 'zh-CN', name: '简体中文', suffix: '-cn'},
+        {id: 'zh-TW', name: '繁體中文', suffix: '-tw'},
     ],
-    themeConfig: {
-        name: 'Ant Buddy Pro',
-        logo: `${ROOT_CONTEXT}/assets/ico/logo-icon.svg`,
-        editLink: false,
-        socialLinks: {
-            github: 'https://github.com/yookue/ant-buddy-pro',
-        },
-        footer: `Open-source MIT Licensed<br/>Copyright © 2023 Yookue Ltd. All rights reserved`,
-    },
     metas: [{
         name: 'keywords',
-        content: 'Ant Buddy, Ant Buddy Pro, Ant Design, Ant Design Pro, React, NPM',
+        content: 'Yookue, Ant Buddy Pro, Ant Design, Ant Design Pro, React, NPM',
     }],
     favicons: [`${ROOT_CONTEXT}/favicon.ico`],
     links: [
@@ -59,7 +52,6 @@ export default defineConfig({
         { rel: 'fluid-icon', type: 'image/svg+xml', href: `${ROOT_CONTEXT}/assets/ico/logo-icon.svg` },
         { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.font.im/css?family=Comfortaa' },
         { rel: 'stylesheet', type: 'text/css', href: `${ROOT_CONTEXT}/assets/css/overlay.css` },
-        { rel: 'stylesheet', type: 'text/css', href: `${ROOT_CONTEXT}/assets/css/darkness.css` },
     ],
     externals: {
         'react': 'React',
@@ -86,9 +78,21 @@ export default defineConfig({
     // apiParser: {},
     exportStatic: {},
     hash: true,
+    // mako: {},
     mfsu: {},
-    // ssr: {},
+    // ssr: {builder: 'mako'},
     // chainWebpack(memo, args) {
     //     return memo;
     // },
+    themeConfig: {
+        name: 'Ant Buddy Pro',
+        logo: `${ROOT_CONTEXT}/assets/ico/logo-icon.svg`,
+        editLink: false,
+        lastUpdated: false,
+        socialLinks: {
+            github: 'https://github.com/yookue/ant-buddy-pro',
+        },
+        footer: `Open-source MIT Licensed<br/>Copyright © 2025 Yookue Ltd. All rights reserved`,
+        ...antdTheme,
+    },
 });

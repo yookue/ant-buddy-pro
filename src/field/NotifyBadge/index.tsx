@@ -21,13 +21,19 @@ import {ListItemMetaProps} from 'antd/es/list/Item';
 import {BellOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
-import {ArrayUtils, BooleanUtils} from '@yookue/ts-lang-utils';
+import {ArrayUtils, BooleanUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
-import {type Tab as RcTab} from 'rc-tabs/es/interface';
+import {type Tab as RcTab, type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
-import {type WithFalse} from '@/type/declaration';
+import {type WithFalse, type ReadonlyTabsType} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import './index.less';
+
+
+export type NotifyPresetStyle = WithFalse<'notice' | 'task'>;
+
+
+export type NotifyTabPosition = Exclude<RcTabPosition, 'bottom'>;
 
 
 export type NotifyDataItem = Omit<ListItemMetaProps, 'children'> & {
@@ -161,11 +167,11 @@ export type MixinTabProps = Omit<RcTab, 'children'> & {
      * @description.zh-CN 预设样式
      * @description.zh-TW 預設樣式
      */
-    presetStyle?: WithFalse<'notice' | 'task'>;
+    presetStyle?: NotifyPresetStyle;
 };
 
 
-export type MixinTabsProps = Omit<TabsProps, 'addIcon' | 'hideAdd' | 'items' | 'type' | 'onEdit' | 'editable' | 'getPopupContainer' | 'tabPosition'> & {
+export type MixinTabsProps = Omit<TabsProps, 'activeKey' | 'addIcon' | 'hideAdd' | 'items' | 'tabPosition' | 'type' | 'onEdit' | 'children'> & {
     /**
      * @description The contents of the tabs
      * @description.zh-CN 标签页的内容
@@ -179,7 +185,7 @@ export type MixinTabsProps = Omit<TabsProps, 'addIcon' | 'hideAdd' | 'items' | '
      * @description.zh-TW 標籤頁的類型
      * @default 'line'
      */
-    type?: 'line' | 'card';
+    type?: ReadonlyTabsType;
 
     /**
      * @description The position of the tab labels
@@ -187,7 +193,7 @@ export type MixinTabsProps = Omit<TabsProps, 'addIcon' | 'hideAdd' | 'items' | '
      * @description.zh-TW 標籤頁的位置
      * @default 'top'
      */
-    tabPosition?: 'top' | 'left' | 'right';
+    tabPosition?: NotifyTabPosition;
 };
 
 
@@ -251,7 +257,7 @@ export type NotifyBadgeProps = {
      * @description.zh-CN 下拉弹出层的属性
      * @description.zh-TW 下拉彈出層的屬性
      */
-    dropdownProps?: Omit<DropdownProps, 'menu' | 'dropdownRender' | 'children'>;
+    dropdownProps?: Omit<DropdownProps, 'dropdownRender' | 'menu' | 'children'>;
 
     /**
      * @description The properties of the tabs
@@ -259,6 +265,13 @@ export type NotifyBadgeProps = {
      * @description.zh-TW 標簽頁的屬性
      */
     tabsProps?: MixinTabsProps;
+
+    /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
 
     /**
      * @description The props of locale
@@ -275,9 +288,7 @@ export type NotifyBadgeProps = {
  * @author David Hsing
  */
 export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-notify-badge');
     const intlType = useIntl();
 
@@ -285,6 +296,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
     const {
         badgeContent = <BellOutlined style={{cursor: 'pointer'}}/>,
         dropdownEnabled = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     const badgeDom = (
@@ -315,7 +327,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
         if (tab.presetStyle !== 'notice' && tab.presetStyle !== 'task') {
             return undefined;
         }
-        const label = intlLocales.get([intlType.locale, tab.presetStyle]) ?? intlLocales.get(['en_US', tab.presetStyle]);
+        const label = intlLocales.get([locale, tab.presetStyle]) ?? intlLocales.get(['en_US', tab.presetStyle]);
         return !tab.labelBadgeProps ? label : (
             <Badge count={unreadCount} {...omitProps}>
                 {label}
@@ -389,7 +401,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onClear?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.clear || intlLocales.get([intlType.locale, 'clear']) || intlLocales.get(['en_US', 'clear'])}
+                            {ObjectUtils.firstNotNil(props?.localeProps?.clear, intlLocales.get([locale, 'clear']), intlLocales.get(['en_US', 'clear']))}
                         </div>
                     </If>
                     <If condition={showMore} validation={false}>
@@ -397,7 +409,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                             className={`${clazzPrefix}-action-button`}
                             onClick={event => tab.onMore?.(event, tab.key ?? tab.presetStyle)}
                         >
-                            {props?.localeProps?.more || intlLocales.get([intlType.locale, 'more']) || intlLocales.get(['en_US', 'more'])}
+                            {ObjectUtils.firstNotNil(props?.localeProps?.more, intlLocales.get([locale, 'more']), intlLocales.get(['en_US', 'more']))}
                         </div>
                     </If>
                 </div>
@@ -410,7 +422,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
             return undefined;
         }
         return props.tabsProps.items.map((tab: MixinTabProps) => {
-            const empty = !tab.listProps?.dataSource || (Array.isArray(tab.listProps.dataSource) && tab.listProps.dataSource.length === 0);
+            const empty = !tab.listProps?.dataSource || (Array.isArray(tab.listProps.dataSource) && !tab.listProps.dataSource.length);
             const placeholder = tab.listPlaceholder ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>;
             const content = empty ? placeholder : (
                 <List
@@ -447,9 +459,10 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
 
     return !dropdownEnabled ? hyperlinkDom : (
         <Dropdown
+            className={classNames(`${clazzPrefix}-trigger`, props?.dropdownProps?.className)}
             menu={{items: menuItems}}
-            overlayClassName={classNames(`${clazzPrefix}-dropdown`, props?.dropdownProps?.overlayClassName)}
-            {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['overlayClassName']))}
+            overlayClassName={classNames(`${clazzPrefix}-popup`, props?.dropdownProps?.overlayClassName)}
+            {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['className', 'overlayClassName']))}
         >
             {hyperlinkDom}
         </Dropdown>

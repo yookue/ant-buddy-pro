@@ -53,6 +53,13 @@ export type BadgeRibbonProps = RibbonProps & {
      * @default false
      */
     renderEmpty?: boolean;
+
+    /**
+     * @description Whether to use the transparent color or not
+     * @description.zh-CN 是否透明色
+     * @description.zh-TW 是否透明色
+     */
+    transparent?: boolean;
 };
 
 
@@ -62,9 +69,7 @@ export type BadgeRibbonProps = RibbonProps & {
  * @author David Hsing
  */
 export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-badge-ribbon');
 
     // Initialize the default props
@@ -76,7 +81,7 @@ export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps
         if (!renderEmpty && !props?.text) {
             return props?.children;
         }
-        const omitProps = !props? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'renderEmpty']);
+        const omitProps = !props? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'renderEmpty', 'transparent']);
         return (
             <Badge.Ribbon
                 className={classNames(`${clazzPrefix}-content`, props?.className)}
@@ -87,7 +92,7 @@ export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps
 
     return (
         <div
-            className={classNames(clazzPrefix, props?.containerClazz)}
+            className={classNames(clazzPrefix, (!props?.transparent ? undefined : `${clazzPrefix}-transparent`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildInnerDom()}

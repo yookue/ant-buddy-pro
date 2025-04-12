@@ -19,6 +19,7 @@ import React from 'react';
 import {ConfigProvider, type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, StarOutlined, StarFilled} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type AxisDirectionType} from '@/type/declaration';
 import {CountField, type CountFieldRef} from '@/field/CountField';
@@ -32,9 +33,13 @@ export type ThumbActionType = 'like' | 'dislike' | 'favorite';
 
 export type ThumbToggleRef = CountFieldRef & {
     isCheckable: () => boolean,
-    setCheckable: (checkable: boolean) => void;
     isChecked: () => boolean;
+    getCount: () => number;
+    setCheckable: (checkable: boolean) => void;
     setChecked: (checked: boolean) => void;
+    setCount: (count: number) => void;
+    increaseCount: ()=> void;
+    decreaseCount: ()=> void;
     toggleChecked: () => Promise<void>;
 };
 
@@ -148,6 +153,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description The layout of the icon and the field
      * @description.zh-CN 图标和内容的布局样式
      * @description.zh-TW 圖標和內容的布局樣式
+     * @default 'horizontal'
      */
     layout?: AxisDirectionType;
 
@@ -188,6 +194,13 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
     onToggle?: (checked?: boolean, count?: number) => boolean | number | void | Promise<boolean | number | void>;
 
     /**
+     * @description The locale of the component, e.g. 'en_US'
+     * @description.zh-CN 组件的语言, e.g. 'zh_CN'
+     * @description.zh-TW 組件的語言, e.g. 'zh_TW'
+     */
+    locale?: string;
+
+    /**
      * @description The props of locale
      * @description.zh-CN 多语言属性
      * @description.zh-TW 多語言屬性
@@ -204,9 +217,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
 export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & React.RefAttributes<ThumbToggleRef>> = React.forwardRef((props?: ThumbToggleProps, ref?: any) => {
     ThumbToggle.displayName = 'ThumbToggle';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-toggle');
     const intlType = useIntl();
 
@@ -214,8 +225,10 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     const {
         actionType = 'like',
         count = 0,
+        layout = 'horizontal',
         showCount = true,
         showZero = true,
+        locale = intlType.locale,
     } = props ?? {};
 
     ConsoleUtils.warn(count >= 0, true, 'ThumbToggle', `Prop 'count' must be equal or greater than 0`);
@@ -230,20 +243,17 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
         isCheckable: (): boolean => {
             return checkable;
         },
-        setCheckable: (checkable: boolean): void => {
-            setCheckable(checkable);
-        },
         isChecked: (): boolean => {
             return checked;
         },
-        setChecked: (checked: boolean): void => {
-            setChecked(checked);
-        },
-        toggleChecked: async (): Promise<void> => {
-            await handleToggle();
-        },
         getCount: (): number => {
             return countFieldRef.current?.getCount() ?? 0;
+        },
+        setCheckable: (checkable: boolean): void => {
+            setCheckable(checkable);
+        },
+        setChecked: (checked: boolean): void => {
+            setChecked(checked);
         },
         setCount: (count: number): void => {
             countFieldRef.current?.setCount(count);
@@ -253,6 +263,9 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
         },
         decreaseCount: (): void => {
             countFieldRef.current?.decreaseCount();
+        },
+        toggleChecked: async (): Promise<void> => {
+            await handleToggle();
         }
     }));
 
@@ -307,11 +320,11 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     const detectIconTooltip = () => {
         switch (actionType) {
             case 'like':
-                return props?.localeProps?.like || intlLocales.get([intlType.locale, 'like']) || intlLocales.get(['en_US', 'like']);
+                return ObjectUtils.firstNotNil(props?.localeProps?.like, intlLocales.get([locale, 'like']), intlLocales.get(['en_US', 'like']));
             case 'dislike':
-                return props?.localeProps?.dislike || intlLocales.get([intlType.locale, 'dislike']) || intlLocales.get(['en_US', 'dislike']);
+                return ObjectUtils.firstNotNil(props?.localeProps?.dislike, intlLocales.get([locale, 'dislike']), intlLocales.get(['en_US', 'dislike']));
             case 'favorite':
-                return props?.localeProps?.favorite || intlLocales.get([intlType.locale, 'favorite']) || intlLocales.get(['en_US', 'favorite']);
+                return ObjectUtils.firstNotNil(props?.localeProps?.favorite, intlLocales.get([locale, 'favorite']), intlLocales.get(['en_US', 'favorite']));
             default:
                 return undefined;
         }
@@ -328,7 +341,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
                 field={buildIconDom()}
                 count={props?.count}
                 countProps={props?.countProps}
-                layout={props?.layout}
+                layout={layout}
                 showCount={showCount}
                 showZero={showZero}
                 tooltipCtrl={props?.tooltipCtrl}

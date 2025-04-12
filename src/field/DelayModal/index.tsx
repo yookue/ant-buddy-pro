@@ -18,6 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Modal, type ModalProps, type ModalFuncProps} from 'antd';
 import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
+import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -25,10 +26,13 @@ import {ConsoleUtils} from '@/util/ConsoleUtils';
 
 export type DelayModalRef = {
     isOpening: () => boolean;
-    hasOpened: () => boolean;
     isTiming: () => boolean;
+    hasOpened: () => boolean;
     startTimer: () => void;
     stopTimer: () => void;
+    resetTimer: () => void;
+    addListener: () => void;
+    removeListener: () => void;
 };
 
 
@@ -45,7 +49,7 @@ export type MixinModalFuncProps = Omit<ModalFuncProps, 'open'> & {
 };
 
 
-export type ModalActionType = 'confirm' | 'info' | 'warn' | 'success' | 'error' | 'custom';
+export type ModalActionType = Exclude<ModalFuncProps['type'], 'warning' | undefined> | 'custom';
 
 
 export type DelayModalProps = React.PropsWithChildren<{
@@ -103,7 +107,7 @@ export type DelayModalProps = React.PropsWithChildren<{
      * @description.zh-TW 要觸發延遲事件的 DOM 元素
      * @default document
      */
-    triggerFor?: HTMLElement;
+    triggerFor?: Document | Element | null | (() => Document | Element | null | undefined);
 
     /**
      * @description The properties of the modal
@@ -120,9 +124,23 @@ export type DelayModalProps = React.PropsWithChildren<{
     modalFunProps?: MixinModalFuncProps;
 
     /**
+     * @description The condition for skipping timer once
+     * @description.zh-CN 跳过单次计时器的条件
+     * @description.zh-TW 跳過單次計時器的條件
+     */
+    skipCondition?: boolean | (() => boolean | undefined);
+
+    /**
+     * @description The condition for stopping the timer
+     * @description.zh-CN 停止计时器的条件
+     * @description.zh-TW 停止計時器的條件
+     */
+    stopCondition?: boolean | (() => boolean | undefined);
+
+    /**
      * @description The callback function when the opening state changed
-     * @description.zh-CN 模态对话框显示状态变化时的回调函数
-     * @description.zh-TW 模態對話框顯示狀態變化時的回調函數
+     * @description.zh-CN 显示状态变化时的回调函数
+     * @description.zh-TW 顯示狀態變化時的回調函數
      */
     onOpenChange?: (open: boolean) => void;
 }>;
@@ -136,9 +154,7 @@ export type DelayModalProps = React.PropsWithChildren<{
 export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React.RefAttributes<DelayModalRef>> = React.forwardRef((props?: DelayModalProps, ref?: any) => {
     DelayModal.displayName = 'DelayModal';
 
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-delay-modal');
 
     ConsoleUtils.warn(!!props?.modalProps || !!props?.modalFunProps, true, 'DelayModal', ` Any props of 'modalProps/modalFunProps' is required`);
@@ -150,37 +166,49 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         onceOnly = true,
         preventEvents = ['keydown', 'mousedown', 'scroll'],
         timeout = 1000 * 60 * 15,
-        triggerFor = document,
     } = props ?? {};
 
-    const [opening, setOpening] = React.useState<boolean>(false);
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const [modalOpening, setModalOpening] = React.useState<boolean>(false);
+    const [modalFuncOpening, setModalFuncOpening] = React.useState<boolean>(false);
+    const modalFuncOpeningRef = React.useRef<boolean>(false);
     const openedRef = React.useRef<boolean>(false);
     const timerRef = React.useRef<number>(0);
+    const triggerForRef = React.useRef<Document | Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
         isOpening: (): boolean => {
-            return opening;
-        },
-        hasOpened: (): boolean => {
-            return openedRef.current;
+            return modalOpening || modalFuncOpening;
         },
         isTiming: (): boolean => {
             return !!timerRef.current;
+        },
+        hasOpened: (): boolean => {
+            return openedRef.current;
         },
         startTimer: (): void => {
             startTimer();
         },
         stopTimer: (): void => {
             stopTimer();
+        },
+        resetTimer: (): void => {
+            resetTimer();
+        },
+        addListener: (): void => {
+            addListener();
+        },
+        removeListener: (): void => {
+            removeListener();
         }
     }));
 
     React.useEffect(() => {
+        addListener();
         if (autoStart) {
             startTimer();
         }
-        addListener();
         return () => {
             stopTimer();
             removeListener();
@@ -188,14 +216,26 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     }, []);
 
     React.useEffect(() => {
-        props?.onOpenChange?.(opening);
-    }, [opening]);
+        props?.onOpenChange?.(modalOpening);
+    }, [modalOpening]);
+
+    React.useEffect(() => {
+        props?.onOpenChange?.(modalFuncOpening);
+    }, [modalFuncOpening]);
 
     const onTimer = () => {
         stopTimer();
-        if (!opening && ((onceOnly && !openedRef.current) || !onceOnly)) {
-            setOpening(true);
-            if (actionType !== 'custom') {
+        if ((typeof props?.skipCondition === 'function') ? props.skipCondition() : props?.skipCondition) {
+            return;
+        }
+        if ((typeof props?.stopCondition === 'function') ? props.stopCondition() : props?.stopCondition) {
+            stopTimer();
+            return;
+        }
+        if (!onceOnly || (onceOnly && !openedRef.current)) {
+            if (actionType === 'custom') {
+                setModalOpening(true);
+            } else {
                 popupFuncModal();
             }
             openedRef.current = true;
@@ -224,24 +264,27 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
 
     const addListener = () => {
         preventEvents.forEach(item => {
-            triggerFor.addEventListener(item, resetTimer);
+            triggerForRef.current.addEventListener(item, resetTimer);
         });
     };
 
     const removeListener = () => {
         preventEvents.forEach(item => {
-            triggerFor.removeEventListener(item, resetTimer);
+            triggerForRef.current.removeEventListener(item, resetTimer);
         });
     };
 
     const popupFuncModal = () => {
+        if (modalFuncOpeningRef.current || document.querySelector(`.${clazzPrefix}-${fieldId}`)) {
+            return;
+        }
         const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'afterClose', 'preprocess']);
         const fullProps: ModalFuncProps = {
-            className: classNames(clazzPrefix, props?.modalFunProps?.className),
-            wrapClassName: classNames(`${clazzPrefix}-wrapper`, props?.modalFunProps?.wrapClassName),
-            open: opening,
+            className: classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalFunProps?.className),
+            wrapClassName: classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalFunProps?.wrapClassName),
             afterClose: () => {
-                setOpening(false);
+                modalFuncOpeningRef.current = false;
+                setModalFuncOpening(false);
                 if (!onceOnly) {
                     startTimer();
                 }
@@ -269,6 +312,9 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
             default:
                 break;
         }
+        modalFuncOpeningRef.current = true;
+        setModalFuncOpening(true);
+        stopTimer();
     };
 
     if (actionType !== 'custom') {
@@ -276,20 +322,22 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     }
 
     const omitProps = !props?.modalProps ? {} : omit(props.modalProps, ['className', 'wrapClassName', 'onOk', 'onCancel', 'afterClose', 'children']);
+
     return (
         <Modal
-            className={classNames(clazzPrefix, props?.modalProps?.className)}
-            wrapClassName={classNames(`${clazzPrefix}-wrapper`, props?.modalProps?.wrapClassName)}
-            open={opening}
+            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalProps?.className)}
+            wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalProps?.wrapClassName)}
+            open={modalOpening}
             onOk={(event: React.MouseEvent<HTMLElement>) => {
-                setOpening(false);
+                setModalOpening(false);
                 props?.modalProps?.onOk?.(event);
             }}
             onCancel={(event: React.MouseEvent<HTMLElement>) => {
-                setOpening(false);
+                setModalOpening(false);
                 props?.modalProps?.onCancel?.(event);
             }}
             afterClose={() => {
+                setModalOpening(false);
                 if (!onceOnly) {
                     startTimer();
                 }

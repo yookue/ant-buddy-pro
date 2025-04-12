@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {ConfigProvider} from 'antd';
+import {ImageUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
 import omit from 'rc-util/es/omit';
-import {ImageUtils} from '@/util/ImageUtils';
 
 
 export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
@@ -54,30 +54,33 @@ export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
  * @author David Hsing
  */
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fallback-image');
 
-    const [imageSource, setImageSource] = React.useState(() => {
-        return ImageUtils.detectSource(props?.src, data => setImageSource(data));
-    });
+    // noinspection DuplicatedCode
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const [imageSrc, setImageSrc] = React.useState<string>();
 
-    const handleError = (event: React.SyntheticEvent<any>) => {
-        if (props?.fallback) {
-            setImageSource(ImageUtils.detectSource(props?.fallback, data => setImageSource(data)));
-        }
-        props?.onError?.(event);
-    };
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.src, res => setImageSrc(res));
+    }, [props?.src]);
 
-    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'src', 'fallback', 'onError']);
+    React.useEffect(() => {
+        ImageUtils.detectSource(props?.fallback, res => {
+            const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
+            if (inspect && !inspect.onerror) {
+                inspect.setAttribute('onerror', `this.src='${res}'`);
+            }
+        });
+    }, [props?.fallback]);
+
+    const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'src', 'fallback']);
 
     return (
         <RcImage
-            className={classNames(clazzPrefix, props?.className)}
-            src={imageSource}
+            className={classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className)}
+            src={imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`}
             {...omitProps}
-            onError={handleError}
         />
     );
 };

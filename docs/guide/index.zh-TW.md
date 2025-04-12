@@ -14,16 +14,16 @@ nav:
 ## 特性
 
 🪄 熟悉 Ant Design 可快速上手，讓您專註於業務邏輯
- 
+
 💎 不斷完善的 React 組件，與 Ant Design 如出一轍
- 
+
 🎨 支持 Ant Design Pro 主題樣式，更多樣式，隨心控製
 
 ## 快速上手
 
 ### 環境準備
 
-首先得有 [node](https://nodejs.org/en/)，並確保 node 版本是 10.13 或以上。
+首先得有 [node](https://nodejs.org/en)，並確保 node 版本是 10.13 或以上。
 
 ```bash
 $ node -v
@@ -34,9 +34,11 @@ v10.13.0
 
 在您的項目中安裝此依賴：
 
-```bash
-$ npm install @yookue/ant-buddy-pro --save
-```
+<InstallDependencies
+  npm="$ npm install @yookue/ant-buddy-pro"
+  yarn="$ yarn add @yookue/ant-buddy-pro"
+  pnpm="$ pnpm install @yookue/ant-buddy-pro"
+/>
 
 ### 開始開發
 

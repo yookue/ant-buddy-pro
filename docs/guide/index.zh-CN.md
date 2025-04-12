@@ -23,7 +23,7 @@ nav:
 
 ### 环境准备
 
-首先得有 [node](https://nodejs.org/en/)，并确保 node 版本是 10.13 或以上。
+首先得有 [node](https://nodejs.org/en)，并确保 node 版本是 10.13 或以上。
 
 ```bash
 $ node -v
@@ -34,9 +34,11 @@ v10.13.0
 
 在您的项目中安装此依赖：
 
-```bash
-$ npm install @yookue/ant-buddy-pro --save
-```
+<InstallDependencies
+  npm="$ npm install @yookue/ant-buddy-pro"
+  yarn="$ yarn add @yookue/ant-buddy-pro"
+  pnpm="$ pnpm install @yookue/ant-buddy-pro"
+/>
 
 ### 开始开发
 

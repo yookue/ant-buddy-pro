@@ -132,9 +132,7 @@ export type CornerStampProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps) => {
-    // noinspection JSUnresolvedReference
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    // noinspection JSUnresolvedReference
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-corner-stamp');
 
     // Initialize the default props
@@ -146,7 +144,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
         zIndex = 9,
     } = props ?? {};
 
-    ConsoleUtils.warn(size > 0, true, 'CornerStamp',  `Prop 'size' must be greater than 0`);
+    ConsoleUtils.warn(size > 0, true, 'CornerStamp', `Prop 'size' must be greater than 0`);
 
     const bgColor = !isPresetColor(color) ? color : presetPrimaryColors[color];
 
