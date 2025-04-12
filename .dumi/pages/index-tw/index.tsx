@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2025 Yookue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -15,11 +15,4 @@
  */
 
 
-import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
-
-
-export const intlLocales = ReadonlyMultiKeyMap.of([
-    [['en_US', 'default'], 'Default'],
-    [['zh_CN', 'default'], '默认'],
-    [['zh_TW', 'default'], '默認'],
-]);
+export {default} from '../index';
