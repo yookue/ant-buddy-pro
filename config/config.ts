@@ -39,7 +39,7 @@ export default {
     metas: [
         {
             name: 'keywords',
-            content: 'Ant Buddy, Ant Buddy Pro, Ant Design, Ant Design Pro, React, NPM',
+            content: 'Yookue, Ant Buddy Pro, Ant Design, Ant Design Pro, React, NPM',
         }
     ],
     favicon: `${globalSettings.context?.root}/favicon.ico`,
