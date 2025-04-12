@@ -15,7 +15,8 @@
  */
 
 
-const ROOT_CONTEXT: string = '/ant-buddy-pro';
+const {APP_ENV = 'dev'} = process.env;
+const ROOT_CONTEXT: string = (APP_ENV === 'dev') ? '' : '/ant-buddy-pro';
 
 
 /**
