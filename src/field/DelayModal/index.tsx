@@ -1,0 +1,351 @@
+/*
+ * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+import React from 'react';
+import {ConfigProvider, Modal, type ModalProps, type ModalFuncProps} from 'antd';
+import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
+import {NanoidUtils} from '@yookue/ts-lang-utils';
+import classNames from 'classnames';
+import omit from 'rc-util/es/omit';
+import {ConsoleUtils} from '@/util/ConsoleUtils';
+
+
+export type DelayModalRef = {
+    isOpening: () => boolean;
+    isTiming: () => boolean;
+    hasOpened: () => boolean;
+    startTimer: () => void;
+    stopTimer: () => void;
+    resetTimer: () => void;
+    addListener: () => void;
+    removeListener: () => void;
+};
+
+
+export type MixinModalProps = Omit<ModalProps, 'open'>;
+
+
+export type MixinModalFuncProps = Omit<ModalFuncProps, 'open'> & {
+    /**
+     * @description whether to preprocess the properties (setups the icon, etc.)
+     * @description.zh-CN 是否预处理属性（设置图标等）
+     * @description.zh-TW 是否預處理屬性（設置圖標等）
+     */
+    preprocess?: boolean;
+};
+
+
+export type ModalActionType = Exclude<ModalFuncProps['type'], 'warning' | undefined> | 'custom';
+
+
+export type DelayModalProps = React.PropsWithChildren<{
+    /**
+     * @description The CSS class prefix of the component
+     * @description.zh-CN 组件的 CSS 类名前缀
+     * @description.zh-TW 組件的 CSS 類名前綴
+     * @default 'buddy-delay-modal'
+     */
+    clazzPrefix?: string;
+
+    /**
+     * @description The action type to display the modal
+     * @description.zh-CN 显示模态对话框的动作类型
+     * @description.zh-TW 顯示模態對話框的動作類型
+     * @default 'info'
+     */
+    actionType?: ModalActionType;
+
+    /**
+     * @description Whether auto start the modal timer
+     * @description.zh-CN 是否自动开始模态对话框的计时器
+     * @description.zh-TW 是否自動開始模態對話框的計時器
+     * @default true
+     */
+    autoStart?: boolean;
+
+    /**
+     * @description Whether to display the modal only once
+     * @description.zh-CN 是否只显示一次模态对话框
+     * @description.zh-TW 是否只顯示一次模態對話框
+     * @default true
+     */
+    onceOnly?: boolean;
+
+    /**
+     * @description The events that will prevent displaying the modal
+     * @description.zh-CN 阻止显示模态对话框的事件
+     * @description.zh-TW 阻止显示模态对话框的事件
+     * @default ['keydown', 'mousedown', 'scroll']
+     */
+    preventEvents?: Array<keyof GlobalEventHandlersEventMap>;
+
+    /**
+     * @description The timeout that will display the modal, in milliseconds
+     * @description.zh-CN 显示模态对话框的超时时间，单位毫秒
+     * @description.zh-TW 顯示模態對話框的超時時間，單位毫秒
+     * @default 1000 * 60 * 15
+     */
+    timeout?: number;
+
+    /**
+     * @description The target DOM element to trigger the prevent events
+     * @description.zh-CN 要触发延迟事件的 DOM 元素
+     * @description.zh-TW 要觸發延遲事件的 DOM 元素
+     * @default document
+     */
+    triggerFor?: Document | Element | null | (() => Document | Element | null | undefined);
+
+    /**
+     * @description The properties of the modal
+     * @description.zh-CN 模态对话框的属性
+     * @description.zh-TW 模態對話框的屬性
+     */
+    modalProps?: MixinModalProps;
+
+    /**
+     * @description The properties of the functional modal dialog
+     * @description.zh-CN 函数型模态对话框的属性
+     * @description.zh-TW 函數型模態對話框的屬性
+     */
+    modalFunProps?: MixinModalFuncProps;
+
+    /**
+     * @description The condition for skipping timer once
+     * @description.zh-CN 跳过单次计时器的条件
+     * @description.zh-TW 跳過單次計時器的條件
+     */
+    skipCondition?: boolean | (() => boolean | undefined);
+
+    /**
+     * @description The condition for stopping the timer
+     * @description.zh-CN 停止计时器的条件
+     * @description.zh-TW 停止計時器的條件
+     */
+    stopCondition?: boolean | (() => boolean | undefined);
+
+    /**
+     * @description The callback function when the opening state changed
+     * @description.zh-CN 显示状态变化时的回调函数
+     * @description.zh-TW 顯示狀態變化時的回調函數
+     */
+    onOpenChange?: (open: boolean) => void;
+}>;
+
+
+/**
+ * Component for displaying a modal dialog when exceeds timeout
+ *
+ * @author David Hsing
+ */
+export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React.RefAttributes<DelayModalRef>> = React.forwardRef((props?: DelayModalProps, ref?: any) => {
+    DelayModal.displayName = 'DelayModal';
+
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
+    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-delay-modal');
+
+    ConsoleUtils.warn(!!props?.modalProps || !!props?.modalFunProps, true, 'DelayModal', ` Any props of 'modalProps/modalFunProps' is required`);
+
+    // Initialize the default props
+    const {
+        actionType = 'info',
+        autoStart = true,
+        onceOnly = true,
+        preventEvents = ['keydown', 'mousedown', 'scroll'],
+        timeout = 1000 * 60 * 15,
+    } = props ?? {};
+
+    const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const [modalOpening, setModalOpening] = React.useState<boolean>(false);
+    const [modalFuncOpening, setModalFuncOpening] = React.useState<boolean>(false);
+    const modalFuncOpeningRef = React.useRef<boolean>(false);
+    const openedRef = React.useRef<boolean>(false);
+    const timerRef = React.useRef<number>(0);
+    const triggerForRef = React.useRef<Document | Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document);
+
+    // noinspection JSUnusedGlobalSymbols
+    React.useImperativeHandle(ref, () => ({
+        isOpening: (): boolean => {
+            return modalOpening || modalFuncOpening;
+        },
+        isTiming: (): boolean => {
+            return !!timerRef.current;
+        },
+        hasOpened: (): boolean => {
+            return openedRef.current;
+        },
+        startTimer: (): void => {
+            startTimer();
+        },
+        stopTimer: (): void => {
+            stopTimer();
+        },
+        resetTimer: (): void => {
+            resetTimer();
+        },
+        addListener: (): void => {
+            addListener();
+        },
+        removeListener: (): void => {
+            removeListener();
+        }
+    }));
+
+    React.useEffect(() => {
+        addListener();
+        if (autoStart) {
+            startTimer();
+        }
+        return () => {
+            stopTimer();
+            removeListener();
+        }
+    }, []);
+
+    React.useEffect(() => {
+        props?.onOpenChange?.(modalOpening);
+    }, [modalOpening]);
+
+    React.useEffect(() => {
+        props?.onOpenChange?.(modalFuncOpening);
+    }, [modalFuncOpening]);
+
+    const onTimer = () => {
+        stopTimer();
+        if ((typeof props?.skipCondition === 'function') ? props.skipCondition() : props?.skipCondition) {
+            return;
+        }
+        if ((typeof props?.stopCondition === 'function') ? props.stopCondition() : props?.stopCondition) {
+            stopTimer();
+            return;
+        }
+        if (!onceOnly || (onceOnly && !openedRef.current)) {
+            if (actionType === 'custom') {
+                setModalOpening(true);
+            } else {
+                popupFuncModal();
+            }
+            openedRef.current = true;
+        }
+    };
+
+    const startTimer = () => {
+        if (!timerRef.current) {
+            timerRef.current = window.setTimeout(onTimer, timeout);
+        }
+    };
+
+    const stopTimer = () => {
+        if (timerRef.current) {
+            window.clearTimeout(timerRef.current);
+            timerRef.current = 0;
+        }
+    };
+
+    const resetTimer = () => {
+        if (timerRef.current) {
+            stopTimer();
+            startTimer();
+        }
+    };
+
+    const addListener = () => {
+        preventEvents.forEach(item => {
+            triggerForRef.current.addEventListener(item, resetTimer);
+        });
+    };
+
+    const removeListener = () => {
+        preventEvents.forEach(item => {
+            triggerForRef.current.removeEventListener(item, resetTimer);
+        });
+    };
+
+    const popupFuncModal = () => {
+        if (modalFuncOpeningRef.current || document.querySelector(`.${clazzPrefix}-${fieldId}`)) {
+            return;
+        }
+        const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'afterClose', 'preprocess']);
+        const fullProps: ModalFuncProps = {
+            className: classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalFunProps?.className),
+            wrapClassName: classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalFunProps?.wrapClassName),
+            afterClose: () => {
+                modalFuncOpeningRef.current = false;
+                setModalFuncOpening(false);
+                if (!onceOnly) {
+                    startTimer();
+                }
+                props?.modalFunProps?.afterClose?.();
+            },
+            ...omitProps,
+        };
+        const preprocess = props?.modalFunProps?.preprocess ?? true;
+        switch (actionType) {
+            case 'confirm':
+                Modal.confirm(preprocess ? withConfirm(fullProps) : fullProps);
+                break;
+            case 'info':
+                Modal.info(preprocess ? withInfo(fullProps) : fullProps);
+                break;
+            case 'warn':
+                Modal.warn(preprocess ? withWarn(fullProps) : fullProps);
+                break;
+            case 'success':
+                Modal.success(preprocess ? withSuccess(fullProps) : fullProps);
+                break;
+            case 'error':
+                Modal.error(preprocess ? withError(fullProps) : fullProps);
+                break;
+            default:
+                break;
+        }
+        modalFuncOpeningRef.current = true;
+        setModalFuncOpening(true);
+        stopTimer();
+    };
+
+    if (actionType !== 'custom') {
+        return null;
+    }
+
+    const omitProps = !props?.modalProps ? {} : omit(props.modalProps, ['className', 'wrapClassName', 'onOk', 'onCancel', 'afterClose', 'children']);
+
+    return (
+        <Modal
+            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalProps?.className)}
+            wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalProps?.wrapClassName)}
+            open={modalOpening}
+            onOk={(event: React.MouseEvent<any>) => {
+                setModalOpening(false);
+                props?.modalProps?.onOk?.(event);
+            }}
+            onCancel={(event: React.MouseEvent<any>) => {
+                setModalOpening(false);
+                props?.modalProps?.onCancel?.(event);
+            }}
+            afterClose={() => {
+                setModalOpening(false);
+                if (!onceOnly) {
+                    startTimer();
+                }
+                props?.modalProps?.afterClose?.();
+            }}
+            {...omitProps}
+        >
+            {props?.modalProps?.children ?? props?.children}
+        </Modal>
+    );
+});
