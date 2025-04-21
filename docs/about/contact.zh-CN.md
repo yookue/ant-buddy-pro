@@ -1,10 +1,10 @@
 ---
-title: 关于我们
-order: 1
-toc: false
 nav:
   title: 关于
   order: 9
+title: 关于我们
+order: 1
+toc: false
 ---
 
 ## 版权所有

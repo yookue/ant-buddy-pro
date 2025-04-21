@@ -22,7 +22,7 @@ import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type RectZenithPlace} from '@/type/declaration';
-import './index.less';
+import {useFieldStyle} from './style';
 
 
 export type AvatarStampProps = AvatarProps & {
@@ -100,6 +100,8 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
         placement = 'bottomRight',
     } = props ?? {};
 
+    const fieldStyle = useFieldStyle(clazzPrefix);
+
     const buildAddonCss = () => {
         let result = undefined;
         switch (placement) {
@@ -148,7 +150,7 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
 
     return (
         <div
-            className={classNames(clazzPrefix, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Avatar {...omitAvatarProps}/>

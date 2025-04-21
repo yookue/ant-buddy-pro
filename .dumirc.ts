@@ -17,7 +17,7 @@
 
 import nodePath from 'node:path';
 import {defineConfig} from 'dumi';
-import antdTheme from './antd-theme';
+import dumiTheme from './.dumitheme';
 
 
 const {APP_ENV = 'dev'} = process.env;
@@ -59,11 +59,11 @@ export default defineConfig({
     },
     headScripts: [
         // Whether use unpkg
-        {src: 'https://unpkg.com/react@18.2.0/umd/react.production.min.js'},
-        {src: 'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js'},
+        {src: 'https://unpkg.com/react@18.3.1/umd/react.production.min.js'},
+        {src: 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js'},
         // Or use bootcdn
-        // {src: 'https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.production.min.js'},
-        // {src: 'https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js'},
+        // {src: 'https://cdn.bootcdn.net/ajax/libs/react/18.3.1/umd/react.production.min.js'},
+        // {src: 'https://cdn.bootcdn.net/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js'},
     ],
     resolve: {
         docDirs: ['docs'],
@@ -75,7 +75,7 @@ export default defineConfig({
         '@': nodePath.resolve(__dirname, './src'),
         '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
     },
-    // apiParser: {},
+    apiParser: {},
     exportStatic: {},
     hash: true,
     // mako: {},
@@ -93,6 +93,6 @@ export default defineConfig({
             github: 'https://github.com/yookue/ant-buddy-pro',
         },
         footer: `Open-source MIT Licensed<br/>Copyright © 2025 Yookue Ltd. All rights reserved`,
-        ...antdTheme,
+        ...dumiTheme,
     },
 });

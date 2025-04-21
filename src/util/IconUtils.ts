@@ -19,7 +19,7 @@ import React from 'react';
 import {type ThemeType} from '@ant-design/icons-svg/es/types';
 import {type MenuDataItem} from '@ant-design/pro-layout';
 import {StringUtils} from '@yookue/ts-lang-utils';
-import * as iconTypes from '@/type/antd-icons';
+import * as iconTypes from '@/type/design-icon';
 
 
 /**

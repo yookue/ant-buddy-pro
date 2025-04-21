@@ -22,7 +22,7 @@ import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrRead
 import {css} from '@emotion/css';
 import classNames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import './index.less';
+import {useFieldStyle} from './style';
 
 
 export type TuplePresetStyle = WithFalse<'field-prior' | 'addon-prior'>;
@@ -181,6 +181,8 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
         presetStyle = 'field-prior',
     } = props ?? {};
 
+    const fieldStyle = useFieldStyle(clazzPrefix);
+
     const buildFieldDom = () => {
         if (!props?.field) {
             return undefined;
@@ -209,7 +211,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
 
     return (
         <div
-            className={classNames(clazzPrefix, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (addonPos ? `${clazzPrefix}-addon-${addonPos}` : undefined), (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact {...spaceCompactProps}>

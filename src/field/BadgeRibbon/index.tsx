@@ -20,7 +20,7 @@ import {ConfigProvider, Badge} from 'antd';
 import {type RibbonProps} from 'antd/es/badge/Ribbon';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import './index.less';
+import {useFieldStyle} from './style';
 
 
 export type BadgeRibbonProps = RibbonProps & {
@@ -47,14 +47,6 @@ export type BadgeRibbonProps = RibbonProps & {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description Whether to render ribbon for empty text or not
-     * @description.zh-CN 当文本节点为空时是否渲染缎带
-     * @description.zh-TW 當文本節點為空時是否渲染緞帶
-     * @default false
-     */
-    renderEmpty?: boolean;
-
-    /**
      * @description Whether to use the transparent color or not
      * @description.zh-CN 是否透明色
      * @description.zh-TW 是否透明色
@@ -72,16 +64,13 @@ export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-badge-ribbon');
 
-    // Initialize the default props
-    const {
-        renderEmpty = false,
-    } = props ?? {};
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     const buildInnerDom = () => {
-        if (!renderEmpty && !props?.text) {
+        if (!props?.text) {
             return props?.children;
         }
-        const omitProps = !props? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'renderEmpty', 'transparent']);
+        const omitProps = !props? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'transparent']);
         return (
             <Badge.Ribbon
                 className={classNames(`${clazzPrefix}-content`, props?.className)}
@@ -92,7 +81,7 @@ export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps
 
     return (
         <div
-            className={classNames(clazzPrefix, (!props?.transparent ? undefined : `${clazzPrefix}-transparent`), props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.transparent ? undefined : `${clazzPrefix}-transparent`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildInnerDom()}

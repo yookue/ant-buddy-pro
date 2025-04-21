@@ -18,14 +18,14 @@
 import React from 'react';
 import HomeBaseLayout from 'dumi-theme-antd/dist/builtins/HomeBaseLayout';
 import {Helmet} from 'react-helmet-async';
-import antdTheme from '#/antd-theme';
+import dumiTheme from '#/.dumitheme';
 
 
 const IndexLayout: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>{antdTheme.title as string}</title>
+                <title>{dumiTheme.title as string}</title>
             </Helmet>
             <HomeBaseLayout/>
         </>

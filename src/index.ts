@@ -15,5 +15,24 @@
  */
 
 
-export {type IconSceneType} from './type/antd-icons';
+export {AvatarStamp, type AvatarStampProps} from './field/AvatarStamp';
+export {BadgeRibbon, type BadgeRibbonProps} from './field/BadgeRibbon';
+export {ColorPicker, type ColorPickerProps, type ColorPickerRef} from './field/ColorPicker';
+export {CompactTuple, type CompactTupleProps} from './field/CompactTuple';
+export {CornerStamp, type CornerStampProps} from './field/CornerStamp';
+export {CountField, type CountFieldProps, type CountFieldRef} from './field/CountField';
+
+export {TooltipRender} from './render/TooltipRender';
+export {ChildUtils} from './util/ChildUtils';
+export {ConsoleUtils} from './util/ConsoleUtils';
+export {DatasetUtils} from './util/DatasetUtils';
+export {ModalUtils} from './util/ModalUtils';
+export {FieldUtils} from './util/FieldUtils';
+export {IconUtils} from './util/IconUtils';
+export {ParticleUtils} from './util/ParticleUtils';
+export {PropUtils} from './util/PropUtils';
+export {StyleUtils} from './util/StyleUtils';
+export {TriggerUtils} from './util/TriggerUtils';
+export {type IconSceneType} from './type/design-icon';
+export * from './type/design-comp';
 export * from './type/declaration';

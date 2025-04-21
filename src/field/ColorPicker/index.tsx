@@ -20,13 +20,12 @@ import {ConfigProvider, Form, Button, Space, type ButtonProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {CloseCircleOutlined, DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {ProFormField} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/interface';
-import pickProFormItemProps from '@ant-design/pro-utils/es/pickProFormItemProps';
+import {ProFormField, type ProFormItemProps} from '@ant-design/pro-form';
+import {pickProFormItemProps} from '@ant-design/pro-utils/es/pickProFormItemProps';
+import Trigger, {type TriggerProps} from '@rc-component/trigger';
+import '@rc-component/trigger/assets/index.less';
 import {ColorUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
-import Trigger, {type TriggerProps} from 'rc-trigger';
-import 'rc-trigger/assets/index.less';
 import omit from 'rc-util/es/omit';
 import {BlockPicker, ChromePicker, CirclePicker, CompactPicker, GithubPicker, HuePicker, MaterialPicker, SketchPicker, SwatchesPicker, TwitterPicker} from 'react-color';
 import type {BlockPickerProps, ChromePickerProps, CirclePickerProps, CompactPickerProps, GithubPickerProps, HuePickerProps, MaterialPickerProps, SketchPickerProps, SwatchesPickerProps, TwitterPickerProps} from 'react-color';
@@ -34,7 +33,7 @@ import type {Color, ColorResult} from 'react-color';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
-import './index.less';
+import {useFieldStyle} from './style';
 
 
 export type ColorPickerRef = {
@@ -46,7 +45,7 @@ export type ColorPickerRef = {
 export type PickerType = 'block' | 'chrome' | 'circle' | 'compact' | 'github' | 'hue' | 'material' | 'sketch' | 'swatches' | 'twitter';
 
 
-export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
+export type ColorPickerProps = Omit<ProFormItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -244,6 +243,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     const [hexColor, setHexColor] = React.useState<Color>();
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const [mouseHover, setMouseHover] = React.useState<boolean>(false);
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -298,10 +298,10 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 width: `${props.width}px`,
             });
         }
-        const fieldDom = (
+        return (
             <div
                 ref={fieldRef}
-                className={classNames(clazzPrefix, (props?.widthBlock? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+                className={classNames(clazzPrefix, fieldStyle.hashId, (props?.widthBlock? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
                 style={props?.containerStyle}
                 data-color-picker-entry={fieldId}
                 onMouseOver={() => setMouseHover(true)}
@@ -328,24 +328,6 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 </Button>
                 {!!props?.name && <input type='hidden' name={props.name}/>}
             </div>
-        );
-        if (!props?.name || !formContext?.form) {
-            return fieldDom;
-        }
-        if (!proField) {
-            // @ts-ignore
-            const itemProps = !props ? {} : omit(pickProFormItemProps(props), ['noStyle']);
-            return (
-                <Form.Item {...itemProps}>
-                    {fieldDom}
-                </Form.Item>
-            );
-        }
-        const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
-        return (
-            <ProFormField {...omitProps}>
-                {fieldDom}
-            </ProFormField>
         );
     };
 
@@ -519,11 +501,10 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         }
     };
 
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['className', 'action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onPopupVisibleChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onPopupVisibleChange']);
 
-    return (
+    const triggerDom = (
         <Trigger
-            className={classNames(`${clazzPrefix}-trigger`, props?.triggerProps?.className)}
             action={props?.triggerProps?.action ?? ['click']}
             builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
             popup={buildPopupDom()}
@@ -531,15 +512,33 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 points: ['tl', 'bl'],
                 offset: [0, 4],
             }}
-            popupClassName={classNames(`${clazzPrefix}-popup`, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
+            popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
-            onPopupVisibleChange={(open: boolean) => {
+            onOpenChange={(open: boolean) => {
                 setTriggerOpen(open);
-                props?.triggerProps?.onPopupVisibleChange?.(open);
+                props?.triggerProps?.onOpenChange?.(open);
             }}
             {...omitTriggerProps}
         >
             {buildEntryDom()}
         </Trigger>
+    );
+
+    if (!props?.name || !formContext?.form) {
+        return triggerDom;
+    }
+    if (!proField) {
+        const itemProps = !props ? {} : pickProFormItemProps(props);
+        return (
+            <Form.Item {...itemProps}>
+                {triggerDom}
+            </Form.Item>
+        );
+    }
+    const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+    return (
+        <ProFormField {...omitProps}>
+            {triggerDom}
+        </ProFormField>
     );
 });

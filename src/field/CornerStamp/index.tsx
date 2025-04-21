@@ -17,14 +17,14 @@
 
 import React from 'react';
 import {ConfigProvider, type BadgeProps} from 'antd';
-import {isPresetColor} from 'antd/es/badge/utils';
+import {isPresetColor} from 'antd/es/_util/colors';
 import {presetPrimaryColors} from '@ant-design/colors';
 import {css} from '@emotion/css';
 import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import {type RectZenithPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import './index.less';
+import {useFieldStyle} from './style';
 
 
 export type CornerStampProps = React.PropsWithChildren<{
@@ -145,6 +145,8 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
     } = props ?? {};
 
     ConsoleUtils.warn(size > 0, true, 'CornerStamp', `Prop 'size' must be greater than 0`);
+
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     const bgColor = !isPresetColor(color) ? color : presetPrimaryColors[color];
 
@@ -330,7 +332,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
 
     return (
         <div
-            className={classNames(clazzPrefix, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildFieldDom()}

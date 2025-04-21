@@ -1,10 +1,10 @@
 ---
-title: About Us
-order: 1
-toc: false
 nav:
   title: About
   order: 9
+title: About Us
+order: 1
+toc: false
 ---
 
 ## Copyright

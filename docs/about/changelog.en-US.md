@@ -1,10 +1,10 @@
 ---
-title: Changelog
-order: 10
-toc: false
 nav:
   title: Changelog
   order: 10
+title: Changelog
+order: 10
+toc: false
 ---
 
 ## Version History

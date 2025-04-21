@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {ConfigProvider, Badge, Space, type BadgeProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Badge, Space, Tooltip, type BadgeProps, type TooltipProps} from 'antd';
 import {type SpaceSize} from 'antd/es/space';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type AxisDirectionType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import './index.less';
+import {useFieldStyle} from './style';
 
 
 export type CountFieldRef = {
@@ -149,6 +149,7 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [counting, setCounting] = React.useState<number>(count);
+    const fieldStyle = useFieldStyle(clazzPrefix, configContext.iconPrefixCls);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -179,13 +180,14 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
         if (!showCount || (counting <= 0 && !showZero)) {
             return undefined;
         }
-        const omitProps = !props?.countProps ? {} : omit(props.countProps, ['overflowCount']);
+        const omitProps = !props?.countProps ? {} : omit(props.countProps, ['overflowCount', 'title']);
         return (
             <div className={`${clazzPrefix}-count`}>
                 <Badge
                     count={counting}
                     showZero={showZero}
                     overflowCount={props?.countProps?.overflowCount ?? 99999999}
+                    title={props?.countProps?.title ?? ''}
                     {...omitProps}
                 />
             </div>
@@ -195,7 +197,7 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space
