@@ -7,16 +7,16 @@ toc: content
 
 ColorPicker 可以显示一个带颜色拾取器的按钮。
 
-### 导入组件
+## 导入组件
 
 ```jsx | pure
 import {ColorPicker} from '@yookue/ant-buddy-pro';
 ```
 
-### 使用示例
+## 使用示例
 
 <code src="./demo.zh-CN.tsx"></code>
 
-### 组件属性
+## 组件属性
 
 <API id="ColorPicker.zh-CN" src="@/field/ColorPicker/index.tsx" hideTitle></API>

@@ -7,16 +7,16 @@ toc: content
 
 CountField component, can display a field with a count number.
 
-### Import
+## Import
 
 ```jsx | pure
 import {CountField} from '@yookue/ant-buddy-pro';
 ```
 
-### Example
+## Example
 
 <code src="./demo.en-US.tsx"></code>
 
-### Properties
+## Properties
 
 <API id="CountField.en-US" src="@/field/CountField/index.tsx" hideTitle></API>

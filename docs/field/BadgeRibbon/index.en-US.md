@@ -9,16 +9,16 @@ BadgeRibbon component, can display a ribbon.
 
 Similar to [Badge](https://4x.ant.design/components/badge/#components-badge-demo-ribbbon) of [Ant Design](https://ant.design), the most difference is that, `BadgeRibbon` provides a choice to render empty `text` or not.
 
-### Import
+## Import
 
 ```jsx | pure
 import {BadgeRibbon} from '@yookue/ant-buddy-pro';
 ```
 
-### Example
+## Example
 
 <code src="./demo.en-US.tsx"></code>
 
-### Properties
+## Properties
 
 <API id="BadgeRibbon.en-US" src="@/field/BadgeRibbon/index.tsx" hideTitle></API>

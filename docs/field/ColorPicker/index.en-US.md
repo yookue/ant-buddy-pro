@@ -7,16 +7,16 @@ toc: content
 
 ColorPicker component, can display a button which can be clicked to show a color picker.
 
-### Import
+## Import
 
 ```jsx | pure
 import {ColorPicker} from '@yookue/ant-buddy-pro';
 ```
 
-### Example
+## Example
 
 <code src="./demo.en-US.tsx"></code>
 
-### Properties
+## Properties
 
 <API id="ColorPicker.en-US" src="@/field/ColorPicker/index.tsx" hideTitle></API>
