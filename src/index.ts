@@ -25,7 +25,8 @@ export {DelayModal, type DelayModalProps, type DelayModalRef} from './field/Dela
 export {DragModal, type DragModalProps} from './field/DragModal';
 export {FallbackImage, type FallbackImageProps} from './field/FallbackImage';
 export {Fullscreen, type FullscreenProps, type FullscreenRef} from './field/Fullscreen';
-
+export {LabelField, type LabelFieldProps} from './field/LabelField';
+export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/NotifyBadge';
 export {PreviewImage, type PreviewImageProps} from './field/PreviewImage';
 export {RefreshImage, type RefreshImageProps} from './field/RefreshImage';
 export {RemoteField, type RemoteFieldProps, type RemoteFieldRef} from './field/RemoteField';

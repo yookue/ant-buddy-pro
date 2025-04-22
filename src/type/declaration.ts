@@ -15,6 +15,10 @@
  */
 
 
+import {type TabsType} from 'antd/es/tabs';
+import {type Placement as RcPlacement} from 'rc-select/es/BaseSelect';
+
+
 export type WithFalse<T> = T | false;
 
 export type AxisDirectionType = 'horizontal' | 'vertical';
@@ -25,12 +29,14 @@ export type ClickHoverType = 'click' | 'hover';
 
 export type CircleSquareShape = 'circle' | 'square';
 
-export type FileSizeUint = 'KB' | 'MB' | 'GB';
+export type FileSizeUint = 'KB' | 'MB' | 'GB' | 'TB';
 
 export type LabelValueType = 'label' | 'value';
 
-export type RectZenithPlace = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+export type ReadonlyTabsType = Exclude<TabsType, 'editable-card'>;
 
-export type RequestOptionPlace = 'before' | 'after' | 'override';
+export type RectZenithPlace = RcPlacement;
+
+export type RequestOptionPlace = BeforeAfterType | 'override';
 
 export type RuleValidateScope = 'all' | 'required' | 'optional';

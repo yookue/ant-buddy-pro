@@ -1,0 +1,140 @@
+/*
+ * Copyright (c) 2025 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License")
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+import {unit} from '@ant-design/cssinjs';
+import {useStyle, type UseStyleResult, type GenerateStyle} from '@ant-design/pro-provider';
+import {type ExtraProAliasToken} from '@/type/design-comp';
+import {PackageConst} from '@/constant/PackageConst';
+
+
+const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
+    return {
+        [`${token.componentCls}`]: {
+            [`&-popup`]: {
+                minWidth: '300px',
+                [`> ${token.antCls}-dropdown-menu > ${token.antCls}-dropdown-menu-item:hover`]: {
+                    backgroundColor: 'unset !important',
+                    cursor: 'unset !important',
+                },
+                [`${token.componentCls}-tabs`]: {
+                    [`${token.antCls}-tabs-content-top ${token.antCls}-tabs-tab`]: {
+                        paddingTop: '2px',
+                    },
+                    [`.@{ant-prefix}-tabs-content-left .@{ant-prefix}-tabs-tabpane`]: {
+                        paddingLeft: token.paddingXS,
+                    },
+                    [`.@{ant-prefix}-tabs-content-right .@{ant-prefix}-tabs-tabpane`]: {
+                        paddingRight: token.paddingXS,
+                    },
+                    [`${token.componentCls}-tab-list`]: {
+                        maxHeight: '400px',
+                        overflow: 'auto',
+                        [`&::-webkit-scrollbar`]: {
+                            display: 'none',
+                        },
+                        [`${token.antCls}-list-footer`]: {
+                            paddingBottom: 0,
+                        }
+                    },
+                    [`${token.componentCls}-list-item`]: {
+                        borderRadius: token.borderRadius,
+                        cursor: 'pointer',
+                        paddingRight: token.paddingXS,
+                        paddingLeft: token.paddingXS,
+                        overflow: 'hidden',
+                        transition: 'all 0.3s',
+                        [`&&-read`]: {
+                            opacity: 0.4,
+                        },
+                        [`&-avatar`]: {
+                            background: token.colorBgContainer,
+                            marginTop: token.marginXXS,
+                        },
+                        [`&-icon`]: {
+                            fontSize: '32px',
+                        },
+                        [`&-meta`]: {
+                            width: '100%',
+                        },
+                        [`&-title`]: {
+                            marginBottom: token.marginXS,
+                            fontWeight: 'normal',
+                        },
+                        [`&-description`]: {
+                            lineHeight: token.lineHeight,
+                        },
+                        [`&-timestamp`]: {
+                            marginTop: token.marginXXS,
+                            fontSize: token.fontSizeSM,
+                            lineHeight: token.lineHeight,
+                        },
+                        [`&-extra`]: {
+                            float: 'right',
+                            marginTop: '-1.5px',
+                            marginRight: 0,
+                            color: token.colorTextSecondary,
+                            fontWeight: 'normal',
+                        },
+                        [`&:hover`]: {
+                            background: token.blue1,
+                        },
+                        [`&:last-child`]: {
+                            borderBottom: 'none !important',
+                        }
+                    },
+                    [`${token.componentCls}-builtin-footer`]: {
+                        height: '38px',
+                        color: token.colorPrimaryText,
+                        lineHeight: '46px',
+                        textAlign: 'center',
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderRadius: `0 0 ${token.borderRadius} ${token.borderRadius}`,
+                        transition: 'all 0.3s',
+                        [`${token.componentCls}-action-button`]: {
+                            display: 'inline-block',
+                            width: '50%',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s',
+                            userSelect: 'none',
+                            [`&:hover`]: {
+                                color: token.colorPrimaryHover,
+                            },
+                            [`&:only-child`]: {
+                                width: '100%',
+                            },
+                            [`&:not(:only-child):last-child`]: {
+                                borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+}
+
+
+export function useFieldStyle(prefixCls: string): UseStyleResult {
+    return useStyle(`${PackageConst.PACKAGE_NAME}:NotifyBadge`, (token) => {
+        const mesh: ExtraProAliasToken = {
+            prefixCls,
+            componentCls: `.${prefixCls}`,
+            ...token,
+        };
+        return [buildFieldStyle(mesh)];
+    });
+}
