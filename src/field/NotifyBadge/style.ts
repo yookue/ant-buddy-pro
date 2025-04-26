@@ -34,10 +34,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     [`${token.antCls}-tabs-content-top ${token.antCls}-tabs-tab`]: {
                         paddingTop: '2px',
                     },
-                    [`.@{ant-prefix}-tabs-content-left .@{ant-prefix}-tabs-tabpane`]: {
+                    [`${token.antCls}-tabs-content-left ${token.antCls}-tabs-tabpane`]: {
                         paddingLeft: token.paddingXS,
                     },
-                    [`.@{ant-prefix}-tabs-content-right .@{ant-prefix}-tabs-tabpane`]: {
+                    [`${token.antCls}-tabs-content-right ${token.antCls}-tabs-tabpane`]: {
                         paddingRight: token.paddingXS,
                     },
                     [`${token.componentCls}-tab-list`]: {
@@ -61,7 +61,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                             opacity: 0.4,
                         },
                         [`&-avatar`]: {
-                            background: token.colorBgContainer,
+                            backgroundColor: token.colorBgContainer,
                             marginTop: token.marginXXS,
                         },
                         [`&-icon`]: {
@@ -90,7 +90,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                             fontWeight: 'normal',
                         },
                         [`&:hover`]: {
-                            background: token.blue1,
+                            backgroundColor: token.controlItemBgActive,
                         },
                         [`&:last-child`]: {
                             borderBottom: 'none !important',

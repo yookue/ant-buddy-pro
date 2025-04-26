@@ -46,6 +46,8 @@ export default () => {
             >
                 <ProFormSelect
                     label='拾取器類型'
+                    placeholder='拾取器類型'
+                    width='md'
                     fieldProps={{
                         allowClear: false,
                         value: pickerType,

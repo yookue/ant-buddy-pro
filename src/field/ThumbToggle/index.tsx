@@ -334,7 +334,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, (checkable ? `${clazzPrefix}-checkable` : undefined), `${clazzPrefix}-${checked ? 'checked' : 'unchecked'}`, props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, (!checkable ? undefined : `${clazzPrefix}-checkable`), `${clazzPrefix}-${checked ? 'checked' : 'unchecked'}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <CountField

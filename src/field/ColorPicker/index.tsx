@@ -301,14 +301,14 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         return (
             <div
                 ref={fieldRef}
-                className={classNames(clazzPrefix, fieldStyle.hashId, (props?.widthBlock? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+                className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.containerClazz)}
                 style={props?.containerStyle}
                 data-color-picker-entry={fieldId}
                 onMouseOver={() => setMouseHover(true)}
                 onMouseOut={() => setMouseHover(false)}
             >
                 <Button
-                    className={classNames(`${clazzPrefix}-button`, (!entryImmutable ? undefined : `${clazzPrefix}-button-immutable`), ((typeof props?.width === 'string') ? `${clazzPrefix}-button-${props.width}` : undefined), (iconPos ? `${clazzPrefix}-icon-${iconPos}` : undefined), props?.buttonProps?.className)}
+                    className={classNames(`${clazzPrefix}-button`, (!entryImmutable ? undefined : `${clazzPrefix}-button-immutable`), ((typeof props?.width !== 'string') ? undefined : `${clazzPrefix}-button-${props.width}`), (!iconPos ? undefined : `${clazzPrefix}-icon-${iconPos}`), props?.buttonProps?.className)}
                     disabled={entryImmutable}
                     size={props?.buttonProps?.size ?? 'small'}
                     style={buttonStyle}
@@ -319,7 +319,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                         {buildEntryIconDom(true)}
                         <div
                             className={classNames(`${clazzPrefix}-preview`, (hexColor ? undefined : `${clazzPrefix}-preview-empty`))}
-                            style={hexColor ? {backgroundColor: `${hexColor}`} : undefined}
+                            style={!hexColor ? undefined : {backgroundColor: `${hexColor}`}}
                         >
                             <span>&nbsp;</span>
                         </div>
@@ -512,7 +512,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 points: ['tl', 'bl'],
                 offset: [0, 4],
             }}
-            popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
+            popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
             onOpenChange={(open: boolean) => {
                 setTriggerOpen(open);

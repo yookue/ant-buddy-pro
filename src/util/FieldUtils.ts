@@ -45,6 +45,7 @@ export abstract class FieldUtils {
             return ObjectUtils.isPlain(value) ? (value as ProSchemaValueEnumType).text : value;
         };
         const convertOption = (value: ProSchemaValueEnumMap | ProSchemaValueEnumObj) => {
+            // noinspection SuspiciousTypeOfGuard
             if (value instanceof Map) {
                 const result: DefaultOptionType[] = [];
                 (value as ProSchemaValueEnumMap).forEach((v, k) => {
@@ -83,6 +84,7 @@ export abstract class FieldUtils {
             return ObjectUtils.isPlain(value) ? (value as ProSchemaValueEnumType).disabled : undefined;
         };
         const convertOption = (value: ProSchemaValueEnumMap | ProSchemaValueEnumObj) => {
+            // noinspection SuspiciousTypeOfGuard
             if (value instanceof Map) {
                 const result: SegmentedLabeledOption[] = [];
                 (value as ProSchemaValueEnumMap).forEach((v, k) => {

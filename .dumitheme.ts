@@ -35,6 +35,10 @@ export default defineThemeConfig({
                 link: '/guide',
             },
             {
+                title: 'Layout',
+                link: '/layout',
+            },
+            {
                 title: 'Field',
                 link: '/field',
             },
@@ -49,6 +53,10 @@ export default defineThemeConfig({
                 link: '/guide-cn',
             },
             {
+                title: '布局',
+                link: '/layout-cn',
+            },
+            {
                 title: '控件',
                 link: '/field-cn',
             },
@@ -61,6 +69,10 @@ export default defineThemeConfig({
             {
                 title: '指南',
                 link: '/guide-tw',
+            },
+            {
+                title: '布局',
+                link: '/layout-tw',
             },
             {
                 title: '控件',

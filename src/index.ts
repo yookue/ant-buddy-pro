@@ -34,6 +34,18 @@ export {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from './field/T
 export {ThumbTuple, type ThumbTupleProps, type ThumbTupleRef} from './field/ThumbTuple';
 export {TooltipField, type TooltipFieldProps} from './field/TooltipField';
 
+export {ApartTitle, type ApartTitleProps} from './layout/ApartTitle';
+export {BorderBox, type BorderBoxProps} from './layout/BorderBox';
+export {CardTabs, type CardTabsProps} from './layout/CardTabs';
+export {CodePreview, type CodePreviewProps} from './layout/CodePreview';
+export {FlexBox, type FlexBoxProps} from './layout/FlexBox';
+export {FoldSection, type FoldSectionProps} from './layout/FoldSection';
+export {LoginPortal, type LoginPortalProps} from './layout/LoginPortal';
+export {MenuTabs, type MenuTabsProps} from './layout/MenuTabs';
+export {PageFooter, type PageFooterProps} from './layout/PageFooter';
+export {SectionTitle, type SectionTitleProps} from './layout/SectionTitle';
+export {SpaceBound, type SpaceBoundProps} from './layout/SpaceBound';
+
 export {TooltipRender} from './render/TooltipRender';
 export {ChildUtils} from './util/ChildUtils';
 export {ConsoleUtils} from './util/ConsoleUtils';

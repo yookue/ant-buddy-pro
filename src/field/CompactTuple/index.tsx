@@ -211,7 +211,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (addonPos ? `${clazzPrefix}-addon-${addonPos}` : undefined), (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (addonPos ? `${clazzPrefix}-addon-${addonPos}` : undefined), (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact {...spaceCompactProps}>

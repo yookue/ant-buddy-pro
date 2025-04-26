@@ -1,0 +1,68 @@
+/*
+ * Copyright (c) 2025 Yookue Ltd. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License")
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
+
+import {unit} from '@ant-design/cssinjs';
+import {useStyle, type UseStyleResult, type GenerateStyle} from '@ant-design/pro-provider';
+import {type ExtraProAliasToken} from '@/type/design-comp';
+import {PackageConst} from '@/constant/PackageConst';
+
+
+const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
+    return {
+        [`${token.componentCls}`]: {
+            display: 'flex',
+            flexFlow: 'column wrap',
+            height: '100vh',
+            overflow: 'auto',
+            [`&-vessel`]: {
+                display: 'flex',
+                flexFlow: 'row wrap',
+                height: '100vh',
+            },
+            [`&-introduction`]: {
+                display: 'flex',
+                flex: 1,
+            },
+            [`&-interaction`]: {
+                display: 'flex',
+                flex: 1,
+                flexFlow: 'column nowrap',
+                maxWidth: '520px',
+                backgroundColor: token.colorBgContainer,
+            },
+            [`&&-interchange`]: {
+                display: 'flex',
+                flex: 1,
+                flexFlow: 'column wrap',
+                backgroundColor: token.colorBgContainer,
+                width: '100%',
+            }
+        }
+    };
+}
+
+
+export function useFieldStyle(prefixCls: string): UseStyleResult {
+    return useStyle(`${PackageConst.PACKAGE_NAME}:LoginPortal`, (token) => {
+        const mesh: ExtraProAliasToken = {
+            prefixCls,
+            componentCls: `.${prefixCls}`,
+            ...token,
+        };
+        return [buildFieldStyle(mesh)];
+    });
+}

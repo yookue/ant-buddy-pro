@@ -1,0 +1,57 @@
+---
+title: LoginPortal
+toc: content
+---
+
+## 組件說明
+
+與 [Ant Design ProComponents](https://procomponents.ant.design) 的 [LoginFormPage](https://github.com/ant-design/pro-components/blob/v1/packages/form/src/components/LoginForm/index.md) 類似, 但支持更多的自定義 CSS 樣式。
+
+## 效果截圖
+
+<code src="./snapshot.tsx"></code>
+
+## 導入組件
+
+```jsx | pure
+import {LoginPortal} from '@yookue/ant-buddy-pro';
+```
+
+## 使用示例
+
+```jsx | pure
+import React from 'react';
+import {LoginForm} from '@ant-design/pro-form';
+import {LoginPortal, PageFooter} from '@yookue/ant-buddy-pro';
+import {SelectLang} from '@umijs/max';
+
+export default () => {
+    const loginForm = (
+        // 根據您的需要自行定製以下內容
+        // 通常是一個登錄表單
+        <LoginForm/>
+    );
+
+    return (
+        <LoginPortal
+            interactionHeader={(
+                // 根據您的需要自行定製以下內容
+                // 這裏使用一個多語言切換的下拉菜單
+                <div data-lang='true'>
+                    <SelectLang/>
+                </div>
+            )}
+            interactionContent={loginForm}
+            interactionFooter={(
+                // 根據您的需要自行定製以下內容
+                // 通常是一個頁腳
+                <PageFooter/>
+            )}
+        />
+    );
+}
+```
+
+## 組件屬性
+
+<API id="LoginPortal.zh-TW" src="@/layout/LoginPortal/index.tsx" hideTitle></API>

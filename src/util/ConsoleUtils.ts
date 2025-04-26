@@ -18,10 +18,10 @@
 import dayjs from 'dayjs';
 import objectHash from 'object-hash';
 import {noteOnce as rcNote, warningOnce as rcWarning} from 'rc-util/es/warning';
+import {PackageConst} from '@/constant/PackageConst';
 
 
 const loggedHashes: string[] = [];
-const productName: string = '@yookue/ant-buddy-pro';
 const timeFormat: string = 'YYYY-MM-DD HH:mm:ss';
 
 
@@ -40,7 +40,7 @@ export abstract class ConsoleUtils {
      * @param product The package name to prefix
      */
     public static build(component?: string, message?: string, product?: string): string | undefined {
-        return !message ? undefined : (component ? `[${product ?? productName}: ${component}] - ` : '').concat(message);
+        return !message ? undefined : (component ? `[${product ?? PackageConst.PACKAGE_NAME}: ${component}] - ` : '').concat(message);
     }
 
     /**

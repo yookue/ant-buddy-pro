@@ -46,6 +46,8 @@ export default () => {
             >
                 <ProFormSelect
                     label='Picker Type'
+                    placeholder='Picker Type'
+                    width='md'
                     fieldProps={{
                         allowClear: false,
                         value: pickerType,
