@@ -24,7 +24,7 @@ import {MenuTabs, type PaddingSpaceType} from '@yookue/ant-buddy-pro';
 export default () => {
     const [inkBar, setInkBar] = React.useState<boolean>(true);
     const [selectionBold, setSelectionBold] = React.useState<boolean>(true);
-    const [presetStyle, setPresetStyle] = React.useState<PaddingSpaceType>('padding-md');
+    const [presetStyle, setPresetStyle] = React.useState<PaddingSpaceType | false>('padding-md');
 
     // noinspection DuplicatedCode
     return (

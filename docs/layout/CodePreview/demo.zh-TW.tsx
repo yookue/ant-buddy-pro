@@ -24,7 +24,7 @@ import {CodePreview, type PaddingSpaceType} from '@yookue/ant-buddy-pro';
 export default () => {
     const [boundBorder, setBoundBorder] = React.useState<boolean>(true);
     const [boundShadow, setBoundShadow] = React.useState<boolean>(false);
-    const [presetStyle, setPresetStyle] = React.useState<PaddingSpaceType>('padding-md');
+    const [presetStyle, setPresetStyle] = React.useState<PaddingSpaceType | false>('padding-md');
 
     // noinspection DuplicatedCode
     return (

@@ -27,7 +27,7 @@ export default () => {
     const [tabBorder, setTabBorder] = React.useState<boolean>(true);
     const [contentBorder, setContentBorder] = React.useState<boolean>(true);
     const [inkBar, setInkBar] = React.useState<boolean>(true);
-    const [presetStyle, setPresetStyle] = React.useState<PaddingSpaceType>('padding-md');
+    const [presetStyle, setPresetStyle] = React.useState<PaddingSpaceType | false>('padding-md');
 
     // noinspection DuplicatedCode
     return (
