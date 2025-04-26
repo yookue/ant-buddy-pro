@@ -5,7 +5,7 @@ toc: content
 
 ## Description
 
-Similar to [GlobalFooter](https://github.com/ant-design/pro-components/blob/v1/packages/layout/src/components/GlobalFooter/index.tsx) of [Ant Design ProComponents](https://procomponents.ant.design), with more customization for CSS classes and styles.
+Similar to [GlobalFooter](https://github.com/ant-design/pro-components/tree/master/packages/layout/src/components/GlobalFooter/index.tsx) of [Ant Design ProComponents](https://procomponents.ant.design), with more customization for CSS classes and styles.
 
 ## Import
 
