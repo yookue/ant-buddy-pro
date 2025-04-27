@@ -334,7 +334,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                     placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     rows: fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined),
                                     allowClear: fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
-                                    autoSize: fieldProps?.autoSize || props?.switchShareProps?.allowClear || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined),
+                                    autoSize: fieldProps?.autoSize || props?.switchShareProps?.autoSize || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined),
                                     bordered: fieldProps?.bordered || props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined),
                                     maxLength: fieldProps?.maxLength || props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined),
                                     showCount: fieldProps?.showCount || props?.switchShareProps?.showCount || (switchCloneProps.showCount ? props?.fieldProps?.showCount : undefined),
@@ -357,8 +357,8 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 rows={fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined)}
                                 allowClear={fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
+                                autoSize={fieldProps?.autoSize || props?.switchShareProps?.autoSize || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
                                 bordered={fieldProps?.bordered || props?.switchShareProps?.bordered || (switchCloneProps.bordered ? props?.fieldProps?.bordered : undefined)}
-                                autoSize={fieldProps?.autoSize || props?.switchShareProps?.allowClear || (switchCloneProps.autoSize ? props?.fieldProps?.autoSize : undefined)}
                                 maxLength={fieldProps?.maxLength || props?.switchShareProps?.maxLength || (switchCloneProps.maxLength ? props?.fieldProps?.maxLength : undefined)}
                                 showCount={fieldProps?.showCount || props?.switchShareProps?.showCount || (switchCloneProps.showCount ? props?.fieldProps?.showCount : undefined)}
                                 disabled={props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled}
