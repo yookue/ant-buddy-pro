@@ -264,7 +264,7 @@ export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStre
             >
                 {[veryWeak, weak, medium, strong, veryStrong].map(item => {
                     return (
-                        <Col span={4}>{item}</Col>
+                        <Col key={item} span={4}>{item}</Col>
                     );
                 })}
             </Row>
