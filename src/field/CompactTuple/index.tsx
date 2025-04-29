@@ -199,8 +199,8 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
             return undefined;
         }
         const marginClazz = css({
-            marginLeft: !props?.addonMarginLeft ? undefined : (typeof props.addonMarginLeft === 'boolean' ? '-1px' : `${props.addonMarginLeft}px`),
-            marginRight: !props?.addonMarginRight ? undefined : (typeof props.addonMarginRight === 'boolean' ? '-1px' : `${props.addonMarginRight}px`),
+            marginLeft: !props?.addonMarginLeft ? undefined : (typeof props.addonMarginLeft === 'boolean' ? '-1' : props.addonMarginLeft),
+            marginRight: !props?.addonMarginRight ? undefined : (typeof props.addonMarginRight === 'boolean' ? '-1' : props.addonMarginRight),
         });
         return (
             <div className={classNames(`${clazzPrefix}-addon`, (!props?.addonBorder ? undefined : `${clazzPrefix}-addon-border`), marginClazz, props?.addonClazz)} style={props?.addonStyle}>

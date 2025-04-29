@@ -5,7 +5,7 @@ toc: content
 
 ## 组件说明
 
-参见 [在线例子](https://preview.pro.ant.design/account/settings)。`MenuTabs` 与 [Ant Design Tab](https://4x.ant.design/components/tabs) 类似，但是集成了 [Ant Design Menu](https://4x.ant.design/components/menu)。
+参见 [在线例子](https://preview.pro.ant.design/account/settings)。`MenuTabs` 与 [Ant Design Tab](https://ant.design/components/tabs) 类似，但是集成了 [Ant Design Menu](https://ant.design/components/menu)。
 
 ## 导入组件
 

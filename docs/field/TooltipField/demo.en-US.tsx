@@ -28,7 +28,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='TooltipField_demo'
+                name='TooltipField_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

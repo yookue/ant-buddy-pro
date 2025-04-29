@@ -35,8 +35,8 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&-ornament`]: {
                 display: 'flex',
                 flex: 'none',
-                width: '22px',
-                height: '22px',
+                width: 22,
+                height: 22,
             },
             [`&-ornament-before`]: {
                 marginRight: token.paddingXXS,

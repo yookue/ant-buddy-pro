@@ -29,12 +29,12 @@ export default () => {
     const [formReadonly, setFormReadonly] = React.useState<boolean>(false);
     const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
     const [addonPos, setAddonPos] = React.useState<BeforeAfterType>('after');
-    const [presetStyle, setPresetStyle] = React.useState<TuplePresetStyle>('field-prior');
+    const [presetStyle, setPresetStyle] = React.useState<TuplePresetStyle | false>('field-prior');
 
     return (
         <>
             <ProForm
-                name='CompactTuple_demo'
+                name='CompactTuple_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

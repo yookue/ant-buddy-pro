@@ -7,7 +7,7 @@ toc: content
 
 BadgeRibbon component, can display a ribbon.
 
-Similar to [Badge](https://4x.ant.design/components/badge/#components-badge-demo-ribbbon) of [Ant Design](https://ant.design), the most difference is that, `BadgeRibbon` provides a choice to render empty `text` or not.
+Similar to [Badge](https://ant.design/components/badge/#components-badge-demo-ribbbon) of [Ant Design](https://ant.design), the most difference is that, `BadgeRibbon` provides a choice to render empty `text` or not.
 
 ## Import
 

@@ -11,6 +11,9 @@ toc: false
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v1.0.0** [2025-04-30]
+    - 升级 Ant Design v4 到 v5, Ant Design ProComponents v1 到 v2
+
   - **v0.1.163** [2025-03-31]
     - 增加 'form/ServerTuple'
 

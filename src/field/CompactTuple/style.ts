@@ -81,7 +81,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             },
             [`&-field, &-addon`]: {
                 [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control > ${token.antCls}-form-item-control-input`]: {
-                    minHeight: '30px',
+                    minHeight: 30,
                 }
             }
         }

@@ -37,8 +37,8 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 [`&-ornament-before, &-ornament-after`]: {
                     display: 'flex',
                     flex: 'none',
-                    width: '22px',
-                    height: '22px',
+                    width: 22,
+                    height: 22,
                 },
                 [`&-ornament-before`]: {
                     marginRight: token.paddingXXS,
@@ -52,8 +52,8 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     display: 'flex',
                     flex: 'none',
                     borderRadius: token.borderRadiusSM,
-                    width: '28px',
-                    height: '28px',
+                    width: 28,
+                    height: 28,
                     justifyContent: 'center',
                     [`&:hover`]: {
                         backgroundColor: token.controlItemBgHover,

@@ -31,7 +31,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='FlexBox_demo'
+                name='FlexBox_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

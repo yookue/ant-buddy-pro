@@ -35,7 +35,7 @@ export abstract class PropUtils {
      */
     public static omitProProps = (props?: Record<string, any>): Record<string, any> => {
         // @ts-ignore
-        return !props ? {} : omit(props, [...DesignConst.ProFormFieldItemProps, ...DesignConst.ProFieldSelectProps]);
+        return !props ? {} : omit(props, [...DesignConst.PRO_FORM_FIELD_ITEM_PROPS, ...DesignConst.PRO_FIELD_SELECT_PROPS]);
     }
 
     /**
@@ -51,7 +51,7 @@ export abstract class PropUtils {
         }
         const result = {};
         // @ts-ignore
-        Object.keys(props).filter(key => DesignConst.ForwardFieldProps.includes(key)).forEach(key => result[key] = props[key]);
+        Object.keys(props).filter(key => DesignConst.FORWARD_FIELD_PROPS.includes(key)).forEach(key => result[key] = props[key]);
         return result;
     }
 }

@@ -59,6 +59,7 @@ export abstract class ChildUtils {
                     if (ReactDOMServer.renderToStaticMarkup(child)) {
                         result++;
                     }
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 } catch (ignored) {
                 }
             }

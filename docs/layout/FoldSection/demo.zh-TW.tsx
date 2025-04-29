@@ -26,13 +26,13 @@ import {type SectionPresetStyle} from '@yookue/ant-buddy-pro/layout/FoldSection'
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
     const [collapsePos, setCollapsePos] = React.useState<BeforeAfterType>('after');
-    const [presetStyle, setPresetStyle] = React.useState<SectionPresetStyle>('default');
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
+    const [presetStyle, setPresetStyle] = React.useState<SectionPresetStyle | false>('default');
 
     return (
         <>
             <ProForm
-                name='FoldSection_demo'
+                name='FoldSection_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

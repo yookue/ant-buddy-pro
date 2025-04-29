@@ -28,7 +28,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='BadgeRibbon_demo'
+                name='BadgeRibbon_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

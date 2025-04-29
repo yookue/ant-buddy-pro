@@ -20,7 +20,8 @@ import {ConfigProvider, Form, Button, Space, type ButtonProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {CloseCircleOutlined, DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {ProFormField, type ProFormItemProps} from '@ant-design/pro-form';
+import {ProFormField} from '@ant-design/pro-form';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {pickProFormItemProps} from '@ant-design/pro-utils/es/pickProFormItemProps';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
@@ -45,7 +46,7 @@ export type ColorPickerRef = {
 export type PickerType = 'block' | 'chrome' | 'circle' | 'compact' | 'github' | 'hue' | 'material' | 'sketch' | 'swatches' | 'twitter';
 
 
-export type ColorPickerProps = Omit<ProFormItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
+export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -501,7 +502,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         }
     };
 
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onPopupVisibleChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onOpenChange']);
 
     const triggerDom = (
         <Trigger

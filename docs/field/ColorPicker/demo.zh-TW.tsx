@@ -39,7 +39,7 @@ export default () => {
         <>
             <ProForm
                 formRef={formRef}
-                name='ColorPicker_demo'
+                name='ColorPicker_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

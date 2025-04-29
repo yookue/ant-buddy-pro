@@ -33,7 +33,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='ThumbToggle_demo'
+                name='ThumbToggle_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

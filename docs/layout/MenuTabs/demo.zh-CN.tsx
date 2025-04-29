@@ -30,7 +30,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='MenuTabs_demo'
+                name='MenuTabs_demo.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

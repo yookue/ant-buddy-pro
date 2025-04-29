@@ -107,26 +107,26 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
         switch (placement) {
             case 'topLeft':
                 result = {
-                    top: `${props?.offset?.[1] ?? 0}px`,
-                    left: `${props?.offset?.[0] ?? 0}px`,
+                    top: `${props?.offset?.[1] ?? 0}`,
+                    left: `${props?.offset?.[0] ?? 0}`,
                 };
                 break;
             case 'topRight':
                 result = {
-                    top: `${props?.offset?.[1] ?? 0}px`,
-                    right: `${props?.offset?.[0] ?? 0}px`,
+                    top: `${props?.offset?.[1] ?? 0}`,
+                    right: `${props?.offset?.[0] ?? 0}`,
                 };
                 break;
             case 'bottomLeft':
                 result = {
-                    bottom: `${props?.offset?.[1] ?? 0}px`,
-                    left: `${props?.offset?.[0] ?? 0}px`,
+                    bottom: `${props?.offset?.[1] ?? 0}`,
+                    left: `${props?.offset?.[0] ?? 0}`,
                 };
                 break;
             case 'bottomRight':
                 result = {
-                    bottom: `${props?.offset?.[1] ?? 0}px`,
-                    right: `${props?.offset?.[0] ?? 0}px`,
+                    bottom: `${props?.offset?.[1] ?? 0}`,
+                    right: `${props?.offset?.[0] ?? 0}`,
                 };
                 break;
             default:

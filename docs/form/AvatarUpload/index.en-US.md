@@ -1,0 +1,22 @@
+---
+title: AvatarUpload
+toc: content
+---
+
+## Description
+
+AvatarUpload, provides an avtar with upload and crop capability.
+
+## Import
+
+```jsx | pure
+import {AvatarUpload} from '@yookue/ant-buddy-pro';
+```
+
+## Example
+
+<code src="./demo.en-US.tsx"></code>
+
+## Properties
+
+<API id="AvatarUpload.en-US" src="@/form/AvatarUpload/index.tsx" hideTitle></API>

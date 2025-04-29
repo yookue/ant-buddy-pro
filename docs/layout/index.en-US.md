@@ -1,7 +1,7 @@
 ---
 nav:
   title: Layout
-  order: 2
+  order: 4
 title: Layout Overview
 order: -1
 toc: false

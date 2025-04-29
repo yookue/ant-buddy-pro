@@ -25,8 +25,8 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             [`&-field > ${token.iconCls}`]: {
-                minWidth: '15px',
-                minHeight: '15px',
+                minWidth: 15,
+                minHeight: 15,
                 verticalAlign: 'middle',
             },
             [`${token.antCls}-badge ${token.antCls}-badge-count`]: {

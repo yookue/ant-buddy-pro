@@ -11,6 +11,9 @@ toc: false
 
 Here are some milestone versions of the changelog:
 
+  - **v1.0.0** [2025-04-30]
+    - Bump from Ant Design v4 to v5, Ant Design ProComponents v1 to v2
+
   - **v0.1.163** [2025-03-31]
     - Add 'form/ServerTuple'
 

@@ -33,7 +33,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='CardTabs_demo'
+                name='CardTabs_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

@@ -9,8 +9,8 @@ Fullscreen, provides an icon with the ability to toggle fullscreen mode.
 
 ## Premise
 
-<Alert type='info'>
-  Before use this component, you need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first:
+<Alert showIcon>
+  You need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first if you're using the default icons:
 </Alert>
 
 <InstallDependencies

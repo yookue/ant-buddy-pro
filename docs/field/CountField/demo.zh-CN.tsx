@@ -31,7 +31,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='CountField_demo'
+                name='CountField_demo.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

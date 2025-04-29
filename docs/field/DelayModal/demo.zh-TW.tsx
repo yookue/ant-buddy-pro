@@ -34,7 +34,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='DelayModal_demo'
+                name='DelayModal_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

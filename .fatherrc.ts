@@ -43,5 +43,4 @@ export default defineConfig({
             scope: 'all',
         }],
     ],
-    plugins: ['@rc-component/father-plugin'],
 });

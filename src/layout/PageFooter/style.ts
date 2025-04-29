@@ -33,7 +33,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     color: token.colorTextSecondary,
                     transition: 'all 0.3s',
                     [`&:not(:last-child)`]: {
-                        marginRight: '40px',
+                        marginRight: 40,
                     },
                     [`&:hover`]: {
                         color: token.colorText,
@@ -49,7 +49,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     padding: `24px 50px`,
                 }
             },
-            [`&&-moiety`]: {
+            [`&&-half`]: {
                 [`${token.componentCls}-vessel`]: {
                     padding: `12px 25px`,
                 }

@@ -233,34 +233,34 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
         switch (placement) {
             case 'topLeft':
                 diffProps = {
-                    top: `-${size * ratio}px`,
-                    left: `-${size * ratio}px`,
+                    top: `-${size * ratio}`,
+                    left: `-${size * ratio}`,
                 };
                 break;
             case 'topRight':
                 diffProps = {
-                    top: `-${size * ratio}px`,
-                    right: `-${size * ratio}px`,
+                    top: `-${size * ratio}`,
+                    right: `-${size * ratio}`,
                 };
                 break;
             case 'bottomLeft':
                 diffProps = {
-                    bottom: `-${size * ratio}px`,
-                    left: `-${size * ratio}px`,
+                    bottom: `-${size * ratio}`,
+                    left: `-${size * ratio}`,
                 };
                 break;
             case 'bottomRight':
                 diffProps = {
-                    bottom: `-${size * ratio}px`,
-                    right: `-${size * ratio}px`,
+                    bottom: `-${size * ratio}`,
+                    right: `-${size * ratio}`,
                 };
                 break;
             default:
                 break;
         }
         return css({
-            width: `${size + size * ratio}px`,
-            height: `${size + size * ratio}px`,
+            width: `${size + size * ratio}`,
+            height: `${size + size * ratio}`,
             zIndex: zIndex + 1,
             ...diffProps,
         });
@@ -278,40 +278,40 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                 rectCenter = [hypotenuse / 2, -perpendicular / 2];
                 stampCenter = [size / 3, -size / 3];
                 diffProps = {
-                    top: `${rectCenter[1] - stampCenter[1]}px`,
-                    left: `${stampCenter[0] - rectCenter[0]}px`,
+                    top: `${rectCenter[1] - stampCenter[1]}`,
+                    left: `${stampCenter[0] - rectCenter[0]}`,
                 };
                 break;
             case 'topRight':
                 rectCenter = [-hypotenuse / 2, -perpendicular / 2];
                 stampCenter = [-size / 3, -size / 3];
                 diffProps = {
-                    top: `${rectCenter[1] - stampCenter[1]}px`,
-                    right: `${rectCenter[0] - stampCenter[0]}px`,
+                    top: `${rectCenter[1] - stampCenter[1]}`,
+                    right: `${rectCenter[0] - stampCenter[0]}`,
                 };
                 break;
             case 'bottomLeft':
                 rectCenter = [hypotenuse / 2, perpendicular / 2];
                 stampCenter = [size / 3, size / 3];
                 diffProps = {
-                    bottom: `${rectCenter[1] - stampCenter[1]}px`,
-                    left: `${stampCenter[0] - rectCenter[0]}px`,
+                    bottom: `${rectCenter[1] - stampCenter[1]}`,
+                    left: `${stampCenter[0] - rectCenter[0]}`,
                 };
                 break;
             case 'bottomRight':
                 rectCenter = [-hypotenuse / 2, perpendicular / 2];
                 stampCenter = [-size / 3, size / 3];
                 diffProps = {
-                    bottom: `${rectCenter[1] - stampCenter[1]}px`,
-                    right: `${rectCenter[0] - stampCenter[0]}px`,
+                    bottom: `${rectCenter[1] - stampCenter[1]}`,
+                    right: `${rectCenter[0] - stampCenter[0]}`,
                 };
                 break;
             default:
                 break;
         }
         return css({
-            width: `${hypotenuse}px`,
-            height: `${perpendicular}px`,
+            width: hypotenuse,
+            height: perpendicular,
             transform: `rotate(${rotation}deg)`,
             zIndex: zIndex + 1,
             ...diffProps,

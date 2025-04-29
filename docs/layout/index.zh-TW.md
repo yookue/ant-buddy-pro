@@ -1,7 +1,7 @@
 ---
 nav:
   title: 布局
-  order: 2
+  order: 4
 title: 布局總覽
 order: -1
 toc: false

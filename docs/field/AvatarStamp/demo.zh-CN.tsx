@@ -27,7 +27,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='AvatarStamp_demo'
+                name='AvatarStamp_demo.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

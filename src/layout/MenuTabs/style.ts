@@ -48,9 +48,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 flex: 1,
                 [`&-title`]: {
                     fontWeight: 500,
-                    fontSize: '20px',
-                    lineHeight: '28px',
-                    marginBottom: '12px',
+                    fontSize: 20,
+                    lineHeight: 28,
+                    marginBottom: 12,
                 }
             },
             [`&-tab-active`]: {
@@ -134,7 +134,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     border: 'none',
                 },
                 [`&-tab`]: {
-                    padding: '32px',
+                    padding: 32,
                 }
             }
         }

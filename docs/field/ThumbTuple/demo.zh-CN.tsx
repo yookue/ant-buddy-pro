@@ -28,7 +28,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='ThumbTuple_demo'
+                name='ThumbTuple_demo.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

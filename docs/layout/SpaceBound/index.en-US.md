@@ -5,7 +5,7 @@ toc: content
 
 ## Description
 
-Similar to [Space](https://4x.ant.design/components/space) of [Ant Design](https://ant.design), `SpaceBound` provides padding spaces.
+Similar to [Space](https://ant.design/components/space) of [Ant Design](https://ant.design), `SpaceBound` provides padding spaces.
 The difference is that, the `Space` provides spaces between more than one component, the `SpaceBound` wraps it's child/children component(s), even there is a single child.
 
 ## Import

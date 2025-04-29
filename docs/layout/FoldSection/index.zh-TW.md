@@ -5,12 +5,12 @@ toc: content
 
 ## 組件說明
 
-與 [Ant Design](https://ant.design) 的 [Collapse](https://4x.ant.design/components/collapse) 組件類似，但只有一個標題欄和一個面板。
+與 [Ant Design](https://ant.design) 的 [Collapse](https://ant.design/components/collapse) 組件類似，但只有一個標題欄和一個面板。
 
 ## Premise
 
-<Alert type='info'>
-  如果您使用默認的 <b><i>`headerCollapseDom`/`headerExpandDom`</i></b> 屬性，要使用此組件，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
+<Alert showIcon>
+  如果您使用默認的圖標，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
 </Alert>
 
 <InstallDependencies

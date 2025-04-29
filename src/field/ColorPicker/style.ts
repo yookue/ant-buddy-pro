@@ -48,19 +48,19 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     }
                 },
                 [`&&-xs`]: {
-                    width: '104px',
+                    width: 104,
                 },
                 [`&&-sm`]: {
-                    width: '216px',
+                    width: 216,
                 },
                 [`&&-md`]: {
-                    width: '328px',
+                    width: 328,
                 },
                 [`&&-lg`]: {
-                    width: '440px',
+                    width: 440,
                 },
                 [`&&-xl`]: {
-                    width: '552px',
+                    width: 552,
                 },
                 [`&${token.componentCls}-icon-before > ${token.antCls}-space`]: {
                     flex: 1,
@@ -79,7 +79,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 [`${token.componentCls}-preview`]: {
                     border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                     borderRadius: token.borderRadiusSM,
-                    minHeight: '12px',
+                    minHeight: 12,
                     [`&-empty`]: {
                         background: `linear-gradient(to bottom right, rgba(247,89,171,0) 0%, rgba(247,89,171,0) calc(50% - 1.5px), rgba(247,89,171,1) 50%, rgba(247,89,171,0) calc(50% + 1.5px), rgba(247,89,171,0) 100%)`,
                     }
@@ -89,18 +89,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     paddingRight: token.paddingXS,
                     [`${token.componentCls}-preview`]: {
                         fontSize: token.fontSize,
-                        minHeight: '26px',
+                        minHeight: 26,
                     },
                     [`${token.componentCls}-icon`]: {
                         fontSize: token.fontSizeLG,
                     }
                 },
                 [`&${token.antCls}-btn-sm`]: {
-                    paddingLeft: '6px',
-                    paddingRight: '6px',
+                    paddingLeft: 6,
+                    paddingRight: 6,
                     [`${token.componentCls}-preview`]: {
                         fontSize: token.fontSizeSM - 4,
-                        minHeight: '14px',
+                        minHeight: 14,
                     },
                     [`${token.componentCls}-icon`]: {
                         fontSize: token.fontSizeSM,
@@ -111,7 +111,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     paddingRight: token.paddingXS,
                     [`${token.componentCls}-preview`]: {
                         fontSize: token.fontSizeSM,
-                        minHeight: '20px',
+                        minHeight: 20,
                     },
                     [`${token.componentCls}-icon`]: {
                         fontSize: token.fontSize,
@@ -177,10 +177,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 },
                 [`> div:nth-of-type(3) > div`]: {
                     [`&:first-of-type > div`]: {
-                        marginRight: '12px',
+                        marginRight: 12,
                     },
                     [`&:not(:first-of-type) > div`]: {
-                        marginRight: '6px',
+                        marginRight: 6,
                     },
                     [`> div input`]: {
                         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder} !important`,
@@ -200,11 +200,11 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             },
             [`.swatches-picker`]: {
-                maxWidth: '280px',
+                maxWidth: 280,
                 [`> div > div:last-of-type > div`]: {
                     [`&::-webkit-scrollbar`]: {
-                        height: '8px',
-                        width: '8px',
+                        height: 8,
+                        width: 8,
                     },
                     [`&::-webkit-scrollbar-track`]: {
                         borderRadius: token.borderRadius,

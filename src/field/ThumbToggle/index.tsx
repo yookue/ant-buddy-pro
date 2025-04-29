@@ -284,6 +284,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
                     const count = checked ? ((countFieldRef.current?.getCount() ?? 1) - 1) : ((countFieldRef.current?.getCount() ?? 0) + 1);
                     countFieldRef.current?.setCount(Math.max(0, count));
                 }
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (ignored) {
             }
         } else {

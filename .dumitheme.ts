@@ -19,9 +19,6 @@ import {defineThemeConfig} from 'dumi-theme-antd/dist/defineThemeConfig';
 
 
 export default defineThemeConfig({
-    // loading: {
-    //     skeleton: ['/guide', '/about']
-    // },
     title: 'Yookue Ant Buddy Pro',
     // localesEnhance: [
     //     {id: 'en-US', switchPrefix: 'EN'},
@@ -35,12 +32,16 @@ export default defineThemeConfig({
                 link: '/guide',
             },
             {
-                title: 'Layout',
-                link: '/layout',
-            },
-            {
                 title: 'Field',
                 link: '/field',
+            },
+            {
+                title: 'Form',
+                link: '/form',
+            },
+            {
+                title: 'Layout',
+                link: '/layout',
             },
             {
                 title: 'About',
@@ -53,12 +54,16 @@ export default defineThemeConfig({
                 link: '/guide-cn',
             },
             {
-                title: '布局',
-                link: '/layout-cn',
-            },
-            {
                 title: '控件',
                 link: '/field-cn',
+            },
+            {
+                title: '表单',
+                link: '/form-cn',
+            },
+            {
+                title: '布局',
+                link: '/layout-cn',
             },
             {
                 title: '关于',
@@ -71,12 +76,16 @@ export default defineThemeConfig({
                 link: '/guide-tw',
             },
             {
-                title: '布局',
-                link: '/layout-tw',
-            },
-            {
                 title: '控件',
                 link: '/field-tw',
+            },
+            {
+                title: '表單',
+                link: '/form-tw',
+            },
+            {
+                title: '布局',
+                link: '/layout-tw',
             },
             {
                 title: '關于',
@@ -142,29 +151,53 @@ export default defineThemeConfig({
         'en-US': [
             {
                 title: '🎁 Out of the box',
-                details: 'Elegant default configurations assist developers to get started as simple as possible'
+                details: 'Elegant default configurations assist developers to get started as simple as possible',
             },
             {
                 title: '🎄 Theme support',
-                details: 'Theme capabilities, for customizing complete theme components, are up to you'
+                details: 'Theme capabilities, for customizing complete theme components, are up to you',
+            },
+            {
+                title: '🚀 Better Compilation Performance',
+                details: 'By combining Umi v4, esbuild, SWC, persistent cache and other schemes, it brings faster compilation speed than 0.x',
+            },
+            {
+                title: '🎨 Uniform style',
+                details: "Based on antd 5.0 CSS-in-JS style support, it fully unifies built-in styles and supports custom loading theme",
+            },
+            {
+                title: '🎮 Simple Use',
+                details: 'Easy access, installation and use, fully integrated into Ant Design style'
             },
             {
                 title: '✨ More coming components',
-                details: 'React components compatible with Ant Design. More components are coming soon'
+                details: 'React components compatible with Ant Design. More components are coming soon',
             }
         ],
         'zh-CN': [
             {
                 title: '🎁 开箱即用',
-                details: '熟悉 Ant Design 可快速上手，让您专注于业务逻辑'
+                details: '熟悉 Ant Design 可快速上手，让您专注于业务逻辑',
             },
             {
                 title: '🎄 主题支持',
-                details: '支持 Ant Design Pro 主题样式，更多样式，随心控制'
+                details: '支持 Ant Design Pro 主题样式，更多样式，随心控制',
+            },
+            {
+                title: '🚀 更好的编译性能',
+                details: '通过结合使用 Umi v4、esbuild、SWC、持久缓存等方案，带来比 0.x 更快的编译速度',
+            },
+            {
+                title: '🎨 样式风格统一',
+                details: '基于 antd v5 CSS-in-JS 样式加持，全面统一内置样式，同时支持自定义主题加载',
+            },
+            {
+                title: '🎮 上手简单',
+                details: '接入简单，安装即使用，全面融入 Ant Design 风格',
             },
             {
                 title: '✨ 丰富组件',
-                details: '不断完善的 React 组件，与 Ant Design 如出一辙'
+                details: '不断完善的 React 组件，与 Ant Design 如出一辙',
             }
         ],
         'zh-TW': [
@@ -177,10 +210,22 @@ export default defineThemeConfig({
                 details: '支持 Ant Design Pro 主題樣式，更多樣式，隨心控制'
             },
             {
+                title: '🚀 更好的編譯性能',
+                details: '通過結合使用 Umi v4、esbuild、SWC、持久緩存等方案，帶來比 0.x 更快的編譯速度',
+            },
+            {
+                title: '🎨 樣式風格統一',
+                details: '基于 antd v5 CSS-in-JS 樣式加持，全面統一內置樣式，同時支持自定義主題加載',
+            },
+            {
+                title: '🎮 上手簡單',
+                details: '接入簡單，安裝即使用，全面融入 Ant Design 風格',
+            },
+            {
                 title: '✨ 豐富組件',
                 details: '不斷完善的 React 組件，與 Ant Design 如出一轍'
             }
         ]
     },
-    sidebarGroupModePath: ['/guide', '/about'],
+    sidebarGroupModePath: true,
 });

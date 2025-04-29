@@ -24,12 +24,12 @@ import {type TitlePresetStyle} from 'src/layout/SectionTitle';
 
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
-    const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle>('success');
+    const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle | false>('success');
 
     return (
         <>
             <ProForm
-                name='SectionTitle_demo'
+                name='SectionTitle_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

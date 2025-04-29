@@ -25,14 +25,14 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             [`&-popup`]: {
-                minWidth: '300px',
+                minWidth: 300,
                 [`> ${token.antCls}-dropdown-menu > ${token.antCls}-dropdown-menu-item:hover`]: {
                     backgroundColor: 'unset !important',
                     cursor: 'unset !important',
                 },
                 [`${token.componentCls}-tabs`]: {
                     [`${token.antCls}-tabs-content-top ${token.antCls}-tabs-tab`]: {
-                        paddingTop: '2px',
+                        paddingTop: 2,
                     },
                     [`${token.antCls}-tabs-content-left ${token.antCls}-tabs-tabpane`]: {
                         paddingLeft: token.paddingXS,
@@ -41,7 +41,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         paddingRight: token.paddingXS,
                     },
                     [`${token.componentCls}-tab-list`]: {
-                        maxHeight: '400px',
+                        maxHeight: 400,
                         overflow: 'auto',
                         [`&::-webkit-scrollbar`]: {
                             display: 'none',
@@ -65,7 +65,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                             marginTop: token.marginXXS,
                         },
                         [`&-icon`]: {
-                            fontSize: '32px',
+                            fontSize: 32,
                         },
                         [`&-meta`]: {
                             width: '100%',
@@ -84,7 +84,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         },
                         [`&-extra`]: {
                             float: 'right',
-                            marginTop: '-1.5px',
+                            marginTop: -1.5,
                             marginRight: 0,
                             color: token.colorTextSecondary,
                             fontWeight: 'normal',
@@ -97,9 +97,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         }
                     },
                     [`${token.componentCls}-builtin-footer`]: {
-                        height: '38px',
+                        height: 38,
                         color: token.colorPrimaryText,
-                        lineHeight: '46px',
+                        lineHeight: 46,
                         textAlign: 'center',
                         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                         borderRadius: `0 0 ${token.borderRadius} ${token.borderRadius}`,

@@ -28,7 +28,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='SpaceBound_demo'
+                name='SpaceBound_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

@@ -25,12 +25,12 @@ import {type ApartPresetStyle} from '@yookue/ant-buddy-pro/layout/ApartTitle';
 
 export default () => {
     const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
-    const [presetStyle, setPresetStyle] = React.useState<ApartPresetStyle>('default');
+    const [presetStyle, setPresetStyle] = React.useState<ApartPresetStyle | false>('default');
 
     return (
         <>
             <ProForm
-                name='ApartTitle_demo'
+                name='ApartTitle_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

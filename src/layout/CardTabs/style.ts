@@ -53,18 +53,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                     }
                 },
-                [`&${token.antCls}-tabs-right`]: {
-                    [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab-active`]: {
-                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                    },
-                    [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                    }
-                },
                 [`&${token.antCls}-tabs-bottom`]: {
                     [`> ${token.antCls}-tabs-nav`]: {
                         marginTop: 0,
@@ -88,6 +76,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     },
                     [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
                         borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                    }
+                },
+                [`&${token.antCls}-tabs-right`]: {
+                    [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab-active`]: {
+                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                    },
+                    [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
+                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                         borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                     }

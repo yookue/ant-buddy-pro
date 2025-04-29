@@ -5,7 +5,7 @@ toc: content
 
 ## 組件說明
 
-與 [Ant Design](https://ant.design) 的 [Tabs](https://4x.ant.design/components/tabs) 組件類似，但 `CardTabs` 采用了卡片樣式和邊框。
+與 [Ant Design](https://ant.design) 的 [Tabs](https://ant.design/components/tabs) 組件類似，但 `CardTabs` 采用了卡片樣式和邊框。
 
 ## 導入組件
 

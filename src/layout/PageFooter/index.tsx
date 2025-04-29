@@ -24,7 +24,7 @@ import {type WithFalse} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
 
-export type FooterPresetStyle = WithFalse<'default' | 'moiety'>;
+export type FooterPresetStyle = WithFalse<'default' | 'half'>;
 
 
 export type HyperlinkProps = {

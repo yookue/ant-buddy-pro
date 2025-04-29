@@ -41,7 +41,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 display: 'flex',
                 flex: 1,
                 flexFlow: 'column nowrap',
-                maxWidth: '520px',
+                maxWidth: 520,
                 backgroundColor: token.colorBgContainer,
             },
             [`&&-interchange`]: {

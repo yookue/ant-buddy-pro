@@ -27,7 +27,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='Fullscreen_demo'
+                name='Fullscreen_demo.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

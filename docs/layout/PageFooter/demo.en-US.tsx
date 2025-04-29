@@ -17,21 +17,20 @@
 
 import React from 'react';
 import {Divider, ColorPicker} from 'antd';
-import {type Color} from 'antd/es/color-picker';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {PageFooter} from '@yookue/ant-buddy-pro';
 import {type FooterPresetStyle} from '@yookue/ant-buddy-pro/layout/PageFooter';
 
 
 export default () => {
-    const [presetStyle, setPresetStyle] = React.useState<FooterPresetStyle>('default');
-    const [bgColor, setBgColor] = React.useState<Color>();
+    const [bgColor, setBgColor] = React.useState<string>('#e6f4ff');
     const [copyrightIcon, setCopyrightIcon] = React.useState<boolean>(true);
+    const [presetStyle, setPresetStyle] = React.useState<FooterPresetStyle | false>('default');
 
     return (
         <>
             <ProForm
-                name='PageFooter_demo'
+                name='PageFooter_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
@@ -43,7 +42,9 @@ export default () => {
                         <ColorPicker
                             size='small'
                             value={bgColor}
-                            onChangeComplete={setBgColor}
+                            onChangeComplete={(color) => {
+                                setBgColor(color?.toHexString);
+                            }}
                         />
                     </ProForm.Item>
                     <ProFormSwitch
@@ -68,7 +69,7 @@ export default () => {
                     }}
                     options={[
                         {label: 'Default', value: 'default'},
-                        {label: 'Moiety', value: 'moiety'},
+                        {label: 'Half', value: 'half'},
                         {label: 'False', value: false},
                     ]}
                 />
@@ -88,7 +89,7 @@ export default () => {
                 copyright={`${new Date().getFullYear()} Yookue Ltd`}
                 copyrightIcon={copyrightIcon}
                 containerStyle={{
-                    backgroundColor: bgColor?.toHexString(),
+                    backgroundColor: bgColor,
                 }}
                 copyrightStyle={{
                     color: '#443300',

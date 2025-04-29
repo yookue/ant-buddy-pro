@@ -30,7 +30,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='CodePreview_demo'
+                name='CodePreview_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

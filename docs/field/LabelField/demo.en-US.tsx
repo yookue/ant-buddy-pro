@@ -25,12 +25,12 @@ import {type LabelPresetStyle} from '@yookue/ant-buddy-pro/field/LabelField';
 export default () => {
     const [layout, setLayout] = React.useState<AxisDirectionType>('horizontal');
     const [required, setRequired] = React.useState<boolean>(false);
-    const [presetStyle, setPresetStyle] = React.useState<LabelPresetStyle>('field-prior');
+    const [presetStyle, setPresetStyle] = React.useState<LabelPresetStyle | false>('field-prior');
 
     return (
         <>
             <ProForm
-                name='LabelField_demo'
+                name='LabelField_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

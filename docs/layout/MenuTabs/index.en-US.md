@@ -5,7 +5,7 @@ toc: content
 
 ## Description
 
-Just like [the live example](https://preview.pro.ant.design/account/settings), `MenuTabs` is a component that similar to [Ant Design Tab](https://4x.ant.design/components/tabs), integrated with [Ant Design Menu](https://4x.ant.design/components/menu).
+Just like [the live example](https://preview.pro.ant.design/account/settings), `MenuTabs` is a component that similar to [Ant Design Tab](https://ant.design/components/tabs), integrated with [Ant Design Menu](https://ant.design/components/menu).
 
 ## Import
 

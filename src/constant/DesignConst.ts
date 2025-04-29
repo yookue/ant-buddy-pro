@@ -22,22 +22,22 @@
  */
 export abstract class DesignConst {
     // @see "antd/es/form/FormItem/index.d.ts"
-    public static FormItemProps = ['prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];
+    public static FORM_ITEM_PROPS = ['prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];
 
     // @see "@ant-design/pro-form/es/components/FormItem/index.d.ts"
-    public static WarpFormItemProps = ['addonBefore', 'addonAfter', 'convertValue'];
+    public static WARP_FORM_ITEM_PROPS = ['addonBefore', 'addonAfter', 'convertValue'];
 
     // @see "@ant-design/pro-form/es/components/FormItem/index.d.ts"
-    public static ProFormItemProps = [...DesignConst.FormItemProps, ...DesignConst.WarpFormItemProps, 'ignoreFormItem', 'valueType', 'transform', 'dataFormat', 'lightProps', 'proFormFieldKey'];
+    public static PRO_FORM_ITEM_PROPS = [...DesignConst.FORM_ITEM_PROPS, ...DesignConst.WARP_FORM_ITEM_PROPS, 'ignoreFormItem', 'valueType', 'transform', 'dataFormat', 'lightProps', 'proFormFieldKey'];
 
     // @see "@ant-design/pro-form/es/interface.d.ts"
-    public static ProFormExtendProps = ['secondary', 'allowClear', 'bordered', 'colSize', 'params', 'ignoreFormItem', 'convertValue', 'formItemProps', 'filedConfig', 'fieldRef'];
+    public static PRO_FORM_EXTEND_PROPS = ['secondary', 'allowClear', 'variant', 'colSize', 'params', 'ignoreFormItem', 'convertValue', 'formItemProps', 'filedConfig', 'fieldRef'];
 
     // @see "@ant-design/pro-form/es/interface.d.ts"
-    public static ProFormFieldItemProps = [...DesignConst.ProFormItemProps, ...DesignConst.ProFormExtendProps, 'fieldProps', 'proFieldProps', 'cacheForSwr', 'footerRender', 'colProps'];
+    public static PRO_FORM_FIELD_ITEM_PROPS = [...DesignConst.PRO_FORM_ITEM_PROPS, ...DesignConst.PRO_FORM_EXTEND_PROPS, 'fieldProps', 'proFieldProps', 'cacheForSwr', 'footerRender', 'colProps'];
 
-    public static ForwardFieldProps = ['name', 'id', 'placeholder'];
+    public static FORWARD_FIELD_PROPS = ['name', 'id', 'placeholder'];
 
     // @see "@ant-design/pro-field/es/components/Select/index.d.ts"
-    public static ProFieldSelectProps = ['valueEnum', 'debounceTime', 'params', 'request'];
+    public static PRO_FIELD_SELECT_PROPS = ['valueEnum', 'debounceTime', 'params', 'request'];
 }

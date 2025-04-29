@@ -31,7 +31,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='BorderBox_demo'
+                name='BorderBox_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}

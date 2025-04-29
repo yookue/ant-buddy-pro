@@ -30,7 +30,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='DragModal_demo'
+                name='DragModal_demo.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
