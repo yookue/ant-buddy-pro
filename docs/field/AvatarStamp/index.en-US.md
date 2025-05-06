@@ -19,4 +19,4 @@ import {AvatarStamp} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="AvatarStamp.en-US" src="@/field/AvatarStamp/index.tsx" hideTitle></API>
+<API id="AvatarStamp"></API>

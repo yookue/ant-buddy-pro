@@ -19,4 +19,4 @@ import {CipherStrength} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CipherStrength.en-US" src="@/form/CipherStrength/index.tsx" hideTitle></API>
+<API id="CipherStrength"></API>

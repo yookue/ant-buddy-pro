@@ -19,4 +19,4 @@ import {FlexBox} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="FlexBox.zh-TW" src="@/layout/FlexBox/index.tsx" hideTitle></API>
+<API id="FlexBox"></API>

@@ -25,4 +25,4 @@ import {TagInput} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="TagInput.en-US" src="@/form/TagInput/index.tsx" hideTitle></API>
+<API id="TagInput"></API>

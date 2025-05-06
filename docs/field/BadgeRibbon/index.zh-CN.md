@@ -21,4 +21,4 @@ import {BadgeRibbon} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="BadgeRibbon.zh-CN" src="@/field/BadgeRibbon/index.tsx" hideTitle></API>
+<API id="BadgeRibbon"></API>

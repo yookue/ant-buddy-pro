@@ -27,7 +27,7 @@ import {PropUtils} from '@/util/PropUtils';
 import {useFieldStyle} from './style';
 
 
-export type StretchInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
+export type StretchInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

@@ -19,4 +19,4 @@ import {CountField} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CountField.en-US" src="@/field/CountField/index.tsx" hideTitle></API>
+<API id="CountField"></API>

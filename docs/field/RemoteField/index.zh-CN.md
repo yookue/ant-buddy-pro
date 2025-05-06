@@ -21,4 +21,4 @@ import {RemoteField} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="RemoteField.zh-CN" src="@/field/RemoteField/index.tsx" hideTitle></API>
+<API id="RemoteField"></API>

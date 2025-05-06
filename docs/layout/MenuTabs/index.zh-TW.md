@@ -19,4 +19,4 @@ import {MenuTabs} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="MenuTabs.zh-TW" src="@/layout/MenuTabs/index.tsx" hideTitle></API>
+<API id="MenuTabs"></API>

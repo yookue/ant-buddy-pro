@@ -23,4 +23,4 @@ import {CompactTuple} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="CompactTuple.zh-CN" src="@/field/CompactTuple/index.tsx" hideTitle></API>
+<API id="CompactTuple"></API>

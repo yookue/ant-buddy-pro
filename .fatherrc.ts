@@ -42,5 +42,5 @@ export default defineConfig({
         ['@yookue/babel-plugin-remove-comment', {
             scope: 'all',
         }],
-    ],
+    ]
 });

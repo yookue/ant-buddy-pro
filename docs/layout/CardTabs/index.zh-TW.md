@@ -19,4 +19,4 @@ import {CardTabs} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="CardTabs.zh-TW" src="@/layout/CardTabs/index.tsx" hideTitle></API>
+<API id="CardTabs"></API>

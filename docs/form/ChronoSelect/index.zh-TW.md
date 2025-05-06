@@ -19,4 +19,4 @@ import {ChronoSelect} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="ChronoSelect.zh-TW" src="@/form/ChronoSelect/index.tsx" hideTitle></API>
+<API id="ChronoSelec"></API>

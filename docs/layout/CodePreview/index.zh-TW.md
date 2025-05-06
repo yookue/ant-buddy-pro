@@ -19,4 +19,4 @@ import {CodePreview} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="CodePreview.zh-TW" src="@/layout/CodePreview/index.tsx" hideTitle></API>
+<API id="CodePreview"></API>

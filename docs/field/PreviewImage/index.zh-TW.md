@@ -19,4 +19,4 @@ import {PreviewImage} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="PreviewImage.zh-TW" src="@/field/PreviewImage/index.tsx" hideTitle></API>
+<API id="PreviewImage"></API>

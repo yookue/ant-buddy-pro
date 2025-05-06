@@ -21,4 +21,4 @@ import {DelayModal} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="DelayModal.zh-TW" src="@/field/DelayModal/index.tsx" hideTitle></API>
+<API id="DelayModal"></API>

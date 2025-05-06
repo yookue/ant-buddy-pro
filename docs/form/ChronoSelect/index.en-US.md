@@ -19,4 +19,4 @@ import {ChronoSelect} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ChronoSelect.en-US" src="@/form/ChronoSelect/index.tsx" hideTitle></API>
+<API id="ChronoSelec"></API>

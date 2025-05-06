@@ -19,4 +19,4 @@ import {DivideSelect} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="DivideSelect.en-US" src="@/form/DivideSelect/index.tsx" hideTitle></API>
+<API id="DivideSelect"></API>

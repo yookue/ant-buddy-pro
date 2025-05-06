@@ -19,4 +19,4 @@ import {ServerTuple} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="AvatarUpload.zh-CN" src="@/form/ServerTuple/index.tsx" hideTitle></API>
+<API id="AvatarUpload"></API>

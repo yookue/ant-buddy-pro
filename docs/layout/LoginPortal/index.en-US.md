@@ -54,4 +54,4 @@ export default () => {
 
 ## Properties
 
-<API id="LoginPortal.en-US" src="@/layout/LoginPortal/index.tsx" hideTitle></API>
+<API id="LoginPortal"></API>

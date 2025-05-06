@@ -21,4 +21,4 @@ import {StretchInput} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="StretchInput.en-US" src="@/form/StretchInput/index.tsx" hideTitle></API>
+<API id="StretchInput"></API>

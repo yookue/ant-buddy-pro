@@ -21,4 +21,4 @@ import {RefreshImage} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="RefreshImage.en-US" src="@/field/RefreshImage/index.tsx" hideTitle></API>
+<API id="RefreshImage"></API>

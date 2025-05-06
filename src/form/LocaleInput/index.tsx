@@ -36,7 +36,7 @@ import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 
 
-export type PopupInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
+export type PopupInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
     /**
      * @description The locale language tag
      * @description.zh-CN 语言标签

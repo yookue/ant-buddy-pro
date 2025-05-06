@@ -22,6 +22,7 @@ import {PackageConst} from '@/constant/PackageConst';
 
 
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
+    // noinspection DuplicatedCode
     return {
         [`${token.componentCls}`]: {
             [`&-ink-bar > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-ink-bar`]: {

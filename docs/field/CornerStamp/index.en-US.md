@@ -19,4 +19,4 @@ import {CornerStamp} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CornerStamp.en-US" src="@/field/CornerStamp/index.tsx" hideTitle></API>
+<API id="CornerStamp"></API>

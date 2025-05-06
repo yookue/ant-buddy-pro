@@ -102,7 +102,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type ChronoSelectProps = ProFormSelectProps & {
+export type ChronoSelectProps = Omit<ProFormSelectProps, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

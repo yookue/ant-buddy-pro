@@ -49,4 +49,4 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="LocaleInput.zh-CN" src="@/form/LocaleInput/index.tsx" hideTitle></API>
+<API id="LocaleInput"></API>

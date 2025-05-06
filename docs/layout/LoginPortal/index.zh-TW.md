@@ -54,4 +54,4 @@ export default () => {
 
 ## 組件屬性
 
-<API id="LoginPortal.zh-TW" src="@/layout/LoginPortal/index.tsx" hideTitle></API>
+<API id="LoginPortal"></API>

@@ -30,7 +30,7 @@ import {FieldUtils} from '@/util/FieldUtils';
 import {PropUtils} from '@/util/PropUtils';
 
 
-export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'placeholder' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request'> & {
+export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'children' | 'placeholder' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

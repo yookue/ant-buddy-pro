@@ -19,4 +19,4 @@ import {LabelField} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="LabelField.en-US" src="@/field/LabelField/index.tsx" hideTitle></API>
+<API id="LabelField"></API>

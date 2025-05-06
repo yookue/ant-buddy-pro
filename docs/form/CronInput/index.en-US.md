@@ -19,4 +19,4 @@ import {CronInput} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CronInput.en-US" src="@/form/CronInput/index.tsx" hideTitle></API>
+<API id="CronInput"></API>

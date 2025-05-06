@@ -19,4 +19,4 @@ import {MenuTabs} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="MenuTabs.en-US" src="@/layout/MenuTabs/index.tsx" hideTitle></API>
+<API id="MenuTabs"></API>

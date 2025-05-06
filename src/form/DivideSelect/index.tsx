@@ -34,7 +34,7 @@ import {useFieldStyle} from './style';
 export type DividePresetStyle = WithFalse<'before-prior' | 'after-prior'>;
 
 
-export type DivideSelectProps = ProFormSelectProps & {
+export type DivideSelectProps = Omit<ProFormSelectProps, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

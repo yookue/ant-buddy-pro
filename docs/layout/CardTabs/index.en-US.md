@@ -19,4 +19,4 @@ import {CardTabs} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CardTabs.en-US" src="@/layout/CardTabs/index.tsx" hideTitle></API>
+<API id="CardTabs"></API>

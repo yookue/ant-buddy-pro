@@ -105,11 +105,11 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         locale = intlType.locale,
     } = props ?? {};
 
-    // noinspection DuplicatedCode
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();
     const fieldStyle = useFieldStyle(clazzPrefix);
 
+    // noinspection DuplicatedCode
     React.useEffect(() => {
         ImageUtils.detectSource(props?.src, res => setImageSrc(res));
     }, [props?.src]);

@@ -21,4 +21,4 @@ import {ThumbTuple} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ThumbTuple.en-US" src="@/field/ThumbTuple/index.tsx" hideTitle></API>
+<API id="ThumbTuple"></API>

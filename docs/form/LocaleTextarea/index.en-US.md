@@ -37,4 +37,4 @@ import {LocaleTextarea} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="LocaleTextarea.en-US" src="@/form/LocaleTextarea/index.tsx" hideTitle></API>
+<API id="LocaleTextarea"></API>

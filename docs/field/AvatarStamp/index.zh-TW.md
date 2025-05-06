@@ -19,4 +19,4 @@ import {AvatarStamp} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="AvatarStamp.zh-TW" src="@/field/AvatarStamp/index.tsx" hideTitle></API>
+<API id="AvatarStamp"></API>

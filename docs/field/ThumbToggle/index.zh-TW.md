@@ -19,4 +19,4 @@ import {ThumbToggle} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="ThumbToggle.zh-TW" src="@/field/ThumbToggle/index.tsx" hideTitle></API>
+<API id="ThumbToggle"></API>

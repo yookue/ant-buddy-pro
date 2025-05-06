@@ -49,4 +49,4 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="LocaleInput.en-US" src="@/form/LocaleInput/index.tsx" hideTitle></API>
+<API id="LocaleInput"></API>

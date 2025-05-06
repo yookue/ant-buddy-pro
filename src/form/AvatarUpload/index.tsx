@@ -118,7 +118,7 @@ export type FileUploadProps = Omit<UploadProps, 'name' | 'maxCount' | 'showUploa
 };
 
 
-export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'disabled' | 'readonly'> & {
+export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef' | 'fieldProps' | 'placeholder' | 'disabled' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

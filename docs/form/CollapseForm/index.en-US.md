@@ -21,4 +21,4 @@ import {CollapseForm} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CollapseForm.en-US" src="@/form/CollapseForm/index.tsx" hideTitle></API>
+<API id="CollapseForm"></API>

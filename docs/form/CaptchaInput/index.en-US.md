@@ -26,4 +26,4 @@ import {CaptchaInput} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CaptchaInput.en-US" src="@/form/CaptchaInput/index.tsx" hideTitle></API>
+<API id="CaptchaInput"></API>

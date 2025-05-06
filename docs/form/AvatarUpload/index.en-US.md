@@ -19,4 +19,4 @@ import {AvatarUpload} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="AvatarUpload.en-US" src="@/form/AvatarUpload/index.tsx" hideTitle></API>
+<API id="AvatarUpload"></API>

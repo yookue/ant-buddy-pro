@@ -21,4 +21,4 @@ import {StretchInput} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="StretchInput.zh-TW" src="@/form/StretchInput/index.tsx" hideTitle></API>
+<API id="StretchInput"></API>

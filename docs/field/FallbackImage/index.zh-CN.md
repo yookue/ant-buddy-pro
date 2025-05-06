@@ -19,4 +19,4 @@ import {FallbackImage} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="FallbackImage.zh-CN" src="@/field/FallbackImage/index.tsx" hideTitle></API>
+<API id="FallbackImage"></API>

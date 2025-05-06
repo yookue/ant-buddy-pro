@@ -21,4 +21,4 @@ import {RefreshImage} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="RefreshImage.zh-TW" src="@/field/RefreshImage/index.tsx" hideTitle></API>
+<API id="RefreshImage"></API>

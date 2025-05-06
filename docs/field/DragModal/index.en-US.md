@@ -19,4 +19,4 @@ import {DragModal} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="DragModal.en-US" src="@/field/DragModal/index.tsx" hideTitle></API>
+<API id="DragModal"></API>

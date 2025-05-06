@@ -19,4 +19,4 @@ import {CountField} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="CountField.zh-CN" src="@/field/CountField/index.tsx" hideTitle></API>
+<API id="CountField"></API>

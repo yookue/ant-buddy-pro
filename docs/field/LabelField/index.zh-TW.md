@@ -19,4 +19,4 @@ import {LabelField} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="LabelField.zh-TW" src="@/field/LabelField/index.tsx" hideTitle></API>
+<API id="LabelField"></API>

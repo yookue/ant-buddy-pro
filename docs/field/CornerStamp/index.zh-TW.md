@@ -19,4 +19,4 @@ import {CornerStamp} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="CornerStamp.zh-TW" src="@/field/CornerStamp/index.tsx" hideTitle></API>
+<API id="CornerStamp"></API>

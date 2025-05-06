@@ -19,4 +19,4 @@ import {AvatarUpload} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="AvatarUpload.zh-CN" src="@/form/AvatarUpload/index.tsx" hideTitle></API>
+<API id="AvatarUpload"></API>

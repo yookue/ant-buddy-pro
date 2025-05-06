@@ -19,4 +19,4 @@ import {SectionTitle} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="SectionTitle.en-US" src="@/layout/SectionTitle/index.tsx" hideTitle></API>
+<API id="SectionTitle"></API>

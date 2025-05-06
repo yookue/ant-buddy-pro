@@ -27,7 +27,7 @@ import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
 
-export type MixinMenuProps = Omit<MenuProps, 'activeKey' | 'defaultSelectedKeys' | 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'onDeselect'> & {
+export type MixinMenuProps = Omit<MenuProps, 'children' | 'activeKey' | 'defaultSelectedKeys' | 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'onDeselect'> & {
     /**
      * @description The items of the menu
      * @description.zh-CN 菜单项数组

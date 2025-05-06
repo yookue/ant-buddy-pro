@@ -19,4 +19,4 @@ import {DragModal} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="DragModal.zh-TW" src="@/field/DragModal/index.tsx" hideTitle></API>
+<API id="DragModal"></API>

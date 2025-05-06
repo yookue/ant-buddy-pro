@@ -21,4 +21,4 @@ import {ThumbTuple} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="ThumbTuple.zh-CN" src="@/field/ThumbTuple/index.tsx" hideTitle></API>
+<API id="ThumbTuple"></API>

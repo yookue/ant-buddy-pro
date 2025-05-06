@@ -19,4 +19,4 @@ import {PageFooter} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="PageFooter.zh-TW" src="@/layout/PageFooter/index.tsx" hideTitle></API>
+<API id="PageFooter"></API>

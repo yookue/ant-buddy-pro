@@ -19,4 +19,4 @@ import {BorderBox} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="BorderBox.en-US" src="@/layout/BorderBox/index.tsx" hideTitle></API>
+<API id="BorderBox"></API>

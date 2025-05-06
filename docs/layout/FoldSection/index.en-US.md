@@ -31,4 +31,4 @@ import {FoldSection} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="FoldSection.en-US" src="@/layout/FoldSection/index.tsx" hideTitle></API>
+<API id="FoldSection"></API>

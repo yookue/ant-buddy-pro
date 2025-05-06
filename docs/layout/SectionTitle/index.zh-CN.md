@@ -19,4 +19,4 @@ import {SectionTitle} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="SectionTitle.zh-CN" src="@/layout/SectionTitle/index.tsx" hideTitle></API>
+<API id="SectionTitle"></API>

@@ -132,7 +132,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type LocaleTextareaProps = ProFormFieldItemProps<TextAreaProps, TextAreaRef> & {
+export type LocaleTextareaProps = Omit<ProFormFieldItemProps<TextAreaProps, TextAreaRef>, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

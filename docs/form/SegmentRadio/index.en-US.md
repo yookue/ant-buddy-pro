@@ -29,4 +29,4 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="SegmentRadio.en-US" src="@/form/SegmentRadio/index.tsx" hideTitle></API>
+<API id="SegmentRadio"></API>

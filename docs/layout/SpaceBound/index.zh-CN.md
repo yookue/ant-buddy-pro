@@ -20,4 +20,4 @@ import {SpaceBound} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="SpaceBound.zh-CN" src="@/layout/SpaceBound/index.tsx" hideTitle></API>
+<API id="SpaceBound"></API>

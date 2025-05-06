@@ -20,4 +20,4 @@ import {SpaceBound} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="SpaceBound.en-US" src="@/layout/SpaceBound/index.tsx" hideTitle></API>
+<API id="SpaceBound"></API>

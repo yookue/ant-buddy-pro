@@ -29,4 +29,4 @@ import {SegmentRadio} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="SegmentRadio.zh-TW" src="@/form/SegmentRadio/index.tsx" hideTitle></API>
+<API id="SegmentRadio"></API>

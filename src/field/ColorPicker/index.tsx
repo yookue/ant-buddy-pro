@@ -46,7 +46,7 @@ export type ColorPickerRef = {
 export type PickerType = 'block' | 'chrome' | 'circle' | 'compact' | 'github' | 'hue' | 'material' | 'sketch' | 'swatches' | 'twitter';
 
 
-export type ColorPickerProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
+export type ColorPickerProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef' | 'fieldProps' | 'placeholder' | 'readonly'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

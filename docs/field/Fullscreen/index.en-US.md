@@ -31,4 +31,4 @@ import {Fullscreen} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="Fullscreen.en-US" src="@/field/Fullscreen/index.tsx" hideTitle></API>
+<API id="Fullscreen"></API>

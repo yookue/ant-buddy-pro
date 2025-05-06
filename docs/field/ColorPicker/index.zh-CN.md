@@ -19,4 +19,4 @@ import {ColorPicker} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="ColorPicker.zh-CN" src="@/field/ColorPicker/index.tsx" hideTitle></API>
+<API id="ColorPicker"></API>

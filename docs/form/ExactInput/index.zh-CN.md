@@ -31,4 +31,4 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="ExactInput.zh-CN" src="@/form/ExactInput/index.tsx" hideTitle></API>
+<API id="ExactInput"></API>

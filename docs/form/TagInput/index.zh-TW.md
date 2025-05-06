@@ -25,4 +25,4 @@ import {TagInput} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="TagInput.zh-TW" src="@/form/TagInput/index.tsx" hideTitle></API>
+<API id="TagInput"></API>

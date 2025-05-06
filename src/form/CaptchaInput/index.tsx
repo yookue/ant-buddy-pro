@@ -54,7 +54,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'fieldRef' | 'onGetCaptcha'> & {
+export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'children' | 'fieldRef' | 'onGetCaptcha'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

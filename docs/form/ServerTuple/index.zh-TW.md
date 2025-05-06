@@ -19,4 +19,4 @@ import {ServerTuple} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="ServerTuple.zh-TW" src="@/form/ServerTuple/index.tsx" hideTitle></API>
+<API id="ServerTuple"></API>

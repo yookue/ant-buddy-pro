@@ -19,4 +19,4 @@ import {DivideSelect} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="DivideSelect.zh-TW" src="@/form/DivideSelect/index.tsx" hideTitle></API>
+<API id="DivideSelect"></API>

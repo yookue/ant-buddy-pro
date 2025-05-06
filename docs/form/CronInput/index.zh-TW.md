@@ -19,4 +19,4 @@ import {CronInput} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="CronInput.zh-TW" src="@/form/CronInput/index.tsx" hideTitle></API>
+<API id="CronInput"></API>

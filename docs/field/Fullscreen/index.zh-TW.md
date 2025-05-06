@@ -31,4 +31,4 @@ import {Fullscreen} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="Fullscreen.zh-TW" src="@/field/Fullscreen/index.tsx" hideTitle></API>
+<API id="Fullscreen"></API>

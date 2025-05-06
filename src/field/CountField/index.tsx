@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Badge, Space, Tooltip, type BadgeProps, type TooltipProps} from 'antd';
+import {ConfigProvider, Badge, Space, type BadgeProps, type TooltipProps} from 'antd';
 import {type SpaceSize} from 'antd/es/space';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
@@ -77,7 +77,7 @@ export type CountFieldProps = React.PropsWithChildren<{
      * @description.zh-CN 计数的属性
      * @description.zh-TW 計數的屬性
      */
-    countProps?: Omit<BadgeProps, 'color' | 'count' | 'dot' | 'showZero' | 'size' | 'status' | 'text'>;
+    countProps?: Omit<BadgeProps, 'children' | 'color' | 'count' | 'dot' | 'showZero' | 'size' | 'status' | 'text'>;
 
     /**
      * @description The layout of the label and the field

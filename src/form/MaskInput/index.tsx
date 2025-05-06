@@ -27,7 +27,7 @@ import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {PropUtils} from '@/util/PropUtils';
 
 
-export type MaskInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
+export type MaskInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

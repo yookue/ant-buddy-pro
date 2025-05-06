@@ -19,4 +19,4 @@ import {MaskInput} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="MaskInput.en-US" src="@/form/MaskInput/index.tsx" hideTitle></API>
+<API id="MaskInput"></API>

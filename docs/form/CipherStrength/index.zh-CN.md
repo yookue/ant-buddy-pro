@@ -19,4 +19,4 @@ import {CipherStrength} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="CipherStrength.zh-CN" src="@/form/CipherStrength/index.tsx" hideTitle></API>
+<API id="CipherStrength"></API>

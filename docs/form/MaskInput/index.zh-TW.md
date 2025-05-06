@@ -19,4 +19,4 @@ import {MaskInput} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="MaskInput.zh-TW" src="@/form/MaskInput/index.tsx" hideTitle></API>
+<API id="MaskInput"></API>

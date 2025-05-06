@@ -21,4 +21,4 @@ import {DelayModal} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="DelayModal.en-US" src="@/field/DelayModal/index.tsx" hideTitle></API>
+<API id="DelayModal"></API>

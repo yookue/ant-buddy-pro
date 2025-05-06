@@ -19,4 +19,4 @@ import {ServerTuple} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ServerTuple.en-US" src="@/form/ServerTuple/index.tsx" hideTitle></API>
+<API id="ServerTuple"></API>

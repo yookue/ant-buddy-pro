@@ -129,7 +129,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type CronInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
+export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

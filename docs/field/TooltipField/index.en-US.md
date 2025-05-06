@@ -19,4 +19,4 @@ import {TooltipField} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="TooltipField.en-US" src="@/field/TooltipField/index.tsx" hideTitle></API>
+<API id="TooltipField"></API>

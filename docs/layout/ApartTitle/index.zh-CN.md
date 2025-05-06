@@ -19,4 +19,4 @@ import {ApartTitle} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="ApartTitle.zh-CN" src="@/layout/ApartTitle/index.tsx" hideTitle></API>
+<API id="ApartTitle"></API>

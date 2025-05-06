@@ -19,4 +19,4 @@ import {ChronoTuple} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="ChronoTuple.zh-CN" src="@/form/ChronoTuple/index.tsx" hideTitle></API>
+<API id="ChronoTuple"></API>

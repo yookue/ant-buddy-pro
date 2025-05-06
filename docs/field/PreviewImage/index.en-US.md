@@ -19,4 +19,4 @@ import {PreviewImage} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="PreviewImage.en-US" src="@/field/PreviewImage/index.tsx" hideTitle></API>
+<API id="PreviewImage"></API>

@@ -19,4 +19,4 @@ import {FallbackImage} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="FallbackImage.en-US" src="@/field/FallbackImage/index.tsx" hideTitle></API>
+<API id="FallbackImage"></API>

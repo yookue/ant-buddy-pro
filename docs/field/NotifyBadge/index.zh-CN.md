@@ -21,4 +21,4 @@ import {NotifyBadge} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="NotifyBadge.zh-CN" src="@/field/NotifyBadge/index.tsx" hideTitle></API>
+<API id="NotifyBadge"></API>

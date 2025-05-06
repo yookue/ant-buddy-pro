@@ -31,4 +31,4 @@ import {IconSelect} from '@yookue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="IconSelect.zh-CN" src="@/form/IconSelect/index.tsx" hideTitle></API>
+<API id="IconSelect"></API>

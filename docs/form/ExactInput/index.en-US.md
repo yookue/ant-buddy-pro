@@ -31,4 +31,4 @@ import {ExactInput} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ExactInput.en-US" src="@/form/ExactInput/index.tsx" hideTitle></API>
+<API id="ExactInput"></API>

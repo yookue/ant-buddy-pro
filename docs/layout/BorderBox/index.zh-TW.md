@@ -19,4 +19,4 @@ import {BorderBox} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="BorderBox.zh-TW" src="@/layout/BorderBox/index.tsx" hideTitle></API>
+<API id="BorderBox"></API>

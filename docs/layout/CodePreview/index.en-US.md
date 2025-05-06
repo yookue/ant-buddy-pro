@@ -19,4 +19,4 @@ import {CodePreview} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CodePreview.en-US" src="@/layout/CodePreview/index.tsx" hideTitle></API>
+<API id="CodePreview"></API>

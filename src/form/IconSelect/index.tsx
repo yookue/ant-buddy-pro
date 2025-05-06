@@ -134,7 +134,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type IconSelectProps = SelectFieldProps & {
+export type IconSelectProps = Omit<SelectFieldProps, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀

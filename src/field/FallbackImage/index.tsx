@@ -57,10 +57,10 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fallback-image');
 
-    // noinspection DuplicatedCode
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();
 
+    // noinspection DuplicatedCode
     React.useEffect(() => {
         ImageUtils.detectSource(props?.src, res => setImageSrc(res));
     }, [props?.src]);

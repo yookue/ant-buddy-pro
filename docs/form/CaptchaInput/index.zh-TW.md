@@ -26,4 +26,4 @@ import {CaptchaInput} from '@yookue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="CaptchaInput.zh-TW" src="@/form/CaptchaInput/index.tsx" hideTitle></API>
+<API id="CaptchaInput"></API>

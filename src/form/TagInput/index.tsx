@@ -70,7 +70,7 @@ export type TextTagProps = Omit<TagProps, 'children'> & {
 };
 
 
-export type TagInputProps = Omit<ProFormFieldItemProps, 'fieldRef' | 'fieldProps' | 'placeholder' | 'disabled' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
+export type TagInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef' | 'fieldProps' | 'placeholder' | 'disabled' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request' | 'valueEnum'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -384,11 +384,13 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 </span>
             );
         });
+        // noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
         const wrapDom = !tweenOneAnim ? tagsDom : (
             <TweenOneGroup {...buildTweenOneProps()}>
                 {tagsDom}
             </TweenOneGroup>
         );
+        // noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
         return (
             <div className={`${clazzPrefix}-fulfil`}>
                 {wrapDom}

@@ -19,4 +19,4 @@ import {PageFooter} from '@yookue/ant-buddy-pro';
 
 ## Properties
 
-<API id="PageFooter.en-US" src="@/layout/PageFooter/index.tsx" hideTitle></API>
+<API id="PageFooter"></API>
