@@ -25,10 +25,14 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             [`&-popup`]: {
-                minWidth: 300,
-                [`> ${token.antCls}-dropdown-menu > ${token.antCls}-dropdown-menu-item:hover`]: {
-                    backgroundColor: 'unset !important',
-                    cursor: 'unset !important',
+                minWidth: 320,
+                [`> ${token.antCls}-dropdown-menu > ${token.antCls}-dropdown-menu-item`]: {
+                    paddingLeft: `${token.paddingXS}px !important`,
+                    paddingRight: `${token.paddingXS}px !important`,
+                    [`&:hover`]: {
+                        backgroundColor: 'unset !important',
+                        cursor: 'unset !important',
+                    }
                 },
                 [`${token.componentCls}-tabs`]: {
                     [`${token.antCls}-tabs-content-top ${token.antCls}-tabs-tab`]: {
@@ -75,12 +79,11 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                             fontWeight: 'normal',
                         },
                         [`&-description`]: {
-                            lineHeight: token.lineHeight,
+                            fontSize: token.fontSize - 1,
                         },
                         [`&-timestamp`]: {
                             marginTop: token.marginXXS,
                             fontSize: token.fontSizeSM,
-                            lineHeight: token.lineHeight,
                         },
                         [`&-extra`]: {
                             float: 'right',
@@ -99,25 +102,39 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     [`${token.componentCls}-builtin-footer`]: {
                         height: 38,
                         color: token.colorPrimaryText,
-                        lineHeight: 46,
+                        display: 'flex',
+                        alignItems: 'start',
                         textAlign: 'center',
                         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
-                        borderRadius: `0 0 ${token.borderRadius} ${token.borderRadius}`,
+                        borderRadius: `0 0 ${token.borderRadius}px ${token.borderRadius}px`,
                         transition: 'all 0.3s',
                         [`${token.componentCls}-action-button`]: {
-                            display: 'inline-block',
-                            width: '50%',
+                            display: 'flex',
+                            flex: 1,
                             cursor: 'pointer',
+                            height: '100%',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                             transition: 'all 0.3s',
                             userSelect: 'none',
                             [`&:hover`]: {
+                                backgroundColor: token.controlItemBgHover,
                                 color: token.colorPrimaryHover,
                             },
-                            [`&:only-child`]: {
-                                width: '100%',
+                            [`&:only-child:hover`]: {
+                                borderBottomLeftRadius: token.borderRadius,
+                                borderBottomRightRadius: token.borderRadius,
+                            },
+                            [`&:not(:only-child):first-child`]: {
+                                [`&:hover`]: {
+                                    borderBottomLeftRadius: token.borderRadius,
+                                }
                             },
                             [`&:not(:only-child):last-child`]: {
                                 borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                                [`&:hover`]: {
+                                    borderBottomRightRadius: token.borderRadius,
+                                }
                             }
                         }
                     }

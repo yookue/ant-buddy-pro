@@ -1,13 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+**/._*
 **/.DS_Store
 node_modules
 coverage
 dist
 docs-dist
-.dumi/tmp
-.dumi/tmp-test
-.dumi/tmp-production
+.dumi/tmp*
 .idea
 .vscode
 npm-debug.log*

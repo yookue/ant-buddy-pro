@@ -49,7 +49,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 [`&-title`]: {
                     fontWeight: 500,
                     fontSize: 20,
-                    lineHeight: 28,
                     marginBottom: 12,
                 }
             },

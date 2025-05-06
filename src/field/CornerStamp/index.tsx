@@ -278,32 +278,32 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                 rectCenter = [hypotenuse / 2, -perpendicular / 2];
                 stampCenter = [size / 3, -size / 3];
                 diffProps = {
-                    top: `${rectCenter[1] - stampCenter[1]}`,
-                    left: `${stampCenter[0] - rectCenter[0]}`,
+                    top: `${rectCenter[1] - stampCenter[1]}px !important`,
+                    left: `${stampCenter[0] - rectCenter[0]}px !important`,
                 };
                 break;
             case 'topRight':
                 rectCenter = [-hypotenuse / 2, -perpendicular / 2];
                 stampCenter = [-size / 3, -size / 3];
                 diffProps = {
-                    top: `${rectCenter[1] - stampCenter[1]}`,
-                    right: `${rectCenter[0] - stampCenter[0]}`,
+                    top: `${rectCenter[1] - stampCenter[1]}px !important`,
+                    right: `${rectCenter[0] - stampCenter[0]}px !important`,
                 };
                 break;
             case 'bottomLeft':
                 rectCenter = [hypotenuse / 2, perpendicular / 2];
                 stampCenter = [size / 3, size / 3];
                 diffProps = {
-                    bottom: `${rectCenter[1] - stampCenter[1]}`,
-                    left: `${stampCenter[0] - rectCenter[0]}`,
+                    bottom: `${rectCenter[1] - stampCenter[1]}px !important`,
+                    left: `${stampCenter[0] - rectCenter[0]}px !important`,
                 };
                 break;
             case 'bottomRight':
                 rectCenter = [-hypotenuse / 2, perpendicular / 2];
                 stampCenter = [-size / 3, size / 3];
                 diffProps = {
-                    bottom: `${rectCenter[1] - stampCenter[1]}`,
-                    right: `${rectCenter[0] - stampCenter[0]}`,
+                    bottom: `${rectCenter[1] - stampCenter[1]}px !important`,
+                    right: `${rectCenter[0] - stampCenter[0]}px !important`,
                 };
                 break;
             default:

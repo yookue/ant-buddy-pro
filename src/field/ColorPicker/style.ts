@@ -124,18 +124,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             boxShadow: token.boxShadow,
             zIndex: token.zIndexPopupBase,
             [`.block-picker`]: {
-                borderRadius: `${token.borderRadius} !important`,
+                borderRadius: `${token.borderRadius}px !important`,
                 [`> div:nth-of-type(2)`]: {
-                    borderTopLeftRadius: `${token.borderRadius} !important`,
-                    borderTopRightRadius: `${token.borderRadius} !important`,
+                    borderTopLeftRadius: `${token.borderRadius}px !important`,
+                    borderTopRightRadius: `${token.borderRadius}px !important`,
                 },
                 [`> div:last-of-type > div:first-of-type > span > div`]: {
-                    borderRadius: `${token.borderRadius} !important`,
+                    borderRadius: `${token.borderRadius}px !important`,
                 },
                 [`> div:last-of-type input`]: {
                     border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder} !important`,
                     boxShadow: 'none !important',
-                    borderRadius: `${token.borderRadius} !important`,
+                    borderRadius: `${token.borderRadius}px !important`,
                     [`&:focus, &:hover`]: {
                         borderColor: `${token.colorPrimaryBorderHover} !important`,
                     }
@@ -151,7 +151,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     }
                 },
                 [`svg`]: {
-                    borderRadius: `${token.borderRadius} !important`,
+                    borderRadius: `${token.borderRadius}px !important`,
                     [`&:hover`]: {
                         backgroundColor: token.colorPrimaryBgHover,
                         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorPrimaryBorderHover} !important`,
@@ -170,10 +170,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 padding: `8px !important`,
             },
             [`.sketch-picker`]: {
-                borderRadius: `${token.borderRadius} !important`,
+                borderRadius: `${token.borderRadius}px !important`,
                 boxShadow: 'none !important',
                 [`> div:last-of-type > div > span > div`]: {
-                    borderRadius: `${token.borderRadius} !important`,
+                    borderRadius: `${token.borderRadius}px !important`,
                 },
                 [`> div:nth-of-type(3) > div`]: {
                     [`&:first-of-type > div`]: {
@@ -185,7 +185,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     [`> div input`]: {
                         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder} !important`,
                         boxShadow: 'none !important',
-                        borderRadius: `${token.borderRadius} !important`,
+                        borderRadius: `${token.borderRadius}px !important`,
                         width: `100% !important`,
                         [`&:focus, &:hover`]: {
                             borderColor: `${token.colorPrimaryBorderHover} !important`,
@@ -223,24 +223,24 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             },
             [`.twitter-picker`]: {
-                borderRadius: `${token.borderRadius} !important`,
+                borderRadius: `${token.borderRadius}px !important`,
                 [`> div:last-of-type`]: {
                     [`> span > div`]: {
-                        borderRadius: `${token.borderRadius} !important`,
+                        borderRadius: `${token.borderRadius}px !important`,
                     },
                     [`> div:first-of-type`]: {
                         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder} !important`,
                         borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder} !important`,
                         borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder} !important`,
-                        borderTopLeftRadius: `${token.borderRadius} !important`,
-                        borderBottomLeftRadius: `${token.borderRadius} !important`,
+                        borderTopLeftRadius: `${token.borderRadius}px !important`,
+                        borderBottomLeftRadius: `${token.borderRadius}px !important`,
                     },
                     [`> div:nth-of-type(2) input`]: {
                         height: '30px !important',
                         boxShadow: 'none !important',
                         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder} !important`,
-                        borderTopRightRadius: `${token.borderRadius} !important`,
-                        borderBottomRightRadius: `${token.borderRadius} !important`,
+                        borderTopRightRadius: `${token.borderRadius}px !important`,
+                        borderBottomRightRadius: `${token.borderRadius}px !important`,
                         [`&:focus, &:hover`]: {
                             borderColor: `${token.colorPrimaryBorderHover} !important`,
                             outline: 'none !important',

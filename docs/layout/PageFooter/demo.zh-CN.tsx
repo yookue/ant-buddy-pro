@@ -43,7 +43,7 @@ export default () => {
                             size='small'
                             value={bgColor}
                             onChangeComplete={(color) => {
-                                setBgColor(color?.toHexString);
+                                setBgColor(color?.toHexString());
                             }}
                         />
                     </ProForm.Item>
