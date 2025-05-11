@@ -17,11 +17,12 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {CronInput} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
+    const [tabPos, setTabPos] = React.useState<'top' | 'bottom'>('top');
     const [allowSecond, setAllowSecond] = React.useState(true);
     const [allowYear, setAllowYear] = React.useState(true);
     const [allowOkEcho, setAllowOkEcho] = React.useState(true);
@@ -34,6 +35,21 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProFormRadio.Group
+                    label='Tab Position'
+                    radioType='button'
+                    fieldProps={{
+                        value: tabPos,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setTabPos(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Top', value: 'top'},
+                        {label: 'Bottom', value: 'bottom'},
+                    ]}
+                />
                 <ProForm.Group>
                     <ProFormSwitch
                         label='Allow Second'
@@ -76,6 +92,9 @@ export default () => {
                     allowSecond={allowSecond}
                     allowYear={allowYear}
                     allowOkEcho={allowOkEcho}
+                    tabsProps={{
+                        tabPosition: tabPos,
+                    }}
                     locale='en_US'
                 />
             </ProForm>

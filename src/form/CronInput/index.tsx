@@ -23,12 +23,13 @@ import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
+import Trigger, {type TriggerProps} from '@rc-component/trigger';
+import '@rc-component/trigger/assets/index.less';
 import {If} from '@yookue/react-condition';
 import {ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import cronValidate from 'cron-validate';
-import Trigger, {type TriggerProps} from '@rc-component/trigger';
-import '@rc-component/trigger/assets/index.less';
+import {type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
@@ -53,6 +54,11 @@ export type CronInputRef = {
     isShowYear: () => boolean;
     setShowSecond: () => void;
     setShowYear: () => void;
+};
+
+
+export type CronTabProps = Omit<CardTabsProps, 'addIcon' | 'hideAdd' | 'items' | 'onEdit'> & {
+    tabPosition?: Omit<RcTabPosition, 'left' | 'right'>;
 };
 
 
@@ -210,7 +216,7 @@ export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
      * @description.zh-CN 标签页的属性
      * @description.zh-TW 標籤頁的屬性
      */
-    tabsProps?: Omit<CardTabsProps, 'addIcon' | 'hideAdd' | 'items' | 'onEdit'>;
+    tabsProps?: CronTabProps;
 
     /**
      * @description The properties of the second panel
@@ -314,6 +320,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
     const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input');
+    const subClazzPrefix = configContext.getPrefixCls(props?.tabsProps?.clazzPrefix ?? 'buddy-card-tabs');
     const intlType = useIntl();
 
     // Initialize the default props
@@ -332,7 +339,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     const [showSecond, setShowSecond] = React.useState<boolean>(props?.defaultShowSecond ?? false);
     const [showYear, setShowYear] = React.useState<boolean>(props?.defaultShowYear ?? false);
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
-    const fieldStyle = useFieldStyle(clazzPrefix);
+    const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({

@@ -24,6 +24,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}-popup`]: {
             backgroundColor: token.colorBgContainer,
+            borderRadius: token.borderRadiusLG,
             boxShadow: token.boxShadow,
             zIndex: token.zIndexPopupBase,
             [`${token.antCls}-form ${token.antCls}-space-item`]: {
@@ -39,6 +40,16 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     minWidth: 44,
                     height: 18,
                     fontSize: token.fontSizeSM,
+                }
+            },
+            [`> ${token.subComponentCls}`]: {
+                [`&${token.subComponentCls}-top > ${token.subComponentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
+                    borderTopColor: `${token.colorBorderSecondary} !important`,
+                    borderTopRightRadius: '0 !important',
+                },
+                [`&${token.subComponentCls}-bottom > ${token.subComponentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
+                    borderBottomColor: `${token.colorBorderSecondary} !important`,
+                    borderBottomRightRadius: '0 !important',
                 }
             }
         },
@@ -65,11 +76,13 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
 }
 
 
-export function useFieldStyle(prefixCls: string): UseStyleResult {
+export function useFieldStyle(prefixCls: string, subPrefixCls: string): UseStyleResult {
     return useStyle(`${PackageConst.PACKAGE_NAME}:CronInput`, (token) => {
         const mesh: ExtraProAliasToken = {
             prefixCls,
             componentCls: `.${prefixCls}`,
+            subPrefixCls,
+            subComponentCls: `.${subPrefixCls}`,
             ...token,
         };
         return [buildFieldStyle(mesh)];

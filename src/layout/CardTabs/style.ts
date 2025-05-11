@@ -39,6 +39,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     background: 'transparent',
                     border: 'none',
                 },
+                [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab`]: {
+                    borderColor: token.colorBorder,
+                },
                 [`&${token.antCls}-tabs-top`]: {
                     [`> ${token.antCls}-tabs-nav`]: {
                         marginBottom: 0,
@@ -49,9 +52,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                     },
                     [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderRadius: `0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
+                        marginTop: -1,
                     }
                 },
                 [`&${token.antCls}-tabs-bottom`]: {
@@ -64,9 +67,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                     },
                     [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderRadius: `${token.borderRadiusLG}px ${token.borderRadiusLG}px ${token.borderRadiusLG}px 0`,
+                        marginBottom: -1,
                     }
                 },
                 [`&${token.antCls}-tabs-left`]: {
@@ -79,6 +82,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                         borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderRadius: `0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
                     }
                 },
                 [`&${token.antCls}-tabs-right`]: {
@@ -91,12 +95,34 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                         borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderRadius: `${token.borderRadiusLG}px 0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
+                    }
+                }
+            },
+            [`&${token.componentCls}-top-end`]: {
+                [`> ${token.antCls}-tabs`]: {
+                    [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
+                        borderRadius: `${token.borderRadiusLG}px 0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
+                        marginTop: -1,
+                    }
+                }
+            },
+            [`&${token.componentCls}-bottom-end`]: {
+                [`> ${token.antCls}-tabs`]: {
+                    [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
+                        borderRadius: `${token.borderRadiusLG}px ${token.borderRadiusLG}px 0 ${token.borderRadiusLG}px`,
+                        marginBottom: -1,
                     }
                 }
             },
             [`&${token.componentCls}-top-end, &${token.componentCls}-bottom-end`]: {
                 [`> ${token.antCls}-tabs:not(${token.antCls}-tabs-centered) > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap`]: {
                     justifyContent: 'flex-end',
+                }
+            },
+            [`&${token.componentCls}-top, &${token.componentCls}-top-end, &${token.componentCls}-bottom, &${token.componentCls}-bottom-end`]: {
+                [`> ${token.antCls}-tabs > ${token.antCls}-tabs-nav::before`]: {
+                    borderBottom: 'none',
                 }
             },
             [`&${token.componentCls}-padding-0 > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
