@@ -25,10 +25,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}-popup`]: {
             backgroundColor: token.colorBgContainer,
+            borderRadius: token.borderRadiusLG,
             boxShadow: token.boxShadow,
             zIndex: token.zIndexPopupBase,
             [`${token.componentCls}-popup-list`]: {
-                borderRadius: token.borderRadius,
                 [`${token.componentCls}-popup-list-item`]: {
                     [`&:hover`]: {
                         backgroundColor: token.controlItemBgHover,
