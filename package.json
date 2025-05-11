@@ -32,7 +32,7 @@
         "start:prd": "cross-env APP_ENV=prd dumi dev",
         "build": "del-cli ./dist && father build",
         "doctor": "father doctor",
-        "docs:build": "npm run docs:build-dev",
+        "docs:build": "npm run docs:build-prd",
         "docs:build-dev": "del-cli ./docs-dist && cross-env APP_ENV=dev dumi build",
         "docs:build-prd": "del-cli ./docs-dist && cross-env APP_ENV=prd dumi build",
         "docs:publish": "gh-pages -d ./docs-dist",
