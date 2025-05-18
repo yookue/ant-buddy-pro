@@ -78,8 +78,8 @@ export default defineConfig({
     apiParser: {},
     exportStatic: {},
     hash: true,
-    // mako: {},
-    mfsu: {},
+    mako: {},
+    // mfsu: {},
     // ssr: {builder: 'mako'},
     // chainWebpack(memo, args) {
     //     return memo;
