@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]||[]).push([["4035a77a"],{"4035a77a":function(e,o,u){"use strict";u.d(o,"__esModule",{value:!0}),u.d(o,"demos",{enumerable:!0,get:function(){return a;}}),u("581839e8");let a={};}}]);
+//# sourceMappingURL=4035a77a-async.5c95158d.js.map

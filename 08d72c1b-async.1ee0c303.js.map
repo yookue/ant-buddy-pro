@@ -1,0 +1,1 @@
+{"version":3,"sources":["docs/guide/index.en-US.md?type=demo"],"sourcesContent":["import React from 'react';\nimport '/Volumes/TU201-UD/Personal/WebStorm/AntBuddyPro/bundle/ant-buddy-pro/docs/guide/index.en-US.md?watch=parent';\nexport const demos = {\n};"],"names":[],"mappings":"+QAEa,6CAAA,QADN,YACA,IAAM,EAAQ,CACrB"}
