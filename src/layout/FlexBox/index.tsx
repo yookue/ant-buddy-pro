@@ -16,7 +16,6 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
 import {css} from '@emotion/css';
 import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -31,7 +30,7 @@ export type FlexBoxProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-flex-box''
+     * @default 'abp-flex-box''
      */
     clazzPrefix?: string;
 
@@ -167,8 +166,7 @@ export type FlexBoxProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-flex-box');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-flex-box';
 
     const fieldStyle = useFieldStyle(clazzPrefix);
 

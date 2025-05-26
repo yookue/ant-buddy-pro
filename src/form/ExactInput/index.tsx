@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Checkbox, Space, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
+import {Input, Checkbox, Space, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {useIntl} from '@ant-design/pro-provider';
@@ -79,7 +79,7 @@ export type ExactInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-exact-input'
+     * @default 'abp-exact-input'
      */
     clazzPrefix?: string;
 
@@ -150,8 +150,7 @@ export type ExactInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
  * @author David Hsing
  */
 export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-exact-input');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-exact-input';
     const intlType = useIntl();
 
     // Initialize the default props

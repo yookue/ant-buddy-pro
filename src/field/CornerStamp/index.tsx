@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, type BadgeProps} from 'antd';
+import {type BadgeProps} from 'antd';
 import {isPresetColor} from 'antd/es/_util/colors';
 import {presetPrimaryColors} from '@ant-design/colors';
 import {css} from '@emotion/css';
@@ -32,7 +32,7 @@ export type CornerStampProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-corner-stamp'
+     * @default 'abp-corner-stamp'
      */
     clazzPrefix?: string;
 
@@ -132,8 +132,7 @@ export type CornerStampProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-corner-stamp');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-corner-stamp';
 
     // Initialize the default props
     const {

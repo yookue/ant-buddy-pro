@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Typography} from 'antd';
+import {Typography} from 'antd';
 import {type TitleProps} from 'antd/es/typography/Title';
 import {type TextProps} from 'antd/es/typography/Text';
 import {If} from '@yookue/react-condition';
@@ -30,7 +30,7 @@ export type CodePreviewProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-code-preview'
+     * @default 'abp-code-preview'
      */
     clazzPrefix?: string;
 
@@ -163,8 +163,7 @@ export type CodePreviewProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-code-preview');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-code-preview';
 
     // Initialize the default props
     const {

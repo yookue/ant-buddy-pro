@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Menu, type MenuProps} from 'antd';
+import {Menu, type MenuProps} from 'antd';
 import {type MenuItemType} from 'antd/es/menu/interface';
 import {css} from '@emotion/css';
 import {BooleanUtils} from '@yookue/ts-lang-utils';
@@ -86,7 +86,7 @@ export type MenuTabsProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-menu-tabs'
+     * @default 'abp-menu-tabs'
      */
     clazzPrefix?: string;
 
@@ -237,8 +237,7 @@ export type MenuTabsProps = {
  * @author David Hsing
  */
 export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-menu-tabs');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-menu-tabs';
 
     // Initialize the default props
     const {

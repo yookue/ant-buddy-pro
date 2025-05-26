@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Select} from 'antd';
+import {Select} from 'antd';
 import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {type RequestOptionsType} from '@ant-design/pro-utils';
@@ -39,7 +39,7 @@ export type DivideSelectProps = Omit<ProFormSelectProps, 'children'> & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-divide-select'
+     * @default 'abp-divide-select'
      */
     clazzPrefix?: string;
 
@@ -146,8 +146,7 @@ export type DivideSelectProps = Omit<ProFormSelectProps, 'children'> & {
  * @author David Hsing
  */
 export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-divide-select');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-divide-select';
 
     // Initialize the default props
     const {

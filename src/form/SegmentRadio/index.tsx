@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import {ConfigProvider, Segmented, type SegmentedProps} from 'antd';
+import {Segmented, type SegmentedProps} from 'antd';
 import {type SegmentedLabeledOption} from 'antd/es/segmented';
 import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
@@ -35,7 +35,7 @@ export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'chi
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-segment-radio'
+     * @default 'abp-segment-radio'
      */
     clazzPrefix?: string;
 
@@ -92,9 +92,8 @@ export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'chi
  * @author David Hsing
  */
 export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-segment-radio');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-segment-radio';
 
     // Initialize the default props
     const {

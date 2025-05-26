@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Space, type SpaceProps} from 'antd';
+import {Space, type SpaceProps} from 'antd';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from '@/field/ThumbToggle';
@@ -34,7 +34,7 @@ export type ThumbTupleProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-thumb-tuple'
+     * @default 'abp-thumb-tuple'
      */
     clazzPrefix?: string;
 
@@ -83,8 +83,7 @@ export type ThumbTupleProps = {
 export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React.RefAttributes<ThumbTupleRef>> = React.forwardRef((props?: ThumbTupleProps, ref?: any) => {
     ThumbTuple.displayName = 'ThumbTuple';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-tuple');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-thumb-tuple';
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const thumbLikeRef = React.useRef<ThumbToggleRef>(null);

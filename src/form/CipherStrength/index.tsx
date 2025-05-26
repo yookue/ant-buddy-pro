@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Row, Col, Form, Progress, theme} from 'antd';
+import {Row, Col, Form, Progress, theme} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {useIntl} from '@ant-design/pro-provider';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
@@ -109,7 +109,7 @@ export type CipherStrengthProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-cipher-strength'
+     * @default 'abp-cipher-strength'
      */
     clazzPrefix?: string;
 
@@ -207,9 +207,8 @@ export type CipherStrengthProps = {
  * @author David Hsing
  */
 export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStrengthProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cipher-strength');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-cipher-strength';
     const intlType = useIntl();
 
     ConsoleUtils.warn(!!formContext?.form, true, 'CipherStrength', `Field needs a Form instance`);

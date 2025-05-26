@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, type TooltipProps} from 'antd';
+import {type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
@@ -56,7 +56,7 @@ export type FullscreenProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-fullscreen'
+     * @default 'abp-fullscreen'
      */
     clazzPrefix?: string;
 
@@ -127,8 +127,7 @@ export type FullscreenProps = {
 export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React.RefAttributes<FullscreenRef>> = React.forwardRef((props?: FullscreenProps, ref?: any) => {
     Fullscreen.displayName = 'Fullscreen';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fullscreen');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-fullscreen';
     const intlType = useIntl();
 
     // Initialize the default props

@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Tabs, type TabsProps} from 'antd';
+import {Tabs, type TabsProps} from 'antd';
 import {type SizeType} from 'antd/es/config-provider/SizeContext';
 import classNames from 'classnames';
 import {type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
@@ -36,7 +36,7 @@ export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition'> & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-card-tabs'
+     * @default 'abp-card-tabs'
      */
     clazzPrefix?: string;
 
@@ -110,8 +110,7 @@ export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition'> & {
  * @author David Hsing
  */
 export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-card-tabs');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-card-tabs';
 
     // Initialize the default props
     const {

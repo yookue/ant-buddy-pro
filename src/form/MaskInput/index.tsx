@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, type InputProps, type InputRef} from 'antd';
+import {Input, type InputProps, type InputRef} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
@@ -32,7 +32,7 @@ export type MaskInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-mask-input'
+     * @default 'abp-mask-input'
      */
     clazzPrefix?: string;
 
@@ -59,9 +59,8 @@ export type MaskInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
  * @author David Hsing
  */
 export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-mask-input');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-mask-input';
 
     ConsoleUtils.warn(!!formContext?.form, true, 'MaskInput', `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);
 

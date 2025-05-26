@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Space, InputNumber} from 'antd';
+import {Space, InputNumber} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
@@ -36,7 +36,7 @@ export type ServerTupleProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-server-tuple'
+     * @default 'abp-server-tuple'
      */
     clazzPrefix?: string;
 
@@ -106,10 +106,9 @@ export type ServerTupleProps = {
  * @author David Hsing
  */
 export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-server-tuple');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-server-tuple';
     const intlType = useIntl();
 
     // Initialize the default props

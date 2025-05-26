@@ -16,7 +16,6 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
 import classNames from 'classnames';
 import {useFieldStyle} from './style';
 
@@ -26,7 +25,7 @@ export type BorderBoxProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-border-box'
+     * @default 'abp-border-box'
      */
     clazzPrefix?: string;
 
@@ -91,8 +90,7 @@ export type BorderBoxProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-border-box');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-border-box';
 
     // Initialize the default props
     const {

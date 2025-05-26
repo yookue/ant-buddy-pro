@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Empty, type TooltipProps} from 'antd';
+import {Empty, type TooltipProps} from 'antd';
 import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
@@ -53,7 +53,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-fold-section'
+     * @default 'abp-fold-section'
      */
     clazzPrefix?: string;
 
@@ -235,8 +235,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fold-section');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-fold-section';
     const intlType = useIntl();
 
     // Initialize the default props

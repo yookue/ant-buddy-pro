@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type DropdownProps, type ListProps, type MenuProps, type TabsProps} from 'antd';
+import {Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type DropdownProps, type ListProps, type MenuProps, type TabsProps} from 'antd';
 import {ListItemMetaProps} from 'antd/es/list/Item';
 import {BellOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
@@ -219,7 +219,7 @@ export type NotifyBadgeProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-notify-badge'
+     * @default 'abp-notify-badge'
      */
     clazzPrefix?: string;
 
@@ -288,8 +288,7 @@ export type NotifyBadgeProps = {
  * @author David Hsing
  */
 export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-notify-badge');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-notify-badge';
     const intlType = useIntl();
 
     // Initialize the default props

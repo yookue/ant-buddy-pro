@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
+import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -102,7 +102,7 @@ export type HourPanelProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-cron-input-hour-panel'
+     * @default 'abp-cron-input-hour'
      */
     clazzPrefix?: string;
 
@@ -151,9 +151,8 @@ export type HourPanelProps = {
 export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.RefAttributes<HourPanelRef>> = React.forwardRef((props?: HourPanelProps, ref?: any) => {
     HourPanel.displayName = 'CronInputHourPanel';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const entryContext = React.useContext(CronInputContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-hour-panel');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input-hour';
     // noinspection DuplicatedCode
     const intlType = useIntl();
 

@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, type TooltipProps} from 'antd';
+import {type TooltipProps} from 'antd';
 import classNames from 'classnames';
 import {TooltipRender} from '@/render/TooltipRender';
 
@@ -26,7 +26,7 @@ export type TooltipFieldProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-tooltip-field'
+     * @default 'abp-tooltip-field'
      */
     clazzPrefix?: string;
 
@@ -103,8 +103,7 @@ export type TooltipFieldProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const TooltipField: React.FC<TooltipFieldProps> = (props?: TooltipFieldProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-tooltip-field');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-tooltip-field';
 
     // Initialize the default props
     const {

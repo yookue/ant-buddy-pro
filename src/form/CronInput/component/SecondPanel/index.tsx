@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
+import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -102,7 +102,7 @@ export type SecondPanelProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-cron-input-month-panel'
+     * @default 'abp-cron-input-month'
      */
     clazzPrefix?: string;
 
@@ -152,9 +152,8 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
     SecondPanel.displayName = 'CronInputSecondPanel';
 
     // noinspection DuplicatedCode
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const entryContext = React.useContext(CronInputContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-month-panel');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input-month';
     const intlType = useIntl();
 
     // Initialize the default props

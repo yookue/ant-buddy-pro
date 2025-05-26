@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps, message as messageApi} from 'antd';
+import {Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps, message as messageApi} from 'antd';
 import {type RcFile} from 'antd/es/upload/interface';
 import {UserOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
@@ -123,7 +123,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'children' | 'fieldR
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-avatar-upload'
+     * @default 'abp-avatar-upload'
      */
     clazzPrefix?: string;
 
@@ -266,9 +266,8 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'children' | 'fieldR
 const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & React.RefAttributes<AvatarUploadRef>> = React.forwardRef((props?: AvatarUploadProps, ref?: any) => {
     AvatarUploadField.displayName = 'AvatarUpload';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-avatar-upload');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-avatar-upload';
     const intlType = useIntl();
 
     // Initialize the default props

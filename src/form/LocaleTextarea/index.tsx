@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, type TabsProps, type FormRule} from 'antd';
+import {Input, type TabsProps, type FormRule} from 'antd';
 import {type TextAreaProps, type TextAreaRef} from 'antd/es/input/TextArea';
 import {ProFormTextArea} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
@@ -137,7 +137,7 @@ export type LocaleTextareaProps = Omit<ProFormFieldItemProps<TextAreaProps, Text
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-locale-textarea'
+     * @default 'abp-locale-textarea'
      */
     clazzPrefix?: string;
 
@@ -236,10 +236,9 @@ export type LocaleTextareaProps = Omit<ProFormFieldItemProps<TextAreaProps, Text
  * @author David Hsing
  */
 export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleTextareaProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-textarea');
-    const subClazzPrefix = configContext.getPrefixCls(props?.tabsProps?.clazzPrefix ?? 'buddy-card-tabs');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-textarea';
+    const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();
 
     // Initialize the default props

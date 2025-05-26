@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Select} from 'antd';
+import {Select} from 'antd';
 import {type LabeledValue} from 'antd/es/select';
 import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
@@ -107,7 +107,7 @@ export type ChronoSelectProps = Omit<ProFormSelectProps, 'children'> & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-chrono-select'
+     * @default 'abp-chrono-select'
      */
     clazzPrefix?: string;
 
@@ -156,8 +156,7 @@ export type ChronoSelectProps = Omit<ProFormSelectProps, 'children'> & {
  * @author David Hsing
  */
 export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-chrono-select');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-chrono-select';
     const intlType = useIntl();
 
     // Initialize the default props

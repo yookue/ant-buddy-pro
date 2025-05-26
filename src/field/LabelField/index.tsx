@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Space} from 'antd';
+import {Space} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {type SpaceSize} from 'antd/es/space';
 import classNames from 'classnames';
@@ -32,7 +32,7 @@ export type LabelFieldProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-label-field'
+     * @default 'abp-label-field'
      */
     clazzPrefix?: string;
 
@@ -132,9 +132,8 @@ export type LabelFieldProps = React.PropsWithChildren<{
  * @author David Hsing
  */
 export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-label-field');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-label-field';
 
     // Initialize the default props
     const {

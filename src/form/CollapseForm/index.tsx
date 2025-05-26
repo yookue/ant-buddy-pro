@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, type FormProps, type FormInstance} from 'antd';
+import {Form, type FormProps, type FormInstance} from 'antd';
 import {ProForm, type ProFormProps, type ProFormInstance} from '@ant-design/pro-form';
 import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -39,7 +39,7 @@ export type CollapseFormProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-collapse-form'
+     * @default 'abp-collapse-form'
      */
     clazzPrefix?: string;
 
@@ -169,8 +169,7 @@ export type CollapseFormProps = React.PropsWithChildren<{
 export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & React.RefAttributes<CollapseFormRef>> = React.forwardRef((props?: CollapseFormProps, ref?: any) => {
     CollapseForm.displayName = 'CollapseForm';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-collapse-form');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-collapse-form';
 
     // Initialize the default props
     const {
@@ -258,7 +257,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
             return (
                 <ProForm
                     formRef={proFormRef}
-                    name={props?.formProps?.name ?? `buddy-collapse-form-${fieldId}`}
+                    name={props?.formProps?.name ?? `abp-collapse-form-${fieldId}`}
                     {...omitFromProps}
                     onFinish={async (values) => {
                         if (closeOnFinish) {
@@ -274,7 +273,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         return (
             <Form
                 form={formRef}
-                name={props?.formProps?.name ?? `buddy-collapse-form-${fieldId}`}
+                name={props?.formProps?.name ?? `abp-collapse-form-${fieldId}`}
                 {...omitFromProps}
                 onFinish={async (params) => {
                     if (closeOnFinish) {

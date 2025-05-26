@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Modal, type ModalProps, type ModalFuncProps} from 'antd';
+import {Modal, type ModalProps, type ModalFuncProps} from 'antd';
 import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
 import {NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -57,7 +57,7 @@ export type DelayModalProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-delay-modal'
+     * @default 'abp-delay-modal'
      */
     clazzPrefix?: string;
 
@@ -154,8 +154,7 @@ export type DelayModalProps = React.PropsWithChildren<{
 export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React.RefAttributes<DelayModalRef>> = React.forwardRef((props?: DelayModalProps, ref?: any) => {
     DelayModal.displayName = 'DelayModal';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-delay-modal');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-delay-modal';
 
     ConsoleUtils.warn(!!props?.modalProps || !!props?.modalFunProps, true, 'DelayModal', ` Any props of 'modalProps/modalFunProps' is required`);
 

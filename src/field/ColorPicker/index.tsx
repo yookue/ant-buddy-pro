@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Button, Space, type ButtonProps} from 'antd';
+import {Form, Button, Space, type ButtonProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {CloseCircleOutlined, DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
@@ -51,7 +51,7 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRe
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-color-picker'
+     * @default 'abp-color-picker'
      */
     clazzPrefix?: string;
 
@@ -224,10 +224,9 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRe
 export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & React.RefAttributes<ColorPickerRef>> = React.forwardRef((props?: ColorPickerProps, ref?: any) => {
     ColorPicker.displayName = 'ColorPicker';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-color-picker');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-color-picker';
 
     // Initialize the default props
     const {
@@ -314,7 +313,6 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                     size={props?.buttonProps?.size ?? 'small'}
                     style={buttonStyle}
                     {...omitButtonProps}
-                    data-buddy-color-picker-id={fieldId}
                 >
                     <Space>
                         {buildEntryIconDom(true)}
@@ -502,7 +500,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         }
     };
 
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onOpenChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onPopupVisibleChange']);
 
     const triggerDom = (
         <Trigger
@@ -515,9 +513,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             }}
             popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
-            onOpenChange={(open: boolean) => {
+            onPopupVisibleChange={(open: boolean) => {
                 setTriggerOpen(open);
-                props?.triggerProps?.onOpenChange?.(open);
+                props?.triggerProps?.onPopupVisibleChange?.(open);
             }}
             {...omitTriggerProps}
         >

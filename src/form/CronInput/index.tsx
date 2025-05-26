@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Button, Input, Switch, Space, type InputProps, type InputRef, message as messageApi} from 'antd';
+import {Button, Input, Switch, Space, type InputProps, type InputRef, message as messageApi} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {FieldTimeOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
@@ -140,7 +140,7 @@ export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-cron-input'
+     * @default 'abp-cron-input'
      */
     clazzPrefix?: string;
 
@@ -316,11 +316,10 @@ export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
 export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.RefAttributes<CronInputRef>> = React.forwardRef((props?: CronInputProps, ref?: any) => {
     CronInput.displayName = 'CronInput';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input');
-    const subClazzPrefix = configContext.getPrefixCls(props?.tabsProps?.clazzPrefix ?? 'buddy-card-tabs');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input';
+    const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();
 
     // Initialize the default props
@@ -778,7 +777,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         );
     };
 
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
 
     return (
         <Trigger
@@ -798,12 +797,12 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
             popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
             stretch={props?.triggerProps?.stretch ?? 'width'}
-            onOpenChange={(open: boolean) => {
+            onPopupVisibleChange={(open: boolean) => {
                 if (!open && (secondPanelRef.current?.isCompositing() || minutePanelRef.current?.isCompositing() || hourPanelRef.current?.isCompositing() || dayPanelRef.current?.isCompositing() || monthPanelRef.current?.isCompositing() || weekPanelRef.current?.isCompositing() || yearPanelRef.current?.isCompositing())) {
                     return;
                 }
                 setTriggerOpen(open);
-                props?.triggerProps?.onOpenChange?.(open);
+                props?.triggerProps?.onPopupVisibleChange?.(open);
             }}
             {...omitTriggerProps}
         >

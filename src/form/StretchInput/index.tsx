@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, type InputProps, type InputRef} from 'antd';
+import {Input, type InputProps, type InputRef} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {NanoidUtils} from '@yookue/ts-lang-utils';
@@ -32,7 +32,7 @@ export type StretchInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-stretch-input'
+     * @default 'abp-stretch-input'
      */
     clazzPrefix?: string;
 
@@ -87,8 +87,7 @@ export type StretchInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>
  * @author David Hsing
  */
 export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-stretch-input');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-stretch-input';
 
     // Initialize the default props
     const {

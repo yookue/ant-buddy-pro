@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Space, type SpaceProps} from 'antd';
+import {Space, type SpaceProps} from 'antd';
 import {type SpaceSize} from 'antd/es/space';
 import {css} from '@emotion/css';
 import classNames from 'classnames';
@@ -29,7 +29,7 @@ export type SpaceBoundProps = SpaceProps & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-space-bound'
+     * @default 'abp-space-bound'
      */
     clazzPrefix?: string;
 
@@ -77,8 +77,7 @@ export type SpaceBoundProps = SpaceProps & {
  * @author David Hsing
  */
 export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-space-bound');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-space-bound';
 
     // Initialize the default props
     const {

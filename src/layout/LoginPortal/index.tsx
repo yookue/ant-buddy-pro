@@ -16,7 +16,6 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
 import classNames from 'classnames';
 import {useFieldStyle} from './style';
 
@@ -26,7 +25,7 @@ export type LoginPortalProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-login-portal'
+     * @default 'abp-login-portal'
      */
     clazzPrefix?: string;
 
@@ -150,8 +149,7 @@ export type LoginPortalProps = {
  * @author David Hsing
  */
 export const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-login-portal');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-login-portal';
 
     const fieldStyle = useFieldStyle(clazzPrefix);
 

@@ -39,7 +39,7 @@ export type CountFieldProps = React.PropsWithChildren<{
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-count-field'
+     * @default 'abp-count-field'
      */
     clazzPrefix?: string;
 
@@ -134,7 +134,7 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
     CountField.displayName = 'CountField';
 
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-count-field');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-count-field';
 
     // Initialize the default props
     const {

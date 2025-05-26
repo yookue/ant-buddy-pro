@@ -16,7 +16,6 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
 import classNames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {useFieldStyle} from './style';
@@ -30,7 +29,7 @@ export type SectionTitleProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-section-title'
+     * @default 'abp-section-title'
      */
     clazzPrefix?: string;
 
@@ -121,8 +120,7 @@ export type SectionTitleProps = {
  * @author David Hsing
  */
 export const SectionTitle: React.FC<SectionTitleProps> = (props?: SectionTitleProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-section-title');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-section-title';
 
     // Initialize the default props
     const {

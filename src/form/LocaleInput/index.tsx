@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, List, Space, Popconfirm, type InputProps, type InputRef, type FormRule} from 'antd';
+import {Input, List, Space, Popconfirm, type InputProps, type InputRef, type FormRule} from 'antd';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
@@ -145,7 +145,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-locale-input'
+     * @default 'abp-locale-input'
      */
     clazzPrefix?: string;
 
@@ -277,9 +277,8 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @author David Hsing
  */
 export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-locale-input');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-input';
     const intlType = useIntl();
 
     // Initialize the default props
@@ -698,7 +697,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     };
 
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
 
     return (
         <Trigger
@@ -718,12 +717,12 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
             stretch={props?.triggerProps?.stretch ?? 'width'}
-            onOpenChange={(open: boolean) => {
+            onPopupVisibleChange={(open: boolean) => {
                 if (!open && (compositionRef.current || confirmOpen)) {
                     return;
                 }
                 setTriggerOpen(open);
-                props?.triggerProps?.onOpenChange?.(open);
+                props?.triggerProps?.onPopupVisibleChange?.(open);
             }}
             {...omitTriggerProps}
         >

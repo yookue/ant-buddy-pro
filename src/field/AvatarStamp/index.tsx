@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Avatar, type AvatarProps} from 'antd';
+import {Avatar, type AvatarProps} from 'antd';
 import {css} from '@emotion/css';
 import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -30,7 +30,7 @@ export type AvatarStampProps = AvatarProps & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-avatar-stamp'
+     * @default 'abp-avatar-stamp'
      */
     clazzPrefix?: string;
 
@@ -92,8 +92,7 @@ export type AvatarStampProps = AvatarProps & {
  * @author David Hsing
  */
 export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-avatar-stamp');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-avatar-stamp';
 
     // Initialize the default props
     const {

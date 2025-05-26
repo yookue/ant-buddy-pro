@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Button} from 'antd';
+import {Input, Button} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
@@ -59,7 +59,7 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'children' | 'fieldRef
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-captcha-input'
+     * @default 'abp-captcha-input'
      */
     clazzPrefix?: string;
 
@@ -144,9 +144,8 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'children' | 'fieldRef
 const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & React.RefAttributes<CaptchaInputRef>> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
     CaptchaInputField.displayName = 'CaptchaInput';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-captcha-input');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-captcha-input';
     const intlType = useIntl();
 
     ConsoleUtils.warn(!!formContext?.form, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);

@@ -139,7 +139,7 @@ export type IconSelectProps = Omit<SelectFieldProps, 'children'> & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-icon-select'
+     * @default 'abp-icon-select'
      */
     clazzPrefix?: string;
 
@@ -306,7 +306,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-icon-select');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-icon-select';
     const intlType = useIntl();
 
     ConsoleUtils.warn(!!formContext?.form, true, 'IconSelect', `Field '${props?.name}' needs a Form instance`);

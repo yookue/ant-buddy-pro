@@ -75,7 +75,7 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef' 
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-tag-input'
+     * @default 'abp-tag-input'
      */
     clazzPrefix?: string;
 
@@ -222,7 +222,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-tag-input');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-tag-input';
     const intlType = useIntl();
 
     // Initialize the default props

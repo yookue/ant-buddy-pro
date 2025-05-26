@@ -28,7 +28,7 @@ export type PreviewImageProps = Omit<RcImagePreviewProps, 'src' | 'current' | 'c
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-preview-image'
+     * @default 'abp-preview-image'
      */
     clazzPrefix?: string;
 
@@ -55,7 +55,7 @@ export type PreviewImageProps = Omit<RcImagePreviewProps, 'src' | 'current' | 'c
  */
 export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImageProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-preview-image');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-preview-image';
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();

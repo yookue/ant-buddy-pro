@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Modal, type ModalProps} from 'antd';
+import {Modal, type ModalProps} from 'antd';
 import {NanoidUtils} from '@yookue/ts-lang-utils';
 import Draggable, {type DraggableBounds, type DraggableData, type DraggableEvent} from 'react-draggable';
 import classNames from 'classnames';
@@ -29,7 +29,7 @@ export type DragModalProps = ModalProps & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-drag-modal'
+     * @default 'abp-drag-modal'
      */
     clazzPrefix?: string;
 
@@ -57,8 +57,7 @@ export type DragModalProps = ModalProps & {
  * @author David Hsing
  */
 export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-drag-modal');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-drag-modal';
 
     // Initialize the default props
     const {

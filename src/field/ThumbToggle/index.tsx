@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
+import {type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, StarOutlined, StarFilled} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
 import {ObjectUtils} from '@yookue/ts-lang-utils';
@@ -73,7 +73,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-thumb-toggle'
+     * @default 'abp-thumb-toggle'
      */
     clazzPrefix?: string;
 
@@ -217,8 +217,7 @@ export type ThumbToggleProps = Pick<CheckboxProps, 'checked' | 'defaultChecked'>
 export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & React.RefAttributes<ThumbToggleRef>> = React.forwardRef((props?: ThumbToggleProps, ref?: any) => {
     ThumbToggle.displayName = 'ThumbToggle';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-thumb-toggle');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-thumb-toggle';
     const intlType = useIntl();
 
     // Initialize the default props

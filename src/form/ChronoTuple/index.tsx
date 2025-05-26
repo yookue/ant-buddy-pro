@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Space, InputNumber} from 'antd';
+import {Space, InputNumber} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
 import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
@@ -32,7 +32,7 @@ export type ChronoTupleProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-chrono-tuple'
+     * @default 'abp-chrono-tuple'
      */
     clazzPrefix?: string;
 
@@ -87,10 +87,9 @@ export type ChronoTupleProps = {
  * @author David Hsing
  */
 export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-chrono-tuple');
-    const subClazzPrefix = configContext.getPrefixCls(props?.selectProps?.clazzPrefix ?? 'buddy-chrono-select');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-chrono-tuple';
+    const subClazzPrefix = props?.selectProps?.clazzPrefix ?? 'abp-chrono-select';
 
     // Initialize the default props
     const {

@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Spin} from 'antd';
+import {Spin} from 'antd';
 import {type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
 import {useDebounceFn} from '@ant-design/pro-utils';
 import {NanoidUtils} from '@yookue/ts-lang-utils';
@@ -34,7 +34,7 @@ export type RemoteFieldProps = Omit<ProFormFieldRemoteProps, 'request' | 'valueE
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-remote-field'
+     * @default 'abp-remote-field'
      */
     clazzPrefix?: string;
 
@@ -92,8 +92,7 @@ export type RemoteFieldProps = Omit<ProFormFieldRemoteProps, 'request' | 'valueE
 export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & React.RefAttributes<RemoteFieldRef>> = React.forwardRef((props?: RemoteFieldProps, ref?: any) => {
     RemoteField.displayName = 'RemoteField';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-remote-field');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-remote-field';
 
     // Initialize the default props
     const {

@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Space} from 'antd';
+import {Space} from 'antd';
 import {SpaceCompactProps} from 'antd/es/space/Compact';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {css} from '@emotion/css';
@@ -33,7 +33,7 @@ export type CompactTupleProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-compact-tuple'
+     * @default 'abp-compact-tuple'
      */
     clazzPrefix?: string;
 
@@ -169,9 +169,8 @@ export type CompactTupleProps = {
  * @author David Hsing
  */
 export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTupleProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-compact-tuple');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-compact-tuple';
 
     // Initialize the default props
     const {

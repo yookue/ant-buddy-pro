@@ -16,7 +16,6 @@
 
 
 import React from 'react';
-import {ConfigProvider} from 'antd';
 import {ImageUtils, NanoidUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
@@ -28,7 +27,7 @@ export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-fallback-image'
+     * @default 'abp-fallback-image'
      */
     clazzPrefix?: string;
 
@@ -54,8 +53,7 @@ export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
  * @author David Hsing
  */
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-fallback-image');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-fallback-image';
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();

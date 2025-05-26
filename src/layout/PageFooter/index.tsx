@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Layout} from 'antd';
+import {Layout} from 'antd';
 import {CopyrightOutlined} from '@ant-design/icons';
 import {If, For} from '@yookue/react-condition';
 import classNames from 'classnames';
@@ -93,7 +93,7 @@ export type PageFooterProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-page-footer'
+     * @default 'abp-page-footer'
      */
     clazzPrefix?: string;
 
@@ -205,8 +205,7 @@ export type PageFooterProps = {
  * @author David Hsing
  */
 export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-page-footer');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-page-footer';
 
     // Initialize the default props
     const {

@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
+import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -156,7 +156,7 @@ export type DayPanelProps = {
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-cron-input-day-panel'
+     * @default 'abp-cron-input-day'
      */
     clazzPrefix?: string;
 
@@ -205,9 +205,8 @@ export type DayPanelProps = {
 export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.RefAttributes<DayPanelRef>> = React.forwardRef((props?: DayPanelProps, ref?: any) => {
     DayPanel.displayName = 'CronInputDayPanel';
 
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const entryContext = React.useContext(CronInputContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-cron-input-day-panel');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input-day';
     // noinspection DuplicatedCode
     const intlType = useIntl();
 

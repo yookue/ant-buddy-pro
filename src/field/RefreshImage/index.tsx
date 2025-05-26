@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ConfigProvider, Image, type ImageProps} from 'antd';
+import {Image, type ImageProps} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
 import {ImageUtils, NanoidUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
@@ -40,7 +40,7 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'>
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'buddy-refresh-image'
+     * @default 'abp-refresh-image'
      */
     clazzPrefix?: string;
 
@@ -95,8 +95,7 @@ export type RefreshImageProps = Omit<ImageProps, 'src' | 'fallback' | 'preview'>
  * @author David Hsing
  */
 export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImageProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const clazzPrefix = configContext.getPrefixCls(props?.clazzPrefix ?? 'buddy-refresh-image');
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-refresh-image';
     const intlType = useIntl();
 
     // Initialize the default props
