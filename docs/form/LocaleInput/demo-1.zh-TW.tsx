@@ -22,8 +22,10 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     return (
         <>
+            {messageContext}
             <ProForm
                 name='LocaleInput_demo1.zh-TW'
                 layout='horizontal'
@@ -35,7 +37,7 @@ export default () => {
                     }
                 }}
                 onFinish={async () => {
-                    messageApi.success('您點擊了提交按鈕');
+                    messageInvoker.success('您點擊了提交按鈕');
                 }}
             >
                 <LocaleInput

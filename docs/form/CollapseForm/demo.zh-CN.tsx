@@ -25,8 +25,10 @@ import {RandomUtils} from '@yookue/ts-lang-utils';
 
 
 export default () => {
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     return (
         <>
+            {messageContext}
             <Comment
                 avatar={(
                     <Avatar src='https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png' size='small'/>
@@ -52,7 +54,7 @@ export default () => {
                                 }
                             },
                             onFinish: async () => {
-                                messageApi.success('您点击了提交按钮');
+                                messageInvoker.success('您点击了提交按钮');
                             }
                         }}
                     >

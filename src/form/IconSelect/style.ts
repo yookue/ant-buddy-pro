@@ -100,17 +100,33 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 [`&:hover`]: {
                     transform: 'scale(1.2)',
                 }
+            },
+            [`${token.subComponentCls}`]: {
+                [`&${token.subComponentCls}-top > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
+                    borderTopRightRadius: '0 !important',
+                },
+                [`&${token.subComponentCls}-top-end > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
+                    borderTopLeftRadius: '0 !important',
+                },
+                [`&${token.subComponentCls}-bottom > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
+                    borderBottomRightRadius: '0 !important',
+                },
+                [`&${token.subComponentCls}-bottom-end > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
+                    borderBottomLeftRadius: '0 !important',
+                }
             }
         }
     };
 }
 
 
-export function useFieldStyle(prefixCls: string): UseStyleResult {
+export function useFieldStyle(prefixCls: string, subPrefixCls: string): UseStyleResult {
     return useStyle(`${PackageConst.PACKAGE_NAME}:IconSelect`, (token) => {
         const mesh: ExtraProAliasToken = {
             prefixCls,
             componentCls: `.${prefixCls}`,
+            subPrefixCls,
+            subComponentCls: `.${subPrefixCls}`,
             ...token,
         };
         return [buildFieldStyle(mesh)];

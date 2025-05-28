@@ -338,6 +338,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     const [showSecond, setShowSecond] = React.useState<boolean>(props?.defaultShowSecond ?? false);
     const [showYear, setShowYear] = React.useState<boolean>(props?.defaultShowYear ?? false);
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
@@ -545,7 +546,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                         if (validateRule && !!event.target.value) {
                             const validate = cronValidate(event.target.value, validateOptions);
                             if (validate.isError()) {
-                                messageApi.warning(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
+                                messageInvoker.warning(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
                             }
                         }
                         setIncomeExpress(event.target.value);
@@ -780,35 +781,38 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
 
     return (
-        <Trigger
-            action={props?.triggerProps?.action ?? (entryImmutable ? ['hover'] : ['click'])}
-            builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
-            getPopupContainer={(trigger: HTMLElement) => {
-                return props?.triggerProps?.getPopupContainer?.(trigger) || trigger?.closest('form')?.parentElement || document.body;
-            }}
-            getTriggerDOMNode={(node: React.ReactInstance) => {
-                return props?.triggerProps?.getTriggerDOMNode?.(node) || document.querySelector<HTMLElement>(`[data-cron-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
-            }}
-            popup={buildPopupDom()}
-            popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
-                points: ['tl', 'bl'],
-                offset: [0, 4],
-            }}
-            popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
-            popupVisible={triggerOpen}
-            stretch={props?.triggerProps?.stretch ?? 'width'}
-            onPopupVisibleChange={(open: boolean) => {
-                if (!open && (secondPanelRef.current?.isCompositing() || minutePanelRef.current?.isCompositing() || hourPanelRef.current?.isCompositing() || dayPanelRef.current?.isCompositing() || monthPanelRef.current?.isCompositing() || weekPanelRef.current?.isCompositing() || yearPanelRef.current?.isCompositing())) {
-                    return;
-                }
-                setTriggerOpen(open);
-                props?.triggerProps?.onPopupVisibleChange?.(open);
-            }}
-            {...omitTriggerProps}
-        >
-            <div data-cron-input-entry={fieldId}>
-                {buildEntryDom()}
-            </div>
-        </Trigger>
+        <>
+            {messageContext}
+            <Trigger
+                action={props?.triggerProps?.action ?? (entryImmutable ? ['hover'] : ['click'])}
+                builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
+                getPopupContainer={(trigger: HTMLElement) => {
+                    return props?.triggerProps?.getPopupContainer?.(trigger) || trigger?.closest('form')?.parentElement || document.body;
+                }}
+                getTriggerDOMNode={(node: React.ReactInstance) => {
+                    return props?.triggerProps?.getTriggerDOMNode?.(node) || document.querySelector<HTMLElement>(`[data-cron-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
+                }}
+                popup={buildPopupDom()}
+                popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
+                    points: ['tl', 'bl'],
+                    offset: [0, 4],
+                }}
+                popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
+                popupVisible={triggerOpen}
+                stretch={props?.triggerProps?.stretch ?? 'width'}
+                onPopupVisibleChange={(open: boolean) => {
+                    if (!open && (secondPanelRef.current?.isCompositing() || minutePanelRef.current?.isCompositing() || hourPanelRef.current?.isCompositing() || dayPanelRef.current?.isCompositing() || monthPanelRef.current?.isCompositing() || weekPanelRef.current?.isCompositing() || yearPanelRef.current?.isCompositing())) {
+                        return;
+                    }
+                    setTriggerOpen(open);
+                    props?.triggerProps?.onPopupVisibleChange?.(open);
+                }}
+                {...omitTriggerProps}
+            >
+                <div data-cron-input-entry={fieldId}>
+                    {buildEntryDom()}
+                </div>
+            </Trigger>
+        </>
     );
 });

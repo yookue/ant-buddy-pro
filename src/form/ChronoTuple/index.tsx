@@ -108,7 +108,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact>

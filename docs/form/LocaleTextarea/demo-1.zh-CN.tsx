@@ -24,9 +24,11 @@ import {type TabsPosition} from '@yookue/ant-buddy-pro/layout/CardTabs';
 
 export default () => {
     const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
+    const [messageInvoker, messageContext] = messageApi.useMessage();
 
     return (
         <>
+            {messageContext}
             <ProForm
                 name='LocaleTextarea_demo1.zh-CN'
                 layout='horizontal'
@@ -38,7 +40,7 @@ export default () => {
                     }
                 }}
                 onFinish={async () => {
-                    messageApi.success('您点击了提交按钮');
+                    messageInvoker.success('您点击了提交按钮');
                 }}
             >
                 <ProFormRadio.Group

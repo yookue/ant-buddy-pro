@@ -307,6 +307,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-icon-select';
+    const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();
 
     ConsoleUtils.warn(!!formContext?.form, true, 'IconSelect', `Field '${props?.name}' needs a Form instance`);
@@ -333,8 +334,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
     const [searchWord, setSearchWord] = React.useState<string | undefined>(props?.fieldProps?.searchValue);
     const [searchDisabled, setSearchDisabled] = React.useState<boolean>(false);
     const searchRef = React.useRef<InputRef>(null);
-    // noinspection DuplicatedCode
-    const fieldStyle = useFieldStyle(clazzPrefix);
+    const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
     // noinspection DuplicatedCode
     const handleWindowResize = () => {

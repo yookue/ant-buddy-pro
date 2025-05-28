@@ -282,6 +282,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     const [loading, setLoading] = React.useState<boolean>(false);
     const [imageSrc, setImageSrc] = React.useState<string | undefined>(props?.imageSrc);
     const [fallbackSrc, setFallbackSrc] = React.useState<string | undefined>(props?.fallbackSrc);
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
@@ -458,13 +459,16 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     };
 
     return (
-        <div
-            ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
-            style={props?.containerStyle}
-        >
-            {buildAvatarDom()}
-        </div>
+        <>
+            {messageContext}
+            <div
+                ref={fieldRef}
+                className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+                style={props?.containerStyle}
+            >
+                {buildAvatarDom()}
+            </div>
+        </>
     );
 });
 

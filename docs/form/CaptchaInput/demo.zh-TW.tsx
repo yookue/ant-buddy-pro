@@ -25,9 +25,11 @@ import {CaptchaInput, ConsoleUtils, type CaptchaInputRef} from '@yookue/ant-budd
 export default () => {
     const captchaInputRef = React.useRef<CaptchaInputRef>(null);
     const [timing, setTiming] = React.useState<boolean>(false);
+    const [messageInvoker, messageContext] = messageApi.useMessage();
 
     return (
         <>
+            {messageContext}
             <ProForm
                 name='CaptchaInput_demo.zh-TW'
                 layout='horizontal'
@@ -58,7 +60,7 @@ export default () => {
                     phoneName='mobile'
                     countDown={29}
                     onGenerate={() => {
-                        messageApi.success('驗證碼發送成功');
+                        messageInvoker.success('驗證碼發送成功');
                     }}
                     onTimer={count => {
                         ConsoleUtils.logTimestamp(false, false, 'CaptchaInput', 'onTimer count = ' + count);

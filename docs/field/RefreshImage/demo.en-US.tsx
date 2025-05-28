@@ -22,24 +22,28 @@ import {RandomUtils} from '@yookue/ts-lang-utils';
 
 
 export default () => {
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     return (
-        <RefreshImage
-            width={120}
-            height={120}
-            src={() => {
-                const images = [
-                    `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`,
-                    `https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png?timestamp=${Date.now()}`,
-                    `https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg?timestamp=${Date.now()}`,
-                ];
-                return RandomUtils.randomElement(images);
-            }}
-            fallback='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
-            title='Click to refresh'
-            handCursor={true}
-            onRefresh={() => {
-                messageApi.success('Image has been refreshed');
-            }}
-        />
+        <>
+            {messageContext}
+            <RefreshImage
+                width={120}
+                height={120}
+                src={() => {
+                    const images = [
+                        `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`,
+                        `https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png?timestamp=${Date.now()}`,
+                        `https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg?timestamp=${Date.now()}`,
+                    ];
+                    return RandomUtils.randomElement(images);
+                }}
+                fallback='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
+                title='Click to refresh'
+                handCursor={true}
+                onRefresh={() => {
+                    messageInvoker.success('Image has been refreshed');
+                }}
+            />
+        </>
     );
 }

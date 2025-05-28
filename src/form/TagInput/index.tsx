@@ -239,6 +239,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     const [inputName, setInputName] = React.useState<string>();
     const [inputValue, setInputValue] = React.useState<string>();
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     const [tagContents, setTagContents] = React.useState<(string | number)[] | undefined>(() => {
@@ -417,7 +418,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 setTagContents(contents);
             } else {
                 if (warnDuplicate && !proField) {
-                    messageApi.warning(ObjectUtils.firstNotNil(props?.localeProps?.duplicateTag, intlLocales.get([locale, 'duplicateTag']), intlLocales.get(['en_US', 'duplicateTag'])));
+                    messageInvoker.warning(ObjectUtils.firstNotNil(props?.localeProps?.duplicateTag, intlLocales.get([locale, 'duplicateTag']), intlLocales.get(['en_US', 'duplicateTag'])));
                 }
             }
         }
@@ -553,14 +554,17 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     };
 
     return (
-        <div
-            ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
-            style={props?.containerStyle}
-        >
-            {buildFulfilDom()}
-            {buildActionDom()}
-        </div>
+        <>
+            {messageContext}
+            <div
+                ref={fieldRef}
+                className={classNames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
+                style={props?.containerStyle}
+            >
+                {buildFulfilDom()}
+                {buildActionDom()}
+            </div>
+        </>
     );
 });
 

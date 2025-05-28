@@ -25,9 +25,11 @@ import {CaptchaInput, ConsoleUtils, type CaptchaInputRef} from '@yookue/ant-budd
 export default () => {
     const captchaInputRef = React.useRef<CaptchaInputRef>(null);
     const [timing, setTiming] = React.useState<boolean>(false);
+    const [messageInvoker, messageContext] = messageApi.useMessage();
 
     return (
         <>
+            {messageContext}
             <ProForm
                 name='CaptchaInput_demo.en-US'
                 layout='horizontal'
@@ -58,7 +60,7 @@ export default () => {
                     phoneName='mobile'
                     countDown={29}
                     onGenerate={() => {
-                        messageApi.success('Captcha sent successfully');
+                        messageInvoker.success('Captcha sent successfully');
                     }}
                     onTimer={count => {
                         ConsoleUtils.logTimestamp(false, false, 'CaptchaInput', 'onTimer count = ' + count);
