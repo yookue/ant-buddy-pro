@@ -23,9 +23,9 @@ import {CaptchaInput, ConsoleUtils, type CaptchaInputRef} from '@yookue/ant-budd
 
 
 export default () => {
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     const captchaInputRef = React.useRef<CaptchaInputRef>(null);
     const [timing, setTiming] = React.useState<boolean>(false);
-    const [messageInvoker, messageContext] = messageApi.useMessage();
 
     return (
         <>

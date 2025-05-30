@@ -33,13 +33,13 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&-links`]: {
                 marginBottom: token.marginXS,
                 [`a`]: {
-                    color: token.colorTextSecondary,
+                    color: token.colorTextTertiary,
                     transition: 'all 0.3s',
                     [`&:not(:last-child)`]: {
                         marginRight: 40,
                     },
                     [`&:hover`]: {
-                        color: token.colorText,
+                        color: token.colorInfoTextHover,
                     }
                 }
             },

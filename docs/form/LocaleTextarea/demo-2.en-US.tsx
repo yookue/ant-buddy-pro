@@ -23,8 +23,8 @@ import {type TabsPosition} from '@yookue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
-    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
     const [messageInvoker, messageContext] = messageApi.useMessage();
+    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
 
     return (
         <>

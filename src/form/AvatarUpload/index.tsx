@@ -16,8 +16,9 @@
 
 
 import React from 'react';
-import {Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps, message as messageApi} from 'antd';
+import {App, Avatar, Image, Space, Upload, type AvatarProps, type TooltipProps, type UploadProps} from 'antd';
 import {type RcFile} from 'antd/es/upload/interface';
+import {type ImageProps as RcImageProps} from 'rc-image';
 import {UserOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
@@ -182,7 +183,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'children' | 'fieldR
      * @description.zh-CN 图像属性
      * @description.zh-TW 圖像屬性
      */
-    imageProps?: Omit<ImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
+    imageProps?: Omit<RcImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
 
     /**
      * @description Whether to enable upload or not
@@ -282,8 +283,8 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     const [loading, setLoading] = React.useState<boolean>(false);
     const [imageSrc, setImageSrc] = React.useState<string | undefined>(props?.imageSrc);
     const [fallbackSrc, setFallbackSrc] = React.useState<string | undefined>(props?.fallbackSrc);
-    const [messageInvoker, messageContext] = messageApi.useMessage();
     const fieldStyle = useFieldStyle(clazzPrefix);
+    const {message: messageApi} = App.useApp();
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -459,16 +460,13 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     };
 
     return (
-        <>
-            {messageContext}
-            <div
-                ref={fieldRef}
-                className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
-                style={props?.containerStyle}
-            >
-                {buildAvatarDom()}
-            </div>
-        </>
+        <div
+            ref={fieldRef}
+            className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
+            {buildAvatarDom()}
+        </div>
     );
 });
 

@@ -234,12 +234,12 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         locale = intlType.locale,
     } = props ?? {};
 
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [inputName, setInputName] = React.useState<string>();
     const [inputValue, setInputValue] = React.useState<string>();
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
-    const [messageInvoker, messageContext] = messageApi.useMessage();
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     const [tagContents, setTagContents] = React.useState<(string | number)[] | undefined>(() => {

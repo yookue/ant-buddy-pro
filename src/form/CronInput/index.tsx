@@ -334,11 +334,11 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         locale = intlType.locale,
     } = props ?? {};
 
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [showSecond, setShowSecond] = React.useState<boolean>(props?.defaultShowSecond ?? false);
     const [showYear, setShowYear] = React.useState<boolean>(props?.defaultShowYear ?? false);
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
-    const [messageInvoker, messageContext] = messageApi.useMessage();
     const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols

@@ -33,7 +33,7 @@ export type HyperlinkProps = {
      * @description.zh-CN 超链接数组的 key
      * @description.zh-TW 超鏈接數組的 key
      */
-    key: string;
+    key: React.Key;
 
     /**
      * @description The CSS class name of hyperlink

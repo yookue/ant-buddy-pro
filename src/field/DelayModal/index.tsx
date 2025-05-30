@@ -167,6 +167,7 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         timeout = 1000 * 60 * 15,
     } = props ?? {};
 
+    const [modalInvoker, modelContext] = Modal.useModal();
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [modalOpening, setModalOpening] = React.useState<boolean>(false);
     const [modalFuncOpening, setModalFuncOpening] = React.useState<boolean>(false);
@@ -294,19 +295,19 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         const preprocess = props?.modalFunProps?.preprocess ?? true;
         switch (actionType) {
             case 'confirm':
-                Modal.confirm(preprocess ? withConfirm(fullProps) : fullProps);
+                modalInvoker.confirm(preprocess ? withConfirm(fullProps) : fullProps);
                 break;
             case 'info':
-                Modal.info(preprocess ? withInfo(fullProps) : fullProps);
+                modalInvoker.info(preprocess ? withInfo(fullProps) : fullProps);
                 break;
             case 'warn':
-                Modal.warn(preprocess ? withWarn(fullProps) : fullProps);
+                modalInvoker.warning(preprocess ? withWarn(fullProps) : fullProps);
                 break;
             case 'success':
-                Modal.success(preprocess ? withSuccess(fullProps) : fullProps);
+                modalInvoker.success(preprocess ? withSuccess(fullProps) : fullProps);
                 break;
             case 'error':
-                Modal.error(preprocess ? withError(fullProps) : fullProps);
+                modalInvoker.error(preprocess ? withError(fullProps) : fullProps);
                 break;
             default:
                 break;
@@ -317,7 +318,11 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     };
 
     if (actionType !== 'custom') {
-        return null;
+        return (
+            <>
+                {modelContext}
+            </>
+        );
     }
 
     const omitProps = !props?.modalProps ? {} : omit(props.modalProps, ['className', 'wrapClassName', 'onOk', 'onCancel', 'afterClose', 'children']);
