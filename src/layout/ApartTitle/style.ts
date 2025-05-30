@@ -29,6 +29,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             borderRadius: token.borderRadius,
             padding: `${token.paddingXS}px ${token.paddingMD}px`,
             alignItems: 'center',
+            [`&&-bound-border`]: {
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+            },
             [`&&-width-block`]: {
                 width: '100%',
             },
@@ -51,13 +54,12 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 textOverflow: 'ellipsis',
             },
             [`&&-default, &&-success, &&-info, &&-warn, &&-error, &&-classic`]: {
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                 [`${token.componentCls}-content`]: {
                     fontWeight: 500,
                 }
             },
             [`&&-default`]: {
-                backgroundColor: '#fafafa',
+                backgroundColor: token.colorBorderSecondary,
             },
             [`&&-success`]: {
                 backgroundColor: token.colorSuccessBg,

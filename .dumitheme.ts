@@ -158,7 +158,7 @@ export default defineThemeConfig({
                 details: 'Theme capabilities, for customizing complete theme components, are up to you',
             },
             {
-                title: '🚀 Better Compilation Performance',
+                title: '🚀 Better compilation performance',
                 details: 'By combining Umi v4, esbuild, SWC, persistent cache and other schemes, it brings faster compilation speed than 0.x',
             },
             {
@@ -166,7 +166,7 @@ export default defineThemeConfig({
                 details: "Based on antd 5.0 CSS-in-JS style support, it fully unifies built-in styles and supports custom loading theme",
             },
             {
-                title: '🎮 Simple Use',
+                title: '🎮 Simple use',
                 details: 'Easy access, installation and use, fully integrated into Ant Design style'
             },
             {

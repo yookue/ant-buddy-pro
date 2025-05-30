@@ -24,6 +24,7 @@ import {type SectionPresetStyle} from '@yookue/ant-buddy-pro/layout/FoldSection'
 
 
 export default () => {
+    const [boundBorder, setBoundBorder] = React.useState<boolean>(true);
     const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
     const [collapsePos, setCollapsePos] = React.useState<BeforeAfterType>('after');
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
@@ -37,6 +38,15 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProFormSwitch
+                    label='外邊框'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: boundBorder,
+                        onChange: setBoundBorder,
+                    }}
+                />
                 <ProFormRadio.Group
                     label='裝飾物位置'
                     radioType='button'
@@ -101,6 +111,7 @@ export default () => {
             </ProForm>
             <Divider/>
             <FoldSection
+                boundBorder={boundBorder}
                 headerOrnament={<AppstoreOutlined/>}
                 headerOrnamentPos={ornamentPos}
                 headerContent='FoldSection 頭部標題'
@@ -108,10 +119,7 @@ export default () => {
                 panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='無數據'/>}
                 presetStyle={presetStyle}
                 tooltipCtrl={tooltipCtrl}
-                localeProps={{
-                    collapse: '摺叠',
-                    expend: '展開',
-                }}
+                locale='zh_TW'
             />
         </>
     );

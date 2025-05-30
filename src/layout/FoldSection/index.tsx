@@ -72,6 +72,14 @@ export type FoldSectionProps = React.PropsWithChildren<{
     containerStyle?: React.CSSProperties;
 
     /**
+     * @description Whether to border the bound or not
+     * @description.zh-CN 外边界是否有边框
+     * @description.zh-TW 外邊界是否有邊框
+     * @default true
+     */
+    boundBorder?: boolean;
+
+    /**
      * @description The CSS class names of the header div
      * @description.zh-CN 头部 div 的 CSS 类名
      * @description.zh-TW 頭部 div 的 CSS 類名
@@ -240,6 +248,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     // Initialize the default props
     const {
+        boundBorder = true,
         headerOrnamentPos = 'before',
         headerCollapse = <DownOutlined/>,
         headerCollapsePos = 'after',
@@ -303,7 +312,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     return (
         <section
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`, props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>

@@ -98,6 +98,14 @@ export type ApartTitleProps = {
     contentStyle?: React.CSSProperties;
 
     /**
+     * @description Whether to border the bound or not
+     * @description.zh-CN 外边界是否有边框
+     * @description.zh-TW 外邊界是否有邊框
+     * @default true
+     */
+    boundBorder?: boolean;
+
+    /**
      * @description Whether to match the width of parent element or not
      * @description.zh-CN 是否匹配父节点的宽度
      * @description.zh-TW 是否匹配父節點的寬度
@@ -124,6 +132,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     // Initialize the default props
     const {
+        boundBorder = true,
         ornamentPos = 'before',
         presetStyle = 'default',
     } = props ?? {};
@@ -146,7 +155,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classNames(`${clazzPrefix}`, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {ornamentPos === 'before' && buildOrnamentDom(true)}

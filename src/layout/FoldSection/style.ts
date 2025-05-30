@@ -27,6 +27,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             display: 'flex',
             flexDirection: 'column',
             borderRadius: token.borderRadius,
+            [`&&-bound-border`]: {
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+            },
             [`&-header`]: {
                 display: 'flex',
                 flexFlow: 'row nowrap',
@@ -83,8 +86,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 display: 'none',
             },
             [`&&-default, &&-success, &&-info, &&-warn, &&-error, &&-classic`]: {
-                backgroundColor: token.colorBgContainer,
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                 [`${token.componentCls}-header`]: {
                     fontWeight: 500,
                 },
@@ -94,7 +95,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             },
             [`&&-default`]: {
                 [`${token.componentCls}-header`]: {
-                    backgroundColor: '#fafafa',
+                    backgroundColor: token.colorBorderSecondary,
                 }
             },
             [`&&-success`]: {

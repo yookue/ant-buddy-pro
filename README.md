@@ -11,11 +11,17 @@
 
 ## Features
 
-🪄 Elegant default configurations assist developers to get started as simple as possible
+🎁 Elegant default configurations assist developers to get started as simple as possible
 
-💎 React components compatible with Ant Design. More components are coming soon
+🎄 Theme capabilities, for customizing complete theme components, are up to you
 
-🎨 Theme capabilities, for customizing complete theme components, are up to you
+🚀 By combining Umi v4, esbuild, SWC, persistent cache and other schemes, it brings faster compilation speed than 0.x
+
+🎨 Based on antd 5.0 CSS-in-JS style support, it fully unifies built-in styles and supports custom loading theme
+
+🎮 Easy access, installation and use, fully integrated into Ant Design style
+
+✨ React components compatible with Ant Design. More components are coming soon
 
 ## Quickstart
 

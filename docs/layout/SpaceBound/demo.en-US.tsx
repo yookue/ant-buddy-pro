@@ -35,7 +35,7 @@ export default () => {
             >
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='Border Bound'
+                        label='Bound Border'
                         checkedChildren='True'
                         unCheckedChildren='False'
                         fieldProps={{

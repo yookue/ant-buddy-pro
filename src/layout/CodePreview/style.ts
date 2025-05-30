@@ -24,16 +24,17 @@ import {PackageConst} from '@/constant/PackageConst';
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
-            backgroundColor: token.colorBgContainer,
             borderRadius: token.borderRadius,
-            [`pre code`]: {
-                border: 'none',
-            },
             [`&&-bound-border`]: {
                 border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
             },
             [`&&-bound-shadow`]: {
                 boxShadow: token.boxShadow,
+            },
+            [`pre code`]: {
+                border: 'none',
+                backgroundColor: token.colorBgContainer,
+                color: token.colorText,
             },
             [`&${token.componentCls}-padding-0 pre code`]: {
                 padding: 0,

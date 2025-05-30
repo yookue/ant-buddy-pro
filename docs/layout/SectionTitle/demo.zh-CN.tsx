@@ -17,14 +17,15 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {SectionTitle, type BeforeAfterType} from '@yookue/ant-buddy-pro';
 import {type TitlePresetStyle} from 'src/layout/SectionTitle';
 
 
 export default () => {
+    const [boundBorder, setBoundBorder] = React.useState<boolean>(true);
     const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
-    const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle | false>('success');
+    const [presetStyle, setPresetStyle] = React.useState<TitlePresetStyle | false>('default');
 
     return (
         <>
@@ -34,6 +35,15 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProFormSwitch
+                    label='外边框'
+                    checkedChildren='是'
+                    unCheckedChildren='否'
+                    fieldProps={{
+                        checked: boundBorder,
+                        onChange: setBoundBorder,
+                    }}
+                />
                 <ProFormRadio.Group
                     label='装饰物位置'
                     radioType='button'
@@ -73,7 +83,8 @@ export default () => {
             </ProForm>
             <Divider/>
             <SectionTitle
-                ornament='1'
+                boundBorder={boundBorder}
+                ornament='Ant Buddy'
                 ornamentPos={ornamentPos}
                 content='SectionTitle 标题内容'
                 presetStyle={presetStyle}

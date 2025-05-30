@@ -24,6 +24,7 @@ import {type SectionPresetStyle} from '@yookue/ant-buddy-pro/layout/FoldSection'
 
 
 export default () => {
+    const [boundBorder, setBoundBorder] = React.useState<boolean>(true);
     const [ornamentPos, setOrnamentPos] = React.useState<BeforeAfterType>('before');
     const [collapsePos, setCollapsePos] = React.useState<BeforeAfterType>('after');
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
@@ -37,6 +38,15 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProFormSwitch
+                    label='Bound Border'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: boundBorder,
+                        onChange: setBoundBorder,
+                    }}
+                />
                 <ProFormRadio.Group
                     label='Ornament Position'
                     radioType='button'
@@ -101,6 +111,7 @@ export default () => {
             </ProForm>
             <Divider/>
             <FoldSection
+                boundBorder={boundBorder}
                 headerOrnament={<AppstoreOutlined/>}
                 headerOrnamentPos={ornamentPos}
                 headerContent='FoldSection header caption'
@@ -108,10 +119,7 @@ export default () => {
                 panelPlaceholder={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No Data'/>}
                 presetStyle={presetStyle}
                 tooltipCtrl={tooltipCtrl}
-                localeProps={{
-                    collapse: 'Collapse',
-                    expend: 'Expend',
-                }}
+                locale='en_US'
             />
         </>
     );

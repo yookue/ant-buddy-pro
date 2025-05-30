@@ -26,8 +26,11 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
         [`${token.componentCls}`]: {
             display: 'flex',
             flexFlow: 'row nowrap',
-            borderRadius: token.borderRadius,
             alignItems: 'center',
+            borderRadius: token.borderRadius,
+            [`&&-bound-border`]: {
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+            },
             [`&&-width-block`]: {
                 width: '100%',
             },
@@ -52,16 +55,16 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 flex: 1,
                 textOverflow: 'ellipsis',
             },
-            [`&&-default, &&-success, &&-info, &&-warn, &&-error`]: {
+            [`&&-success, &&-info, &&-warn, &&-error`]: {
                 [`${token.componentCls}-ornament`]: {
                     color: token.colorWhite,
                 }
             },
             [`&&-default, &&-success, &&-info, &&-warn, &&-error, &&-classic`]: {
                 [`${token.componentCls}-ornament`]: {
-                    fontWeight: 500,
-                    fontSize: token.fontSizeLG,
-                    padding: `${token.paddingXXS}px ${token.padding}px`,
+                    fontWeight: 300,
+                    fontSize: token.fontSize + 1,
+                    padding: `${token.paddingXXS}px ${token.paddingMD}px`,
                 },
                 [`&${token.componentCls}-ornament-before ${token.componentCls}-content, &${token.componentCls}-ornament-after ${token.componentCls}-content`]: {
                     alignItems: 'center',
@@ -72,9 +75,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             },
             [`&&-default`]: {
-                backgroundColor: '#fafafa',
+                backgroundColor: token.colorBorderSecondary,
                 [`${token.componentCls}-ornament`]: {
-                    backgroundColor: '#8c8c8c',
+                    backgroundColor: token.colorTextTertiary,
                 }
             },
             [`&&-success`]: {
@@ -102,7 +105,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             },
             [`&&-classic`]: {
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                 [`&${token.componentCls}-ornament-before ${token.componentCls}-ornament`]: {
                     borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
                 },

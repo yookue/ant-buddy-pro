@@ -23,10 +23,12 @@ import {PackageConst} from '@/constant/PackageConst';
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
+            backgroundColor: 'transparent',
+            borderRadius: token.borderRadius,
+            padding: '0 0',
             [`&&-width-block`]: {
                 width: '100%',
             },
-            padding: '0 0',
             [`&-vessel`]: {
                 textAlign: 'center',
             },
@@ -45,7 +47,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             },
             [`&-copyright`]: {
                 color: token.colorTextTertiary,
-                fontSize: token.fontSize - 1,
+                fontSize: token.fontSize,
             },
             [`&&-default`]: {
                 [`${token.componentCls}-vessel`]: {

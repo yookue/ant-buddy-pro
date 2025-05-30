@@ -20,10 +20,11 @@ import {Divider, ColorPicker} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {PageFooter} from '@yookue/ant-buddy-pro';
 import {type FooterPresetStyle} from '@yookue/ant-buddy-pro/layout/PageFooter';
+import {ColorUtils} from '@yookue/ts-lang-utils';
 
 
 export default () => {
-    const [bgColor, setBgColor] = React.useState<string>('#e6f4ff');
+    const [bgColor, setBgColor] = React.useState<string>();
     const [copyrightIcon, setCopyrightIcon] = React.useState<boolean>(true);
     const [presetStyle, setPresetStyle] = React.useState<FooterPresetStyle | false>('default');
 
@@ -92,7 +93,7 @@ export default () => {
                     backgroundColor: bgColor,
                 }}
                 copyrightStyle={{
-                    color: '#443300',
+                    color: ColorUtils.reverseHex(bgColor) ?? '#443300',
                 }}
                 presetStyle={presetStyle}
             />
