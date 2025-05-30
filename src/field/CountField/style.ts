@@ -17,7 +17,7 @@
 
 
 import {useStyle, type UseStyleResult, type GenerateStyle} from '@ant-design/pro-provider';
-import {type ExtraProAliasToken} from '@/type/design-comp';
+import {type ExtraProAliasToken} from '@/type/design-token';
 import {PackageConst} from '@/constant/PackageConst';
 
 

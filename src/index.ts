@@ -77,3 +77,4 @@ export {TriggerUtils} from './util/TriggerUtils';
 export * from './type/declaration';
 export * from './type/design-comp';
 export * from './type/design-icon';
+export * from './type/design-token';

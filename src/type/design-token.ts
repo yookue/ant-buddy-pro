@@ -15,27 +15,10 @@
  */
 
 
-import {App} from 'antd';
-import type {MessageInstance} from 'antd/es/message/interface';
-import type {ModalStaticFunctions} from 'antd/es/modal/confirm';
-import type {NotificationInstance} from 'antd/es/notification/interface';
+import {type TokenWithCommonCls} from '@ant-design/cssinjs-utils';
+import {type ProAliasToken} from '@ant-design/pro-provider';
 
 
-let message: MessageInstance;
-let notification: NotificationInstance;
-let modal: Omit<ModalStaticFunctions, 'warn'>;
-
-
-/**
- * @see "https://ant-design.antgroup.com/components/app#global-scene-redux-scene"
- */
-export default () => {
-    const staticFunction = App.useApp();
-    message = staticFunction.message;
-    modal = staticFunction.modal;
-    notification = staticFunction.notification;
-    return null;
+export type ExtraProAliasToken = ProAliasToken & Partial<Pick<TokenWithCommonCls<ProAliasToken>, 'componentCls' | 'prefixCls' | 'iconCls'>> & {
+    [key: string]: any;
 };
-
-
-export {message, notification, modal};
