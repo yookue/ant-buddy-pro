@@ -25,6 +25,7 @@ import {type ValueType as RcValueType} from 'rc-input-number';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
+import {useFieldStyle} from './style';
 
 
 export type WeekPanelRef = {
@@ -283,7 +284,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
 
     // noinspection DuplicatedCode
     const entryContext = React.useContext(CronInputContext);
-    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input-month';
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input-week';
     const intlType = useIntl();
 
     // Initialize the default props
@@ -307,6 +308,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
     const [orderWeekSort, setOrderWeekSort] = React.useState<RcValueType | null>();
     const [orderWeekValue, setOrderWeekValue] = React.useState<RcValueType | null>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -437,7 +439,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <BadgeRibbon
                 text={!allowAlias ? undefined : (
                     <Switch
@@ -604,6 +606,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                                                 return (
                                                     <Checkbox.Group
                                                         name='specificWeeks'
+                                                        className={`${clazzPrefix}-specific`}
                                                         disabled={entryChoice !== EntryChoiceType.SPECIFY_WEEK}
                                                         options={buildWeekOptions()}
                                                         value={specificWeeks}

@@ -23,6 +23,7 @@ import classNames from 'classnames';
 import {type ValueType as RcValueType} from 'rc-input-number';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
+import {useFieldStyle} from './style';
 
 
 export type HourPanelRef = {
@@ -161,7 +162,6 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
         locale = intlType.locale,
     } = props ?? {};
 
-    // noinspection DuplicatedCode
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
     const [entryChoice, setEntryChoice] = React.useState<EntryChoiceType>();
@@ -171,6 +171,7 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
     const [fromIntervalStep, setFromIntervalStep] = React.useState<RcValueType | null>();
     const [specificHours, setSpecificHours] = React.useState<any[]>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -236,7 +237,7 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
@@ -362,6 +363,7 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
                                             return (
                                                 <Checkbox.Group
                                                     name='specificHours'
+                                                    className={`${clazzPrefix}-specific`}
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_HOUR}
                                                     options={buildSpecificOptions()}
                                                     value={specificHours}

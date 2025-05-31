@@ -23,6 +23,7 @@ import classNames from 'classnames';
 import {type ValueType as RcValueType} from 'rc-input-number';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
+import {useFieldStyle} from './style';
 
 
 export type MinutePanelRef = {
@@ -157,7 +158,6 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
     const intlType = useIntl();
 
     // Initialize the default props
-    // noinspection DuplicatedCode
     const {
         locale = intlType.locale,
     } = props ?? {};
@@ -171,6 +171,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
     const [fromIntervalStep, setFromIntervalStep] = React.useState<RcValueType | null>();
     const [specificMinutes, setSpecificMinutes] = React.useState<any[]>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -236,7 +237,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
@@ -362,6 +363,7 @@ export const MinutePanel: React.ForwardRefExoticComponent<MinutePanelProps & Rea
                                             return (
                                                 <Checkbox.Group
                                                     name='specificMinutes'
+                                                    className={`${clazzPrefix}-specific`}
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_MINUTE}
                                                     options={buildSpecificOptions()}
                                                     value={specificMinutes}

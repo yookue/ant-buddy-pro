@@ -24,6 +24,7 @@ import {type ValueType as RcValueType} from 'rc-input-number';
 import {CronInputContext} from '@/form/CronInput/context';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
+import {useFieldStyle} from './style';
 
 
 export type YearPanelRef = {
@@ -168,7 +169,7 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
 
     // noinspection DuplicatedCode
     const entryContext = React.useContext(CronInputContext);
-    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input-month';
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input-year';
     const intlType = useIntl();
 
     // Initialize the default props
@@ -190,6 +191,7 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
     const [fromIntervalStep, setFromIntervalStep] = React.useState<RcValueType | null>();
     const [specificYears, setSpecificYears] = React.useState<any[]>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -255,7 +257,7 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
@@ -381,12 +383,13 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
                                             return (
                                                 <Checkbox.Group
                                                     name='specificYears'
+                                                    className={`${clazzPrefix}-specific`}
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_YEAR}
                                                     options={buildSpecificOptions()}
                                                     value={specificYears}
-                                                    onChange={(checkeds: any[]) => {
-                                                        setSpecificYears(checkeds);
-                                                        if (!entryContext?.allowOkEcho && (!checkeds || !checkeds.length)) {
+                                                    onChange={(checks: any[]) => {
+                                                        setSpecificYears(checks);
+                                                        if (!entryContext?.allowOkEcho && (!checks || !checks.length)) {
                                                             window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_YEAR), 80);
                                                         }
                                                     }}

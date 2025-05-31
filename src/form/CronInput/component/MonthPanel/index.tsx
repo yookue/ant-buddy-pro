@@ -24,6 +24,7 @@ import {type ValueType as RcValueType} from 'rc-input-number';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
+import {useFieldStyle} from './style';
 
 
 export type MonthPanelRef = {
@@ -212,6 +213,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
     const [fromIntervalStep, setFromIntervalStep] = React.useState<RcValueType | null>();
     const [specificMonths, setSpecificMonths] = React.useState<any[]>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -297,7 +299,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <BadgeRibbon
                 text={!allowAlias ? undefined : (
                     <Switch
@@ -441,6 +443,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                                                 return (
                                                     <Checkbox.Group
                                                         name='specificMonths'
+                                                        className={`${clazzPrefix}-specific`}
                                                         disabled={entryChoice !== EntryChoiceType.SPECIFY_MONTH}
                                                         options={buildSpecificOptions()}
                                                         value={specificMonths}

@@ -95,7 +95,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             },
             [`&&-default`]: {
                 [`${token.componentCls}-header`]: {
-                    backgroundColor: token.colorBorderSecondary,
+                    backgroundColor: token.controlItemBgHover,
                 }
             },
             [`&&-success`]: {

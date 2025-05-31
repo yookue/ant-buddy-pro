@@ -23,6 +23,7 @@ import classNames from 'classnames';
 import {type ValueType as RcValueType} from 'rc-input-number';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
+import {useFieldStyle} from './style';
 
 
 export type DayPanelRef = {
@@ -217,7 +218,6 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
 
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
-    // noinspection DuplicatedCode
     const [entryChoice, setEntryChoice] = React.useState<EntryChoiceType>();
     const [fromToStart, setFromToStart] = React.useState<RcValueType | null>();
     const [fromToEnd, setFromToEnd] = React.useState<RcValueType | null>();
@@ -227,6 +227,7 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
     const [lastBeforeDay, setLastBeforeDay] = React.useState<RcValueType | null>();
     const [nearestWorkday, setNearestWorkday] = React.useState<RcValueType | null>();
     const [unitExpress, setUnitExpress] = React.useState<string | undefined>(props?.value as string);
+    const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -319,7 +320,7 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}
@@ -448,6 +449,7 @@ export const DayPanel: React.ForwardRefExoticComponent<DayPanelProps & React.Ref
                                             return (
                                                 <Checkbox.Group
                                                     name='specificDays'
+                                                    className={`${clazzPrefix}-specific`}
                                                     disabled={entryChoice !== EntryChoiceType.SPECIFY_DAY}
                                                     options={buildSpecificOptions()}
                                                     value={specificDays}
