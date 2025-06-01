@@ -24,7 +24,7 @@ import {ColorUtils} from '@yookue/ts-lang-utils';
 
 
 export default () => {
-    const [bgColor, setBgColor] = React.useState<string>('#e6f4ff');
+    const [bgColor, setBgColor] = React.useState<string>();
     const [copyrightIcon, setCopyrightIcon] = React.useState<boolean>(true);
     const [presetStyle, setPresetStyle] = React.useState<FooterPresetStyle | false>('default');
 
