@@ -227,16 +227,20 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
 
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'request', 'valueEnum', 'clazzPrefix', 'optionClazz', 'optionStyle', 'optionBeforeClazz', 'optionBeforeStyle', 'optionBeforeContent', 'optionAfterClazz', 'optionAfterStyle', 'optionAfterContent', 'requestOptionPlace', 'proField', 'presetStyle']);
-        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options', 'optionRender', 'optionLabelProp', 'popupClassName']);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['classNames', 'options', 'optionRender', 'optionLabelProp']);
         return (
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, props?.fieldProps?.className),
+                    classNames: {
+                        root: classNames(clazzPrefix, props?.fieldProps?.classNames?.root),
+                        popup: {
+                            root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
+                        }
+                    },
                     options: optionItems,
                     optionRender: (item) => renderOption(item),
                     optionLabelProp: props?.fieldProps?.optionLabelProp ?? 'label',
-                    popupClassName: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.popupClassName),
                     ...omitFieldProps,
                 }}
                 proFieldProps={{
@@ -290,15 +294,19 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         };
 
         const restProps = PropUtils.pickForwardProps(props);
-        const omitFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['className', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionRender', 'popupClassName']);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['classNames', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionRender']);
 
         return (
             <Select
-                className={classNames(clazzPrefix, props?.fieldProps?.className)}
+                classNames={{
+                    root: classNames(clazzPrefix, props?.fieldProps?.classNames?.root),
+                    popup: {
+                        root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
+                    }
+                }}
                 {...restProps}
                 options={(!presetStyle ? optionItems : rebuildOptions()) ?? []}
                 optionLabelProp={(!props?.fieldProps?.optionLabelProp || props.fieldProps.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
-                popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.popupClassName)}
                 {...omitFieldProps}
             />
         );

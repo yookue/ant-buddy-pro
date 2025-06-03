@@ -137,7 +137,7 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         <Image
             className={classNames(clazzPrefix, fieldStyle.hashId, (!handCursor ? undefined : `${clazzPrefix}-hand-cursor`), `${clazzPrefix}-id-${fieldId}`, props?.className)}
             preview={false}
-            src={imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`}
+            src={imageSrc ?? ''}
             {...omitProps}
             title={ObjectUtils.firstNotNil(props?.title, props?.localeProps?.clickToRefresh, intlLocales.get([locale, 'clickToRefresh']), intlLocales.get(['en_US', 'clickToRefresh']))}
             onClick={handleClick}

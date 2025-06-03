@@ -24,6 +24,7 @@ import {PackageConst} from '@/constant/PackageConst';
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}-popup`]: {
+            padding: 0,
             [`&-tabs`]: {
                 [`> ${token.antCls}-tabs-nav > ${token.antCls}-tabs-extra-content`]: {
                     maxWidth: 200,

@@ -83,7 +83,7 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
             height={0}
             preview={{
                 className: classNames(`${clazzPrefix}-preview`, `${clazzPrefix}-id-${fieldId}`),
-                src: imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`,
+                src: imageSrc ?? '',
                 ...omitProps,
             }}
             rootClassName={classNames(`${clazzPrefix}-root`, `${clazzPrefix}-root-id-${fieldId}`, props?.rootClassName)}

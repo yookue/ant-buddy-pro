@@ -257,7 +257,7 @@ export type NotifyBadgeProps = {
      * @description.zh-CN 下拉弹出层的属性
      * @description.zh-TW 下拉彈出層的屬性
      */
-    dropdownProps?: Omit<DropdownProps, 'dropdownRender' | 'menu' | 'children'>;
+    dropdownProps?: Omit<DropdownProps, 'popupRender' | 'menu' | 'children'>;
 
     /**
      * @description The properties of the tabs

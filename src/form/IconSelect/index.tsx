@@ -47,7 +47,7 @@ export type IconOptionMode = 'icon' | 'text';
 
 
 export type SelectFieldProps = Omit<ProFormFieldItemProps<SelectProps, RefSelectProps>, 'fieldProps'> & {
-    fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'dropdownRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'showSearch' | 'onPopupScroll'>;
+    fieldProps?: FieldProps<RefSelectProps> & Omit<SelectProps, 'popupRender' | 'menuItemSelectedIcon' | 'filterOption' | 'filterSort' | 'listHeight' | 'loading' | 'optionLabelProp' | 'options' | 'showSearch' | 'onPopupScroll'>;
 };
 
 
@@ -776,11 +776,11 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     const handleDropdownOpenChange = (open: boolean) => {
         setDropdownOpen(open);
-        props?.fieldProps?.onDropdownVisibleChange?.(open);
+        props?.fieldProps?.onOpenChange?.(open);
     };
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'disabled', 'dropdownStyle', 'open', 'popupClassName', 'virtual', 'onClear', 'onDeselect', 'onDropdownVisibleChange']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['classNames', 'disabled', 'open', 'virtual', 'onClear', 'onDeselect', 'onOpenChange']);
 
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'optionMode', 'optionGroup', 'proField', 'tabsProps', 'themeTypes', 'defaultThemeType', 'themeInkBar', 'sceneTypes', 'defaultSceneType', 'sceneInkBar', 'sceneEntryWidth', 'optionWrapperClazz', 'optionWrapperStyle', 'optionIconClazz', 'optionIconStyle', 'searchBox', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
@@ -788,21 +788,22 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className),
+                    classNames: {
+                        root: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
+                        popup: {
+                            root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
+                        }
+                    },
                     ...omitFieldProps,
                     disabled: entryImmutable,
-                    dropdownRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
-                    dropdownStyle: ObjectUtils.defaultProps(props?.fieldProps?.dropdownStyle, {
-                        padding: 0,
-                    }),
+                    popupRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
                     options: textOptions,
                     virtual: props?.fieldProps?.virtual ?? false,
                     open: dropdownOpen,
-                    popupClassName: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.popupClassName),
                     showSearch: false,
                     onClear: handleOptionClear,
                     onDeselect: handleOptionDeselect,
-                    onDropdownVisibleChange: handleDropdownOpenChange,
+                    onOpenChange: handleDropdownOpenChange,
                     // @ts-ignore
                     'data-icon-select-id': fieldId,
                 }}
@@ -812,22 +813,23 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         const restProps = PropUtils.pickForwardProps(props);
         return (
             <Select
-                className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
+                classNames={{
+                    root: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
+                    popup: {
+                        root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
+                    }
+                }}
                 {...restProps}
                 {...omitFieldProps}
                 disabled={entryImmutable}
-                dropdownRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
-                dropdownStyle={ObjectUtils.defaultProps(props?.fieldProps?.dropdownStyle, {
-                    padding: 0,
-                })}
+                popupRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
                 options={textOptions}
                 virtual={props?.fieldProps?.virtual ?? false}
                 open={dropdownOpen}
-                popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.popupClassName)}
                 showSearch={false}
                 onClear={handleOptionClear}
                 onDeselect={handleOptionDeselect}
-                onDropdownVisibleChange={handleDropdownOpenChange}
+                onOpenChange={handleDropdownOpenChange}
                 data-icon-select-id={fieldId}
             />
         );

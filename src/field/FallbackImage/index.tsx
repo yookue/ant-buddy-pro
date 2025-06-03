@@ -77,7 +77,7 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
     return (
         <RcImage
             className={classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className)}
-            src={imageSrc ?? `error-image-placeholder?timestamp=${Date.now()}`}
+            src={imageSrc ?? ''}
             {...omitProps}
         />
     );
