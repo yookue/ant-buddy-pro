@@ -63,14 +63,20 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     flex: 1,
                 }
             },
-            [`&&-addon-after &-addon > ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
-                borderTopRightRadius: token.borderRadius,
-                borderBottomRightRadius: token.borderRadius,
+            [`&&-addon-after &-addon`]: {
+                marginLeft: -1,
+                [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
+                    borderTopRightRadius: token.borderRadius,
+                    borderBottomRightRadius: token.borderRadius,
+                }
             },
-            [`&&-addon-before &-addon > ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
-                borderTopLeftRadius: token.borderRadius,
-                borderBottomLeftRadius: token.borderRadius,
-                zIndex: token.zIndexBase + 1,
+            [`&&-addon-before &-addon`]: {
+                marginRight: -1,
+                [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
+                    borderTopLeftRadius: token.borderRadius,
+                    borderBottomLeftRadius: token.borderRadius,
+                    zIndex: token.zIndexBase + 1,
+                }
             },
             [`&&-field-prior, &&-addon-prior`]: {
                 [`${token.componentCls}-field, ${token.componentCls}-addon`]: {
