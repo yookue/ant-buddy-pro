@@ -65,7 +65,7 @@
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.3.1",
-        "@eslint/js": "^9.27.0",
+        "@eslint/js": "^9.28.0",
         "@types/object-hash": "^3.0.6",
         "@types/react": "~18.2.0",
         "@types/react-color": "^3.0.13",
