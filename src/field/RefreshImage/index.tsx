@@ -113,34 +113,40 @@ export const RefreshImage: React.FC<RefreshImageProps> = (props?: RefreshImagePr
         ImageUtils.detectSource(props?.src, res => setImageSrc(res));
     }, [props?.src]);
 
+    // noinspection DuplicatedCode
     React.useEffect(() => {
         ImageUtils.detectSource(props?.fallback, res => {
             const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
             if (inspect && !inspect.onerror) {
-                inspect.setAttribute('onerror', `this.src='${res}'`);
+                inspect.setAttribute('onerror', `this.src='${res ?? ''}'`);
             }
         });
     }, [props?.fallback]);
 
-    const handleClick = (event: React.MouseEvent<any>) => {
-        props?.onClick?.(event);
-        const previousSrc = imageSrc;
-        ImageUtils.detectSource(props?.src, res => {
-            setImageSrc(res);
-            props?.onRefresh?.(previousSrc, res);
-        });
-    };
+    React.useEffect(() => {
+        const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
+        if (inspect && (!inspect.src || inspect.src === document.location.href)) {
+            inspect.setAttribute('src', '');
+        }
+    }, [props?.src, props?.fallback]);
 
-    const omitProps = !props ? {} : omit(props, ['className', 'title', 'onClick', 'clazzPrefix', 'handCursor', 'src', 'fallback', 'onRefresh', 'locale', 'localeProps']);
+    const omitProps = !props ? {} : omit(props, ['className', 'src', 'fallback', 'title', 'onClick', 'clazzPrefix', 'handCursor', 'onRefresh', 'locale', 'localeProps']);
 
     return (
         <Image
             className={classNames(clazzPrefix, fieldStyle.hashId, (!handCursor ? undefined : `${clazzPrefix}-hand-cursor`), `${clazzPrefix}-id-${fieldId}`, props?.className)}
             preview={false}
-            src={`${imageSrc}`}
-            {...omitProps}
+            src={`${imageSrc ?? ''}`}
             title={ObjectUtils.firstNotNil(props?.title, props?.localeProps?.clickToRefresh, intlLocales.get([locale, 'clickToRefresh']), intlLocales.get(['en_US', 'clickToRefresh']))}
-            onClick={handleClick}
+            {...omitProps}
+            onClick={(event: React.MouseEvent<any>) => {
+                props?.onClick?.(event);
+                const previousSrc = imageSrc;
+                ImageUtils.detectSource(props?.src, res => {
+                    setImageSrc(res);
+                    props?.onRefresh?.(res, previousSrc);
+                });
+            }}
         />
     );
 };

@@ -69,7 +69,7 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
             const selector = `.${clazzPrefix}-id-${fieldId} .${configContext.getPrefixCls('image-preview-content')} .${configContext.getPrefixCls('image-preview-body')} .${configContext.getPrefixCls('image-preview-img-wrapper')} > img`;
             const inspect = document.querySelector<HTMLImageElement>(selector);
             if (inspect && !inspect.onerror) {
-                inspect.setAttribute('onerror', `this.src='${res}'`);
+                inspect.setAttribute('onerror', `this.src='${res ?? ''}'`);
             }
         });
     }, [props?.fallback]);

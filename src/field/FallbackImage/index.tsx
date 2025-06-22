@@ -63,21 +63,29 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
         ImageUtils.detectSource(props?.src, res => setImageSrc(res));
     }, [props?.src]);
 
+    // noinspection DuplicatedCode
     React.useEffect(() => {
         ImageUtils.detectSource(props?.fallback, res => {
             const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
             if (inspect && !inspect.onerror) {
-                inspect.setAttribute('onerror', `this.src='${res}'`);
+                inspect.setAttribute('onerror', `this.src='${res ?? ''}'`);
             }
         });
     }, [props?.fallback]);
+
+    React.useEffect(() => {
+        const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
+        if (inspect && (!inspect.src || inspect.src === document.location.href)) {
+            inspect.setAttribute('src', '');
+        }
+    }, [props?.src, props?.fallback]);
 
     const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'src', 'fallback']);
 
     return (
         <RcImage
             className={classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className)}
-            src={`${imageSrc}`}
+            src={`${imageSrc ?? ''}`}
             {...omitProps}
         />
     );
