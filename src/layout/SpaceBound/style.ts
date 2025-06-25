@@ -32,7 +32,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             },
             [`&&-bound-border`]: {
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 borderRadius: token.borderRadius,
             }
         }

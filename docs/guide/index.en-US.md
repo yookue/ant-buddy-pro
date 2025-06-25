@@ -9,7 +9,7 @@ toc: menu
 
 ## What's `ant-buddy-pro`?
 
-`ant-buddy-pro` is a React components library based on [Ant Design ProComponents](https://procomponents.ant.design), providing more customization and individual components, aiming to provide better experience for React developers.
+`ant-buddy-pro` is a React components library based on [Ant Design](https://ant.design) & [Ant ProComponents](https://procomponents.ant.design), providing more customization and individual components, aiming to provide better experience for React developers.
 
 ## Features
 

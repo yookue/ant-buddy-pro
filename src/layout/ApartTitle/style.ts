@@ -30,7 +30,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             padding: `${token.paddingXS}px ${token.paddingMD}px`,
             alignItems: 'center',
             [`&&-bound-border`]: {
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
             [`&&-width-block`]: {
                 width: '100%',

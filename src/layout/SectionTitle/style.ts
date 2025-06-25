@@ -29,7 +29,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             alignItems: 'center',
             borderRadius: token.borderRadius,
             [`&&-bound-border`]: {
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
             [`&&-width-block`]: {
                 width: '100%',
@@ -106,10 +106,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             },
             [`&&-classic`]: {
                 [`&${token.componentCls}-ornament-before ${token.componentCls}-ornament`]: {
-                    borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
+                    borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 },
                 [`&${token.componentCls}-ornament-after ${token.componentCls}-ornament`]: {
-                    borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
+                    borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 }
             }
         }

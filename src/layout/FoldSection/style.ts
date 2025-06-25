@@ -28,7 +28,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             flexDirection: 'column',
             borderRadius: token.borderRadius,
             [`&&-bound-border`]: {
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
             [`&-header`]: {
                 display: 'flex',
@@ -90,7 +90,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     fontWeight: 500,
                 },
                 [`${token.componentCls}-panel`]: {
-                    borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
+                    borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 }
             },
             [`&&-default`]: {

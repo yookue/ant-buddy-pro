@@ -1,8 +1,8 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "title": "Ant Buddy Pro",
-    "description": "Awesome components based on React & Ant Design ProComponents",
+    "description": "Awesome components based on Ant Design & Ant ProComponents",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
     "organization": "Yookue Ltd",
     "private": false,
@@ -13,7 +13,7 @@
         "antd",
         "ant-design",
         "ant-design-pro",
-        "ant-design-pro-components",
+        "ant-pro-components",
         "admin",
         "dashboard"
     ],

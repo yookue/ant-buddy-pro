@@ -44,11 +44,11 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             },
             [`> ${token.subComponentCls}`]: {
                 [`&${token.subComponentCls}-top > ${token.subComponentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                    borderTopColor: `${token.colorBorderSecondary} !important`,
+                    borderTopColor: `${token.colorSplit} !important`,
                     borderTopRightRadius: '0 !important',
                 },
                 [`&${token.subComponentCls}-bottom > ${token.subComponentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                    borderBottomColor: `${token.colorBorderSecondary} !important`,
+                    borderBottomColor: `${token.colorSplit} !important`,
                     borderBottomRightRadius: '0 !important',
                 }
             }

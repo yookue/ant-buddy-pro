@@ -41,7 +41,7 @@ export default defineConfig({
     ],
     metas: [{
         name: 'keywords',
-        content: 'Yookue, Ant Buddy Pro, Ant Design, Ant Design Pro, React, NPM',
+        content: 'Yookue, Ant Buddy Pro, Ant Design, Ant ProComponents, React, NPM',
     }],
     favicons: [`${ROOT_CONTEXT}/favicon.ico`],
     links: [

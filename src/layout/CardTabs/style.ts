@@ -39,20 +39,17 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     background: 'transparent',
                     border: 'none',
                 },
-                [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab`]: {
-                    borderColor: token.colorBorder,
-                },
                 [`&${token.antCls}-tabs-top`]: {
                     [`> ${token.antCls}-tabs-nav`]: {
                         marginBottom: 0,
                     },
                     [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab-active`]: {
-                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                     },
                     [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                         borderRadius: `0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
                         marginTop: -1,
                     }
@@ -62,39 +59,39 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         marginTop: 0,
                     },
                     [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab-active`]: {
-                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                     },
                     [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                         borderRadius: `${token.borderRadiusLG}px ${token.borderRadiusLG}px ${token.borderRadiusLG}px 0`,
                         marginBottom: -1,
                     }
                 },
                 [`&${token.antCls}-tabs-left`]: {
                     [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab-active`]: {
-                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                     },
                     [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                         borderRadius: `0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
                     }
                 },
                 [`&${token.antCls}-tabs-right`]: {
                     [`&${token.componentCls}-tab-border > ${token.antCls}-tabs-nav > ${token.antCls}-tabs-nav-wrap > ${token.antCls}-tabs-nav-list > ${token.antCls}-tabs-tab-active`]: {
-                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                     },
                     [`&${token.componentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
-                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
-                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                        borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                        borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                         borderRadius: `${token.borderRadiusLG}px 0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
                     }
                 }

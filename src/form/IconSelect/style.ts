@@ -31,7 +31,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     margin: token.marginXXS,
                     [`> ${token.antCls}-input-search > ${token.antCls}-input-wrapper > ${token.antCls}-input-affix-wrapper`]: {
                         height: 24,
-                        marginTop: 1,
                         [`&${token.antCls}-input-affix-wrapper-status-error`]: {
                             borderColor: `${token.colorBorder} !important`,
                             [`&:not(${token.antCls}-input-affix-wrapper-focused):hover`]: {

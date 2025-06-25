@@ -66,7 +66,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     flex: 'none',
                     width: 'fit-content',
                     backgroundColor: token.controlItemBgHover,
-                    border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+                    border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                     borderRadius: token.borderRadiusSM,
                     color: token.colorTextSecondary,
                     cursor: 'default',

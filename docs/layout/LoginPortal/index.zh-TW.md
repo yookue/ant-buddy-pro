@@ -5,7 +5,7 @@ toc: content
 
 ## 組件說明
 
-與 [Ant Design ProComponents](https://procomponents.ant.design) 的 [LoginFormPage](https://github.com/ant-design/pro-components/tree/master/packages/form/src/components/LoginForm/index.md) 類似, 但支持更多的自定義 CSS 樣式。
+與 [Ant ProComponents](https://procomponents.ant.design) 的 [LoginFormPage](https://github.com/ant-design/pro-components/tree/master/packages/form/src/components/LoginForm/index.md) 類似, 但支持更多的自定義 CSS 樣式。
 
 ## 效果截圖
 

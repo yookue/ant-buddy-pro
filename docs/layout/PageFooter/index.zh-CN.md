@@ -5,7 +5,7 @@ toc: content
 
 ## 组件说明
 
-与 [Ant Design ProComponents](https://procomponents.ant.design) 的 [GlobalFooter](https://github.com/ant-design/pro-components/tree/master/packages/layout/src/components/GlobalFooter/index.tsx) 类似, 但支持更多的自定义 CSS 样式。
+与 [Ant ProComponents](https://procomponents.ant.design) 的 [GlobalFooter](https://github.com/ant-design/pro-components/tree/master/packages/layout/src/components/GlobalFooter/index.tsx) 类似, 但支持更多的自定义 CSS 样式。
 
 ## 导入组件
 

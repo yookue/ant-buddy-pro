@@ -108,9 +108,9 @@ export default defineThemeConfig({
         }
     ],
     description: {
-        'en-US': '🏅 Awesome components based on Ant Design ProComponents ❤️',
-        'zh-CN': '🏅 开箱即用的 Ant Design ProComponents 增强组件 ❤️',
-        'zh-TW': '🏅 開箱即用的 Ant Design ProComponents 增強組件 ❤️',
+        'en-US': '🏅 Awesome components based on Ant Design & Ant ProComponents ❤️',
+        'zh-CN': '🏅 开箱即用的 Ant Design & Ant ProComponents 增强组件 ❤️',
+        'zh-TW': '🏅 開箱即用的 Ant Design & Ant ProComponents 增強組件 ❤️',
     },
     actions: {
         'en-US': [
@@ -181,7 +181,7 @@ export default defineThemeConfig({
             },
             {
                 title: '🎄 主题支持',
-                details: '支持 Ant Design Pro 主题样式，更多样式，随心控制',
+                details: '支持 Ant Design 主题样式，更多样式，随心控制',
             },
             {
                 title: '🚀 更好的编译性能',
@@ -207,7 +207,7 @@ export default defineThemeConfig({
             },
             {
                 title: '🎄 主題支持',
-                details: '支持 Ant Design Pro 主題樣式，更多樣式，隨心控制'
+                details: '支持 Ant Design 主題樣式，更多樣式，隨心控制'
             },
             {
                 title: '🚀 更好的編譯性能',

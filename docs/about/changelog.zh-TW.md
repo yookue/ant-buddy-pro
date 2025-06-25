@@ -12,7 +12,7 @@ toc: false
 以下是一些裏程碑版本的更新軌跡：
 
   - **v1.0.0** [2025-05-06]
-    - 升級 Ant Design v4 到 v5, Ant Design ProComponents v1 到 v2
+    - 升級 Ant Design v4 到 v5, Ant ProComponents v1 到 v2
 
   - **v0.1.163** [2025-03-31]
     - 增加 'form/ServerTuple'
