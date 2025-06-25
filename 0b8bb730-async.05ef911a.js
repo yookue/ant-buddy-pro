@@ -1,2 +1,0 @@
-(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]||[]).push([["0b8bb730"],{"0b8bb730":function(e,o,n){"use strict";n.d(o,"__esModule",{value:!0}),n.d(o,"texts",{enumerable:!0,get:function(){return a;}}),n("15dfcc78");let a=[{value:"CornerStamp component, can display a corner stamp.",paraId:0,tocIndex:0},{value:"import {CornerStamp} from '@yookue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
-//# sourceMappingURL=0b8bb730-async.05ef911a.js.map

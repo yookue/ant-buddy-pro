@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]||[]).push([["5193361e"],{"5193361e":function(e,o,n){"use strict";n.d(o,"__esModule",{value:!0}),n.d(o,"texts",{enumerable:!0,get:function(){return u;}}),n("bcb52a93");let u=[{value:"CountField component, can display a field with a count number.",paraId:0,tocIndex:0},{value:"import {CountField} from '@yookue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
+//# sourceMappingURL=5193361e-async.94433006.js.map

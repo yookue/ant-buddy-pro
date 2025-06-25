@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]||[]).push([["14902b4e"],{"14902b4e":function(e,o,n){"use strict";n.d(o,"__esModule",{value:!0}),n.d(o,"texts",{enumerable:!0,get:function(){return a;}}),n("807ad0b4");let a=[{value:"FlexBox component, a flex layout container for alignment.",paraId:0,tocIndex:0},{value:"import {FlexBox} from '@yookue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
+//# sourceMappingURL=14902b4e-async.8756d6d5.js.map
