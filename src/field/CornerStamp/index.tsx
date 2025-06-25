@@ -232,34 +232,34 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
         switch (placement) {
             case 'topLeft':
                 diffProps = {
-                    top: `-${size * ratio}`,
-                    left: `-${size * ratio}`,
+                    top: -(size * ratio),
+                    left: -(size * ratio),
                 };
                 break;
             case 'topRight':
                 diffProps = {
-                    top: `-${size * ratio}`,
-                    right: `-${size * ratio}`,
+                    top: -(size * ratio),
+                    right: -(size * ratio),
                 };
                 break;
             case 'bottomLeft':
                 diffProps = {
-                    bottom: `-${size * ratio}`,
-                    left: `-${size * ratio}`,
+                    bottom: -(size * ratio),
+                    left: -(size * ratio),
                 };
                 break;
             case 'bottomRight':
                 diffProps = {
-                    bottom: `-${size * ratio}`,
-                    right: `-${size * ratio}`,
+                    bottom: -(size * ratio),
+                    right: -(size * ratio),
                 };
                 break;
             default:
                 break;
         }
         return css({
-            width: `${size + size * ratio}`,
-            height: `${size + size * ratio}`,
+            width: size + size * ratio,
+            height: size + size * ratio,
             zIndex: zIndex + 1,
             ...diffProps,
         });
