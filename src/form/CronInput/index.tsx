@@ -427,7 +427,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         if (entryImmutable) {
             return;
         }
-        const outcome = StringUtils.join(outcomeExpresses, ' ', item => !!item);
+        const outcome = StringUtils.join(outcomeExpresses, ' ', (item: any) => !!item);
         if (!outcome) {
             return;
         }

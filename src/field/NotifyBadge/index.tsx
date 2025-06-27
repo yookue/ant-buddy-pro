@@ -316,7 +316,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
     );
 
     const renderTabLabel = (tab: MixinTabProps): React.ReactNode => {
-        const unreadCount = tab.labelBadgeProps?.count ?? ArrayUtils.count(tab.listProps?.dataSource, item => BooleanUtils.isNotTrue(item.read));
+        const unreadCount = tab.labelBadgeProps?.count ?? ArrayUtils.count(tab.listProps?.dataSource, (item: any) => BooleanUtils.isNotTrue(item.read));
         const omitProps = !tab.labelBadgeProps ? {} : omit(tab.labelBadgeProps, ['count']);
         if (tab.label) {
             return !tab.labelBadgeProps ? tab.label : (

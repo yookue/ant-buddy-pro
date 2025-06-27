@@ -362,7 +362,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         }
         if (info.file.status === 'done') {
             // Get the url from response in real world
-            FileUtils.readAsDataUrl(info.file.originFileObj as RcFile, res => {
+            FileUtils.readAsDataUrl(info.file.originFileObj as RcFile, (res: any) => {
                 setLoading(false);
                 setImageSrc(res);
             });

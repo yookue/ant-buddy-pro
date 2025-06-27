@@ -56,7 +56,7 @@ export type IntlLocaleProps = {
      * @description.zh-CN 标签已存在
      * @description.zh-TW 標簽已存在
      */
-    duplicateTag?: string;
+    tagExists?: string;
 };
 
 
@@ -178,7 +178,7 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef' 
      * @description.zh-TW 是否顯示標簽已存在的警告
      * @default true
      */
-    warnDuplicate?: boolean;
+    warnExists?: boolean;
 
     /**
      * @description Whether to use ProFormField instead of Antd
@@ -229,7 +229,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     const {
         addable = false,
         tweenOneAnim = true,
-        warnDuplicate = true,
+        warnExists = true,
         proField = true,
         locale = intlType.locale,
     } = props ?? {};
@@ -238,7 +238,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [inputName, setInputName] = React.useState<string>();
-    const [inputValue, setInputValue] = React.useState<string>();
+    const inputValueRef = React.useRef<string>();
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
     const fieldStyle = useFieldStyle(clazzPrefix);
 
@@ -306,6 +306,12 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     }, [inputVisible]);
 
     React.useEffect(() => {
+        if (inputName) {
+            formContext?.form?.setFieldValue(inputName, undefined);
+        }
+    }, [inputName]);
+
+    React.useEffect(() => {
         if (props?.name && formContext?.form) {
             formContext.form.setFieldValue(props.name, tagContents);
         }
@@ -366,7 +372,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 );
             }
             const omitOriginProps = omit(origin, ['className', 'onClose']);
-            const mergedProps = ObjectUtils.defaultProps(omitOriginProps, omitShareProps, false);
+            const mergedProps = ObjectUtils.mergeProps(omitOriginProps, omitShareProps, false);
             return (
                 <span key={`${index}_${objectHash(content)}`} className={`${clazzPrefix}-fulfil-span`}>
                     <Tag
@@ -411,19 +417,19 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 return;
             }
         }
-        if (inputValue) {
-            const valueInteger = NumberUtils.toInteger(inputValue);
-            if (tagContents?.indexOf(inputValue) === -1 && (valueInteger === undefined || tagContents?.indexOf(valueInteger) === -1)) {
-                const contents = [...tagContents, inputValue];
+        if (inputValueRef.current) {
+            const valueInteger = NumberUtils.toInteger(inputValueRef.current);
+            if (tagContents?.indexOf(inputValueRef.current) === -1 && (valueInteger === undefined || tagContents?.indexOf(valueInteger) === -1)) {
+                const contents = [...tagContents, inputValueRef.current];
                 setTagContents(contents);
             } else {
-                if (warnDuplicate && !proField) {
-                    messageInvoker.warning(ObjectUtils.firstNotNil(props?.localeProps?.duplicateTag, intlLocales.get([locale, 'duplicateTag']), intlLocales.get(['en_US', 'duplicateTag'])));
+                if (warnExists && !proField) {
+                    messageInvoker.warning(ObjectUtils.firstNotNil(props?.localeProps?.tagExists, intlLocales.get([locale, 'tagExists']), intlLocales.get(['en_US', 'tagExists'])));
                 }
             }
         }
+        inputValueRef.current = '';
         setInputVisible(false);
-        setInputValue('');
     };
 
     const entryImmutable = !addable || editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
@@ -445,18 +451,19 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                 ref: (input) => input?.focus(),
                                 className: classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className),
                                 type: 'text',
-                                value: inputValue,
+                                id: inputName,
                                 ...omitFieldProps,
                                 size: props?.addingInputProps?.fieldProps?.size ?? 'small',
                                 onChange: (event) => {
                                     props?.addingInputProps?.fieldProps?.onChange?.(event);
                                     if (!event.isDefaultPrevented()) {
-                                        setInputValue(event.target.value);
+                                        inputValueRef.current = event.target.value;
                                     }
                                 },
                                 onKeyDown: (event) => {
                                     props?.addingInputProps?.fieldProps?.onKeyDown?.(event);
                                     if (!event.isDefaultPrevented() && event.key === 'Escape') {
+                                        inputValueRef.current = undefined;
                                         setInputVisible(false);
                                     }
                                 },
@@ -475,7 +482,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                             }}
                             rules={[
                                 ...(props?.addingInputProps?.rules ?? []),
-                                !warnDuplicate ? {} : {
+                                !warnExists ? {} : {
                                     validator: async (_rule: any, value: string) => {
                                         if (!value) {
                                             return undefined;
@@ -484,7 +491,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                         if (tagContents?.indexOf(value) === -1 && (valueInteger === undefined || tagContents?.indexOf(valueInteger) === -1)) {
                                             return Promise.resolve();
                                         }
-                                        return Promise.reject(ObjectUtils.firstNotNil(props?.localeProps?.duplicateTag, intlLocales.get([locale, 'duplicateTag']), intlLocales.get(['en_US', 'duplicateTag'])));
+                                        return Promise.reject(ObjectUtils.firstNotNil(props?.localeProps?.tagExists, intlLocales.get([locale, 'tagExists']), intlLocales.get(['en_US', 'tagExists'])));
                                     }
                                 }
                             ]}
@@ -500,19 +507,19 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                             className={classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className)}
                             type='text'
                             id={inputName}
-                            value={inputValue}
                             {...restProps}
                             {...omitFieldProps}
                             size={props?.addingInputProps?.fieldProps?.size ?? 'small'}
                             onChange={event => {
                                 props?.addingInputProps?.fieldProps?.onChange?.(event);
                                 if (!event.isDefaultPrevented()) {
-                                    setInputValue(event.target.value);
+                                    inputValueRef.current = event.target.value;
                                 }
                             }}
                             onKeyDown={(event) => {
                                 props?.addingInputProps?.fieldProps?.onKeyDown?.(event);
                                 if (!event.isDefaultPrevented() && event.key === 'Escape') {
+                                    inputValueRef.current = undefined;
                                     setInputVisible(false);
                                 }
                             }}

@@ -19,7 +19,7 @@ import {ReadonlyMultiKeyMap} from '@yookue/ts-multi-map';
 
 
 export const intlLocales = ReadonlyMultiKeyMap.of([
-    [['en_US', 'duplicateTag'], 'Tag already exists'],
-    [['zh_CN', 'duplicateTag'], '标签已存在'],
-    [['zh_TW', 'duplicateTag'], '標簽已存在'],
+    [['en_US', 'tagExists'], 'Tag already exists'],
+    [['zh_CN', 'tagExists'], '标签已存在'],
+    [['zh_TW', 'tagExists'], '標簽已存在'],
 ]);
