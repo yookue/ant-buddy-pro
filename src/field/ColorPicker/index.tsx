@@ -500,7 +500,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         }
     };
 
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onPopupVisibleChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'popupAlign', 'popupClassName', 'onOpenChange']);
 
     const triggerDom = (
         <Trigger
@@ -513,9 +513,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             }}
             popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
-            onPopupVisibleChange={(open: boolean) => {
+            onOpenChange={(open: boolean) => {
                 setTriggerOpen(open);
-                props?.triggerProps?.onPopupVisibleChange?.(open);
+                props?.triggerProps?.onOpenChange?.(open);
             }}
             {...omitTriggerProps}
         >

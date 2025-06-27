@@ -414,7 +414,12 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     }
 
     const [confirmOpen, setConfirmOpen] = React.useState<boolean>();
+
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+    // const [entryImmutable, setEntryImmutable] = React.useState<boolean | undefined>(false);
+    // React.useEffect(() =>{
+    //     setEntryImmutable(editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly);
+    // }, [props, editContext]);
 
     const handleSetAsDefault = (tagId: string) => {
         const inspect = document.querySelector<HTMLInputElement>(`[data-locale-input-id='${fieldId}']`);
@@ -697,7 +702,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     };
 
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
 
     return (
         <Trigger
@@ -705,9 +710,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             builtinPlacements={props?.triggerProps?.builtinPlacements ?? TriggerUtils.buildPlacements()}
             getPopupContainer={(trigger: HTMLElement) => {
                 return props?.triggerProps?.getPopupContainer?.(trigger) || trigger?.parentElement || document.body;
-            }}
-            getTriggerDOMNode={(node: React.ReactInstance) => {
-                return props?.triggerProps?.getTriggerDOMNode?.(node) || document.querySelector<HTMLElement>(`[data-locale-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
             }}
             popup={buildPopupDom()}
             popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
@@ -717,12 +719,12 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
             stretch={props?.triggerProps?.stretch ?? 'width'}
-            onPopupVisibleChange={(open: boolean) => {
+            onOpenChange={(open: boolean) => {
                 if (!open && (compositionRef.current || confirmOpen)) {
                     return;
                 }
                 setTriggerOpen(open);
-                props?.triggerProps?.onPopupVisibleChange?.(open);
+                props?.triggerProps?.onOpenChange?.(open);
             }}
             {...omitTriggerProps}
         >

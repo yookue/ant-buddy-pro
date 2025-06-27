@@ -778,7 +778,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         );
     };
 
-    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'getTriggerDOMNode', 'popupAlign', 'popupClassName', 'stretch', 'onPopupVisibleChange']);
+    const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
 
     return (
         <>
@@ -789,9 +789,6 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                 getPopupContainer={(trigger: HTMLElement) => {
                     return props?.triggerProps?.getPopupContainer?.(trigger) || trigger?.closest('form')?.parentElement || document.body;
                 }}
-                getTriggerDOMNode={(node: React.ReactInstance) => {
-                    return props?.triggerProps?.getTriggerDOMNode?.(node) || document.querySelector<HTMLElement>(`[data-cron-input-entry='${fieldId}'] .${clazzPrefix}`) || document.body;
-                }}
                 popup={buildPopupDom()}
                 popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
                     points: ['tl', 'bl'],
@@ -800,12 +797,12 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                 popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
                 popupVisible={triggerOpen}
                 stretch={props?.triggerProps?.stretch ?? 'width'}
-                onPopupVisibleChange={(open: boolean) => {
+                onOpenChange={(open: boolean) => {
                     if (!open && (secondPanelRef.current?.isCompositing() || minutePanelRef.current?.isCompositing() || hourPanelRef.current?.isCompositing() || dayPanelRef.current?.isCompositing() || monthPanelRef.current?.isCompositing() || weekPanelRef.current?.isCompositing() || yearPanelRef.current?.isCompositing())) {
                         return;
                     }
                     setTriggerOpen(open);
-                    props?.triggerProps?.onPopupVisibleChange?.(open);
+                    props?.triggerProps?.onOpenChange?.(open);
                 }}
                 {...omitTriggerProps}
             >
