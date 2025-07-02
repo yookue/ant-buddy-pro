@@ -18,6 +18,7 @@
 import React from 'react';
 import {Input, Button} from 'antd';
 import {FormContext} from 'antd/es/form/context';
+import {type NamePath} from 'antd/es/form/interface';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
@@ -83,6 +84,13 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'children' | 'fieldRef
      * @description.zh-TW 組件的 ref 句柄
      */
     fieldRef?: React.Ref<CaptchaInputRef | null | undefined>;
+
+    /**
+     * @description The field name(s) to validate before sending the captcha
+     * @description.zh-CN 发送验证码之前要校验的字段名
+     * @description.zh-TW 發送驗證碼之前要校驗的字段名
+     */
+    dependName?: NamePath;
 
     /**
      * @description The timer interval, in milliseconds
@@ -180,7 +188,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
             return timing;
         },
         startTimer: (): void => {
-            validatePhoneName().then(() => {
+            validateDependFields().then(() => {
                 setTiming(true);
             }).catch(() => {});
         },
@@ -227,22 +235,39 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         setLoading(false);
     };
 
-    const validatePhoneName = async () => {
+    const validateDependFields = async () => {
+        let result = true;
         if (props?.phoneName) {
-            await formContext?.form?.validateFields([props.phoneName].flat(1));
+            try {
+                await formContext?.form?.validateFields([props.phoneName].flat());
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            } catch (ignored) {
+                result = false;
+            }
         }
+        if (props?.dependName) {
+            try {
+                await formContext?.form?.validateFields([props.dependName].flat());
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            } catch (ignored) {
+                result = false;
+            }
+        }
+        return result;
     };
 
-    const handleClick = async () => {
-        try {
-            await validatePhoneName();
-            await buildCaptcha((!formContext?.form || !props?.phoneName) ? undefined : formContext.form.getFieldValue([props.phoneName].flat(1)));
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (ignored) {
+    const handleClick = async (event?: any) => {
+        const validated = await validateDependFields();
+        if (!validated) {
+            return;
         }
+        await buildCaptcha((!formContext?.form || !props?.phoneName) ? undefined : formContext.form.getFieldValue([props.phoneName].flat()));
+        props?.captchaProps?.onClick?.(event);
     }
 
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'value', 'onChange']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['className', 'value', 'onChange']);
+    const omitCaptchaProps = !props?.captchaProps ? {} : omit(props.captchaProps, ['className', 'disabled', 'loading']);
+
     return (
         <div
             ref={fieldRef}
@@ -256,10 +281,10 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
                 {...omitFieldProps}
             />
             <Button
-                className={`${clazzPrefix}-action`}
-                disabled={timing}
-                loading={loading}
-                {...props?.captchaProps}
+                className={classNames(`${clazzPrefix}-action`, props?.captchaProps?.className)}
+                disabled={timing || props?.captchaProps?.disabled}
+                loading={loading || props?.captchaProps?.loading}
+                {...omitCaptchaProps}
                 onClick={handleClick}
             >
                 {captchaTextRender(timing, counting)}

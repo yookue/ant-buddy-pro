@@ -13,6 +13,7 @@ Similar to [ProFormCaptcha](https://procomponents.ant.design/components/field-se
 - The function declaration of ProFormCaptcha `onGetCaptcha` is `(phone)=>Promise<any>`, while the declaration of CaptchaInput `onGenerate` is `(mobile?: string) => boolean | void | Promise<boolean | void>`, the latter one supports much richer return data types
 - The function of ProFormCaptcha `onGetCaptcha` only can stop captcha generation by throwing an exception, while CaptchaInput `onGenerate` provides more return types to automatically decide should start the generation or not (**This is especially useful when popups an extra slider captcha**)
 - CaptchaInput provides a function named `onTimerBegin` to initialize additional preparations, and provides a function `onTimerEnd` to do the additional cleanups
+- CaptchaInput also provides `dependName` to verify the third-party field. It can be used to allow clicking to obtain the captcha code only when the mobile phone number (and other fields, such as dialing code) are verified
 
 ## Import
 
