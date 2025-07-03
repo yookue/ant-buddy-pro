@@ -20,9 +20,10 @@ import {Input, Button} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {type NamePath} from 'antd/es/form/interface';
 import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
+import {ProForm} from '@ant-design/pro-form';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
+import {ArrayUtils, ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -84,6 +85,13 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'children' | 'fieldRef
      * @description.zh-TW 組件的 ref 句柄
      */
     fieldRef?: React.Ref<CaptchaInputRef | null | undefined>;
+
+    /**
+     * @description Whether to auto validate the `phoneName` and `dependName`
+     * @description.zh-CN 是否自动校验 `phoneName` 和 `dependName`
+     * @description.zh-TW 是否自動校驗 `phoneName` 和 `dependName`
+     */
+    autoValidate?: boolean;
 
     /**
      * @description The field name(s) to validate before sending the captcha
@@ -153,6 +161,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     CaptchaInputField.displayName = 'CaptchaInput';
 
     const formContext = React.useContext(FormContext);
+    const [submittable, setSubmittable] = React.useState<boolean>(true);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-captcha-input';
     const intlType = useIntl();
 
@@ -223,6 +232,26 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         }
     }, [timing, counting]);
 
+    const watchFields = React.useMemo(() => {
+        return [props?.phoneName, props?.dependName].flat().filter((item: any) => !!item);
+    }, [props?.phoneName, props?.dependName]);
+
+    const watchValues = !props?.autoValidate ? [] : ProForm.useWatch([], {form: formContext?.form, preserve: true});
+
+    const checkSubmittable = () => {
+        if (ArrayUtils.isNotEmpty(watchFields)) {
+            formContext?.form?.validateFields([...watchFields], {
+                validateOnly: true,
+            }).then(() => setSubmittable(true)).catch(() => setSubmittable(false));
+        }
+    };
+
+    React.useEffect(() => {
+        if (props?.autoValidate) {
+            checkSubmittable();
+        }
+    }, [props?.autoValidate, formContext?.form, watchValues]);
+
     const buildCaptcha = async (mobile?: string) => {
         if (!mobile || !props?.onGenerate) {
             setLoading(false);
@@ -282,7 +311,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
             />
             <Button
                 className={classNames(`${clazzPrefix}-action`, props?.captchaProps?.className)}
-                disabled={timing || props?.captchaProps?.disabled}
+                disabled={timing || !submittable || props?.captchaProps?.disabled}
                 loading={loading || props?.captchaProps?.loading}
                 {...omitCaptchaProps}
                 onClick={handleClick}

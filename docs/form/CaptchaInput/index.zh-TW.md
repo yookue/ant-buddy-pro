@@ -13,7 +13,7 @@ CaptchaInput，提供了壹個可以獲取驗證碼的按鈕和壹個輸入驗�
   - ProFormCaptcha 的 `onGetCaptcha` 函數定義是 `(phone)=>Promise<any>`，CaptchaInput 的 `onGenerate` 函數定義是 `(mobile?: string) => boolean | void | Promise<boolean | void>`，後者支持更豐富的返回數據類型
   - ProFormCaptcha 的 `onGetCaptcha` 函數只能通過拋出異常來中止觸發倒計時的動作，CaptchaInput 的 `onGenerate` 函數可以依據多種類型來自動判斷是否需要啟動倒計時（**這在彈出額外的滑塊驗證碼的時候特別有用**）
   - CaptchaInput 額外提供了 `onTimerBegin` 函數來初始化其他工作；提供了 `onTimerEnd` 函數來進行額外的清理工作
-  - CaptchaInput 額外提供了 `dependName` 用于校驗第三方字段，可用于當手機號（和其他字段，例如國際冠碼）校驗通過才允許點擊獲取驗證碼
+  - CaptchaInput 額外提供了 `dependName` 用于校驗第三方字段，配合 `autoValidate` 來控制是否自動啟用此功能，可用于當手機號（和其他字段，例如國際冠碼）校驗通過才允許點擊獲取驗證碼
 
 ## 導入組件
 
