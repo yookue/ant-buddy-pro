@@ -25,7 +25,8 @@ import classNames from 'classnames';
 
 export type RemoteFieldRef = {
     getOutcome: () => any;
-    refreshOutcome: () => void;
+    isAutoStart: () => boolean;
+    refresh: () => void;
 };
 
 
@@ -109,7 +110,10 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
         getOutcome: (): any => {
             return outcome;
         },
-        refreshOutcome: (): void => {
+        isAutoStart: (): boolean => {
+            return autoStart;
+        },
+        refresh: (): void => {
             setRefreshId(NanoidUtils.getPopularId());
         }
     }));

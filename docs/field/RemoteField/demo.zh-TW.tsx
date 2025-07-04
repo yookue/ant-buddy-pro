@@ -46,7 +46,7 @@ export default () => {
                 <Button
                     icon={<RedoOutlined/>}
                     onClick={() => {
-                        remoteFieldRef.current?.refreshOutcome();
+                        remoteFieldRef.current?.refresh();
                     }}
                 >
                     刷新請求
