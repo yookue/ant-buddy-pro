@@ -26,7 +26,7 @@ import {type PickerType} from '@yookue/ant-buddy-pro/field/ColorPicker';
 
 export default () => {
     // noinspection DuplicatedCode
-    const formRef = React.useRef<ProFormInstance>(null);
+    const formRef = React.useRef<ProFormInstance>();
     const colorPickerRef = React.useRef<ColorPickerRef>(null);
     const [pickerType, setPickerType] = React.useState<PickerType>('chrome');
     const [allowClear, setAllowClear] = React.useState<boolean>(true);

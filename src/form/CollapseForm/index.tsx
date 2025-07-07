@@ -181,7 +181,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const formRef = Form.useFormInstance();
-    const proFormRef = React.useRef<ProFormInstance>(null);
+    const proFormRef = React.useRef<ProFormInstance>();
     const [formOpen, setFormOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const fieldStyle = useFieldStyle(clazzPrefix);
 
@@ -190,7 +190,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         getFormRef: (): FormInstance<any> => {
             return formRef;
         },
-        getProFormRef: (): React.MutableRefObject<ProFormInstance | null> => {
+        getProFormRef: (): React.MutableRefObject<ProFormInstance | undefined> => {
             return proFormRef;
         },
         isFormOpen: (): boolean => {
