@@ -32,6 +32,9 @@ export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | '
 export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 
 
+// noinspection DuplicatedCode
+
+
 /**
  * Renders for rendering schema
  *
@@ -55,20 +58,21 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const restProps = {
-            proField: props?.proField ?? false,
-            ...(!props ? {} : omit(props, ['proField'])),
-        };
+        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <ExactInput
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                    value: schema.value,
+                    onChange: schema.onChange,
+                    ...rawFieldProps,
                 }}
+                proField={props?.proField ?? false}
                 proFieldProps={schema?.proFieldProps}
                 dependencies={schema?.dependencies}
-                {...restProps}
+                {...extRestProps}
             />
         );
     }
@@ -86,20 +90,21 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const restProps = {
-            proField: props?.proField ?? false,
-            ...(!props ? {} : omit(props, ['proField'])),
-        };
+        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <LocaleInput
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                    value: schema.value,
+                    onChange: schema.onChange,
+                    ...rawFieldProps,
                 }}
+                proField={props?.proField ?? false}
                 proFieldProps={schema?.proFieldProps}
                 dependencies={schema?.dependencies}
-                {...restProps}
+                {...extRestProps}
             />
         );
     }
@@ -117,20 +122,21 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const restProps = {
-            proField: props?.proField ?? false,
-            ...(!props ? {} : omit(props, ['proField'])),
-        };
+        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <MaskInput
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                    value: schema.value,
+                    onChange: schema.onChange,
+                    ...rawFieldProps,
                 }}
+                proField={props?.proField ?? false}
                 proFieldProps={schema?.proFieldProps}
                 dependencies={schema?.dependencies}
-                {...restProps}
+                {...extRestProps}
             />
         );
     }
@@ -148,24 +154,25 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const restProps = {
-            proField: props?.proField ?? false,
-            ...(!props ? {} : omit(props, ['proField'])),
-        };
+        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <DivideSelect
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                    value: schema.value,
+                    onChange: schema.onChange,
+                    ...rawFieldProps,
                 }}
+                proField={props?.proField ?? false}
                 proFieldProps={schema?.proFieldProps}
                 dependencies={schema?.dependencies}
                 valueEnum={schema?.valueEnum}
                 debounceTime={schema?.debounceTime}
                 params={schema?.params}
                 request={schema?.request}
-                {...restProps}
+                {...extRestProps}
             />
         );
     }
@@ -183,20 +190,21 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const restProps = {
-            proField: props?.proField ?? false,
-            ...(!props ? {} : omit(props, ['proField'])),
-        };
+        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <IconSelect
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    ...(!schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue'])),
+                    value: schema.value,
+                    onChange: schema.onChange,
+                    ...rawFieldProps,
                 }}
+                proField={props?.proField ?? false}
                 proFieldProps={schema?.proFieldProps}
                 dependencies={schema?.dependencies}
-                {...restProps}
+                {...extRestProps}
             />
         );
     }
@@ -213,12 +221,12 @@ export abstract class SchemaRender {
         if (!schema || schema?.ignoreFormItem) {
             return undefined;
         }
-        const restProps = {
-            proField: props?.proField ?? false,
-            ...(!props ? {} : omit(props, ['proField'])),
-        };
+        const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
-            <ServerTuple {...restProps}/>
+            <ServerTuple
+                proField={props?.proField ?? false}
+                {...extRestProps}
+            />
         );
     }
 }
