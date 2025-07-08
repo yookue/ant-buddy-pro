@@ -186,20 +186,39 @@ export abstract class SchemaRender {
      *
      * @param schema the column item of `ProSchema` to render
      * @param props the `ServerTupleProps` to inspect
+     * @param defaultNames whether to use the default names of `serverHost` and `serverPort`
      *
      * @returns the rendered `ServerTuple` DOM for the given schema form column
      */
-    public static renderServerTuple = (schema: any, props?: ServerTupleProps): React.ReactNode => {
+    public static renderServerTuple = (schema: any, props?: ServerTupleProps, defaultNames?: boolean): React.ReactNode => {
         if (!schema || schema.ignoreFormItem) {
             return undefined;
         }
         const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
         const extRestProps = !props ? {} : omit(props, ['proField']);
+        if (defaultNames !== true) {
+            return (
+                <ServerTuple
+                    name={fieldName}
+                    proField={props?.proField ?? false}
+                    {...extRestProps}
+                />
+            );
+        }
+        const omitRestProps = omit(extRestProps, ['hostProps', 'portProps']);
         return (
             <ServerTuple
                 name={fieldName}
+                hostProps={{
+                    name: extRestProps.hostProps?.name ?? 'serverHost',
+                    ...(!extRestProps.hostProps ? {} : omit(extRestProps.hostProps, ['name'])),
+                }}
+                portProps={{
+                    name: extRestProps.portProps?.name ?? 'serverPort',
+                    ...(!extRestProps.portProps ? {} : omit(extRestProps.portProps, ['name'])),
+                }}
                 proField={props?.proField ?? false}
-                {...extRestProps}
+                {...omitRestProps}
             />
         );
     }

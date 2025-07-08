@@ -26,8 +26,8 @@ import {useFieldStyle} from './style';
 
 
 export type CollapseFormRef = {
-    getFormInstance: () => FormInstance<any>;
-    getProFormRef: () => React.MutableRefObject<ProFormInstance | null>;
+    getForm: () => FormInstance<any>;
+    getFormRef: () => React.MutableRefObject<ProFormInstance | null>;
     isFormOpen: () => boolean;
     openForm: () => void;
     closeForm: () => void;
@@ -169,8 +169,8 @@ export type CollapseFormProps = React.PropsWithChildren<{
 export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & React.RefAttributes<CollapseFormRef>> = React.forwardRef((props?: CollapseFormProps, ref?: any) => {
     CollapseForm.displayName = 'CollapseForm';
 
-    const formInstance = Form.useFormInstance();
-    const proFormRef = React.useRef<ProFormInstance>();
+    const form = Form.useFormInstance();
+    const formRef = React.useRef<ProFormInstance>();
     const clazzPrefix = props?.clazzPrefix ?? 'abp-collapse-form';
 
     // Initialize the default props
@@ -187,11 +187,11 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getFormInstance: (): FormInstance<any> => {
-            return formInstance;
+        getForm: (): FormInstance<any> => {
+            return form;
         },
-        getProFormRef: (): React.MutableRefObject<ProFormInstance | undefined> => {
-            return proFormRef;
+        getFormRef: (): React.MutableRefObject<ProFormInstance | undefined> => {
+            return formRef;
         },
         isFormOpen: (): boolean => {
             return formOpen;
@@ -256,7 +256,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         if (proField) {
             return (
                 <ProForm
-                    formRef={proFormRef}
+                    formRef={formRef}
                     name={props?.formProps?.name ?? `abp-collapse-form-${fieldId}`}
                     {...omitFromProps}
                     onFinish={async (values) => {
@@ -272,7 +272,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         }
         return (
             <Form
-                form={formInstance}
+                form={form}
                 name={props?.formProps?.name ?? `abp-collapse-form-${fieldId}`}
                 {...omitFromProps}
                 onFinish={async (params) => {

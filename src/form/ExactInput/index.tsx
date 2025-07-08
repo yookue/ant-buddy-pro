@@ -85,6 +85,14 @@ export type ExactInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
     compactAddon?: boolean;
 
     /**
+     * @description Whether to show the checkbox or not
+     * @description.zh-CN 是否显示复选框
+     * @description.zh-TW 是否顯示復選框
+     * @default true
+     */
+    checkable?: boolean;
+
+    /**
      * @description The properties of checkbox for addon
      * @description.zh-CN 复选框的属性
      * @description.zh-TW 複選框的屬性
@@ -143,6 +151,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const {
         addonPos = 'after',
         compactAddon = true,
+        checkable = true,
         checkProps = {
             nameSuffix: 'Exact',
         },
@@ -168,7 +177,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         }
         const checkboxName = generateCheckName();
         const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'name', 'onChange']);
-        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && addonPos === 'before') || (!before && addonPos === 'after'))].filter(object => !!object).length;
+        const nodeCount = [(before && props?.fieldProps?.addonBefore && checkable), (!before && props?.fieldProps?.addonAfter && checkable), ((before && addonPos === 'before' && checkable) || (!before && addonPos === 'after' && checkable))].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
         }
@@ -194,7 +203,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                 <If condition={!before && props?.fieldProps?.addonAfter} validation={false}>
                     {props?.fieldProps?.addonAfter}
                 </If>
-                <If condition={(before && addonPos === 'before') || (!before && addonPos === 'after')} validation={false}>
+                <If condition={checkable && ((before && addonPos === 'before') || (!before && addonPos === 'after'))} validation={false}>
                     {TooltipRender.renderTooltip(props?.tooltipCtrl, {
                         title: ObjectUtils.firstNotNil(props?.localeProps?.exactMatch, intlLocales.get([locale, 'exactMatch']), intlLocales.get(['en_US', 'exactMatch'])),
                         ...props?.tooltipProps,

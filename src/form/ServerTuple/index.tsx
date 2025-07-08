@@ -158,7 +158,7 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
         const omitProps = omit(hostProps, ['name', 'placeholder', 'pattern']);
         return (
             <MaskInput
-                name={hostProps.fieldProps?.name ?? ((hostProps.namePrefix ?? '') + (props?.name ?? '') + (hostProps.nameSuffix ?? 'Host'))}
+                name={hostProps.name || hostProps.fieldProps?.name || ((hostProps.namePrefix ?? '') + (props?.name ?? '') + (hostProps.nameSuffix ?? 'Host'))}
                 label={props?.label}
                 placeholder={ObjectUtils.firstNotNil(hostProps.placeholder, intlLocales.get([locale, 'serverHost']), intlLocales.get(['en_US', 'serverHost']))}
                 fieldProps={{
@@ -172,7 +172,7 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
     };
 
     const buildPortNode = () => {
-        const numberName = portProps.fieldProps?.name ?? ((portProps.namePrefix ?? '') + (props?.name ?? '') + (portProps.nameSuffix ?? 'Port'));
+        const numberName = portProps.name || portProps.fieldProps?.name || ((portProps.namePrefix ?? '') + (props?.name ?? '') + (portProps.nameSuffix ?? 'Port'));
         const omitFieldProps = !portProps.fieldProps ? {} : omit(portProps.fieldProps, ['name', 'id', 'placeholder', 'min', 'max', 'maxLength']);
         if (!proField) {
             const restProps = omit(omitFieldProps, ['onChange']);
