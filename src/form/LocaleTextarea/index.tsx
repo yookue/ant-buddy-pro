@@ -17,6 +17,7 @@
 
 import React from 'react';
 import {Input, type TabsProps, type FormRule} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {type TextAreaProps, type TextAreaRef} from 'antd/es/input/TextArea';
 import {ProFormTextArea} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
@@ -237,6 +238,7 @@ export type LocaleTextareaProps = Omit<ProFormFieldItemProps<TextAreaProps, Text
  */
 export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleTextareaProps) => {
     const editContext = React.useContext(EditOrReadOnlyContext);
+    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-textarea';
     const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();
@@ -278,12 +280,19 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                 />
             )
         } else {
-            const restProps = PropUtils.pickForwardProps(props);
+            const restProps = omit(omitFieldProps, ['name', 'id', 'placeholder', 'onChange']);
             return (
                 <Input.TextArea
                     className={classNames(clazzPrefix, props?.fieldProps?.className)}
+                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                    placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
+                    onChange={(event: any) => {
+                        if (props?.name) {
+                            formContext?.form?.setFieldValue(props.name, event.target.value);
+                        }
+                        props?.fieldProps?.onChange?.(event);
+                    }}
                     {...restProps}
-                    {...omitFieldProps}
                     data-locale-textarea-id={fieldId}
                 />
             );
@@ -312,7 +321,6 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
 
     const buildSwitchItems = () => {
         const rawName = props?.name ?? props?.fieldProps?.name;
-        const rawId = props?.id ?? props?.fieldProps?.id;
         const clonedRules = cloneItemRules();
         const result: TabsProps['items'] = [];
         if (props?.switchTextareaProps) {
@@ -323,6 +331,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                 const {tag, fieldProps, rules} = itemProp;
                 const restProps = omit(itemProp, ['tag', 'name', 'fieldProps', 'rules']);
                 const omitFieldProps = !fieldProps ? {} : omit(fieldProps, ['className', 'name', 'id', 'placeholder', 'allowClear', 'autoSize', 'variant', 'maxLength', 'showCount', 'disabled', 'readOnly']);
+                const pureRestFieldProps = omit(omitFieldProps, ['onChange']);
                 const itemDom = (
                     <If condition={switchProField} validation={false}>
                         <If.Then>
@@ -331,7 +340,6 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 {...restProps}
                                 fieldProps={{
                                     className: classNames(`${clazzPrefix}-item`, `${clazzPrefix}-item-pro-field`, fieldProps?.className),
-                                    id: rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined),
                                     placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     rows: fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined),
                                     allowClear: fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
@@ -353,8 +361,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                         <If.Else>
                             <Input.TextArea
                                 className={classNames(`${clazzPrefix}-item`, fieldProps?.className)}
-                                name={rawName ? `${rawName}[${tag}]` : undefined}
-                                id={rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined)}
+                                id={(!formContext?.name ? '' : `${formContext.name}_`) + (rawName ? `${rawName}[${tag}]` : '')}
                                 placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 rows={fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined)}
                                 allowClear={fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
@@ -364,7 +371,13 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 disabled={props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled}
                                 readOnly={props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly}
                                 variant={fieldProps?.variant || props?.switchShareProps?.variant || (switchCloneProps.variant ? props?.fieldProps?.variant : undefined)}
-                                {...omitFieldProps}
+                                onChange={(event: any) => {
+                                    if (rawName) {
+                                        formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                    }
+                                    omitFieldProps.onChange?.(event);
+                                }}
+                                {...pureRestFieldProps}
                             />
                         </If.Else>
                     </If>
@@ -387,7 +400,6 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 name={rawName ? `${rawName}[${tag}]` : undefined}
                                 fieldProps={{
                                     className: classNames(`${clazzPrefix}-item`, `${clazzPrefix}-item-pro-field`),
-                                    id: rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined),
                                     placeholder: props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     rows: props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined),
                                     allowClear: props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
@@ -407,8 +419,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                         <If.Else>
                             <Input.TextArea
                                 className={`${clazzPrefix}-item`}
-                                name={rawName ? `${rawName}[${tag}]` : undefined}
-                                id={rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined)}
+                                id={(!formContext?.name ? '' : `${formContext.name}_`) + (rawName ? `${rawName}[${tag}]` : '')}
                                 placeholder={props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 rows={props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined)}
                                 allowClear={props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
@@ -418,6 +429,11 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 disabled={props.disabled || props?.fieldProps?.disabled}
                                 readOnly={props.readonly || props?.fieldProps?.readOnly}
                                 variant={props?.switchShareProps?.variant || (switchCloneProps.variant ? props?.fieldProps?.variant : undefined)}
+                                onChange={(event: any) => {
+                                    if (rawName) {
+                                        formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                    }
+                                }}
                             />
                         </If.Else>
                     </If>

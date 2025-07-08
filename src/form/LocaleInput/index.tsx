@@ -17,6 +17,7 @@
 
 import React from 'react';
 import {Input, List, Space, Popconfirm, type InputProps, type InputRef, type FormRule} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
@@ -278,6 +279,7 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  */
 export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
     const editContext = React.useContext(EditOrReadOnlyContext);
+    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-input';
     const intlType = useIntl();
 
@@ -395,14 +397,21 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 />
             )
         } else {
-            const restProps = PropUtils.pickForwardProps(props);
+            const restProps = omit(omitFieldProps, ['name', 'id', 'placeholder', 'onChange']);
             return (
                 <Input
                     className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
+                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                    placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                     addonBefore={buildEntryAddonDom(true)}
                     addonAfter={buildEntryAddonDom(false)}
+                    onChange={(event: any) => {
+                        if (props?.name) {
+                            formContext?.form?.setFieldValue(props.name, event.target.value);
+                        }
+                        props?.fieldProps?.onChange?.(event);
+                    }}
                     {...restProps}
-                    {...omitFieldProps}
                     data-locale-input-id={fieldId}
                 />
             );
@@ -520,7 +529,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     const buildPopupDom = () => {
         const rawName = props?.name ?? props?.fieldProps?.name;
-        const rawId = props?.id ?? props?.fieldProps?.id;
         const clonedRules = cloneItemRules();
         const tagInputs: React.ReactNode[] = [];
         if (props?.popupInputProps) {
@@ -534,6 +542,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 const tagId = NanoidUtils.getPopularId();
                 const beforeDom = buildItemAddonDom(tag, true, tagId, itemProp);
                 const afterDom = buildItemAddonDom(tag, false, tagId, itemProp);
+                const pureRestFieldProps = omit(omitFieldProps, ['onChange']);
                 const itemDom = (
                     <If condition={popupProField} validation={false}>
                         <If.Then>
@@ -543,7 +552,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 {...restProps}
                                 fieldProps={{
                                     className: classNames(`${clazzPrefix}-locale-item`, fieldProps?.className),
-                                    id: rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined),
                                     placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     autoComplete: 'off',
                                     addonBefore: beforeDom,
@@ -581,8 +589,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             <Input
                                 key={tag}
                                 className={classNames(`${clazzPrefix}-locale-item`, fieldProps?.className)}
-                                name={rawName ? `${rawName}[${tag}]` : undefined}
-                                id={rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined)}
+                                id={(!formContext?.name ? '' : `${formContext.name}_`) + (rawName ? `${rawName}[${tag}]` : '')}
                                 placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 autoComplete={'off'}
                                 addonBefore={beforeDom}
@@ -594,6 +601,12 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 variant={fieldProps?.variant || props?.popupShareProps?.variant || (popupCloneProps.variant ? props?.fieldProps?.variant : undefined)}
                                 disabled={props.disabled || props?.fieldProps?.disabled || fieldProps?.disabled || entryImmutable}
                                 readOnly={props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly}
+                                onChange={(event: any) => {
+                                    if (rawName) {
+                                        formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                    }
+                                    omitFieldProps.onChange?.(event);
+                                }}
                                 onCompositionStart={(event: React.CompositionEvent<HTMLInputElement>) => {
                                     compositionRef.current = true;
                                     fieldProps?.onCompositionStart?.(event);
@@ -602,7 +615,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                     compositionRef.current = false;
                                     fieldProps?.onCompositionEnd?.(event);
                                 }}
-                                {...omitFieldProps}
+                                {...pureRestFieldProps}
                                 data-locale-input-tag={tagId}
                             />
                         </If.Else>
@@ -626,7 +639,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 name={rawName ? `${rawName}[${tag}]` : undefined}
                                 fieldProps={{
                                     className: `${clazzPrefix}-locale-item`,
-                                    id: rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined),
                                     placeholder: props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     autoComplete: 'off',
                                     addonBefore: beforeDom,
@@ -659,8 +671,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             <Input
                                 key={tag}
                                 className={`${clazzPrefix}-locale-item`}
-                                name={rawName ? `${rawName}[${tag}]` : undefined}
-                                id={rawId ? `${rawId}[${tag}]` : (rawName ? `${rawName}[${tag}]` : undefined)}
+                                id={(!formContext?.name ? '' : `${formContext.name}_`) + (rawName ? `${rawName}[${tag}]` : '')}
                                 placeholder={props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 autoComplete={'off'}
                                 addonBefore={beforeDom}
@@ -672,6 +683,11 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                                 variant={props?.popupShareProps?.variant || (popupCloneProps.variant ? props?.fieldProps?.variant : undefined)}
                                 disabled={props.disabled || props?.fieldProps?.disabled || entryImmutable}
                                 readOnly={props.readonly || props?.fieldProps?.readOnly}
+                                onChange={(event: any) => {
+                                    if (rawName) {
+                                        formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                    }
+                                }}
                                 onCompositionStart={() => {
                                     compositionRef.current = true;
                                 }}

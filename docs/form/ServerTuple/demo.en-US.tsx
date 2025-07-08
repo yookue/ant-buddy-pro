@@ -18,15 +18,17 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ServerTuple} from '@yookue/ant-buddy-pro';
+import {ServerTuple, ConsoleUtils} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
+    const [form] = ProForm.useForm();
     const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
 
     return (
         <>
             <ProForm
+                form={form}
                 name='ServerTuple_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
@@ -43,10 +45,25 @@ export default () => {
                 />
                 <Divider/>
                 <ServerTuple
-                    hostProps={{
-                        label: 'Server',
-                    }}
+                    name='server'
+                    label='Server'
                     widthBlock={widthBlock}
+                    hostProps={{
+                        fieldProps: {
+                            onChange: () => {
+                                const values = form.getFieldsValue(['serverHost', 'serverPort']);
+                                ConsoleUtils.logTimestamp(false, false, 'ServerTuple', 'host onChange host/port value = ' + values.serverHost + '/' + values.serverPort);
+                            },
+                        },
+                    }}
+                    portProps={{
+                        fieldProps: {
+                            onChange: () => {
+                                const values = form.getFieldsValue(['serverHost', 'serverPort']);
+                                ConsoleUtils.logTimestamp(false, false, 'ServerTuple', 'port onChange host/port value = ' + values.serverHost + '/' + values.serverPort);
+                            },
+                        },
+                    }}
                     locale='en_US'
                 />
             </ProForm>

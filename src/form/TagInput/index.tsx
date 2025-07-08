@@ -25,14 +25,13 @@ import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {useDebounceFn} from '@ant-design/pro-utils';
-import {ArrayUtils, NanoidUtils, NumberUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {ArrayUtils, NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import objectHash from 'object-hash';
 import omit from 'rc-util/es/omit';
 import {TweenOneGroup, type IGroupProps as TweenOneGroupProps} from 'rc-tween-one';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 
@@ -451,8 +450,6 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                 ref: (input) => input?.focus(),
                                 className: classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className),
                                 type: 'text',
-                                id: inputName,
-                                ...omitFieldProps,
                                 size: props?.addingInputProps?.fieldProps?.size ?? 'small',
                                 onChange: (event) => {
                                     props?.addingInputProps?.fieldProps?.onChange?.(event);
@@ -478,7 +475,8 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                     if (!event.isDefaultPrevented()) {
                                         handleInputConfirm().then();
                                     }
-                                }
+                                },
+                                ...omitFieldProps,
                             }}
                             rules={[
                                 ...(props?.addingInputProps?.rules ?? []),
@@ -499,16 +497,16 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                     </div>
                 );
             } else {
-                const restProps = PropUtils.pickForwardProps(props);
+                const restProps = omit(omitFieldProps, ['placeholder']);
                 return (
                     <div className={`${clazzPrefix}-action`}>
                         <Input
                             ref={(input) => input?.focus()}
                             className={classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className)}
                             type='text'
-                            id={inputName}
+                            id={(!formContext?.name ? '' : `${formContext.name}_`) + inputName}
+                            placeholder={StringUtils.join(props?.addingInputProps?.placeholder) ?? props?.addingInputProps?.fieldProps?.placeholder}
                             {...restProps}
-                            {...omitFieldProps}
                             size={props?.addingInputProps?.fieldProps?.size ?? 'small'}
                             onChange={event => {
                                 props?.addingInputProps?.fieldProps?.onChange?.(event);

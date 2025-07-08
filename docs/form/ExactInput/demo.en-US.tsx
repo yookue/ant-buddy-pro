@@ -18,15 +18,17 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ExactInput} from '@yookue/ant-buddy-pro';
+import {ExactInput, ConsoleUtils} from '@yookue/ant-buddy-pro';
 
 
 export default () => {
+    const [form] = ProForm.useForm();
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
 
     return (
         <>
             <ProForm
+                form={form}
                 name='ExactInput_demo.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
@@ -47,6 +49,12 @@ export default () => {
                     placeholder='Please input this field'
                     fieldProps={{
                         addonBefore: 'Prefix',
+                    }}
+                    checkProps={{
+                        onChange: () => {
+                            const values = form.getFieldsValue(['foobar', 'foobarExact']);
+                            ConsoleUtils.logTimestamp(false, false, 'ExactInput', 'onChange input/checkbox value = ' + values.foobar + '/' + values.foobarExact);
+                        }
                     }}
                     tooltipCtrl={tooltipCtrl}
                     locale='en_US'

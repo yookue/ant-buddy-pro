@@ -22,13 +22,49 @@ import {ProFormDigit} from '@ant-design/pro-form';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
 import {useIntl} from '@ant-design/pro-provider';
-import {ArrayUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
+
+
+export type HostInputProps = Omit<MaskInputProps, 'proField' | 'label'> & {
+    /**
+     * @description The prefix of name for the host
+     * @description.zh-CN 主机名的名称前缀
+     * @description.zh-TW 主機名的名稱前綴
+     */
+    namePrefix?: string;
+
+    /**
+     * @description The suffix of name for the host
+     * @description.zh-CN 主机名的名称后缀
+     * @description.zh-TW 主機名的名稱后綴
+     * @default 'Host'
+     */
+    nameSuffix?: string;
+}
+
+
+export type PortInputProps = Omit<ProFormDigitProps, 'proField'> & {
+    /**
+     * @description The prefix of name for the port
+     * @description.zh-CN 端口号的名称前缀
+     * @description.zh-TW 端口號的名稱前綴
+     */
+    namePrefix?: string;
+
+    /**
+     * @description The suffix of name for the port
+     * @description.zh-CN 端口号的名称后缀
+     * @description.zh-TW 端口號的名稱后綴
+     * @default 'Port'
+     */
+    nameSuffix?: string;
+}
 
 
 export type ServerTupleProps = {
@@ -55,26 +91,18 @@ export type ServerTupleProps = {
     containerStyle?: React.CSSProperties;
 
     /**
-     * @description The field name of the child components
-     * @description.zh-CN 子组件的名称
-     * @description.zh-TW 子組件的名稱
-     * @default ['serverHost', 'serverPort']
-     */
-    name?: [string, string];
-
-    /**
      * @description The props of the host address
      * @description.zh-CN 主机地址的属性
      * @description.zh-TW 主機地址的屬性
      */
-    hostProps?: Omit<MaskInputProps, 'proField'>;
+    hostProps?: HostInputProps;
 
     /**
      * @description The props of the port number
      * @description.zh-CN 端口的属性
      * @description.zh-TW 端口的屬性
      */
-    portProps?: ProFormDigitProps;
+    portProps?: PortInputProps;
 
     /**
      * @description Whether to match the width of parent element or not
@@ -97,7 +125,7 @@ export type ServerTupleProps = {
      * @description.zh-TW 組件的語言, e.g. 'zh_TW'
      */
     locale?: string;
-};
+} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'name'> & Pick<React.OptionHTMLAttributes<HTMLOptionElement>, 'label'>;
 
 
 /**
@@ -113,7 +141,12 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
 
     // Initialize the default props
     const {
-        name = ['serverHost', 'serverPort'],
+        hostProps = {
+            nameSuffix: 'Host',
+        },
+        portProps = {
+            nameSuffix: 'Port',
+        },
         proField = true,
         locale = intlType.locale,
     } = props ?? {};
@@ -121,12 +154,17 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     const buildHostNode = () => {
-        const omitProps = !props?.hostProps ? {} : omit(props.hostProps, ['name', 'placeholder', 'pattern']);
+        const omitFieldProps = !hostProps.fieldProps ? {} : omit(hostProps.fieldProps, ['name', 'id']);
+        const omitProps = omit(hostProps, ['name', 'placeholder', 'pattern']);
         return (
             <MaskInput
-                name={props?.hostProps?.name || props?.hostProps?.fieldProps?.name || ArrayUtils.getFirst(name)}
-                placeholder={ObjectUtils.firstNotNil(props?.hostProps?.placeholder, intlLocales.get([locale, 'serverHost']), intlLocales.get(['en_US', 'serverHost']))}
-                pattern={props?.hostProps?.pattern ?? /^[a-zA-Z0-9-_.:]+$/}
+                name={hostProps.fieldProps?.name ?? ((hostProps.namePrefix ?? '') + (props?.name ?? '') + (hostProps.nameSuffix ?? 'Host'))}
+                label={props?.label}
+                placeholder={ObjectUtils.firstNotNil(hostProps.placeholder, intlLocales.get([locale, 'serverHost']), intlLocales.get(['en_US', 'serverHost']))}
+                fieldProps={{
+                    ...omitFieldProps,
+                }}
+                pattern={hostProps.pattern ?? /^[a-zA-Z0-9-_.:]+$/}
                 proField={proField}
                 {...omitProps}
             />
@@ -134,30 +172,37 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
     };
 
     const buildPortNode = () => {
-        const omitFieldProps = !props?.portProps?.fieldProps ? {} : omit(props.portProps.fieldProps, ['name', 'placeholder', 'min', 'max', 'maxLength']);
+        const numberName = portProps.fieldProps?.name ?? ((portProps.namePrefix ?? '') + (props?.name ?? '') + (portProps.nameSuffix ?? 'Port'));
+        const omitFieldProps = !portProps.fieldProps ? {} : omit(portProps.fieldProps, ['name', 'id', 'placeholder', 'min', 'max', 'maxLength']);
         if (!proField) {
+            const restProps = omit(omitFieldProps, ['onChange']);
             return (
                 <InputNumber
-                    {...PropUtils.pickForwardProps(props?.portProps)}
-                    name={props?.portProps?.name || props?.portProps?.fieldProps?.name || ArrayUtils.getLast(name)}
-                    placeholder={ObjectUtils.firstNotNil(props?.portProps?.placeholder, intlLocales.get([locale, 'serverPort']), intlLocales.get(['en_US', 'serverPort']))}
-                    min={props?.portProps?.fieldProps?.min ?? 1}
-                    max={props?.portProps?.fieldProps?.max ?? 65535}
-                    maxLength={props?.portProps?.fieldProps?.maxLength ?? 5}
-                    {...omitFieldProps}
+                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (numberName ?? '')}
+                    placeholder={ObjectUtils.firstNotNil(portProps.placeholder, intlLocales.get([locale, 'serverPort']), intlLocales.get(['en_US', 'serverPort']))}
+                    min={portProps.fieldProps?.min ?? 1}
+                    max={portProps.fieldProps?.max ?? 65535}
+                    maxLength={portProps.fieldProps?.maxLength ?? 5}
+                    onChange={value => {
+                        if (numberName) {
+                            formContext?.form?.setFieldValue(numberName, value);
+                        }
+                        props?.portProps?.fieldProps?.onChange?.( value);
+                    }}
+                    {...restProps}
                 />
             );
         }
         const omitProps = !props?.portProps ? {} : omit(props.portProps, ['name', 'label', 'placeholder', 'fieldProps']);
         return (
             <ProFormDigit
-                name={props?.portProps?.name || props?.portProps?.fieldProps?.name || ArrayUtils.getLast(name)}
-                label={props?.portProps?.label ?? (formContext?.vertical ? ' ' : '')}
-                placeholder={ObjectUtils.firstNotNil(props?.portProps?.placeholder, intlLocales.get([locale, 'serverPort']), intlLocales.get(['en_US', 'serverPort']))}
+                name={numberName}
+                label={portProps.label ?? (formContext?.vertical ? ' ' : '')}
+                placeholder={ObjectUtils.firstNotNil(portProps.placeholder, intlLocales.get([locale, 'serverPort']), intlLocales.get(['en_US', 'serverPort']))}
                 fieldProps={{
-                    min: props?.portProps?.fieldProps?.min ?? 1,
-                    max: props?.portProps?.fieldProps?.min ?? 65535,
-                    maxLength: props?.portProps?.fieldProps?.maxLength ?? 5,
+                    min: portProps.fieldProps?.min ?? 1,
+                    max: portProps.fieldProps?.min ?? 65535,
+                    maxLength: portProps.fieldProps?.maxLength ?? 5,
                     ...omitFieldProps,
                 }}
                 {...omitProps}
@@ -165,7 +210,7 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
         );
     };
 
-    const entryImmutable = editContext.mode === 'read' || props?.hostProps?.fieldProps?.disabled || props?.hostProps?.fieldProps?.readOnly || props?.hostProps?.proFieldProps?.mode === 'read' || props?.hostProps?.proFieldProps?.readonly || props?.portProps?.fieldProps?.disabled || props?.portProps?.fieldProps?.readOnly || props?.portProps?.proFieldProps?.mode === 'read' || props?.portProps?.proFieldProps?.readonly;
+    const entryImmutable = editContext.mode === 'read' || hostProps.fieldProps?.disabled || hostProps.fieldProps?.readOnly || hostProps.proFieldProps?.mode === 'read' || hostProps.proFieldProps?.readonly || portProps.fieldProps?.disabled || portProps.fieldProps?.readOnly || portProps.proFieldProps?.mode === 'read' || portProps.proFieldProps?.readonly;
 
     return (
         <div

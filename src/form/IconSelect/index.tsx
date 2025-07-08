@@ -37,7 +37,6 @@ import {type ReadonlyTabsType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {PropUtils} from '@/util/PropUtils';
 import {StyleUtils} from '@/util/StyleUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -794,7 +793,6 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                             root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
                         }
                     },
-                    ...omitFieldProps,
                     disabled: entryImmutable,
                     popupRender: (optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown()),
                     options: textOptions,
@@ -804,13 +802,14 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     onClear: handleOptionClear,
                     onDeselect: handleOptionDeselect,
                     onOpenChange: handleDropdownOpenChange,
+                    ...omitFieldProps,
                     // @ts-ignore
                     'data-icon-select-id': fieldId,
                 }}
             />
         );
     } else {
-        const restProps = PropUtils.pickForwardProps(props);
+        const restProps = omit(omitFieldProps, ['id', 'placeholder', 'onChange']);
         return (
             <Select
                 classNames={{
@@ -819,8 +818,8 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
                     }
                 }}
-                {...restProps}
-                {...omitFieldProps}
+                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 disabled={entryImmutable}
                 popupRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
                 options={textOptions}
@@ -830,6 +829,13 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 onClear={handleOptionClear}
                 onDeselect={handleOptionDeselect}
                 onOpenChange={handleDropdownOpenChange}
+                onChange={(event: any) => {
+                    if (props?.name) {
+                        formContext?.form?.setFieldValue(props.name, event.target.value);
+                    }
+                    props?.fieldProps?.onChange?.(event);
+                }}
+                {...restProps}
                 data-icon-select-id={fieldId}
             />
         );

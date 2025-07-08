@@ -17,16 +17,16 @@
 
 import React from 'react';
 import {Input, Checkbox, Space, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
-import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 
@@ -46,21 +46,6 @@ export type AddonCheckProps = CheckboxProps & React.PropsWithChildren<{
      * @default 'Exact'
      */
     nameSuffix?: string;
-
-    /**
-     * @description The prefix of id for the checkbox
-     * @description.zh-CN 复选框的 id 前缀
-     * @description.zh-TW 複選框的 id 前綴
-     */
-    idPrefix?: string;
-
-    /**
-     * @description The suffix of id for the checkbox
-     * @description.zh-CN 复选框的名称后缀
-     * @description.zh-TW 複選框的名稱后綴
-     * @default 'Exact'
-     */
-    idSuffix?: string;
 }>;
 
 
@@ -150,6 +135,7 @@ export type ExactInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
  * @author David Hsing
  */
 export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
+    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-exact-input';
     const intlType = useIntl();
 
@@ -159,7 +145,6 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         compactAddon = true,
         checkProps = {
             nameSuffix: 'Exact',
-            idSuffix: 'Exact',
         },
         proField = true,
         locale = intlType.locale,
@@ -168,21 +153,11 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     const generateCheckName = () => {
-        if (checkProps?.name) {
-            return checkProps?.name;
+        if (checkProps.name) {
+            return checkProps.name;
         }
         if (props?.name) {
-            return (checkProps?.namePrefix ?? '') + props?.name + (checkProps?.nameSuffix ?? '');
-        }
-        return undefined;
-    };
-
-    const generateCheckId = () => {
-        if (checkProps?.id) {
-            return checkProps?.id;
-        }
-        if (props?.id) {
-            return (checkProps?.idPrefix ?? '') + props?.id + (checkProps?.idSuffix ?? '');
+            return (checkProps.namePrefix ?? '') + (props.name ?? '') + (checkProps.nameSuffix ?? 'Exact');
         }
         return undefined;
     };
@@ -192,16 +167,20 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             return undefined;
         }
         const checkboxName = generateCheckName();
-        const checkboxId = generateCheckId();
-        const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'idPrefix', 'idSuffix', 'name', 'id']);
+        const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'name', 'onChange']);
         const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), ((before && addonPos === 'before') || (!before && addonPos === 'after'))].filter(object => !!object).length;
         if (nodeCount === 0) {
             return undefined;
         }
         const innerDom = (
             <Checkbox
-                name={checkboxName}
-                id={checkboxId ?? checkboxName}
+                id={(!formContext?.name ? '' : `${formContext.name}_`) + checkboxName}
+                onChange={(event: any) => {
+                    if (checkboxName) {
+                        formContext?.form?.setFieldValue(checkboxName, event.target.checked);
+                    }
+                    checkProps?.onChange?.(event);
+                }}
                 {...omitCheckProps}
             >
                 {checkProps?.children}
@@ -234,7 +213,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const afterDom = buildAddonDom(false);
     const posClazz = !addonPos ? undefined : `${clazzPrefix}-addon-${addonPos}`;
     const compactClazz = !compactAddon ? undefined : `${clazzPrefix}-compact`;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'id', 'addonBefore', 'addonAfter']);
 
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'tooltipCtrl', 'tooltipProps', 'proField', 'locale', 'localeProps']);
@@ -250,14 +229,21 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             />
         );
     } else {
-        const restProps = PropUtils.pickForwardProps(props);
+        const restProps = omit(omitFieldProps, ['placeholder', 'onChange']);
         return (
             <Input
                 className={classNames(clazzPrefix, fieldStyle.hashId, (!addonPos ? undefined : `${clazzPrefix}-addon`), posClazz, compactClazz, props?.fieldProps?.className)}
-                {...restProps}
-                {...omitFieldProps}
+                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 addonBefore={beforeDom}
                 addonAfter={afterDom}
+                onChange={(event: any) => {
+                    if (props?.name) {
+                        formContext?.form?.setFieldValue(props.name, event.target.value);
+                    }
+                    props?.fieldProps?.onChange?.(event);
+                }}
+                {...restProps}
             />
         );
     }

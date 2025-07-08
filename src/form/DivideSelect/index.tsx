@@ -17,12 +17,13 @@
 
 import React from 'react';
 import {Select} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {type RequestOptionsType} from '@ant-design/pro-utils';
 import {useDebounceFn} from '@ant-design/pro-utils';
 import {If} from '@yookue/react-condition';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type LabelValueType, type RequestOptionPlace} from '@/type/declaration';
@@ -146,6 +147,7 @@ export type DivideSelectProps = Omit<ProFormSelectProps, 'children'> & {
  * @author David Hsing
  */
 export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
+    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-divide-select';
 
     // Initialize the default props
@@ -293,8 +295,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             });
         };
 
-        const restProps = PropUtils.pickForwardProps(props);
-        const omitFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['classNames', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionRender']);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['classNames', 'id', 'placeholder', 'options', 'optionLabelProp', 'searchOnFocus', 'resetAfterSelect', 'fetchDataOnSearch', 'optionRender', 'onChange']);
 
         return (
             <Select
@@ -304,9 +305,16 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                         root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
                     }
                 }}
-                {...restProps}
+                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 options={(!presetStyle ? optionItems : rebuildOptions()) ?? []}
                 optionLabelProp={(!props?.fieldProps?.optionLabelProp || props.fieldProps.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
+                onChange={(event: any) => {
+                    if (props?.name) {
+                        formContext?.form?.setFieldValue(props.name, event.target.value);
+                    }
+                    props?.fieldProps?.onChange?.(event);
+                }}
                 {...omitFieldProps}
             />
         );

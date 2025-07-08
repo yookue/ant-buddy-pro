@@ -18,7 +18,6 @@
 import React from 'react';
 import omit from 'rc-util/es/omit';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
-import {LocaleInput, type LocaleInputProps} from '@/form/LocaleInput';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
 import {IconSelect, type IconSelectProps} from '@/form/IconSelect';
@@ -26,7 +25,6 @@ import {ServerTuple, type ServerTupleProps} from '@/form/ServerTuple';
 
 
 export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
-export type OmitLocaleInputProps = Omit<LocaleInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitMaskInputProps = Omit<MaskInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
 export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
@@ -54,56 +52,27 @@ export abstract class SchemaRender {
      * @returns the rendered `ExactInput` DOM for the given schema form column
      */
     public static renderExactInput = (schema: any, props?: OmitExactInputProps): React.ReactNode => {
-        if (!schema || schema?.ignoreFormItem) {
+        if (!schema || schema.ignoreFormItem || !schema.dataIndex) {
             return undefined;
         }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
+        const extCheckProps = !props?.checkProps ? {} : omit(props.checkProps, ['name', 'value', 'onChange']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <ExactInput
                 name={fieldName}
                 fieldProps={{
-                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    value: schema.value,
-                    onChange: schema.onChange,
+                    defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
+                    onChange: (event: any) => {
+                        schema.fieldProps?.onChange?.(event);
+                    },
                     ...rawFieldProps,
                 }}
+                checkProps={extCheckProps}
                 proField={props?.proField ?? false}
-                proFieldProps={schema?.proFieldProps}
-                dependencies={schema?.dependencies}
-                {...extRestProps}
-            />
-        );
-    }
-
-    /**
-     * Returns the rendered `LocaleInput` DOM for the given schema form column
-     *
-     * @param schema the column item of `ProSchema` to render
-     * @param props the `LocaleInputProps` to inspect
-     *
-     * @returns the rendered `LocaleInput` DOM for the given schema form column
-     */
-    public static renderLocaleInput = (schema: any, props?: OmitLocaleInputProps): React.ReactNode => {
-        if (!schema || schema?.ignoreFormItem) {
-            return undefined;
-        }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
-        const extRestProps = !props ? {} : omit(props, ['proField']);
-        return (
-            <LocaleInput
-                name={fieldName}
-                fieldProps={{
-                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    value: schema.value,
-                    onChange: schema.onChange,
-                    ...rawFieldProps,
-                }}
-                proField={props?.proField ?? false}
-                proFieldProps={schema?.proFieldProps}
-                dependencies={schema?.dependencies}
+                proFieldProps={schema.proFieldProps}
+                dependencies={schema.dependencies}
                 {...extRestProps}
             />
         );
@@ -118,24 +87,25 @@ export abstract class SchemaRender {
      * @returns the rendered `MaskInput` DOM for the given schema form column
      */
     public static renderMaskInput = (schema: any, props?: OmitMaskInputProps): React.ReactNode => {
-        if (!schema || schema?.ignoreFormItem) {
+        if (!schema || schema.ignoreFormItem || !schema.dataIndex) {
             return undefined;
         }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <MaskInput
                 name={fieldName}
                 fieldProps={{
-                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    value: schema.value,
-                    onChange: schema.onChange,
+                    defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
+                    onChange: (event: any) => {
+                        schema.fieldProps?.onChange?.(event);
+                    },
                     ...rawFieldProps,
                 }}
                 proField={props?.proField ?? false}
-                proFieldProps={schema?.proFieldProps}
-                dependencies={schema?.dependencies}
+                proFieldProps={schema.proFieldProps}
+                dependencies={schema.dependencies}
                 {...extRestProps}
             />
         );
@@ -150,28 +120,29 @@ export abstract class SchemaRender {
      * @returns the rendered `DivideSelect` DOM for the given schema form column
      */
     public static renderDivideSelect = (schema: any, props?: OmitDivideSelectProps): React.ReactNode => {
-        if (!schema || schema?.ignoreFormItem) {
+        if (!schema || schema.ignoreFormItem || !schema.dataIndex) {
             return undefined;
         }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <DivideSelect
                 name={fieldName}
                 fieldProps={{
-                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    value: schema.value,
-                    onChange: schema.onChange,
+                    defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
+                    onChange: (event: any) => {
+                        schema.fieldProps?.onChange?.(event);
+                    },
                     ...rawFieldProps,
                 }}
                 proField={props?.proField ?? false}
-                proFieldProps={schema?.proFieldProps}
-                dependencies={schema?.dependencies}
-                valueEnum={schema?.valueEnum}
-                debounceTime={schema?.debounceTime}
-                params={schema?.params}
-                request={schema?.request}
+                proFieldProps={schema.proFieldProps}
+                dependencies={schema.dependencies}
+                valueEnum={schema.valueEnum}
+                debounceTime={schema.debounceTime}
+                params={schema.params}
+                request={schema.request}
                 {...extRestProps}
             />
         );
@@ -186,24 +157,25 @@ export abstract class SchemaRender {
      * @returns the rendered `IconSelect` DOM for the given schema form column
      */
     public static renderIconSelect = (schema: any, props?: OmitIconSelectProps): React.ReactNode => {
-        if (!schema || schema?.ignoreFormItem) {
+        if (!schema || schema.ignoreFormItem || !schema.dataIndex) {
             return undefined;
         }
-        const fieldName = Array.isArray(schema?.dataIndex) ? schema.dataIndex.join('.') : schema?.dataIndex;
-        const rawFieldProps = !schema?.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'value', 'onChange']);
+        const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <IconSelect
                 name={fieldName}
                 fieldProps={{
-                    defaultValue: schema?.initialValue ?? schema?.fieldProps?.defaultValue,
-                    value: schema.value,
-                    onChange: schema.onChange,
+                    defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
+                    onChange: (event: any) => {
+                        schema.fieldProps?.onChange?.(event);
+                    },
                     ...rawFieldProps,
                 }}
                 proField={props?.proField ?? false}
-                proFieldProps={schema?.proFieldProps}
-                dependencies={schema?.dependencies}
+                proFieldProps={schema.proFieldProps}
+                dependencies={schema.dependencies}
                 {...extRestProps}
             />
         );
@@ -218,12 +190,14 @@ export abstract class SchemaRender {
      * @returns the rendered `ServerTuple` DOM for the given schema form column
      */
     public static renderServerTuple = (schema: any, props?: ServerTupleProps): React.ReactNode => {
-        if (!schema || schema?.ignoreFormItem) {
+        if (!schema || schema.ignoreFormItem) {
             return undefined;
         }
+        const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <ServerTuple
+                name={fieldName}
                 proField={props?.proField ?? false}
                 {...extRestProps}
             />

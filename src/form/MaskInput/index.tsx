@@ -20,11 +20,10 @@ import {Input, type InputProps, type InputRef} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {ElementUtils, NanoidUtils, RegexUtils} from '@yookue/ts-lang-utils';
+import {ElementUtils, NanoidUtils, RegexUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {PropUtils} from '@/util/PropUtils';
 
 
 export type MaskInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
@@ -79,9 +78,15 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
             // formContext?.form?.setFieldValue(props?.name ?? props?.fieldProps?.name, previousRef.current);
             const inspect = document.querySelector<HTMLInputElement>(`[data-mask-input-id='${fieldId}']`);
             ElementUtils.setElementValue(inspect, previousRef.current);
+            if (props?.name && !proField) {
+                formContext?.form?.setFieldValue(props.name, previousRef.current);
+            }
             failAction?.();
         } else {
             previousRef.current = value;
+            if (props?.name && !proField) {
+                formContext?.form?.setFieldValue(props.name, value);
+            }
             passAction?.();
         }
     };
@@ -109,7 +114,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
         }
     };
 
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'onChange', 'onCompositionStart', 'onCompositionEnd']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'onChange', 'onCompositionStart', 'onCompositionEnd']);
     if (proField) {
         const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'pattern', 'proField']);
         return (
@@ -117,24 +122,24 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
                 {...restProps}
                 fieldProps={{
                     className: classNames(clazzPrefix, props?.fieldProps?.className),
-                    ...omitFieldProps,
                     onChange: handleChange,
                     onCompositionStart: handleCompositionStart,
                     onCompositionEnd: handleCompositionEnd,
+                    ...omitFieldProps,
                     'data-mask-input-id': fieldId,
                 }}
             />
         );
     } else {
-        const restProps = PropUtils.pickForwardProps(props);
         return (
             <Input
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}
-                {...restProps}
-                {...omitFieldProps}
+                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 onChange={handleChange}
                 onCompositionStart={handleCompositionStart}
                 onCompositionEnd={handleCompositionEnd}
+                {...omitFieldProps}
                 data-mask-input-id={fieldId}
             />
         );

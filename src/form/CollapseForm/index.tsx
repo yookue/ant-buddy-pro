@@ -26,7 +26,7 @@ import {useFieldStyle} from './style';
 
 
 export type CollapseFormRef = {
-    getFormRef: () => FormInstance<any>;
+    getFormInstance: () => FormInstance<any>;
     getProFormRef: () => React.MutableRefObject<ProFormInstance | null>;
     isFormOpen: () => boolean;
     openForm: () => void;
@@ -169,6 +169,8 @@ export type CollapseFormProps = React.PropsWithChildren<{
 export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & React.RefAttributes<CollapseFormRef>> = React.forwardRef((props?: CollapseFormProps, ref?: any) => {
     CollapseForm.displayName = 'CollapseForm';
 
+    const formInstance = Form.useFormInstance();
+    const proFormRef = React.useRef<ProFormInstance>();
     const clazzPrefix = props?.clazzPrefix ?? 'abp-collapse-form';
 
     // Initialize the default props
@@ -180,15 +182,13 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
-    const formRef = Form.useFormInstance();
-    const proFormRef = React.useRef<ProFormInstance>();
     const [formOpen, setFormOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getFormRef: (): FormInstance<any> => {
-            return formRef;
+        getFormInstance: (): FormInstance<any> => {
+            return formInstance;
         },
         getProFormRef: (): React.MutableRefObject<ProFormInstance | undefined> => {
             return proFormRef;
@@ -272,7 +272,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         }
         return (
             <Form
-                form={formRef}
+                form={formInstance}
                 name={props?.formProps?.name ?? `abp-collapse-form-${fieldId}`}
                 {...omitFromProps}
                 onFinish={async (params) => {

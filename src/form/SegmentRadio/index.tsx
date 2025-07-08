@@ -16,6 +16,7 @@
 
 import React from 'react';
 import {Segmented, type SegmentedProps} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {type SegmentedLabeledOption} from 'antd/es/segmented';
 import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
@@ -27,7 +28,6 @@ import {type SegmentedRawOption} from 'rc-segmented';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
-import {PropUtils} from '@/util/PropUtils';
 
 
 export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'children' | 'placeholder' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request'> & {
@@ -93,6 +93,7 @@ export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'chi
  */
 export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioProps) => {
     const editContext = React.useContext(EditOrReadOnlyContext);
+    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-segment-radio';
 
     // Initialize the default props
@@ -133,7 +134,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     }, [optionItems]);
 
     const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
-    const restFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options', 'disabled']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options', 'disabled']);
 
     if (proField) {
         const restProps = !props ? {} : pickProFormItemProps(props);
@@ -143,20 +144,26 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
                     <Segmented
                         options={optionItems ?? []}
                         disabled={entryImmutable}
-                        {...restFieldProps}
+                        {...omitFieldProps}
                     />
                 </ProForm.Item>
             </div>
         );
     } else {
-        const restProps = PropUtils.pickForwardProps(props);
+        const restProps = omit(omitFieldProps, ['id', 'onChange']);
         return (
             <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
                 <Segmented
+                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                     options={optionItems ?? []}
                     disabled={entryImmutable}
+                    onChange={(event: any) => {
+                        if (props?.name) {
+                            formContext?.form?.setFieldValue(props.name, event.target.value);
+                        }
+                        props?.fieldProps?.onChange?.(event);
+                    }}
                     {...restProps}
-                    {...restFieldProps}
                 />
             </div>
         );
