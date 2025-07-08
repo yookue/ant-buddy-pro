@@ -530,10 +530,12 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                 />
             )
         } else {
-            const restProps = PropUtils.pickForwardProps(props);
+            const restProps = omit(omitFieldProps, ['placeholder']);
             return (
                 <Input
                     className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
+                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                    placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                     addonBefore={buildEntryAddonDom(true)}
                     addonAfter={buildEntryAddonDom(false)}
                     {...restProps}

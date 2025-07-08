@@ -20,10 +20,10 @@ import {Space, InputNumber} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
 import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
+import {StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ChronoSelect, type ChronoSelectProps} from '@/form/ChronoSelect';
-import {PropUtils} from '@/util/PropUtils';
 import {useFieldStyle} from './style';
 
 
@@ -98,13 +98,28 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
 
     const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
-    const digitNode = proField ? (
-        <ProFormDigit {...props?.digitProps}/>
-    ) : (
-        <InputNumber {...PropUtils.pickForwardProps(props?.digitProps)} {...props?.digitProps?.fieldProps}/>
-    );
+    const buildDigitNode = () => {
+        if (proField) {
+            return <ProFormDigit {...props?.digitProps}/>;
+        }
+        const restProps = !props?.digitProps?.fieldProps ? {} : omit(props.digitProps.fieldProps, ['className', 'name', 'id', 'placeholder', 'onChange']);
+        return (
+            <InputNumber
+                className={classNames(`${clazzPrefix}-digit`, props?.digitProps?.fieldProps?.className)}
+                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.digitProps?.name ?? '')}
+                placeholder={StringUtils.join(props?.digitProps?.placeholder) ?? props?.digitProps?.fieldProps?.placeholder}
+                onChange={(value: any) => {
+                    if (props?.digitProps?.name) {
+                        formContext?.form?.setFieldValue(props.digitProps.name, value);
+                    }
+                    props?.digitProps?.fieldProps?.onChange?.(value);
+                }}
+                {...restProps}
+            />
+        );
+    };
 
-    const omitProps = !props?.selectProps ? {} : omit(props.selectProps, ['label', 'proField', 'presetStyle']);
+    const omitProps = !props?.selectProps ? {} : omit(props.selectProps, ['className', 'label', 'proField', 'presetStyle']);
 
     return (
         <div
@@ -112,8 +127,9 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
             style={props?.containerStyle}
         >
             <Space.Compact>
-                {digitNode}
+                {buildDigitNode()}
                 <ChronoSelect
+                    className={classNames(`${clazzPrefix}-select`, props?.selectProps?.fieldProps?.className)}
                     label={props?.selectProps?.label ?? (formContext?.vertical ? ' ' : '')}
                     {...omitProps}
                     proField={proField}

@@ -117,6 +117,27 @@ export type LabelFieldProps = React.PropsWithChildren<{
     required?: boolean;
 
     /**
+     * @description Whether to match the width of parent element or not
+     * @description.zh-CN 是否匹配父节点的宽度
+     * @description.zh-TW 是否匹配父節點的寬度
+     */
+    widthBlock?: boolean;
+
+    /**
+     * @description Whether to hide the label (and delimiter) when it is empty
+     * @description.zh-CN 当标签为空时是否隐藏标签和分隔符
+     * @description.zh-TW 當標簽為空時是否隱藏標簽和分隔符
+     */
+    hideLabelWhenEmpty?: boolean;
+
+    /**
+     * @description Whether to hide the field when it is empty
+     * @description.zh-CN 当内容为空时是否隐藏内容
+     * @description.zh-TW 當內容為空時是否隱藏內容
+     */
+    hideFieldWhenEmpty?: boolean;
+
+    /**
      * @description The preset style of the component
      * @description.zh-CN 预设样式
      * @description.zh-TW 預設樣式
@@ -145,22 +166,42 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
 
     const fieldStyle = useFieldStyle(clazzPrefix);
 
+    const buildLabelDom = () => {
+        const income = !props?.label ? undefined : (typeof props.label === 'function' ? props.label() : props.label);
+        if (!income && props?.hideLabelWhenEmpty) {
+            return undefined;
+        }
+        return (
+            <div
+                className={classNames(`${clazzPrefix}-label`, props?.labelClazz)}
+                style={props?.labelStyle}
+            >
+                {income}
+                {!delimiterInLayout ? undefined : (delimiterInLayout.includes(layout) ? delimiter : undefined)}
+            </div>
+        );
+    };
+
+    const buildFieldDom = () => {
+        const income = !props?.field ? props?.children : (typeof props.field === 'function' ? props.field() : props.field);
+        if (!income && props?.hideFieldWhenEmpty) {
+            return undefined;
+        }
+        return (
+            <div className={`${clazzPrefix}-field`}>
+                {income}
+            </div>
+        );
+    };
+
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, ((formContext?.requiredMark !== false && props?.required) ? `${clazzPrefix}-required` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, ((formContext?.requiredMark !== false && props?.required) ? `${clazzPrefix}-required` : undefined), (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space className={`${clazzPrefix}-space-${layout}`} direction={layout} size={props?.spaceSize}>
-                <div
-                    className={classNames(`${clazzPrefix}-label`, props?.labelClazz)}
-                    style={props?.labelStyle}
-                >
-                    {!props?.label ? undefined : (typeof props.label === 'function' ? props.label() : props.label)}
-                    {!delimiterInLayout ? undefined : (delimiterInLayout.includes(layout) ? delimiter : undefined)}
-                </div>
-                <div className={`${clazzPrefix}-field`}>
-                    {!props?.field ? props?.children : (typeof props.field === 'function' ? props.field() : props.field)}
-                </div>
+                {buildLabelDom()}
+                {buildFieldDom()}
             </Space>
         </div>
     );

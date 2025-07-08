@@ -26,10 +26,11 @@ import {useIntl} from '@ant-design/pro-provider';
 import {If} from '@yookue/react-condition';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
+import {type TabPaneProps as RcTabPaneProps} from 'rc-tabs/es/TabPanelList/TabPane';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type ReadonlyTabsType, type RuleValidateScope} from '@/type/declaration';
+import {LabelField} from '@/field/LabelField';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
-import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 
@@ -228,7 +229,7 @@ export type LocaleTextareaProps = Omit<ProFormFieldItemProps<TextAreaProps, Text
      * @default true
      */
     switchProField?: boolean;
-};
+} & Pick<RcTabPaneProps, 'forceRender'>;
 
 
 /**
@@ -245,6 +246,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
 
     // Initialize the default props
     const {
+        forceRender = true,
         multilingual = true,
         proField = true,
         locale = intlType.locale,
@@ -267,7 +269,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
     const buildEntryDom = () => {
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className']);
         if (proField) {
-            const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabsProps', 'multilingual', 'proField', 'locale', 'localeProps', 'switchTextareaProps', 'switchQuickTags', 'switchShareProps', 'switchCloneProps', 'switchProField']);
+            const restProps = !props ? {} : omit(props, ['label', 'fieldProps', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabsProps', 'multilingual', 'proField', 'locale', 'localeProps', 'switchTextareaProps', 'switchQuickTags', 'switchShareProps', 'switchCloneProps', 'switchProField']);
             return (
                 <ProFormTextArea
                     {...restProps}
@@ -386,6 +388,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                     key: itemProp.tag,
                     label: itemProp.tag,
                     children: itemDom,
+                    forceRender,
                 });
             }
         } else if (!props?.switchTextareaProps && props?.switchQuickTags) {
@@ -442,6 +445,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                     key: tag,
                     label: tag,
                     children: itemDom,
+                    forceRender,
                 });
             }
         }
@@ -451,7 +455,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
     const entryImmutable = editContext.mode === 'read' || props?.disabled || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.readonly || props?.proFieldProps?.readonly;
     const omitTabsProps = !props?.tabsProps ? {} : omit(props.tabsProps, ['contentBorder', 'size', 'presetStyle']);
 
-    return (
+    const fieldDom = (
         <div
             className={classNames(`${clazzPrefix}-container`, fieldStyle.hashId, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
@@ -471,5 +475,20 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                 {...omitTabsProps}
             />
         </div>
+    );
+
+    const fieldRequired = props?.required || props?.fieldProps?.required || props?.rules?.some((rule: any) => rule?.required === true);
+
+    return (
+        <LabelField
+            label={props?.label}
+            labelClazz={`${clazzPrefix}-label`}
+            layout={formContext?.vertical ? 'vertical' : 'horizontal'}
+            delimiter={formContext.colon}
+            field={fieldDom}
+            required={fieldRequired}
+            widthBlock={true}
+            hideLabelWhenEmpty={true}
+        />
     );
 };

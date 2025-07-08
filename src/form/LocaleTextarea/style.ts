@@ -23,6 +23,7 @@ import {PackageConst} from '@/constant/PackageConst';
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}-container`]: {
+            width: '100%',
             [`> ${token.subComponentCls}`]: {
                 [`&${token.subComponentCls}-top ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     [`${token.componentCls}, ${token.componentCls}-item`]: {

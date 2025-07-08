@@ -30,7 +30,6 @@ import {BooleanUtils, ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from 
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
-import {PropUtils} from '@/util/PropUtils';
 import {StyleUtils} from '@/util/StyleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
 import {intlLocales} from './intl-locales';

@@ -26,7 +26,6 @@ import {ObjectUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
-import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 

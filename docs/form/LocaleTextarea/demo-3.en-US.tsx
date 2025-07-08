@@ -28,7 +28,7 @@ export default () => {
             {messageContext}
             <ProForm
                 name='LocaleTextarea_demo3.en-US'
-                layout='horizontal'
+                layout='vertical'
                 autoFocusFirstInput={false}
                 submitter={{
                     searchConfig: {

@@ -23,6 +23,9 @@ import {PackageConst} from '@/constant/PackageConst';
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
+            [`&&-width-block > ${token.antCls}-space`]: {
+                width: '100%',
+            },
             [`&&-required &-label::before`]: {
                 display: 'inline-block',
                 marginRight: token.marginXXS,

@@ -31,7 +31,7 @@ export default () => {
             {messageContext}
             <ProForm
                 name='LocaleTextarea_demo1.en-US'
-                layout='horizontal'
+                layout='vertical'
                 autoFocusFirstInput={false}
                 submitter={{
                     searchConfig: {
@@ -65,6 +65,7 @@ export default () => {
                 <Divider/>
                 <LocaleTextarea
                     name='foobar'
+                    label='Demo Field Label'
                     placeholder='Demo Field With Validation'
                     fieldProps={{
                         autoSize: {

@@ -28,7 +28,6 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type LabelValueType, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
-import {PropUtils} from '@/util/PropUtils';
 import {useFieldStyle} from './style';
 
 

@@ -21,8 +21,14 @@
  * @author David Hsing
  */
 export abstract class DesignConst {
+    // @see "antd/es/form/FormItemLabel.d.ts"
+    public static FORM_ITEM_LABEL_PROPS = ['colon', 'htmlFor', 'label', 'labelAlign', 'labelCol', 'tooltip', 'vertical'];
+
+    // @see "antd/es/form/FormItemInput.d.ts"
+    public static FORM_ITEM_INPUT_PROPS = ['labelCol', 'wrapperCol', 'extra', 'status', 'help', 'fieldId', 'label'];
+
     // @see "antd/es/form/FormItem/index.d.ts"
-    public static FORM_ITEM_PROPS = ['prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];
+    public static FORM_ITEM_PROPS = [...DesignConst.FORM_ITEM_LABEL_PROPS, ...DesignConst.FORM_ITEM_INPUT_PROPS, 'prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];
 
     // @see "@ant-design/pro-form/es/components/FormItem/index.d.ts"
     public static WARP_FORM_ITEM_PROPS = ['addonBefore', 'addonAfter', 'convertValue'];
