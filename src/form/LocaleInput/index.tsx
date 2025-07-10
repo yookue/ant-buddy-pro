@@ -390,7 +390,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         'data-locale-input-id': fieldId,
                     }}
                     proFieldProps={{
-                        render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? renderEntryReadonly(dom),
+                        render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? (!multilingual ? dom : renderEntryReadonly(dom)),
                         ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
                     }}
                 />
