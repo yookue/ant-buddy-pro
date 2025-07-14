@@ -103,6 +103,20 @@ export type LabelFieldProps = React.PropsWithChildren<{
     field?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
+     * @description The CSS class name of the field
+     * @description.zh-CN 字段节点的 CSS 类名
+     * @description.zh-TW 字段節點的 CSS 類名
+     */
+    fieldClazz?: string;
+
+    /**
+     * @description The CSS style of the field
+     * @description.zh-CN 字段节点的 CSS 样式
+     * @description.zh-TW 字段節點的 CSS 樣式
+     */
+    fieldStyle?: React.CSSProperties;
+
+    /**
      * @description The space size
      * @description.zh-CN 间距大小
      * @description.zh-TW 間距大小
@@ -188,7 +202,10 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
             return undefined;
         }
         return (
-            <div className={`${clazzPrefix}-field`}>
+            <div
+                className={classNames(`${clazzPrefix}-field`, props?.fieldClazz)}
+                style={props?.fieldStyle}
+            >
                 {income}
             </div>
         );
