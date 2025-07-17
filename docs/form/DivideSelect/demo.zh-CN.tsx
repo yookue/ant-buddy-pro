@@ -18,12 +18,14 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {DivideSelect, type LabelValueType} from '@yookue/ant-buddy-pro';
+import {DivideSelect, type LabelMixinType} from '@yookue/ant-buddy-pro';
 import {type DividePresetStyle} from '@yookue/ant-buddy-pro/form/DivideSelect';
 
 
 export default () => {
-    const [optionLabel, setOptionLabel] = React.useState<LabelValueType>('label');
+    const [optionLabel, setOptionLabel] = React.useState<LabelMixinType>('label');
+    const [optionBeforeContent, setOptionBeforeContent] = React.useState<LabelMixinType>('label');
+    const [optionAfterContent, setOptionAfterContent] = React.useState<LabelMixinType>('value');
     const [presetStyle, setPresetStyle] = React.useState<DividePresetStyle | false>('before-prior');
 
     return (
@@ -47,6 +49,41 @@ export default () => {
                     options={[
                         {label: '标签', value: 'label'},
                         {label: '值', value: 'value'},
+                        {label: '编码', value: 'code'},
+                    ]}
+                />
+                <ProFormRadio.Group
+                    label='选项左侧内容'
+                    radioType='button'
+                    fieldProps={{
+                        value: optionBeforeContent,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setOptionBeforeContent(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '标签', value: 'label'},
+                        {label: '值', value: 'value'},
+                        {label: '编码', value: 'code'},
+                        {label: '无', value: false},
+                    ]}
+                />
+                <ProFormRadio.Group
+                    label='选项右侧内容'
+                    radioType='button'
+                    fieldProps={{
+                        value: optionAfterContent,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setOptionAfterContent(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '标签', value: 'label'},
+                        {label: '值', value: 'value'},
+                        {label: '编码', value: 'code'},
+                        {label: '无', value: false},
                     ]}
                 />
                 <ProFormRadio.Group
@@ -77,7 +114,7 @@ export default () => {
                                 value: 'optGroup',
                                 optionType: 'optGroup',
                                 children: [
-                                    {label: '中国', value: '+86'},
+                                    {label: '中国', value: '+86', code: 'CN'},
                                 ]
                             },
                             {
@@ -85,7 +122,7 @@ export default () => {
                                 value: 'optGroup',
                                 optionType: 'optGroup',
                                 children: [
-                                    {label: '美国', value: '+1'},
+                                    {label: '美国', value: '+1', code: 'US'},
                                 ]
                             }
                         ]
@@ -93,6 +130,8 @@ export default () => {
                     valueEnum={{
                         '+7': '俄罗斯',
                     }}
+                    optionBeforeContent={optionBeforeContent}
+                    optionAfterContent={optionAfterContent}
                     presetStyle={presetStyle}
                 />
             </ProForm>

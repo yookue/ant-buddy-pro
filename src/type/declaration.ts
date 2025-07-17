@@ -33,6 +33,8 @@ export type FileSizeUint = 'KB' | 'MB' | 'GB' | 'TB';
 
 export type LabelValueType = 'label' | 'value';
 
+export type LabelMixinType = LabelValueType | 'code';
+
 export type PaddingSpaceType = WithFalse<'padding-0' | 'padding-xxs' | 'padding-xs' | 'padding-sm' | 'padding-md' | 'padding-lg' | 'padding-x-0' | 'padding-x-xxs' | 'padding-x-xs' | 'padding-x-sm' | 'padding-x-md' | 'padding-x-lg' | 'padding-y-0' | 'padding-y-xxs' | 'padding-y-xs' | 'padding-y-sm' | 'padding-y-md' | 'padding-y-lg'>;
 
 export type ReadonlyTabsType = Exclude<TabsType, 'editable-card'>;

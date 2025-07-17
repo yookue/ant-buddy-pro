@@ -18,12 +18,14 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {DivideSelect, type LabelValueType} from '@yookue/ant-buddy-pro';
+import {DivideSelect, type LabelMixinType} from '@yookue/ant-buddy-pro';
 import {type DividePresetStyle} from '@yookue/ant-buddy-pro/form/DivideSelect';
 
 
 export default () => {
-    const [optionLabel, setOptionLabel] = React.useState<LabelValueType>('label');
+    const [optionLabel, setOptionLabel] = React.useState<LabelMixinType>('label');
+    const [optionBeforeContent, setOptionBeforeContent] = React.useState<LabelMixinType>('label');
+    const [optionAfterContent, setOptionAfterContent] = React.useState<LabelMixinType>('value');
     const [presetStyle, setPresetStyle] = React.useState<DividePresetStyle | false>('before-prior');
 
     return (
@@ -47,6 +49,41 @@ export default () => {
                     options={[
                         {label: 'Label', value: 'label'},
                         {label: 'Value', value: 'value'},
+                        {label: 'Code', value: 'code'},
+                    ]}
+                />
+                <ProFormRadio.Group
+                    label='Option Before Content'
+                    radioType='button'
+                    fieldProps={{
+                        value: optionBeforeContent,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setOptionBeforeContent(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Label', value: 'label'},
+                        {label: 'Value', value: 'value'},
+                        {label: 'Code', value: 'code'},
+                        {label: 'False', value: false},
+                    ]}
+                />
+                <ProFormRadio.Group
+                    label='Option After Content'
+                    radioType='button'
+                    fieldProps={{
+                        value: optionAfterContent,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setOptionAfterContent(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Label', value: 'label'},
+                        {label: 'Value', value: 'value'},
+                        {label: 'Code', value: 'code'},
+                        {label: 'False', value: false},
                     ]}
                 />
                 <ProFormRadio.Group
@@ -77,7 +114,7 @@ export default () => {
                                 value: 'optGroup',
                                 optionType: 'optGroup',
                                 children: [
-                                    {label: 'China', value: '+86'},
+                                    {label: 'China', value: '+86', code: 'CN'},
                                 ]
                             },
                             {
@@ -85,7 +122,7 @@ export default () => {
                                 value: 'optGroup',
                                 optionType: 'optGroup',
                                 children: [
-                                    {label: 'United States', value: '+1'},
+                                    {label: 'United States', value: '+1', code: 'US'},
                                 ]
                             }
                         ]
@@ -93,6 +130,8 @@ export default () => {
                     valueEnum={{
                         '+7': 'Russia',
                     }}
+                    optionBeforeContent={optionBeforeContent}
+                    optionAfterContent={optionAfterContent}
                     presetStyle={presetStyle}
                 />
             </ProForm>

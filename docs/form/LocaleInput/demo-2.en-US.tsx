@@ -23,6 +23,7 @@ import {LocaleInput} from '@yookue/ant-buddy-pro';
 
 export default () => {
     const [messageInvoker, messageContext] = messageApi.useMessage();
+
     return (
         <>
             {messageContext}

@@ -26,7 +26,7 @@ import {If} from '@yookue/react-condition';
 import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {type WithFalse, type LabelValueType, type RequestOptionPlace} from '@/type/declaration';
+import {type WithFalse, type LabelMixinType, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
 import {useFieldStyle} from './style';
 
@@ -77,7 +77,7 @@ export type DivideSelectProps = Omit<ProFormSelectProps, 'children'> & {
      * @description.zh-TW 下拉選項左側 span 的内容
      * @default 'label'
      */
-    optionBeforeContent?: WithFalse<LabelValueType>;
+    optionBeforeContent?: WithFalse<LabelMixinType>;
 
     /**
      * @description The render of the option item before
@@ -106,7 +106,7 @@ export type DivideSelectProps = Omit<ProFormSelectProps, 'children'> & {
      * @description.zh-TW 下拉選項右側 span 的内容
      * @default 'value'
      */
-    optionAfterContent?: WithFalse<LabelValueType>;
+    optionAfterContent?: WithFalse<LabelMixinType>;
 
     /**
      * @description The render of the option item after
@@ -194,17 +194,46 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         }
         const label = ObjectUtils.getProp(item, props?.fieldProps?.fieldNames?.label) ?? item?.data?.label;
         const value = ObjectUtils.getProp(item, props?.fieldProps?.fieldNames?.value) ?? item?.data?.value;
+        const code = ObjectUtils.getProp(item?.data, 'code');
         if (before) {
-            if (optionBeforeContent === 'value' && item?.optionType === 'optGroup') {
+            if (optionBeforeContent !== 'label' && item?.optionType === 'optGroup') {
                 return undefined;
             }
-            const content: React.ReactNode = (optionBeforeContent === 'value') ? value : label;
+            // const content: React.ReactNode = (optionBeforeContent === 'value') ? value : label;
+            let content: React.ReactNode = undefined;
+            switch (optionBeforeContent) {
+                case 'label':
+                    content = label;
+                    break;
+                case 'value':
+                    content = value;
+                    break;
+                case 'code':
+                    content = code;
+                    break;
+                default:
+                    break;
+            }
             return props?.optionBeforeRender ? props?.optionBeforeRender(content) : content;
         } else {
-            if (optionAfterContent === 'value' && item?.optionType === 'optGroup') {
+            if (optionAfterContent !== 'label' && item?.optionType === 'optGroup') {
                 return undefined;
             }
-            const content: React.ReactNode = (optionAfterContent === 'value') ? value : label;
+            // const content: React.ReactNode = (optionAfterContent === 'value') ? value : label;
+            let content: React.ReactNode = undefined;
+            switch (optionAfterContent) {
+                case 'label':
+                    content = label;
+                    break;
+                case 'value':
+                    content = value;
+                    break;
+                case 'code':
+                    content = code;
+                    break;
+                default:
+                    break;
+            }
             return props?.optionAfterRender ? props?.optionAfterRender(content) : content;
         }
     };
