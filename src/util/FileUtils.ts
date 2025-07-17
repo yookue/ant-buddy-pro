@@ -61,4 +61,22 @@ export abstract class FileUtils {
         reader.addEventListener('load', () => callback(reader.result as string));
         reader.readAsDataURL(file);
     };
+
+    /**
+     * Popup a download dialog by creating a fake download link
+     *
+     * @param url the url to download
+     * @param fileName the default file name to save, when popup the download dialog
+     */
+    public static downloadByElement(url?: string, fileName?: string) {
+        if (!url || !fileName) {
+            return;
+        }
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 }
