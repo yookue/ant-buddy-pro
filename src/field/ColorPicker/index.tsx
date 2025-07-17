@@ -291,7 +291,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     };
 
     const buildEntryDom = () => {
-        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'size', 'style']);
+        const omitButtonProps = !props?.buttonProps ? {} : omit(props?.buttonProps, ['className', 'style']);
         const buttonStyle = !props?.buttonProps?.style ? {} : props.buttonProps.style;
         if (typeof props?.width === 'number') {
             Object.assign(buttonStyle, {
@@ -310,7 +310,6 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 <Button
                     className={classNames(`${clazzPrefix}-button`, (!entryImmutable ? undefined : `${clazzPrefix}-button-immutable`), ((typeof props?.width !== 'string') ? undefined : `${clazzPrefix}-button-${props.width}`), (!iconPos ? undefined : `${clazzPrefix}-icon-${iconPos}`), props?.buttonProps?.className)}
                     disabled={entryImmutable}
-                    size={props?.buttonProps?.size ?? 'small'}
                     style={buttonStyle}
                     {...omitButtonProps}
                 >

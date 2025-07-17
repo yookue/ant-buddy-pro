@@ -31,7 +31,7 @@ export default () => {
     const [pickerType, setPickerType] = React.useState<PickerType>('chrome');
     const [allowClear, setAllowClear] = React.useState<boolean>(true);
     const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
-    const [buttonSize, setButtonSize] = React.useState<SizeType>('small');
+    const [buttonSize, setButtonSize] = React.useState<SizeType>('middle');
     const [iconPos, setIconPos] = React.useState<BeforeAfterType>('after');
 
     // noinspection DuplicatedCode
