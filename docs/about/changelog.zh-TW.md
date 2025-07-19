@@ -11,6 +11,12 @@ toc: false
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v1.0.27** [2025-07-19]
+    - 增加 `form/SortableList`, 用于給 Ant `ProFormList` 增加排序能力
+
+  - **v1.0.26** [2025-07-18]
+    - 升級 `DivideSelect` 屬性 `optionBeforeContent` 和 `optionAfterContent`，增加新選項 `code`，用于替代顯示 `value`，但在提交時依然保持原始 `value`
+
   - **v1.0.18** [2025-07-08]
     - 更新 `SchemaRender` 和其他表單組件以支持 [Ant ProComponents](https://procomponents.ant.design) `FormTable` 的 `schema` 渲染
 

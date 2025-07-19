@@ -11,6 +11,12 @@ toc: false
 
 Here are some milestone versions of the changelog:
 
+  - **v1.0.27** [2025-07-19]
+    - Add `form/SortableList`, to support Ant `ProFormList` with sort ability
+
+  - **v1.0.26** [2025-07-18]
+    - Support `DivideSelect` props `optionBeforeContent` and `optionAfterContent` new ability `code`, thus can be used to display it instead of `value`, but still keep original `value` in submitting
+
   - **v1.0.18** [2025-07-08]
     - Update `SchemaRender` and form components to support `schema` renderer of [Ant ProComponents](https://procomponents.ant.design) `FormTable`
 
