@@ -85,6 +85,14 @@ export type SortableListProps<T> = ProFormListProps<T> & {
     allowUpDown?: boolean;
 
     /**
+     * @description Whether to allow the default actions, which are copy and delete
+     * @description.zh-CN 是否允许默认动作，即复制和删除
+     * @description.zh-TW 是否允許默認動作，即復制和刪除
+     * @default true
+     */
+    allowDefaultAction?: boolean;
+
+    /**
      * @description The locale of the component, e.g. 'en_US'
      * @description.zh-CN 组件的语言, e.g. 'zh_CN'
      * @description.zh-TW 組件的語言, e.g. 'zh_TW'
@@ -115,6 +123,7 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
     const {
         allowTopBottom = true,
         allowUpDown = true,
+        allowDefaultAction = true,
         locale = intlType.locale,
     } = props ?? {};
 
@@ -184,10 +193,10 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
                 </Tooltip>
             </Space>
         );
-        return [topBottomDom, upDownDom, ...defaultActionDom];
+        return [topBottomDom, upDownDom, ...(!allowDefaultAction ? [] : defaultActionDom)];
     };
 
-    const restProps = !props ? {} : omit(props, ['className', 'name', 'actionRender', 'clazzPrefix', 'allowTopBottom', 'allowUpDown', 'locale', 'localeProps']);
+    const restProps = !props ? {} : omit(props, ['className', 'name', 'actionRender', 'clazzPrefix', 'allowTopBottom', 'allowUpDown', 'allowDefaultAction', 'locale', 'localeProps']);
 
     return (
         <ProFormList

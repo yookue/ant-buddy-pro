@@ -25,6 +25,7 @@ import {SortableList} from '@yookue/ant-buddy-pro';
 export default () => {
     const [allowTopBottom, setAllowTopBottom] = React.useState<boolean>(true);
     const [allowUpDown, setAllowUpDown] = React.useState<boolean>(true);
+    const [allowDefaultAction, setAllowDefaultAction] = React.useState<boolean>(true);
 
     return (
         <>
@@ -53,12 +54,22 @@ export default () => {
                             onChange: setAllowUpDown,
                         }}
                     />
+                    <ProFormSwitch
+                        label='Allow Default Action'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: allowDefaultAction,
+                            onChange: setAllowDefaultAction,
+                        }}
+                    />
                 </ProForm.Group>
                 <Divider/>
                 <SortableList
                     name='demoList'
                     allowTopBottom={allowTopBottom}
                     allowUpDown={allowUpDown}
+                    allowDefaultAction={allowDefaultAction}
                     creatorButtonProps={{
                         creatorButtonText: 'Add a group data',
                     }}
