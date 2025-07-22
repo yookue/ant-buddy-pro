@@ -55,11 +55,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 flex: 1,
                 textOverflow: 'ellipsis',
             },
-            [`&&-success, &&-info, &&-warn, &&-error`]: {
-                [`${token.componentCls}-ornament`]: {
-                    color: token.colorWhite,
-                }
-            },
             [`&&-default, &&-success, &&-info, &&-warn, &&-error, &&-classic`]: {
                 [`${token.componentCls}-ornament`]: {
                     fontWeight: 300,
@@ -75,33 +70,33 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             },
             [`&&-default`]: {
-                backgroundColor: token.controlItemBgHover,
+                backgroundColor: token.colorFillAlter,
                 [`${token.componentCls}-ornament`]: {
-                    backgroundColor: token.colorBgTextActive,
+                    backgroundColor: token.colorBgContainerDisabled,
                 }
             },
             [`&&-success`]: {
                 backgroundColor: token.colorSuccessBg,
                 [`${token.componentCls}-ornament`]: {
-                    backgroundColor: token.colorSuccess,
+                    backgroundColor: token.green2,
                 }
             },
             [`&&-info`]: {
                 backgroundColor: token.colorInfoBg,
                 [`${token.componentCls}-ornament`]: {
-                    backgroundColor: token.colorInfo,
+                    backgroundColor: token.blue2,
                 }
             },
             [`&&-warn`]: {
                 backgroundColor: token.colorWarningBg,
                 [`${token.componentCls}-ornament`]: {
-                    backgroundColor: token.colorWarning,
+                    backgroundColor: token.orange2,
                 }
             },
             [`&&-error`]: {
                 backgroundColor: token.colorErrorBg,
                 [`${token.componentCls}-ornament`]: {
-                    backgroundColor: token.colorError,
+                    backgroundColor: token.red2,
                 }
             },
             [`&&-classic`]: {

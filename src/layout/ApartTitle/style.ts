@@ -59,7 +59,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             },
             [`&&-default`]: {
-                backgroundColor: token.controlItemBgHover,
+                backgroundColor: token.colorFillAlter,
             },
             [`&&-success`]: {
                 backgroundColor: token.colorSuccessBg,
