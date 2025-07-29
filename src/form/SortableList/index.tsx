@@ -114,6 +114,7 @@ export type SortableListProps<T> = ProFormListProps<T> & {
  * @author David Hsing
  *
  * @see "https://www.cnblogs.com/zyj-Blogs/p/17882220.html"
+ * @see "https://pro-components.antdigital.dev/components/group#%E7%AE%AD%E5%A4%B4%E6%8E%92%E5%BA%8F"
  */
 export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableListProps<any>) => {
     const clazzPrefix = props?.clazzPrefix ?? 'abp-sortable-list';
