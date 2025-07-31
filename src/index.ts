@@ -46,6 +46,7 @@ export {IconSelect, type IconSelectProps} from './form/IconSelect';
 export {LocaleInput, type LocaleInputProps} from './form/LocaleInput';
 export {LocaleTextarea, type LocaleTextareaProps} from './form/LocaleTextarea';
 export {MaskInput, type MaskInputProps} from './form/MaskInput';
+export {MathInput, type MathInputProps} from './form/MathInput';
 export {SegmentRadio, type SegmentRadioProps} from './form/SegmentRadio';
 export {ServerTuple, type ServerTupleProps} from './form/ServerTuple';
 export {SortableList, type SortableListProps} from './form/SortableList';

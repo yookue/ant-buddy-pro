@@ -11,6 +11,9 @@ toc: false
 
 以下是一些里程碑版本的更新轨迹：
 
+  - **v1.0.31** [2025-07-31]
+    - 增加 `form/MathInput`
+
   - **v1.0.27** [2025-07-19]
     - 增加 `form/SortableList`, 用于给 Ant `ProFormList` 增加排序能力
 

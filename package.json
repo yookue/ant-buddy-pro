@@ -1,6 +1,6 @@
 {
     "name": "@yookue/ant-buddy-pro",
-    "version": "1.0.30",
+    "version": "1.0.31",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on Ant Design & Ant ProComponents",
     "homepage": "https://yookue.github.io/ant-buddy-pro",
@@ -24,7 +24,8 @@
     "module": "dist/esm/index.js",
     "types": "dist/esm/index.d.ts",
     "sideEffects": [
-        "**/*.less"
+        "**/*.less",
+        "**/*.css"
     ],
     "scripts": {
         "start": "npm run start:dev",
@@ -48,11 +49,12 @@
         "@emotion/css": "^11.13.5",
         "@rc-component/trigger": "^3.5.2",
         "@yookue/react-condition": "^0.2.1",
-        "@yookue/ts-lang-utils": "^0.2.9",
+        "@yookue/ts-lang-utils": "^0.2.10",
         "@yookue/ts-multi-map": "^0.2.2",
         "antd-img-crop": "^4.25.0",
         "antd-style": "^3.7.1",
         "cron-validate": "^1.5.2",
+        "mathlive": "^0.106.0",
         "object-hash": "^3.0.0",
         "rc-scrollbars": "^1.1.6",
         "rc-tween-one": "^3.0.6",

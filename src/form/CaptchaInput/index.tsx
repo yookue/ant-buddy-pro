@@ -269,16 +269,14 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         if (props?.phoneName) {
             try {
                 await formContext?.form?.validateFields([props.phoneName].flat());
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            } catch (ignored) {
+            } catch {
                 result = false;
             }
         }
         if (props?.dependName) {
             try {
                 await formContext?.form?.validateFields([props.dependName].flat());
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            } catch (ignored) {
+            } catch {
                 result = false;
             }
         }

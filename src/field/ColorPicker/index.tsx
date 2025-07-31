@@ -22,7 +22,6 @@ import {CloseCircleOutlined, DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {ProFormField} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {pickProFormItemProps} from '@ant-design/pro-utils/es/pickProFormItemProps';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
 import {ColorUtils, NanoidUtils} from '@yookue/ts-lang-utils';
@@ -33,6 +32,7 @@ import type {BlockPickerProps, ChromePickerProps, CirclePickerProps, CompactPick
 import type {Color, ColorResult} from 'react-color';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
+import {PropUtils} from '@/util/PropUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
 import {useFieldStyle} from './style';
 
@@ -224,8 +224,8 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRe
 export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & React.RefAttributes<ColorPickerRef>> = React.forwardRef((props?: ColorPickerProps, ref?: any) => {
     ColorPicker.displayName = 'ColorPicker';
 
-    const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-color-picker';
 
     // Initialize the default props
@@ -525,15 +525,17 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     if (!props?.name || !formContext?.form) {
         return triggerDom;
     }
+
+    const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+
     if (!proField) {
-        const itemProps = !props ? {} : pickProFormItemProps(props);
+        const itemProps = !omitProps ? {} : PropUtils.omitProProps(omitProps);
         return (
             <Form.Item {...itemProps}>
                 {triggerDom}
             </Form.Item>
         );
     }
-    const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
     return (
         <ProFormField {...omitProps}>
             {triggerDom}

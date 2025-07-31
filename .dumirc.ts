@@ -81,8 +81,8 @@ export default defineConfig({
     mako: {},
     // mfsu: {},
     // ssr: {builder: 'mako'},
-    // chainWebpack(memo, args) {
-    //     return memo;
+    // chainWebpack: (config) => {
+    //     config.resolve.modules.add('node_modules').prepend('src');
     // },
     themeConfig: {
         name: 'Ant Buddy Pro',

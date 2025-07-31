@@ -277,8 +277,8 @@ export type LocaleInputProps = ProFormFieldItemProps<InputProps, InputRef> & {
  * @author David Hsing
  */
 export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
-    const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-input';
     const intlType = useIntl();
 
@@ -731,7 +731,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 points: ['tl', 'bl'],
                 offset: [0, 4],
             }}
-            popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
+            popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
             stretch={props?.triggerProps?.stretch ?? 'width'}
             onOpenChange={(open: boolean) => {

@@ -219,8 +219,8 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     TagInputField.displayName = 'TagInput';
 
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-tag-input';
     const intlType = useIntl();
 
@@ -411,8 +411,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         if (props?.name && proField && formContext?.form) {
             try {
                 await formContext.form.validateFields([inputName]);
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            } catch (ignored) {
+            } catch {
                 return;
             }
         }

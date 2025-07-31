@@ -133,8 +133,8 @@ export type ServerTupleProps = {
  * @author David Hsing
  */
 export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps) => {
-    const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-server-tuple';
     const intlType = useIntl();
 

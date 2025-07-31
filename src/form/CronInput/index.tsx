@@ -315,8 +315,8 @@ export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
 export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.RefAttributes<CronInputRef>> = React.forwardRef((props?: CronInputProps, ref?: any) => {
     CronInput.displayName = 'CronInput';
 
-    const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input';
     const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();
@@ -795,7 +795,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                     points: ['tl', 'bl'],
                     offset: [0, 4],
                 }}
-                popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (entryImmutable ? `${clazzPrefix}-popup-immutable` : undefined), props?.triggerProps?.popupClassName)}
+                popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
                 popupVisible={triggerOpen}
                 stretch={props?.triggerProps?.stretch ?? 'width'}
                 onOpenChange={(open: boolean) => {

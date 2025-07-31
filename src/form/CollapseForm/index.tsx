@@ -259,11 +259,11 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
                     formRef={formRef}
                     name={props?.formProps?.name ?? `abp-collapse-form-${fieldId}`}
                     {...omitFromProps}
-                    onFinish={async (values) => {
+                    onFinish={async (params) => {
                         if (closeOnFinish) {
                             setFormOpen(false);
                         }
-                        await props?.formProps?.onFinish?.(values);
+                        await props?.formProps?.onFinish?.(params);
                     }}
                 >
                     {!props?.formContent ? props?.children : ((typeof props?.formContent === 'function') ? props.formContent() : props.formContent)}

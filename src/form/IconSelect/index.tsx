@@ -303,8 +303,8 @@ export type IconSelectProps = Omit<SelectFieldProps, 'children'> & {
  */
 export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-icon-select';
     const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();

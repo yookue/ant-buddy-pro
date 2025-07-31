@@ -11,6 +11,9 @@ toc: false
 
 Here are some milestone versions of the changelog:
 
+  - **v1.0.31** [2025-07-31]
+    - Add `form/MathInput`
+
   - **v1.0.27** [2025-07-19]
     - Add `form/SortableList`, to support Ant `ProFormList` with sort ability
 

@@ -238,8 +238,8 @@ export type LocaleTextareaProps = Omit<ProFormFieldItemProps<TextAreaProps, Text
  * @author David Hsing
  */
 export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleTextareaProps) => {
-    const editContext = React.useContext(EditOrReadOnlyContext);
     const formContext = React.useContext(FormContext);
+    const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-textarea';
     const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();
@@ -457,7 +457,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
 
     const fieldDom = (
         <div
-            className={classNames(`${clazzPrefix}-container`, fieldStyle.hashId, (entryImmutable ? `${clazzPrefix}-immutable` : undefined), props?.containerClazz)}
+            className={classNames(`${clazzPrefix}-container`, fieldStyle.hashId, (!entryImmutable ? undefined : `${clazzPrefix}-immutable`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <CardTabs
