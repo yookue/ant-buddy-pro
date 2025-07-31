@@ -185,7 +185,11 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
         if (fieldRef.current) {
             try {
                 if (props?.value) {
-                    fieldRef.current.value = StringUtils.join(props?.value) ?? '';
+                    fieldRef.current.value = StringUtils.join(props.value) ?? '';
+                } else {
+                    if (props?.name) {
+                        fieldRef.current.value = formContext?.form?.getFieldValue(props.name) ?? '';
+                    }
                 }
                 if (props?.placeholder) {
                     fieldRef.current.placeholder = `\\text{${StringUtils.join(props.placeholder) ?? ''}}`;
