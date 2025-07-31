@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]||[]).push([["39ac5039"],{"39ac5039":function(e,a,t){"use strict";t.d(a,"__esModule",{value:!0}),t.d(a,"texts",{enumerable:!0,get:function(){return o;}}),t("0cbd66ea");let o=[{value:"MathInput, provides a text input-alike box with math capability.",paraId:0,tocIndex:0},{value:"import {MathInput} from '@yookue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
+//# sourceMappingURL=39ac5039-async.9d177505.js.map
