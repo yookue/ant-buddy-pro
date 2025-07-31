@@ -187,7 +187,6 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
             }
         }
         if (fieldRef.current) {
-            console.log('fieldRef.current incomeValue == ', incomeValue);
             try {
                 if (incomeValue) {
                     fieldRef.current.value = incomeValue ?? '';
