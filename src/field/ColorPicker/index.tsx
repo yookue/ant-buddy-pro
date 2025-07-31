@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Form, Button, Space, type ButtonProps} from 'antd';
+import {Form, Button, Space, type ButtonProps, type InputProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {CloseCircleOutlined, DownOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {ProFormField} from '@ant-design/pro-form';
+import {ProForm, FormListContext} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
@@ -95,7 +95,7 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRe
      * @description.zh-CN 按钮的属性
      * @description.zh-TW 按鈕的屬性
      */
-    buttonProps?: Omit<ButtonProps, 'block' | 'disabled' | 'href' | 'htmlType' | 'icon' | 'target' | 'children'>;
+    buttonProps?: Omit<ButtonProps, 'block' | 'disabled' | 'href' | 'htmlType' | 'icon' | 'size' | 'target' | 'children'>;
 
     /**
      * @description The icon element
@@ -212,7 +212,7 @@ export type ColorPickerProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRe
      * @description.zh-TW 顔色值變化時的回調函數
      */
     onChange?: (color?: Color) => void;
-} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'value'>;
+} & Pick<InputProps, 'value'> & Pick<ButtonProps, 'size'>;
 
 
 /**
@@ -225,6 +225,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     ColorPicker.displayName = 'ColorPicker';
 
     const formContext = React.useContext(FormContext);
+    const formListContext = React.useContext(FormListContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-color-picker';
 
@@ -239,8 +240,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
-    const fieldValue = (props?.name && formContext?.form) ? Form.useWatch(props.name, formContext.form) : props?.value;
-    const [hexColor, setHexColor] = React.useState<Color>();
+    const fieldName = !props?.name ? undefined : [...(formListContext?.listName ?? []), props.name];
+    const incomeValue = (props?.name && formContext?.form) ? Form.useWatch(fieldName, formContext.form) : props?.value;
+    const [insideValue, setInsideValue] = React.useState<Color>();
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const [mouseHover, setMouseHover] = React.useState<boolean>(false);
     const fieldStyle = useFieldStyle(clazzPrefix);
@@ -248,27 +250,27 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
         getColor: (): Color | undefined => {
-            return hexColor;
+            return insideValue;
         },
         setColor: (hexColor?: string): void => {
             const validHex = ColorUtils.isHex(hexColor);
             ConsoleUtils.warn(!hexColor || validHex, false, 'ColorPicker', `Value '${hexColor}' for 'setColor' is not a valid hex color`);
-            setHexColor(validHex ? hexColor : undefined);
+            setInsideValue(validHex ? hexColor : undefined);
         }
     }));
 
     React.useEffect(() => {
-        const validHex = ColorUtils.isHex(fieldValue);
-        ConsoleUtils.warn(!fieldValue || validHex, false, 'ColorPicker', `Value '${hexColor}' for '${props?.name}' is not a valid hex color`);
-        setHexColor(validHex ? fieldValue : undefined);
-    }, [fieldValue]);
+        const validHex = ColorUtils.isHex(incomeValue);
+        ConsoleUtils.warn(!incomeValue || validHex, false, 'ColorPicker', `Value '${insideValue}' for '${props?.name}' is not a valid hex color`);
+        setInsideValue(validHex ? incomeValue : undefined);
+    }, [incomeValue]);
 
     React.useEffect(() => {
-        if (props?.name && formContext?.form) {
-            formContext.form.setFieldValue(props.name, hexColor);
+        if (fieldName) {
+            formContext?.form?.setFieldValue(fieldName, insideValue);
         }
-        props?.onChange?.(hexColor);
-    }, [hexColor]);
+        props?.onChange?.(insideValue);
+    }, [insideValue]);
 
     const entryImmutable = props?.disabled || editContext.mode === 'read';
 
@@ -276,16 +278,16 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         if (entryImmutable) {
             return undefined;
         }
-        return ((!before && allowClear && hexColor && mouseHover && iconPos === false) || (before && iconPos === 'before') || (!before && iconPos === 'after')) ? (
+        return ((!before && allowClear && insideValue && mouseHover && iconPos === false) || (before && iconPos === 'before') || (!before && iconPos === 'after')) ? (
             <span
                 className={`${clazzPrefix}-icon`}
-                onClick={(!allowClear || !hexColor) ? undefined : (event: any) => {
+                onClick={(!allowClear || !insideValue) ? undefined : (event: any) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    setHexColor(undefined);
+                    setInsideValue(undefined);
                 }}
             >
-                {((allowClear && hexColor && mouseHover) || iconPos === false) ? <CloseCircleOutlined/> : ((typeof icon === 'function') ? icon() : icon)}
+                {((allowClear && insideValue && mouseHover) || iconPos === false) ? <CloseCircleOutlined/> : ((typeof icon === 'function') ? icon() : icon)}
             </span>
         ) : undefined;
     };
@@ -295,7 +297,7 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         const buttonStyle = !props?.buttonProps?.style ? {} : props.buttonProps.style;
         if (typeof props?.width === 'number') {
             Object.assign(buttonStyle, {
-                width: `${props.width}px`,
+                width: props.width,
             });
         }
         return (
@@ -310,21 +312,21 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
                 <Button
                     className={classNames(`${clazzPrefix}-button`, (!entryImmutable ? undefined : `${clazzPrefix}-button-immutable`), ((typeof props?.width !== 'string') ? undefined : `${clazzPrefix}-button-${props.width}`), (!iconPos ? undefined : `${clazzPrefix}-icon-${iconPos}`), props?.buttonProps?.className)}
                     disabled={entryImmutable}
+                    size={props?.size}
                     style={buttonStyle}
                     {...omitButtonProps}
                 >
                     <Space>
                         {buildEntryIconDom(true)}
                         <div
-                            className={classNames(`${clazzPrefix}-preview`, (hexColor ? undefined : `${clazzPrefix}-preview-empty`))}
-                            style={!hexColor ? undefined : {backgroundColor: `${hexColor}`}}
+                            className={classNames(`${clazzPrefix}-preview`, (insideValue ? undefined : `${clazzPrefix}-preview-empty`))}
+                            style={!insideValue ? undefined : {backgroundColor: `${insideValue}`}}
                         >
                             <span>&nbsp;</span>
                         </div>
                         {buildEntryIconDom(false)}
                     </Space>
                 </Button>
-                {!!props?.name && <input type='hidden' name={props.name}/>}
             </div>
         );
     };
@@ -355,10 +357,10 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'block':
                 return (
                     <BlockPicker
-                        color={hexColor}
+                        color={insideValue}
                         triangle='hide'
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -370,9 +372,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'circle':
                 return (
                     <CirclePicker
-                        color={hexColor}
+                        color={insideValue}
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -384,9 +386,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'compact':
                 return (
                     <CompactPicker
-                        color={hexColor}
+                        color={insideValue}
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -398,10 +400,10 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'github':
                 return (
                     <GithubPicker
-                        color={hexColor}
+                        color={insideValue}
                         triangle='hide'
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -413,9 +415,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'hue':
                 return (
                     <HuePicker
-                        color={hexColor}
+                        color={insideValue}
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -427,9 +429,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'material':
                 return (
                     <MaterialPicker
-                        color={hexColor}
+                        color={insideValue}
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -441,9 +443,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'sketch':
                 return (
                     <SketchPicker
-                        color={hexColor}
+                        color={insideValue}
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -455,9 +457,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'swatches':
                 return (
                     <SwatchesPicker
-                        color={hexColor}
+                        color={insideValue}
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -469,10 +471,10 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             case 'twitter':
                 return (
                     <TwitterPicker
-                        color={hexColor}
+                        color={insideValue}
                         triangle='hide'
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -485,9 +487,9 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
             default:
                 return (
                     <ChromePicker
-                        color={hexColor}
+                        color={insideValue}
                         onChangeComplete={(color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHexColor(color.hex);
+                            setInsideValue(color.hex);
                             if (props?.closeAfterPicked) {
                                 setTriggerOpen(false);
                             }
@@ -526,19 +528,25 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         return triggerDom;
     }
 
-    const omitProps = !props? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+    const omitProps = !props? {} : omit(props, ['name', 'size', 'clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
 
     if (!proField) {
         const itemProps = !omitProps ? {} : PropUtils.omitProProps(omitProps);
         return (
-            <Form.Item {...itemProps}>
+            <Form.Item
+                name={fieldName}
+                {...itemProps}
+            >
                 {triggerDom}
             </Form.Item>
         );
     }
     return (
-        <ProFormField {...omitProps}>
+        <ProForm.Item
+            name={fieldName}
+            {...omitProps}
+        >
             {triggerDom}
-        </ProFormField>
+        </ProForm.Item>
     );
 });

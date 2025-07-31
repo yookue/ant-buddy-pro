@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Form} from 'antd';
+import {Form, type InputProps} from 'antd';
 import {FormContext} from 'antd/es/form/context';
-import {ProForm} from '@ant-design/pro-form';
+import {ProForm, FormListContext} from '@ant-design/pro-form';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {useIntl} from '@ant-design/pro-provider';
@@ -107,7 +107,7 @@ export type MathInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef'
      * @description.zh-TW 多語言屬性
      */
     localeProps?: IntlLocaleProps;
-} & Pick<React.InputHTMLAttributes<HTMLInputElement>, 'value'>;
+} & Pick<InputProps, 'value'>;
 
 
 /**
@@ -117,6 +117,7 @@ export type MathInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef'
  */
 export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
     const formContext = React.useContext(FormContext);
+    const formListContext = React.useContext(FormListContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-math-input';
     const intlType = useIntl();
@@ -133,6 +134,8 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const fieldName = !props?.name ? undefined : [...(formListContext?.listName ?? []), props.name];
+    const incomeValue = (props?.name && formContext?.form) ? Form.useWatch(fieldName, formContext.form) : props?.value;
     const containerRef = React.useRef<HTMLDivElement>(null);
     const fieldRef = React.useRef<MathfieldElement>(null);
     const fieldStyle = useFieldStyle(clazzPrefix);
@@ -152,14 +155,15 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
     const entryImmutable = editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
 
     const handleInputChange = React.useCallback(() => {
-        if (fieldRef.current) {
-            const value = fieldRef.current.value;
-            if (props?.name) {
-                formContext?.form?.setFieldValue(props.name, value);
-            }
-            props?.onChange?.(value);
+        if (!fieldRef.current) {
+            return;
         }
-    }, [props?.name, props?.onChange, formContext?.form]);
+        const value = fieldRef.current.value;
+        if (fieldName) {
+            formContext?.form?.setFieldValue(fieldName, value);
+        }
+        props?.onChange?.(value);
+    }, [fieldName, formContext?.form]);
 
     React.useEffect(() => {
         if (containerRef.current && !fieldRef.current && window.MathfieldElement) {
@@ -183,12 +187,13 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
             }
         }
         if (fieldRef.current) {
+            console.log('fieldRef.current incomeValue == ', incomeValue);
             try {
-                if (props?.value) {
-                    fieldRef.current.value = StringUtils.join(props.value) ?? '';
+                if (incomeValue) {
+                    fieldRef.current.value = incomeValue ?? '';
                 } else {
-                    if (props?.name) {
-                        fieldRef.current.value = formContext?.form?.getFieldValue(props.name) ?? '';
+                    if (fieldName) {
+                        fieldRef.current.value = formContext?.form?.getFieldValue(fieldName) ?? '';
                     }
                 }
                 if (props?.placeholder) {
@@ -242,12 +247,13 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
         }
     ];
 
-    const omitProps = !props? {} : omit(props, ['rules', 'clazzPrefix', 'containerClazz', 'containerStyle', 'mathOptions', 'validation', 'onChange', 'proField', 'locale', 'localeProps']);
+    const omitProps = !props? {} : omit(props, ['name', 'rules', 'clazzPrefix', 'containerClazz', 'containerStyle', 'mathOptions', 'validation', 'onChange', 'proField', 'locale', 'localeProps']);
 
     if (!proField) {
         const itemProps = !omitProps ? {} : PropUtils.omitProProps(omitProps);
         return (
             <Form.Item
+                name={fieldName}
                 rules={[
                     ...internalRules,
                     ...(props?.rules ?? [])
@@ -260,6 +266,7 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
     }
     return (
         <ProForm.Item
+            name={fieldName}
             rules={[
                 ...internalRules,
                 ...(props?.rules ?? [])

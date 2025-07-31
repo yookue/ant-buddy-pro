@@ -27,6 +27,9 @@ export default () => {
                 name='MathInput_demo.zh-CN'
                 layout='vertical'
                 autoFocusFirstInput={false}
+                initialValues={{
+                    foobar: '\\sqrt{x^2+y^2}',
+                }}
                 submitter={false}
             >
                 <MathInput

@@ -31,7 +31,7 @@ export default () => {
     const [pickerType, setPickerType] = React.useState<PickerType>('chrome');
     const [allowClear, setAllowClear] = React.useState<boolean>(true);
     const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
-    const [buttonSize, setButtonSize] = React.useState<SizeType>('middle');
+    const [size, setSize] = React.useState<SizeType>('middle');
     const [iconPos, setIconPos] = React.useState<BeforeAfterType>('after');
 
     // noinspection DuplicatedCode
@@ -92,10 +92,10 @@ export default () => {
                     label='按鈕大小'
                     radioType='button'
                     fieldProps={{
-                        value: buttonSize,
+                        value: size,
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setButtonSize(event.target?.value);
+                            setSize(event.target?.value);
                         }
                     }}
                     options={[
@@ -143,9 +143,7 @@ export default () => {
                     widthBlock={widthBlock}
                     pickerType={pickerType}
                     allowClear={allowClear}
-                    buttonProps={{
-                        size: buttonSize,
-                    }}
+                    size={size}
                     iconPos={iconPos}
                     onChange={(color: any) => {
                         ConsoleUtils.logTimestamp(false, false, 'ColorPicker', 'onChange color = ' + color);

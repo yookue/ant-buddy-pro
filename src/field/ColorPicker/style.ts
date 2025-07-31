@@ -37,12 +37,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 display: 'flex',
                 alignItems: 'center',
                 width: '100%',
-                [`&&-button-immutable`]: {
-                    backgroundColor: token.colorBgContainer,
+                [`&${token.componentCls}-button-immutable`]: {
+                    backgroundColor: token.colorBgContainerDisabled,
                     cursor: 'default',
-                    [`&:hover, &:active`]: {
-                        backgroundColor: 'unset',
-                    },
                     [`${token.componentCls}-preview`]: {
                         border: `${unit(token.lineWidth)} dashed ${token.colorBorder}`,
                     }
