@@ -29,7 +29,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 '--correct-color': token.colorSuccessText,
                 '--incorrect-color': token.colorErrorText,
                 '--highlight-text': 'transparent',
-                '--keyboard-zindex': token.zIndexPopupBase + 50,
                 borderColor: token.colorBorder,
                 borderRadius: token.borderRadius,
                 paddingLeft: token.paddingXXS,

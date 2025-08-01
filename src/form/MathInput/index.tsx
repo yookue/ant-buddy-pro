@@ -114,6 +114,7 @@ export type MathInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef'
  * Component for displaying a text input-alike box with math capability
  *
  * @author David Hsing
+ * @see "https://mathlive.io/mathfield/guides/customizing/"
  */
 export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
     const formContext = React.useContext(FormContext);
@@ -226,6 +227,9 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
             />
         );
     }, [props]);
+
+    // Adjust the default styles
+    document.body.style.setProperty('--keyboard-zindex', '1050');
 
     const internalRules = !validation ? [] : [
         {
