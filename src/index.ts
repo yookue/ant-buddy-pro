@@ -72,6 +72,7 @@ export {DatasetUtils} from './util/DatasetUtils';
 export {ModalUtils} from './util/ModalUtils';
 export {FieldUtils} from './util/FieldUtils';
 export {IconUtils} from './util/IconUtils';
+export {PaginationUtils} from './util/PaginationUtils';
 export {ParticleUtils} from './util/ParticleUtils';
 export {PropUtils} from './util/PropUtils';
 export {StyleUtils} from './util/StyleUtils';

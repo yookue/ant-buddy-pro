@@ -11,6 +11,9 @@ toc: false
 
 以下是一些裏程碑版本的更新軌跡：
 
+  - **v1.0.36** [2025-08-02]
+    - 增加 `util/PaginationUtils`
+
   - **v1.0.31** [2025-07-31]
     - 增加 `form/MathInput`
 

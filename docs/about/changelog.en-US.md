@@ -11,6 +11,9 @@ toc: false
 
 Here are some milestone versions of the changelog:
 
+  - **v1.0.36** [2025-08-02]
+    - Add `util/PaginationUtils`
+
   - **v1.0.31** [2025-07-31]
     - Add `form/MathInput`
 
