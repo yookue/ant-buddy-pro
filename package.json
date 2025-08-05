@@ -49,7 +49,7 @@
         "@emotion/css": "^11.13.5",
         "@rc-component/trigger": "^3.5.2",
         "@yookue/react-condition": "^0.2.1",
-        "@yookue/ts-lang-utils": "^0.2.11",
+        "@yookue/ts-lang-utils": "^0.2.12",
         "@yookue/ts-multi-map": "^0.2.2",
         "antd-img-crop": "^4.25.0",
         "antd-style": "^3.7.1",
