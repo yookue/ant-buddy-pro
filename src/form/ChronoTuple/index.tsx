@@ -130,7 +130,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
                 {buildDigitNode()}
                 <ChronoSelect
                     className={classNames(`${clazzPrefix}-select`, props?.selectProps?.fieldProps?.className)}
-                    label={props?.selectProps?.label ?? (formContext?.vertical ? ' ' : '')}
+                    label={props?.selectProps?.label ?? (formContext?.layout === 'vertical' ? ' ' : '')}
                     {...omitProps}
                     proField={proField}
                     presetStyle={(props?.selectProps?.presetStyle === undefined) ? 'addon' : props.selectProps.presetStyle}

@@ -196,7 +196,7 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
         return (
             <ProFormDigit
                 name={numberName}
-                label={portProps.label ?? (formContext?.vertical ? ' ' : '')}
+                label={portProps.label ?? (formContext?.layout === 'vertical' ? ' ' : '')}
                 placeholder={ObjectUtils.firstNotNil(portProps.placeholder, intlLocales.get([locale, 'serverPort']), intlLocales.get(['en_US', 'serverPort']))}
                 fieldProps={{
                     min: portProps.fieldProps?.min ?? 1,
