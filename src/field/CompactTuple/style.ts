@@ -68,6 +68,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
                     borderTopRightRadius: token.borderRadius,
                     borderBottomRightRadius: token.borderRadius,
+                    [`&:hover`]: {
+                        zIndex: token.zIndexBase + 10,
+                    }
                 }
             },
             [`&&-addon-before &-addon`]: {
@@ -75,7 +78,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
                     borderTopLeftRadius: token.borderRadius,
                     borderBottomLeftRadius: token.borderRadius,
-                    zIndex: token.zIndexBase + 1,
+                    [`&:hover`]: {
+                        zIndex: token.zIndexBase + 10,
+                    }
                 }
             },
             [`&&-field-prior, &&-addon-prior`]: {
