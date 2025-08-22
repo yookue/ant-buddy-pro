@@ -331,8 +331,31 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         );
     };
 
+    const buildFormDom = (children: React.ReactNode) => {
+        const omitProps = !props? {} : omit(props, ['name', 'size', 'clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
+        if (!proField) {
+            const itemProps = !omitProps ? {} : PropUtils.omitProProps(omitProps);
+            return (
+                <Form.Item
+                    name={fieldName}
+                    {...itemProps}
+                >
+                    {children}
+                </Form.Item>
+            );
+        }
+        return (
+            <ProForm.Item
+                name={fieldName}
+                {...omitProps}
+            >
+                {children}
+            </ProForm.Item>
+        );
+    };
+
     if (entryImmutable) {
-        return buildEntryDom();
+        return buildFormDom(buildEntryDom());
     }
 
     React.useLayoutEffect(() => {
@@ -524,29 +547,5 @@ export const ColorPicker: React.ForwardRefExoticComponent<ColorPickerProps & Rea
         </Trigger>
     );
 
-    if (!props?.name || !formContext?.form) {
-        return triggerDom;
-    }
-
-    const omitProps = !props? {} : omit(props, ['name', 'size', 'clazzPrefix', 'containerClazz', 'containerStyle', 'closeAfterPicked', 'defaultOpen', 'triggerProps', 'buttonProps', 'icon', 'iconPos', 'pickerType', 'proField', 'widthBlock', 'blockPickerProps', 'chromePickerProps', 'circlePickerProps', 'compactPickerProps', 'githubPickerProps', 'huePickerProps', 'materialPickerProps', 'sketchPickerProps', 'swatchesPickerProps', 'twitterPickerProps', 'onChange']);
-
-    if (!proField) {
-        const itemProps = !omitProps ? {} : PropUtils.omitProProps(omitProps);
-        return (
-            <Form.Item
-                name={fieldName}
-                {...itemProps}
-            >
-                {triggerDom}
-            </Form.Item>
-        );
-    }
-    return (
-        <ProForm.Item
-            name={fieldName}
-            {...omitProps}
-        >
-            {triggerDom}
-        </ProForm.Item>
-    );
+    return (!props?.name || !formContext?.form) ? triggerDom : buildFormDom(triggerDom);
 });

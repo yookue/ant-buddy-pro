@@ -41,7 +41,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     backgroundColor: token.colorBgContainerDisabled,
                     cursor: 'default',
                     [`${token.componentCls}-preview`]: {
-                        border: `${unit(token.lineWidth)} dashed ${token.colorBorder}`,
+                        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
                     }
                 },
                 [`&&-xs`]: {
