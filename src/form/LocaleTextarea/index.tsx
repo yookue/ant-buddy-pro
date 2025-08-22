@@ -266,10 +266,13 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
-    const buildEntryDom = () => {
+    const buildEntryDom = (withLabel: boolean) => {
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className']);
         if (proField) {
-            const restProps = !props ? {} : omit(props, ['label', 'fieldProps', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabsProps', 'multilingual', 'proField', 'locale', 'localeProps', 'switchTextareaProps', 'switchQuickTags', 'switchShareProps', 'switchCloneProps', 'switchProField']);
+            let restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabsProps', 'multilingual', 'proField', 'locale', 'localeProps', 'switchTextareaProps', 'switchQuickTags', 'switchShareProps', 'switchCloneProps', 'switchProField']);
+            if (!withLabel) {
+                restProps = omit(restProps, ['label']);
+            }
             return (
                 <ProFormTextArea
                     {...restProps}
@@ -302,7 +305,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
     };
 
     if (!multilingual || (!props?.switchTextareaProps && !props?.switchQuickTags)) {
-        return buildEntryDom();
+        return buildEntryDom(true);
     }
 
     const cloneItemRules = () => {
@@ -465,7 +468,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                     {
                         key: 'default',
                         label: ObjectUtils.firstNotNil(props?.localeProps?.default, intlLocales.get([locale, 'default']), intlLocales.get(['en_US', 'default'])),
-                        children: buildEntryDom(),
+                        children: buildEntryDom(false),
                     },
                     ...buildSwitchItems(),
                 ]}
