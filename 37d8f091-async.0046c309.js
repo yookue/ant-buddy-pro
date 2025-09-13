@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]||[]).push([["37d8f091"],{"37d8f091":function(e,o,n){"use strict";n.d(o,"__esModule",{value:!0}),n.d(o,"texts",{enumerable:!0,get:function(){return d;}}),n("4c472502");let d=[{value:"TooltipField component, can display a field with a tooltip.",paraId:0,tocIndex:0},{value:"import {TooltipField} from '@unikue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
+//# sourceMappingURL=37d8f091-async.0046c309.js.map

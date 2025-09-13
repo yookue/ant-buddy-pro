@@ -1,2 +1,0 @@
-(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@yookue/ant-buddy-pro"]||[]).push([["e10bdb79"],{e10bdb79:function(a,e,o){"use strict";o.d(e,"__esModule",{value:!0}),o.d(e,"texts",{enumerable:!0,get:function(){return d;}}),o("aabaee73");let d=[{value:"AvatarUpload, provides an avtar with upload and crop capability.",paraId:0,tocIndex:0},{value:"import {AvatarUpload} from '@yookue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
-//# sourceMappingURL=e10bdb79-async.765d6ba1.js.map

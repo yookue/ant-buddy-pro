@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]||[]).push([["babf329a"],{babf329a:function(e,o,a){"use strict";a.d(o,"__esModule",{value:!0}),a.d(o,"texts",{enumerable:!0,get:function(){return n;}}),a("74a93466");let n=[{value:"BorderBox component, can display a box with borders.",paraId:0,tocIndex:0},{value:"import {BorderBox} from '@unikue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
+//# sourceMappingURL=babf329a-async.82eb504c.js.map
