@@ -12,7 +12,7 @@ The typical scenario is, displaying two thumbs which acted as `like` and `dislik
 ## Import
 
 ```jsx | pure
-import {ThumbTuple} from '@yookue/ant-buddy-pro';
+import {ThumbTuple} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -23,8 +23,8 @@ import {ProFormTextArea} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {If} from '@yookue/react-condition';
-import {NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {If} from '@unikue/react-condition';
+import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import {type TabPaneProps as RcTabPaneProps} from 'rc-tabs/es/TabPanelList/TabPane';
 import omit from 'rc-util/es/omit';

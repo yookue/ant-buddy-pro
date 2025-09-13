@@ -10,7 +10,7 @@ Just like [the live example](https://preview.pro.ant.design/account/settings), `
 ## Import
 
 ```jsx | pure
-import {MenuTabs} from '@yookue/ant-buddy-pro';
+import {MenuTabs} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

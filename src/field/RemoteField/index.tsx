@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {Spin} from 'antd';
 import {type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
 import {useDebounceFn} from '@ant-design/pro-utils';
-import {NanoidUtils} from '@yookue/ts-lang-utils';
+import {NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 
 

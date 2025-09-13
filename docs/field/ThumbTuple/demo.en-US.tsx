@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {Button, Divider} from 'antd';
 import {LikeOutlined, DislikeOutlined} from '@ant-design/icons';
 import {ProForm} from '@ant-design/pro-form';
-import {ThumbTuple, type ThumbTupleRef} from '@yookue/ant-buddy-pro';
+import {ThumbTuple, type ThumbTupleRef} from '@unikue/ant-buddy-pro';
 
 
 export default () => {

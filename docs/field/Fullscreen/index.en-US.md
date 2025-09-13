@@ -22,7 +22,7 @@ Fullscreen, provides an icon with the ability to toggle fullscreen mode.
 ## Import
 
 ```jsx | pure
-import {Fullscreen} from '@yookue/ant-buddy-pro';
+import {Fullscreen} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

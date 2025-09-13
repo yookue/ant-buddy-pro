@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -18,8 +18,8 @@
 import React from 'react';
 import {Input, Divider} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {LabelField, type AxisDirectionType} from '@yookue/ant-buddy-pro';
-import {type LabelPresetStyle} from '@yookue/ant-buddy-pro/field/LabelField';
+import {LabelField, type AxisDirectionType} from '@unikue/ant-buddy-pro';
+import {type LabelPresetStyle} from '@unikue/ant-buddy-pro/field/LabelField';
 
 
 export default () => {

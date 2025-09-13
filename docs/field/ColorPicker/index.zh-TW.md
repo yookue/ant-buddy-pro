@@ -10,7 +10,7 @@ ColorPicker 可以顯示壹個帶顏色拾取器的按鈕。
 ## 導入組件
 
 ```jsx | pure
-import {ColorPicker} from '@yookue/ant-buddy-pro';
+import {ColorPicker} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

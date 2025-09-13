@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -18,9 +18,9 @@
 import React from 'react';
 import {Divider, ColorPicker} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {PageFooter} from '@yookue/ant-buddy-pro';
-import {type FooterPresetStyle} from '@yookue/ant-buddy-pro/layout/PageFooter';
-import {ColorUtils} from '@yookue/ts-lang-utils';
+import {PageFooter} from '@unikue/ant-buddy-pro';
+import {type FooterPresetStyle} from '@unikue/ant-buddy-pro/layout/PageFooter';
+import {ColorUtils} from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -81,13 +81,13 @@ export default () => {
                     {
                         key: 'ant-buddy-pro',
                         content: 'Ant Buddy Pro',
-                        href: 'https://github.com/yookue/ant-buddy-pro',
+                        href: 'https://github.com/unikueltd/ant-buddy-pro',
                         style: {
                             color: '#eba77a',
                         }
                     }
                 ]}
-                copyright={`${new Date().getFullYear()} Yookue Ltd`}
+                copyright={`${new Date().getFullYear()} Unikue Ltd`}
                 copyrightIcon={copyrightIcon}
                 containerStyle={{
                     backgroundColor: bgColor,

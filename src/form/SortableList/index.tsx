@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -21,7 +21,7 @@ import {type FormListFieldData, type FormListOperation} from 'antd/es/form/FormL
 import {VerticalAlignTopOutlined, VerticalAlignBottomOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import {ProFormList, type ProFormListProps} from '@ant-design/pro-form';
 import {useIntl} from '@ant-design/pro-provider';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {intlLocales} from './intl-locales';

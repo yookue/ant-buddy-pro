@@ -22,7 +22,7 @@ ExactInput, provides a text input box with a checkbox, aiming to support exact c
 ## Import
 
 ```jsx | pure
-import {ExactInput} from '@yookue/ant-buddy-pro';
+import {ExactInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

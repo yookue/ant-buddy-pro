@@ -10,7 +10,7 @@ DivideSelect, 提供了一下可以将选项的标签和值分开显示的选择
 ## 导入组件
 
 ```jsx | pure
-import {DivideSelect} from '@yookue/ant-buddy-pro';
+import {DivideSelect} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

@@ -12,7 +12,7 @@ BadgeRibbon 组件可以显示一个缎带。
 ## 导入组件
 
 ```jsx | pure
-import {BadgeRibbon} from '@yookue/ant-buddy-pro';
+import {BadgeRibbon} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

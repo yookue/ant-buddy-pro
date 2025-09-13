@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {Menu, type MenuProps} from 'antd';
 import {type MenuItemType} from 'antd/es/menu/interface';
 import {css} from '@emotion/css';
-import {BooleanUtils} from '@yookue/ts-lang-utils';
+import {BooleanUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import {type MenuInfo, type MenuMode} from 'rc-menu/es/interface';
 import omit from 'rc-util/es/omit';

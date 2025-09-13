@@ -1,8 +1,8 @@
-# @yookue/ant-buddy-pro
+# @unikue/ant-buddy-pro
 
-[![NPM version](https://img.shields.io/npm/v/@yookue/ant-buddy-pro.svg?style=flat)](https://npmjs.org/package/@yookue/ant-buddy-pro)
+[![NPM version](https://img.shields.io/npm/v/@unikue/ant-buddy-pro.svg?style=flat)](https://npmjs.org/package/@unikue/ant-buddy-pro)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.txt)
-[![NPM downloads](http://img.shields.io/npm/dm/@yookue/ant-buddy-pro.svg?style=flat)](https://npmjs.org/package/@yookue/ant-buddy-pro)
+[![NPM downloads](http://img.shields.io/npm/dm/@unikue/ant-buddy-pro.svg?style=flat)](https://npmjs.org/package/@unikue/ant-buddy-pro)
 [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi)
 
 🏅 Awesome components based on Ant Design & Ant ProComponents ❤️
@@ -28,20 +28,20 @@
 You can install this package in your React project as follows:
 
 ```bash
-$ npm install @yookue/ant-buddy-pro --save
+$ npm install @unikue/ant-buddy-pro --save
 ```
 
 Then, you may import components as follows:
 
 ```jsx | pure
-import {Foobar} from '@yookue/ant-buddy-pro';
+import {Foobar} from '@unikue/ant-buddy-pro';
 ```
 
 Enjoy your coding journey with `ant-buddy-pro` ✌️
 
 ## Document
 
-- GitHub pages: [https://yookue.github.io/ant-buddy-pro](https://yookue.github.io/ant-buddy-pro)
+- GitHub pages: [https://unikueltd.github.io/ant-buddy-pro](https://unikueltd.github.io/ant-buddy-pro)
 
 ## License
 
@@ -49,8 +49,8 @@ This project is under the [MIT License](https://mit-license.org/).
 
 ## Copyright
 
-Beijing Yookue Network Technology Ltd.
+Beijing Unikue Network Technology Ltd.
 
 ## Website
 
-- Yookue: [https://yookue.com](https://yookue.com)
+- Unikue: [https://unikue.cn](https://unikue.cn)

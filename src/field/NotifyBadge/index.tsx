@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -20,8 +20,8 @@ import {Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type Dropdo
 import {ListItemMetaProps} from 'antd/es/list/Item';
 import {BellOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
-import {If} from '@yookue/react-condition';
-import {ArrayUtils, BooleanUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {If} from '@unikue/react-condition';
+import {ArrayUtils, BooleanUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import {type Tab as RcTab, type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';

@@ -12,7 +12,7 @@ The typical scenario is, displaying a dialog to notice user that user hasn't ope
 ## Import
 
 ```jsx | pure
-import {DelayModal} from '@yookue/ant-buddy-pro';
+import {DelayModal} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

@@ -22,7 +22,7 @@ IconSelect，提供了一個可選擇圖標的下拉框。
 ## 導入組件
 
 ```jsx | pure
-import {IconSelect} from '@yookue/ant-buddy-pro';
+import {IconSelect} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

@@ -10,7 +10,7 @@ SectionTitle 组件，可展示一个带有装饰前缀的标题栏，用于分�
 ## Import
 
 ```jsx | pure
-import {SectionTitle} from '@yookue/ant-buddy-pro';
+import {SectionTitle} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

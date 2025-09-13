@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ImageUtils, NanoidUtils} from '@yookue/ts-lang-utils';
+import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
 import omit from 'rc-util/es/omit';

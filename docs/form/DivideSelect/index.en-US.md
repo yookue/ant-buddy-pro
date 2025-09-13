@@ -10,7 +10,7 @@ DivideSelect, provides a capability that displaying the label and value of optio
 ## Import
 
 ```jsx | pure
-import {DivideSelect} from '@yookue/ant-buddy-pro';
+import {DivideSelect} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

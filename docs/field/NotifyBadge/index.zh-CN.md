@@ -12,7 +12,7 @@ NotifyBadge，提供了一个带下拉框的徽标。
 ## 导入组件
 
 ```jsx | pure
-import {NotifyBadge} from '@yookue/ant-buddy-pro';
+import {NotifyBadge} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

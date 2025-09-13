@@ -10,7 +10,7 @@ LocaleTextarea, provides a textarea with a tabs that can switch different locale
 ## Import
 
 ```jsx | pure
-import {LocaleTextarea} from '@yookue/ant-buddy-pro';
+import {LocaleTextarea} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

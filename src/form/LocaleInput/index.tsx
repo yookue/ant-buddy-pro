@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -25,8 +25,8 @@ import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrRead
 import {useIntl} from '@ant-design/pro-provider';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
-import {If} from '@yookue/react-condition';
-import {BooleanUtils, ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {If} from '@unikue/react-condition';
+import {BooleanUtils, ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';

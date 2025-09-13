@@ -18,7 +18,7 @@ CaptchaInput，提供了一个可以获取验证码的按钮和一个输入验�
 ## 导入组件
 
 ```jsx | pure
-import {CaptchaInput} from '@yookue/ant-buddy-pro';
+import {CaptchaInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

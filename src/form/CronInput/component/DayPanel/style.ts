@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2025 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *

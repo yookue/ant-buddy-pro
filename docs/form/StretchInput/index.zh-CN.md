@@ -12,7 +12,7 @@ StretchInput，提供了一个可以动态拉伸的文本框。
 ## 导入组件
 
 ```jsx | pure
-import {StretchInput} from '@yookue/ant-buddy-pro';
+import {StretchInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

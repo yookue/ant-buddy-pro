@@ -10,7 +10,7 @@ toc: content
 ## 导入组件
 
 ```jsx | pure
-import {CardTabs} from '@yookue/ant-buddy-pro';
+import {CardTabs} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

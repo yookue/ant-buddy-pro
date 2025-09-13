@@ -10,7 +10,7 @@ Similar to [Tabs](https://ant.design/components/tabs) of [Ant Design](https://an
 ## Import
 
 ```jsx | pure
-import {CardTabs} from '@yookue/ant-buddy-pro';
+import {CardTabs} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

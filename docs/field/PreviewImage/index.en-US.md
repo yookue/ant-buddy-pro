@@ -10,7 +10,7 @@ PreviewImage, provides a preview image component with fallback capability.
 ## Import
 
 ```jsx | pure
-import {PreviewImage} from '@yookue/ant-buddy-pro';
+import {PreviewImage} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

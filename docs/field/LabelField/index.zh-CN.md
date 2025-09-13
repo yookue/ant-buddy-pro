@@ -10,7 +10,7 @@ LabelField 可以显示一个带标签的控件。
 ## 导入组件
 
 ```jsx | pure
-import {LabelField} from '@yookue/ant-buddy-pro';
+import {LabelField} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

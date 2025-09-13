@@ -10,7 +10,7 @@ SortableList, 是一個可以為 Ant `ProFormList` 增加排序能力的包裝�
 ## 導入組件
 
 ```jsx | pure
-import {SortableList} from '@yookue/ant-buddy-pro';
+import {SortableList} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

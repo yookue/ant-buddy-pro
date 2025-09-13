@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -18,7 +18,7 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormSelect, ProFormSwitch} from '@ant-design/pro-form';
-import {CodePreview, type PaddingSpaceType} from '@yookue/ant-buddy-pro';
+import {CodePreview, type PaddingSpaceType} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -92,7 +92,7 @@ export default () => {
             <Divider/>
             <CodePreview
                 titleContent='如何安装这个包？'
-                textContent='npm install @yookue/ant-buddy-pro -S'
+                textContent='npm install @unikue/ant-buddy-pro -S'
                 titleProps={{
                     level: 5,
                 }}

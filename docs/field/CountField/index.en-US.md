@@ -10,7 +10,7 @@ CountField component, can display a field with a count number.
 ## Import
 
 ```jsx | pure
-import {CountField} from '@yookue/ant-buddy-pro';
+import {CountField} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

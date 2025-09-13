@@ -35,9 +35,9 @@ v10.13.0
 在您的項目中安裝此依賴：
 
 <InstallDependencies
-  npm="$ npm install @yookue/ant-buddy-pro"
-  yarn="$ yarn add @yookue/ant-buddy-pro"
-  pnpm="$ pnpm install @yookue/ant-buddy-pro"
+  npm="$ npm install @unikue/ant-buddy-pro"
+  yarn="$ yarn add @unikue/ant-buddy-pro"
+  pnpm="$ pnpm install @unikue/ant-buddy-pro"
 />
 
 ### 開始開發
@@ -45,7 +45,7 @@ v10.13.0
 在您的程序中導入組件：
 
 ```jsx | pure
-import {FooBar} from '@yookue/ant-buddy-pro';
+import {FooBar} from '@unikue/ant-buddy-pro';
 ```
 
 即可開始使用 `ant-buddy-pro` 組件編寫您的程序。✌️

@@ -10,7 +10,7 @@ AvatarUpload, provides an avtar with upload and crop capability.
 ## Import
 
 ```jsx | pure
-import {AvatarUpload} from '@yookue/ant-buddy-pro';
+import {AvatarUpload} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

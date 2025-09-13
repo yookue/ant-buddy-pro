@@ -10,7 +10,7 @@ TagInput, provides some tags with a text input box with addable capability.
 ## Import
 
 ```jsx | pure
-import {TagInput} from '@yookue/ant-buddy-pro';
+import {TagInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

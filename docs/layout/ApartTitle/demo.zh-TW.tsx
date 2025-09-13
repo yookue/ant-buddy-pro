@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,8 +19,8 @@ import React from 'react';
 import {Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {ApartTitle, type BeforeAfterType} from '@yookue/ant-buddy-pro';
-import {type ApartPresetStyle} from '@yookue/ant-buddy-pro/layout/ApartTitle';
+import {ApartTitle, type BeforeAfterType} from '@unikue/ant-buddy-pro';
+import {type ApartPresetStyle} from '@unikue/ant-buddy-pro/layout/ApartTitle';
 
 
 export default () => {

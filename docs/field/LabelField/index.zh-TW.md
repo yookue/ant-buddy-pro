@@ -10,7 +10,7 @@ LabelField 可以顯示壹個帶標簽的控件。
 ## 導入組件
 
 ```jsx | pure
-import {LabelField} from '@yookue/ant-buddy-pro';
+import {LabelField} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

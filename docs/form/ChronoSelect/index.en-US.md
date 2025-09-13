@@ -10,7 +10,7 @@ ChronoSelect, provides a capability that displaying a select box with chrono uni
 ## Import
 
 ```jsx | pure
-import {ChronoSelect} from '@yookue/ant-buddy-pro';
+import {ChronoSelect} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

@@ -12,7 +12,7 @@ The typical scenario is, replying to someone under a comment.
 ## Import
 
 ```jsx | pure
-import {CollapseForm} from '@yookue/ant-buddy-pro';
+import {CollapseForm} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

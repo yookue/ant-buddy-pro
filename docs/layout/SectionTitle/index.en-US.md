@@ -10,7 +10,7 @@ SectionTitle component, displays a title bar and an ornament prefix, in order to
 ## Import
 
 ```jsx | pure
-import {SectionTitle} from '@yookue/ant-buddy-pro';
+import {SectionTitle} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

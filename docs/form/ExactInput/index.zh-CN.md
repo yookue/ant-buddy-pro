@@ -22,7 +22,7 @@ ExactInput，提供了一个带复选框的文本输入字段，以便支持精�
 ## 导入组件
 
 ```jsx | pure
-import {ExactInput} from '@yookue/ant-buddy-pro';
+import {ExactInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

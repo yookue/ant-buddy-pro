@@ -14,7 +14,7 @@ Similar to [LoginFormPage](https://github.com/ant-design/pro-components/tree/mas
 ## Import
 
 ```jsx | pure
-import {LoginPortal} from '@yookue/ant-buddy-pro';
+import {LoginPortal} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example
@@ -22,7 +22,7 @@ import {LoginPortal} from '@yookue/ant-buddy-pro';
 ```jsx | pure
 import React from 'react';
 import {LoginForm} from '@ant-design/pro-form';
-import {LoginPortal, PageFooter} from '@yookue/ant-buddy-pro';
+import {LoginPortal, PageFooter} from '@unikue/ant-buddy-pro';
 import {SelectLang} from '@umijs/max';
 
 export default () => {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,8 +19,8 @@ import React from 'react';
 import {Button, Divider} from 'antd';
 import {PlusOutlined, MinusOutlined, FireOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {ThumbToggle, ConsoleUtils, type ThumbToggleRef} from '@yookue/ant-buddy-pro';
-import {type ThumbActionType} from '@yookue/ant-buddy-pro/field/ThumbToggle';
+import {ThumbToggle, ConsoleUtils, type ThumbToggleRef} from '@unikue/ant-buddy-pro';
+import {type ThumbActionType} from '@unikue/ant-buddy-pro/field/ThumbToggle';
 
 
 export default () => {

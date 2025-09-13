@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025- Yookue Ltd. All rights reserved.
+ * Copyright (c) 2025- Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,7 +19,7 @@ import {defineThemeConfig} from 'dumi-theme-antd/dist/defineThemeConfig';
 
 
 export default defineThemeConfig({
-    title: 'Yookue Ant Buddy Pro',
+    title: 'Unikue Ant Buddy Pro',
     // localesEnhance: [
     //     {id: 'en-US', switchPrefix: 'EN'},
     //     {id: 'zh-CN', switchPrefix: '中'},
@@ -96,15 +96,15 @@ export default defineThemeConfig({
     moreLinks: [
         {
             text: 'TsLangUtils',
-            link: 'https://github.com/yookue/ts-lang-utils'
+            link: 'https://github.com/unikueltd/ts-lang-utils'
         },
         {
             text: 'TsMultiMap',
-            link: 'https://github.com/yookue/ts-multi-map'
+            link: 'https://github.com/unikueltd/ts-multi-map'
         },
         {
             text: 'React Condition',
-            link: 'https://github.com/yookue/react-condition'
+            link: 'https://github.com/unikueltd/react-condition'
         }
     ],
     description: {

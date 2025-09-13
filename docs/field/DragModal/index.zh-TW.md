@@ -10,7 +10,7 @@ DragModal 用於顯示壹個可拖動的模態對話框。
 ## 導入組件
 
 ```jsx | pure
-import {DragModal} from '@yookue/ant-buddy-pro';
+import {DragModal} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

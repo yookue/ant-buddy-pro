@@ -10,7 +10,7 @@ ApartTitle 組件，可展示壹個帶有裝飾圖標的標題欄，用於分割
 ## Import
 
 ```jsx | pure
-import {ApartTitle} from '@yookue/ant-buddy-pro';
+import {ApartTitle} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

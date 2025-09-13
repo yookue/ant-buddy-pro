@@ -22,7 +22,7 @@ LocaleInput，提供了壹個包含多種語言下拉框的文本輸入字段，
 ## 導入組件
 
 ```jsx | pure
-import {LocaleInput} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

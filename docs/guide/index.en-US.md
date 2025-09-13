@@ -35,9 +35,9 @@ v10.13.0
 You can install this package in your React project as follows:
 
 <InstallDependencies
-  npm="$ npm install @yookue/ant-buddy-pro"
-  yarn="$ yarn add @yookue/ant-buddy-pro"
-  pnpm="$ pnpm install @yookue/ant-buddy-pro"
+  npm="$ npm install @unikue/ant-buddy-pro"
+  yarn="$ yarn add @unikue/ant-buddy-pro"
+  pnpm="$ pnpm install @unikue/ant-buddy-pro"
 />
 
 #### Start Coding
@@ -45,7 +45,7 @@ You can install this package in your React project as follows:
 You may import components as follows:
 
 ```jsx | pure
-import {Foobar} from '@yookue/ant-buddy-pro';
+import {Foobar} from '@unikue/ant-buddy-pro';
 ```
 
 Enjoy your coding journey with `ant-buddy-pro`. ✌️

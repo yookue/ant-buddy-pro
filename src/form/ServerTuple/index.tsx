@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -22,7 +22,7 @@ import {ProFormDigit} from '@ant-design/pro-form';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
 import {useIntl} from '@ant-design/pro-provider';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';

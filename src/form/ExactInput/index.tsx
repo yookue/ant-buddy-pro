@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -21,8 +21,8 @@ import {FormContext} from 'antd/es/form/context';
 import {ProFormText} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {useIntl} from '@ant-design/pro-provider';
-import {If} from '@yookue/react-condition';
-import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {If} from '@unikue/react-condition';
+import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';

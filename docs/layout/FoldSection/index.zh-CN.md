@@ -22,7 +22,7 @@ toc: content
 ## Import
 
 ```jsx | pure
-import {FoldSection} from '@yookue/ant-buddy-pro';
+import {FoldSection} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

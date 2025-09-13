@@ -22,7 +22,7 @@ Fullscreen 是壹個用來切換全屏的圖標按鈕。
 ## 導入組件
 
 ```jsx | pure
-import {Fullscreen} from '@yookue/ant-buddy-pro';
+import {Fullscreen} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

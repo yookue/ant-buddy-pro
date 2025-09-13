@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2024 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -18,7 +18,7 @@
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Switch, Space, type RadioChangeEvent} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
-import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import {type ValueType as RcValueType} from 'rc-input-number';
 import {BadgeRibbon} from '@/field/BadgeRibbon';

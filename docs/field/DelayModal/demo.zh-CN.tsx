@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,9 +19,9 @@ import React from 'react';
 import {Button, Divider} from 'antd';
 import {FireOutlined, StopOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {DelayModal, ConsoleUtils, type DelayModalRef} from '@yookue/ant-buddy-pro';
-import {type ModalActionType} from '@yookue/ant-buddy-pro/field/DelayModal';
-import {RandomUtils} from '@yookue/ts-lang-utils';
+import {DelayModal, ConsoleUtils, type DelayModalRef} from '@unikue/ant-buddy-pro';
+import {type ModalActionType} from '@unikue/ant-buddy-pro/field/DelayModal';
+import {RandomUtils} from '@unikue/ts-lang-utils';
 
 
 export default () => {

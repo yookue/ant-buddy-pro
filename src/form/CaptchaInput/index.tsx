@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -23,7 +23,7 @@ import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captc
 import {ProForm} from '@ant-design/pro-form';
 import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
-import {ArrayUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {ArrayUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';

@@ -14,7 +14,7 @@ CompactTuple 可以顯示緊湊間距模式下的壹個控件和壹個附加節�
 ## 導入組件
 
 ```jsx | pure
-import {CompactTuple} from '@yookue/ant-buddy-pro';
+import {CompactTuple} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

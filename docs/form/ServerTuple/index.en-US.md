@@ -10,7 +10,7 @@ ServerTuple, provides a capability that displaying a text input box with a numbe
 ## Import
 
 ```jsx | pure
-import {ServerTuple} from '@yookue/ant-buddy-pro';
+import {ServerTuple} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

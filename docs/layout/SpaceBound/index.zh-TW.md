@@ -11,7 +11,7 @@ toc: content
 ## 導入組件
 
 ```jsx | pure
-import {SpaceBound} from '@yookue/ant-buddy-pro';
+import {SpaceBound} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

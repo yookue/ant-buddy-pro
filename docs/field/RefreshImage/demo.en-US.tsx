@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -17,8 +17,8 @@
 
 import React from 'react';
 import {message as messageApi} from 'antd';
-import {RefreshImage} from '@yookue/ant-buddy-pro';
-import {RandomUtils} from '@yookue/ts-lang-utils';
+import {RefreshImage} from '@unikue/ant-buddy-pro';
+import {RandomUtils} from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -31,7 +31,7 @@ export default () => {
                 height={120}
                 src={() => {
                     const images = [
-                        `https://yookue.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`,
+                        `https://unikueltd.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`,
                         `https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png?timestamp=${Date.now()}`,
                         `https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg?timestamp=${Date.now()}`,
                     ];

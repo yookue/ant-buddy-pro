@@ -1,10 +1,10 @@
 {
-    "name": "@yookue/ant-buddy-pro",
-    "version": "1.0.39",
+    "name": "@unikue/ant-buddy-pro",
+    "version": "1.1.0",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on Ant Design & Ant ProComponents",
-    "homepage": "https://yookue.github.io/ant-buddy-pro",
-    "organization": "Yookue Ltd",
+    "homepage": "https://unikueltd.github.io/ant-buddy-pro",
+    "organization": "Unikue Ltd",
     "private": false,
     "license": "MIT",
     "keywords": [
@@ -45,12 +45,12 @@
     "dependencies": {
         "@ant-design/compatible": "^5.1.4",
         "@ant-design/pro-components": "^2.8.10",
-        "@babel/runtime": "^7.28.3",
+        "@babel/runtime": "^7.28.4",
         "@emotion/css": "^11.13.5",
         "@rc-component/trigger": "^3.5.2",
-        "@yookue/react-condition": "^0.2.1",
-        "@yookue/ts-lang-utils": "^0.2.19",
-        "@yookue/ts-multi-map": "^0.2.2",
+        "@unikue/react-condition": "^1.0.0",
+        "@unikue/ts-lang-utils": "^1.0.0",
+        "@unikue/ts-multi-map": "^1.0.0",
         "antd-img-crop": "^4.25.0",
         "antd-style": "^3.7.1",
         "cron-validate": "^1.5.2",
@@ -67,21 +67,21 @@
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.3.1",
-        "@eslint/js": "^9.33.0",
+        "@eslint/js": "^9.35.0",
         "@types/object-hash": "^3.0.6",
         "@types/react": "~18.2.0",
         "@types/react-color": "^3.0.13",
         "@types/react-dom": "~18.2.0",
         "@types/zxcvbn": "^4.4.5",
-        "@typescript-eslint/eslint-plugin": "^8.40.0",
-        "@yookue/babel-plugin-remove-comment": "^0.2.0",
+        "@typescript-eslint/eslint-plugin": "^8.43.0",
+        "@unikue/babel-plugin-remove-comment": "^1.0.0",
         "cross-env": "^7.0.3",
         "del-cli": "^6.0.0",
         "dumi": "^2.4.21",
         "dumi-theme-antd": "^0.4.4",
-        "father": "^4.6.3",
+        "father": "^4.6.4",
         "gh-pages": "^6.3.0",
-        "globals": "^16.3.0",
+        "globals": "^16.4.0",
         "less": "^4.3.0",
         "less-plugin-no-comment": "^0.1.0",
         "stylelint-config-standard-less": "^3.0.1",
@@ -92,26 +92,26 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/yookue/ant-buddy-pro.git"
+        "url": "git+https://github.com/unikueltd/ant-buddy-pro.git"
     },
     "bugs": {
-        "url": "https://github.com/yookue/ant-buddy-pro/issues"
+        "url": "https://github.com/unikueltd/ant-buddy-pro/issues"
     },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org"
     },
     "collective": {
-        "url": "https://opencollective.com/yookue-awesome"
+        "url": "https://opencollective.com/unikue-awesome"
     },
     "funding": [
         {
             "type": "opencollective",
-            "url": "https://opencollective.com/yookue-awesome"
+            "url": "https://opencollective.com/unikue-awesome"
         },
         {
             "type": "individual",
-            "url": "https://yookue.com/donation"
+            "url": "https://unikue.cn/donation"
         }
     ],
     "browserslist": {
@@ -127,9 +127,9 @@
         ]
     },
     "author": {
-        "name": "Yookue Ltd",
-        "email": "yookue@outlook.com",
-        "url": "https://yookue.com"
+        "name": "Unikue Ltd",
+        "email": "unikue@yeah.net",
+        "url": "https://unikue.cn"
     },
     "contributors": [
         {

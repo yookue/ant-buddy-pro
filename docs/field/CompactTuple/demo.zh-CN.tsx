@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,8 +19,8 @@ import React from 'react';
 import {Row, Col, Divider} from 'antd';
 import datePickerLocale from 'antd/es/date-picker/locale/zh_CN';
 import {ProForm, ProFormDatePicker, ProFormRadio, ProFormSwitch, ProFormDependency} from '@ant-design/pro-form';
-import {CompactTuple, type BeforeAfterType} from '@yookue/ant-buddy-pro';
-import {type TuplePresetStyle} from '@yookue/ant-buddy-pro/field/CompactTuple';
+import {CompactTuple, type BeforeAfterType} from '@unikue/ant-buddy-pro';
+import {type TuplePresetStyle} from '@unikue/ant-buddy-pro/field/CompactTuple';
 import dayjs from 'dayjs';
 
 

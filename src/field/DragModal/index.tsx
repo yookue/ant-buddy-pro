@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Modal, type ModalProps} from 'antd';
-import {NanoidUtils} from '@yookue/ts-lang-utils';
+import {NanoidUtils} from '@unikue/ts-lang-utils';
 import Draggable, {type DraggableBounds, type DraggableData, type DraggableEvent} from 'react-draggable';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';

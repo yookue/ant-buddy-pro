@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -16,7 +16,7 @@
 
 
 import {red, volcano, gold, yellow, lime, green, cyan, blue, geekblue, purple, magenta, grey} from '@ant-design/colors';
-import {RandomUtils} from '@yookue/ts-lang-utils';
+import {RandomUtils} from '@unikue/ts-lang-utils';
 
 
 /**

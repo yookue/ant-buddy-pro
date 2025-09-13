@@ -10,7 +10,7 @@ MaskInput, provides a text input box with regular expression validation capabili
 ## Import
 
 ```jsx | pure
-import {MaskInput} from '@yookue/ant-buddy-pro';
+import {MaskInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

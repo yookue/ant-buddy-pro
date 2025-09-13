@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -41,7 +41,7 @@ export default defineConfig({
     ],
     metas: [{
         name: 'keywords',
-        content: 'Yookue, Ant Buddy Pro, Ant Design, Ant ProComponents, React, NPM',
+        content: 'Unikue, Ant Buddy Pro, Ant Design, Ant ProComponents, React, NPM',
     }],
     favicons: [`${ROOT_CONTEXT}/favicon.ico`],
     links: [
@@ -73,7 +73,7 @@ export default defineConfig({
     alias: {
         '#': nodePath.resolve(__dirname, '.'),
         '@': nodePath.resolve(__dirname, './src'),
-        '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
+        '@unikue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
     },
     apiParser: {},
     exportStatic: {},
@@ -90,9 +90,9 @@ export default defineConfig({
         editLink: false,
         lastUpdated: false,
         socialLinks: {
-            github: 'https://github.com/yookue/ant-buddy-pro',
+            github: 'https://github.com/unikueltd/ant-buddy-pro',
         },
-        footer: `Open-source MIT Licensed<br/>Copyright © 2025 Yookue Ltd. All rights reserved`,
+        footer: `Open-source MIT Licensed<br/>Copyright © 2025 Unikue Ltd. All rights reserved`,
         ...dumiTheme,
     },
 });

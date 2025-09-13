@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -18,8 +18,8 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch} from '@ant-design/pro-form';
-import {CardTabs, type PaddingSpaceType} from '@yookue/ant-buddy-pro';
-import {type TabsPosition} from '@yookue/ant-buddy-pro/layout/CardTabs';
+import {CardTabs, type PaddingSpaceType} from '@unikue/ant-buddy-pro';
+import {type TabsPosition} from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {

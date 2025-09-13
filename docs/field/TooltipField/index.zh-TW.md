@@ -10,7 +10,7 @@ TooltipField 用於顯示壹個帶提示的字段。
 ## 導入組件
 
 ```jsx | pure
-import {TooltipField} from '@yookue/ant-buddy-pro';
+import {TooltipField} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

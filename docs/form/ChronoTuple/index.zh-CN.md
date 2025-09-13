@@ -10,7 +10,7 @@ ChronoTuple, 提供了一个可以输入数值和选择时间单位的选择框�
 ## 导入组件
 
 ```jsx | pure
-import {ChronoTuple} from '@yookue/ant-buddy-pro';
+import {ChronoTuple} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

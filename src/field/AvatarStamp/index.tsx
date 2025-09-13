@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -18,7 +18,7 @@
 import React from 'react';
 import {Avatar, type AvatarProps} from 'antd';
 import {css} from '@emotion/css';
-import {StringUtils} from '@yookue/ts-lang-utils';
+import {StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type RectZenithPlace} from '@/type/declaration';

@@ -10,7 +10,7 @@ DragModal component, can display a modal dialog with draggable ability.
 ## Import
 
 ```jsx | pure
-import {DragModal} from '@yookue/ant-buddy-pro';
+import {DragModal} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

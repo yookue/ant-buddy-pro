@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -20,7 +20,7 @@ import {type DefaultOptionType} from 'antd/es/select';
 import {type SegmentedLabeledOption} from 'antd/es/segmented';
 import {type ProSchemaValueEnumType} from '@ant-design/pro-provider';
 import {type ProSchemaValueEnumObj, type ProSchemaValueEnumMap} from '@ant-design/pro-utils';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils} from '@unikue/ts-lang-utils';
 
 
 /**

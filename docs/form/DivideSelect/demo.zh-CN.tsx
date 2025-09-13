@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -18,8 +18,8 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
-import {DivideSelect, type LabelMixinType} from '@yookue/ant-buddy-pro';
-import {type DividePresetStyle} from '@yookue/ant-buddy-pro/form/DivideSelect';
+import {DivideSelect, type LabelMixinType} from '@unikue/ant-buddy-pro';
+import {type DividePresetStyle} from '@unikue/ant-buddy-pro/form/DivideSelect';
 
 
 export default () => {

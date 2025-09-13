@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,8 +19,8 @@ import React from 'react';
 import {Avatar, Button, Divider, Space, Tooltip} from 'antd';
 import {Comment} from '@ant-design/compatible';
 import {FieldStringOutlined, RedoOutlined} from '@ant-design/icons';
-import {RemoteField, ConsoleUtils, type RemoteFieldRef} from '@yookue/ant-buddy-pro';
-import {RandomUtils} from '@yookue/ts-lang-utils';
+import {RemoteField, ConsoleUtils, type RemoteFieldRef} from '@unikue/ant-buddy-pro';
+import {RandomUtils} from '@unikue/ts-lang-utils';
 
 
 export default () => {

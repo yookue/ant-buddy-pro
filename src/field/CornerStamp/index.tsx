@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -20,7 +20,7 @@ import {type BadgeProps} from 'antd';
 import {isPresetColor} from 'antd/es/_util/colors';
 import {presetPrimaryColors} from '@ant-design/colors';
 import {css} from '@emotion/css';
-import {StringUtils} from '@yookue/ts-lang-utils';
+import {StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import {type RectZenithPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';

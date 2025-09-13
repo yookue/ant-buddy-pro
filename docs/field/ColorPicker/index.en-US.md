@@ -10,7 +10,7 @@ ColorPicker component, can display a button which can be clicked to show a color
 ## Import
 
 ```jsx | pure
-import {ColorPicker} from '@yookue/ant-buddy-pro';
+import {ColorPicker} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

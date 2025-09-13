@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {Typography} from 'antd';
 import {type TitleProps} from 'antd/es/typography/Title';
 import {type TextProps} from 'antd/es/typography/Text';
-import {If} from '@yookue/react-condition';
+import {If} from '@unikue/react-condition';
 import classNames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
 import {useFieldStyle} from './style';

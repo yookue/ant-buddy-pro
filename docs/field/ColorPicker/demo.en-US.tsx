@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -20,8 +20,8 @@ import {Button, Divider} from 'antd';
 import {type SizeType} from 'antd/es/config-provider/SizeContext';
 import {FireOutlined, FormOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch, type ProFormInstance} from '@ant-design/pro-form';
-import {ColorPicker, ConsoleUtils, type BeforeAfterType, type ColorPickerRef} from '@yookue/ant-buddy-pro';
-import {type PickerType} from '@yookue/ant-buddy-pro/field/ColorPicker';
+import {ColorPicker, ConsoleUtils, type BeforeAfterType, type ColorPickerRef} from '@unikue/ant-buddy-pro';
+import {type PickerType} from '@unikue/ant-buddy-pro/field/ColorPicker';
 
 
 export default () => {

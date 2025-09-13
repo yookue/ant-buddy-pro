@@ -10,7 +10,7 @@ CornerStamp component, can display a corner stamp.
 ## Import
 
 ```jsx | pure
-import {CornerStamp} from '@yookue/ant-buddy-pro';
+import {CornerStamp} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

@@ -12,7 +12,7 @@ RemoteField 可以使用远程数据渲染一个组件。
 ## 导入组件
 
 ```jsx | pure
-import {RemoteField} from '@yookue/ant-buddy-pro';
+import {RemoteField} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

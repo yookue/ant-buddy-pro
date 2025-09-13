@@ -15,8 +15,8 @@ toc: false
 
 您可以通过以下方式访问我们：
 
-- Yookue: [https://yookue.com](https://yookue.com)
-- GitHub: [https://github.com/yookue](https://github.com/yookue)
+- Unikue: [https://unikue.cn](https://unikue.cn)
+- GitHub: [https://github.com/unikue](https://github.com/unikue)
 
 ## 特别感谢
 

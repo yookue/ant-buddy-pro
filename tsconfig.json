@@ -22,10 +22,10 @@
             "@@/*": [
                 ".dumi/tmp/*"
             ],
-            "@yookue/ant-buddy-pro": [
+            "@unikue/ant-buddy-pro": [
                 "./src",
             ],
-            "@yookue/ant-buddy-pro/*": [
+            "@unikue/ant-buddy-pro/*": [
                 "./src/*",
             ]
         }

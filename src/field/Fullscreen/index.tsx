@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
-import {ObjectUtils} from '@yookue/ts-lang-utils';
+import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import screenfull from 'screenfull';
 import {TooltipRender} from '@/render/TooltipRender';

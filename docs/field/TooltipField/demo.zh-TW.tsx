@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {Divider} from 'antd';
 import {GithubOutlined} from '@ant-design/icons';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {TooltipField} from '@yookue/ant-buddy-pro';
+import {TooltipField} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -50,7 +50,7 @@ export default () => {
                     title: 'Github',
                 }}
             >
-                <a href='https://github.com/yookue/ant-buddy-pro' target='_blank' style={{color: 'inherit'}}>
+                <a href='https://github.com/unikueltd/ant-buddy-pro' target='_blank' style={{color: 'inherit'}}>
                     <GithubOutlined style={{fontSize: '24px'}}/>
                 </a>
             </TooltipField>

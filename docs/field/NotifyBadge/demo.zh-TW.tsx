@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Empty, Tag, message as messageApi} from 'antd';
-import {NotifyBadge, ConsoleUtils} from '@yookue/ant-buddy-pro';
+import {NotifyBadge, ConsoleUtils} from '@unikue/ant-buddy-pro';
 
 
 export default () => {

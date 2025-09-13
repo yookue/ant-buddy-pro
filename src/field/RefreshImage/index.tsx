@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -18,7 +18,7 @@
 import React from 'react';
 import {Image, type ImageProps} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
-import {ImageUtils, NanoidUtils, ObjectUtils} from '@yookue/ts-lang-utils';
+import {ImageUtils, NanoidUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {intlLocales} from './intl-locales';

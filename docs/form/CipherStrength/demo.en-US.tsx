@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {Divider} from 'antd';
 import {LockOutlined} from '@ant-design/icons';
 import {ProForm, ProFormText, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {CipherStrength, type BeforeAfterType} from '@yookue/ant-buddy-pro';
+import {CipherStrength, type BeforeAfterType} from '@unikue/ant-buddy-pro';
 
 
 export default () => {

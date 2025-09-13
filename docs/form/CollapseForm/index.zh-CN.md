@@ -12,7 +12,7 @@ CollapseForm，提供了一个可以折叠展开的表单。
 ## 导入组件
 
 ```jsx | pure
-import {CollapseForm} from '@yookue/ant-buddy-pro';
+import {CollapseForm} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

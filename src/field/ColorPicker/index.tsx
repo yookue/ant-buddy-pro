@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -24,7 +24,7 @@ import {ProForm, FormListContext} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
-import {ColorUtils, NanoidUtils} from '@yookue/ts-lang-utils';
+import {ColorUtils, NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {BlockPicker, ChromePicker, CirclePicker, CompactPicker, GithubPicker, HuePicker, MaterialPicker, SketchPicker, SwatchesPicker, TwitterPicker} from 'react-color';

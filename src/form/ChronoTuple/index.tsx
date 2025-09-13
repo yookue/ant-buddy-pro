@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -20,7 +20,7 @@ import {Space, InputNumber} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
 import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
-import {StringUtils} from '@yookue/ts-lang-utils';
+import {StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {ChronoSelect, type ChronoSelectProps} from '@/form/ChronoSelect';

@@ -10,7 +10,7 @@ FallbackImage, provides a fallback option when the image source can not be loade
 ## Import
 
 ```jsx | pure
-import {FallbackImage} from '@yookue/ant-buddy-pro';
+import {FallbackImage} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

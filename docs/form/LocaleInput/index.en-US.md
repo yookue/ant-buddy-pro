@@ -22,7 +22,7 @@ LocaleInput, provides a text input box with a dropdown div of locale input boxes
 ## Import
 
 ```jsx | pure
-import {LocaleInput} from '@yookue/ant-buddy-pro';
+import {LocaleInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

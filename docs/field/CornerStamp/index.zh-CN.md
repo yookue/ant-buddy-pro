@@ -10,7 +10,7 @@ CornerStamp 是一个可以显示带角标的控件。
 ## 导入组件
 
 ```jsx | pure
-import {CornerStamp} from '@yookue/ant-buddy-pro';
+import {CornerStamp} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

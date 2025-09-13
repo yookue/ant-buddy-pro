@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License.
  *
@@ -36,10 +36,10 @@ export default defineConfig({
     alias: {
         '#': nodePath.resolve(__dirname, '.'),
         '@': nodePath.resolve(__dirname, './src'),
-        '@yookue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
+        '@unikue/ant-buddy-pro': nodePath.resolve(__dirname, './src'),
     },
     extraBabelPlugins: [
-        ['@yookue/babel-plugin-remove-comment', {
+        ['@unikue/babel-plugin-remove-comment', {
             scope: 'all',
         }],
     ]

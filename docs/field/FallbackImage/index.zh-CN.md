@@ -10,7 +10,7 @@ FallbackImage 提供了一个加载图片备用源的选项，用以在图片常
 ## 导入组件
 
 ```jsx | pure
-import {FallbackImage} from '@yookue/ant-buddy-pro';
+import {FallbackImage} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例

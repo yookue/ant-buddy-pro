@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -22,8 +22,8 @@ import {ProFormSelect} from '@ant-design/pro-form';
 import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {type RequestOptionsType} from '@ant-design/pro-utils';
 import {useDebounceFn} from '@ant-design/pro-utils';
-import {If} from '@yookue/react-condition';
-import {ObjectUtils, StringUtils} from '@yookue/ts-lang-utils';
+import {If} from '@unikue/react-condition';
+import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type LabelMixinType, type RequestOptionPlace} from '@/type/declaration';

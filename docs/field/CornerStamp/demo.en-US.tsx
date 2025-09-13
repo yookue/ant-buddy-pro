@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
  * Licensed under the MIT License (the "License")
  *
@@ -19,7 +19,7 @@ import React from 'react';
 import {Card, Divider} from 'antd';
 import {SmileOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio, ProFormSwitch, ProFormSlider} from '@ant-design/pro-form';
-import {CornerStamp, type RectZenithPlace} from '@yookue/ant-buddy-pro';
+import {CornerStamp, type RectZenithPlace} from '@unikue/ant-buddy-pro';
 
 
 export default () => {

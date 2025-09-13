@@ -12,7 +12,7 @@ The typical scenario is, displaying a small search box or an icon, and stretchin
 ## Import
 
 ```jsx | pure
-import {StretchInput} from '@yookue/ant-buddy-pro';
+import {StretchInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

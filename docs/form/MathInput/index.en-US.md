@@ -10,7 +10,7 @@ MathInput, provides a text input-alike box with math capability.
 ## Import
 
 ```jsx | pure
-import {MathInput} from '@yookue/ant-buddy-pro';
+import {MathInput} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example

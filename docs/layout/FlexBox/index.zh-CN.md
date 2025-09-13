@@ -10,7 +10,7 @@ FlexBox 组件，一个用于对齐的弹性布局容器。
 ## 导入组件
 
 ```jsx | pure
-import {FlexBox} from '@yookue/ant-buddy-pro';
+import {FlexBox} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例
