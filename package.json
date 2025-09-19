@@ -1,6 +1,6 @@
 {
     "name": "@unikue/ant-buddy-pro",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "title": "Ant Buddy Pro",
     "description": "Awesome components based on Ant Design & Ant ProComponents",
     "homepage": "https://unikueltd.github.io/ant-buddy-pro",
@@ -79,7 +79,7 @@
         "del-cli": "^6.0.0",
         "dumi": "^2.4.21",
         "dumi-theme-antd": "^0.4.4",
-        "father": "^4.6.4",
+        "father": "^4.6.5",
         "gh-pages": "^6.3.0",
         "globals": "^16.4.0",
         "less": "^4.3.0",

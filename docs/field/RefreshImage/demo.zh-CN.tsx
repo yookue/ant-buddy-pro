@@ -16,17 +16,30 @@
 
 
 import React from 'react';
-import {message as messageApi} from 'antd';
-import {RefreshImage} from '@unikue/ant-buddy-pro';
+import {Button, Divider, message as messageApi} from 'antd';
+import {RedoOutlined} from '@ant-design/icons';
+import {RefreshImage, type RefreshImageRef} from '@unikue/ant-buddy-pro';
 import {RandomUtils} from '@unikue/ts-lang-utils';
 
 
 export default () => {
     const [messageInvoker, messageContext] = messageApi.useMessage();
+    const refreshImageRef = React.useRef<RefreshImageRef>(null);
+
     return (
         <>
             {messageContext}
+            <Button
+                icon={<RedoOutlined/>}
+                onClick={() => {
+                    refreshImageRef.current?.refresh();
+                }}
+            >
+                刷新图片
+            </Button>
+            <Divider/>
             <RefreshImage
+                ref={refreshImageRef}
                 width={120}
                 height={120}
                 src={() => {
