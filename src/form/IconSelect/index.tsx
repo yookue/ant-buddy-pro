@@ -29,7 +29,7 @@ import {useIntl} from '@ant-design/pro-provider';
 import {If, For, MapIterator} from '@unikue/react-condition';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {Scrollbars} from 'rc-scrollbars';
+import {Scrollbars} from 'react-custom-scrollbars-4';
 import {type DefaultOptionType} from 'rc-select/es/select';
 import omit from 'rc-util/es/omit';
 import {allIconTypes, type IconSceneType} from '@/type/design-icon';

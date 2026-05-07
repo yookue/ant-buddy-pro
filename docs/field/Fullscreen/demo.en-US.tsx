@@ -22,7 +22,7 @@ import {Fullscreen} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
-    const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
+    const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(true);
 
     return (
         <>

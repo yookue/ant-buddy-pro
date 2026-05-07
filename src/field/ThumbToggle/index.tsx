@@ -293,7 +293,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     };
 
     const buildIconDom = () => {
-        let icon = undefined;
+        let icon: React.ComponentType<any> | undefined = undefined;
         switch (actionType) {
             case 'like':
                 icon = checked ? LikeFilled : LikeOutlined;

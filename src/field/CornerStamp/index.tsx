@@ -150,10 +150,10 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
     const bgColor = !isPresetColor(color) ? color : presetPrimaryColors[color];
 
     const buildCornerCss = () => {
-        let result = undefined;
+        let result: string | undefined = undefined;
         switch (placement) {
             case 'topLeft':
-                result = {
+                result = css({
                     '::before': {
                         top: 0,
                         left: 0,
@@ -165,10 +165,10 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                         borderLeftColor: 'transparent',
                         zIndex: zIndex,
                     }
-                };
+                });
                 break;
             case 'topRight':
-                result = {
+                result = css({
                     '::before': {
                         top: 0,
                         right: 0,
@@ -180,10 +180,10 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                         borderLeftWidth: `${size}px !important`,
                         zIndex: zIndex,
                     }
-                };
+                });
                 break;
             case 'bottomLeft':
-                result = {
+                result = css({
                     '::before': {
                         bottom: 0,
                         left: 0,
@@ -195,10 +195,10 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                         borderLeftColor: 'transparent',
                         zIndex: zIndex,
                     }
-                };
+                });
                 break;
             case 'bottomRight':
-                result = {
+                result = css({
                     '::before': {
                         bottom: 0,
                         right: 0,
@@ -210,12 +210,12 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
                         borderLeftWidth: `${size}px !important`,
                         zIndex: zIndex,
                     }
-                };
+                });
                 break;
             default:
                 break;
         }
-        return !result ? undefined : css(result);
+        return result;
     };
 
     const buildFieldDom = () => {

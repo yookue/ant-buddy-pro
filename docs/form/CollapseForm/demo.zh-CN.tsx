@@ -15,7 +15,6 @@
  */
 
 
-import React from 'react';
 import {Avatar, message as messageApi} from 'antd';
 import {Comment} from '@ant-design/compatible';
 import {UserOutlined} from '@ant-design/icons';
@@ -39,7 +38,7 @@ export default () => {
                 actions={[(
                     <CollapseForm
                         closedEntry='回复'
-                        openedEntry='取消回复'
+                        openedEntry='取消'
                         autoEntryCursor={true}
                         formProps={{
                             submitter: {

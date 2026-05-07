@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
+import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
@@ -226,7 +226,7 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
     }, [props?.value]);
 
     const buildSpecificOptions = () => {
-        const result = [];
+        const result: CheckboxOptionType[] = [];
         for (let i = 0; i < 60; i++) {
             result.push({
                 label: (i < 10) ? `0${i}` : i,

@@ -28,6 +28,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 flexFlow: 'row nowrap',
                 [`${token.antCls}-form-item:first-of-type`]: {
                     marginRight: -1,
+                    [`&:focus, &:hover`]: {
+                        zIndex: 10,
+                    }
                 }
             },
             [`&&-pro-field`]: {
@@ -42,6 +45,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         display: 'flex',
                         [`${token.antCls}-form-item:first-of-type`]: {
                             flex: 1,
+                            [`&:focus, &:hover`]: {
+                                zIndex: 10,
+                            }
                         },
                         [`${token.antCls}-form-item:last-of-type`]: {
                             flex: 'none',

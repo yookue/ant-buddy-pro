@@ -24,12 +24,18 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {MathfieldElement, type MathfieldOptions} from 'mathlive';
 import omit from 'rc-util/es/omit';
 import 'mathlive';
 import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
+
+
+type MathfieldOptions = {
+    virtualKeyboardMode?: 'auto' | 'manual' | 'onfocus' | 'off';
+    smartMode?: boolean;
+    [key: string]: any;
+};
 
 
 export type IntlLocaleProps = {
@@ -138,7 +144,7 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
     const fieldName = !props?.name ? undefined : [...(formListContext?.listName ?? []), props.name];
     const incomeValue = (props?.name && formContext?.form) ? Form.useWatch(fieldName, formContext.form) : props?.value;
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const fieldRef = React.useRef<MathfieldElement>(null);
+    const fieldRef = React.useRef<any>(null);
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     // const loadMathLiveStyles = async () => {
@@ -167,8 +173,8 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
     }, [fieldName, formContext?.form]);
 
     React.useEffect(() => {
-        if (containerRef.current && !fieldRef.current && window.MathfieldElement) {
-            const mathField = new window.MathfieldElement();
+        if (containerRef.current && !fieldRef.current && (window as any).MathfieldElement) {
+            const mathField = new (window as any).MathfieldElement();
             if (mathOptions) {
                 Object.entries(mathOptions).forEach(([key, value]) => {
                     if (value !== undefined) {

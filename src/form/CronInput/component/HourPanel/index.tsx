@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent} from 'antd';
+import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
@@ -225,7 +225,7 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
     }, [props?.value]);
 
     const buildSpecificOptions = () => {
-        const result = [];
+        const result: CheckboxOptionType[] = [];
         for (let i = 0; i < 24; i++) {
             result.push({
                 label: (i < 10) ? `0${i}` : i,

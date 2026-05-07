@@ -92,7 +92,7 @@ export default defineConfig({
         socialLinks: {
             github: 'https://github.com/unikueltd/ant-buddy-pro',
         },
-        footer: `Open-source MIT Licensed<br/>Copyright © 2025 Unikue Ltd. All rights reserved`,
+        footer: `Open-source MIT Licensed<br/>Copyright © ${new Date().getFullYear()} Unikue Ltd. All rights reserved`,
         ...dumiTheme,
     },
 });

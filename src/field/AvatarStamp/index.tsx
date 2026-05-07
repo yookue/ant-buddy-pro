@@ -102,36 +102,36 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     const buildAddonCss = () => {
-        let result = undefined;
+        let result: string | undefined = undefined;
         switch (placement) {
             case 'topLeft':
-                result = {
+                result = css({
                     top: props?.offset?.[1] ?? 0,
                     left: props?.offset?.[0] ?? 0,
-                };
+                });
                 break;
             case 'topRight':
-                result = {
+                result = css({
                     top: props?.offset?.[1] ?? 0,
                     right: props?.offset?.[0] ?? 0,
-                };
+                });
                 break;
             case 'bottomLeft':
-                result = {
+                result = css({
                     bottom: props?.offset?.[1] ?? 0,
                     left: props?.offset?.[0] ?? 0,
-                };
+                });
                 break;
             case 'bottomRight':
-                result = {
+                result = css({
                     bottom: props?.offset?.[1] ?? 0,
                     right: props?.offset?.[0] ?? 0,
-                };
+                });
                 break;
             default:
                 break;
         }
-        return !result ? undefined : css(result);
+        return result;
     };
 
     const buildAddonDom = () => {

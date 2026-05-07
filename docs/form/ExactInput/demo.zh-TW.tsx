@@ -23,7 +23,7 @@ import {ExactInput, ConsoleUtils} from '@unikue/ant-buddy-pro';
 
 export default () => {
     const [form] = ProForm.useForm();
-    const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
+    const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(true);
 
     return (
         <>
