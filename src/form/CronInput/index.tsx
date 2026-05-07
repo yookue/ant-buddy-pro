@@ -329,6 +329,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     const [showSecond, setShowSecond] = React.useState<boolean>(props?.defaultShowSecond ?? false);
     const [showYear, setShowYear] = React.useState<boolean>(props?.defaultShowYear ?? false);
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
+    const closeTimerRef = React.useRef<NodeJS.Timeout | null>(null);
     const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
     // noinspection JSUnusedGlobalSymbols
@@ -691,13 +692,32 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         }
         const omitTabsProps = !props?.tabsProps ? {} : omit(props.tabsProps, ['defaultActiveKey', 'size', 'tabBarExtraContent']);
         return (
-            <CronInputContext.Provider
-                value={{
-                    fieldId: fieldId,
-                    allowOkEcho: allowOkEcho,
-                    popupOpen: triggerOpen,
+            <div
+                onMouseEnter={() => {
+                    // Cancel close when mouse enters popup
+                    if (closeTimerRef.current) {
+                        clearTimeout(closeTimerRef.current);
+                        closeTimerRef.current = null;
+                    }
+                }}
+                onMouseLeave={() => {
+                    // Delay close to allow mouse to move back to trigger
+                    if (closeTimerRef.current) {
+                        clearTimeout(closeTimerRef.current);
+                    }
+                    closeTimerRef.current = setTimeout(() => {
+                        setTriggerOpen(false);
+                        props?.triggerProps?.onOpenChange?.(false);
+                    }, 200);
                 }}
             >
+                <CronInputContext.Provider
+                    value={{
+                        fieldId: fieldId,
+                        allowOkEcho: allowOkEcho,
+                        popupOpen: triggerOpen,
+                    }}
+                >
                 <CardTabs
                     items={tabItems}
                     defaultActiveKey={props?.tabsProps?.defaultActiveKey ?? 'minute'}
@@ -759,8 +779,9 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                     {...omitTabsProps}
                 />
             </CronInputContext.Provider>
-        );
-    };
+        </div>
+    );
+};
 
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
 

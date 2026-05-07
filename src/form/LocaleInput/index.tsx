@@ -306,6 +306,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const compositionRef = React.useRef<boolean>(false);
+    const closeTimerRef = React.useRef<NodeJS.Timeout | null>(null);
     // noinspection DuplicatedCode
     const fieldStyle = useFieldStyle(clazzPrefix);
 
@@ -367,6 +368,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         ...omitFieldProps,
                         'data-locale-input-id': fieldId,
                     }}
+                    proField={proField}
                     proFieldProps={{
                         render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? (!multilingual ? dom : renderEntryReadonly(dom)),
                         ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
@@ -638,17 +640,37 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             }
         }
         return (
-            <List
-                className={`${clazzPrefix}-popup-list`}
-                dataSource={tagInputs}
-                bordered={true}
-                size='small'
-                renderItem={item => (
-                    <List.Item className={`${clazzPrefix}-popup-list-item`}>
-                        {item}
-                    </List.Item>
-                )}
-            />
+            <div
+                onMouseEnter={() => {
+                    // Cancel close when mouse enters popup
+                    if (closeTimerRef.current) {
+                        clearTimeout(closeTimerRef.current);
+                        closeTimerRef.current = null;
+                    }
+                }}
+                onMouseLeave={() => {
+                    // Delay close to allow mouse to move back to trigger
+                    if (closeTimerRef.current) {
+                        clearTimeout(closeTimerRef.current);
+                    }
+                    closeTimerRef.current = setTimeout(() => {
+                        setTriggerOpen(false);
+                        props?.triggerProps?.onOpenChange?.(false);
+                    }, 200);
+                }}
+            >
+                <List
+                    className={`${clazzPrefix}-popup-list`}
+                    dataSource={tagInputs}
+                    bordered={true}
+                    size='small'
+                    renderItem={item => (
+                        <List.Item className={`${clazzPrefix}-popup-list-item`}>
+                            {item}
+                        </List.Item>
+                    )}
+                />
+            </div>
         );
     };
 
