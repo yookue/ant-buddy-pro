@@ -16,19 +16,14 @@
 
 
 import React from 'react';
-import {Input, Checkbox, Space, type InputProps, type InputRef, type CheckboxProps, type TooltipProps} from 'antd';
-import {FormContext} from 'antd/es/form/context';
-import {ProFormText} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {Checkbox, Form, type CheckboxProps, type TooltipProps} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
-import {If} from '@unikue/react-condition';
-import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import {ObjectUtils} from '@unikue/ts-lang-utils';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
+import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
 import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
 
 
 export type AddonCheckProps = CheckboxProps & React.PropsWithChildren<{
@@ -59,7 +54,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type ExactInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
+export type ExactInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore' | 'addonAfter' | 'cursorBefore' | 'cursorAfter' | 'paddingBefore' | 'paddingAfter'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -114,14 +109,6 @@ export type ExactInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
     tooltipProps?: Omit<TooltipProps, 'title'>;
 
     /**
-     * @description Whether to use ProFormField instead of Antd
-     * @description.zh-CN 是否使用 ProFormField 控件
-     * @description.zh-TW 是否使用 ProFormField 控件
-     * @default true
-     */
-    proField?: boolean;
-
-    /**
      * @description The locale of the component, e.g. 'en_US'
      * @description.zh-CN 组件的语言, e.g. 'zh_CN'
      * @description.zh-TW 組件的語言, e.g. 'zh_TW'
@@ -143,7 +130,6 @@ export type ExactInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
  * @author David Hsing
  */
 export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
-    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-exact-input';
     const intlType = useIntl();
 
@@ -155,11 +141,8 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         checkProps = {
             nameSuffix: 'Exact',
         },
-        proField = true,
         locale = intlType.locale,
     } = props ?? {};
-
-    const fieldStyle = useFieldStyle(clazzPrefix);
 
     const generateCheckName = () => {
         if (checkProps.name) {
@@ -172,88 +155,44 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     };
 
     const buildAddonDom = (before: boolean) => {
-        if (((before && addonPos !== 'before') || (!before && addonPos !== 'after')) && ((before && !props?.fieldProps?.addonBefore) || (!before && !props?.fieldProps?.addonAfter))) {
+        if (!checkable || (before && addonPos !== 'before') || (!before && addonPos !== 'after')) {
             return undefined;
         }
         const checkboxName = generateCheckName();
-        const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'name', 'onChange']);
-        const nodeCount = [(before && props?.fieldProps?.addonBefore && checkable), (!before && props?.fieldProps?.addonAfter && checkable), ((before && addonPos === 'before' && checkable) || (!before && addonPos === 'after' && checkable))].filter(object => !!object).length;
-        if (nodeCount === 0) {
-            return undefined;
-        }
+        const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'name', 'title', 'value']);
+        const tooltipTitle: string = ObjectUtils.firstNotNil(props?.localeProps?.exactMatch, intlLocales.get([locale, 'exactMatch']), intlLocales.get(['en_US', 'exactMatch']));
         const innerDom = (
-            <Checkbox
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + checkboxName}
-                onChange={(event: any) => {
-                    if (checkboxName) {
-                        formContext?.form?.setFieldValue(checkboxName, event.target.checked);
-                    }
-                    checkProps?.onChange?.(event);
-                }}
-                {...omitCheckProps}
+            <Form.Item
+                name={checkboxName}
+                noStyle={true}
+                valuePropName='checked'
             >
-                {checkProps?.children}
-            </Checkbox>
+                <Checkbox
+                    title={props?.tooltipCtrl ? undefined : tooltipTitle}
+                    {...omitCheckProps}
+                />
+            </Form.Item>
         );
-        const combineDom = (
-            <>
-                <If condition={before && props?.fieldProps?.addonBefore} validation={false}>
-                    {props?.fieldProps?.addonBefore}
-                </If>
-                <If condition={!before && props?.fieldProps?.addonAfter} validation={false}>
-                    {props?.fieldProps?.addonAfter}
-                </If>
-                <If condition={checkable && ((before && addonPos === 'before') || (!before && addonPos === 'after'))} validation={false}>
-                    {TooltipRender.renderTooltip(props?.tooltipCtrl, {
-                        title: ObjectUtils.firstNotNil(props?.localeProps?.exactMatch, intlLocales.get([locale, 'exactMatch']), intlLocales.get(['en_US', 'exactMatch'])),
-                        ...props?.tooltipProps,
-                    }, innerDom)}
-                </If>
-            </>
-        );
-        return (nodeCount === 1) ? combineDom : (
-            <Space className={`${clazzPrefix}-addon-space`}>
-                {combineDom}
-            </Space>
-        );
+        if (!props?.tooltipCtrl) {
+            return innerDom;
+        }
+        return TooltipRender.renderTooltip(props?.tooltipCtrl, {
+            title: tooltipTitle,
+            ...props?.tooltipProps,
+        }, innerDom);
     };
 
     const beforeDom = buildAddonDom(true);
     const afterDom = buildAddonDom(false);
-    const posClazz = !addonPos ? undefined : `${clazzPrefix}-addon-${addonPos}`;
-    const compactClazz = !compactAddon ? undefined : `${clazzPrefix}-compact`;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'id', 'addonBefore', 'addonAfter']);
-
-    if (proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'addonPos', 'checkProps', 'tooltipCtrl', 'tooltipProps', 'proField', 'locale', 'localeProps']);
-        return (
-            <ProFormText
-                {...restProps}
-                fieldProps={{
-                    className: classNames(clazzPrefix, fieldStyle.hashId, (!addonPos ? undefined : `${clazzPrefix}-addon`), posClazz, compactClazz, props?.fieldProps?.className),
-                    addonBefore: beforeDom,
-                    addonAfter: afterDom,
-                    ...omitFieldProps,
-                }}
-            />
-        );
-    } else {
-        const restProps = omit(omitFieldProps, ['placeholder', 'onChange']);
-        return (
-            <Input
-                className={classNames(clazzPrefix, fieldStyle.hashId, (!addonPos ? undefined : `${clazzPrefix}-addon`), posClazz, compactClazz, props?.fieldProps?.className)}
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
-                placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
-                addonBefore={beforeDom}
-                addonAfter={afterDom}
-                onChange={(event: any) => {
-                    if (props?.name) {
-                        formContext?.form?.setFieldValue(props.name, event.target.value);
-                    }
-                    props?.fieldProps?.onChange?.(event);
-                }}
-                {...restProps}
-            />
-        );
-    }
+    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'addonPos', 'compactAddon', 'checkable', 'checkProps', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
+    return (
+        <AddonInput
+            clazzPrefix={clazzPrefix}
+            addonBefore={beforeDom}
+            addonAfter={afterDom}
+            paddingBefore={compactAddon ? 8 : undefined}
+            paddingAfter={compactAddon ? 8 : undefined}
+            {...restProps}
+        />
+    );
 };

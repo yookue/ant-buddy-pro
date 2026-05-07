@@ -24,6 +24,7 @@ import {ExactInput, ConsoleUtils} from '@unikue/ant-buddy-pro';
 export default () => {
     const [form] = ProForm.useForm();
     const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(true);
+    const [proField, setProField] = React.useState<boolean>(true);
 
     return (
         <>
@@ -34,22 +35,30 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProFormSwitch
-                    label='Tooltip Ctrl'
-                    checkedChildren='True'
-                    unCheckedChildren='False'
-                    fieldProps={{
-                        checked: tooltipCtrl,
-                        onChange: setTooltipCtrl,
-                    }}
-                />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='Tooltip Ctrl'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: tooltipCtrl,
+                            onChange: setTooltipCtrl,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Use ProField'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: proField,
+                            onChange: setProField,
+                        }}
+                    />
+                </ProForm.Group>
                 <Divider/>
                 <ExactInput
                     name='foobar'
                     placeholder='Please input this field'
-                    fieldProps={{
-                        addonBefore: 'Prefix',
-                    }}
                     checkProps={{
                         onChange: () => {
                             const values = form.getFieldsValue(['foobar', 'foobarExact']);
@@ -58,6 +67,7 @@ export default () => {
                     }}
                     tooltipCtrl={tooltipCtrl}
                     locale='en_US'
+                    proField={proField}
                 />
             </ProForm>
         </>
