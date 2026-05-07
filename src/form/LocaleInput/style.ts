@@ -38,11 +38,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     },
                     [`${token.componentCls}-locale-tag`]: {
                         color: token.colorTextSecondary,
-                        cursor: 'default',
                         fontSize: token.fontSize - 1,
-                    },
-                    [`${token.componentCls}-locale-action`]: {
-                        cursor: 'pointer',
                     }
                 }
             },
@@ -69,7 +65,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                     borderRadius: token.borderRadiusSM,
                     color: token.colorTextSecondary,
-                    cursor: 'default',
                     padding: `2px ${token.paddingXS}px`,
                     fontSize: token.fontSizeSM,
                 }

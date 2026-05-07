@@ -19,15 +19,18 @@ import {ReadonlyMultiKeyMap} from '@unikue/ts-multi-map';
 
 
 export const intlLocales = ReadonlyMultiKeyMap.of([
-    [['en_US', 'setAsDefault'], 'Set as default?'],
+    [['en_US', 'setAsDefault'], 'Set as default'],
+    [['en_US', 'sureSetAsDefault'], 'Set as default?'],
     [['en_US', 'ok'], 'OK'],
     [['en_US', 'cancel'], 'Cancel'],
 
-    [['zh_CN', 'setAsDefault'], '设为默认吗？'],
+    [['zh_CN', 'setAsDefault'], '设为默认'],
+    [['zh_CN', 'sureSetAsDefault'], '设为默认吗？'],
     [['zh_CN', 'ok'], '确定'],
     [['zh_CN', 'cancel'], '取消'],
 
-    [['zh_TW', 'setAsDefault'], '設爲默認嗎？'],
+    [['zh_TW', 'setAsDefault'], '設爲默認'],
+    [['zh_TW', 'sureSetAsDefault'], '設爲默認嗎？'],
     [['zh_TW', 'ok'], '確定'],
     [['zh_TW', 'cancel'], '取消'],
 ]);
