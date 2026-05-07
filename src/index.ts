@@ -33,6 +33,7 @@ export {RemoteField, type RemoteFieldProps, type RemoteFieldRef} from './field/R
 export {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from './field/ThumbToggle';
 export {ThumbTuple, type ThumbTupleProps, type ThumbTupleRef} from './field/ThumbTuple';
 export {TooltipField, type TooltipFieldProps} from './field/TooltipField';
+export {AddonInput, type AddonInputProps} from './form/AddonInput';
 export {AvatarUpload, type AvatarUploadProps, type AvatarUploadRef} from './form/AvatarUpload';
 export {CaptchaInput, type CaptchaInputProps, type CaptchaInputRef} from './form/CaptchaInput';
 export {ChronoSelect, type ChronoSelectProps} from './form/ChronoSelect';
