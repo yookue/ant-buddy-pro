@@ -45,7 +45,7 @@ export default () => {
                         }}
                     />
                     <ProFormSwitch
-                        label='Use ProForm'
+                        label='Use ProField'
                         checkedChildren='True'
                         unCheckedChildren='False'
                         fieldProps={{
@@ -81,7 +81,7 @@ export default () => {
                         label='Search'
                         placeholder='Please enter search content'
                         addonAfter={<Button type='primary' icon={<SearchOutlined/>}>Search</Button>}
-                        compactAfter={true}
+                        paddingAfter={0}
                         widthBlock={widthBlock}
                         proField={proField}
                     />

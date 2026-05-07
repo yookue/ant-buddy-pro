@@ -45,7 +45,7 @@ export default () => {
                         }}
                     />
                     <ProFormSwitch
-                        label='使用 ProForm'
+                        label='使用 ProField'
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
@@ -81,7 +81,7 @@ export default () => {
                         label='搜索'
                         placeholder='请输入搜索内容'
                         addonAfter={<Button type='primary' icon={<SearchOutlined/>}>搜索</Button>}
-                        compactAfter={true}
+                        paddingAfter={0}
                         widthBlock={widthBlock}
                         proField={proField}
                     />

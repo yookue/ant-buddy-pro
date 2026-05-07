@@ -24,7 +24,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             display: 'inline-flex',
-            alignItems: 'stretch',
 
             [`> ${token.antCls}-form-item`]: {
                 width: '100%',
@@ -33,15 +32,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&&-width-block`]: {
                 width: '100%',
 
-                [`${token.componentCls}-space`]: {
+                [`${token.antCls}-form-item-control ${token.antCls}-form-item-control-input-content > ${token.antCls}-space-compact`]: {
                     width: '100%',
                 },
             },
 
             [`&-compact-before, &-compact-after`]: {
-                paddingInline: 0,
-                marginTop: -token.lineWidth,
-                marginBottom: -token.lineWidth,
+                flex: 'none',
+
+                [`${token.antCls}-btn`]: {
+                    marginTop: -token.lineWidth,
+                    marginBottom: -token.lineWidth,
+                }
             },
 
             // Status styles - when ProForm.Item has error, apply to Space.Compact
@@ -50,11 +52,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
 
                 [`${token.antCls}-space-addon-compact-first-item, ${token.antCls}-space-addon-compact-last-item`]: {
                     borderColor: token.colorError,
-
                     '&:hover': {
                         borderColor: token.colorErrorHover,
                     },
-
                     '&:focus': {
                         borderColor: token.colorError,
                         boxShadow: `0 0 0 2px ${token.colorErrorBg}`,

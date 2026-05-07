@@ -20,7 +20,7 @@ import {Input, Space, type InputProps, type InputRef} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {ProFormText, ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {StringUtils} from '@unikue/ts-lang-utils';
+import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {useFieldStyle} from './style';
@@ -50,20 +50,34 @@ export type AddonInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
     addonAfter?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
-     * @description Whether to use compact mode for the addon before
-     * @description.zh-CN 输入框前的内容是否使用紧凑模式
-     * @description.zh-TW 輸入框前的內容是否使用緊凑模式
-     * @default false
+     * @description The cursor before the input field
+     * @description.zh-CN 输入框前的内容的鼠标指针
+     * @description.zh-TW 輸入框前的內容的鼠標指針
+     * @default 'default'
      */
-    compactBefore?: boolean;
+    cursorBefore?: string;
 
     /**
-     * @description Whether to use compact mode for the addon after
-     * @description.zh-CN 输入框后的内容是否使用紧凑模式
-     * @description.zh-TW 輸入框後的內容是否使用緊凑模式
-     * @default false
+     * @description The cursor after the input field
+     * @description.zh-CN 输入框后的内容的鼠标指针
+     * @description.zh-TW 輸入框後的內容的鼠標指針
+     * @default 'default'
      */
-    compactAfter?: boolean;
+    cursorAfter?: string;
+
+    /**
+     * @description The padding of the addon before
+     * @description.zh-CN 输入框前的内容间距
+     * @description.zh-TW 輸入框前的內容間距
+     */
+    paddingBefore?: number;
+
+    /**
+     * @description The padding of the addon after
+     * @description.zh-CN 输入框后的内容间距
+     * @description.zh-TW 輸入框後的內容間距
+     */
+    paddingAfter?: number;
 
     /**
      * @description Whether to match the width of parent element or not
@@ -93,37 +107,41 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
 
     // Initialize the default props
     const {
-        compactBefore = false,
-        compactAfter = false,
+        cursorBefore = 'default',
+        cursorAfter = 'default',
         widthBlock = true,
         proField = true,
     } = props ?? {};
 
     const fieldStyle = useFieldStyle(clazzPrefix);
 
-    // Determine wrapper classes based on addon presence
     const addonBeforeDom = (typeof props?.addonBefore === 'function') ? props.addonBefore() : props?.addonBefore;
     const addonAfterDom = (typeof props?.addonAfter === 'function') ? props.addonAfter() : props?.addonAfter;
-    const compactBeforeClazz = !compactBefore ? undefined : `${clazzPrefix}-compact-before`;
-    const compactAfterClazz = !compactAfter ? undefined : `${clazzPrefix}-compact-after`;
-    const widthBlockClazz = !widthBlock ? undefined : `${clazzPrefix}-width-block`;
+    const addonBeforeStyle = {
+        cursor: cursorBefore,
+        paddingInline: ObjectUtils.isNil(props?.paddingBefore) ? undefined : props?.paddingBefore,
+    };
+    const addonAfterStyle = {
+        cursor: cursorAfter,
+        paddingInline: ObjectUtils.isNil(props?.paddingAfter) ? undefined : props?.paddingAfter,
+    };
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'id', 'placeholder', 'onChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'fieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'compactBefore', 'compactAfter', 'widthBlock', 'proField']);
+        const restProps = !props ? {} : omit(props, ['className', 'name', 'fieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
         return (
-            <div className={classNames(clazzPrefix, fieldStyle.hashId, widthBlockClazz, props?.className ?? props?.fieldProps?.className)}>
-                <ProForm.Item
-                    {...restProps}
-                >
-                    <Space.Compact className={`${clazzPrefix}-space`}>
+            <div className={classNames(clazzPrefix, fieldStyle.hashId, (!widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.className ?? props?.fieldProps?.className)}>
+                <ProForm.Item {...restProps}>
+                    <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                         {!!addonBeforeDom && (
-                            <Space.Addon className={compactBeforeClazz}>
+                            <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
                                 {addonBeforeDom}
                             </Space.Addon>
                         )}
                         <ProFormText
+                            className={`${clazzPrefix}-input`}
+                            name={props?.name ?? props?.fieldProps?.name}
                             noStyle={true}
                             fieldProps={{
                                 placeholder: StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder,
@@ -131,7 +149,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                             }}
                         />
                         {!!addonAfterDom && (
-                            <Space.Addon className={compactAfterClazz}>
+                            <Space.Addon className={`${clazzPrefix}-compact-after`} style={addonAfterStyle}>
                                 {addonAfterDom}
                             </Space.Addon>
                         )}
@@ -141,15 +159,16 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
         );
     } else {
         return (
-            <div className={classNames(clazzPrefix, fieldStyle.hashId, widthBlockClazz, props?.className ?? props?.fieldProps?.className)}>
-                <Space.Compact className={`${clazzPrefix}-space`}>
+            <div className={classNames(clazzPrefix, fieldStyle.hashId, (!widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.className ?? props?.fieldProps?.className)}>
+                <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                     {!!addonBeforeDom && (
-                        <Space.Addon className={compactBeforeClazz}>
+                        <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
                             {addonBeforeDom}
                         </Space.Addon>
                     )}
                     <Input
                         className={`${clazzPrefix}-input`}
+                        name={props?.name ?? props?.fieldProps?.name}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                         onChange={(event: any) => {
                             if (props?.name) {
@@ -160,7 +179,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         {...omitFieldProps}
                     />
                     {!!addonAfterDom && (
-                        <Space.Addon className={compactAfterClazz}>
+                        <Space.Addon className={`${clazzPrefix}-compact-after`} style={addonAfterStyle}>
                             {addonAfterDom}
                         </Space.Addon>
                     )}
