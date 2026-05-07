@@ -15,7 +15,6 @@
  */
 
 
-import React from 'react';
 import {ProForm} from '@ant-design/pro-form';
 import {MaskInput} from '@unikue/ant-buddy-pro';
 

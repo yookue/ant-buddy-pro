@@ -15,7 +15,6 @@
  */
 
 
-import React from 'react';
 import {FallbackImage} from '@unikue/ant-buddy-pro';
 
 

@@ -15,7 +15,6 @@
  */
 
 
-import React from 'react';
 import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
 import {LocaleInput} from '@unikue/ant-buddy-pro';
