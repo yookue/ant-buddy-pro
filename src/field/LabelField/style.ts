@@ -73,6 +73,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         flex: 1,
                     }
                 }
+            },
+            [`&-tooltip`]: {
+                marginLeft: token.marginXXS,
+                color: token.colorTextTertiary,
             }
         }
     };

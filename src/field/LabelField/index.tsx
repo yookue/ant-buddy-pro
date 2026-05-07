@@ -16,10 +16,11 @@
 
 
 import React from 'react';
-import {Space} from 'antd';
+import {Space, Tooltip} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {type SpaceSize} from 'antd/es/space';
 import classNames from 'classnames';
+import {QuestionCircleOutlined} from '@ant-design/icons';
 import {type WithFalse, type AxisDirectionType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -131,6 +132,13 @@ export type LabelFieldProps = React.PropsWithChildren<{
     required?: boolean;
 
     /**
+     * @description The content of tooltip
+     * @description.zh-CN 提示框的内容
+     * @description.zh-TW 提示框的內容
+     */
+    tooltip?: React.ReactNode | (() => React.ReactNode | undefined);
+
+    /**
      * @description Whether to match the width of parent element or not
      * @description.zh-CN 是否匹配父节点的宽度
      * @description.zh-TW 是否匹配父節點的寬度
@@ -172,9 +180,9 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
 
     // Initialize the default props
     const {
-        delimiter = ':',
+        delimiter = formContext?.colon ?? ':',
         delimiterInLayout = ['horizontal', 'vertical'],
-        layout = 'horizontal',
+        layout = (formContext?.layout === 'vertical') ? 'vertical' : 'horizontal',
         presetStyle = 'field-prior',
     } = props ?? {};
 
@@ -185,6 +193,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
         if (!income && props?.hideLabelWhenEmpty) {
             return undefined;
         }
+        const tooltipDom = (typeof props?.tooltip === 'function') ? props.tooltip() : props?.tooltip;
         return (
             <div
                 className={classNames(`${clazzPrefix}-label`, props?.labelClazz)}
@@ -192,6 +201,11 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
             >
                 {income}
                 {!delimiterInLayout ? undefined : (delimiterInLayout.includes(layout) ? delimiter : undefined)}
+                {!!tooltipDom && (
+                    <Tooltip title={tooltipDom}>
+                        <QuestionCircleOutlined className={`${clazzPrefix}-tooltip`}/>
+                    </Tooltip>
+                )}
             </div>
         );
     };

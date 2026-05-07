@@ -85,6 +85,7 @@ export default () => {
                 label='用戶名'
                 layout={layout}
                 required={required}
+                tooltip='用于顯示的提示'
                 presetStyle={presetStyle}
             >
                 <Input placeholder='用戶名'/>

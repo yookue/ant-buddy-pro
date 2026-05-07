@@ -85,6 +85,7 @@ export default () => {
                 label='Username'
                 layout={layout}
                 required={required}
+                tooltip='Tooltip for display'
                 presetStyle={presetStyle}
             >
                 <Input placeholder='Username'/>
