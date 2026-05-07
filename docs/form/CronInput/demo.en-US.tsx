@@ -26,6 +26,7 @@ export default () => {
     const [allowSecond, setAllowSecond] = React.useState(true);
     const [allowYear, setAllowYear] = React.useState(true);
     const [allowOkEcho, setAllowOkEcho] = React.useState(true);
+    const [proField, setProField] = React.useState<boolean>(true);
 
     return (
         <>
@@ -78,6 +79,15 @@ export default () => {
                             onChange: setAllowOkEcho,
                         }}
                     />
+                    <ProFormSwitch
+                        label='Use ProField'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: proField,
+                            onChange: setProField,
+                        }}
+                    />
                 </ProForm.Group>
                 <Divider/>
                 <CronInput
@@ -96,6 +106,7 @@ export default () => {
                         tabPosition: tabPos,
                     }}
                     locale='en_US'
+                    proField={proField}
                 />
             </ProForm>
         </>

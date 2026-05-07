@@ -28,6 +28,19 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     alignSelf: 'flex-start',
                     marginTop: 3,
                 }
+            },
+
+            // Fixed width for checkbox group options to ensure consistent alignment
+            [`${token.componentCls}-specific`]: {
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '6px',
+
+                [`${token.antCls}-checkbox-wrapper`]: {
+                    flex: '0 0 auto',
+                    minWidth: '4.5em',
+                    maxWidth: '4.5em',
+                }
             }
         }
     };

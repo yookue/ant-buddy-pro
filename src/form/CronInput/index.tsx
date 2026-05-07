@@ -16,11 +16,9 @@
 
 
 import React from 'react';
-import {Button, Input, Switch, Space, type InputProps, type InputRef, message as messageApi} from 'antd';
+import {Button, Switch, Space, message as messageApi} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {FieldTimeOutlined} from '@ant-design/icons';
-import {ProFormText} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
@@ -33,6 +31,7 @@ import {type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
+import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {StyleUtils} from '@/util/StyleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
@@ -134,7 +133,7 @@ export type IntlLocaleProps = {
 };
 
 
-export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
+export type CronInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore' | 'addonAfter' | 'cursorBefore' | 'cursorAfter' | 'paddingBefore' | 'paddingAfter'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -149,7 +148,7 @@ export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
      * @description.zh-TW 默認文本框的標簽節點內容
      * @default <FieldTimeOutlined/>
      */
-    addon?: React.ReactNode;
+    addon?: React.ReactNode | (() => React.ReactNode | undefined);
 
     /**
      * @description The position of the addon for the entry field
@@ -273,14 +272,6 @@ export type CronInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
      * @default true
      */
     validateRule?: boolean;
-
-    /**
-     * @description Whether to use ProFormField instead of Antd for the entry field
-     * @description.zh-CN 默认文本框是否使用 ProFormField 控件
-     * @description.zh-TW 默認文本框是否使用 ProFormField 控件
-     * @default true
-     */
-    proField?: boolean;
 
     /**
      * @description The locale of the component, e.g. 'en_US'
@@ -447,25 +438,9 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         echoToEntry();
     }, [outcomeExpresses, showSecond, showYear]);
 
+    const addonEntryDom = (typeof addon === 'function') ? addon() : addon;
     const buildEntryAddonDom = (before: boolean) => {
-        if (before && !props?.fieldProps?.addonBefore && addonPos === 'before' && !addon) {
-            return undefined;
-        }
-        if (!before && !props?.fieldProps?.addonAfter && addonPos === 'after' && !addon) {
-            return undefined;
-        }
-        const nodeCount = [(before && props?.fieldProps?.addonBefore), (!before && props?.fieldProps?.addonAfter), (addon && ((before && addonPos === 'before') || (!before && addonPos === 'after')))].filter(object => !!object).length;
-        if (nodeCount === 0) {
-            return undefined;
-        }
-        const combineDom = (
-            <>
-                {(before && props?.fieldProps?.addonBefore) && props?.fieldProps?.addonBefore}
-                {(!before && props?.fieldProps?.addonAfter) && props?.fieldProps?.addonAfter}
-                {(addon && ((before && addonPos === 'before') || (!before && addonPos === 'after'))) && addon}
-            </>
-        );
-        return (nodeCount === 1) ? combineDom : <Space>{combineDom}</Space>;
+        return ((before && addonPos === 'before') || (!before && addonPos === 'after')) ? addonEntryDom : undefined;
     };
 
     // noinspection DuplicatedCode
@@ -473,7 +448,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         <div className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-entry-readonly`, (addonPos ? `${clazzPrefix}-entry-readonly-${addonPos}` : undefined))}>
             {addonPos === 'before' && (
                 <span className={classNames(`${clazzPrefix}-entry-readonly-addon`, `${clazzPrefix}-entry-readonly-addon-${addonPos}`)}>
-                    {addon}
+                    {addonEntryDom}
                 </span>
             )}
             <div className={`${clazzPrefix}-entry-readonly-content`}>
@@ -481,7 +456,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
             </div>
             {addonPos === 'after' && (
                 <span className={classNames(`${clazzPrefix}-entry-readonly-addon`, `${clazzPrefix}-entry-readonly-addon-${addonPos}`)}>
-                    {addon}
+                    {addonEntryDom}
                 </span>
             )}
         </div>
@@ -492,12 +467,14 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         if (proField) {
             const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'rules', 'clazzPrefix', 'defaultOpen', 'triggerProps', 'tabsProps', 'secondPanelProps', 'validateRule', 'proField', 'locale', 'localeProps']);
             return (
-                <ProFormText
-                    {...restProps}
+                <AddonInput
+                    clazzPrefix={clazzPrefix}
+                    addonBefore={buildEntryAddonDom(true)}
+                    addonAfter={buildEntryAddonDom(false)}
+                    cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
+                    cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
                     fieldProps={{
                         className: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className),
-                        addonBefore: buildEntryAddonDom(true),
-                        addonAfter: buildEntryAddonDom(false),
                         ...omitFieldProps,
                         onChange: (event: any) => {
                             props?.fieldProps?.onChange?.(event);
@@ -507,6 +484,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                         },
                         'data-cron-input-id': fieldId,
                     }}
+                    proField={proField}
                     proFieldProps={{
                         render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? renderEntryReadonly(dom),
                         ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
@@ -526,19 +504,22 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                             }
                         }
                     ]}
+                    {...restProps}
                 />
             )
         } else {
             const restProps = omit(omitFieldProps, ['placeholder']);
             return (
-                <Input
+                <AddonInput
+                    clazzPrefix={clazzPrefix}
                     className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
-                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                     placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                     addonBefore={buildEntryAddonDom(true)}
                     addonAfter={buildEntryAddonDom(false)}
-                    {...restProps}
-                    {...omitFieldProps}
+                    cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
+                    cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
+                    proField={proField}
+                    // @ts-ignore
                     onChange={(event: any)=> {
                         props?.fieldProps?.onChange?.(event);
                         if (event.isDefaultPrevented()) {
@@ -553,6 +534,8 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                         setIncomeExpress(event.target.value);
                     }}
                     data-cron-input-id={fieldId}
+                    {...restProps}
+                    {...omitFieldProps}
                 />
             );
         }
@@ -793,7 +776,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                 popup={buildPopupDom()}
                 popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
                     points: ['tl', 'bl'],
-                    offset: [0, 4],
+                    offset: [0, proField ? -20 : 4],
                 }}
                 popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
                 popupVisible={triggerOpen}
