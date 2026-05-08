@@ -54,4 +54,34 @@ export abstract class PropUtils {
         Object.keys(props).filter(key => DesignConst.FORWARD_FIELD_PROPS.includes(key)).forEach(key => result[key] = props[key]);
         return result;
     }
+
+    /**
+     * Calculate width based on ProForm width presets
+     *
+     * @param width The width value (number or preset string: xs/sm/md/lg/xl)
+     * @returns The calculated width in pixels, or undefined if no width specified
+     *
+     * @example
+     * ```ts
+     *  PropUtils.calculateWidth('xs');  // returns '104px'
+     *  PropUtils.calculateWidth('md');  // returns '328px'
+     *  PropUtils.calculateWidth(200);   // returns '200px'
+     *  ```
+     */
+    public static calculateWidth = (width?: number | string): string | undefined => {
+        if (!width) {
+            return undefined;
+        }
+        if (typeof width === 'number') {
+            return `${width}px`;
+        }
+        const widthMap: Record<string, string> = {
+            xs: '104px',
+            sm: '216px',
+            md: '328px',
+            lg: '440px',
+            xl: '552px',
+        };
+        return widthMap[width];
+    }
 }

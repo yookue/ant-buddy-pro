@@ -31,9 +31,7 @@ export default () => {
                 <MaskInput
                     name='foobar'
                     placeholder='Please input this field'
-                    fieldProps={{
-                        addonBefore: 'Alphanumeric',
-                    }}
+                    addonBefore='Alphanumeric'
                     pattern={/^[a-zA-Z0-9]+$/}
                 />
             </ProForm>

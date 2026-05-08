@@ -23,7 +23,6 @@ import {AddonInput} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
-    const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
     const [proField, setProField] = React.useState<boolean>(true);
 
     return (
@@ -35,15 +34,6 @@ export default () => {
                 submitter={false}
             >
                 <ProForm.Group>
-                    <ProFormSwitch
-                        label='Width Block'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: widthBlock,
-                            onChange: setWidthBlock,
-                        }}
-                    />
                     <ProFormSwitch
                         label='Use ProField'
                         checkedChildren='True'
@@ -62,7 +52,6 @@ export default () => {
                         placeholder='Please enter URL'
                         addonBefore='https://'
                         addonAfter='.com'
-                        widthBlock={widthBlock}
                         proField={proField}
                         tooltip='Website URL for display'
                         rules={[
@@ -82,7 +71,6 @@ export default () => {
                         placeholder='Please enter search content'
                         addonAfter={<Button type='primary' icon={<SearchOutlined/>}>Search</Button>}
                         paddingAfter={0}
-                        widthBlock={widthBlock}
                         proField={proField}
                     />
                     <AddonInput
@@ -91,7 +79,6 @@ export default () => {
                         placeholder='Please enter price'
                         addonBefore='$'
                         addonAfter='USD'
-                        widthBlock={widthBlock}
                         proField={proField}
                     />
                 </Space>

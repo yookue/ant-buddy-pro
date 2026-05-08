@@ -23,6 +23,7 @@ import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
+import {PropUtils} from '@/util/PropUtils';
 import {useFieldStyle} from './style';
 
 
@@ -80,13 +81,6 @@ export type AddonInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
     paddingAfter?: number;
 
     /**
-     * @description Whether to match the width of parent element or not
-     * @description.zh-CN 是否匹配父节点的宽度
-     * @description.zh-TW 是否匹配父節點的寬度
-     */
-    widthBlock?: boolean;
-
-    /**
      * @description Whether to use ProFormField instead of Antd
      * @description.zh-CN 是否使用 ProFormField 控件
      * @description.zh-TW 是否使用 ProFormField 控件
@@ -109,7 +103,6 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     const {
         cursorBefore = 'default',
         cursorAfter = 'default',
-        widthBlock = true,
         proField = true,
     } = props ?? {};
 
@@ -128,12 +121,13 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
 
     const fieldName = props?.name ?? props?.fieldProps?.name;
     const watchedValue = Form.useWatch(fieldName, formContext?.form);
+    const inputWidth = PropUtils.calculateWidth(props?.width ?? (typeof props?.fieldProps?.style?.width === 'string' ? props.fieldProps.style.width : undefined));
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'value', 'onChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'name', 'fieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
+        const restProps = !props ? {} : omit(props, ['className', 'name', 'fieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'paddingBefore', 'paddingAfter', 'proField']);
         return (
-            <div className={classNames(clazzPrefix, fieldStyle.hashId, (!widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.className ?? props?.fieldProps?.className)}>
+            <div className={classNames(clazzPrefix, fieldStyle.hashId, props?.className ?? props?.fieldProps?.className)}>
                 <ProForm.Item name={fieldName} {...restProps}>
                     <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                         {!!addonBeforeDom && (
@@ -146,6 +140,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                             name={fieldName}
                             value={watchedValue}
+                            style={!inputWidth ? undefined : {width: inputWidth}}
                             onChange={(event: any) => {
                                 if (fieldName) {
                                     formContext?.form?.setFieldValue(fieldName, event.target.value);
@@ -165,7 +160,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
         );
     } else {
         return (
-            <div className={classNames(clazzPrefix, fieldStyle.hashId, (!widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.className ?? props?.fieldProps?.className)}>
+            <div className={classNames(clazzPrefix, fieldStyle.hashId, props?.className ?? props?.fieldProps?.className)}>
                 <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                     {!!addonBeforeDom && (
                         <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
@@ -177,6 +172,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         name={props?.name ?? props?.fieldProps?.name}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                         value={watchedValue}
+                        style={!inputWidth ? undefined : {width: inputWidth}}
                         onChange={(event: any) => {
                             if (props?.name) {
                                 formContext?.form?.setFieldValue(props.name, event.target.value);

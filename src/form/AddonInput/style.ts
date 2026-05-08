@@ -23,24 +23,10 @@ import {PackageConst} from '@/constant/PackageConst';
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
-            display: 'inline-flex',
-
-            [`> ${token.antCls}-form-item`]: {
-                width: '100%',
-            },
-
-            [`&&-width-block`]: {
-                width: '100%',
-
-                [`${token.antCls}-form-item-control ${token.antCls}-form-item-control-input-content > ${token.antCls}-space-compact`]: {
-                    width: '100%',
-                },
-            },
-
             [`&-compact-before, &-compact-after`]: {
                 flex: 'none',
 
-                [`${token.antCls}-btn`]: {
+                [`> ${token.antCls}-btn`]: {
                     marginTop: -token.lineWidth,
                     marginBottom: -token.lineWidth,
                 }
@@ -58,7 +44,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     '&:focus': {
                         borderColor: token.colorError,
                         boxShadow: `0 0 0 2px ${token.colorErrorBg}`,
-                    },
+                    }
                 }
             }
         }

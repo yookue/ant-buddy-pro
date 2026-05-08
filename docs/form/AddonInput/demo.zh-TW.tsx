@@ -23,7 +23,6 @@ import {AddonInput} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
-    const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
     const [proField, setProField] = React.useState<boolean>(true);
 
     return (
@@ -35,15 +34,6 @@ export default () => {
                 submitter={false}
             >
                 <ProForm.Group>
-                    <ProFormSwitch
-                        label='匹配寬度'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: widthBlock,
-                            onChange: setWidthBlock,
-                        }}
-                    />
                     <ProFormSwitch
                         label='使用 ProField'
                         checkedChildren='是'
@@ -62,7 +52,6 @@ export default () => {
                         placeholder='請輸入網址'
                         addonBefore='https://'
                         addonAfter='.com'
-                        widthBlock={widthBlock}
                         proField={proField}
                         tooltip='用於顯示的網站 URL'
                         rules={[
@@ -82,7 +71,6 @@ export default () => {
                         placeholder='請輸入搜索內容'
                         addonAfter={<Button type='primary' icon={<SearchOutlined/>}>搜索</Button>}
                         paddingAfter={0}
-                        widthBlock={widthBlock}
                         proField={proField}
                     />
                     <AddonInput
@@ -91,7 +79,6 @@ export default () => {
                         placeholder='請輸入價格'
                         addonBefore='¥'
                         addonAfter='元'
-                        widthBlock={widthBlock}
                         proField={proField}
                     />
                 </Space>
