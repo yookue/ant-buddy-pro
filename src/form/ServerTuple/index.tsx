@@ -146,6 +146,7 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
         portProps = {
             nameSuffix: 'Port',
         },
+        widthBlock = true,
         proField = true,
         locale = intlType.locale,
     } = props ?? {};
@@ -213,7 +214,7 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+            className={classNames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), (widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact>

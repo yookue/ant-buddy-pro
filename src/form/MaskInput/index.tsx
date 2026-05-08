@@ -16,15 +16,17 @@
 
 
 import React from 'react';
+import {Input, type InputProps, type InputRef} from 'antd';
 import {FormContext} from 'antd/es/form/context';
-import {ElementUtils, NanoidUtils, RegexUtils} from '@unikue/ts-lang-utils';
+import {ProFormText} from '@ant-design/pro-form';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {ElementUtils, NanoidUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
-import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 
 
-export type MaskInputProps = Omit<AddonInputProps, 'clazzPrefix'> & {
+export type MaskInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -39,6 +41,14 @@ export type MaskInputProps = Omit<AddonInputProps, 'clazzPrefix'> & {
      * @description.zh-TW 允許值的正則表達式，滿足任意一個即視爲有效
      */
     pattern?: RegExp | RegExp[];
+
+    /**
+     * @description Whether to use ProFormField instead of Antd
+     * @description.zh-CN 是否使用 ProFormField 控件
+     * @description.zh-TW 是否使用 ProFormField 控件
+     * @default true
+     */
+    proField?: boolean;
 };
 
 
@@ -104,21 +114,34 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
         }
     };
 
-    const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'pattern', 'proField']);
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'onChange', 'onCompositionStart', 'onCompositionEnd']);
-    return (
-        <AddonInput
-            clazzPrefix={clazzPrefix}
-            fieldProps={{
-                className: classNames(clazzPrefix, props?.fieldProps?.className),
-                onChange: handleChange,
-                onCompositionStart: handleCompositionStart,
-                onCompositionEnd: handleCompositionEnd,
-                ...omitFieldProps,
-                'data-mask-input-id': fieldId,
-            }}
-            proField={proField}
-            {...restProps}
-        />
-    );
+    if (proField) {
+        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'pattern', 'proField']);
+        return (
+            <ProFormText
+                {...restProps}
+                fieldProps={{
+                    className: classNames(clazzPrefix, props?.fieldProps?.className),
+                    onChange: handleChange,
+                    onCompositionStart: handleCompositionStart,
+                    onCompositionEnd: handleCompositionEnd,
+                    ...omitFieldProps,
+                    'data-mask-input-id': fieldId,
+                }}
+            />
+        );
+    } else {
+        return (
+            <Input
+                className={classNames(clazzPrefix, props?.fieldProps?.className)}
+                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
+                placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
+                onChange={handleChange}
+                onCompositionStart={handleCompositionStart}
+                onCompositionEnd={handleCompositionEnd}
+                {...omitFieldProps}
+                data-mask-input-id={fieldId}
+            />
+        );
+    }
 };

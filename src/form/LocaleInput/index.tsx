@@ -674,6 +674,12 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         );
     };
 
+    // Calculate yOffset based on whether the form item has feedback
+    const calculateYOffset = (): number => {
+        const entryElement = document.querySelector<HTMLElement>(`[data-locale-input-id='${fieldId}']`);
+        return (entryElement && StyleUtils.hasFeedback(entryElement)) ? -20 : 4;
+    };
+
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
 
@@ -687,7 +693,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             popup={buildPopupDom()}
             popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
                 points: ['tl', 'bl'],
-                offset: [0, proField ? -20 : 4],
+                offset: [0, calculateYOffset()],
             }}
             popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}

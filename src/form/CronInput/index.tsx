@@ -783,6 +783,12 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     );
 };
 
+    // Calculate yOffset based on whether the form item has feedback
+    const calculateYOffset = (): number => {
+        const entryElement = document.querySelector<HTMLElement>(`[data-cron-input-id='${fieldId}']`);
+        return (entryElement && StyleUtils.hasFeedback(entryElement)) ? -20 : 4;
+    };
+
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
 
     return (
@@ -797,7 +803,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                 popup={buildPopupDom()}
                 popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
                     points: ['tl', 'bl'],
-                    offset: [0, proField ? -20 : 4],
+                    offset: [0, calculateYOffset()],
                 }}
                 popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
                 popupVisible={triggerOpen}

@@ -22,7 +22,7 @@ import {ChronoTuple} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
-    const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
+    const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
 
     return (
         <>

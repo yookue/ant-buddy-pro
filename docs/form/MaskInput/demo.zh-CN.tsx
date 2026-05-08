@@ -30,8 +30,7 @@ export default () => {
             >
                 <MaskInput
                     name='foobar'
-                    placeholder='请输入此项'
-                    addonBefore='数字或字母'
+                    placeholder='请输入数字或字母'
                     pattern={/^[a-zA-Z0-9]+$/}
                 />
             </ProForm>

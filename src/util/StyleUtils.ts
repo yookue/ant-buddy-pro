@@ -180,4 +180,47 @@ export abstract class StyleUtils {
         const result = Object.keys(styles).filter((key) => styles[key]).join(' ').trim().replace(/\s+/g, ' ');
         return result.length ? result : undefined;
     }
+
+    /**
+     * Checks if the given element or its parent has form feedback (error/success/warning)
+     *
+     * @param element The element to inspect (usually the input element or its container)
+     * @param prefix The CSS class prefix (default: 'ant')
+     * @returns true if the element or its parent has feedback status, false otherwise
+     *
+     * @example
+     * ```ts
+     *  // Check if an input field has validation feedback
+     *  const hasFeedback = StyleUtils.hasFeedback(inputElement);
+     *
+     *  // With custom prefix
+     *  const hasFeedback = StyleUtils.hasFeedback(inputElement, 'custom');
+     *  ```
+     */
+    public static hasFeedback = (element?: HTMLElement | null, prefix: string = 'ant'): boolean => {
+        if (!element) {
+            return false;
+        }
+        // Check if the element itself has feedback class
+        const feedbackClasses = [
+            `${prefix}-form-item-has-error`,
+            `${prefix}-form-item-has-success`,
+            `${prefix}-form-item-has-warning`,
+            `${prefix}-form-item-has-feedback`,
+        ];
+        // Check the element and its parents up to the form item level
+        let current: HTMLElement | null = element;
+        while (current) {
+            // Check if current element has feedback class
+            if (feedbackClasses.some(cls => current?.classList.contains(cls))) {
+                return true;
+            }
+            // Stop searching if we reach the form level
+            if (current.tagName === 'FORM' || current.classList.contains(`${prefix}-form`)) {
+                break;
+            }
+            current = current.parentElement;
+        }
+        return false;
+    }
 }

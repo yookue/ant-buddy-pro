@@ -23,7 +23,7 @@ import {ServerTuple, ConsoleUtils} from '@unikue/ant-buddy-pro';
 
 export default () => {
     const [form] = ProForm.useForm();
-    const [widthBlock, setWidthBlock] = React.useState<boolean>(false);
+    const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
 
     return (
         <>

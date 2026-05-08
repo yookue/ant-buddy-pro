@@ -23,6 +23,14 @@ import {PackageConst} from '@/constant/PackageConst';
 const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
+            [`&&-width-block`]: {
+                width: '100%',
+            },
+
+            [`> ${token.antCls}-form-item`]: {
+                width: '100%',
+            },
+
             [`&-compact-before, &-compact-after`]: {
                 flex: 'none',
 
