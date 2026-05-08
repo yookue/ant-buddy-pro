@@ -16,7 +16,8 @@
 
 
 import React from 'react';
-import {Checkbox, Form, type CheckboxProps, type TooltipProps} from 'antd';
+import {Checkbox, type CheckboxProps, type TooltipProps} from 'antd';
+import {FormContext} from 'antd/es/form/context';
 import {useIntl} from '@ant-design/pro-provider';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import omit from 'rc-util/es/omit';
@@ -130,6 +131,7 @@ export type ExactInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore
  * @author David Hsing
  */
 export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
+    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-exact-input';
     const intlType = useIntl();
 
@@ -143,6 +145,8 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
         },
         locale = intlType.locale,
     } = props ?? {};
+
+    const [checked, setChecked] = React.useState<boolean>(props?.checkProps?.defaultChecked ?? false);
 
     const generateCheckName = () => {
         if (checkProps.name) {
@@ -159,19 +163,23 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
             return undefined;
         }
         const checkboxName = generateCheckName();
-        const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'name', 'title', 'value']);
+        const omitCheckProps = !checkProps ? {} : omit(checkProps, ['namePrefix', 'nameSuffix', 'name', 'title', 'value', 'checked', 'onChange']);
         const tooltipTitle: string = ObjectUtils.firstNotNil(props?.localeProps?.exactMatch, intlLocales.get([locale, 'exactMatch']), intlLocales.get(['en_US', 'exactMatch']));
         const innerDom = (
-            <Form.Item
+            <Checkbox
+                title={props?.tooltipCtrl ? undefined : tooltipTitle}
+                checked={checked}
                 name={checkboxName}
-                noStyle={true}
-                valuePropName='checked'
-            >
-                <Checkbox
-                    title={props?.tooltipCtrl ? undefined : tooltipTitle}
-                    {...omitCheckProps}
-                />
-            </Form.Item>
+                onChange={(ev) => {
+                    ev.stopPropagation();
+                    setChecked(ev.target.checked);
+                    if (checkboxName) {
+                        formContext?.form?.setFieldValue(checkboxName, ev.target.checked);
+                    }
+                    checkProps?.onChange?.(ev);
+                }}
+                {...omitCheckProps}
+            />
         );
         if (!props?.tooltipCtrl) {
             return innerDom;

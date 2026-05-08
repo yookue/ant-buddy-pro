@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Input, Space, type InputProps, type InputRef} from 'antd';
+import {Form, Input, Space, type InputProps, type InputRef} from 'antd';
 import {FormContext} from 'antd/es/form/context';
-import {ProFormText, ProForm} from '@ant-design/pro-form';
+import {ProForm} from '@ant-design/pro-form';
 import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
@@ -126,27 +126,33 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
         paddingInline: ObjectUtils.isNil(props?.paddingAfter) ? undefined : props?.paddingAfter,
     };
 
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'id', 'placeholder', 'onChange']);
+    const fieldName = props?.name ?? props?.fieldProps?.name;
+    const watchedValue = Form.useWatch(fieldName, formContext?.form);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'value', 'onChange']);
 
     if (proField) {
         const restProps = !props ? {} : omit(props, ['className', 'name', 'fieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
         return (
             <div className={classNames(clazzPrefix, fieldStyle.hashId, (!widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.className ?? props?.fieldProps?.className)}>
-                <ProForm.Item {...restProps}>
+                <ProForm.Item name={fieldName} {...restProps}>
                     <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                         {!!addonBeforeDom && (
                             <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
                                 {addonBeforeDom}
                             </Space.Addon>
                         )}
-                        <ProFormText
+                        <Input
                             className={`${clazzPrefix}-input`}
-                            name={props?.name ?? props?.fieldProps?.name}
-                            noStyle={true}
-                            fieldProps={{
-                                placeholder: StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder,
-                                ...omitFieldProps,
+                            placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
+                            name={fieldName}
+                            value={watchedValue}
+                            onChange={(event: any) => {
+                                if (fieldName) {
+                                    formContext?.form?.setFieldValue(fieldName, event.target.value);
+                                }
+                                props?.fieldProps?.onChange?.(event);
                             }}
+                            {...omitFieldProps}
                         />
                         {!!addonAfterDom && (
                             <Space.Addon className={`${clazzPrefix}-compact-after`} style={addonAfterStyle}>
@@ -170,6 +176,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         className={`${clazzPrefix}-input`}
                         name={props?.name ?? props?.fieldProps?.name}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
+                        value={watchedValue}
                         onChange={(event: any) => {
                             if (props?.name) {
                                 formContext?.form?.setFieldValue(props.name, event.target.value);

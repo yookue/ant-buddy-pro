@@ -17,7 +17,7 @@
 
 import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {LocaleInput} from '@unikue/ant-buddy-pro';
+import {LocaleInput, ConsoleUtils} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -36,7 +36,8 @@ export default () => {
                         resetText: '重置',
                     }
                 }}
-                onFinish={async () => {
+                onFinish={async (values) => {
+                    ConsoleUtils.logTimestamp(false, false, 'LocaleInput', values, '提交的数据');
                     messageInvoker.success('您点击了提交按钮');
                 }}
             >

@@ -17,7 +17,7 @@
 
 import {message as messageApi} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {LocaleInput} from '@unikue/ant-buddy-pro';
+import {LocaleInput, ConsoleUtils} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -36,7 +36,8 @@ export default () => {
                         resetText: 'Reset',
                     }
                 }}
-                onFinish={async () => {
+                onFinish={async (values) => {
+                    ConsoleUtils.logTimestamp(false, false, 'LocaleInput', values, 'Submitted data');
                     messageInvoker.success(`Yep, you've clicked the submit button`);
                 }}
             >
