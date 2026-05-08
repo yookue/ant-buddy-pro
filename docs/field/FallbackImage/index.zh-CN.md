@@ -19,4 +19,10 @@ import {FallbackImage} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="FallbackImage"></API>
+| 属性          | 描述           | 类型                                                                                                      | 默认值                    |
+|-------------|--------------|---------------------------------------------------------------------------------------------------------|------------------------|
+| clazzPrefix | 组件的 CSS 类名前缀 | `string`                                                                                                | `'abp-fallback-image'` |
+| src         | 图片源          | `string \| Promise<string \| undefined> \| (() => string \| undefined \| Promise<string \| undefined>)` | -                      |
+| fallback    | 备用图片源        | `string \| Promise<string \| undefined> \| (() => string \| undefined \| Promise<string \| undefined>)` | -                      |
+
+> 注：其他属性继承自 rc-image 的 Image 组件。

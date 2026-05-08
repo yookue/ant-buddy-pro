@@ -19,4 +19,8 @@ import {MaskInput} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="MaskInput"></API>
+| 屬性          | 說明                    | 類型                   | 預設值                |
+|-------------|-----------------------|----------------------|--------------------|
+| clazzPrefix | 組件的 CSS 類名前綴          | `string`             | `'abp-mask-input'` |
+| pattern     | 允許值的正則表達式，滿足任意一個即視爲有效 | `RegExp \| RegExp[]` | -                  |
+| proField    | 是否使用 ProFormField 控件  | `boolean`            | `true`             |

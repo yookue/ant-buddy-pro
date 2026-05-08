@@ -27,4 +27,20 @@ import {CaptchaInput} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="CaptchaInput"></API>
+| 属性             | 说明                            | 类型                                                                 | 默认值                   |
+|----------------|-------------------------------|--------------------------------------------------------------------|-----------------------|
+| clazzPrefix    | 组件的 CSS 类名前缀                  | `string`                                                           | `'abp-captcha-input'` |
+| containerClazz | 容器 div 的 CSS 类名               | `string`                                                           | -                     |
+| containerStyle | 容器 div 的 CSS 样式               | `React.CSSProperties`                                              | -                     |
+| fieldRef       | 组件的 ref 句柄                    | `React.Ref<CaptchaInputRef \| null \| undefined>`                  | -                     |
+| autoValidate   | 是否自动校验 phoneName 和 dependName | `boolean`                                                          | -                     |
+| dependName     | 发送验证码之前要校验的字段名                | `NamePath`                                                         | -                     |
+| timerInterval  | 计时器的间隔，单位毫秒                   | `number`                                                           | `1000`                |
+| onGenerate     | 生成验证码时的回调函数                   | `(mobile?: string) => boolean \| void \| Promise<boolean \| void>` | -                     |
+| onTimer        | 计时变化时的回调函数                    | `(count: number) => void`                                          | -                     |
+| onTimerBegin   | 计时开始时的回调函数                    | `() => void`                                                       | -                     |
+| onTimerEnd     | 计时结束时的回调函数                    | `() => void`                                                       | -                     |
+| locale         | 组件的语言, e.g. 'zh_CN'           | `string`                                                           | -                     |
+| localeProps    | 多语言属性                         | `IntlLocaleProps`                                                  | -                     |
+
+> 注意: 其他属性继承自 ProFormCaptcha 组件。

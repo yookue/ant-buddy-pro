@@ -27,4 +27,20 @@ import {CaptchaInput} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="CaptchaInput"></API>
+| Property       | Description                                       | Type                                                               | Default               |
+|----------------|---------------------------------------------------|--------------------------------------------------------------------|-----------------------|
+| clazzPrefix    | The CSS class prefix of the component             | `string`                                                           | `'abp-captcha-input'` |
+| containerClazz | The CSS class name of the container div           | `string`                                                           | -                     |
+| containerStyle | The CSS style of the container div                | `React.CSSProperties`                                              | -                     |
+| fieldRef       | The ref of the component                          | `React.Ref<CaptchaInputRef \| null \| undefined>`                  | -                     |
+| autoValidate   | Whether to auto validate phoneName and dependName | `boolean`                                                          | -                     |
+| dependName     | The field name(s) to validate before sending      | `NamePath`                                                         | -                     |
+| timerInterval  | The timer interval, in milliseconds               | `number`                                                           | `1000`                |
+| onGenerate     | The callback function when generating captcha     | `(mobile?: string) => boolean \| void \| Promise<boolean \| void>` | -                     |
+| onTimer        | The callback function when the timer changed      | `(count: number) => void`                                          | -                     |
+| onTimerBegin   | The callback function when the timer begin        | `() => void`                                                       | -                     |
+| onTimerEnd     | The callback function when the timer end          | `() => void`                                                       | -                     |
+| locale         | The locale of the component                       | `string`                                                           | -                     |
+| localeProps    | The props of locale                               | `IntlLocaleProps`                                                  | -                     |
+
+> Note: Other properties are inherited from ProFormCaptcha component.

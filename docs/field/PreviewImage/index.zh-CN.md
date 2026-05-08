@@ -19,4 +19,10 @@ import {PreviewImage} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="PreviewImage"></API>
+| 属性          | 描述           | 类型                                                                                                      | 默认值                   |
+|-------------|--------------|---------------------------------------------------------------------------------------------------------|-----------------------|
+| clazzPrefix | 组件的 CSS 类名前缀 | `string`                                                                                                | `'abp-preview-image'` |
+| src         | 图片源          | `string \| Promise<string \| undefined> \| (() => string \| undefined \| Promise<string \| undefined>)` | -                     |
+| fallback    | 备用图片源        | `string \| Promise<string \| undefined> \| (() => string \| undefined \| Promise<string \| undefined>)` | -                     |
+
+> 注：其他属性继承自 Ant Design 的 <a href="https://ant.design/components/image" target="_blank">Image</a> 组件。

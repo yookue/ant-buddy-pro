@@ -31,4 +31,16 @@ import {ExactInput} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ExactInput"></API>
+| Property        | Description                                      | Type                                                                                          | Default              |
+|-----------------|--------------------------------------------------|-----------------------------------------------------------------------------------------------|----------------------|
+| clazzPrefix     | The CSS class prefix of the component            | `string`                                                                                      | `'abp-exact-input'`  |
+| addonPos        | The position of the addon                        | `'before' \| 'after' \| false`                                                                | `'after'`            |
+| compactAddon    | Whether to use compact mode for the addon        | `boolean`                                                                                     | `true`               |
+| checkable       | Whether to show the checkbox or not              | `boolean`                                                                                     | `true`               |
+| checkProps      | The properties of checkbox for addon             | `AddonCheckProps`                                                                             | -                    |
+| tooltipCtrl     | Whether to use Tooltip                           | `boolean`                                                                                     | -                    |
+| tooltipProps    | The props of Antd Tooltip                        | `Omit<TooltipProps, 'title'>`                                                                 | -                    |
+| locale          | The locale of the component, e.g. 'en_US'        | `string`                                                                                      | -                    |
+| localeProps     | The props of locale                              | `IntlLocaleProps`                                                                             | -                    |
+
+> Note: Other properties are inherited from AddonInput component.

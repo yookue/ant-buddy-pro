@@ -21,4 +21,11 @@ import {ThumbTuple} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="ThumbTuple"></API>
+| 屬性                | 描述                  | 類型                                              | 預設值                  |
+|-------------------|---------------------|-------------------------------------------------|----------------------|
+| clazzPrefix       | 組件的 CSS 類名前綴        | `string`                                        | `'abp-thumb-tuple'`  |
+| containerClazz    | 容器 div 的 CSS 類名     | `string`                                        | -                    |
+| containerStyle    | 容器 div 的 CSS 樣式     | `React.CSSProperties`                           | -                    |
+| spaceProps        | 間距的屬性               | `SpaceProps`                                    | -                    |
+| thumbLikeProps    | 喜歡的屬性               | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                    |
+| thumbDislikeProps | 不喜歡的屬性              | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                    |

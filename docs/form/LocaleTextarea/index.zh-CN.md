@@ -37,4 +37,19 @@ import {LocaleTextarea} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="LocaleTextarea"></API>
+| 属性                  | 说明                                            | 类型                      | 默认值                     |
+|---------------------|-----------------------------------------------|-------------------------|-------------------------|
+| clazzPrefix         | 组件的 CSS 类名前缀                                  | `string`                | `'abp-locale-textarea'` |
+| containerClazz      | 容器 div 的 CSS 类名                               | `string`                | -                       |
+| containerStyle      | 容器 div 的 CSS 样式                               | `React.CSSProperties`   | -                       |
+| tabsProps           | 标签页的属性                                        | `MixinTabsProps`        | -                       |
+| multilingual        | 是否启用多语言                                       | `boolean`               | `true`                  |
+| proField            | 默认文本框是否使用 ProFormField 控件                     | `boolean`               | `true`                  |
+| locale              | 组件的语言, e.g. 'zh_CN'                           | `string`                | -                       |
+| localeProps         | 多语言属性                                         | `IntlLocaleProps`       | -                       |
+| switchTextareaProps | 多语言输入项的属性(比 `switchQuickTags` 优先级高，更多自定义)     | `SwitchTextareaProps[]` | -                       |
+| switchQuickTags     | 多语言输入项的名称(比 `switchTextareaProps` 优先级低，更简单快捷) | `string[]`              | -                       |
+| switchShareProps    | 语言输入项的通用属性                                    | `SwitchShareProps`      | -                       |
+| switchCloneProps    | 语言输入项的克隆属性                                    | `SwitchCloneProps`      | -                       |
+| switchProField      | 语言输入项是否使用 ProFormField 控件                     | `boolean`               | `true`                  |
+| forceRender         | 是否强制渲染标签页内容                                   | `boolean`               | `true`                  |

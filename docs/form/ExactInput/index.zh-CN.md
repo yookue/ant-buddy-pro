@@ -31,4 +31,16 @@ import {ExactInput} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="ExactInput"></API>
+| 属性           | 说明                  | 类型                             | 默认值                 |
+|--------------|---------------------|--------------------------------|---------------------|
+| clazzPrefix  | 组件的 CSS 类名前缀        | `string`                       | `'abp-exact-input'` |
+| addonPos     | 文本框的附属节点位置          | `'before' \| 'after' \| false` | `'after'`           |
+| compactAddon | 文本框的附属节点是否使用紧凑模式    | `boolean`                      | `true`              |
+| checkable    | 是否显示复选框             | `boolean`                      | `true`              |
+| checkProps   | 复选框的属性              | `AddonCheckProps`              | -                   |
+| tooltipCtrl  | 是否使用 Tooltip        | `boolean`                      | -                   |
+| tooltipProps | Tooltip 属性          | `Omit<TooltipProps, 'title'>`  | -                   |
+| locale       | 组件的语言, e.g. 'zh_CN' | `string`                       | -                   |
+| localeProps  | 多语言属性               | `IntlLocaleProps`              | -                   |
+
+> 注意: 其他属性继承自 AddonInput 组件。

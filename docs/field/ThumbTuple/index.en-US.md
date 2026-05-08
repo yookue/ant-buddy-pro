@@ -21,4 +21,11 @@ import {ThumbTuple} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ThumbTuple"></API>
+| Property          | Description                             | Type                                            | Default             |
+|-------------------|-----------------------------------------|-------------------------------------------------|---------------------|
+| clazzPrefix       | The CSS class prefix of the component   | `string`                                        | `'abp-thumb-tuple'` |
+| containerClazz    | The CSS class name of the container div | `string`                                        | -                   |
+| containerStyle    | The CSS style of the container div      | `React.CSSProperties`                           | -                   |
+| spaceProps        | The props of the space                  | `SpaceProps`                                    | -                   |
+| thumbLikeProps    | The props of liking                     | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                   |
+| thumbDislikeProps | The props of disliking                  | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                   |

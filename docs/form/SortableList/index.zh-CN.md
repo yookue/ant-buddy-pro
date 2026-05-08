@@ -19,4 +19,13 @@ import {SortableList} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="SortableList"></API>
+| 属性                 | 说明                  | 类型                | 默认值                   |
+|--------------------|---------------------|-------------------|-----------------------|
+| clazzPrefix        | 组件的 CSS 类名前缀        | `string`          | `'abp-sortable-list'` |
+| allowTopBottom     | 是否允许移动到顶部和底部        | `boolean`         | `true`                |
+| allowUpDown        | 是否允许向上和向下移动         | `boolean`         | `true`                |
+| allowDefaultAction | 是否允许默认动作（复制和删除）     | `boolean`         | `true`                |
+| locale             | 组件的语言, e.g. 'zh_CN' | `string`          | -                     |
+| localeProps        | 多语言属性               | `IntlLocaleProps` | -                     |
+
+> 注意: 其他属性继承自 ProFormList 组件。

@@ -19,4 +19,12 @@ import {ChronoTuple} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="ChronoTuple"></API>
+| 属性             | 说明                   | 类型                    | 默认值                  |
+|----------------|----------------------|-----------------------|----------------------|
+| clazzPrefix    | 组件的 CSS 类名前缀         | `string`              | `'abp-chrono-tuple'` |
+| containerClazz | 容器 div 的 CSS 类名      | `string`              | -                    |
+| containerStyle | 容器 div 的 CSS 样式      | `React.CSSProperties` | -                    |
+| digitProps     | 数字组件的属性              | `ProFormDigitProps`   | -                    |
+| selectProps    | 选择组件的属性              | `ChronoSelectProps`   | -                    |
+| widthBlock     | 是否匹配父节点的宽度           | `boolean`             | `true`               |
+| proField       | 是否使用 ProFormField 控件 | `boolean`             | `true`               |

@@ -19,4 +19,15 @@ import {TooltipField} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="TooltipField"></API>
+| 屬性             | 描述                  | 類型                                                        | 預設值                   |
+|----------------|---------------------|-----------------------------------------------------------|-----------------------|
+| clazzPrefix    | 組件的 CSS 類名前綴        | `string`                                                  | `'abp-tooltip-field'` |
+| containerClazz | 容器 div 的 CSS 類名     | `string`                                                  | -                     |
+| containerStyle | 容器 div 的 CSS 樣式     | `React.CSSProperties`                                     | -                     |
+| field          | 字段節點                | `React.ReactNode \| (() => React.ReactNode \| undefined)` | -                     |
+| fieldClazz     | 包裹字段節點 div 的 CSS 類名 | `string`                                                  | -                     |
+| fieldStyle     | 包裹字段節點 div 的 CSS 樣式 | `React.CSSProperties`                                     | -                     |
+| tooltipCtrl    | 是否使用 Tooltip        | `boolean`                                                 | -                     |
+| tooltipProps   | Tooltip 屬性          | `TooltipProps`                                            | -                     |
+| wrapContainer  | 是否包裹容器 div          | `boolean`                                                 | `true`                |
+| wrapField      | 是否包裹字段節點            | `boolean`                                                 | `true`                |

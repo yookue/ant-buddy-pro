@@ -20,4 +20,13 @@ import {SpaceBound} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="SpaceBound"></API>
+| 屬性             | 描述              | 類型                    | 預設值                 |
+|----------------|-----------------|-----------------------|---------------------|
+| clazzPrefix    | 組件的 CSS 類名前綴    | `string`              | `'abp-space-bound'` |
+| containerClazz | 容器 div 的 CSS 類名 | `string`              | -                   |
+| containerStyle | 容器 div 的 CSS 樣式 | `React.CSSProperties` | -                   |
+| boundBorder    | 外邊界是否有邊框        | `boolean`             | -                   |
+| boundPad       | 外邊框是否填充內邊距      | `boolean`             | `true`              |
+| widthBlock     | 是否匹配父節點的寬度      | `boolean`             | -                   |
+
+> 注意: 其他屬性繼承自 Ant Design 的 <a href="https://ant.design/components/space" target="_blank">Space</a> 組件。

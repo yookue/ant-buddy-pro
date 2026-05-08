@@ -19,4 +19,15 @@ import {AvatarStamp} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="AvatarStamp"></API>
+| 属性             | 描述                   | 类型                                                         | 默认值                  |
+|----------------|----------------------|------------------------------------------------------------|----------------------|
+| clazzPrefix    | 组件的 CSS 类名前缀         | `string`                                                   | `'abp-avatar-stamp'` |
+| containerClazz | 容器 div 的 CSS 类名      | `string`                                                   | -                    |
+| containerStyle | 容器 div 的 CSS 样式      | `React.CSSProperties`                                      | -                    |
+| addon          | 附加节点                 | `React.ReactNode \| (() => React.ReactNode \| undefined)`  | -                    |
+| addonClazz     | 包裹附加节点 div 的 CSS 类名  | `string`                                                   | -                    |
+| addonStyle     | 包裹附加节点 div 的 CSS 样式  | `React.CSSProperties`                                      | -                    |
+| offset         | 包裹附加节点 div 的偏移, 单位像素 | `[number, number]`                                         | -                    |
+| placement      | 角标的位置                | `'topLeft' \| 'topRight' \| 'bottomLeft' \| 'bottomRight'` | `'bottomRight'`      |
+
+> 注：其他属性继承自 Ant Design 的 <a href="https://ant.design/components/avatar" target="_blank">Avatar</a> 组件。

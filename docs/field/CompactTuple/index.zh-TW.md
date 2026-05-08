@@ -23,4 +23,23 @@ import {CompactTuple} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="CompactTuple"></API>
+| 屬性                | 描述                  | 類型                                                        | 預設值                   |
+|-------------------|---------------------|-----------------------------------------------------------|-----------------------|
+| clazzPrefix       | 組件的 CSS 類名前綴        | `string`                                                  | `'abp-compact-tuple'` |
+| containerClazz    | 容器 div 的 CSS 類名     | `string`                                                  | -                     |
+| containerStyle    | 容器 div 的 CSS 樣式     | `React.CSSProperties`                                     | -                     |
+| spaceCompactProps | 緊湊間距的屬性             | `SpaceCompactProps`                                       | `{block: true}`       |
+| field             | 字段節點                | `React.ReactNode \| (() => React.ReactNode \| undefined)` | -                     |
+| fieldClazz        | 包裹字段節點 div 的 CSS 類名 | `string`                                                  | -                     |
+| fieldStyle        | 包裹字段節點 div 的 CSS 樣式 | `React.CSSProperties`                                     | -                     |
+| fieldBorder       | 字段節點是否有邊框           | `boolean`                                                 | -                     |
+| addon             | 附加節點                | `React.ReactNode \| (() => React.ReactNode \| undefined)` | -                     |
+| addonClazz        | 包裹附加節點 div 的 CSS 類名 | `string`                                                  | -                     |
+| addonStyle        | 包裹附加節點 div 的 CSS 樣式 | `React.CSSProperties`                                     | -                     |
+| addonBorder       | 附加節點是否有邊框           | `boolean`                                                 | -                     |
+| addonMarginLeft   | 附加節點的左外邊距           | `boolean \| number`                                       | -                     |
+| addonMarginRight  | 附加節點的右外邊距           | `boolean \| number`                                       | -                     |
+| addonPos          | 附屬節點位置              | `'before' \| 'after' \| false`                            | `'after'`             |
+| readonlyBorder    | 只讀模式下是否渲染邊框         | `boolean`                                                 | `false`               |
+| widthBlock        | 是否匹配父節點的寬度          | `boolean`                                                 | -                     |
+| presetStyle       | 預設樣式                | `'field-prior' \| 'addon-prior' \| false`                 | `'field-prior'`       |

@@ -19,4 +19,8 @@ import {MaskInput} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="MaskInput"></API>
+| Property        | Description                                                  | Type                                                                                          | Default              |
+|-----------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------|----------------------|
+| clazzPrefix     | The CSS class prefix of the component                        | `string`                                                                                      | `'abp-mask-input'`   |
+| pattern         | The allowed regex pattern, either is considered as valid     | `RegExp \| RegExp[]`                                                                          | -                    |
+| proField        | Whether to use ProFormField instead of Antd                  | `boolean`                                                                                     | `true`               |

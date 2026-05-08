@@ -19,4 +19,13 @@ import {ChronoSelect} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ChronoSelec"></API>
+| Property    | Description                                 | Type                 | Default                                                                         |
+|-------------|---------------------------------------------|----------------------|---------------------------------------------------------------------------------|
+| clazzPrefix | The CSS class prefix of the component       | `string`             | `'abp-chrono-select'`                                                           |
+| unitTypes   | The unit types                              | `ChronoUintType[]`   | `['millis', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years']` |
+| proField    | Whether to use ProFormField instead of Antd | `boolean`            | `true`                                                                          |
+| presetStyle | The preset style of the component           | `WithFalse<'addon'>` | -                                                                               |
+| locale      | The locale of the component, e.g. 'en_US'   | `string`             | -                                                                               |
+| localeProps | The props of locale                         | `IntlLocaleProps`    | -                                                                               |
+
+> Note: Other properties are inherited from ProFormSelect component.

@@ -21,4 +21,16 @@ import {RefreshImage} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="RefreshImage"></API>
+| Property       | Description                                       | Type                                                                                                    | Default               |
+|----------------|---------------------------------------------------|---------------------------------------------------------------------------------------------------------|-----------------------|
+| clazzPrefix    | The CSS class prefix of the component             | `string`                                                                                                | `'abp-refresh-image'` |
+| containerClazz | The CSS class name of the container div           | `string`                                                                                                | -                     |
+| containerStyle | The CSS style of the container div                | `React.CSSProperties`                                                                                   | -                     |
+| handCursor     | Whether to change cursor to pointer or not        | `boolean`                                                                                               | `true`                |
+| src            | The source of the image                           | `string \| Promise<string \| undefined> \| (() => string \| undefined \| Promise<string \| undefined>)` | -                     |
+| fallback       | The fallback source of the image                  | `string \| Promise<string \| undefined> \| (() => string \| undefined \| Promise<string \| undefined>)` | -                     |
+| onRefresh      | The callback function when the image is refreshed | `(currentSrc?: string, previousSrc?: string) => void`                                                   | -                     |
+| locale         | The locale of the component, e.g. 'en_US'         | `string`                                                                                                | -                     |
+| localeProps    | The props of locale                               | `IntlLocaleProps`                                                                                       | -                     |
+
+> Note: Other properties are inherited from Ant Design's <a href="https://ant.design/components/image" target="_blank">Image</a> component.

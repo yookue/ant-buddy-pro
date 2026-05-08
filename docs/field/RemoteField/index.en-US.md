@@ -21,4 +21,14 @@ import {RemoteField} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="RemoteField"></API>
+| Property       | Description                                      | Type                                                                   | Default              |
+|----------------|--------------------------------------------------|------------------------------------------------------------------------|----------------------|
+| clazzPrefix    | The CSS class prefix of the component            | `string`                                                               | `'abp-remote-field'` |
+| containerClazz | The CSS class name of the container div          | `string`                                                               | -                    |
+| containerStyle | The CSS style of the container div               | `React.CSSProperties`                                                  | -                    |
+| request        | The remote request                               | `(params?: any) => Promise<any>`                                       | -                    |
+| render         | The callback function after fetching remote data | `React.ReactNode \| ((outcome?: any) => React.ReactNode \| undefined)` | -                    |
+| fallback       | The fallback of the component                    | `React.ReactNode \| (() => React.ReactNode \| undefined)`              | `<Spin/>`            |
+| autoStart      | Whether auto start the fetching request          | `boolean`                                                              | `true`               |
+
+> Note: Other properties are inherited from Pro Components' ProFormFieldRemoteProps.

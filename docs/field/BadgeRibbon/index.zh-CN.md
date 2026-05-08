@@ -21,4 +21,11 @@ import {BadgeRibbon} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="BadgeRibbon"></API>
+| 属性             | 描述              | 类型                    | 默认值                  |
+|----------------|-----------------|-----------------------|----------------------|
+| clazzPrefix    | 组件的 CSS 类名前缀    | `string`              | `'abp-badge-ribbon'` |
+| containerClazz | 容器 div 的 CSS 类名 | `string`              | -                    |
+| containerStyle | 容器 div 的 CSS 样式 | `React.CSSProperties` | -                    |
+| transparent    | 是否透明色           | `boolean`             | -                    |
+
+> 注：其他属性继承自 Ant Design 的 <a href="https://ant.design/components/badge" target="_blank">Badge.Ribbon</a> 组件。

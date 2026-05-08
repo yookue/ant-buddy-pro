@@ -19,4 +19,13 @@ import {SortableList} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="SortableList"></API>
+| Property           | Description                                            | Type              | Default               |
+|--------------------|--------------------------------------------------------|-------------------|-----------------------|
+| clazzPrefix        | The CSS class prefix of the component                  | `string`          | `'abp-sortable-list'` |
+| allowTopBottom     | Whether to allow move to top and bottom                | `boolean`         | `true`                |
+| allowUpDown        | Whether to allow move up and down                      | `boolean`         | `true`                |
+| allowDefaultAction | Whether to allow the default actions (copy and delete) | `boolean`         | `true`                |
+| locale             | The locale of the component, e.g. 'en_US'              | `string`          | -                     |
+| localeProps        | The props of locale                                    | `IntlLocaleProps` | -                     |
+
+> Note: Other properties are inherited from ProFormList component.

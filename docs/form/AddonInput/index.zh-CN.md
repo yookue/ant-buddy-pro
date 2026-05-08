@@ -23,4 +23,16 @@ import {AddonInput} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="AddonInput"></API>
+| 属性            | 描述                   | 类型                                                        | 默认值                 |
+|---------------|----------------------|-----------------------------------------------------------|---------------------|
+| clazzPrefix   | 组件的 CSS 类名前缀         | `string`                                                  | `'abp-addon-input'` |
+| addonBefore   | 输入框前的内容              | `React.ReactNode \| (() => React.ReactNode \| undefined)` | -                   |
+| addonAfter    | 输入框后的内容              | `React.ReactNode \| (() => React.ReactNode \| undefined)` | -                   |
+| cursorBefore  | 输入框前的内容的鼠标指针         | `string`                                                  | `'default'`         |
+| cursorAfter   | 输入框后的内容的鼠标指针         | `string`                                                  | `'default'`         |
+| paddingBefore | 输入框前的内容间距            | `number`                                                  | -                   |
+| paddingAfter  | 输入框后的内容间距            | `number`                                                  | -                   |
+| widthBlock    | 是否匹配父节点的宽度           | `boolean`                                                 | `true`              |
+| proField      | 是否使用 ProFormField 控件 | `boolean`                                                 | `true`              |
+
+> 注意: 其他属性继承自 Ant Design Pro 的 ProForm.Item 组件。

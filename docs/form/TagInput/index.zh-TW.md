@@ -25,4 +25,24 @@ import {TagInput} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="TagInput"></API>
+| 屬性                  | 說明                     | 類型                                                                                                             | 預設值               |
+|---------------------|------------------------|----------------------------------------------------------------------------------------------------------------|-------------------|
+| clazzPrefix         | 組件的 CSS 類名前綴           | `string`                                                                                                       | `'abp-tag-input'` |
+| containerClazz      | 容器 div 的 CSS 類名        | `string`                                                                                                       | -                 |
+| containerStyle      | 容器 div 的 CSS 樣式        | `React.CSSProperties`                                                                                          | -                 |
+| fieldRef            | 組件的 ref 句柄             | `React.Ref<TagInputRef \| null \| undefined>`                                                                  | -                 |
+| request             | 遠程數據請求                 | `(params?: Record<string, any>, props?: Record<string, any>) => Promise<(string \| number \| TextTagProps)[]>` | -                 |
+| requestOptionPlace  | 使用 request 數據的同時是否保留數據 | `'before' \| 'after' \| 'override' \| false`                                                                   | -                 |
+| fulfilTagItems      | 已完成標簽的屬性或內容            | `(string \| number \| TextTagProps)[]`                                                                         | -                 |
+| fulfilTagProps      | 已完成標簽的通用屬性             | `Omit<TagProps, 'children'>`                                                                                   | -                 |
+| addable             | 是否可以添加標簽               | `boolean`                                                                                                      | `false`           |
+| addingInputProps    | 添加標簽的文本框的屬性            | `AddingInputProps`                                                                                             | -                 |
+| addingTagProps      | 添加標簽的屬性                | `TagProps`                                                                                                     | -                 |
+| compactMargin       | 是否使用緊凑邊距               | `boolean`                                                                                                      | -                 |
+| tweenOneAnim        | 是否啟用 tween-one 動畫      | `boolean`                                                                                                      | `true`            |
+| tweenOneProps       | tween-one 動畫的屬性        | `TweenOneGroupProps`                                                                                           | -                 |
+| warnExists          | 是否顯示標簽已存在的警告           | `boolean`                                                                                                      | `true`            |
+| proField            | 是否使用 ProFormField 控件   | `boolean`                                                                                                      | `true`            |
+| onTagContentsChange | 標簽内容變化時的回調函數           | `(contents?: (string \| number)[]) => void`                                                                    | -                 |
+| locale              | 組件的語言, e.g. 'zh_TW'    | `string`                                                                                                       | -                 |
+| localeProps         | 多語言屬性                  | `IntlLocaleProps`                                                                                              | -                 |

@@ -19,4 +19,13 @@ import {ChronoSelect} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="ChronoSelec"></API>
+| 屬性          | 說明                   | 類型                   | 預設值                                                                             |
+|-------------|----------------------|----------------------|---------------------------------------------------------------------------------|
+| clazzPrefix | 組件的 CSS 類名前綴         | `string`             | `'abp-chrono-select'`                                                           |
+| unitTypes   | 單位類型                 | `ChronoUintType[]`   | `['millis', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years']` |
+| proField    | 是否使用 ProFormField 控件 | `boolean`            | `true`                                                                          |
+| presetStyle | 預設樣式                 | `WithFalse<'addon'>` | -                                                                               |
+| locale      | 組件的語言, e.g. 'zh_TW'  | `string`             | -                                                                               |
+| localeProps | 多語言屬性                | `IntlLocaleProps`    | -                                                                               |
+
+> 注意: 其他屬性繼承自 ProFormSelect 組件。

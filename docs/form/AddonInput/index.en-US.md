@@ -23,4 +23,16 @@ import {AddonInput} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="AddonInput"></API>
+| Property       | Description                                    | Type                                                                      | Default              |
+|----------------|------------------------------------------------|---------------------------------------------------------------------------|----------------------|
+| clazzPrefix    | The CSS class prefix of the component          | `string`                                                                  | `'abp-addon-input'`  |
+| addonBefore    | The content before the input field             | `React.ReactNode \| (() => React.ReactNode \| undefined)`                 | -                    |
+| addonAfter     | The content after the input field              | `React.ReactNode \| (() => React.ReactNode \| undefined)`                 | -                    |
+| cursorBefore   | The cursor before the input field              | `string`                                                                  | `'default'`          |
+| cursorAfter    | The cursor after the input field               | `string`                                                                  | `'default'`          |
+| paddingBefore  | The padding of the addon before                | `number`                                                                  | -                    |
+| paddingAfter   | The padding of the addon after                 | `number`                                                                  | -                    |
+| widthBlock     | Whether to match the width of parent element   | `boolean`                                                                 | `true`               |
+| proField       | Whether to use ProFormField instead of Antd    | `boolean`                                                                 | `true`               |
+
+> Note: Other properties are inherited from Ant Design Pro's ProForm.Item component.

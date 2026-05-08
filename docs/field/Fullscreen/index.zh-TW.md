@@ -31,4 +31,14 @@ import {Fullscreen} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="Fullscreen"></API>
+| 屬性             | 描述                 | 類型                                                        | 預設值                        |
+|----------------|--------------------|-----------------------------------------------------------|----------------------------|
+| clazzPrefix    | 組件的 CSS 類名前綴       | `string`                                                  | `'abp-fullscreen'`         |
+| containerClazz | 容器 span 的 CSS 類名   | `string`                                                  | -                          |
+| containerStyle | 容器 span 的 CSS 樣式   | `React.CSSProperties`                                     | -                          |
+| onChange       | 全屏更改後的回調函數         | `(fullscreen?: boolean) => void`                          | -                          |
+| triggerFor     | 要切換全屏的 DOM 元素      | `Element \| null \| (() => Element \| null \| undefined)` | `document.documentElement` |
+| tooltipCtrl    | 是否使用 Tooltip       | `boolean`                                                 | -                          |
+| tooltipProps   | Tooltip 屬性         | `Omit<TooltipProps, 'title'>`                             | -                          |
+| locale         | 組件的語言，e.g. 'zh_TW' | `string`                                                  | -                          |
+| localeProps    | 多語言屬性              | `IntlLocaleProps`                                         | -                          |

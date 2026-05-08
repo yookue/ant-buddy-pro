@@ -19,4 +19,10 @@ import {DragModal} from '@unikue/ant-buddy-pro';
 
 ## 組件屬性
 
-<API id="DragModal"></API>
+| 屬性             | 描述           | 類型                | 預設值                                      |
+|----------------|--------------|-------------------|------------------------------------------|
+| clazzPrefix    | 組件的 CSS 類名前綴 | `string`          | `'abp-drag-modal'`                       |
+| draggable      | 模態對話框是否可拖動   | `boolean`         | `true`                                   |
+| draggableBound | 可拖動區域的邊界     | `DraggableBounds` | `{left: 0, top: 0, bottom: 0, right: 0}` |
+
+> 註：其他屬性繼承自 Ant Design 的 <a href="https://ant.design/components/modal" target="_blank">Modal</a> 組件。

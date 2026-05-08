@@ -21,4 +21,12 @@ import {StretchInput} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="StretchInput"></API>
+| Property        | Description                                                  | Type                          | Default               |
+|-----------------|--------------------------------------------------------------|-------------------------------|-----------------------|
+| clazzPrefix     | The CSS class prefix of the component                        | `string`                      | `'abp-stretch-input'` |
+| miniature       | The instead DOM when the input box is collapsed (lost focus) | `React.ReactNode`             | -                     |
+| stretchClazz    | The CSS class name when stretched                            | `string`                      | -                     |
+| stretchStyle    | The CSS style when stretched                                 | `React.CSSProperties`         | -                     |
+| triggerType     | The trigger type when stretch the collapsed DOM              | `'click' \| 'hover'`          | `'click'`             |
+| proField        | Whether to use ProFormField instead of Antd                  | `boolean`                     | -                     |
+| onStretchChange | The callback function when stretch changed                   | `(stretch?: boolean) => void` | -                     |

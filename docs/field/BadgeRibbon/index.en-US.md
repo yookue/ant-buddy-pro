@@ -21,4 +21,11 @@ import {BadgeRibbon} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="BadgeRibbon"></API>
+| Property       | Description                                 | Type                  | Default              |
+|----------------|---------------------------------------------|-----------------------|----------------------|
+| clazzPrefix    | The CSS class prefix of the component       | `string`              | `'abp-badge-ribbon'` |
+| containerClazz | The CSS class name of the container div     | `string`              | -                    |
+| containerStyle | The CSS style of the container div          | `React.CSSProperties` | -                    |
+| transparent    | Whether to use the transparent color or not | `boolean`             | -                    |
+
+> Note: Other properties are inherited from Ant Design's <a href="https://ant.design/components/badge" target="_blank">Badge.Ribbon</a> component.

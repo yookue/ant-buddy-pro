@@ -21,4 +21,14 @@ import {NotifyBadge} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="NotifyBadge"></API>
+| 属性              | 描述                  | 类型                                                           | 默认值                  |
+|-----------------|---------------------|--------------------------------------------------------------|----------------------|
+| clazzPrefix     | 组件的 CSS 类名前缀        | `string`                                                     | `'abp-notify-badge'` |
+| hyperlinkProps  | 超链接的属性              | `HyperlinkProps`                                             | -                    |
+| badgeContent    | 徽标的内容节点             | `React.ReactNode`                                            | `<BellOutlined/>`    |
+| badgeProps      | 徽标的属性               | `Omit<BadgeProps, 'children'>`                               | -                    |
+| dropdownEnabled | 是否允许下拉弹出层           | `boolean`                                                    | `true`               |
+| dropdownProps   | 下拉弹出层的属性            | `Omit<DropdownProps, 'popupRender' \| 'menu' \| 'children'>` | -                    |
+| tabsProps       | 标签页的属性              | `MixinTabsProps`                                             | -                    |
+| locale          | 组件的语言, e.g. 'zh_CN' | `string`                                                     | -                    |
+| localeProps     | 多语言属性               | `IntlLocaleProps`                                            | -                    |

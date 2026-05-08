@@ -49,4 +49,23 @@ import {LocaleInput} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="LocaleInput"></API>
+| 属性                | 说明                                        | 类型                                                            | 默认值                      |
+|-------------------|-------------------------------------------|---------------------------------------------------------------|--------------------------|
+| clazzPrefix       | 组件的 CSS 类名前缀                              | `string`                                                      | `'abp-locale-input'`     |
+| addon             | 默认文本框的附属节点内容                              | `React.ReactNode \| (() => React.ReactNode \| undefined)`     | `<TranslationOutlined/>` |
+| addonPos          | 默认文本框的附属节点位置                              | `'before' \| 'after' \| false`                                | `'after'`                |
+| defaultOpen       | 是否默认展开弹出层                                 | `boolean`                                                     | -                        |
+| triggerProps      | 弹出层的属性                                    | `Omit<TriggerProps, 'popup' \| 'popupVisible' \| 'children'>` | -                        |
+| multilingual      | 是否启用多语言                                   | `boolean`                                                     | `true`                   |
+| locale            | 组件的语言, e.g. 'zh_CN'                       | `string`                                                      | -                        |
+| popupInputProps   | 多语言输入项的属性(比 `popupQuickTags` 优先级高，更多自定义)  | `PopupInputProps[]`                                           | -                        |
+| popupQuickTags    | 多语言输入项的名称(比 `popupInputProps` 优先级低，更简单快捷) | `string[]`                                                    | -                        |
+| popupTagPos       | 语言输入项的标签位置                                | `'before' \| 'after' \| false`                                | `'before'`               |
+| popupAddon        | 语言输入项的附属节点内容                              | `React.ReactNode \| (() => React.ReactNode \| undefined)`     | `<SelectOutlined/>`      |
+| popupAddonPos     | 语言输入项的附属节点位置                              | `'before' \| 'after' \| false`                                | `'after'`                |
+| popupShareProps   | 语言输入项的通用属性                                | `PopupShareProps`                                             | -                        |
+| popupCloneProps   | 语言输入项的克隆属性                                | `PopupCloneProps`                                             | -                        |
+| popupConfirmProps | 语言输入项的动作确认属性                              | `PopupConfirmProps`                                           | -                        |
+| popupProField     | 语言输入项是否使用 ProFormField 控件                 | `boolean`                                                     | `true`                   |
+
+> 注意: 其他属性继承自 AddonInput 组件。

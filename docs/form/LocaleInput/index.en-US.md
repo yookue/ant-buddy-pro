@@ -49,4 +49,23 @@ import {LocaleInput} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="LocaleInput"></API>
+| Property          | Description                                                                                 | Type                                                          | Default                  |
+|-------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------|--------------------------|
+| clazzPrefix       | The CSS class prefix of the component                                                       | `string`                                                      | `'abp-locale-input'`     |
+| addon             | The DOM of the addon for the entry field                                                    | `React.ReactNode \| (() => React.ReactNode \| undefined)`     | `<TranslationOutlined/>` |
+| addonPos          | The position of the addon for the entry field                                               | `'before' \| 'after' \| false`                                | `'after'`                |
+| defaultOpen       | Whether the dropdown div is default open or not                                             | `boolean`                                                     | -                        |
+| triggerProps      | The properties of the dropdown div                                                          | `Omit<TriggerProps, 'popup' \| 'popupVisible' \| 'children'>` | -                        |
+| multilingual      | Whether to enable multilingual or not                                                       | `boolean`                                                     | `true`                   |
+| locale            | The locale of the component, e.g. 'en_US'                                                   | `string`                                                      | -                        |
+| popupInputProps   | The properties of locale items (Higher priority than `popupQuickTags`, more customizations) | `PopupInputProps[]`                                           | -                        |
+| popupQuickTags    | The tag of locale items (Lower priority than `popupInputProps`, more convenient)            | `string[]`                                                    | -                        |
+| popupTagPos       | The position of language tags for the locale items                                          | `'before' \| 'after' \| false`                                | `'before'`               |
+| popupAddon        | The DOM of language addon for the locale items                                              | `React.ReactNode \| (() => React.ReactNode \| undefined)`     | `<SelectOutlined/>`      |
+| popupAddonPos     | The position of language addons for the locale items                                        | `'before' \| 'after' \| false`                                | `'after'`                |
+| popupShareProps   | The share properties of the locale items                                                    | `PopupShareProps`                                             | -                        |
+| popupCloneProps   | The clone properties of the locale items                                                    | `PopupCloneProps`                                             | -                        |
+| popupConfirmProps | The confirm properties of the locale items                                                  | `PopupConfirmProps`                                           | -                        |
+| popupProField     | Whether to use ProFormField instead of Antd for the locale items                            | `boolean`                                                     | `true`                   |
+
+> Note: Other properties are inherited from AddonInput component.

@@ -29,4 +29,12 @@ import {SegmentRadio} from '@unikue/ant-buddy-pro';
 
 ## 组件属性
 
-<API id="SegmentRadio"></API>
+| 属性                  | 说明                                   | 类型                                                                                                                         | 默认值                   |
+|---------------------|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------|-----------------------|
+| clazzPrefix         | 组件的 CSS 类名前缀                         | `string`                                                                                                                   | `'abp-segment-radio'` |
+| containerClazz      | 容器 div 的 CSS 类名                      | `string`                                                                                                                   | -                     |
+| containerStyle      | 容器 div 的 CSS 样式                      | `React.CSSProperties`                                                                                                      | -                     |
+| request             | 远程数据请求                               | `(params?: Record<string, any>, props?: Record<string, any>) => Promise<(SegmentedRawOption \| SegmentedLabeledOption)[]>` | -                     |
+| requestOptionPlace  | 使用 `request` 数据的同时，是否保留 `options` 数据 | `'before' \| 'after' \| 'override' \| false`                                                                               | -                     |
+| proField            | 是否使用 ProFormField 控件                 | `boolean`                                                                                                                  | `true`                |
+| onOptionItemsChange | 选项变化时的回调函数                           | `(options?: (SegmentedRawOption \| SegmentedLabeledOption)[]) => void`                                                     | -                     |

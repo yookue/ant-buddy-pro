@@ -31,4 +31,14 @@ import {Fullscreen} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="Fullscreen"></API>
+| Property       | Description                                       | Type                                                      | Default                    |
+|----------------|---------------------------------------------------|-----------------------------------------------------------|----------------------------|
+| clazzPrefix    | The CSS class prefix of the component             | `string`                                                  | `'abp-fullscreen'`         |
+| containerClazz | The CSS class name of the container span          | `string`                                                  | -                          |
+| containerStyle | The CSS style of the container span               | `React.CSSProperties`                                     | -                          |
+| onChange       | The callback function when the fullscreen changed | `(fullscreen?: boolean) => void`                          | -                          |
+| triggerFor     | The target DOM element to toggle fullscreen       | `Element \| null \| (() => Element \| null \| undefined)` | `document.documentElement` |
+| tooltipCtrl    | Whether to use Tooltip                            | `boolean`                                                 | -                          |
+| tooltipProps   | The props of Antd Tooltip                         | `Omit<TooltipProps, 'title'>`                             | -                          |
+| locale         | The locale of the component, e.g. 'en_US'         | `string`                                                  | -                          |
+| localeProps    | The props of locale                               | `IntlLocaleProps`                                         | -                          |

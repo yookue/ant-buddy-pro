@@ -19,4 +19,12 @@ import {ChronoTuple} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-<API id="ChronoTuple"></API>
+| Property       | Description                                  | Type                  | Default              |
+|----------------|----------------------------------------------|-----------------------|----------------------|
+| clazzPrefix    | The CSS class prefix of the component        | `string`              | `'abp-chrono-tuple'` |
+| containerClazz | The CSS class name of the container div      | `string`              | -                    |
+| containerStyle | The CSS style of the container div           | `React.CSSProperties` | -                    |
+| digitProps     | The props of the digit component             | `ProFormDigitProps`   | -                    |
+| selectProps    | The props of the select component            | `ChronoSelectProps`   | -                    |
+| widthBlock     | Whether to match the width of parent element | `boolean`             | `true`               |
+| proField       | Whether to use ProFormField instead of Antd  | `boolean`             | `true`               |
