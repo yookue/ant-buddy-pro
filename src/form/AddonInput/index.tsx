@@ -128,7 +128,8 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     };
 
     const fieldName = props?.name ?? props?.fieldProps?.name;
-    const watchedValue = Form.useWatch(fieldName, formContext?.form);
+    const watchedValue = Form.useWatch(fieldName as string, formContext?.form);
+    const inputValue = !fieldName ? props?.fieldProps?.value : watchedValue;
     const inputWidth = !widthBlock ? undefined : (PropUtils.calculateWidth(props?.width ?? (typeof props?.fieldProps?.style?.width === 'string' ? props.fieldProps.style.width : undefined)));
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'value', 'onChange']);
 
@@ -147,7 +148,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                             className={`${clazzPrefix}-input`}
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                             name={fieldName}
-                            value={watchedValue}
+                            value={inputValue}
                             style={!inputWidth ? undefined : {width: inputWidth}}
                             onChange={(event: any) => {
                                 if (fieldName) {
@@ -179,7 +180,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         className={`${clazzPrefix}-input`}
                         name={props?.name ?? props?.fieldProps?.name}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
-                        value={watchedValue}
+                        value={inputValue}
                         style={!inputWidth ? undefined : {width: inputWidth}}
                         onChange={(event: any) => {
                             if (props?.name) {

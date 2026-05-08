@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Button, Switch, Space, message as messageApi} from 'antd';
+import {Button, Switch, Space, Input, message as messageApi} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {FieldTimeOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
@@ -511,33 +511,40 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         } else {
             const restProps = omit(omitFieldProps, ['placeholder']);
             return (
-                <AddonInput
-                    clazzPrefix={clazzPrefix}
-                    className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
-                    placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
-                    addonBefore={buildEntryAddonDom(true)}
-                    addonAfter={buildEntryAddonDom(false)}
-                    cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
-                    cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
-                    proField={proField}
-                    // @ts-ignore
-                    onChange={(event: any)=> {
-                        props?.fieldProps?.onChange?.(event);
-                        if (event.isDefaultPrevented()) {
-                            return;
-                        }
-                        if (validateRule && !!event.target.value) {
-                            const validate = cronValidate(event.target.value, validateOptions);
-                            if (validate.isError()) {
-                                messageInvoker.warning(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
-                            }
-                        }
-                        setIncomeExpress(event.target.value);
-                    }}
-                    data-cron-input-id={fieldId}
-                    {...restProps}
-                    {...omitFieldProps}
-                />
+                <div className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}>
+                    <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
+                        {addonPos === 'before' && (
+                            <Space.Addon className={`${clazzPrefix}-compact-before`} style={{cursor: 'pointer'}}>
+                                {buildEntryAddonDom(true)}
+                            </Space.Addon>
+                        )}
+                        <Input
+                            className={`${clazzPrefix}-input`}
+                            placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
+                            data-cron-input-id={fieldId}
+                            {...restProps}
+                            onChange={(event: any) => {
+                                props?.fieldProps?.onChange?.(event);
+                                if (event.isDefaultPrevented()) {
+                                    return;
+                                }
+                                if (validateRule && !!event.target.value) {
+                                    const validate = cronValidate(event.target.value, validateOptions);
+                                    if (validate.isError()) {
+                                        messageInvoker.warning(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
+                                    }
+                                }
+                                setIncomeExpress(event.target.value);
+                            }}
+                            {...omitFieldProps}
+                        />
+                        {addonPos === 'after' && (
+                            <Space.Addon className={`${clazzPrefix}-compact-after`} style={{cursor: 'pointer'}}>
+                                {buildEntryAddonDom(false)}
+                            </Space.Addon>
+                        )}
+                    </Space.Compact>
+                </div>
             );
         }
     };

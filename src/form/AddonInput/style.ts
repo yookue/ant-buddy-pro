@@ -28,7 +28,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             },
 
             [`> ${token.antCls}-form-item`]: {
-                width: '100%',
+                width: '100% !important',
             },
 
             [`&-compact-before, &-compact-after`]: {
