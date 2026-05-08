@@ -1,6 +1,7 @@
 ---
 title: ChronoTuple
 toc: content
+order: 20
 ---
 
 ## 組件說明

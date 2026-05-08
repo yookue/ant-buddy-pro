@@ -1,6 +1,7 @@
 ---
 title: Fullscreen
 toc: content
+order: 40
 ---
 
 ## 组件说明

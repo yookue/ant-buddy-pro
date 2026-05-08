@@ -1,6 +1,7 @@
 ---
 title: CardTabs
 toc: content
+order: 10
 ---
 
 ## 組件說明

@@ -1,6 +1,7 @@
 ---
 title: CaptchaInput
 toc: content
+order: 10
 ---
 
 ## 組件說明

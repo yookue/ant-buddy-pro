@@ -1,6 +1,7 @@
 ---
 title: ThumbToggle
 toc: content
+order: 70
 ---
 
 ## 组件说明

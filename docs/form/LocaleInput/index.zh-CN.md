@@ -1,6 +1,7 @@
 ---
 title: LocaleInput
 toc: content
+order: 55
 ---
 
 ## 组件说明

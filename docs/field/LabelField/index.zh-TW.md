@@ -1,6 +1,7 @@
 ---
 title: LabelField
 toc: content
+order: 45
 ---
 
 ## 組件說明

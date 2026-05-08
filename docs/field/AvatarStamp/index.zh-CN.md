@@ -1,6 +1,7 @@
 ---
 title: AvatarStamp
 toc: content
+order: 0
 ---
 
 ## 组件说明

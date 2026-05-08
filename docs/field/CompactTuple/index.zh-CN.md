@@ -1,6 +1,7 @@
 ---
 title: CompactTuple
 toc: content
+order: 10
 ---
 
 ## 组件说明

@@ -1,6 +1,7 @@
 ---
 title: StretchInput
 toc: content
+order: 90
 ---
 
 ## 組件說明

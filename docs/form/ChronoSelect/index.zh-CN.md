@@ -1,6 +1,7 @@
 ---
 title: ChronoSelect
 toc: content
+order: 15
 ---
 
 ## 组件说明

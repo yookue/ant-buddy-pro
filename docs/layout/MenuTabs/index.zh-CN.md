@@ -1,6 +1,7 @@
 ---
 title: MenuTabs
 toc: content
+order: 35
 ---
 
 ## 组件说明

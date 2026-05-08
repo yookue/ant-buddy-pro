@@ -1,6 +1,7 @@
 ---
 title: PageFooter
 toc: content
+order: 40
 ---
 
 ## Description

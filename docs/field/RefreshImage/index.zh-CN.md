@@ -1,6 +1,7 @@
 ---
 title: RefreshImage
 toc: content
+order: 60
 ---
 
 ## 组件说明
