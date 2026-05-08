@@ -16,7 +16,7 @@ toc: false
 您可以通過以下方式訪問我們：
 
 - Unikue: [https://unikue.cn](https://unikue.cn)
-- GitHub: [https://github.com/unikue](https://github.com/unikue)
+- GitHub: [https://github.com/unikueltd](https://github.com/unikueltd)
 
 ## 特別感謝
 
