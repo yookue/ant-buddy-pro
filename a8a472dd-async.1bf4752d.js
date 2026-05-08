@@ -1,2 +1,0 @@
-(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]||[]).push([["a8a472dd"],{a8a472dd:function(e,a,d){"use strict";d.d(a,"__esModule",{value:!0}),d.d(a,"texts",{enumerable:!0,get:function(){return l;}}),d("95b38dda");let l=[{value:"LabelField component, can display a field with a label.",paraId:0,tocIndex:0},{value:"import {LabelField} from '@unikue/ant-buddy-pro';\n",paraId:1,tocIndex:1}];}}]);
-//# sourceMappingURL=a8a472dd-async.1bf4752d.js.map
