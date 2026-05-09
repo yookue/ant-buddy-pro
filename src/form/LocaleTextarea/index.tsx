@@ -486,8 +486,6 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
         <LabelField
             label={props?.label}
             labelClazz={`${clazzPrefix}-label`}
-            layout={formContext?.layout === 'vertical' ? 'vertical' : 'horizontal'}
-            delimiter={formContext.colon}
             field={fieldDom}
             required={fieldRequired}
             widthBlock={true}

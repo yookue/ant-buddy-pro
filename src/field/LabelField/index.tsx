@@ -81,20 +81,19 @@ export type LabelFieldProps = React.PropsWithChildren<{
     labelStyle?: React.CSSProperties;
 
     /**
-     * @description The delimiter between the label and the content
+     * @description The colon between the label and the content
      * @description.zh-CN 标签和内容之间的分隔符
      * @description.zh-TW 標簽和內容之間的分隔符
      * @default ':'
      */
-    delimiter?: React.ReactNode;
+    colon?: React.ReactNode;
 
     /**
-     * @description The layouts when should display the delimiter
-     * @description.zh-CN 需要显示分隔符的布局样式
-     * @description.zh-TW 需要顯示分隔符的布局樣式
-     * @default ['horizontal', 'vertical']
+     * @description Whether to display the colon
+     * @description.zh-CN 是否需要显示分隔符
+     * @description.zh-TW 是否需要顯示分隔符
      */
-    delimiterInLayout?: AxisDirectionType[] | false;
+    labelColon?: boolean;
 
     /**
      * @description The field element
@@ -146,7 +145,7 @@ export type LabelFieldProps = React.PropsWithChildren<{
     widthBlock?: boolean;
 
     /**
-     * @description Whether to hide the label (and delimiter) when it is empty
+     * @description Whether to hide the label (and colon) when it is empty
      * @description.zh-CN 当标签为空时是否隐藏标签和分隔符
      * @description.zh-TW 當標簽為空時是否隱藏標簽和分隔符
      */
@@ -180,8 +179,8 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
 
     // Initialize the default props
     const {
-        delimiter = formContext?.colon ?? ':',
-        delimiterInLayout = ['horizontal', 'vertical'],
+        colon = formContext?.colon ?? ':',
+        labelColon = formContext?.layout === 'horizontal',
         layout = (formContext?.layout === 'vertical') ? 'vertical' : 'horizontal',
         presetStyle = 'field-prior',
     } = props ?? {};
@@ -200,7 +199,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
                 style={props?.labelStyle}
             >
                 {income}
-                {!delimiterInLayout ? undefined : (delimiterInLayout.includes(layout) ? delimiter : undefined)}
+                {labelColon ? colon : undefined}
                 {!!tooltipDom && (
                     <Tooltip title={tooltipDom}>
                         <QuestionCircleOutlined className={`${clazzPrefix}-tooltip`}/>
