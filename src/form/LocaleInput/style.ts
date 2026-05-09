@@ -42,13 +42,23 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     }
                 }
             },
-            [`&${token.componentCls}-popup-immutable ${token.componentCls}-popup-list ${token.componentCls}-popup-list-item`]: {
-                [`> ${token.antCls}-form-item`] :{
-                    marginBottom: 0,
+            [`&${token.componentCls}-popup-immutable ${token.componentCls}-popup-list ${token.componentCls}-popup-list-item ${token.componentCls}-pro-field > ${token.antCls}-form-item`]: {
+                marginBottom: 0,
+
+                [`${token.componentCls}-locale-tag`]: {
+                    backgroundColor: token.controlItemBgHover,
+                    borderColor: token.colorBorder,
+                    borderRadius: token.borderRadiusSM,
+                    color: token.colorTextTertiary,
+                    padding: `${token.paddingXXS}px ${token.paddingXS}px`,
+                },
+
+                [`${token.componentCls}-input`]: {
+                    cursor: 'default',
                 },
 
                 [`${token.componentCls}-locale-action`]: {
-                    color: token.colorTextDisabled,
+                    display: 'none'
                 }
             },
             [`${token.componentCls}-locale-item-readonly`]: {
