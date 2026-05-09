@@ -89,9 +89,17 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+            </ProForm>
+            <Divider/>
+            <ProForm
+                name='CronInput_demo.zh-CN.Test'
+                layout='vertical'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <CronInput
                     name='foobar'
+                    label='示例字段'
                     placeholder='请输入此项'
                     rules={[
                         {

@@ -55,9 +55,18 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+            </ProForm>
+            <Divider/>
+            <ProForm
+                form={form}
+                name='ExactInput_demo.en-US.Test'
+                layout='vertical'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ExactInput
                     name='foobar'
+                    label='Demo field'
                     placeholder='Please input this field'
                     checkProps={{
                         onChange: () => {

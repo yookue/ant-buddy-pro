@@ -24,12 +24,13 @@ export default () => {
         <>
             <ProForm
                 name='MaskInput_demo.en-US'
-                layout='horizontal'
+                layout='vertical'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
                 <MaskInput
                     name='foobar'
+                    label='Demo field'
                     placeholder='Please input alphanumeric'
                     pattern={/^[a-zA-Z0-9]+$/}
                 />

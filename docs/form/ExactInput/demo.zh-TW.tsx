@@ -55,9 +55,18 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+            </ProForm>
+            <Divider/>
+            <ProForm
+                form={form}
+                name='ExactInput_demo.zh-TW.Test'
+                layout='vertical'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ExactInput
                     name='foobar'
+                    label='示例字段'
                     placeholder='請輸入此項'
                     checkProps={{
                         onChange: () => {

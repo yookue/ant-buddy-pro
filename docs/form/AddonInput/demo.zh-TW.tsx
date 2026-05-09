@@ -57,7 +57,7 @@ export default () => {
             </ProForm>
             <Divider/>
             <ProForm
-                name='AddonInput_demo.en-US.Test'
+                name='AddonInput_demo.zh-TW.Test'
                 layout='vertical'
                 autoFocusFirstInput={false}
                 readonly={readonly}

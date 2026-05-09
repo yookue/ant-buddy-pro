@@ -194,13 +194,14 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
     const afterDom = buildAddonDom(false);
     const restProps = !props ? {} : omit(props, ['clazzPrefix', 'addonPos', 'compactAddon', 'checkable', 'checkProps', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
     return (
-        <AddonInput
-            clazzPrefix={clazzPrefix}
-            addonBefore={beforeDom}
-            addonAfter={afterDom}
-            paddingBefore={compactAddon ? 8 : undefined}
-            paddingAfter={compactAddon ? 8 : undefined}
-            {...restProps}
-        />
+        <div className={clazzPrefix}>
+            <AddonInput
+                addonBefore={beforeDom}
+                addonAfter={afterDom}
+                paddingBefore={compactAddon ? 8 : undefined}
+                paddingAfter={compactAddon ? 8 : undefined}
+                {...restProps}
+            />
+        </div>
     );
 };

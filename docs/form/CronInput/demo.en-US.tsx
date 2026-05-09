@@ -89,9 +89,17 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+            </ProForm>
+            <Divider/>
+            <ProForm
+                name='CronInput_demo.en-US.Test'
+                layout='vertical'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <CronInput
                     name='foobar'
+                    label='Demo field'
                     placeholder='Please input this field'
                     rules={[
                         {

@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {List, Popconfirm, Space, Tooltip, type InputProps, type FormRule} from 'antd';
+import {ConfigProvider, List, Popconfirm, Space, Tooltip, type InputProps, type FormRule} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
@@ -29,6 +29,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
 import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
+import {DesignUtils} from '@/util/DesignUtils';
 import {StyleUtils} from '@/util/StyleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
 import {intlLocales} from './intl-locales';
@@ -275,6 +276,7 @@ export type LocaleInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefor
  * @author David Hsing
  */
 export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-input';
@@ -305,6 +307,8 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
+    const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
+    const [triggerOffset, setTriggerOffset] = React.useState<number>(4);
     const compositionRef = React.useRef<boolean>(false);
     const closeTimerRef = React.useRef<NodeJS.Timeout | null>(null);
     // noinspection DuplicatedCode
@@ -319,6 +323,23 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
         }
     };
+
+    // Monitor ant-form-item-additional changes and update offset
+    // noinspection DuplicatedCode
+    React.useEffect(() => {
+        const entryElement = document.querySelector<HTMLElement>(`.${clazzPrefix}-entry-${fieldId}`);
+        if (!entryElement) {
+            return;
+        }
+        const updateOffset = () => {
+            setTriggerOffset(DesignUtils.hasFormAdditional(entryElement, configContext?.getPrefixCls('')) ? -20 : 4);
+        };
+        updateOffset();
+
+        const observer = new MutationObserver(updateOffset);
+        observer.observe(entryElement, {childList: true, subtree: true});
+        return () => observer.disconnect();
+    }, []);
 
     React.useLayoutEffect(() => {
         window.addEventListener('resize', handleWindowResize);
@@ -357,47 +378,49 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         if (proField) {
             const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'addon', 'addonPos', 'defaultOpen', 'triggerProps', 'multilingual', 'proField', 'locale', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupAddon', 'popupAddonPos', 'popupShareProps', 'popupCloneProps', 'popupConfirmProps', 'popupProField']);
             return (
-                <AddonInput
-                    clazzPrefix={clazzPrefix}
-                    addonBefore={buildEntryAddonDom(true)}
-                    addonAfter={buildEntryAddonDom(false)}
-                    cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
-                    cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
-                    fieldProps={{
-                        className: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className),
-                        ...omitFieldProps,
-                        'data-locale-input-id': fieldId,
-                    }}
-                    proField={proField}
-                    proFieldProps={{
-                        render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? (!multilingual ? dom : renderEntryReadonly(dom)),
-                        ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
-                    }}
-                    {...restProps}
-                />
+                <div className={clazzPrefix}>
+                    <AddonInput
+                        addonBefore={buildEntryAddonDom(true)}
+                        addonAfter={buildEntryAddonDom(false)}
+                        cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
+                        cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
+                        fieldProps={{
+                            className: classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className),
+                            ...omitFieldProps,
+                            'data-locale-input-id': fieldId,
+                        }}
+                        proField={proField}
+                        proFieldProps={{
+                            render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? (!multilingual ? dom : renderEntryReadonly(dom)),
+                            ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
+                        }}
+                        {...restProps}
+                    />
+                </div>
             )
         } else {
             const restProps = omit(omitFieldProps, ['name', 'id', 'placeholder', 'onChange']);
             return (
-                <AddonInput
-                    clazzPrefix={clazzPrefix}
-                    className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}
-                    placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
-                    addonBefore={buildEntryAddonDom(true)}
-                    addonAfter={buildEntryAddonDom(false)}
-                    cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
-                    cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
-                    proField={proField}
-                    // @ts-ignore
-                    onChange={(event: any) => {
-                        if (props?.name) {
-                            formContext?.form?.setFieldValue(props.name, event.target.value);
-                        }
-                        props?.fieldProps?.onChange?.(event);
-                    }}
-                    data-locale-input-id={fieldId}
-                    {...restProps}
-                />
+                <div className={clazzPrefix}>
+                    <AddonInput
+                        className={classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className)}
+                        placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
+                        addonBefore={buildEntryAddonDom(true)}
+                        addonAfter={buildEntryAddonDom(false)}
+                        cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
+                        cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
+                        proField={proField}
+                        // @ts-ignore
+                        onChange={(event: any) => {
+                            if (props?.name) {
+                                formContext?.form?.setFieldValue(props.name, event.target.value);
+                            }
+                            props?.fieldProps?.onChange?.(event);
+                        }}
+                        data-locale-input-id={fieldId}
+                        {...restProps}
+                    />
+                </div>
             );
         }
     };
@@ -536,7 +559,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 const itemDom = (
                     <AddonInput
                         key={tag}
-                        clazzPrefix={clazzPrefix}
                         name={rawName ? `${rawName}[${tag}]` : undefined}
                         addonBefore={beforeDom}
                         addonAfter={afterDom}
@@ -594,7 +616,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 const itemDom = (
                     <AddonInput
                         key={tag}
-                        clazzPrefix={clazzPrefix}
                         name={rawName ? `${rawName}[${tag}]` : undefined}
                         addonBefore={beforeDom}
                         addonAfter={afterDom}
@@ -670,13 +691,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         );
     };
 
-    // Calculate yOffset based on whether the form item has feedback
-    const calculateYOffset = (): number => {
-        const entryElement = document.querySelector<HTMLElement>(`[data-locale-input-id='${fieldId}']`);
-        return (entryElement && StyleUtils.hasFeedback(entryElement)) ? -20 : 4;
-    };
-
-    const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
 
     return (
@@ -689,7 +703,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             popup={buildPopupDom()}
             popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
                 points: ['tl', 'bl'],
-                offset: [0, calculateYOffset()],
+                offset: [0, triggerOffset],
             }}
             popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}

@@ -24,12 +24,13 @@ export default () => {
         <>
             <ProForm
                 name='MaskInput_demo.zh-TW'
-                layout='horizontal'
+                layout='vertical'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
                 <MaskInput
                     name='foobar'
+                    label='示例字段'
                     placeholder='請輸入數字或字母'
                     pattern={/^[a-zA-Z0-9]+$/}
                 />

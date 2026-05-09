@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {Button, Switch, Space, Input, message as messageApi} from 'antd';
+import {ConfigProvider, Button, Switch, Space, Input, message as messageApi} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {FieldTimeOutlined} from '@ant-design/icons';
 import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
@@ -33,6 +33,7 @@ import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
 import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
+import {DesignUtils} from '@/util/DesignUtils';
 import {StyleUtils} from '@/util/StyleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
 import {CronInputContext, type CronInputContextProps} from './context';
@@ -306,6 +307,7 @@ export type CronInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore'
 export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.RefAttributes<CronInputRef>> = React.forwardRef((props?: CronInputProps, ref?: any) => {
     CronInput.displayName = 'CronInput';
 
+    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const formContext = React.useContext(FormContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input';
@@ -329,6 +331,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     const [showSecond, setShowSecond] = React.useState<boolean>(props?.defaultShowSecond ?? false);
     const [showYear, setShowYear] = React.useState<boolean>(props?.defaultShowYear ?? false);
     const [triggerOpen, setTriggerOpen] = React.useState<boolean>(props?.defaultOpen ?? false);
+    const [triggerOffset, setTriggerOffset] = React.useState<number>(4);
     const closeTimerRef = React.useRef<NodeJS.Timeout | null>(null);
     const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
 
@@ -389,6 +392,23 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
             useNthWeekdayOfMonth: true,
         }
     };
+
+    // Monitor ant-form-item-additional changes and update offset
+    // noinspection DuplicatedCode
+    React.useEffect(() => {
+        const entryElement = document.querySelector<HTMLElement>(`.${clazzPrefix}-entry-${fieldId}`);
+        if (!entryElement) {
+            return;
+        }
+        const updateOffset = () => {
+            setTriggerOffset(DesignUtils.hasFormAdditional(entryElement, configContext?.getPrefixCls('')) ? -20 : 4);
+        };
+        updateOffset();
+
+        const observer = new MutationObserver(updateOffset);
+        observer.observe(entryElement, {childList: true, subtree: true});
+        return () => observer.disconnect();
+    }, []);
 
     React.useEffect(() => {
         if (!incomeExpress) {
@@ -468,50 +488,51 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         if (proField) {
             const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'rules', 'clazzPrefix', 'defaultOpen', 'triggerProps', 'tabsProps', 'secondPanelProps', 'validateRule', 'proField', 'locale', 'localeProps']);
             return (
-                <AddonInput
-                    clazzPrefix={clazzPrefix}
-                    addonBefore={buildEntryAddonDom(true)}
-                    addonAfter={buildEntryAddonDom(false)}
-                    cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
-                    cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
-                    fieldProps={{
-                        className: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className),
-                        ...omitFieldProps,
-                        onChange: (event: any) => {
-                            props?.fieldProps?.onChange?.(event);
-                            if (!event.isDefaultPrevented()) {
-                                setIncomeExpress(event.target.value);
-                            }
-                        },
-                        'data-cron-input-id': fieldId,
-                    }}
-                    proField={proField}
-                    proFieldProps={{
-                        render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? renderEntryReadonly(dom),
-                        ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
-                    }}
-                    rules={[
-                        ...(props?.rules ?? []),
-                        !validateRule ? {} : {
-                            validator: async (_rule: any, value: string) => {
-                                if (!value) {
-                                    return undefined;
+                <div className={clazzPrefix}>
+                    <AddonInput
+                        addonBefore={buildEntryAddonDom(true)}
+                        addonAfter={buildEntryAddonDom(false)}
+                        cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
+                        cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
+                        fieldProps={{
+                            className: classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className),
+                            ...omitFieldProps,
+                            onChange: (event: any) => {
+                                props?.fieldProps?.onChange?.(event);
+                                if (!event.isDefaultPrevented()) {
+                                    setIncomeExpress(event.target.value);
                                 }
-                                const validate = cronValidate(value, validateOptions);
-                                if (validate.isValid()) {
-                                    return Promise.resolve(ObjectUtils.firstNotNil(props?.localeProps?.validExpress, intlLocales.get([locale, 'validExpress']), intlLocales.get(['en_US', 'validExpress'])));
+                            },
+                            'data-cron-input-id': fieldId,
+                        }}
+                        proField={proField}
+                        proFieldProps={{
+                            render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? renderEntryReadonly(dom),
+                            ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
+                        }}
+                        rules={[
+                            ...(props?.rules ?? []),
+                            !validateRule ? {} : {
+                                validator: async (_rule: any, value: string) => {
+                                    if (!value) {
+                                        return undefined;
+                                    }
+                                    const validate = cronValidate(value, validateOptions);
+                                    if (validate.isValid()) {
+                                        return Promise.resolve(ObjectUtils.firstNotNil(props?.localeProps?.validExpress, intlLocales.get([locale, 'validExpress']), intlLocales.get(['en_US', 'validExpress'])));
+                                    }
+                                    return Promise.reject(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
                                 }
-                                return Promise.reject(ObjectUtils.firstNotNil(props?.localeProps?.invalidExpress, intlLocales.get([locale, 'invalidExpress']), intlLocales.get(['en_US', 'invalidExpress'])));
                             }
-                        }
-                    ]}
-                    {...restProps}
-                />
+                        ]}
+                        {...restProps}
+                    />
+                </div>
             )
         } else {
             const restProps = omit(omitFieldProps, ['placeholder']);
             return (
-                <div className={classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.className)}>
+                <div className={clazzPrefix}>
                     <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                         {addonPos === 'before' && (
                             <Space.Addon className={`${clazzPrefix}-compact-before`} style={{cursor: 'pointer'}}>
@@ -519,7 +540,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                             </Space.Addon>
                         )}
                         <Input
-                            className={`${clazzPrefix}-input`}
+                            className={classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className)}
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                             data-cron-input-id={fieldId}
                             {...restProps}
@@ -725,75 +746,69 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                         popupOpen: triggerOpen,
                     }}
                 >
-                <CardTabs
-                    items={tabItems}
-                    defaultActiveKey={props?.tabsProps?.defaultActiveKey ?? 'minute'}
-                    size={props?.tabsProps?.size ?? 'extra-small'}
-                    tabBarExtraContent={(
-                        <>
-                            {props?.tabsProps?.tabBarExtraContent}
-                            <If condition={allowSecond || allowYear || allowOkEcho} validation={false}>
-                                <div className={`${clazzPrefix}-tabs-extra`}>
-                                    <Space size={'middle'}>
-                                        <If condition={allowSecond && !entryImmutable} validation={false}>
-                                            <Switch
-                                                checked={showSecond}
-                                                size='small'
-                                                checkedChildren={ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second']))}
-                                                unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second']))}
-                                                onChange={(checked: boolean) => {
-                                                    setShowSecond(checked);
-                                                    const rawName = props?.name ?? props?.fieldProps?.name;
-                                                    if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
-                                                        formContext.form.validateFields([rawName]);
-                                                    }
-                                                }}
-                                            />
-                                        </If>
-                                        <If condition={allowYear && !entryImmutable} validation={false}>
-                                            <Switch
-                                                checked={showYear}
-                                                size='small'
-                                                checkedChildren={ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year']))}
-                                                unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year']))}
-                                                onChange={(checked: boolean) => {
-                                                    setShowYear(checked);
-                                                    const rawName = props?.name ?? props?.fieldProps?.name;
-                                                    if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
-                                                        formContext.form.validateFields([rawName]);
-                                                    }
-                                                }}
-                                            />
-                                        </If>
-                                        <If condition={allowOkEcho && !entryImmutable} validation={false}>
-                                            <Button
-                                                className={`${clazzPrefix}-ok-echo`}
-                                                size='small'
-                                                type='primary'
-                                                onClick={() => {
-                                                    echoToEntry();
-                                                    setTriggerOpen(false);
-                                                }}
-                                            >
-                                                {ObjectUtils.firstNotNil(props?.localeProps?.ok, intlLocales.get([locale, 'ok']), intlLocales.get(['en_US', 'ok']))}
-                                            </Button>
-                                        </If>
-                                    </Space>
-                                </div>
-                            </If>
-                        </>
-                    )}
-                    {...omitTabsProps}
-                />
-            </CronInputContext.Provider>
-        </div>
-    );
-};
-
-    // Calculate yOffset based on whether the form item has feedback
-    const calculateYOffset = (): number => {
-        const entryElement = document.querySelector<HTMLElement>(`[data-cron-input-id='${fieldId}']`);
-        return (entryElement && StyleUtils.hasFeedback(entryElement)) ? -20 : 4;
+                    <CardTabs
+                        items={tabItems}
+                        defaultActiveKey={props?.tabsProps?.defaultActiveKey ?? 'minute'}
+                        size={props?.tabsProps?.size ?? 'extra-small'}
+                        tabBarExtraContent={(
+                            <>
+                                {props?.tabsProps?.tabBarExtraContent}
+                                <If condition={allowSecond || allowYear || allowOkEcho} validation={false}>
+                                    <div className={`${clazzPrefix}-tabs-extra`}>
+                                        <Space size={'middle'}>
+                                            <If condition={allowSecond && !entryImmutable} validation={false}>
+                                                <Switch
+                                                    checked={showSecond}
+                                                    size='small'
+                                                    checkedChildren={ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second']))}
+                                                    unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.second, intlLocales.get([locale, 'second']), intlLocales.get(['en_US', 'second']))}
+                                                    onChange={(checked: boolean) => {
+                                                        setShowSecond(checked);
+                                                        const rawName = props?.name ?? props?.fieldProps?.name;
+                                                        if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
+                                                            formContext.form.validateFields([rawName]);
+                                                        }
+                                                    }}
+                                                />
+                                            </If>
+                                            <If condition={allowYear && !entryImmutable} validation={false}>
+                                                <Switch
+                                                    checked={showYear}
+                                                    size='small'
+                                                    checkedChildren={ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year']))}
+                                                    unCheckedChildren={ObjectUtils.firstNotNil(props?.localeProps?.year, intlLocales.get([locale, 'year']), intlLocales.get(['en_US', 'year']))}
+                                                    onChange={(checked: boolean) => {
+                                                        setShowYear(checked);
+                                                        const rawName = props?.name ?? props?.fieldProps?.name;
+                                                        if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
+                                                            formContext.form.validateFields([rawName]);
+                                                        }
+                                                    }}
+                                                />
+                                            </If>
+                                            <If condition={allowOkEcho && !entryImmutable} validation={false}>
+                                                <Button
+                                                    className={`${clazzPrefix}-ok-echo`}
+                                                    size='small'
+                                                    type='primary'
+                                                    onClick={() => {
+                                                        echoToEntry();
+                                                        setTriggerOpen(false);
+                                                    }}
+                                                >
+                                                    {ObjectUtils.firstNotNil(props?.localeProps?.ok, intlLocales.get([locale, 'ok']), intlLocales.get(['en_US', 'ok']))}
+                                                </Button>
+                                            </If>
+                                        </Space>
+                                    </div>
+                                </If>
+                            </>
+                        )}
+                        {...omitTabsProps}
+                    />
+                </CronInputContext.Provider>
+            </div>
+        );
     };
 
     const omitTriggerProps = !props?.triggerProps ? {} : omit(props?.triggerProps, ['action', 'builtinPlacements', 'getPopupContainer', 'popupAlign', 'popupClassName', 'stretch', 'onOpenChange']);
@@ -810,7 +825,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                 popup={buildPopupDom()}
                 popupAlign={(props?.triggerProps?.popupPlacement || props?.triggerProps?.popupAlign) ? props?.triggerProps?.popupAlign : {
                     points: ['tl', 'bl'],
-                    offset: [0, calculateYOffset()],
+                    offset: [0, triggerOffset],
                 }}
                 popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
                 popupVisible={triggerOpen}
