@@ -332,7 +332,9 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             return;
         }
         const updateOffset = () => {
-            setTriggerOffset(DesignUtils.hasFormAdditional(entryElement, configContext?.getPrefixCls('')) ? -20 : 4);
+            const prefixCls = configContext?.getPrefixCls('') ?? 'ant';
+            const additionalHeight = DesignUtils.getFormAdditionalHeight(entryElement, prefixCls);
+            setTriggerOffset(4 - additionalHeight);
         };
         updateOffset();
 

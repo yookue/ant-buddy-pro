@@ -93,4 +93,29 @@ export abstract class DesignUtils {
         // Check if any child element has the additional class
         return !!element.querySelector(`.${additionalClass}`);
     }
+
+    /**
+     * Gets the height of the form additional content element
+     *
+     * @param element The element to inspect (usually the form item container)
+     * @param prefix The CSS class prefix (default: 'ant')
+     * @returns the height of the additional content element, or 0 if not found
+     *
+     * @example
+     * ```ts
+     *  // Get the height of additional content (error message, help text, etc.)
+     *  const additionalHeight = DesignUtils.getFormAdditionalHeight(formItemElement);
+     *
+     *  // With custom prefix
+     *  const additionalHeight = DesignUtils.getFormAdditionalHeight(formItemElement, 'custom');
+     *  ```
+     */
+    public static getFormAdditionalHeight = (element?: HTMLElement | null, prefix: string = 'ant'): number => {
+        if (!element) {
+            return 0;
+        }
+        const additionalClass = `${prefix}-form-item-additional`;
+        const additionalElement = element.classList.contains(additionalClass) ? element : element.querySelector<HTMLElement>(`.${additionalClass}`);
+        return additionalElement?.offsetHeight ?? 0;
+    }
 }
