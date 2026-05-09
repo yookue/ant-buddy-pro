@@ -54,6 +54,45 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         boxShadow: `0 0 0 2px ${token.colorErrorBg}`,
                     }
                 }
+            },
+
+            // Readonly styles
+            [`&&-read-mode`]: {
+                [`& ${token.componentCls}-space`]: {
+                    background: 'transparent',
+                    border: 'none',
+                    boxShadow: 'none',
+                },
+
+                [`& ${token.componentCls}-input`]: {
+                    background: 'transparent',
+                    border: 'none',
+                    boxShadow: 'none',
+                    color: token.colorText,
+                    padding: 0,
+
+                    '&:hover': {
+                        background: 'transparent',
+                        border: 'none',
+                        boxShadow: 'none',
+                    },
+
+                    '&:focus': {
+                        background: 'transparent',
+                        border: 'none',
+                        boxShadow: 'none',
+                    },
+
+                    '&::placeholder': {
+                        color: token.colorTextDescription,
+                    },
+                },
+
+                [`& ${token.componentCls}-compact-before, & ${token.componentCls}-compact-after`]: {
+                    background: 'transparent',
+                    border: 'none',
+                    boxShadow: 'none',
+                }
             }
         }
     };

@@ -408,11 +408,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     const [confirmOpen, setConfirmOpen] = React.useState<boolean>();
 
-    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
-    // const [entryImmutable, setEntryImmutable] = React.useState<boolean | undefined>(false);
-    // React.useEffect(() =>{
-    //     setEntryImmutable(editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly);
-    // }, [props, editContext]);
+    const entryImmutable = editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || props?.disabled || props?.fieldProps?.disabled;
 
     const handleSetAsDefault = (tagId: string) => {
         const inspect = document.querySelector<HTMLInputElement>(`[data-locale-input-id='${fieldId}']`);

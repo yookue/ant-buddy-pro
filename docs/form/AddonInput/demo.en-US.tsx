@@ -17,23 +17,33 @@
 
 import React from 'react';
 import {Divider, Button, Space} from 'antd';
-import {SearchOutlined} from '@ant-design/icons';
+import {LinkOutlined, SearchOutlined} from '@ant-design/icons';
 import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
 import {AddonInput} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
+    const [readonly, setReadonly] = React.useState<boolean>(false);
     const [proField, setProField] = React.useState<boolean>(true);
 
     return (
         <>
             <ProForm
                 name='AddonInput_demo.en-US'
-                layout='vertical'
+                layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
                 <ProForm.Group>
+                    <ProFormSwitch
+                        label='Form Readonly'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: readonly,
+                            onChange: setReadonly,
+                        }}
+                    />
                     <ProFormSwitch
                         label='Use ProField'
                         checkedChildren='True'
@@ -44,14 +54,22 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+            </ProForm>
+            <Divider/>
+            <ProForm
+                name='AddonInput_demo.en-US.Test'
+                layout='vertical'
+                autoFocusFirstInput={false}
+                readonly={readonly}
+                submitter={false}
+            >
                 <Space direction='vertical' size='middle' style={{width: '100%'}}>
                     <AddonInput
                         name='website'
                         label='Website'
                         placeholder='Please enter URL'
                         addonBefore='https://'
-                        addonAfter='.com'
+                        addonAfter={<LinkOutlined/>}
                         proField={proField}
                         tooltip='Website URL for display'
                         rules={[
@@ -69,7 +87,15 @@ export default () => {
                         name='search'
                         label='Search'
                         placeholder='Please enter search content'
-                        addonAfter={<Button type='primary' icon={<SearchOutlined/>}>Search</Button>}
+                        addonAfter={(
+                            <Button
+                                type='primary'
+                                icon={<SearchOutlined/>}
+                                disabled={readonly}
+                            >
+                                Search
+                            </Button>
+                        )}
                         paddingAfter={0}
                         proField={proField}
                     />

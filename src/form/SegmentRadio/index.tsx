@@ -133,7 +133,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
         props?.onOptionItemsChange?.(optionItems);
     }, [optionItems]);
 
-    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+    const entryImmutable = editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || props?.disabled || props?.fieldProps?.disabled;
     const omitFieldProps = !props?.fieldProps ? {} : omit(props.fieldProps, ['options', 'disabled']);
 
     if (proField) {

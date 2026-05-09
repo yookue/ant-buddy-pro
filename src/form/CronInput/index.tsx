@@ -412,7 +412,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         setYearExpress(express.years);
     }, [incomeExpress]);
 
-    const entryImmutable = editContext.mode === 'read' || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
+    const entryImmutable = editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.fieldProps?.readOnly || props?.proFieldProps?.readonly || props?.disabled || props?.fieldProps?.disabled;
 
     const echoToEntry = () => {
         if (entryImmutable) {
