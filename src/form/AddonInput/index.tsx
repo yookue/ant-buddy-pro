@@ -145,7 +145,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'readOnly', 'disabled', 'value', 'onChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'name', 'fieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'cursorBefore', 'cursorAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
+        const restProps = !props ? {} : omit(props, ['className', 'name', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'cursorBefore', 'cursorAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
         return (
             <div className={classNames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
                 <ProForm.Item name={fieldName} {...restProps}>
