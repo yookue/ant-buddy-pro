@@ -24,27 +24,37 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}-container`]: {
             width: '100%',
+
             [`> ${token.subComponentCls}`]: {
+                [`${token.antCls}-tabs-tab`]: {
+                    paddingLeft: `${token.paddingSM}px !important`,
+                    paddingRight: `${token.paddingSM}px !important`,
+                },
+
                 [`&${token.subComponentCls}-top ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     [`${token.componentCls}, ${token.componentCls}-item`]: {
                         borderTopLeftRadius: 0,
                     }
                 },
+
                 [`&${token.subComponentCls}-top-end ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     [`${token.componentCls}, ${token.componentCls}-item`]: {
                         borderTopRightRadius: 0,
                     }
                 },
+
                 [`&${token.subComponentCls}-bottom ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     [`${token.componentCls}:not(${token.componentCls}-pro-field), ${token.componentCls}-item:not(${token.componentCls}-item-pro-field)`]: {
                         borderBottomLeftRadius: 0,
                     }
                 },
+
                 [`&${token.subComponentCls}-bottom-end ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     [`${token.componentCls}:not(${token.componentCls}-pro-field), ${token.componentCls}-item:not(${token.componentCls}-item-pro-field)`]: {
                         borderBottomRightRadius: 0,
                     }
                 },
+
                 [`&${token.subComponentCls}-left ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     paddingLeft: 1,
                     [`${token.componentCls}, ${token.componentCls}-item`]: {
@@ -52,6 +62,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         borderBottomLeftRadius: 0,
                     }
                 },
+
                 [`&${token.subComponentCls}-right ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     paddingRight: 1,
                     [`${token.componentCls}, ${token.componentCls}-item`]: {

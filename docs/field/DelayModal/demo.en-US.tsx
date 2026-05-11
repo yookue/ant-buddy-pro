@@ -125,7 +125,7 @@ export default () => {
                     title: 'DelayModal',
                     children: `Oops! This is a message from modalProps. ${RandomUtils.randomString(6)}`,
                     closable: false,
-                    maskClosable: false,
+                    mask: {closable: false},
                     okText: 'OK',
                     cancelText: 'Cancel',
                 }}
@@ -133,7 +133,7 @@ export default () => {
                     title: 'DelayModal',
                     content: `Oops! This is a message from modalFunProps. ${RandomUtils.randomString(6)}`,
                     closable: false,
-                    maskClosable: false,
+                    mask: {closable: false},
                     okText: 'OK',
                     cancelText: 'Cancel',
                 }}

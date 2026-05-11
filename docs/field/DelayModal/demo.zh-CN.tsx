@@ -125,7 +125,7 @@ export default () => {
                     title: 'DelayModal',
                     children: `咦，这是一条来自 modalProps 的消息。${RandomUtils.randomString(6)}`,
                     closable: false,
-                    maskClosable: false,
+                    mask: {closable: false},
                     okText: '确定',
                     cancelText: '取消',
                 }}
@@ -133,7 +133,7 @@ export default () => {
                     title: 'DelayModal',
                     content: `咦，这是一条来自 modalFunProps 的消息。${RandomUtils.randomString(6)}`,
                     closable: false,
-                    maskClosable: false,
+                    mask: {closable: false},
                     okText: '确定',
                     cancelText: '取消',
                 }}

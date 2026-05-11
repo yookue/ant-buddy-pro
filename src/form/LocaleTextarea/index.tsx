@@ -468,7 +468,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                     },
                     ...buildSwitchItems(),
                 ]}
-                size={props?.tabsProps?.size ?? 'extra-small'}
+                size={props?.tabsProps?.size ?? 'small'}
                 contentBorder={props?.tabsProps?.contentBorder ?? false}
                 presetStyle={props?.tabsProps?.presetStyle ?? 'padding-0'}
                 {...omitTabsProps}
