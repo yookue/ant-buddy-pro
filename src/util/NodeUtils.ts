@@ -32,7 +32,7 @@ export abstract class NodeUtils {
      *
      * @returns the string representation of the node
      */
-    public static toString(node?: React.ReactNode | (() => React.ReactNode | undefined) | null): string | undefined {
+    public static toString(node?: React.ReactNode | null | (() => React.ReactNode | null | undefined)): string | undefined {
         if (!node) {
             return undefined;
         }

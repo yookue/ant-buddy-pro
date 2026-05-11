@@ -204,7 +204,7 @@ export abstract class IconUtils {
      *
      * @returns the menu items that has been resolved icons from string to component
      */
-    public static resolveMenuIcons(items?: MenuDataItem[]): MenuDataItem[] | undefined {
+    public static resolveMenuIcons(items?: MenuDataItem[] | null): MenuDataItem[] | undefined {
         if (!items || items.length === 0) {
             return undefined;
         }

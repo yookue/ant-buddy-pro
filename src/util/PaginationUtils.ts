@@ -30,7 +30,7 @@ export abstract class PaginationUtils {
      * @param actionRef The actionRef of the table
      * @param currentIndex The index of the row
      */
-    public static calculateRowSerial = (actionRef?: React.RefObject<ActionType | undefined>, currentIndex?: number): number => {
+    public static calculateRowSerial = (actionRef?: React.RefObject<ActionType | null | undefined>, currentIndex?: number): number => {
         if (!actionRef?.current || currentIndex === undefined || currentIndex < 0) {
             return -1;
         }
@@ -42,7 +42,7 @@ export abstract class PaginationUtils {
      * @param actionRef The actionRef of the table
      * @param deletedCount The number of deleted items
      */
-    public static reloadAfterDelete = (actionRef?: React.RefObject<ActionType | undefined>, deletedCount: number = 1): void => {
+    public static reloadAfterDelete = (actionRef?: React.RefObject<ActionType | null | undefined>, deletedCount: number = 1): void => {
         if (!actionRef?.current) {
             return;
         }

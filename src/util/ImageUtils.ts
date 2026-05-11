@@ -30,7 +30,7 @@ export abstract class ImageUtils {
      *
      * @returns the detected image src for the given param
      */
-    public static detectSource = (param?: string | Promise<string | undefined> | (() => string | undefined | Promise<string | undefined>), callback?: ((value?: string) => void)): string | undefined => {
+    public static detectSource = (param?: string | null | Promise<string | null | undefined> | (() => string | null | undefined | Promise<string | null | undefined>), callback?: ((value?: string) => void)): string | undefined => {
         if (!param) {
             return undefined;
         }
