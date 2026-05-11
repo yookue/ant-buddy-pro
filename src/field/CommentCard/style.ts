@@ -33,7 +33,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 display: 'inline-block',
                 flexShrink: 0,
                 marginRight: token.marginSM,
-                cursor: 'pointer',
 
                 img: {
                     width: 32,
@@ -60,12 +59,6 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         fontSize: token.fontSizeSM,
                         lineHeight: token.lineHeightSM,
                         marginRight: token.marginXS,
-
-                        '> a, > span': {
-                            color: token.colorTextSecondary,
-                            fontSize: token.fontSizeSM,
-                            lineHeight: token.lineHeightSM,
-                        },
                     },
 
                     [`&-time`]: {
