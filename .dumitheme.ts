@@ -15,7 +15,7 @@
  */
 
 
-import {defineThemeConfig} from 'dumi-theme-antd/dist/defineThemeConfig';
+import {defineThemeConfig} from '@byte.n/dumi-theme-antd/dist/defineThemeConfig';
 
 
 export default defineThemeConfig({

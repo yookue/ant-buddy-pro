@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import HomeBaseLayout from 'dumi-theme-antd/dist/builtins/HomeBaseLayout';
+import HomeBaseLayout from '@byte.n/dumi-theme-antd/dist/builtins/HomeBaseLayout';
 import {Helmet} from 'react-helmet-async';
 import dumiTheme from '#/.dumitheme';
 
