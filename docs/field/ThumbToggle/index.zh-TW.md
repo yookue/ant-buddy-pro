@@ -10,7 +10,7 @@ ThumbToggle 用於顯示壹個帶計數的拇指圖標，並可以切換。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {ThumbToggle} from '@unikue/ant-buddy-pro';
 ```
 

@@ -12,7 +12,7 @@ ThumbTuple 用於顯示兩個拇指圖標和計數。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {ThumbTuple} from '@unikue/ant-buddy-pro';
 ```
 

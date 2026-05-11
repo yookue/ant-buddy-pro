@@ -15,17 +15,16 @@
  */
 
 import React from 'react';
-import {Segmented, type SegmentedProps} from 'antd';
-import {FormContext} from 'antd/es/form/context';
-import {type SegmentedLabeledOption} from 'antd/es/segmented';
+import {Form, Segmented, type SegmentedProps} from 'antd';
+import {type SegmentedLabeledOption} from 'antd/lib/segmented';
 import {ProForm} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/lib/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
 import {useDebounceFn} from '@ant-design/pro-utils';
-import {pickProFormItemProps} from '@ant-design/pro-utils/es/pickProFormItemProps';
+import {pickProFormItemProps} from '@ant-design/pro-utils/lib/pickProFormItemProps';
+import {type SegmentedRawOption} from '@rc-component/segmented';
+import {omit} from '@rc-component/util';
 import classNames from 'classnames';
-import {type SegmentedRawOption} from 'rc-segmented';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
 
@@ -92,7 +91,7 @@ export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'chi
  * @author David Hsing
  */
 export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-segment-radio';
 
@@ -154,12 +153,11 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
         return (
             <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
                 <Segmented
-                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                     options={optionItems ?? []}
                     disabled={entryImmutable}
                     onChange={(event: any) => {
                         if (props?.name) {
-                            formContext?.form?.setFieldValue(props.name, event.target.value);
+                            form?.setFieldValue(props.name, event.target.value);
                         }
                         props?.fieldProps?.onChange?.(event);
                     }}

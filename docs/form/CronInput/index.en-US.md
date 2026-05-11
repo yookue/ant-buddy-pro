@@ -10,7 +10,7 @@ CronInput, provides a capability that displaying a text input box with a dropdow
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {CronInput} from '@unikue/ant-buddy-pro';
 ```
 

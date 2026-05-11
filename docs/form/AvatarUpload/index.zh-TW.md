@@ -10,7 +10,7 @@ AvatarUpload，可以顯示壹個頭像，並支持上傳和裁剪。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {AvatarUpload} from '@unikue/ant-buddy-pro';
 ```
 

@@ -10,7 +10,7 @@ CipherStrength，是一個可以通過進度條和文字來顯示密碼強度的
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {CipherStrength} from '@unikue/ant-buddy-pro';
 ```
 

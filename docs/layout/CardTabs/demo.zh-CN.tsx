@@ -19,11 +19,11 @@ import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch} from '@ant-design/pro-form';
 import {CardTabs, type PaddingSpaceType} from '@unikue/ant-buddy-pro';
-import {type TabsPosition} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
-    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
+    const [tabPlacement, setTabPlacement] = React.useState<TabPlacement>('top');
     const [tabBorder, setTabBorder] = React.useState<boolean>(true);
     const [contentBorder, setContentBorder] = React.useState<boolean>(true);
     const [inkBar, setInkBar] = React.useState<boolean>(true);
@@ -42,17 +42,17 @@ export default () => {
                     label='Tab 位置'
                     radioType='button'
                     fieldProps={{
-                        value: tabPos,
+                        value: tabPlacement,
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setTabPos(event.target?.value);
+                            setTabPlacement(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '上', value: 'top'},
                         {label: '下', value: 'bottom'},
-                        {label: '左', value: 'left'},
-                        {label: '右', value: 'right'},
+                        {label: '左', value: 'start'},
+                        {label: '右', value: 'end'},
                         {label: '上-末尾', value: 'top-end'},
                         {label: '下-末尾', value: 'bottom-end'},
                     ]}
@@ -122,7 +122,7 @@ export default () => {
             </ProForm>
             <Divider/>
             <CardTabs
-                tabPosition={tabPos}
+                tabPlacement={tabPlacement}
                 tabBorder={tabBorder}
                 contentBorder={contentBorder}
                 inkBar={inkBar}

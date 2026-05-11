@@ -19,7 +19,7 @@ import React from 'react';
 import {Divider} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {SectionTitle, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type TitlePresetStyle} from 'src/layout/SectionTitle';
+import {type TitlePresetStyle} from '@/layout/SectionTitle';
 
 
 export default () => {

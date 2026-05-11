@@ -10,7 +10,7 @@ ThumbToggle component, can display a thumb with toggle capability, and a count n
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {ThumbToggle} from '@unikue/ant-buddy-pro';
 ```
 

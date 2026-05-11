@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2023 Unikue Ltd. All rights reserved.
  *
- * Licensed under the MIT License (the "License")
+ * Licensed under the MIT License.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,26 +14,28 @@
  * copies or substantial portions of the Software.
  */
 
-
-import {ProForm} from '@ant-design/pro-form';
-import {ChronoSelect} from '@unikue/ant-buddy-pro';
+import React from 'react';
 
 
-export default () => {
-    return (
-        <>
-            <ProForm
-                name='ChronoSelect_demo.zh-CN'
-                layout='horizontal'
-                autoFocusFirstInput={false}
-                submitter={false}
-            >
-                <ChronoSelect
-                    name='foobar'
-                    placeholder='请选择此项'
-                    locale='zh_CN'
-                />
-            </ProForm>
-        </>
-    );
+/**
+ * Utility class for React-related operations
+ *
+ * @author David Hsing
+ */
+// noinspection JSUnusedGlobalSymbols
+export class ReactUtils {
+    /**
+     * Get the major version number of React
+     *
+     * @returns The major version number (e.g., 18, 19)
+     *
+     * @example
+     * ```typescript
+     * const majorVersion = ReactUtils.getMajorVersion();
+     * console.log(majorVersion); // 18 or 19
+     * ```
+     */
+    public static getMajorVersion(): number {
+        return parseInt(React.version.split('.')[0], 10);
+    }
 }

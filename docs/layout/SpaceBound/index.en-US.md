@@ -11,7 +11,7 @@ The difference is that, the `Space` provides spaces between more than one compon
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {SpaceBound} from '@unikue/ant-buddy-pro';
 ```
 

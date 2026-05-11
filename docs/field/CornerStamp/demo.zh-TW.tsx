@@ -77,13 +77,18 @@ export default () => {
                 <ProFormSlider
                     label='大小'
                     min={20}
-                    max={80}
+                    max={100}
                     step={10}
                     marks={{
                         20: '20',
+                        30: '30',
                         40: '40',
+                        50: '50',
                         60: '60',
+                        70: '70',
                         80: '80',
+                        90: '90',
+                        100: '100',
                     }}
                     fieldProps={{
                         value: size,

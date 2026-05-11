@@ -10,7 +10,7 @@ BorderBox component, can display a box with borders.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {BorderBox} from '@unikue/ant-buddy-pro';
 ```
 

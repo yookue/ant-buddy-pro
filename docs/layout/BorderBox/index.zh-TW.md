@@ -10,7 +10,7 @@ BorderBox 可以顯示壹個帶邊框的控件。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {BorderBox} from '@unikue/ant-buddy-pro';
 ```
 

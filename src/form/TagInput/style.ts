@@ -24,6 +24,9 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             display: 'flex',
+            [`&-fulfil-addable`]: {
+                marginRight: token.marginXS,
+            },
             [`&-fulfil-span`]: {
                 display: 'inline-block',
             },

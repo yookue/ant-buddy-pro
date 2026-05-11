@@ -17,13 +17,12 @@
 
 import React from 'react';
 import {Form, Input, Space, type InputProps, type InputRef} from 'antd';
-import {FormContext} from 'antd/es/form/context';
 import {ProForm} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
+import {omit} from '@rc-component/util';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {PropUtils} from '@/util/PropUtils';
 import {useFieldStyle} from './style';
 
@@ -104,7 +103,7 @@ export type AddonInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
  * @author David Hsing
  */
 export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-addon-input';
 
@@ -130,7 +129,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     };
 
     const fieldName = props?.name ?? props?.fieldProps?.name;
-    const watchedValue = Form.useWatch(fieldName as string, formContext?.form);
+    const watchedValue = Form.useWatch(fieldName as string, form);
     const inputValue = !fieldName ? props?.fieldProps?.value : watchedValue;
     const inputWidth = !widthBlock ? undefined : (PropUtils.calculateWidth(props?.width ?? (typeof props?.fieldProps?.style?.width === 'string' ? props.fieldProps.style.width : undefined)));
 
@@ -142,10 +141,10 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     const widthBlockClazz = !widthBlock ? undefined : `${clazzPrefix}-width-block`;
     const entryReadModeClazz = !entryReadMode ? undefined : `${clazzPrefix}-read-mode`;
     const entryImmutableClazz = !entryImmutable ? undefined : `${clazzPrefix}-immutable`;
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'readOnly', 'disabled', 'value', 'onChange']);
+    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'name', 'id', 'placeholder', 'allowClear', 'readOnly', 'disabled', 'value', 'onChange']);
 
     if (proField) {
-        const restProps = !props ? {} : omit(props, ['className', 'name', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'cursorBefore', 'cursorAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
+        const restProps = !props ? {} : omit(props, ['className', 'name', 'allowClear', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'cursorBefore', 'cursorAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
         return (
             <div className={classNames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
                 <ProForm.Item name={fieldName} {...restProps}>
@@ -160,12 +159,13 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                             name={fieldName}
                             value={entryReadMode ? (inputValue || props?.proFieldProps?.emptyText || '-') :inputValue}
+                            allowClear={!entryImmutable && props?.allowClear !== false && props?.fieldProps?.allowClear !== false}
                             readOnly={entryReadMode || entryReadonly}
                             disabled={entryDisabled}
                             style={!inputWidth ? undefined : {width: inputWidth}}
                             onChange={(event: any) => {
                                 if (fieldName) {
-                                    formContext?.form?.setFieldValue(fieldName, event.target.value);
+                                    form?.setFieldValue(fieldName, event.target.value);
                                 }
                                 props?.fieldProps?.onChange?.(event);
                             }}
@@ -199,7 +199,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         style={!inputWidth ? undefined : {width: inputWidth}}
                         onChange={(event: any) => {
                             if (props?.name) {
-                                formContext?.form?.setFieldValue(props.name, event.target.value);
+                                form?.setFieldValue(props.name, event.target.value);
                             }
                             props?.fieldProps?.onChange?.(event);
                         }}

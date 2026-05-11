@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import omit from 'rc-util/es/omit';
+import {omit} from '@rc-component/util';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
@@ -37,7 +37,7 @@ export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'plac
  * Renders for rendering schema
  *
  * @see "https://pro-components.antdigital.dev/components/schema"
- * @see "@ant-design/pro-utils/es/typing.d.ts"
+ * @see "@ant-design/pro-utils/lib/typing.d.ts"
  *
  * @author David Hsing
  */

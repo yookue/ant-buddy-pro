@@ -11,7 +11,7 @@ order: 50
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {SpaceBound} from '@unikue/ant-buddy-pro';
 ```
 

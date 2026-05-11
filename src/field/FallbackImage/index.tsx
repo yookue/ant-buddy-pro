@@ -16,13 +16,13 @@
 
 
 import React from 'react';
+import {Image, type ImageProps} from 'antd';
+import {omit} from '@rc-component/util';
 import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import RcImage, {type ImageProps as RcImageProps} from 'rc-image';
-import omit from 'rc-util/es/omit';
 
 
-export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
+export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -55,26 +55,21 @@ export type FallbackImageProps = Omit<RcImageProps, 'src' | 'fallback'> & {
 export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImageProps) => {
     const clazzPrefix = props?.clazzPrefix ?? 'abp-fallback-image';
 
+    // noinspection DuplicatedCode
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();
+    const [imageFallback, setImageFallback] = React.useState<string>();
 
-    // noinspection DuplicatedCode
     React.useEffect(() => {
         ImageUtils.detectSource(props?.src, res => setImageSrc(res));
     }, [props?.src]);
 
-    // noinspection DuplicatedCode
     React.useEffect(() => {
-        ImageUtils.detectSource(props?.fallback, res => {
-            const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
-            if (inspect && !inspect.onerror) {
-                inspect.setAttribute('onerror', `this.src='${res ?? ''}'`);
-            }
-        });
+        ImageUtils.detectSource(props?.fallback, res => setImageFallback(res));
     }, [props?.fallback]);
 
     React.useEffect(() => {
-        const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
+        const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-${fieldId}`);
         if (inspect && (!inspect.src || inspect.src === document.location.href)) {
             inspect.setAttribute('src', '');
         }
@@ -83,9 +78,10 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
     const omitProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'src', 'fallback']);
 
     return (
-        <RcImage
-            className={classNames(clazzPrefix, `${clazzPrefix}-id-${fieldId}`, props?.className)}
-            src={`${imageSrc ?? ''}`}
+        <Image
+            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
+            src={imageSrc}
+            fallback={imageFallback}
             {...omitProps}
         />
     );

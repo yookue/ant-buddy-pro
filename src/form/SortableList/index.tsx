@@ -17,13 +17,13 @@
 
 import React from 'react';
 import {Space, Tooltip} from 'antd';
-import {type FormListFieldData, type FormListOperation} from 'antd/es/form/FormList';
+import {type FormListFieldData, type FormListOperation} from 'antd/lib/form/FormList';
 import {VerticalAlignTopOutlined, VerticalAlignBottomOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import {ProFormList, type ProFormListProps} from '@ant-design/pro-form';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 

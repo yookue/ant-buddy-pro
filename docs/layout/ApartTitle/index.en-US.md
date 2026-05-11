@@ -10,7 +10,7 @@ ApartTitle component, displays a title bar and an ornament icon, in order to sep
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {ApartTitle} from '@unikue/ant-buddy-pro';
 ```
 

@@ -16,16 +16,15 @@
 
 
 import React from 'react';
-import {Input, Button} from 'antd';
-import {FormContext} from 'antd/es/form/context';
-import {type NamePath} from 'antd/es/form/interface';
-import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
+import {Form, Input, Button} from 'antd';
+import {type NamePath} from 'antd/lib/form/interface';
+import {type ProFormCaptchaProps} from '@ant-design/pro-form/lib/components/Captcha';
 import {ProForm} from '@ant-design/pro-form';
-import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
+import {createField} from '@ant-design/pro-form/lib/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {ArrayUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -160,12 +159,13 @@ export type CaptchaInputProps = Omit<ProFormCaptchaProps, 'children' | 'fieldRef
 const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & React.RefAttributes<CaptchaInputRef>> = React.forwardRef((props?: CaptchaInputProps, ref?: any) => {
     CaptchaInputField.displayName = 'CaptchaInput';
 
-    const formContext = React.useContext(FormContext);
-    const [submittable, setSubmittable] = React.useState<boolean>(true);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-captcha-input';
     const intlType = useIntl();
 
-    ConsoleUtils.warn(!!formContext?.form, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);
+    const form = Form.useFormInstance();
+    const [submittable, setSubmittable] = React.useState<boolean>(true);
+
+    ConsoleUtils.warn(!!form, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -179,6 +179,16 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         locale = intlType.locale,
     } = props ?? {};
 
+    React.useEffect(() => {
+        if (props?.autoValidate) {
+            validateDependFields().then(() => {
+                setSubmittable(true);
+            }).catch(() => {
+                setSubmittable(false);
+            });
+        }
+    }, [props?.autoValidate]);
+
     ConsoleUtils.warn(countDown > 0, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' prop 'countDown' must be greater than 0`);
     ConsoleUtils.warn(timerInterval > 0, true, 'CaptchaInput', `Field '${props?.name ?? props?.fieldProps?.name}' prop 'timerInterval' must be greater than 0`);
 
@@ -187,6 +197,17 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     const [loading, setLoading] = React.useState<boolean>(false);
     const [timing, setTiming] = React.useState<boolean>(false);
     const fieldStyle = useFieldStyle(clazzPrefix);
+
+    // Handle timer end - moved to separate useEffect to avoid setState during render
+    React.useEffect(() => {
+        if (counting === 0 && timing) {
+            setCounting(countDown);
+            setTimeout(() => {
+                setTiming(false);
+                props?.onTimerEnd?.();
+            }, 0);
+        }
+    }, [counting, timing]);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -208,16 +229,13 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
 
     React.useEffect(() => {
         let interval = 0;
-        const seconds = countDown;
         if (timing) {
             props?.onTimerBegin?.();
             interval = window.setInterval(() => {
                 setCounting((previous) => {
                     if (previous <= 1) {
-                        setTiming(false);
                         window.clearInterval(interval);
-                        props?.onTimerEnd?.();
-                        return seconds ?? 59;
+                        return 0;  // Set to 0 to trigger the timer end effect
                     }
                     return previous - 1;
                 });
@@ -236,11 +254,11 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         return [props?.phoneName, props?.dependName].flat().filter((item: any) => !!item);
     }, [props?.phoneName, props?.dependName]);
 
-    const watchValues = !props?.autoValidate ? [] : ProForm.useWatch([], {form: formContext?.form, preserve: true});
+    const watchValues = !props?.autoValidate ? [] : ProForm.useWatch([], {form, preserve: true});
 
     const checkSubmittable = () => {
         if (ArrayUtils.isNotEmpty(watchFields)) {
-            formContext?.form?.validateFields([...watchFields], {
+            form?.validateFields([...watchFields], {
                 validateOnly: true,
             }).then(() => setSubmittable(true)).catch(() => setSubmittable(false));
         }
@@ -250,7 +268,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         if (props?.autoValidate) {
             checkSubmittable();
         }
-    }, [props?.autoValidate, formContext?.form, watchValues]);
+    }, [props?.autoValidate, form, watchValues]);
 
     const buildCaptcha = async (mobile?: string) => {
         if (!mobile || !props?.onGenerate) {
@@ -268,14 +286,14 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         let result = true;
         if (props?.phoneName) {
             try {
-                await formContext?.form?.validateFields([props.phoneName].flat());
+                await form?.validateFields([props.phoneName].flat());
             } catch {
                 result = false;
             }
         }
         if (props?.dependName) {
             try {
-                await formContext?.form?.validateFields([props.dependName].flat());
+                await form?.validateFields([props.dependName].flat());
             } catch {
                 result = false;
             }
@@ -288,7 +306,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         if (!validated) {
             return;
         }
-        await buildCaptcha((!formContext?.form || !props?.phoneName) ? undefined : formContext.form.getFieldValue([props.phoneName].flat()));
+        await buildCaptcha((!form || !props?.phoneName) ? undefined : form.getFieldValue([props.phoneName].flat()));
         props?.captchaProps?.onClick?.(event);
     }
 

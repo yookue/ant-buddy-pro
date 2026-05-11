@@ -10,7 +10,7 @@ CodePreview 是一个用于展示代码预览的组件，可包含一个标题�
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {CodePreview} from '@unikue/ant-buddy-pro';
 ```
 

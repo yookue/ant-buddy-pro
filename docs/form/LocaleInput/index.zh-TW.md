@@ -10,9 +10,7 @@ LocaleInput，提供了壹個包含多種語言下拉框的文本輸入字段，
 
 ## 使用前提
 
-<Alert showIcon>
-  如果您使用默認的圖標，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
-</Alert>
+> 如果您使用默認的圖標，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
 
 <InstallDependencies
   npm="$ npm install @ant-design/icons"
@@ -22,7 +20,7 @@ LocaleInput，提供了壹個包含多種語言下拉框的文本輸入字段，
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {LocaleInput} from '@unikue/ant-buddy-pro';
 ```
 

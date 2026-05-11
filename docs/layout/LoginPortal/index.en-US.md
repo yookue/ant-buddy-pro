@@ -14,13 +14,13 @@ Similar to [LoginFormPage](https://github.com/ant-design/pro-components/tree/mas
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {LoginPortal} from '@unikue/ant-buddy-pro';
 ```
 
 ## Example
 
-```jsx | pure
+```tsx | pure
 import React from 'react';
 import {LoginForm} from '@ant-design/pro-form';
 import {LoginPortal, PageFooter} from '@unikue/ant-buddy-pro';

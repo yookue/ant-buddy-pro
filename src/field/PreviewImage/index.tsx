@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {ConfigProvider, Image} from 'antd';
+import {Image} from 'antd';
+import {ImagePreviewType} from 'antd/lib/image';
+import {omit} from '@rc-component/util';
 import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ImagePreviewType as RcImagePreviewProps} from 'rc-image';
-import omit from 'rc-util/es/omit';
 
 
-export type PreviewImageProps = Omit<RcImagePreviewProps, 'src' | 'current' | 'countRender'> & {
+export type PreviewImageProps = Omit<ImagePreviewType, 'src'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -54,39 +54,35 @@ export type PreviewImageProps = Omit<RcImagePreviewProps, 'src' | 'current' | 'c
  * @author David Hsing
  */
 export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImageProps) => {
-    const configContext = React.useContext(ConfigProvider.ConfigContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-preview-image';
 
+    // noinspection DuplicatedCode
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();
+    const [imageFallback, setImageFallback] = React.useState<string>();
 
     React.useEffect(() => {
         ImageUtils.detectSource(props?.src, res => setImageSrc(res));
     }, [props?.src]);
 
     React.useEffect(() => {
-        ImageUtils.detectSource(props?.fallback, res => {
-            const selector = `.${clazzPrefix}-id-${fieldId} .${configContext.getPrefixCls('image-preview-content')} .${configContext.getPrefixCls('image-preview-body')} .${configContext.getPrefixCls('image-preview-img-wrapper')} > img`;
-            const inspect = document.querySelector<HTMLImageElement>(selector);
-            if (inspect && !inspect.onerror) {
-                inspect.setAttribute('onerror', `this.src='${res ?? ''}'`);
-            }
-        });
+        ImageUtils.detectSource(props?.fallback, res => setImageFallback(res));
     }, [props?.fallback]);
 
-    const omitProps = !props ? {} : omit(props, ['className', 'rootClassName', 'clazzPrefix', 'src', 'fallback']);
+    const omitProps = !props ? {} : omit(props, ['clazzPrefix', 'src', 'fallback']);
 
     return (
         <Image
-            className={classNames(clazzPrefix, props?.className)}
+            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`)}
             width={0}
             height={0}
             preview={{
-                className: classNames(`${clazzPrefix}-preview`, `${clazzPrefix}-id-${fieldId}`),
-                src: imageSrc ?? '',
+                src: imageSrc,
+                // @ts-ignore
+                fallback: imageFallback,
                 ...omitProps,
             }}
-            rootClassName={classNames(`${clazzPrefix}-root`, `${clazzPrefix}-root-id-${fieldId}`, props?.rootClassName)}
+            rootClassName={classNames(`${clazzPrefix}-preview`, `${clazzPrefix}-preview-${fieldId}`, props?.rootClassName)}
             style={{
                 display: 'none',
             }}

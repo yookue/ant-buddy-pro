@@ -17,12 +17,12 @@
 
 import React from 'react';
 import {Menu, type MenuProps} from 'antd';
-import {type MenuItemType} from 'antd/es/menu/interface';
+import {type MenuItemType} from 'antd/lib/menu/interface';
 import {css} from '@emotion/css';
-import {BooleanUtils} from '@unikue/ts-lang-utils';
+import {type MenuInfo, type MenuMode} from '@rc-component/menu/lib/interface';
+import {omit} from '@rc-component/util';
+import {useEventListener} from 'ahooks';
 import classNames from 'classnames';
-import {type MenuInfo, type MenuMode} from 'rc-menu/es/interface';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -257,7 +257,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     const [menuMode, setMenuMode] = React.useState<MenuMode>('inline');
     const fieldStyle = useFieldStyle(clazzPrefix);
 
-    if (BooleanUtils.isNotFalse(adjustLayoutProps?.adjustOnResize)) {
+    if (adjustLayoutProps?.adjustOnResize !== false) {
         const handleWindowResize = () => {
             requestAnimationFrame(() => {
                 if (!fieldRef.current) {
@@ -274,14 +274,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                 setMenuMode(shouldMode);
             });
         };
-
-        React.useLayoutEffect(() => {
-            window.addEventListener('resize', handleWindowResize);
-            handleWindowResize();
-            return () => {
-                window.removeEventListener('resize', handleWindowResize);
-            };
-        }, []);
+        useEventListener('resize', handleWindowResize);
     }
 
     const buildTabsDom = () => {

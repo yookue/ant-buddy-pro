@@ -10,7 +10,7 @@ TooltipField 用於顯示壹個帶提示的字段。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {TooltipField} from '@unikue/ant-buddy-pro';
 ```
 

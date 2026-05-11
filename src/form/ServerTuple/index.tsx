@@ -17,14 +17,14 @@
 
 import React from 'react';
 import {Space, InputNumber} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {FormContext} from 'antd/lib/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {type ProFormDigitProps} from '@ant-design/pro-form/lib/components/Digit';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -178,7 +178,6 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
             const restProps = omit(omitFieldProps, ['onChange']);
             return (
                 <InputNumber
-                    id={(!formContext?.name ? '' : `${formContext.name}_`) + (numberName ?? '')}
                     placeholder={ObjectUtils.firstNotNil(portProps.placeholder, intlLocales.get([locale, 'serverPort']), intlLocales.get(['en_US', 'serverPort']))}
                     min={portProps.fieldProps?.min ?? 1}
                     max={portProps.fieldProps?.max ?? 65535}

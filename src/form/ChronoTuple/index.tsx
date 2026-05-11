@@ -17,12 +17,12 @@
 
 import React from 'react';
 import {Space, InputNumber} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {FormContext} from 'antd/lib/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
-import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
+import {type ProFormDigitProps} from '@ant-design/pro-form/lib/components/Digit';
+import {omit} from '@rc-component/util';
 import {StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {ChronoSelect, type ChronoSelectProps} from '@/form/ChronoSelect';
 import {useFieldStyle} from './style';
 
@@ -107,7 +107,6 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
         return (
             <InputNumber
                 className={classNames(`${clazzPrefix}-digit`, props?.digitProps?.fieldProps?.className)}
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.digitProps?.name ?? '')}
                 placeholder={StringUtils.join(props?.digitProps?.placeholder) ?? props?.digitProps?.fieldProps?.placeholder}
                 onChange={(value: any) => {
                     if (props?.digitProps?.name) {

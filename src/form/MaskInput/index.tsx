@@ -16,13 +16,12 @@
 
 
 import React from 'react';
-import {Input, type InputProps, type InputRef} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {Form, Input, type InputProps, type InputRef} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
+import {omit} from '@rc-component/util';
 import {ElementUtils, NanoidUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 
 
@@ -58,10 +57,10 @@ export type MaskInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, '
  * @author David Hsing
  */
 export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const clazzPrefix = props?.clazzPrefix ?? 'abp-mask-input';
 
-    ConsoleUtils.warn(!!formContext?.form, true, 'MaskInput', `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);
+    ConsoleUtils.warn(!!form, true, 'MaskInput', `Field '${props?.name ?? props?.fieldProps?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -70,7 +69,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const compositionRef = React.useRef<boolean>(false);
-    const previousRef = React.useRef<string>(formContext?.form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
+    const previousRef = React.useRef<string>(form?.getFieldValue(props?.name ?? props?.fieldProps?.name));
     const webkitBrowser = navigator.userAgent.indexOf('WebKit') !== -1;
 
     const processValue = (value: string, passAction?: () => void, failAction?: () => void) => {
@@ -79,13 +78,13 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
             const inspect = document.querySelector<HTMLInputElement>(`[data-mask-input-id='${fieldId}']`);
             ElementUtils.setElementValue(inspect, previousRef.current);
             if (props?.name && !proField) {
-                formContext?.form?.setFieldValue(props.name, previousRef.current);
+                form?.setFieldValue(props.name, previousRef.current);
             }
             failAction?.();
         } else {
             previousRef.current = value;
             if (props?.name && !proField) {
-                formContext?.form?.setFieldValue(props.name, value);
+                form?.setFieldValue(props.name, value);
             }
             passAction?.();
         }
@@ -134,7 +133,6 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
         return (
             <Input
                 className={classNames(clazzPrefix, props?.fieldProps?.className)}
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 onChange={handleChange}
                 onCompositionStart={handleCompositionStart}

@@ -10,7 +10,7 @@ MathInput，提供了一个可以输入数学公式的的录入框。
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {MathInput} from '@unikue/ant-buddy-pro';
 ```
 

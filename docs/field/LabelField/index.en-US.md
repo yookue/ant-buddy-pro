@@ -10,7 +10,7 @@ LabelField component, can display a field with a label.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {LabelField} from '@unikue/ant-buddy-pro';
 ```
 

@@ -10,7 +10,7 @@ AvatarStamp component, can display an avatar with a corner stamp.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {AvatarStamp} from '@unikue/ant-buddy-pro';
 ```
 

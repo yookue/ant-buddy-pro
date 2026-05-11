@@ -10,7 +10,7 @@ order: 10
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {CardTabs} from '@unikue/ant-buddy-pro';
 ```
 
@@ -26,7 +26,7 @@ import {CardTabs} from '@unikue/ant-buddy-pro';
 | containerClazz | 容器 div 的 CSS 类名 | `string`                                                                                | -                 |
 | containerStyle | 容器 div 的 CSS 样式 | `React.CSSProperties`                                                                   | -                 |
 | tabBorder      | 是否显示标签的边框       | `boolean`                                                                               | `true`            |
-| tabPosition    | 标签的位置           | `'top' \| 'right' \| 'bottom' \| 'left' \| 'top-end' \| 'bottom-end'`                   | `'top'`           |
+| tabPlacement   | 标签的位置           | `'top' \| 'top-end' \| 'bottom' \| 'bottom-end' \| 'start' \| 'end'`                    | `'top'`           |
 | contentBorder  | 是否显示内容区的边框      | `boolean`                                                                               | `true`            |
 | inkBar         | 是否显示活跃指示条       | `boolean`                                                                               | `true`            |
 | size           | 标签的大小           | `'small' \| 'middle' \| 'large' \| 'extra-small'`                                       | `'middle'`        |

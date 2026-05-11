@@ -16,20 +16,18 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {ConfigProvider, Form, Flex, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {ProFormText} from '@ant-design/pro-form';
-import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
-import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/lib/typing';
+import {createField} from '@ant-design/pro-form/lib/BaseForm/createField';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {useDebounceFn} from '@ant-design/pro-utils';
+import {omit} from '@rc-component/util';
 import {ArrayUtils, NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
 import objectHash from 'object-hash';
-import omit from 'rc-util/es/omit';
-import {TweenOneGroup, type IGroupProps as TweenOneGroupProps} from 'rc-tween-one';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
@@ -157,21 +155,6 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef' 
     compactMargin?: boolean;
 
     /**
-     * @description Whether the tween-one animation is enabled
-     * @description.zh-CN 是否启用 tween-one 动画
-     * @description.zh-TW 是否啟用 tween-one 動畫
-     * @default true
-     */
-    tweenOneAnim?: boolean;
-
-    /**
-     * @description The props of the tween-one animation
-     * @description.zh-CN tween-one 动画的属性
-     * @description.zh-TW tween-one 動畫的屬性
-     */
-    tweenOneProps?: TweenOneGroupProps;
-
-    /**
      * @description Whether to warn if the tag already exists
      * @description.zh-CN 是否显示标签已存在的警告
      * @description.zh-TW 是否顯示標簽已存在的警告
@@ -192,7 +175,7 @@ export type TagInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef' 
      * @description.zh-CN 标签内容变化时的回调函数
      * @description.zh-TW 標簽内容變化時的回調函數
      */
-    onTagContentsChange?: (contents?: (string | number)[]) => void;
+    onTagContentsChange?: (contents?: (string | number)[] | null) => void;
 
     /**
      * @description The locale of the component, e.g. 'en_US'
@@ -219,7 +202,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     TagInputField.displayName = 'TagInput';
 
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-tag-input';
     const intlType = useIntl();
@@ -227,7 +210,6 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     // Initialize the default props
     const {
         addable = false,
-        tweenOneAnim = true,
         warnExists = true,
         proField = true,
         locale = intlType.locale,
@@ -237,11 +219,11 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [inputName, setInputName] = React.useState<string>();
-    const inputValueRef = React.useRef<string>();
+    const inputValueRef = React.useRef<string>(null);
     const [inputVisible, setInputVisible] = React.useState<boolean>(false);
     const fieldStyle = useFieldStyle(clazzPrefix);
 
-    const [tagContents, setTagContents] = React.useState<(string | number)[] | undefined>(() => {
+    const [tagContents, setTagContents] = React.useState<(string | number)[] | null>(() => {
         const result = [...new Set(props?.fulfilTagItems?.map(item => (typeof item === 'string' || typeof item === 'number') ? item : item?.content))] as string[];
         ConsoleUtils.warn(!props?.fulfilTagItems || (result.length === props?.fulfilTagItems?.length), true, 'TagInput', `Field '${props?.name}' prop 'fulfilTagItems' must includes unique contents`);
         return result;
@@ -249,7 +231,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getTagContents: (): (string | number)[] | undefined => {
+        getTagContents: (): (string | number)[] | null => {
             return tagContents;
         },
         setTagContents: (contents?: (string | number)[] | null): void => {
@@ -281,7 +263,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             run(props?.params).then((values?: (string | number | TextTagProps)[]) => {
                 if (!values) {
                     if (props?.requestOptionPlace === 'override') {
-                        setTagContents(undefined);
+                        setTagContents(null);
                     }
                     return;
                 }
@@ -301,45 +283,21 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     }
 
     React.useEffect(() => {
-        setInputName(inputVisible ? (formContext?.name ? `${formContext.name}_${fieldId}` : fieldId) : undefined);
+        setInputName(inputVisible ? fieldId : undefined);
     }, [inputVisible]);
 
     React.useEffect(() => {
         if (inputName) {
-            formContext?.form?.setFieldValue(inputName, undefined);
+            form?.setFieldValue(inputName, undefined);
         }
     }, [inputName]);
 
     React.useEffect(() => {
-        if (props?.name && formContext?.form) {
-            formContext.form.setFieldValue(props.name, tagContents);
+        if (props?.name) {
+            form?.setFieldValue(props.name, tagContents);
         }
         props?.onTagContentsChange?.(tagContents);
     }, [tagContents]);
-
-    const buildTweenOneProps = () => {
-        // noinspection JSUnusedGlobalSymbols
-        return props?.tweenOneProps ?? {
-            appear: false,
-            enter: {
-                scale: 0.8,
-                opacity: 0,
-                type: 'from',
-                duration: 100,
-            },
-            leave: {
-                opacity: 0,
-                width: 0,
-                scale: 0,
-                duration: 200,
-            },
-            onEnd: (event) => {
-                if (event.type === 'appear' || event.type === 'enter') {
-                    (event.target as any).style = 'display: inline-block';
-                }
-            }
-        };
-    };
 
     const buildFulfilDom = () => {
         if (!tagContents) {
@@ -390,17 +348,10 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 </span>
             );
         });
-        // noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
-        const wrapDom = !tweenOneAnim ? tagsDom : (
-            <TweenOneGroup {...buildTweenOneProps()}>
-                {tagsDom}
-            </TweenOneGroup>
-        );
-        // noinspection com.intellij.reactbuddy.ArrayToJSXMapInspection
         return (
-            <div className={`${clazzPrefix}-fulfil`}>
-                {wrapDom}
-            </div>
+            <Flex gap='small' className={classNames(`${clazzPrefix}-fulfil`, (!addable ? undefined : `${clazzPrefix}-fulfil-addable`))}>
+                {tagsDom}
+            </Flex>
         );
     };
 
@@ -408,9 +359,9 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
         if (!inputVisible) {
             return;
         }
-        if (props?.name && proField && formContext?.form) {
+        if (props?.name && proField) {
             try {
-                await formContext.form.validateFields([inputName]);
+                await form?.validateFields([inputName]);
             } catch {
                 return;
             }
@@ -459,7 +410,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                 onKeyDown: (event) => {
                                     props?.addingInputProps?.fieldProps?.onKeyDown?.(event);
                                     if (!event.isDefaultPrevented() && event.key === 'Escape') {
-                                        inputValueRef.current = undefined;
+                                        inputValueRef.current = null;
                                         setInputVisible(false);
                                     }
                                 },
@@ -503,7 +454,6 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                             ref={(input) => input?.focus()}
                             className={classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className)}
                             type='text'
-                            id={(!formContext?.name ? '' : `${formContext.name}_`) + inputName}
                             placeholder={StringUtils.join(props?.addingInputProps?.placeholder) ?? props?.addingInputProps?.fieldProps?.placeholder}
                             {...restProps}
                             size={props?.addingInputProps?.fieldProps?.size ?? 'small'}
@@ -516,7 +466,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                             onKeyDown={(event) => {
                                 props?.addingInputProps?.fieldProps?.onKeyDown?.(event);
                                 if (!event.isDefaultPrevented() && event.key === 'Escape') {
-                                    inputValueRef.current = undefined;
+                                    inputValueRef.current = null;
                                     setInputVisible(false);
                                 }
                             }}

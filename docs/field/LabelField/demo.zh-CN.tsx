@@ -23,7 +23,7 @@ import {type LabelPresetStyle} from '@unikue/ant-buddy-pro/field/LabelField';
 
 
 export default () => {
-    const [layout, setLayout] = React.useState<AxisDirectionType>('horizontal');
+    const [layout, setLayout] = React.useState<AxisDirectionType>('vertical');
     const [required, setRequired] = React.useState<boolean>(false);
     const [presetStyle, setPresetStyle] = React.useState<LabelPresetStyle | false>('field-prior');
 
@@ -43,9 +43,6 @@ export default () => {
                         buttonStyle: 'solid',
                         onChange: (event) => {
                             setLayout(event.target?.value);
-                            if (event.target?.value === 'vertical') {
-                                setPresetStyle(false);
-                            }
                         }
                     }}
                     options={[

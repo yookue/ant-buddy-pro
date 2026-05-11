@@ -22,14 +22,14 @@ import {PreviewImage} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
-    const [visible, setVisible] = React.useState<boolean>(false);
+    const [open, setOpen] = React.useState<boolean>(false);
 
     return (
         <>
             <Button
                 icon={<FireOutlined/>}
-                disabled={visible}
-                onClick={() => setVisible(true)}
+                disabled={open}
+                onClick={() => setOpen(true)}
             >
                 预览
             </Button>
@@ -38,10 +38,8 @@ export default () => {
                 fallback={() => {
                     return 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png';
                 }}
-                visible={visible}
-                onVisibleChange={(visible: boolean) => {
-                    setVisible(visible);
-                }}
+                open={open}
+                onOpenChange={setOpen}
             />
         </>
     );

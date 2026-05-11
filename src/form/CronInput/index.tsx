@@ -16,19 +16,19 @@
 
 
 import React from 'react';
-import {ConfigProvider, Button, Switch, Space, Input, message as messageApi} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {ConfigProvider, Form, Button, Switch, Space, Input, message as messageApi} from 'antd';
+import {type TabPosition} from 'antd/lib/tabs';
 import {FieldTimeOutlined} from '@ant-design/icons';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
+import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import {useEventListener, useMutationObserver} from 'ahooks';
 import classNames from 'classnames';
 import cronValidate from 'cron-validate';
-import {type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
 import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
@@ -57,7 +57,7 @@ export type CronInputRef = {
 
 
 export type CronTabProps = Omit<CardTabsProps, 'addIcon' | 'hideAdd' | 'items' | 'onEdit'> & {
-    tabPosition?: Omit<RcTabPosition, 'left' | 'right'>;
+    tabPlacement?: Omit<TabPosition, 'start' | 'end'>;
 };
 
 
@@ -308,7 +308,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
     CronInput.displayName = 'CronInput';
 
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-cron-input';
     const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
@@ -395,22 +395,25 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
 
     // Monitor ant-form-item-additional changes and update offset
     // noinspection DuplicatedCode
-    React.useEffect(() => {
-        const entryElement = document.querySelector<HTMLElement>(`.${clazzPrefix}-entry-${fieldId}`);
-        if (!entryElement) {
+    const entryElementRef = React.useRef<HTMLDivElement>(null);
+    const updateTriggerOffset = React.useCallback(() => {
+        if (!entryElementRef.current) {
             return;
         }
-        const updateOffset = () => {
-            const prefixCls = configContext?.getPrefixCls('') ?? 'ant';
-            const additionalHeight = DesignUtils.getFormAdditionalHeight(entryElement, prefixCls);
-            setTriggerOffset(4 - additionalHeight);
-        };
-        updateOffset();
-
-        const observer = new MutationObserver(updateOffset);
-        observer.observe(entryElement, {childList: true, subtree: true});
-        return () => observer.disconnect();
+        const prefixCls = configContext?.getPrefixCls('') ?? 'ant';
+        const additionalHeight = DesignUtils.getFormAdditionalHeight(entryElementRef.current, prefixCls);
+        setTriggerOffset(4 - additionalHeight);
     }, []);
+    useMutationObserver(updateTriggerOffset, entryElementRef, {childList: true, subtree: true});
+
+    React.useEffect(() => {
+        const element = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
+        if (!element) {
+            return;
+        }
+        entryElementRef.current = element;
+        updateTriggerOffset();
+    }, [clazzPrefix, fieldId]);
 
     React.useEffect(() => {
         if (!incomeExpress) {
@@ -466,29 +469,21 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         return ((before && addonPos === 'before') || (!before && addonPos === 'after')) ? addonEntryDom : undefined;
     };
 
-    // noinspection DuplicatedCode
-    const renderEntryReadonly = (dom: React.ReactNode) => (
-        <div className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-entry-readonly`, (addonPos ? `${clazzPrefix}-entry-readonly-${addonPos}` : undefined))}>
-            {addonPos === 'before' && (
-                <span className={classNames(`${clazzPrefix}-entry-readonly-addon`, `${clazzPrefix}-entry-readonly-addon-${addonPos}`)}>
-                    {addonEntryDom}
-                </span>
-            )}
-            <div className={`${clazzPrefix}-entry-readonly-content`}>
-                {dom || props?.proFieldProps?.emptyText || '-'}
-            </div>
-            {addonPos === 'after' && (
-                <span className={classNames(`${clazzPrefix}-entry-readonly-addon`, `${clazzPrefix}-entry-readonly-addon-${addonPos}`)}>
-                    {addonEntryDom}
-                </span>
-            )}
-        </div>
-    );
-
     const buildEntryDom = () => {
         const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter', 'onChange']);
         if (proField) {
-            const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'rules', 'clazzPrefix', 'defaultOpen', 'triggerProps', 'tabsProps', 'secondPanelProps', 'validateRule', 'proField', 'locale', 'localeProps']);
+            const restProps = !props ? {} : omit(props, [
+                'fieldProps', 'proFieldProps', 'rules',
+                'clazzPrefix', 'addon', 'addonPos',
+                'allowSecond', 'allowYear', 'allowOkEcho',
+                'defaultOpen', 'defaultShowSecond', 'defaultShowYear',
+                'echoValidateError',
+                'triggerProps', 'tabsProps',
+                'secondPanelProps', 'minutePanelProps', 'hourPanelProps',
+                'dayPanelProps', 'monthPanelProps', 'weekPanelProps', 'yearPanelProps',
+                'validateRule', 'proField', 'locale', 'localeProps',
+                'onValidateError'
+            ]);
             return (
                 <div className={clazzPrefix}>
                     <AddonInput
@@ -508,10 +503,6 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                             'data-cron-input-id': fieldId,
                         }}
                         proField={proField}
-                        proFieldProps={{
-                            render: (dom: React.ReactNode) => props?.proFieldProps?.render(dom) ?? renderEntryReadonly(dom),
-                            ...(!props?.proFieldProps ? {} : omit(props.proFieldProps, ['render']))
-                        }}
                         rules={[
                             ...(props?.rules ?? []),
                             !validateRule ? {} : {
@@ -585,14 +576,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
             StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
         }
     };
-
-    React.useLayoutEffect(() => {
-        window.addEventListener('resize', handleWindowResize);
-        handleWindowResize();
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
+    useEventListener('resize', handleWindowResize);
 
     const buildPopupDom = () => {
         const tabItems: CardTabsProps['items'] = [
@@ -767,8 +751,8 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                                                     onChange={(checked: boolean) => {
                                                         setShowSecond(checked);
                                                         const rawName = props?.name ?? props?.fieldProps?.name;
-                                                        if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
-                                                            formContext.form.validateFields([rawName]);
+                                                        if (validateRule && rawName && form && form.getFieldValue(rawName)) {
+                                                            form.validateFields([rawName]);
                                                         }
                                                     }}
                                                 />
@@ -782,8 +766,8 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                                                     onChange={(checked: boolean) => {
                                                         setShowYear(checked);
                                                         const rawName = props?.name ?? props?.fieldProps?.name;
-                                                        if (validateRule && rawName && formContext?.form && formContext.form.getFieldValue(rawName)) {
-                                                            formContext.form.validateFields([rawName]);
+                                                        if (validateRule && rawName && form && form.getFieldValue(rawName)) {
+                                                            form.validateFields([rawName]);
                                                         }
                                                     }}
                                                 />

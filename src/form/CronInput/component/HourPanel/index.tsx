@@ -18,9 +18,9 @@
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
+import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ValueType as RcValueType} from 'rc-input-number';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -250,7 +250,7 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
                         value={entryChoice}
                         onChange={(event: RadioChangeEvent) => setEntryChoice(event.target.value)}
                     >
-                        <Space direction='vertical'>
+                        <Space orientation='vertical'>
                             <Radio value={EntryChoiceType.EVERY_HOUR}>
                                 {ObjectUtils.firstNotNil(props?.localeProps?.everyHour, intlLocales.get([locale, 'everyHour']), intlLocales.get(['en_US', 'everyHour']))}
                             </Radio>
@@ -356,7 +356,7 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
                                     window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_HOUR), 80);
                                 }}
                             >
-                                <Space direction='vertical'>
+                                <Space orientation='vertical'>
                                     {ObjectUtils.firstNotNil(props?.localeProps?.specificHour, intlLocales.get([locale, 'specificHour']), intlLocales.get(['en_US', 'specificHour']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {

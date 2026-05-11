@@ -10,7 +10,7 @@ order: 35
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {MenuTabs} from '@unikue/ant-buddy-pro';
 ```
 

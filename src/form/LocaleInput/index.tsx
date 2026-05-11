@@ -16,17 +16,17 @@
 
 
 import React from 'react';
-import {ConfigProvider, List, Popconfirm, Space, Tooltip, type InputProps, type FormRule} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {ConfigProvider, Form, List, Popconfirm, Space, Tooltip, type InputProps, type FormRule} from 'antd';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
+import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {BooleanUtils, ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import {useEventListener, useMutationObserver} from 'ahooks';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
 import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
 import {DesignUtils} from '@/util/DesignUtils';
@@ -277,7 +277,7 @@ export type LocaleInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefor
  */
 export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-input';
     const intlType = useIntl();
@@ -314,6 +314,28 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     // noinspection DuplicatedCode
     const fieldStyle = useFieldStyle(clazzPrefix);
 
+    // Monitor ant-form-item-additional changes and update offset
+    // noinspection DuplicatedCode
+    const entryElementRef = React.useRef<HTMLDivElement>(null);
+    const updateTriggerOffset = React.useCallback(() => {
+        if (!entryElementRef.current) {
+            return;
+        }
+        const prefixCls = configContext?.getPrefixCls('') ?? 'ant';
+        const additionalHeight = DesignUtils.getFormAdditionalHeight(entryElementRef.current, prefixCls);
+        setTriggerOffset(4 - additionalHeight);
+    }, []);
+    useMutationObserver(updateTriggerOffset, entryElementRef, {childList: true, subtree: true});
+
+    React.useEffect(() => {
+        const element = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
+        if (!element) {
+            return;
+        }
+        entryElementRef.current = element;
+        updateTriggerOffset();
+    }, [clazzPrefix, fieldId]);
+
     // noinspection DuplicatedCode
     const handleWindowResize = () => {
         const inspect = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
@@ -323,33 +345,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
         }
     };
-
-    // Monitor ant-form-item-additional changes and update offset
-    // noinspection DuplicatedCode
-    React.useEffect(() => {
-        const entryElement = document.querySelector<HTMLElement>(`.${clazzPrefix}-entry-${fieldId}`);
-        if (!entryElement) {
-            return;
-        }
-        const updateOffset = () => {
-            const prefixCls = configContext?.getPrefixCls('') ?? 'ant';
-            const additionalHeight = DesignUtils.getFormAdditionalHeight(entryElement, prefixCls);
-            setTriggerOffset(4 - additionalHeight);
-        };
-        updateOffset();
-
-        const observer = new MutationObserver(updateOffset);
-        observer.observe(entryElement, {childList: true, subtree: true});
-        return () => observer.disconnect();
-    }, []);
-
-    React.useLayoutEffect(() => {
-        window.addEventListener('resize', handleWindowResize);
-        handleWindowResize();
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
+    useEventListener('resize', handleWindowResize);
 
     const addonEntryDom = (typeof addon === 'function') ? addon() : addon;
     const buildEntryAddonDom = (before: boolean) => {
@@ -376,9 +372,9 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
     );
 
     const buildEntryDom = () => {
-        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'addonBefore', 'addonAfter']);
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'allowClear', 'addonBefore', 'addonAfter']);
         if (proField) {
-            const restProps = !props ? {} : omit(props, ['fieldProps', 'proFieldProps', 'clazzPrefix', 'addon', 'addonPos', 'defaultOpen', 'triggerProps', 'multilingual', 'proField', 'locale', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupAddon', 'popupAddonPos', 'popupShareProps', 'popupCloneProps', 'popupConfirmProps', 'popupProField']);
+            const restProps = !props ? {} : omit(props, ['allowClear', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'addon', 'addonPos', 'defaultOpen', 'triggerProps', 'multilingual', 'proField', 'locale', 'popupInputProps', 'popupQuickTags', 'popupTagPos', 'popupAddon', 'popupAddonPos', 'popupShareProps', 'popupCloneProps', 'popupConfirmProps', 'popupProField']);
             return (
                 <div className={clazzPrefix}>
                     <AddonInput
@@ -388,6 +384,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
                         fieldProps={{
                             className: classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className),
+                            allowClear: props?.allowClear || props?.fieldProps?.allowClear,
                             ...omitFieldProps,
                             'data-locale-input-id': fieldId,
                         }}
@@ -415,7 +412,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         // @ts-ignore
                         onChange={(event: any) => {
                             if (props?.name) {
-                                formContext?.form?.setFieldValue(props.name, event.target.value);
+                                form?.setFieldValue(props.name, event.target.value);
                             }
                             props?.fieldProps?.onChange?.(event);
                         }}
@@ -509,24 +506,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         );
     };
 
-    const renderItemReadonly = (tag: string, dom: React.ReactNode) => (
-        <div className={classNames(`${clazzPrefix}-locale-item-readonly`, (popupTagPos ? `${clazzPrefix}-locale-item-readonly-${popupTagPos}` : undefined))}>
-            <If condition={popupTagPos === 'before'} validation={false}>
-                <span className={`${clazzPrefix}-locale-item-readonly-tag`}>
-                    {tag}
-                </span>
-            </If>
-            <div className={`${clazzPrefix}-locale-item-readonly-content`}>
-                {dom || props?.proFieldProps?.emptyText || '-'}
-            </div>
-            <If condition={popupTagPos === 'after'} validation={false}>
-                <span className={`${clazzPrefix}-locale-item-readonly-tag`}>
-                    {tag}
-                </span>
-            </If>
-        </div>
-    );
-
     const cloneItemRules = () => {
         if (!props?.rules || !popupCloneProps?.rules) {
             return [];
@@ -578,7 +557,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             readOnly: props.readonly || props?.fieldProps?.readOnly || fieldProps?.readOnly,
                             onChange: (event: any) => {
                                 if (!popupProField && rawName) {
-                                    formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                    form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
                                 }
                                 fieldProps?.onChange?.(event);
                             },
@@ -594,10 +573,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             'data-locale-input-tag': tagId,
                         }}
                         proField={popupProField}
-                        proFieldProps={{
-                            render: (dom: React.ReactNode) => itemProp?.proFieldProps?.render?.(dom) ?? renderItemReadonly(tag, dom),
-                            ...(!itemProp?.proFieldProps ? {} : omit(itemProp.proFieldProps, ['render']))
-                        }}
                         rules={[
                             ...(props?.popupShareProps?.rules ?? []),
                             ...clonedRules,
@@ -634,7 +609,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             readOnly: props.readonly || props?.fieldProps?.readOnly,
                             onChange: (event: any) => {
                                 if (!popupProField && rawName) {
-                                    formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                    form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
                                 }
                             },
                             onCompositionStart: () => {
@@ -646,9 +621,6 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                             'data-locale-input-tag': tagId,
                         }}
                         proField={popupProField}
-                        proFieldProps={{
-                            render: (dom: React.ReactNode) => renderItemReadonly(tag, dom),
-                        }}
                         rules={[
                             ...(props?.popupShareProps?.rules || []),
                             ...clonedRules,

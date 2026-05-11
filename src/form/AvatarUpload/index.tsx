@@ -16,18 +16,17 @@
 
 
 import React from 'react';
-import {App, Avatar, Image, Space, Upload, type AvatarProps, type TooltipProps, type UploadProps} from 'antd';
-import {type RcFile} from 'antd/es/upload/interface';
-import {type ImageProps as RcImageProps} from 'rc-image';
+import {App, Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps} from 'antd';
+import {type RcFile} from 'antd/lib/upload/interface';
 import {UserOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
+import {createField} from '@ant-design/pro-form/lib/BaseForm/createField';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {FileUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type CircleSquareShape, type FileSizeUint} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {intlLocales} from './intl-locales';
@@ -183,7 +182,7 @@ export type AvatarUploadProps = Omit<ProFormFieldItemProps, 'children' | 'fieldR
      * @description.zh-CN 图像属性
      * @description.zh-TW 圖像屬性
      */
-    imageProps?: Omit<RcImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
+    imageProps?: Omit<ImageProps, 'src' | 'srcSet' | 'fallback' | 'width' | 'height' | 'preview' | 'title'>;
 
     /**
      * @description Whether to enable upload or not

@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Modal, type ModalProps, type ModalFuncProps} from 'antd';
-import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
+import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/lib/modal/confirm';
+import {omit} from '@rc-component/util';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 
 
@@ -174,7 +174,7 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
     const modalFuncOpeningRef = React.useRef<boolean>(false);
     const openedRef = React.useRef<boolean>(false);
     const timerRef = React.useRef<number>(0);
-    const triggerForRef = React.useRef<Document | Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : undefined) ?? document);
+    const triggerForRef = React.useRef<Document | Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : null) ?? document);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -332,11 +332,11 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
             className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalProps?.className)}
             wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalProps?.wrapClassName)}
             open={modalOpening}
-            onOk={(event: React.MouseEvent<any>) => {
+            onOk={(event: any) => {
                 setModalOpening(false);
                 props?.modalProps?.onOk?.(event);
             }}
-            onCancel={(event: React.MouseEvent<any>) => {
+            onCancel={(event: any) => {
                 setModalOpening(false);
                 props?.modalProps?.onCancel?.(event);
             }}

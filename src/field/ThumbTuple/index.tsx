@@ -17,15 +17,15 @@
 
 import React from 'react';
 import {Space, type SpaceProps} from 'antd';
+import {omit} from '@rc-component/util';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from '@/field/ThumbToggle';
 import {useFieldStyle} from './style';
 
 
 export type ThumbTupleRef = {
-    getThumbLikeRef: () => React.MutableRefObject<ThumbToggleRef | undefined>;
-    getThumbDislikeRef: () => React.MutableRefObject<ThumbToggleRef | undefined>;
+    getThumbLikeRef: () => React.RefObject<ThumbToggleRef | undefined>;
+    getThumbDislikeRef: () => React.RefObject<ThumbToggleRef | undefined>;
 };
 
 
@@ -92,10 +92,10 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        getThumbLikeRef: (): React.MutableRefObject<ThumbToggleRef | null> => {
+        getThumbLikeRef: (): React.RefObject<ThumbToggleRef | null> => {
             return thumbLikeRef;
         },
-        getThumbDislikeRef: (): React.MutableRefObject<ThumbToggleRef | null> => {
+        getThumbDislikeRef: (): React.RefObject<ThumbToggleRef | null> => {
             return thumbDislikeRef;
         }
     }));

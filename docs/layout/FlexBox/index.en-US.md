@@ -10,7 +10,7 @@ FlexBox component, a flex layout container for alignment.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {FlexBox} from '@unikue/ant-buddy-pro';
 ```
 

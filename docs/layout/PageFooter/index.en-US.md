@@ -10,7 +10,7 @@ Similar to [GlobalFooter](https://github.com/ant-design/pro-components/tree/mast
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {PageFooter} from '@unikue/ant-buddy-pro';
 ```
 

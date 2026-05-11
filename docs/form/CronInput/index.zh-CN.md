@@ -10,7 +10,7 @@ CronInput 是一个可以通过可视化选项来生成 cron 表达式的组件�
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {CronInput} from '@unikue/ant-buddy-pro';
 ```
 

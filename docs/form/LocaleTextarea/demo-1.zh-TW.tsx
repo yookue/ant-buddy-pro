@@ -19,12 +19,12 @@ import React from 'react';
 import {Divider, message as messageApi} from 'antd';
 import {ProForm, ProFormRadio} from '@ant-design/pro-form';
 import {LocaleTextarea} from '@unikue/ant-buddy-pro';
-import {type TabsPosition} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
     const [messageInvoker, messageContext] = messageApi.useMessage();
-    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
+    const [tabPlacement, setTabPlacement] = React.useState<TabPlacement>('top');
 
     return (
         <>
@@ -47,17 +47,17 @@ export default () => {
                     label='Tab 位置'
                     radioType='button'
                     fieldProps={{
-                        value: tabPos,
+                        value: tabPlacement,
                         buttonStyle: 'solid',
                         onChange: (event) => {
-                            setTabPos(event.target?.value);
+                            setTabPlacement(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '上', value: 'top'},
                         {label: '下', value: 'bottom'},
-                        {label: '左', value: 'left'},
-                        {label: '右', value: 'right'},
+                        {label: '左', value: 'start'},
+                        {label: '右', value: 'end'},
                         {label: '上-末尾', value: 'top-end'},
                         {label: '下-末尾', value: 'bottom-end'},
                     ]}
@@ -72,15 +72,16 @@ export default () => {
                             maxRows: 8,
                         }
                     }}
+                    tabsProps={{
+                        tabPlacement: tabPlacement,
+                    }}
                     rules={[
                         {
                             required: true,
                             message: '請輸入示例字段',
                         },
                     ]}
-                    tabsProps={{
-                        tabPosition: tabPos,
-                    }}
+                    layout='vertical'
                     locale='zh_TW'
                     switchTextareaProps={[
                         {

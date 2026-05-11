@@ -10,7 +10,7 @@ CountField 用于显示一个带计数的字段。
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {CountField} from '@unikue/ant-buddy-pro';
 ```
 

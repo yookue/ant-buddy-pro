@@ -10,7 +10,7 @@ TagInput，提供了壹個可通過文本框增加的多標簽。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {TagInput} from '@unikue/ant-buddy-pro';
 ```
 
@@ -40,8 +40,6 @@ import {TagInput} from '@unikue/ant-buddy-pro';
 | addingInputProps    | 添加標簽的文本框的屬性            | `AddingInputProps`                                                                                             | -                 |
 | addingTagProps      | 添加標簽的屬性                | `TagProps`                                                                                                     | -                 |
 | compactMargin       | 是否使用緊凑邊距               | `boolean`                                                                                                      | -                 |
-| tweenOneAnim        | 是否啟用 tween-one 動畫      | `boolean`                                                                                                      | `true`            |
-| tweenOneProps       | tween-one 動畫的屬性        | `TweenOneGroupProps`                                                                                           | -                 |
 | warnExists          | 是否顯示標簽已存在的警告           | `boolean`                                                                                                      | `true`            |
 | proField            | 是否使用 ProFormField 控件   | `boolean`                                                                                                      | `true`            |
 | onTagContentsChange | 標簽内容變化時的回調函數           | `(contents?: (string \| number)[]) => void`                                                                    | -                 |

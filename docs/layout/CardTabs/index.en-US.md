@@ -10,7 +10,7 @@ Similar to [Tabs](https://ant.design/components/tabs) of [Ant Design](https://an
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {CardTabs} from '@unikue/ant-buddy-pro';
 ```
 
@@ -26,7 +26,7 @@ import {CardTabs} from '@unikue/ant-buddy-pro';
 | containerClazz | The CSS class name of the container div | `string`                                                                                | -                 |
 | containerStyle | The CSS style of the container div      | `React.CSSProperties`                                                                   | -                 |
 | tabBorder      | Whether to display the tab border       | `boolean`                                                                               | `true`            |
-| tabPosition    | The position of the tabs                | `'top' \| 'right' \| 'bottom' \| 'left' \| 'top-end' \| 'bottom-end'`                   | `'top'`           |
+| tabPlacement   | The position of the tabs                | `'top' \| 'top-end' \| 'bottom' \| 'bottom-end' \| 'start' \| 'end'`                    | `'top'`           |
 | contentBorder  | Whether to display the content border   | `boolean`                                                                               | `true`            |
 | inkBar         | Whether to display the ink bar          | `boolean`                                                                               | `true`            |
 | size           | The size of the tabs                    | `'small' \| 'middle' \| 'large' \| 'extra-small'`                                       | `'middle'`        |

@@ -10,7 +10,7 @@ CipherStrength, provides a cipher strength indicator with captions and a progres
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {CipherStrength} from '@unikue/ant-buddy-pro';
 ```
 

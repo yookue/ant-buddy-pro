@@ -18,9 +18,9 @@
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Switch, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
+import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ValueType as RcValueType} from 'rc-input-number';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
@@ -330,7 +330,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                             value={entryChoice}
                             onChange={(event: RadioChangeEvent) => setEntryChoice(event.target.value)}
                         >
-                            <Space direction='vertical'>
+                            <Space orientation='vertical'>
                                 <Radio value={EntryChoiceType.EVERY_MONTH}>
                                     {ObjectUtils.firstNotNil(props?.localeProps?.everyMonth, intlLocales.get([locale, 'everyMonth']), intlLocales.get(['en_US', 'everyMonth']))}
                                 </Radio>
@@ -436,7 +436,7 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
                                         window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_MONTH), 80);
                                     }}
                                 >
-                                    <Space direction='vertical'>
+                                    <Space orientation='vertical'>
                                         {ObjectUtils.firstNotNil(props?.localeProps?.specificMonth, intlLocales.get([locale, 'specificMonth']), intlLocales.get(['en_US', 'specificMonth']))}
                                         <Form.Item noStyle={true} shouldUpdate={true}>
                                             {() => {

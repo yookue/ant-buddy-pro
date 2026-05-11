@@ -26,7 +26,6 @@ export default () => {
     const tagInputRef = React.useRef<TagInputRef>(null);
     const [addable, setAddable] = React.useState<boolean>(false);
     const [removable, setRemovable] = React.useState<boolean>(false);
-    const [tweenOneAnim, setTweenOneAnim] = React.useState<boolean>(true);
 
     return (
         <>
@@ -55,16 +54,6 @@ export default () => {
                             onChange: setRemovable,
                         }}
                     />
-                    <ProFormSwitch
-                        label='TweenOne Animation'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: tweenOneAnim,
-                            disabled: !removable,
-                            onChange: setTweenOneAnim,
-                        }}
-                    />
                 </ProForm.Group>
                 <ProForm.Group>
                     <Button
@@ -87,7 +76,6 @@ export default () => {
                     valuePropName='fulfilTagItems'
                     trigger='onTagContentsChange'
                     addable={addable}
-                    tweenOneAnim={tweenOneAnim}
                     fulfilTagItems={[
                         {
                             color: 'volcano',

@@ -17,21 +17,21 @@
 
 import React from 'react';
 import {Tabs, type TabsProps} from 'antd';
-import {type SizeType} from 'antd/es/config-provider/SizeContext';
+import {type SizeType} from 'antd/lib/config-provider/SizeContext';
+import {type TabPlacement as RcTabPlacement} from 'antd/lib/tabs';
+import {omit} from '@rc-component/util';
 import classNames from 'classnames';
-import {type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
 
-export type TabsPosition = RcTabPosition | 'top-end' | 'bottom-end';
+export type TabPlacement = RcTabPlacement | 'top-end' | 'bottom-end';
 
 
 export type TabsSizeType = SizeType | 'extra-small';
 
 
-export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition'> & {
+export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPlacement'> & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
@@ -63,12 +63,12 @@ export type CardTabsProps = Omit<TabsProps, 'size' | 'tabPosition'> & {
     tabBorder?: boolean;
 
     /**
-     * @description The position of the tabs
+     * @description The placement of the tabs
      * @description.zh-CN 标签的位置
      * @description.zh-TW 標簽的位置
      * @default 'top'
      */
-    tabPosition?: TabsPosition;
+    tabPlacement?: TabPlacement;
 
     /**
      * @description Whether to display the content border
@@ -115,7 +115,7 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     // Initialize the default props
     const {
         tabBorder = true,
-        tabPosition = 'top',
+        tabPlacement = 'top',
         contentBorder = true,
         inkBar = true,
         size = 'middle',
@@ -128,26 +128,27 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
         return (size === 'extra-small') ? 'small' : size;
     };
 
-    const detectTabPosition = () => {
-        switch (tabPosition) {
+    const detectTabPlacement = () => {
+        switch (tabPlacement) {
             case 'top-end':
                 return 'top';
             case 'bottom-end':
                 return 'bottom';
             default:
-                return tabPosition as RcTabPosition;
+                return tabPlacement as TabPlacement;
         }
     };
 
-    const restTabsProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPosition', 'contentBorder', 'inkBar', 'presetStyle', 'type', 'size']);
+    const restTabsProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPlacement', 'contentBorder', 'inkBar', 'presetStyle', 'type', 'size']);
 
     return (
-        <div className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${size}`, `${clazzPrefix}-${tabPosition}`, (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${size}`, `${clazzPrefix}-${tabPlacement}`, (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)} style={props?.containerStyle}>
             <Tabs
                 className={classNames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (!contentBorder ? undefined : `${clazzPrefix}-content-border`), (!inkBar ? undefined : `${clazzPrefix}-ink-bar`))}
                 type={props?.type ?? 'card'}
                 size={detectTabSize()}
-                tabPosition={detectTabPosition()}
+                // @ts-ignore
+                tabPlacement={detectTabPlacement()}
                 {...restTabsProps}
             />
         </div>

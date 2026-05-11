@@ -46,6 +46,7 @@ export default () => {
                     const images = [
                         `https://unikueltd.github.io/ant-buddy-pro/assets/ico/logo-icon.svg?timestamp=${Date.now()}`,
                         `https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png?timestamp=${Date.now()}`,
+                        `https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg?timestamp=${Date.now()}`,
                         `https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg?timestamp=${Date.now()}`,
                     ];
                     return RandomUtils.randomElement(images);

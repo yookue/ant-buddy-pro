@@ -10,7 +10,7 @@ CodePreview component, provides a simple segment for displaying code snippet, wi
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {CodePreview} from '@unikue/ant-buddy-pro';
 ```
 

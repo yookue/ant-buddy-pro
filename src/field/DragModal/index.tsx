@@ -17,11 +17,11 @@
 
 import React from 'react';
 import {Modal, type ModalProps} from 'antd';
+import {DndContext, useDraggable} from '@dnd-kit/core';
+import {restrictToWindowEdges} from '@dnd-kit/modifiers';
+import {omit} from '@rc-component/util';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
-import Draggable, {type DraggableBounds, type DraggableData, type DraggableEvent} from 'react-draggable';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
-import {useFieldStyle} from './style';
 
 
 export type DragModalProps = ModalProps & {
@@ -40,14 +40,6 @@ export type DragModalProps = ModalProps & {
      * @default true
      */
     draggable?: boolean;
-
-    /**
-     * @description The bounds of the draggable area
-     * @description.zh-CN 可拖动区域的边界
-     * @description.zh-TW 可拖動區域的邊界
-     * @default {left: 0, top: 0, bottom: 0, right: 0}
-     */
-    draggableBound?: DraggableBounds;
 };
 
 
@@ -62,57 +54,124 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
     // Initialize the default props
     const {
         draggable = true,
-        draggableBound = {left: 0, top: 0, bottom: 0, right: 0},
     } = props ?? {};
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
-    const [dragDisabled, setDragDisabled] = React.useState<boolean>(true);
-    const [dragBound, setDragBound] = React.useState<DraggableBounds>(draggableBound);
-    const dragRef = React.useRef<HTMLDivElement>(null);
-    const fieldStyle = useFieldStyle(clazzPrefix);
+    const dragId = React.useMemo(() => `drag-modal-${fieldId}`, [fieldId]);
+    const [offset, setOffset] = React.useState<{ x: number; y: number }>({x: 0, y: 0});
+    const [opening, setOpening] = React.useState<boolean>(false);
 
-    const onDragStart = (_event: DraggableEvent, data: DraggableData) => {
-        const {clientWidth, clientHeight} = document.documentElement;
-        const targetRect = dragRef.current?.getBoundingClientRect();
-        if (!targetRect) {
+    const omitProps = !props ? {} : omit(props, ['className', 'wrapClassName', 'modalRender', 'title', 'clazzPrefix', 'draggable']);
+
+    // Handle drag end to update offset
+    const handleDragEnd = (event: any) => {
+        if (!event.delta) {
             return;
         }
-        setDragBound({
-            left: -targetRect.left + data.x,
-            right: clientWidth - (targetRect.right - data.x),
-            top: -targetRect.top + data.y,
-            bottom: clientHeight - (targetRect.bottom - data.y),
-        });
+        setOffset(prev => ({
+            x: prev.x + event.delta.x,
+            y: prev.y + event.delta.y,
+        }));
     };
 
-    const omitProps = !props ? {} : omit(props, ['className', 'wrapClassName', 'modalRender', 'title', 'clazzPrefix', 'draggable', 'draggableBound']);
+    // Reset offset when modal closes
+    React.useEffect(() => {
+        if (!props?.open && opening) {
+            setOffset({x: 0, y: 0});
+            setOpening(false);
+        } else if (props?.open && !opening) {
+            setOpening(true);
+        }
+    }, [props?.open, opening]);
 
-    return (
-        <Modal
-            className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${fieldId}`, props?.className)}
-            wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
-            modalRender={props?.modalRender ?? (!draggable ? undefined : (dom: React.ReactNode) => {
-                return (
-                    <Draggable bounds={dragBound} disabled={dragDisabled} onStart={onDragStart}>
-                        <div ref={dragRef} className={classNames(`${clazzPrefix}-draggable`, `${clazzPrefix}-draggable-${fieldId}`)}>
+    // Prevent body scroll when dragging
+    React.useEffect(() => {
+        if (!draggable || !props?.open) {
+            return;
+        }
+
+        const handleTouchMove = (ev: TouchEvent) => {
+            ev.preventDefault();
+        };
+
+        // Lock body scroll to prevent mask scrollbar flickering
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        document.addEventListener('touchmove', handleTouchMove, {passive: false});
+
+        return () => {
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            document.removeEventListener('touchmove', handleTouchMove);
+        };
+    }, [draggable, props?.open]);
+
+    // Draggable content component - always defined to maintain hook order
+    const DraggableContent: React.FC<{children: React.ReactNode}> = React.useCallback(({children}) => {
+        const {setNodeRef, transform} = useDraggable({
+            id: dragId,
+            disabled: !draggable,
+        });
+
+        const styles = {
+            transform: `translate3d(${(transform?.x || 0) + offset.x}px, ${(transform?.y || 0) + offset.y}px, 0)`,
+        };
+
+        return (
+            <div
+                ref={setNodeRef}
+                className={classNames(`${clazzPrefix}-draggable`, `${clazzPrefix}-draggable-${fieldId}`)}
+                style={styles}
+            >
+                {children}
+            </div>
+        );
+    }, [dragId, draggable, clazzPrefix, fieldId, offset]);
+
+    // Title component with drag handle - always defined to maintain hook order
+    const DraggableTitle: React.FC = React.useCallback(() => {
+        const {listeners, attributes} = useDraggable({
+            id: dragId,
+            disabled: !draggable,
+        });
+
+        return (
+            <div
+                className={classNames(`${clazzPrefix}-draggable-title`, `${clazzPrefix}-draggable-title-${fieldId}`)}
+                {...listeners}
+                {...attributes}
+                style={{cursor: draggable ? 'move' : 'default'}}
+            >
+                {props?.title}
+            </div>
+        );
+    }, [dragId, draggable, clazzPrefix, fieldId, props?.title]);
+
+    // Build modal content based on draggable prop
+    return draggable ? (
+        <DndContext
+            modifiers={[restrictToWindowEdges]}
+            onDragEnd={handleDragEnd}
+        >
+            <Modal
+                className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
+                wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
+                title={props?.modalRender ? props?.title : <DraggableTitle/>}
+                modalRender={props?.modalRender ?? ((dom: React.ReactNode) => {
+                    return (
+                        <DraggableContent>
                             {dom}
-                        </div>
-                    </Draggable>
-                );
-            })}
-            title={(props?.modalRender || !draggable) ? props?.title : (
-                <div
-                    className={classNames(`${clazzPrefix}-draggable-title`, `${clazzPrefix}-draggable-title-${fieldId}`)}
-                    onMouseOver={() => {
-                        if (dragDisabled) {
-                            setDragDisabled(false);
-                        }
-                    }}
-                    onMouseOut={() => setDragDisabled(true)}
-                >
-                    {props?.title}
-                </div>
-            )}
+                        </DraggableContent>
+                    );
+                })}
+                {...omitProps}
+            />
+        </DndContext>
+    ) : (
+        <Modal
+            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
+            wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
+            title={props?.title}
             {...omitProps}
         />
     );

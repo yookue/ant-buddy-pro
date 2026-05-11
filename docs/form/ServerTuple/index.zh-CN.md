@@ -10,7 +10,7 @@ ServerTuple, 提供了一个可以输入服务器主机和端口的组合框。
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {ServerTuple} from '@unikue/ant-buddy-pro';
 ```
 

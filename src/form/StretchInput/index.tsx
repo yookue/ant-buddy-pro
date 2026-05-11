@@ -16,13 +16,12 @@
 
 
 import React from 'react';
-import {Input, type InputProps, type InputRef} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {Form, Input, type InputProps, type InputRef} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
+import {omit} from '@rc-component/util';
 import {NanoidUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type ClickHoverType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -87,7 +86,7 @@ export type StretchInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>
  * @author David Hsing
  */
 export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const clazzPrefix = props?.clazzPrefix ?? 'abp-stretch-input';
 
     // Initialize the default props
@@ -168,11 +167,10 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         return (
             <Input
                 className={classNames(clazzPrefix, fieldStyle.hashId, (stretch ? props?.stretchClazz : props?.fieldProps?.className))}
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 onChange={(event: any) => {
                     if (props?.name) {
-                        formContext?.form?.setFieldValue(props.name, event.target.value);
+                        form?.setFieldValue(props.name, event.target.value);
                     }
                     props?.fieldProps?.onChange?.(event);
                 }}

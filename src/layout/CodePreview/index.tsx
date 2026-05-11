@@ -17,8 +17,8 @@
 
 import React from 'react';
 import {Typography} from 'antd';
-import {type TitleProps} from 'antd/es/typography/Title';
-import {type TextProps} from 'antd/es/typography/Text';
+import {type TitleProps} from 'antd/lib/typography/Title';
+import {type TextProps} from 'antd/lib/typography/Text';
 import {If} from '@unikue/react-condition';
 import classNames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';

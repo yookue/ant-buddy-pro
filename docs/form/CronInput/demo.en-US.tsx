@@ -16,12 +16,13 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
+import {Divider, message as messageApi} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {CronInput} from '@unikue/ant-buddy-pro';
+import {CronInput, ConsoleUtils} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
+    const [messageInvoker, messageContext] = messageApi.useMessage();
     const [tabPos, setTabPos] = React.useState<'top' | 'bottom'>('top');
     const [allowSecond, setAllowSecond] = React.useState(true);
     const [allowYear, setAllowYear] = React.useState(true);
@@ -30,6 +31,7 @@ export default () => {
 
     return (
         <>
+            {messageContext}
             <ProForm
                 name='CronInput_demo.en-US'
                 layout='horizontal'
@@ -95,24 +97,33 @@ export default () => {
                 name='CronInput_demo.en-US.Test'
                 layout='vertical'
                 autoFocusFirstInput={false}
-                submitter={false}
+                submitter={{
+                    searchConfig: {
+                        submitText: 'Submit',
+                        resetText: 'Reset',
+                    }
+                }}
+                onFinish={async (values) => {
+                    ConsoleUtils.logTimestamp(false, false, 'CronInput', values, 'Submitted data');
+                    messageInvoker.success(`Yep, you've clicked the submit button`);
+                }}
             >
                 <CronInput
                     name='foobar'
                     label='Demo field'
                     placeholder='Please input this field'
+                    allowSecond={allowSecond}
+                    allowYear={allowYear}
+                    allowOkEcho={allowOkEcho}
+                    tabsProps={{
+                        tabPlacement: tabPos,
+                    }}
                     rules={[
                         {
                             required: true,
                             message: 'Please input demo field',
                         },
                     ]}
-                    allowSecond={allowSecond}
-                    allowYear={allowYear}
-                    allowOkEcho={allowOkEcho}
-                    tabsProps={{
-                        tabPosition: tabPos,
-                    }}
                     locale='en_US'
                     proField={proField}
                 />

@@ -10,7 +10,7 @@ ChronoTuple, provides a capability that displaying a number input box and a sele
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {ChronoTuple} from '@unikue/ant-buddy-pro';
 ```
 

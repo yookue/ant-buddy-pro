@@ -16,11 +16,10 @@
 
 
 import React from 'react';
-import {Checkbox, type CheckboxProps, type TooltipProps} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {Checkbox, Form, type CheckboxProps, type TooltipProps} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
@@ -131,7 +130,7 @@ export type ExactInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore
  * @author David Hsing
  */
 export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const clazzPrefix = props?.clazzPrefix ?? 'abp-exact-input';
     const intlType = useIntl();
 
@@ -174,7 +173,7 @@ export const ExactInput: React.FC<ExactInputProps> = (props?: ExactInputProps) =
                     ev.stopPropagation();
                     setChecked(ev.target.checked);
                     if (checkboxName) {
-                        formContext?.form?.setFieldValue(checkboxName, ev.target.checked);
+                        form?.setFieldValue(checkboxName, ev.target.checked);
                     }
                     checkProps?.onChange?.(ev);
                 }}

@@ -17,14 +17,13 @@
 
 import React from 'react';
 import {Form, type InputProps} from 'antd';
-import {FormContext} from 'antd/es/form/context';
 import {ProForm, FormListContext} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import 'mathlive';
 import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
@@ -123,7 +122,7 @@ export type MathInputProps = Omit<ProFormFieldItemProps, 'children' | 'fieldRef'
  * @see "https://mathlive.io/mathfield/guides/customizing/"
  */
 export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const formListContext = React.useContext(FormListContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-math-input';
@@ -142,7 +141,7 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldName = !props?.name ? undefined : [...(formListContext?.listName ?? []), props.name];
-    const incomeValue = (props?.name && formContext?.form) ? Form.useWatch(fieldName, formContext.form) : props?.value;
+    const incomeValue = (props?.name && form) ? Form.useWatch(fieldName, form) : props?.value;
     const containerRef = React.useRef<HTMLDivElement>(null);
     const fieldRef = React.useRef<any>(null);
     const fieldStyle = useFieldStyle(clazzPrefix);
@@ -167,10 +166,10 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
         }
         const value = fieldRef.current.value;
         if (fieldName) {
-            formContext?.form?.setFieldValue(fieldName, value);
+            form?.setFieldValue(fieldName, value);
         }
         props?.onChange?.(value);
-    }, [fieldName, formContext?.form]);
+    }, [fieldName, form]);
 
     React.useEffect(() => {
         if (containerRef.current && !fieldRef.current && (window as any).MathfieldElement) {
@@ -199,7 +198,7 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
                     fieldRef.current.value = incomeValue ?? '';
                 } else {
                     if (fieldName) {
-                        fieldRef.current.value = formContext?.form?.getFieldValue(fieldName) ?? '';
+                        fieldRef.current.value = form?.getFieldValue(fieldName) ?? '';
                     }
                 }
                 if (props?.placeholder) {

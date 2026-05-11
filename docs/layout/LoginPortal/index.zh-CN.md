@@ -14,13 +14,13 @@ order: 30
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {LoginPortal} from '@unikue/ant-buddy-pro';
 ```
 
 ## 使用示例
 
-```jsx | pure
+```tsx | pure
 import React from 'react';
 import {LoginForm} from '@ant-design/pro-form';
 import {LoginPortal, PageFooter} from '@unikue/ant-buddy-pro';

@@ -12,7 +12,7 @@ BadgeRibbon 組件可以顯示壹個緞帶。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {BadgeRibbon} from '@unikue/ant-buddy-pro';
 ```
 

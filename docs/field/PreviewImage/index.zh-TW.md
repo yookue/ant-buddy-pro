@@ -10,7 +10,7 @@ PreviewImage 是壹個可顯示圖片預覽的組件，並且支持備用圖片�
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {PreviewImage} from '@unikue/ant-buddy-pro';
 ```
 

@@ -12,7 +12,7 @@ The typical scenario is, displaying a small icon with a dropdown which lists not
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {NotifyBadge} from '@unikue/ant-buddy-pro';
 ```
 

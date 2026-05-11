@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "rootDir": ".",
-        "baseUrl": ".",
         "outDir": "./dist",
         "target": "es2020",
         "lib": ["dom", "es2022"],
@@ -24,7 +23,7 @@
                 "./src/*"
             ],
             "@@/*": [
-                ".dumi/tmp/*"
+                "./.dumi/tmp/*"
             ],
             "@unikue/ant-buddy-pro": [
                 "./src",

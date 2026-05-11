@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {type ThemeType} from '@ant-design/icons-svg/es/types';
+import {type ThemeType} from '@ant-design/icons-svg/lib/types';
 import {type MenuDataItem} from '@ant-design/pro-layout';
 import {StringUtils} from '@unikue/ts-lang-utils';
 import * as iconTypes from '@/type/design-icon';

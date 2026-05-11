@@ -12,7 +12,7 @@ RefreshImage 是一个可点击刷新的图片组件。
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {RefreshImage} from '@unikue/ant-buddy-pro';
 ```
 

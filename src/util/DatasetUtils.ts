@@ -15,7 +15,7 @@
  */
 
 
-import omit from 'rc-util/es/omit';
+import {omit} from '@rc-component/util';
 
 
 /**

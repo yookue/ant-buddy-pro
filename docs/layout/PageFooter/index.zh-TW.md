@@ -10,7 +10,7 @@ order: 40
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {PageFooter} from '@unikue/ant-buddy-pro';
 ```
 

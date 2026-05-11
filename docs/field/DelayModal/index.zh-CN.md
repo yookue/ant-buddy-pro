@@ -12,7 +12,7 @@ DelayModal 用于在超时后显示一个模态对话框，如果没有其它事
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {DelayModal} from '@unikue/ant-buddy-pro';
 ```
 

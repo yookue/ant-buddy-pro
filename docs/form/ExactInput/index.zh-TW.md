@@ -10,9 +10,7 @@ ExactInput，提供了壹個帶復選框的文本輸入字段，以便支持精�
 
 ## 使用前提
 
-<Alert showIcon>
-  如果您使用默認的圖標，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
-</Alert>
+> 如果您使用默認的圖標，您需要先安裝 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 圖標組件包：
 
 <InstallDependencies
   npm="$ npm install @ant-design/icons"
@@ -22,7 +20,7 @@ ExactInput，提供了壹個帶復選框的文本輸入字段，以便支持精�
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {ExactInput} from '@unikue/ant-buddy-pro';
 ```
 

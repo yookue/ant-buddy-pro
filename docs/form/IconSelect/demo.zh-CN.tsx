@@ -20,12 +20,12 @@ import {Divider, Empty} from 'antd';
 import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
 import {IconSelect, ConsoleUtils} from '@unikue/ant-buddy-pro';
 import {IconOptionMode} from '@unikue/ant-buddy-pro/form/IconSelect';
-import {type TabsPosition} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
     const [optionMode, setOptionMode] = React.useState<IconOptionMode>('icon');
-    const [tabPos, setTabPos] = React.useState<TabsPosition>('top');
+    const [tabPlacement, setTabPlacement] = React.useState<TabPlacement>('top');
     const [themeInkBar, setThemeInkBar] = React.useState<boolean>(true);
     const [sceneInkBar, setSceneInkBar] = React.useState<boolean>(true);
     const [searchBox, setSearchBox] = React.useState<boolean>(true);
@@ -60,18 +60,18 @@ export default () => {
                     label='Tab 位置'
                     radioType='button'
                     fieldProps={{
-                        value: tabPos,
+                        value: tabPlacement,
                         buttonStyle: 'solid',
                         disabled: optionMode === 'text',
                         onChange: (event) => {
-                            setTabPos(event.target?.value);
+                            setTabPlacement(event.target?.value);
                         }
                     }}
                     options={[
                         {label: '上', value: 'top'},
                         {label: '下', value: 'bottom'},
-                        {label: '左', value: 'left'},
-                        {label: '右', value: 'right'},
+                        {label: '左', value: 'start'},
+                        {label: '右', value: 'end'},
                         {label: '上-末尾', value: 'top-end'},
                         {label: '下-末尾', value: 'bottom-end'},
                     ]}
@@ -120,7 +120,7 @@ export default () => {
                 </ProForm.Group>
                 <Divider/>
                 <IconSelect
-                    name='DemoIcon'
+                    name='demoIcon'
                     placeholder='请选择图标'
                     fieldProps={{
                         notFoundContent: (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='无数据'/>),
@@ -138,7 +138,7 @@ export default () => {
                     themeInkBar={themeInkBar}
                     sceneInkBar={sceneInkBar}
                     tabsProps={{
-                        tabPosition: tabPos,
+                        tabPlacement: tabPlacement,
                     }}
                     searchBox={searchBox}
                     tooltipCtrl={tooltipCtrl}

@@ -18,9 +18,9 @@
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
+import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ValueType as RcValueType} from 'rc-input-number';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -251,7 +251,7 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
                         value={entryChoice}
                         onChange={(event: RadioChangeEvent) => setEntryChoice(event.target.value)}
                     >
-                        <Space direction='vertical'>
+                        <Space orientation='vertical'>
                             <Radio value={EntryChoiceType.EVERY_SECOND}>
                                 {ObjectUtils.firstNotNil(props?.localeProps?.everySecond, intlLocales.get([locale, 'everySecond']), intlLocales.get(['en_US', 'everySecond']))}
                             </Radio>
@@ -357,7 +357,7 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
                                     window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_SECOND), 80);
                                 }}
                             >
-                                <Space direction='vertical'>
+                                <Space orientation='vertical'>
                                     {ObjectUtils.firstNotNil(props?.localeProps?.specificSecond, intlLocales.get([locale, 'specificSecond']), intlLocales.get(['en_US', 'specificSecond']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {

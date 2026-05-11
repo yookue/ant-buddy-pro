@@ -10,9 +10,7 @@ IconSelect, provides a select box that displaying icons for choosing.
 
 ## Premise
 
-<Alert showIcon>
-  You need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first if you're using the default icons:
-</Alert>
+> You need to install <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> package first if you're using the default icons:
 
 <InstallDependencies
   npm="$ npm install @ant-design/icons"
@@ -22,7 +20,7 @@ IconSelect, provides a select box that displaying icons for choosing.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {IconSelect} from '@unikue/ant-buddy-pro';
 ```
 

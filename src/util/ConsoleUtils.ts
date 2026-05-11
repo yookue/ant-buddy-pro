@@ -15,9 +15,9 @@
  */
 
 
+import {noteOnce as rcNote, warning as rcWarning} from '@rc-component/util';
 import dayjs from 'dayjs';
 import objectHash from 'object-hash';
-import {noteOnce as rcNote, warningOnce as rcWarning} from 'rc-util/es/warning';
 import {PackageConst} from '@/constant/PackageConst';
 
 
@@ -61,6 +61,7 @@ export abstract class ConsoleUtils {
      *  ```
      */
     public static log(valid: boolean, once: boolean, component?: string, message?: any, explain?: string, product?: string): void {
+        // noinspection DuplicatedCode
         if (message === undefined || message === null) {
             return;
         }
@@ -101,6 +102,7 @@ export abstract class ConsoleUtils {
      *  ```
      */
     public static logTimestamp(valid: boolean, once: boolean, component?: string, message?: any, explain?: string, product?: string): void {
+        // noinspection DuplicatedCode
         if (message === undefined || message === null) {
             return;
         }
@@ -142,6 +144,7 @@ export abstract class ConsoleUtils {
      *  ```
      */
     public static note(valid: boolean, once: boolean, component?: string, message?: any, explain?: string, product?: string): void {
+        // noinspection DuplicatedCode
         if (message === undefined || message === null) {
             return;
         }
@@ -177,6 +180,7 @@ export abstract class ConsoleUtils {
      *  ```
      */
     public static warn(valid: boolean, once: boolean, component?: string, message?: any, explain?: string, product?: string): void {
+        // noinspection DuplicatedCode
         if (message === undefined || message === null) {
             return;
         }

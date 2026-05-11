@@ -10,7 +10,7 @@ TooltipField component, can display a field with a tooltip.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {TooltipField} from '@unikue/ant-buddy-pro';
 ```
 

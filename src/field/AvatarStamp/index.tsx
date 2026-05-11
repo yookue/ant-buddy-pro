@@ -18,9 +18,9 @@
 import React from 'react';
 import {Avatar, type AvatarProps} from 'antd';
 import {css} from '@emotion/css';
+import {omit} from '@rc-component/util';
 import {StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type RectZenithPlace} from '@/type/declaration';
 import {useFieldStyle} from './style';
 

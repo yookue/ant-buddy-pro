@@ -10,7 +10,7 @@ TagInput, provides some tags with a text input box with addable capability.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {TagInput} from '@unikue/ant-buddy-pro';
 ```
 
@@ -40,8 +40,6 @@ import {TagInput} from '@unikue/ant-buddy-pro';
 | addingInputProps    | The props of the adding input                   | `AddingInputProps`                                                                                             | -                 |
 | addingTagProps      | The props of the adding tag                     | `TagProps`                                                                                                     | -                 |
 | compactMargin       | Whether to use compact margin                   | `boolean`                                                                                                      | -                 |
-| tweenOneAnim        | Whether the tween-one animation is enabled      | `boolean`                                                                                                      | `true`            |
-| tweenOneProps       | The props of the tween-one animation            | `TweenOneGroupProps`                                                                                           | -                 |
 | warnExists          | Whether to warn if the tag already exists       | `boolean`                                                                                                      | `true`            |
 | proField            | Whether to use ProFormField instead of Antd     | `boolean`                                                                                                      | `true`            |
 | onTagContentsChange | The callback function when tag contents changed | `(contents?: (string \| number)[]) => void`                                                                    | -                 |

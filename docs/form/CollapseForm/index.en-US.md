@@ -12,7 +12,7 @@ The typical scenario is, replying to someone under a comment.
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {CollapseForm} from '@unikue/ant-buddy-pro';
 ```
 

@@ -10,7 +10,7 @@ SortableList, provides a capability that displaying some sort actions for a Ant 
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {SortableList} from '@unikue/ant-buddy-pro';
 ```
 

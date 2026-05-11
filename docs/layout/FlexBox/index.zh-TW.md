@@ -10,7 +10,7 @@ FlexBox 組件，一個用於對齊的彈性布局容器。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {FlexBox} from '@unikue/ant-buddy-pro';
 ```
 

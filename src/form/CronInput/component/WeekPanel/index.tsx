@@ -17,11 +17,11 @@
 
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Switch, Tooltip, Space, type RadioChangeEvent} from 'antd';
-import {type LabeledValue} from 'antd/es/select';
+import {type LabeledValue} from 'antd/lib/select';
 import {useIntl} from '@ant-design/pro-provider';
+import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ValueType as RcValueType} from 'rc-input-number';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
@@ -470,7 +470,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                             value={entryChoice}
                             onChange={(event: RadioChangeEvent) => setEntryChoice(event.target.value)}
                         >
-                            <Space direction='vertical'>
+                            <Space orientation='vertical'>
                                 <Radio value={EntryChoiceType.BLANK_WEEK}>
                                     {ObjectUtils.firstNotNil(props?.localeProps?.blankWeek, intlLocales.get([locale, 'blankWeek']), intlLocales.get(['en_US', 'blankWeek']))}
                                 </Radio>
@@ -599,7 +599,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                                         window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_WEEK), 80);
                                     }}
                                 >
-                                    <Space direction='vertical'>
+                                    <Space orientation='vertical'>
                                         {ObjectUtils.firstNotNil(props?.localeProps?.specificWeek, intlLocales.get([locale, 'specificWeek']), intlLocales.get(['en_US', 'specificWeek']))}
                                         <Form.Item noStyle={true} shouldUpdate={true}>
                                             {() => {
@@ -664,7 +664,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
                                         window.setTimeout(() => setEntryChoice(EntryChoiceType.ORDER_WEEK), 80);
                                     }}
                                 >
-                                    <Space direction='vertical'>
+                                    <Space orientation='vertical'>
                                         <Space>
                                             {ObjectUtils.firstNotNil(props?.localeProps?.monthOrderWeekPrefix, intlLocales.get([locale, 'monthOrderWeekPrefix']), intlLocales.get(['en_US', 'monthOrderWeekPrefix']))}
                                             <Form.Item noStyle={true} shouldUpdate={true}>

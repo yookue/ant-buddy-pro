@@ -53,18 +53,18 @@ export default defineConfig({
         { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.font.im/css?family=Comfortaa' },
         { rel: 'stylesheet', type: 'text/css', href: `${ROOT_CONTEXT}/assets/css/overlay.css` },
     ],
-    externals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-    },
-    headScripts: [
+    // externals: {
+        // 'react': 'React',
+        // 'react-dom': 'ReactDOM',
+    // },
+    // headScripts: [
         // Whether use unpkg
-        {src: 'https://unpkg.com/react@18.3.1/umd/react.production.min.js'},
-        {src: 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js'},
+        // {src: 'https://unpkg.com/react@18.3.1/umd/react.production.min.js'},
+        // {src: 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js'},
         // Or use bootcdn
         // {src: 'https://cdn.bootcdn.net/ajax/libs/react/18.3.1/umd/react.production.min.js'},
         // {src: 'https://cdn.bootcdn.net/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js'},
-    ],
+    // ],
     resolve: {
         docDirs: ['docs'],
         entryFile: './src/index.ts',

@@ -18,7 +18,7 @@ Similar to [ProFormCaptcha](https://procomponents.ant.design/components/field-se
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {CaptchaInput} from '@unikue/ant-buddy-pro';
 ```
 

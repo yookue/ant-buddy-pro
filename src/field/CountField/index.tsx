@@ -17,9 +17,9 @@
 
 import React from 'react';
 import {ConfigProvider, Badge, Space, type BadgeProps, type TooltipProps} from 'antd';
-import {type SpaceSize} from 'antd/es/space';
+import {type SpaceSize} from 'antd/lib/space';
+import {omit} from '@rc-component/util';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type AxisDirectionType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -202,7 +202,7 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
         >
             <Space
                 className={`${clazzPrefix}-space-${layout}`}
-                direction={layout}
+                orientation={layout}
                 size={spaceSize}
             >
                 {buildFieldDom()}

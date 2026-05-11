@@ -16,16 +16,15 @@
 
 
 import React from 'react';
-import {Select} from 'antd';
-import {FormContext} from 'antd/es/form/context';
+import {Form, Select} from 'antd';
 import {ProFormSelect} from '@ant-design/pro-form';
-import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
+import {type ProFormSelectProps} from '@ant-design/pro-form/lib/components/Select';
 import {type RequestOptionsType} from '@ant-design/pro-utils';
 import {useDebounceFn} from '@ant-design/pro-utils';
+import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type LabelMixinType, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
 import {useFieldStyle} from './style';
@@ -146,7 +145,7 @@ export type DivideSelectProps = Omit<ProFormSelectProps, 'children'> & {
  * @author David Hsing
  */
 export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const clazzPrefix = props?.clazzPrefix ?? 'abp-divide-select';
 
     // Initialize the default props
@@ -263,6 +262,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 {...restProps}
                 fieldProps={{
                     classNames: {
+                        // @ts-ignore
                         root: classNames(clazzPrefix, props?.fieldProps?.classNames?.root),
                         popup: {
                             root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
@@ -328,18 +328,18 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
         return (
             <Select
                 classNames={{
+                    // @ts-ignore
                     root: classNames(clazzPrefix, props?.fieldProps?.classNames?.root),
                     popup: {
                         root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
                     }
                 }}
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 options={(!presetStyle ? optionItems : rebuildOptions()) ?? []}
                 optionLabelProp={(!props?.fieldProps?.optionLabelProp || props.fieldProps.optionLabelProp === 'label') ? 'labelOrigin' : (props?.fieldProps?.optionLabelProp ?? 'value')}
                 onChange={(event: any) => {
                     if (props?.name) {
-                        formContext?.form?.setFieldValue(props.name, event.target.value);
+                        form?.setFieldValue(props.name, event.target.value);
                     }
                     props?.fieldProps?.onChange?.(event);
                 }}

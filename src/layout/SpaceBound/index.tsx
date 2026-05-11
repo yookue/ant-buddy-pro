@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Space, type SpaceProps} from 'antd';
-import {type SpaceSize} from 'antd/es/space';
+import {type SpaceSize} from 'antd/lib/space';
 import {css} from '@emotion/css';
+import {omit} from '@rc-component/util';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {useFieldStyle} from './style';
 
 

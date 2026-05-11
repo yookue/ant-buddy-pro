@@ -118,4 +118,51 @@ export abstract class DesignUtils {
         const additionalElement = element.classList.contains(additionalClass) ? element : element.querySelector<HTMLElement>(`.${additionalClass}`);
         return additionalElement?.offsetHeight ?? 0;
     }
+
+    /**
+     * Detects the layout of the nearest parent Form element
+     *
+     * @param element The starting element to search from (usually the current component's root element)
+     * @param prefix The CSS class prefix (default: 'ant')
+     * @returns The detected layout type: 'horizontal', 'vertical', or 'inline'
+     *
+     * @description
+     * This method traverses up the DOM tree from the given element to find the nearest Form element,
+     * and determines its layout by checking the CSS class names.
+     * Useful in React 19 where FormContext may not provide accurate layout information.
+     *
+     * @example
+     * ```ts
+     *  // Detect form layout from current element
+     *  const layout = DesignUtils.detectFormLayout(elementRef.current);
+     *
+     *  // With custom prefix
+     *  const layout = DesignUtils.detectFormLayout(elementRef.current, 'custom');
+     *  ```
+     */
+    public static detectFormLayout = (element?: HTMLElement | null, prefix: string = 'ant'): 'horizontal' | 'vertical' | 'inline' | null => {
+        if (!element) {
+            return null;
+        }
+        // Try to find the nearest Form element by checking parent nodes
+        let currentElement: HTMLElement | null = element;
+        while (currentElement && currentElement !== document.body) {
+            // Check if this element is a Form with layout class
+            if (currentElement.classList.contains(`${prefix}-form-horizontal`)) {
+                return 'horizontal';
+            }
+            if (currentElement.classList.contains(`${prefix}-form-vertical`)) {
+                return 'vertical';
+            }
+            if (currentElement.classList.contains(`${prefix}-form-inline`)) {
+                return 'inline';
+            }
+            // Stop searching if we reach the form level
+            if (currentElement.tagName === 'FORM' || currentElement.classList.contains(`${prefix}-form`)) {
+                break;
+            }
+            currentElement = currentElement.parentElement;
+        }
+        return null;
+    }
 }

@@ -10,7 +10,7 @@ AvatarStamp 是一個可以顯示帶角標的頭像控件。
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {AvatarStamp} from '@unikue/ant-buddy-pro';
 ```
 

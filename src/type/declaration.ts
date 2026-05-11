@@ -15,8 +15,8 @@
  */
 
 
-import {type TabsType} from 'antd/es/tabs';
-import {type Placement as RcPlacement} from 'rc-select/es/BaseSelect';
+import {type TabsType} from 'antd/lib/tabs';
+import {type Placement as RcPlacement} from '@rc-component/select/lib/BaseSelect';
 
 
 export type WithFalse<T> = T | false;

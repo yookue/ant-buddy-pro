@@ -10,7 +10,7 @@ SectionTitle 組件，可展示壹個帶有裝飾前綴的標題欄，用於分�
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {SectionTitle} from '@unikue/ant-buddy-pro';
 ```
 

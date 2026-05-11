@@ -10,9 +10,7 @@ IconSelect，提供了一个可选择图标的下拉框。
 
 ## 使用前提
 
-<Alert showIcon>
-  如果您使用默认的图标，您需要先安装 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 图标组件包：
-</Alert>
+> 如果您使用默认的图标，您需要先安装 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 图标组件包：
 
 <InstallDependencies
   npm="$ npm install @ant-design/icons"
@@ -22,7 +20,7 @@ IconSelect，提供了一个可选择图标的下拉框。
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {IconSelect} from '@unikue/ant-buddy-pro';
 ```
 

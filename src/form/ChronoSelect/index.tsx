@@ -16,15 +16,14 @@
 
 
 import React from 'react';
-import {Select} from 'antd';
-import {FormContext} from 'antd/es/form/context';
-import {type LabeledValue} from 'antd/es/select';
+import {Form, Select} from 'antd';
+import {type LabeledValue} from 'antd/lib/select';
 import {ProFormSelect} from '@ant-design/pro-form';
-import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
+import {type ProFormSelectProps} from '@ant-design/pro-form/lib/components/Select';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type WithFalse} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -156,7 +155,7 @@ export type ChronoSelectProps = Omit<ProFormSelectProps, 'children'> & {
  * @author David Hsing
  */
 export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const clazzPrefix = props?.clazzPrefix ?? 'abp-chrono-select';
     const intlType = useIntl();
 
@@ -197,12 +196,11 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
         return (
             <Select
                 className={classNames(clazzPrefix, fieldStyle.hashId, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className)}
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 options={props?.fieldProps?.options ?? optionItems}
                 onChange={(event: any) => {
                     if (props?.name) {
-                        formContext?.form?.setFieldValue(props.name, event.target.value);
+                        form?.setFieldValue(props.name, event.target.value);
                     }
                     props?.fieldProps?.onChange?.(event);
                 }}

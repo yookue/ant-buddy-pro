@@ -10,9 +10,7 @@ Fullscreen 是一个用来切换全屏的图标按钮。
 
 ## 使用前提
 
-<Alert showIcon>
-  如果您使用默认的图标，您需要先安装 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 图标组件包：
-</Alert>
+> 如果您使用默认的图标，您需要先安装 <a href='https://github.com/ant-design/ant-design-icons' target='_blank'>@ant-design/icons</a> 图标组件包：
 
 <InstallDependencies
   npm="$ npm install @ant-design/icons"
@@ -22,7 +20,7 @@ Fullscreen 是一个用来切换全屏的图标按钮。
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {Fullscreen} from '@unikue/ant-buddy-pro';
 ```
 

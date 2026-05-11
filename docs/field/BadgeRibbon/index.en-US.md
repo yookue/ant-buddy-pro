@@ -12,7 +12,7 @@ Similar to [Badge](https://ant.design/components/badge/#components-badge-demo-ri
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {BadgeRibbon} from '@unikue/ant-buddy-pro';
 ```
 

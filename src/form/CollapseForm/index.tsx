@@ -18,16 +18,16 @@
 import React from 'react';
 import {Form, type FormProps, type FormInstance} from 'antd';
 import {ProForm, type ProFormProps, type ProFormInstance} from '@ant-design/pro-form';
+import {omit} from '@rc-component/util';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {type ClickHoverType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
 
 export type CollapseFormRef = {
     getForm: () => FormInstance<any>;
-    getFormRef: () => React.MutableRefObject<ProFormInstance | null>;
+    getFormRef: () => React.RefObject<ProFormInstance | undefined>;
     isFormOpen: () => boolean;
     openForm: () => void;
     closeForm: () => void;
@@ -170,7 +170,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     CollapseForm.displayName = 'CollapseForm';
 
     const form = Form.useFormInstance();
-    const formRef = React.useRef<ProFormInstance>();
+    const formRef = React.useRef<ProFormInstance>(null);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-collapse-form';
 
     // Initialize the default props
@@ -190,7 +190,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         getForm: (): FormInstance<any> => {
             return form;
         },
-        getFormRef: (): React.MutableRefObject<ProFormInstance | undefined> => {
+        getFormRef: (): React.RefObject<ProFormInstance | null> => {
             return formRef;
         },
         isFormOpen: (): boolean => {

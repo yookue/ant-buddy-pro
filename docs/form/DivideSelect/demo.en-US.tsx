@@ -111,7 +111,7 @@ export default () => {
                         options: [
                             {
                                 label: 'Asia',
-                                value: 'optGroup',
+                                value: 'optGroup-asia',
                                 optionType: 'optGroup',
                                 children: [
                                     {label: 'China', value: '+86', code: 'CN'},
@@ -119,7 +119,7 @@ export default () => {
                             },
                             {
                                 label: 'America',
-                                value: 'optGroup',
+                                value: 'optGroup-america',
                                 optionType: 'optGroup',
                                 children: [
                                     {label: 'United States', value: '+1', code: 'US'},

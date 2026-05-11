@@ -44,7 +44,7 @@ You can install this package in your React project as follows:
 
 You may import components as follows:
 
-```jsx | pure
+```tsx | pure
 import {Foobar} from '@unikue/ant-buddy-pro';
 ```
 

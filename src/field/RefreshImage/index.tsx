@@ -18,9 +18,9 @@
 import React from 'react';
 import {Image, type ImageProps} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {ImageUtils, NanoidUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import omit from 'rc-util/es/omit';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 
@@ -128,16 +128,19 @@ export const RefreshImage: React.ForwardRefExoticComponent<RefreshImageProps & R
     const fieldRef = React.useRef<HTMLDivElement>(null);
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();
+    const [imageFallback, setImageFallback] = React.useState<string>();
     const fieldStyle = useFieldStyle(clazzPrefix);
+
+    const clickRefresh = (): void => {
+        const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-${fieldId}`);
+        if (inspect) {
+            inspect.click();
+        }
+    };
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
-        refresh: (): void => {
-            const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
-            if (inspect) {
-                inspect.click();
-            }
-        }
+        refresh: (): void => clickRefresh(),
     }));
 
     // noinspection DuplicatedCode
@@ -145,22 +148,9 @@ export const RefreshImage: React.ForwardRefExoticComponent<RefreshImageProps & R
         ImageUtils.detectSource(props?.src, res => setImageSrc(res));
     }, [props?.src]);
 
-    // noinspection DuplicatedCode
     React.useEffect(() => {
-        ImageUtils.detectSource(props?.fallback, res => {
-            const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
-            if (inspect && !inspect.onerror) {
-                inspect.setAttribute('onerror', `this.src='${res ?? ''}'`);
-            }
-        });
+        ImageUtils.detectSource(props?.fallback, res => setImageFallback(res));
     }, [props?.fallback]);
-
-    React.useEffect(() => {
-        const inspect = document.querySelector<HTMLImageElement>(`.${clazzPrefix}-id-${fieldId}`);
-        if (inspect && (!inspect.src || inspect.src === document.location.href)) {
-            inspect.setAttribute('src', '');
-        }
-    }, [props?.src, props?.fallback]);
 
     const omitProps = !props ? {} : omit(props, ['className', 'src', 'fallback', 'title', 'onClick', 'clazzPrefix', 'containerClazz', 'containerStyle', 'handCursor', 'onRefresh', 'locale', 'localeProps']);
 
@@ -171,12 +161,12 @@ export const RefreshImage: React.ForwardRefExoticComponent<RefreshImageProps & R
             style={props?.containerStyle}
         >
             <Image
-                className={classNames(`${clazzPrefix}-internal-image`, `${clazzPrefix}-id-${fieldId}`, props?.className)}
+                className={classNames(`${clazzPrefix}-internal-image`, `${clazzPrefix}-${fieldId}`, props?.className)}
                 preview={false}
-                src={`${imageSrc ?? ''}`}
+                src={imageSrc}
+                fallback={imageFallback}
                 title={ObjectUtils.firstNotNil(props?.title, props?.localeProps?.clickToRefresh, intlLocales.get([locale, 'clickToRefresh']), intlLocales.get(['en_US', 'clickToRefresh']))}
-                {...omitProps}
-                onClick={(event: React.MouseEvent<any>) => {
+                onClick={(event: any) => {
                     props?.onClick?.(event);
                     const previousSrc = imageSrc;
                     ImageUtils.detectSource(props?.src, res => {
@@ -184,6 +174,7 @@ export const RefreshImage: React.ForwardRefExoticComponent<RefreshImageProps & R
                         props?.onRefresh?.(res, previousSrc);
                     });
                 }}
+                {...omitProps}
             />
         </div>
     );

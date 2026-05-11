@@ -16,22 +16,21 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps} from 'antd';
-import {FormContext} from 'antd/es/form/context';
-import {type LabeledValue} from 'antd/es/select';
-import Wave from 'antd/es/_util/wave';
+import {ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps, Form} from 'antd';
+import {type LabeledValue} from 'antd/lib/select';
+import Wave from 'antd/lib/_util/wave';
 import {default as Icon} from '@ant-design/icons';
-import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/es/types';
+import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/lib/types';
 import {ProFormSelect} from '@ant-design/pro-form';
-import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
+import {omit} from '@rc-component/util';
 import {If, For, MapIterator} from '@unikue/react-condition';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import {useEventListener} from 'ahooks';
 import classNames from 'classnames';
 import {Scrollbars} from 'react-custom-scrollbars-4';
-import {type DefaultOptionType} from 'rc-select/es/select';
-import omit from 'rc-util/es/omit';
 import {allIconTypes, type IconSceneType} from '@/type/design-icon';
 import {type ReadonlyTabsType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
@@ -303,13 +302,14 @@ export type IconSelectProps = Omit<SelectFieldProps, 'children'> & {
  */
 export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) => {
     const configContext = React.useContext(ConfigProvider.ConfigContext);
-    const formContext = React.useContext(FormContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-icon-select';
     const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
     const intlType = useIntl();
 
-    ConsoleUtils.warn(!!formContext?.form, true, 'IconSelect', `Field '${props?.name}' needs a Form instance`);
+    const form = Form.useFormInstance();
+
+    ConsoleUtils.warn(!!form, true, 'IconSelect', `Field '${props?.name}' needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -330,7 +330,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [dropdownOpen, setDropdownOpen] = React.useState<boolean>((props?.fieldProps?.open || props?.fieldProps?.defaultOpen) ?? false);
-    const [searchWord, setSearchWord] = React.useState<string | undefined>(props?.fieldProps?.searchValue);
+    const [searchWord, setSearchWord] = React.useState<string>();
     const [searchDisabled, setSearchDisabled] = React.useState<boolean>(false);
     const searchRef = React.useRef<InputRef>(null);
     const fieldStyle = useFieldStyle(clazzPrefix, subClazzPrefix);
@@ -344,16 +344,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             StyleUtils.addStyle(sponsor, 'min-width', `${inspect.offsetWidth}px`);
         }
     };
-
-    if (props?.fieldProps?.popupMatchSelectWidth !== false) {
-        React.useLayoutEffect(() => {
-            window.addEventListener('resize', handleWindowResize);
-            handleWindowResize();
-            return () => {
-                window.removeEventListener('resize', handleWindowResize);
-            };
-        }, []);
-    }
+    useEventListener('resize', handleWindowResize);
 
     const buildTextOptions = () => {
         const result: any[] = [];
@@ -389,7 +380,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         children: children,
                     };
                     ObjectUtils.setProp(optGroup, (props?.fieldProps?.fieldNames?.label ?? 'label'), `${themeTitle}-${sceneTitle}`);
-                    ObjectUtils.setProp(optGroup, (props?.fieldProps?.fieldNames?.value ?? 'value'), 'optGroup');
+                    ObjectUtils.setProp(optGroup, (props?.fieldProps?.fieldNames?.value ?? 'value'), `optGroup-${themeType}-${sceneType}`);
                     result.push(optGroup);
                 } else {
                     result.push(...children);
@@ -401,10 +392,10 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
 
     const textOptions = React.useMemo(() => {
         return buildTextOptions();
-    }, [themeTypes, sceneTypes]);
+    }, [themeTypes, sceneTypes, searchWord]);
 
     const isIconSelected = (iconName?: string) => {
-        const fieldValue = formContext?.form?.getFieldValue(props?.name);
+        const fieldValue = form?.getFieldValue(props?.name);
         if (!fieldValue || StringUtils.isBlank(iconName)) {
             return false;
         }
@@ -443,41 +434,41 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 props?.fieldProps?.onDeselect?.(iconName, {
                     label: iconName,
                     value: iconName,
-                } as DefaultOptionType);
-                const fieldValue = formContext?.form?.getFieldValue(props?.name);
+                });
+                const fieldValue = form?.getFieldValue(props?.name);
                 if (fieldValue) {
                     const result = !props?.fieldProps?.labelInValue ? fieldValue.filter((item: any) => {
                         return !StringUtils.equalsIgnoreCase(item as string, iconName);
                     }) : fieldValue.filter((item: LabeledValue) => {
                         return !StringUtils.equalsIgnoreCase(item?.value as string, iconName);
                     });
-                    if (formContext?.form && props?.name) {
-                        formContext.form.setFieldValue(props.name, result);
-                        formContext.form.validateFields([props.name]);
+                    if (form && props?.name) {
+                        form.setFieldValue(props.name, result);
+                        form.validateFields([props.name]);
                     }
                     props?.fieldProps?.onChange?.(result, {
                         label: iconName,
                         value: iconName,
-                    } as DefaultOptionType);
+                    });
                 } else {
-                    if (formContext?.form && props?.name) {
-                        formContext.form.setFieldValue(props.name, undefined);
-                        formContext.form.validateFields([props.name]);
+                    if (form && props?.name) {
+                        form.setFieldValue(props.name, undefined);
+                        form.validateFields([props.name]);
                     }
                     props?.fieldProps?.onChange?.(undefined, {
                         label: iconName,
                         value: iconName,
-                    } as DefaultOptionType);
+                    });
                 }
             } else {
-                if (formContext?.form && props?.name) {
-                    formContext.form.setFieldValue(props.name, undefined);
-                    formContext.form.validateFields([props.name]);
+                if (form && props?.name) {
+                    form.setFieldValue(props.name, undefined);
+                    form.validateFields([props.name]);
                 }
                 props?.fieldProps?.onChange?.(undefined, {
                     label: iconName,
                     value: iconName,
-                } as DefaultOptionType);
+                });
                 setDropdownOpen(false);
             }
         } else {
@@ -485,12 +476,12 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 props?.fieldProps?.onSelect?.(iconName, {
                     label: iconName,
                     value: iconName,
-                } as DefaultOptionType);
+                });
             } else {
                 clearIconsBadge();
             }
             changeIconBadge(iconName, true);
-            const fieldValue = formContext?.form?.getFieldValue(props?.name);
+            const fieldValue = form?.getFieldValue(props?.name);
             if (fieldValue && (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags')) {
                 if (props?.fieldProps?.labelInValue) {
                     const value: LabeledValue = {
@@ -498,24 +489,24 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         value: iconName,
                     };
                     const newValue = [...fieldValue, value];
-                    if (formContext?.form && props?.name) {
-                        formContext.form.setFieldValue(props.name, newValue);
-                        formContext.form.validateFields([props.name]);
+                    if (form && props?.name) {
+                        form.setFieldValue(props.name, newValue);
+                        form.validateFields([props.name]);
                     }
                     props?.fieldProps?.onChange?.(newValue, {
                         label: iconName,
                         value: iconName,
-                    } as DefaultOptionType);
+                    });
                 } else {
                     const newValue = [...fieldValue, iconName];
-                    if (formContext?.form && props?.name) {
-                        formContext.form.setFieldValue(props.name, newValue);
-                        formContext.form.validateFields([props.name]);
+                    if (form && props?.name) {
+                        form.setFieldValue(props.name, newValue);
+                        form.validateFields([props.name]);
                     }
                     props?.fieldProps?.onChange?.(newValue, {
                         label: iconName,
                         value: iconName,
-                    } as DefaultOptionType);
+                    });
                 }
             } else {
                 let newValue: any | any[];
@@ -528,14 +519,14 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 } else {
                     newValue = (props?.fieldProps?.mode === 'multiple' || props?.fieldProps?.mode === 'tags') ? [iconName] : iconName;
                 }
-                if (formContext?.form && props?.name) {
-                    formContext.form.setFieldValue(props.name, newValue);
-                    formContext.form.validateFields([props.name]);
+                if (form && props?.name) {
+                    form.setFieldValue(props.name, newValue);
+                    form.validateFields([props.name]);
                 }
                 props?.fieldProps?.onChange?.(newValue, {
                     label: iconName,
                     value: iconName,
-                } as DefaultOptionType);
+                });
             }
             if (props?.fieldProps?.mode !== 'multiple' && props?.fieldProps?.mode !== 'tags') {
                 setDropdownOpen(false);
@@ -734,15 +725,11 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                                     allowClear={true}
                                     size='small'
                                     disabled={searchDisabled}
-                                    value={props?.fieldProps?.searchValue}
                                     onFocus={() => {
                                         const inspect = searchRef.current?.input?.closest(`.${configContext.getPrefixCls('input-affix-wrapper')}`) as HTMLElement;
                                         window.setTimeout(() => StyleUtils.removeClazz(inspect, configContext.getPrefixCls('input-affix-wrapper-status-error')), 100);
                                     }}
-                                    onSearch={(value: string) => {
-                                        setSearchWord(value);
-                                        props?.fieldProps?.onSearch?.(value);
-                                    }}
+                                    onSearch={setSearchWord}
                                     data-icon-select-search={fieldId}
                                 />
                             </If>
@@ -762,7 +749,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         }
     };
 
-    const handleOptionDeselect = (value: string | number | LabeledValue, option: DefaultOptionType) => {
+    const handleOptionDeselect = (value: string | number | LabeledValue, option: any) => {
         if (optionMode === 'icon') {
             if (typeof value === 'string' || typeof value === 'number') {
                 changeIconBadge(value as string, false);
@@ -788,6 +775,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 {...restProps}
                 fieldProps={{
                     classNames: {
+                        // @ts-ignore
                         root: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
                         popup: {
                             root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
@@ -813,12 +801,12 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         return (
             <Select
                 classNames={{
+                    // @ts-ignore
                     root: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
                     popup: {
                         root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
                     }
                 }}
-                id={(!formContext?.name ? '' : `${formContext.name}_`) + (props?.name ?? '')}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 disabled={entryImmutable}
                 popupRender={(optionMode === 'text' || !themeTypes || !sceneTypes || entryImmutable) ? undefined : (() => renderDropdown())}
@@ -831,7 +819,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 onOpenChange={handleDropdownOpenChange}
                 onChange={(event: any) => {
                     if (props?.name) {
-                        formContext?.form?.setFieldValue(props.name, event.target.value);
+                        form?.setFieldValue(props.name, event.target.value);
                     }
                     props?.fieldProps?.onChange?.(event);
                 }}

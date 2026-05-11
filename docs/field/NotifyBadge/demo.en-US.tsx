@@ -30,12 +30,14 @@ export default () => {
                 }}
                 dropdownProps={{
                     arrow: true,
-                    overlayStyle: {
-                        minWidth: '320px',
+                    styles: {
+                        root: {
+                            minWidth: '320px'
+                        }
                     }
                 }}
                 tabsProps={{
-                    tabPosition: 'top',
+                    tabPlacement: 'top',
                     items: [
                         {
                             key: 'notice',

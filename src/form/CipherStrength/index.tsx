@@ -17,7 +17,6 @@
 
 import React from 'react';
 import {Row, Col, Form, Progress, theme} from 'antd';
-import {FormContext} from 'antd/es/form/context';
 import {useIntl} from '@ant-design/pro-provider';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
@@ -207,11 +206,12 @@ export type CipherStrengthProps = {
  * @author David Hsing
  */
 export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStrengthProps) => {
-    const formContext = React.useContext(FormContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-cipher-strength';
     const intlType = useIntl();
 
-    ConsoleUtils.warn(!!formContext?.form, true, 'CipherStrength', `Field needs a Form instance`);
+    const form = Form.useFormInstance();
+
+    ConsoleUtils.warn(!!form, true, 'CipherStrength', `Field needs a Form instance`);
 
     // Initialize the default props
     const {
@@ -228,7 +228,7 @@ export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStre
     } = props ?? {};
 
     const {token} = theme.useToken();
-    const watchValue = Form.useWatch(watchField, formContext?.form);
+    const watchValue = Form.useWatch(watchField, form);
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     const buildProgressDom = () => {

@@ -63,7 +63,7 @@ export default () => {
                 readonly={readonly}
                 submitter={false}
             >
-                <Space direction='vertical' size='middle' style={{width: '100%'}}>
+                <Space orientation='vertical' size='middle' style={{width: '100%'}}>
                     <AddonInput
                         name='website'
                         label='网站地址'

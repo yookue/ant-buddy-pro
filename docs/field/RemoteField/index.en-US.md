@@ -12,7 +12,7 @@ The reason for the appeal is, not all the components of [Ant Design](https://ant
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {RemoteField} from '@unikue/ant-buddy-pro';
 ```
 

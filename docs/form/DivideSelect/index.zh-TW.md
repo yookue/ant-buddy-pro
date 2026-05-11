@@ -10,7 +10,7 @@ DivideSelect, 提供了一下可以將選項的標簽和值分開顯示的選擇
 
 ## 導入組件
 
-```jsx | pure
+```tsx | pure
 import {DivideSelect} from '@unikue/ant-buddy-pro';
 ```
 

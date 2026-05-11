@@ -17,8 +17,8 @@
 
 import React from 'react';
 import {Space, Tooltip} from 'antd';
-import {FormContext} from 'antd/es/form/context';
-import {type SpaceSize} from 'antd/es/space';
+import {FormContext} from 'antd/lib/form/context';
+import {type SpaceSize} from 'antd/lib/space';
 import classNames from 'classnames';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {type WithFalse, type AxisDirectionType} from '@/type/declaration';
@@ -229,7 +229,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
             className={classNames(clazzPrefix, fieldStyle.hashId, ((formContext?.requiredMark !== false && props?.required) ? `${clazzPrefix}-required` : undefined), (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
-            <Space className={`${clazzPrefix}-space-${layout}`} direction={layout} size={props?.spaceSize}>
+            <Space className={`${clazzPrefix}-space-${layout}`} orientation={layout} size={props?.spaceSize}>
                 {buildLabelDom()}
                 {buildFieldDom()}
             </Space>

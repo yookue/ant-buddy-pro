@@ -17,14 +17,15 @@
 
 import React from 'react';
 import {Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type DropdownProps, type ListProps, type MenuProps, type TabsProps} from 'antd';
-import {ListItemMetaProps} from 'antd/es/list/Item';
+import {ListItemMetaProps} from 'antd/lib/list/Item';
+import {type TabPlacement} from 'antd/lib/tabs';
 import {BellOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
+import {type Tab as RcTab} from '@rc-component/tabs/lib/interface';
+import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {ArrayUtils, BooleanUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {type Tab as RcTab, type TabPosition as RcTabPosition} from 'rc-tabs/es/interface';
-import omit from 'rc-util/es/omit';
 import {type WithFalse, type ReadonlyTabsType} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -32,9 +33,7 @@ import {useFieldStyle} from './style';
 
 export type NotifyPresetStyle = WithFalse<'notice' | 'task'>;
 
-
-export type NotifyTabPosition = Exclude<RcTabPosition, 'bottom'>;
-
+export type NotifyTabPosition = Exclude<TabPlacement, 'bottom'>;
 
 export type NotifyDataItem = Omit<ListItemMetaProps, 'children'> & {
     /**
@@ -146,21 +145,21 @@ export type MixinTabProps = Omit<RcTab, 'children'> & {
      * @description.zh-CN 条目的点击响应函数
      * @description.zh-TW 條目的點擊響應函數
      */
-    onClick?: (event: React.MouseEvent<any>, key: string) => void;
+    onClick?: (event: any, key: string) => void;
 
     /**
      * @description The respond function when click the clear button
      * @description.zh-CN 清除按钮的响应函数
      * @description.zh-TW 清除按鈕的響應函數
      */
-    onClear?: (event: React.MouseEvent<any>, key: string) => void;
+    onClear?: (event: any, key: string) => void;
 
     /**
      * @description The respond function when click the more button
      * @description.zh-CN 更多按钮的响应函数
      * @description.zh-TW 更多按鈕的響應函數
      */
-    onMore?: (event: React.MouseEvent<any>, key: string) => void;
+    onMore?: (event: any, key: string) => void;
 
     /**
      * @description The preset style of the component
@@ -171,7 +170,7 @@ export type MixinTabProps = Omit<RcTab, 'children'> & {
 };
 
 
-export type MixinTabsProps = Omit<TabsProps, 'activeKey' | 'addIcon' | 'hideAdd' | 'items' | 'tabPosition' | 'type' | 'onEdit' | 'children'> & {
+export type MixinTabsProps = Omit<TabsProps, 'activeKey' | 'addIcon' | 'hideAdd' | 'items' | 'tabPlacement' | 'type' | 'onEdit' | 'children'> & {
     /**
      * @description The contents of the tabs
      * @description.zh-CN 标签页的内容
@@ -193,7 +192,7 @@ export type MixinTabsProps = Omit<TabsProps, 'activeKey' | 'addIcon' | 'hideAdd'
      * @description.zh-TW 標籤頁的位置
      * @default 'top'
      */
-    tabPosition?: NotifyTabPosition;
+    tabPlacement?: NotifyTabPosition;
 };
 
 
@@ -443,7 +442,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
                 label: renderTabLabel(tab),
                 ...omit(tab, ['key', 'label', 'labelBadgeProps', 'listProps', 'showClear', 'showMore', 'onClick', 'onClear', 'onMore', 'presetStyle']),
                 children: content,
-            } as RcTab;
+            };
         });
     };
 
@@ -460,10 +459,12 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
 
     return !dropdownEnabled ? hyperlinkDom : (
         <Dropdown
-            className={classNames(`${clazzPrefix}-trigger`, props?.dropdownProps?.className)}
             menu={{items: menuItems}}
-            overlayClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.dropdownProps?.overlayClassName)}
-            {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['className', 'overlayClassName']))}
+            classNames={{
+                // @ts-ignore
+                root: classNames(`${clazzPrefix}-trigger`, `${clazzPrefix}-popup`, fieldStyle.hashId, props?.dropdownProps?.classNames?.root)
+            }}
+            {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['className', 'classNames']))}
         >
             {hyperlinkDom}
         </Dropdown>

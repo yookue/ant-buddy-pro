@@ -44,7 +44,7 @@ v10.13.0
 
 在您的程序中導入組件：
 
-```jsx | pure
+```tsx | pure
 import {FooBar} from '@unikue/ant-buddy-pro';
 ```
 

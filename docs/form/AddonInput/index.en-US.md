@@ -14,7 +14,7 @@ The typical scenario is adding fixed prefixes, suffixes, buttons or other conten
 
 ## Import
 
-```jsx | pure
+```tsx | pure
 import {AddonInput} from '@unikue/ant-buddy-pro';
 ```
 

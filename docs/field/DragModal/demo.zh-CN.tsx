@@ -60,7 +60,7 @@ export default () => {
             <DragModal
                 draggable={draggable}
                 title='DragModal'
-                maskClosable={false}
+                mask={{closable: false}}
                 open={open}
                 okText='确定'
                 cancelText='取消'

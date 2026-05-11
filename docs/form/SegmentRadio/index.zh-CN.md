@@ -10,7 +10,7 @@ SegmentRadio 与 [Ant Design](https://ant.design) 的 [Segmented](https://ant.de
 
 ## 导入组件
 
-```jsx | pure
+```tsx | pure
 import {SegmentRadio} from '@unikue/ant-buddy-pro';
 ```
 

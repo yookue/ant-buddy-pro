@@ -68,7 +68,8 @@ export abstract class NodeUtils {
                 result += this.toStringRecursive(child) ?? '';
             });
         } else if (React.isValidElement(node)) {
-            result += this.toStringRecursive(node.props.children) ?? '';
+            // @ts-ignore
+            result += this.toStringRecursive(node?.props?.children) ?? '';
         }
         return result;
     }

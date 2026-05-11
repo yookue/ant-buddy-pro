@@ -18,9 +18,9 @@
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
 import {useIntl} from '@ant-design/pro-provider';
+import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
-import {type ValueType as RcValueType} from 'rc-input-number';
 import {CronInputContext} from '@/form/CronInput/context';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
@@ -270,7 +270,7 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
                         value={entryChoice}
                         onChange={(event: RadioChangeEvent) => setEntryChoice(event.target.value)}
                     >
-                        <Space direction='vertical'>
+                        <Space orientation='vertical'>
                             <Radio value={EntryChoiceType.EVERY_YEAR}>
                                 {ObjectUtils.firstNotNil(props?.localeProps?.everyYear, intlLocales.get([locale, 'everyYear']), intlLocales.get(['en_US', 'everyYear']))}
                             </Radio>
@@ -376,7 +376,7 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
                                     window.setTimeout(() => setEntryChoice(EntryChoiceType.SPECIFY_YEAR), 80);
                                 }}
                             >
-                                <Space direction='vertical'>
+                                <Space orientation='vertical'>
                                     {ObjectUtils.firstNotNil(props?.localeProps?.specificYear, intlLocales.get([locale, 'specificYear']), intlLocales.get(['en_US', 'specificYear']))}
                                     <Form.Item noStyle={true} shouldUpdate={true}>
                                         {() => {
