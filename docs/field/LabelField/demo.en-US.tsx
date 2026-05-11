@@ -78,15 +78,21 @@ export default () => {
                 />
             </ProForm>
             <Divider/>
-            <LabelField
-                label='Username'
+            <ProForm
+                name='LabelField_demo.en-US.Test'
                 layout={layout}
-                required={required}
-                tooltip='Tooltip for display'
-                presetStyle={presetStyle}
+                autoFocusFirstInput={false}
+                submitter={false}
             >
-                <Input placeholder='Username'/>
-            </LabelField>
+                <LabelField
+                    label='Username'
+                    required={required}
+                    tooltip='Tooltip for display'
+                    presetStyle={presetStyle}
+                >
+                    <Input placeholder='Username'/>
+                </LabelField>
+            </ProForm>
         </>
     );
 }

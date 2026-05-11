@@ -78,15 +78,21 @@ export default () => {
                 />
             </ProForm>
             <Divider/>
-            <LabelField
-                label='用戶名'
+            <ProForm
+                name='LabelField_demo.zh-TW.Test'
                 layout={layout}
-                required={required}
-                tooltip='用于顯示的提示'
-                presetStyle={presetStyle}
+                autoFocusFirstInput={false}
+                submitter={false}
             >
-                <Input placeholder='用戶名'/>
-            </LabelField>
+                <LabelField
+                    label='用戶名'
+                    required={required}
+                    tooltip='用于顯示的提示'
+                    presetStyle={presetStyle}
+                >
+                    <Input placeholder='用戶名'/>
+                </LabelField>
+            </ProForm>
         </>
     );
 }

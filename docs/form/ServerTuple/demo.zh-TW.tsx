@@ -17,23 +17,38 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ServerTuple, ConsoleUtils} from '@unikue/ant-buddy-pro';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ServerTuple, ConsoleUtils, type AxisDirectionType} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
     const [form] = ProForm.useForm();
+    const [layout, setLayout] = React.useState<AxisDirectionType>('vertical');
     const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
 
     return (
         <>
             <ProForm
-                form={form}
                 name='ServerTuple_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProFormRadio.Group
+                    label='佈局'
+                    radioType='button'
+                    fieldProps={{
+                        value: layout,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setLayout(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '水平', value: 'horizontal'},
+                        {label: '垂直', value: 'vertical'},
+                    ]}
+                />
                 <ProFormSwitch
                     label='匹配寬度'
                     checkedChildren='是'
@@ -43,7 +58,15 @@ export default () => {
                         onChange: setWidthBlock,
                     }}
                 />
-                <Divider/>
+            </ProForm>
+            <Divider/>
+            <ProForm
+                form={form}
+                name='ServerTuple_demo.zh-TW.Test'
+                layout={layout}
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ServerTuple
                     name='server'
                     label='服務器'

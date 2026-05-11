@@ -17,11 +17,12 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
-import {ChronoTuple} from '@unikue/ant-buddy-pro';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {type AxisDirectionType, ChronoTuple} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
+    const [layout, setLayout] = React.useState<AxisDirectionType>('vertical');
     const [widthBlock, setWidthBlock] = React.useState<boolean>(true);
 
     return (
@@ -32,6 +33,21 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
+                <ProFormRadio.Group
+                    label='布局'
+                    radioType='button'
+                    fieldProps={{
+                        value: layout,
+                        buttonStyle: 'solid',
+                        onChange: (event) => {
+                            setLayout(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '水平', value: 'horizontal'},
+                        {label: '垂直', value: 'vertical'},
+                    ]}
+                />
                 <ProFormSwitch
                     label='匹配宽度'
                     checkedChildren='是'
@@ -41,7 +57,14 @@ export default () => {
                         onChange: setWidthBlock,
                     }}
                 />
-                <Divider/>
+            </ProForm>
+            <Divider/>
+            <ProForm
+                name='ChronoTuple_demo.zh-CN.Test'
+                layout={layout}
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
                 <ChronoTuple
                     digitProps={{
                         name: 'durationAmount',
