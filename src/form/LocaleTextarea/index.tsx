@@ -16,14 +16,13 @@
 
 
 import React from 'react';
-import {Input, type TabsProps, type FormRule} from 'antd';
-import {FormContext} from 'antd/lib/form/context';
-import {type TextAreaProps, type TextAreaRef} from 'antd/lib/input/TextArea';
+import {Form, Input, type TabsProps, type FormRule} from 'antd';
+import {type TextAreaProps, type TextAreaRef} from 'antd/es/input/TextArea';
 import {ProFormTextArea} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
-import {type TabPaneProps as RcTabPaneProps} from '@rc-component/tabs/lib/TabPanelList/TabPane';
+import {type TabPaneProps as RcTabPaneProps} from '@rc-component/tabs/es/TabPanelList/TabPane';
 import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
@@ -238,7 +237,7 @@ export type LocaleTextareaProps = Omit<ProFormFieldItemProps<TextAreaProps, Text
  * @author David Hsing
  */
 export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleTextareaProps) => {
-    const formContext = React.useContext(FormContext);
+    const form = Form.useFormInstance();
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-locale-textarea';
     const subClazzPrefix = props?.tabsProps?.clazzPrefix ?? 'abp-card-tabs';
@@ -292,7 +291,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                     placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                     onChange={(event: any) => {
                         if (props?.name) {
-                            formContext?.form?.setFieldValue(props.name, event.target.value);
+                            form?.setFieldValue(props.name, event.target.value);
                         }
                         props?.fieldProps?.onChange?.(event);
                     }}
@@ -376,7 +375,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 variant={fieldProps?.variant || props?.switchShareProps?.variant || (switchCloneProps.variant ? props?.fieldProps?.variant : undefined)}
                                 onChange={(event: any) => {
                                     if (rawName) {
-                                        formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                        form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
                                     }
                                     omitFieldProps.onChange?.(event);
                                 }}
@@ -434,7 +433,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 variant={props?.switchShareProps?.variant || (switchCloneProps.variant ? props?.fieldProps?.variant : undefined)}
                                 onChange={(event: any) => {
                                     if (rawName) {
-                                        formContext?.form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
+                                        form?.setFieldValue(`${rawName}[${tag}]`, event.target.value);
                                     }
                                 }}
                             />
@@ -477,15 +476,12 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
         </div>
     );
 
-    const verticalLayout = props?.layout === 'vertical' || formContext?.layout === 'vertical';
     const fieldRequired = props?.required || props?.fieldProps?.required || props?.rules?.some((rule: any) => rule?.required === true);
 
     return (
         <LabelField
-            layout={verticalLayout ? 'vertical' : 'horizontal'}
             label={props?.label}
             labelClazz={`${clazzPrefix}-label`}
-            labelColon={!verticalLayout}
             field={fieldDom}
             required={fieldRequired}
             widthBlock={true}

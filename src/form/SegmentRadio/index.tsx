@@ -16,12 +16,12 @@
 
 import React from 'react';
 import {Form, Segmented, type SegmentedProps} from 'antd';
-import {type SegmentedLabeledOption} from 'antd/lib/segmented';
+import {type SegmentedLabeledOption} from 'antd/es/segmented';
 import {ProForm} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/lib/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useDebounceFn} from '@ant-design/pro-utils';
-import {pickProFormItemProps} from '@ant-design/pro-utils/lib/pickProFormItemProps';
+import {pickProFormItemProps} from '@ant-design/pro-utils/es/pickProFormItemProps';
 import {type SegmentedRawOption} from '@rc-component/segmented';
 import {omit} from '@rc-component/util';
 import classNames from 'classnames';

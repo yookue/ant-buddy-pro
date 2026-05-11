@@ -18,7 +18,7 @@
 import React from 'react';
 import {ConfigProvider, Form, List, Popconfirm, Space, Tooltip, type InputProps, type FormRule} from 'antd';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';

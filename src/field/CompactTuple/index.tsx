@@ -17,8 +17,8 @@
 
 import React from 'react';
 import {Space} from 'antd';
-import {SpaceCompactProps} from 'antd/lib/space/Compact';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {SpaceCompactProps} from 'antd/es/space/Compact';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {css} from '@emotion/css';
 import classNames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';

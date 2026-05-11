@@ -17,9 +17,9 @@
 
 import React from 'react';
 import {Space, InputNumber} from 'antd';
-import {FormContext} from 'antd/lib/form/context';
+import {FormContext} from 'antd/es/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
-import {type ProFormDigitProps} from '@ant-design/pro-form/lib/components/Digit';
+import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
 import {omit} from '@rc-component/util';
 import {StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';

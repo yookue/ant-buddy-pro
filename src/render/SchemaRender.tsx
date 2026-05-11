@@ -37,7 +37,7 @@ export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'plac
  * Renders for rendering schema
  *
  * @see "https://pro-components.antdigital.dev/components/schema"
- * @see "@ant-design/pro-utils/lib/typing.d.ts"
+ * @see "@ant-design/pro-utils/es/typing.d.ts"
  *
  * @author David Hsing
  */

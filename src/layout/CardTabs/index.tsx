@@ -17,8 +17,8 @@
 
 import React from 'react';
 import {Tabs, type TabsProps} from 'antd';
-import {type SizeType} from 'antd/lib/config-provider/SizeContext';
-import {type TabPlacement as RcTabPlacement} from 'antd/lib/tabs';
+import {type SizeType} from 'antd/es/config-provider/SizeContext';
+import {type TabPlacement as RcTabPlacement} from 'antd/es/tabs';
 import {omit} from '@rc-component/util';
 import classNames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';

@@ -21,29 +21,29 @@
  * @author David Hsing
  */
 export abstract class DesignConst {
-    // @see "antd/lib/form/FormItemLabel.d.ts"
+    // @see "antd/es/form/FormItemLabel.d.ts"
     public static FORM_ITEM_LABEL_PROPS = ['colon', 'htmlFor', 'label', 'labelAlign', 'labelCol', 'tooltip', 'vertical'];
 
-    // @see "antd/lib/form/FormItemInput.d.ts"
+    // @see "antd/es/form/FormItemInput.d.ts"
     public static FORM_ITEM_INPUT_PROPS = ['labelCol', 'wrapperCol', 'extra', 'status', 'help', 'fieldId', 'label'];
 
-    // @see "antd/lib/form/FormItem/index.d.ts"
+    // @see "antd/es/form/FormItem/index.d.ts"
     public static FORM_ITEM_PROPS = [...DesignConst.FORM_ITEM_LABEL_PROPS, ...DesignConst.FORM_ITEM_INPUT_PROPS, 'dependencies', 'prefixCls', 'noStyle', 'style', 'hasFeedback', 'validateStatus', 'hidden', 'initialValue', 'messageVariables', 'tooltip', 'fieldKey'];
 
-    // @see "@ant-design/pro-form/lib/components/FormItem/index.d.ts"
+    // @see "@ant-design/pro-form/es/components/FormItem/index.d.ts"
     public static WARP_FORM_ITEM_PROPS = ['addonBefore', 'addonAfter', 'convertValue'];
 
-    // @see "@ant-design/pro-form/lib/components/FormItem/index.d.ts"
+    // @see "@ant-design/pro-form/es/components/FormItem/index.d.ts"
     public static PRO_FORM_ITEM_PROPS = [...DesignConst.FORM_ITEM_PROPS, ...DesignConst.WARP_FORM_ITEM_PROPS, 'ignoreFormItem', 'valueType', 'transform', 'dataFormat', 'lightProps', 'proFormFieldKey'];
 
-    // @see "@ant-design/pro-form/lib/interface.d.ts"
+    // @see "@ant-design/pro-form/es/interface.d.ts"
     public static PRO_FORM_EXTEND_PROPS = ['secondary', 'allowClear', 'variant', 'colSize', 'params', 'ignoreFormItem', 'convertValue', 'formItemProps', 'filedConfig', 'fieldRef'];
 
-    // @see "@ant-design/pro-form/lib/interface.d.ts"
+    // @see "@ant-design/pro-form/es/interface.d.ts"
     public static PRO_FORM_FIELD_ITEM_PROPS = [...DesignConst.PRO_FORM_ITEM_PROPS, ...DesignConst.PRO_FORM_EXTEND_PROPS, 'fieldProps', 'proFieldProps', 'cacheForSwr', 'footerRender', 'colProps'];
 
     public static FORWARD_FIELD_PROPS = ['name', 'id', 'placeholder'];
 
-    // @see "@ant-design/pro-field/lib/components/Select/index.d.ts"
+    // @see "@ant-design/pro-field/es/components/Select/index.d.ts"
     public static PRO_FIELD_SELECT_PROPS = ['valueEnum', 'debounceTime', 'params', 'request'];
 }

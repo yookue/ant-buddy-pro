@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Switch, Tooltip, Space, type RadioChangeEvent} from 'antd';
-import {type LabeledValue} from 'antd/lib/select';
+import {type LabeledValue} from 'antd/es/select';
 import {useIntl} from '@ant-design/pro-provider';
 import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';

@@ -18,8 +18,8 @@
 import React from 'react';
 import {Form, Input, Space, type InputProps, type InputRef} from 'antd';
 import {ProForm} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {omit} from '@rc-component/util';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';

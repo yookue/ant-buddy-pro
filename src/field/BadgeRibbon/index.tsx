@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Badge} from 'antd';
-import {type RibbonProps} from 'antd/lib/badge/Ribbon';
+import {type RibbonProps} from 'antd/es/badge/Ribbon';
 import {omit} from '@rc-component/util';
 import classNames from 'classnames';
 import {useFieldStyle} from './style';

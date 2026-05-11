@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {ConfigProvider, Badge, Space, type BadgeProps, type TooltipProps} from 'antd';
-import {type SpaceSize} from 'antd/lib/space';
+import {type SpaceSize} from 'antd/es/space';
 import {omit} from '@rc-component/util';
 import classNames from 'classnames';
 import {type AxisDirectionType} from '@/type/declaration';

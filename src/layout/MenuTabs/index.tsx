@@ -17,9 +17,9 @@
 
 import React from 'react';
 import {Menu, type MenuProps} from 'antd';
-import {type MenuItemType} from 'antd/lib/menu/interface';
+import {type MenuItemType} from 'antd/es/menu/interface';
 import {css} from '@emotion/css';
-import {type MenuInfo, type MenuMode} from '@rc-component/menu/lib/interface';
+import {type MenuInfo, type MenuMode} from '@rc-component/menu/es/interface';
 import {omit} from '@rc-component/util';
 import {useEventListener} from 'ahooks';
 import classNames from 'classnames';

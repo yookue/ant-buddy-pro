@@ -17,8 +17,8 @@
 
 import React from 'react';
 import {Space, Tooltip} from 'antd';
-import {FormContext} from 'antd/lib/form/context';
-import {type SpaceSize} from 'antd/lib/space';
+import {FormContext} from 'antd/es/form/context';
+import {type SpaceSize} from 'antd/es/space';
 import classNames from 'classnames';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {type WithFalse, type AxisDirectionType} from '@/type/declaration';

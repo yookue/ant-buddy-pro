@@ -17,9 +17,9 @@
 
 import React from 'react';
 import {ConfigProvider, Form, Button, Switch, Space, Input, message as messageApi} from 'antd';
-import {type TabPosition} from 'antd/lib/tabs';
+import {type TabPosition} from 'antd/es/tabs';
 import {FieldTimeOutlined} from '@ant-design/icons';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';

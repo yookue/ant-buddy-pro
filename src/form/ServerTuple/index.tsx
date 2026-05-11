@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Space, InputNumber} from 'antd';
-import {FormContext} from 'antd/lib/form/context';
+import {FormContext} from 'antd/es/form/context';
 import {ProFormDigit} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
-import {type ProFormDigitProps} from '@ant-design/pro-form/lib/components/Digit';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
 import {useIntl} from '@ant-design/pro-provider';
 import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';

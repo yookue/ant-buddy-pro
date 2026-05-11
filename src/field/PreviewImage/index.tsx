@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Image} from 'antd';
-import {ImagePreviewType} from 'antd/lib/image';
+import {ImagePreviewType} from 'antd/es/image';
 import {omit} from '@rc-component/util';
 import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';

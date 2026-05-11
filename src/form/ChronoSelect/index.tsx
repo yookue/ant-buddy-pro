@@ -17,9 +17,9 @@
 
 import React from 'react';
 import {Form, Select} from 'antd';
-import {type LabeledValue} from 'antd/lib/select';
+import {type LabeledValue} from 'antd/es/select';
 import {ProFormSelect} from '@ant-design/pro-form';
-import {type ProFormSelectProps} from '@ant-design/pro-form/lib/components/Select';
+import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {useIntl} from '@ant-design/pro-provider';
 import {omit} from '@rc-component/util';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';

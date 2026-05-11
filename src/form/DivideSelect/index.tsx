@@ -18,7 +18,7 @@
 import React from 'react';
 import {Form, Select} from 'antd';
 import {ProFormSelect} from '@ant-design/pro-form';
-import {type ProFormSelectProps} from '@ant-design/pro-form/lib/components/Select';
+import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
 import {type RequestOptionsType} from '@ant-design/pro-utils';
 import {useDebounceFn} from '@ant-design/pro-utils';
 import {omit} from '@rc-component/util';

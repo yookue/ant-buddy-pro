@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Form, Input, Button} from 'antd';
-import {type NamePath} from 'antd/lib/form/interface';
-import {type ProFormCaptchaProps} from '@ant-design/pro-form/lib/components/Captcha';
+import {type NamePath} from 'antd/es/form/interface';
+import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
 import {ProForm} from '@ant-design/pro-form';
-import {createField} from '@ant-design/pro-form/lib/BaseForm/createField';
+import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
 import {useIntl} from '@ant-design/pro-provider';
 import {omit} from '@rc-component/util';
 import {ArrayUtils, ObjectUtils} from '@unikue/ts-lang-utils';

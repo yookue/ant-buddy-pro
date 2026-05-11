@@ -17,11 +17,11 @@
 
 import React from 'react';
 import {Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type DropdownProps, type ListProps, type MenuProps, type TabsProps} from 'antd';
-import {ListItemMetaProps} from 'antd/lib/list/Item';
-import {type TabPlacement} from 'antd/lib/tabs';
+import {ListItemMetaProps} from 'antd/es/list/Item';
+import {type TabPlacement} from 'antd/es/tabs';
 import {BellOutlined} from '@ant-design/icons';
 import {useIntl} from '@ant-design/pro-provider';
-import {type Tab as RcTab} from '@rc-component/tabs/lib/interface';
+import {type Tab as RcTab} from '@rc-component/tabs/es/interface';
 import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {ArrayUtils, BooleanUtils, ObjectUtils} from '@unikue/ts-lang-utils';

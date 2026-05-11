@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Spin} from 'antd';
-import {type ProFormFieldRemoteProps} from '@ant-design/pro-form/lib/typing';
+import {type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
 import {useDebounceFn} from '@ant-design/pro-utils';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';

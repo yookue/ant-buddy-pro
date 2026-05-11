@@ -17,13 +17,13 @@
 
 import React from 'react';
 import {ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps, Form} from 'antd';
-import {type LabeledValue} from 'antd/lib/select';
-import Wave from 'antd/lib/_util/wave';
+import {type LabeledValue} from 'antd/es/select';
+import Wave from 'antd/es/_util/wave';
 import {default as Icon} from '@ant-design/icons';
-import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/lib/types';
+import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/es/types';
 import {ProFormSelect} from '@ant-design/pro-form';
-import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/lib/BaseForm/EditOrReadOnlyContext';
+import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
 import {useIntl} from '@ant-design/pro-provider';
 import {omit} from '@rc-component/util';
 import {If, For, MapIterator} from '@unikue/react-condition';

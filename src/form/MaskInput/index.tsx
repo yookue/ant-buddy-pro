@@ -18,7 +18,7 @@
 import React from 'react';
 import {Form, Input, type InputProps, type InputRef} from 'antd';
 import {ProFormText} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/lib/typing';
+import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
 import {omit} from '@rc-component/util';
 import {ElementUtils, NanoidUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classNames from 'classnames';
