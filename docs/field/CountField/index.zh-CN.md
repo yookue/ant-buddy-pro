@@ -1,7 +1,7 @@
 ---
 title: CountField
 toc: content
-order: 20
+order: 3
 ---
 
 ## 组件说明

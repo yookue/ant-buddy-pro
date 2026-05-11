@@ -1,7 +1,7 @@
 ---
 title: IconSelect
 toc: content
-order: 50
+order: 9
 ---
 
 ## 組件說明

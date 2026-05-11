@@ -1,7 +1,7 @@
 ---
 title: LocaleTextarea
 toc: content
-order: 60
+order: 12
 ---
 
 ## 组件说明

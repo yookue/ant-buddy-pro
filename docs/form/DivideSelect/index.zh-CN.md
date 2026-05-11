@@ -1,7 +1,7 @@
 ---
 title: DivideSelect
 toc: content
-order: 40
+order: 4
 ---
 
 ## 组件说明

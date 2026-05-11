@@ -1,7 +1,7 @@
 ---
 title: SegmentRadio
 toc: content
-order: 75
+order: 19
 ---
 
 ## 组件说明

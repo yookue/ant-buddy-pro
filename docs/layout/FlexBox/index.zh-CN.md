@@ -1,7 +1,7 @@
 ---
 title: FlexBox
 toc: content
-order: 20
+order: 6
 ---
 
 ## 组件说明

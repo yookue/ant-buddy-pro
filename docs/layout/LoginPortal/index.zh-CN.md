@@ -1,7 +1,7 @@
 ---
 title: LoginPortal
 toc: content
-order: 30
+order: 12
 ---
 
 ## 组件说明

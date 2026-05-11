@@ -1,7 +1,7 @@
 ---
 title: NotifyBadge
 toc: content
-order: 50
+order: 14
 ---
 
 ## Description

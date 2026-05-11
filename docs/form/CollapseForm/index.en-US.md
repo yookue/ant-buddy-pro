@@ -1,7 +1,7 @@
 ---
 title: CollapseForm
 toc: content
-order: 30
+order: 3
 ---
 
 ## Description

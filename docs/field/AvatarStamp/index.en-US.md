@@ -1,7 +1,7 @@
 ---
 title: AvatarStamp
 toc: content
-order: 0
+order: 1
 ---
 
 ## Description

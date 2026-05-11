@@ -1,7 +1,7 @@
 ---
 title: ExactInput
 toc: content
-order: 45
+order: 5
 ---
 
 ## 組件說明

@@ -1,7 +1,7 @@
 ---
 title: SortableList
 toc: content
-order: 85
+order: 19
 ---
 
 ## Description

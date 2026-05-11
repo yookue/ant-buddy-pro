@@ -1,7 +1,7 @@
 ---
 title: AvatarUpload
 toc: content
-order: 5
+order: 1
 ---
 
 ## 组件说明

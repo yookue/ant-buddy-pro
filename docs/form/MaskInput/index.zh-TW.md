@@ -1,7 +1,7 @@
 ---
 title: MaskInput
 toc: content
-order: 65
+order: 13
 ---
 
 ## 組件說明

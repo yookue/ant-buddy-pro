@@ -1,7 +1,7 @@
 ---
 title: DragModal
 toc: content
-order: 30
+order: 4
 ---
 
 ## 組件說明

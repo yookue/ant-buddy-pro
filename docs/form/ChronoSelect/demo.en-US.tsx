@@ -30,6 +30,7 @@ export default () => {
             >
                 <ChronoSelect
                     name='foobar'
+                    label='Select period'
                     placeholder='Please select this field'
                     locale='en_US'
                 />

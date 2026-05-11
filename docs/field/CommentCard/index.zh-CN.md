@@ -1,7 +1,7 @@
 ---
 title: CommentCard
 toc: content
-order: 6
+order: 3
 ---
 
 ## 组件说明

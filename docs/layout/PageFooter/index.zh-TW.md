@@ -1,7 +1,7 @@
 ---
 title: PageFooter
 toc: content
-order: 40
+order: 16
 ---
 
 ## 組件說明

@@ -1,7 +1,7 @@
 ---
 title: CompactTuple
 toc: content
-order: 10
+order: 3
 ---
 
 ## Description

@@ -1,7 +1,7 @@
 ---
 title: ThumbTuple
 toc: content
-order: 75
+order: 20
 ---
 
 ## 組件說明

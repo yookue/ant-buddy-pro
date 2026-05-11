@@ -1,7 +1,7 @@
 ---
 title: ServerTuple
 toc: content
-order: 80
+order: 19
 ---
 
 ## 組件說明

@@ -1,7 +1,7 @@
 ---
 title: CipherStrength
 toc: content
-order: 25
+order: 3
 ---
 
 ## 組件說明

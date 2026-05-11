@@ -1,7 +1,7 @@
 ---
 title: TagInput
 toc: content
-order: 95
+order: 20
 ---
 
 ## 組件說明

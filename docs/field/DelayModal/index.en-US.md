@@ -1,7 +1,7 @@
 ---
 title: DelayModal
 toc: content
-order: 25
+order: 4
 ---
 
 ## Description

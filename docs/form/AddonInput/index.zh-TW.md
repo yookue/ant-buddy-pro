@@ -1,7 +1,7 @@
 ---
 title: AddonInput
 toc: content
-order: 0
+order: 1
 ---
 
 ## 組件說明

@@ -1,7 +1,7 @@
 ---
 title: MathInput
 toc: content
-order: 70
+order: 13
 ---
 
 ## Description

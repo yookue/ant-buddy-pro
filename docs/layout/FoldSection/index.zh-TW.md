@@ -1,7 +1,7 @@
 ---
 title: FoldSection
 toc: content
-order: 25
+order: 6
 ---
 
 ## 組件說明

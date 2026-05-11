@@ -1,7 +1,7 @@
 ---
 title: CornerStamp
 toc: content
-order: 15
+order: 3
 ---
 
 ## 组件说明

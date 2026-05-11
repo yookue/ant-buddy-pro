@@ -30,6 +30,7 @@ export default () => {
             >
                 <ChronoSelect
                     name='foobar'
+                    label='選擇期間'
                     placeholder='請選擇此項'
                     locale='zh_TW'
                 />

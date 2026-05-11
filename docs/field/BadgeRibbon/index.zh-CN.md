@@ -1,7 +1,7 @@
 ---
 title: BadgeRibbon
 toc: content
-order: 5
+order: 2
 ---
 
 ## 组件说明

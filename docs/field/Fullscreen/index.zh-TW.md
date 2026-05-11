@@ -1,7 +1,7 @@
 ---
 title: Fullscreen
 toc: content
-order: 40
+order: 6
 ---
 
 ## 組件說明

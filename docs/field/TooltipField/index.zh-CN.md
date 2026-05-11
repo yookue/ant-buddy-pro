@@ -1,7 +1,7 @@
 ---
 title: TooltipField
 toc: content
-order: 80
+order: 20
 ---
 
 ## 组件说明
