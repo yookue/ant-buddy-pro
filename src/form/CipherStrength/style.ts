@@ -29,8 +29,13 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&-progress`]: {
                 width: '100%',
                 textAlign: 'center',
-                [`${token.antCls}-progress-steps-item`]: {
-                    width: 'calc(20% - 2px) !important',
+
+                [`${token.antCls}-progress-steps-body`]: {
+                    width: '100%',
+
+                    [`${token.antCls}-progress-steps-item`]: {
+                        width: 'calc(20% - 2px) !important',
+                    }
                 }
             },
             [`&-caption`]: {
