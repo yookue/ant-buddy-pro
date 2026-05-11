@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button, Divider} from 'antd';
 import {FireOutlined, StopOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {DelayModal, ConsoleUtils, type DelayModalRef} from '@unikue/ant-buddy-pro';
 import {type ModalActionType} from '@unikue/ant-buddy-pro/field/DelayModal';
 import {RandomUtils} from '@unikue/ts-lang-utils';
@@ -75,7 +75,7 @@ export default () => {
                         value: actionType,
                         buttonStyle: 'solid',
                         disabled: autoStart || timing,
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setActionType(event.target?.value);
                         }
                     }}

@@ -15,16 +15,43 @@
  */
 
 
-import {ProForm} from '@ant-design/pro-form';
-import {ChronoSelect} from '@unikue/ant-buddy-pro';
+import React from 'react';
+import {Divider} from 'antd';
+import {ProForm, ProFormRadio} from '@ant-design/pro-components';
+import {ChronoSelect, type AxisDirectionType} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
+    const [layout, setLayout] = React.useState<AxisDirectionType>('vertical');
+
     return (
         <>
             <ProForm
                 name='ChronoSelect_demo.zh-CN'
                 layout='horizontal'
+                autoFocusFirstInput={false}
+                submitter={false}
+            >
+                <ProFormRadio.Group
+                    label='布局'
+                    radioType='button'
+                    fieldProps={{
+                        value: layout,
+                        buttonStyle: 'solid',
+                        onChange: (event: any) => {
+                            setLayout(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '水平', value: 'horizontal'},
+                        {label: '垂直', value: 'vertical'},
+                    ]}
+                />
+            </ProForm>
+            <Divider/>
+            <ProForm
+                name='ChronoSelect_demo.zh-CN.Test'
+                layout={layout}
                 autoFocusFirstInput={false}
                 submitter={false}
             >

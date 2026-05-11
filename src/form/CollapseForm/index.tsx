@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Form, type FormProps, type FormInstance} from 'antd';
-import {ProForm, type ProFormProps, type ProFormInstance} from '@ant-design/pro-form';
+import {ProForm, type ProFormProps, type ProFormInstance} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type ClickHoverType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -170,7 +170,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     CollapseForm.displayName = 'CollapseForm';
 
     const form = Form.useFormInstance();
-    const formRef = React.useRef<ProFormInstance>(null);
+    const formRef = React.useRef<ProFormInstance>(undefined);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-collapse-form';
 
     // Initialize the default props
@@ -190,7 +190,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         getForm: (): FormInstance<any> => {
             return form;
         },
-        getFormRef: (): React.RefObject<ProFormInstance | null> => {
+        getFormRef: (): React.RefObject<ProFormInstance | undefined> => {
             return formRef;
         },
         isFormOpen: (): boolean => {
@@ -227,7 +227,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         if (formOpen) {
             return (
                 <div
-                    className={classNames(`${clazzPrefix}-entry`, `${clazzPrefix}-entry-open`, (props?.autoEntryCursor ? `${clazzPrefix}-entry-cursor` : undefined), props?.openedEntryClazz)}
+                    className={classnames(`${clazzPrefix}-entry`, `${clazzPrefix}-entry-open`, (props?.autoEntryCursor ? `${clazzPrefix}-entry-cursor` : undefined), props?.openedEntryClazz)}
                     style={props?.openedEntryStyle}
                     onClick={triggerType !== 'click' ? undefined : () => setFormOpen(false)}
                     onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(false)}
@@ -239,7 +239,7 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         }
         return (
             <div
-                className={classNames(`${clazzPrefix}-entry`, (props?.autoEntryCursor ? `${clazzPrefix}-entry-cursor` : undefined), props?.closedEntryClazz)}
+                className={classnames(`${clazzPrefix}-entry`, (props?.autoEntryCursor ? `${clazzPrefix}-entry-cursor` : undefined), props?.closedEntryClazz)}
                 style={props?.closedEntryStyle}
                 onClick={triggerType !== 'click' ? undefined : () => setFormOpen(true)}
                 onMouseOver={triggerType !== 'hover' ? undefined : () => setFormOpen(true)}
@@ -288,10 +288,10 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
     };
 
     return (
-        <div className={classNames(clazzPrefix, fieldStyle.hashId)}>
+        <div className={classnames(clazzPrefix, fieldStyle.hashId)}>
             {buildEntryDom()}
             <div
-                className={classNames(`${clazzPrefix}-content`, (!formOpen ? undefined : `${clazzPrefix}-content-open`), props?.formContentClazz)}
+                className={classnames(`${clazzPrefix}-content`, (!formOpen ? undefined : `${clazzPrefix}-content-open`), props?.formContentClazz)}
                 style={props?.formContentStyle}
                 data-collapse-form-content={fieldId}
             >

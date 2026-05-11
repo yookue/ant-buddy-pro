@@ -20,7 +20,7 @@ import {Avatar, type AvatarProps} from 'antd';
 import {css} from '@emotion/css';
 import {omit} from '@rc-component/util';
 import {StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type RectZenithPlace} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -139,7 +139,7 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
             return undefined;
         }
         return (
-            <div className={classNames(`${clazzPrefix}-addon`, buildAddonCss(), props?.addonClazz)} style={props?.addonStyle}>
+            <div className={classnames(`${clazzPrefix}-addon`, buildAddonCss(), props?.addonClazz)} style={props?.addonStyle}>
                 {(typeof props?.addon === 'function') ? props.addon() : props?.addon}
             </div>
         );
@@ -149,7 +149,7 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Avatar {...omitAvatarProps}/>

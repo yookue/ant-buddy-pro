@@ -18,7 +18,7 @@
 import React from 'react';
 import {css} from '@emotion/css';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {useFieldStyle} from './style';
 
 
@@ -200,7 +200,7 @@ export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, fieldStyle.hashId, (!props?.boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.boundShadow ? undefined : `${clazzPrefix}-bound-shadow`), buildContainerCss(), props?.containerClazz)}
+            className={classnames(`${clazzPrefix}`, fieldStyle.hashId, (!props?.boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.boundShadow ? undefined : `${clazzPrefix}-bound-shadow`), buildContainerCss(), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}

@@ -16,7 +16,7 @@
 
 
 import {unit} from '@ant-design/cssinjs';
-import {useStyle, type UseStyleResult, type GenerateStyle} from '@ant-design/pro-provider';
+import {useStyle, type UseStyleResult, type GenerateStyle} from '@ant-design/pro-components';
 import {type ExtraProAliasToken} from '@/type/design-token';
 import {PackageConst} from '@/constant/PackageConst';
 

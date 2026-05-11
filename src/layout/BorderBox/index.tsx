@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {useFieldStyle} from './style';
 
 
@@ -102,7 +102,7 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
 
     const fieldStyle = useFieldStyle(clazzPrefix);
 
-    const sideClazz = classNames({
+    const sideClazz = classnames({
         [`${clazzPrefix}-border-top`]: borderTop,
         [`${clazzPrefix}-border-right`]: borderRight,
         [`${clazzPrefix}-border-bottom`]: borderBottom,
@@ -112,7 +112,7 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, sideClazz, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, sideClazz, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}

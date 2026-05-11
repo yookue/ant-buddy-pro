@@ -17,9 +17,9 @@
 
 import React from 'react';
 import {Row, Col, Form, Progress, theme} from 'antd';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import zxcvbn from 'zxcvbn';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -235,7 +235,7 @@ export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStre
         const strength = !watchValue ? 0 : (zxcvbn(watchValue).score + 1) * 20;
         return (
             <Progress
-                className={classNames(`${clazzPrefix}-progress`, props?.progressClazz)}
+                className={classnames(`${clazzPrefix}-progress`, props?.progressClazz)}
                 percent={strength}
                 steps={5}
                 showInfo={false}
@@ -259,7 +259,7 @@ export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStre
         const veryStrong = ObjectUtils.firstNotNil(props?.localeProps?.veryStrong, intlLocales.get([locale, 'veryStrong']), intlLocales.get(['en_US', 'veryStrong']));
         return (
             <Row
-                className={classNames(`${clazzPrefix}-caption`, props?.captionClazz)}
+                className={classnames(`${clazzPrefix}-caption`, props?.captionClazz)}
                 justify='space-around'
                 style={props?.captionStyle}
             >
@@ -274,7 +274,7 @@ export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStre
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {captionPos === 'before' && buildCaptionDom()}

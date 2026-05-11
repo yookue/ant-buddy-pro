@@ -19,15 +19,15 @@ import React from 'react';
 import {ConfigProvider, Form, Button, Switch, Space, Input, message as messageApi} from 'antd';
 import {type TabPosition} from 'antd/es/tabs';
 import {FieldTimeOutlined} from '@ant-design/icons';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
 import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import {useEventListener, useMutationObserver} from 'ahooks';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import cronValidate from 'cron-validate';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
@@ -492,7 +492,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                         cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
                         cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
                         fieldProps={{
-                            className: classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className),
+                            className: classnames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className),
                             ...omitFieldProps,
                             onChange: (event: any) => {
                                 props?.fieldProps?.onChange?.(event);
@@ -533,7 +533,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                             </Space.Addon>
                         )}
                         <Input
-                            className={classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className)}
+                            className={classnames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className)}
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                             data-cron-input-id={fieldId}
                             {...restProps}
@@ -813,7 +813,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                     points: ['tl', 'bl'],
                     offset: [0, triggerOffset],
                 }}
-                popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
+                popupClassName={classnames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), props?.triggerProps?.popupClassName)}
                 popupVisible={triggerOpen}
                 stretch={props?.triggerProps?.stretch ?? 'width'}
                 onOpenChange={(open: boolean) => {

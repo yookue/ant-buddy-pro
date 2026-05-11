@@ -18,10 +18,10 @@
 import React from 'react';
 import {type TooltipProps} from 'antd';
 import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import {useFullscreen} from 'ahooks';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {TooltipRender} from '@/render/TooltipRender';
 import {intlLocales} from './intl-locales';
 
@@ -175,7 +175,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, props?.containerClazz)}
+            className={classnames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildIconDom()}

@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Card} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
 import {BadgeRibbon} from '@unikue/ant-buddy-pro';
 
 

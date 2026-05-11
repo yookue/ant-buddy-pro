@@ -18,7 +18,7 @@
 import React from 'react';
 import {Card, Divider} from 'antd';
 import {SmileOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch, ProFormSlider} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch, ProFormSlider} from '@ant-design/pro-components';
 import {CornerStamp, type RectZenithPlace} from '@unikue/ant-buddy-pro';
 
 
@@ -42,7 +42,7 @@ export default () => {
                     fieldProps={{
                         value: placement,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setPlacement(event.target?.value);
                         }
                     }}

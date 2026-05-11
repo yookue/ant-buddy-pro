@@ -19,14 +19,14 @@ import React from 'react';
 import {App, Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps} from 'antd';
 import {type RcFile} from 'antd/es/upload/interface';
 import {UserOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
+import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import {warpField} from '@ant-design/pro-components/es/form/components/FormItem/warpField';
 import {omit} from '@rc-component/util';
 import {FileUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type CircleSquareShape, type FileSizeUint} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {intlLocales} from './intl-locales';
@@ -417,7 +417,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
             const omitAvatarProps = !props?.avatarProps ? {} : omit(props.avatarProps, ['className', 'size', 'icon']);
             return (
                 <Avatar
-                    className={classNames(`${clazzPrefix}-avatar`, props?.avatarProps?.className)}
+                    className={classnames(`${clazzPrefix}-avatar`, props?.avatarProps?.className)}
                     shape={shape}
                     size={props?.avatarProps?.size ?? {xs: 24, sm: 32, md: 48, lg: 64, xl: 104, xxl: 128}}
                     icon={buildAvatarPlaceholder()}
@@ -429,7 +429,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         const omitUploadProps = !props?.uploadProps ? {} : omit(props.uploadProps, ['className', 'fileList', 'listType', 'onChange', 'allowedFileTypes', 'warnWithTypes', 'maxFileSize', 'fileSizeUint', 'placeholder']);
         const uploadDom = (
             <Upload
-                className={classNames(`${clazzPrefix}-action-${shape}`, props?.uploadProps?.className)}
+                className={classnames(`${clazzPrefix}-action-${shape}`, props?.uploadProps?.className)}
                 name={props?.name}
                 listType={props?.uploadProps?.listType ?? 'picture-card'}
                 maxCount={1}
@@ -448,7 +448,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         const cropModalTitle = ObjectUtils.firstNotNil(props?.localeProps?.cropModalTitle, intlLocales.get([locale, 'cropModalTitle']), intlLocales.get(['en_US', 'cropModalTitle']));
         return (
             <ImgCrop
-                modalClassName={classNames(`${clazzPrefix}-crop`, props?.cropProps?.modalClassName)}
+                modalClassName={classnames(`${clazzPrefix}-crop`, props?.cropProps?.modalClassName)}
                 modalTitle={props?.cropProps?.modalTitle ?? cropModalTitle}
                 rotationSlider={props?.cropProps?.rotationSlider ?? true}
                 {...omitCropProps}
@@ -461,7 +461,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildAvatarDom()}
@@ -471,4 +471,4 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
 
 
 // @ts-ignore
-export const AvatarUpload = createField(AvatarUploadField) as typeof AvatarUploadField;
+export const AvatarUpload = warpField(AvatarUploadField) as typeof AvatarUploadField;

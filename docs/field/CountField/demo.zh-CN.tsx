@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button, Divider} from 'antd';
 import {PlusOutlined, MinusOutlined, FireOutlined, MessageOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
 import {CountField, ConsoleUtils, type CountFieldRef} from '@unikue/ant-buddy-pro';
 
 

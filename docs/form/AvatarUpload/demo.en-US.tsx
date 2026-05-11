@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button, Divider} from 'antd';
 import {ClearOutlined, PictureOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {AvatarUpload, ConsoleUtils, type AvatarUploadRef, type CircleSquareShape} from '@unikue/ant-buddy-pro';
 
 
@@ -47,7 +47,7 @@ export default () => {
                         fieldProps={{
                             value: shape,
                             buttonStyle: 'solid',
-                            onChange: (event) => {
+                            onChange: (event: any) => {
                                 setShape(event.target?.value);
                             }
                         }}

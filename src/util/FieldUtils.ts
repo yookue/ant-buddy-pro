@@ -18,8 +18,7 @@
 import React from 'react';
 import {type DefaultOptionType} from 'antd/es/select';
 import {type SegmentedLabeledOption} from 'antd/es/segmented';
-import {type ProSchemaValueEnumType} from '@ant-design/pro-provider';
-import {type ProSchemaValueEnumObj, type ProSchemaValueEnumMap} from '@ant-design/pro-utils';
+import {type ProSchemaValueEnumType, type ProSchemaValueEnumObj, type ProSchemaValueEnumMap} from '@ant-design/pro-components';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 
 

@@ -18,10 +18,10 @@
 import React from 'react';
 import {Empty, type TooltipProps} from 'antd';
 import {DownOutlined, UpOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import CssMotion from '@rc-component/motion';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {intlLocales} from './intl-locales';
@@ -269,7 +269,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
             return undefined;
         }
         return (
-            <span className={classNames(`${clazzPrefix}-header-ornament`, `${clazzPrefix}-header-ornament-${headerOrnamentPos}`)}>
+            <span className={classnames(`${clazzPrefix}-header-ornament`, `${clazzPrefix}-header-ornament-${headerOrnamentPos}`)}>
                 {props?.headerOrnament}
             </span>
         );
@@ -283,7 +283,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         const expend = ObjectUtils.firstNotNil(props?.localeProps?.expend, intlLocales.get([locale, 'expend']), intlLocales.get(['en_US', 'expend']));
         const innerDom = (
             <span
-                className={classNames(`${clazzPrefix}-header-collapse`, `${clazzPrefix}-header-collapse-${headerCollapsePos}`)}
+                className={classnames(`${clazzPrefix}-header-collapse`, `${clazzPrefix}-header-collapse-${headerCollapsePos}`)}
                 onClick={handleCollapse}
             >
                 {panelOpen ? headerCollapse : headerExpand}
@@ -312,10 +312,10 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
 
     return (
         <section
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), `${clazzPrefix}-${panelOpen ? 'open' : 'close'}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
-            <div className={classNames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
+            <div className={classnames(`${clazzPrefix}-header`, props?.headerClazz)} style={props?.headerStyle}>
                 {headerCollapsePos === 'before' && buildCollapseDom()}
                 {headerOrnamentPos === 'before' && buildOrnamentDom()}
                 <span className={`${clazzPrefix}-header-content`}>
@@ -326,7 +326,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
             </div>
             <CssMotion visible={panelVisible}>
                 {() => (
-                    <div className={classNames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
+                    <div className={classnames(`${clazzPrefix}-panel`, props?.panelClazz)} style={props?.panelStyle}>
                         {props?.panelContent || props?.children || panelPlaceholder}
                     </div>
                 )}

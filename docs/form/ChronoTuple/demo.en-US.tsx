@@ -17,8 +17,8 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
-import {type AxisDirectionType, ChronoTuple} from '@unikue/ant-buddy-pro';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
+import {ChronoTuple, type AxisDirectionType} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -39,7 +39,7 @@ export default () => {
                     fieldProps={{
                         value: layout,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setLayout(event.target?.value);
                         }
                     }}

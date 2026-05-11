@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Space} from 'antd';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {useFieldStyle} from './style';
 
 
@@ -92,7 +92,7 @@ export const CommentCard: React.FC<CommentCardProps> = (props?: CommentCardProps
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     const renderNested = (nestedChildren: React.ReactNode) => (
-        <div className={classNames(`${clazzPrefix}-nested`)}>{nestedChildren}</div>
+        <div className={classnames(`${clazzPrefix}-nested`)}>{nestedChildren}</div>
     );
 
     const avatarDom = !props?.avatar ? undefined : (
@@ -125,7 +125,7 @@ export const CommentCard: React.FC<CommentCardProps> = (props?: CommentCardProps
     );
 
     return (
-        <div className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <div className={`${clazzPrefix}-inner`}>
                 {avatarDom}
                 {contentDom}

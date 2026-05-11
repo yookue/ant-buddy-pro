@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Image, type ImageProps} from 'antd';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import {ImageUtils, NanoidUtils, ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 
@@ -157,11 +157,11 @@ export const RefreshImage: React.ForwardRefExoticComponent<RefreshImageProps & R
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!handCursor ? undefined : `${clazzPrefix}-hand-cursor`), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!handCursor ? undefined : `${clazzPrefix}-hand-cursor`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Image
-                className={classNames(`${clazzPrefix}-internal-image`, `${clazzPrefix}-${fieldId}`, props?.className)}
+                className={classnames(`${clazzPrefix}-internal-image`, `${clazzPrefix}-${fieldId}`, props?.className)}
                 preview={false}
                 src={imageSrc}
                 fallback={imageFallback}

@@ -17,14 +17,13 @@
 import React from 'react';
 import {Form, Segmented, type SegmentedProps} from 'antd';
 import {type SegmentedLabeledOption} from 'antd/es/segmented';
-import {ProForm} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {useDebounceFn} from '@ant-design/pro-utils';
-import {pickProFormItemProps} from '@ant-design/pro-utils/es/pickProFormItemProps';
+import {ProForm, useDebounceFn} from '@ant-design/pro-components';
+import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-components/es/form/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import {pickProFormItemProps} from '@ant-design/pro-components/es/utils/pickProFormItemProps';
 import {type SegmentedRawOption} from '@rc-component/segmented';
 import {omit} from '@rc-component/util';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
 
@@ -138,7 +137,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     if (proField) {
         const restProps = !props ? {} : pickProFormItemProps(props);
         return (
-            <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+            <div className={classnames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
                 <ProForm.Item {...restProps}>
                     <Segmented
                         options={optionItems ?? []}
@@ -151,7 +150,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     } else {
         const restProps = omit(omitFieldProps, ['id', 'onChange']);
         return (
-            <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+            <div className={classnames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
                 <Segmented
                     options={optionItems ?? []}
                     disabled={entryImmutable}

@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Input, Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {LabelField, type AxisDirectionType} from '@unikue/ant-buddy-pro';
 import {type LabelPresetStyle} from '@unikue/ant-buddy-pro/field/LabelField';
 
@@ -41,7 +41,7 @@ export default () => {
                     fieldProps={{
                         value: layout,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setLayout(event.target?.value);
                         }
                     }}
@@ -66,7 +66,7 @@ export default () => {
                         value: presetStyle,
                         buttonStyle: 'solid',
                         disabled: layout !== 'horizontal',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setPresetStyle(event.target?.value);
                         }
                     }}

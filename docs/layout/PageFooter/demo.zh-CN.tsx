@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider, ColorPicker} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {PageFooter} from '@unikue/ant-buddy-pro';
 import {type FooterPresetStyle} from '@unikue/ant-buddy-pro/layout/PageFooter';
 import {ColorUtils} from '@unikue/ts-lang-utils';
@@ -64,7 +64,7 @@ export default () => {
                     fieldProps={{
                         value: presetStyle,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setPresetStyle(event.target?.value);
                         }
                     }}

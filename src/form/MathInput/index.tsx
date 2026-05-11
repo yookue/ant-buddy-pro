@@ -17,14 +17,14 @@
 
 import React from 'react';
 import {Form, type InputProps} from 'antd';
-import {ProForm, FormListContext} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {useIntl} from '@ant-design/pro-provider';
+import {ProForm, FormListContext, useIntl} from '@ant-design/pro-components';
+import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import {omit} from '@rc-component/util';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import 'mathlive';
+import 'mathlive/fonts.css';
 import {PropUtils} from '@/util/PropUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -226,7 +226,7 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
         return (
             <div
                 ref={containerRef}
-                className={classNames(clazzPrefix, fieldStyle.hashId, (!entryImmutable ? undefined : `${clazzPrefix}-immutable`), props?.containerClazz)}
+                className={classnames(clazzPrefix, fieldStyle.hashId, (!entryImmutable ? undefined : `${clazzPrefix}-immutable`), props?.containerClazz)}
                 style={props?.containerStyle}
                 data-math-input-id={fieldId}
             />

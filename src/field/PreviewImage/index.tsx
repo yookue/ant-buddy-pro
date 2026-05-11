@@ -20,7 +20,7 @@ import {Image} from 'antd';
 import {ImagePreviewType} from 'antd/es/image';
 import {omit} from '@rc-component/util';
 import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 
 export type PreviewImageProps = Omit<ImagePreviewType, 'src'> & {
@@ -73,7 +73,7 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
 
     return (
         <Image
-            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`)}
+            className={classnames(clazzPrefix, `${clazzPrefix}-${fieldId}`)}
             width={0}
             height={0}
             preview={{
@@ -82,7 +82,7 @@ export const PreviewImage: React.FC<PreviewImageProps> = (props?: PreviewImagePr
                 fallback: imageFallback,
                 ...omitProps,
             }}
-            rootClassName={classNames(`${clazzPrefix}-preview`, `${clazzPrefix}-preview-${fieldId}`, props?.rootClassName)}
+            rootClassName={classnames(`${clazzPrefix}-preview`, `${clazzPrefix}-preview-${fieldId}`, props?.rootClassName)}
             style={{
                 display: 'none',
             }}

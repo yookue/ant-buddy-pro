@@ -18,9 +18,9 @@
 import React from 'react';
 import {Space} from 'antd';
 import {SpaceCompactProps} from 'antd/es/space/Compact';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import {css} from '@emotion/css';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -187,7 +187,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
             return undefined;
         }
         return (
-            <div className={classNames(`${clazzPrefix}-field`, (!props?.fieldBorder ? undefined : `${clazzPrefix}-field-border`), props?.fieldClazz)} style={props?.fieldStyle}>
+            <div className={classnames(`${clazzPrefix}-field`, (!props?.fieldBorder ? undefined : `${clazzPrefix}-field-border`), props?.fieldClazz)} style={props?.fieldStyle}>
                 {(typeof props.field === 'function') ? props.field() : props.field}
             </div>
         );
@@ -202,7 +202,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
             marginRight: !props?.addonMarginRight ? undefined : (typeof props.addonMarginRight === 'boolean' ? '-1' : props.addonMarginRight),
         });
         return (
-            <div className={classNames(`${clazzPrefix}-addon`, (!props?.addonBorder ? undefined : `${clazzPrefix}-addon-border`), marginClazz, props?.addonClazz)} style={props?.addonStyle}>
+            <div className={classnames(`${clazzPrefix}-addon`, (!props?.addonBorder ? undefined : `${clazzPrefix}-addon-border`), marginClazz, props?.addonClazz)} style={props?.addonStyle}>
                 {(typeof props.addon === 'function') ? props.addon() : props.addon}
             </div>
         );
@@ -210,7 +210,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (addonPos ? `${clazzPrefix}-addon-${addonPos}` : undefined), (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (addonPos ? `${clazzPrefix}-addon-${addonPos}` : undefined), (editContext.mode === 'read' ? `${clazzPrefix}-readonly` : undefined), ((editContext.mode === 'read' && !readonlyBorder) ? `${clazzPrefix}-readonly-borderless` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact {...spaceCompactProps}>

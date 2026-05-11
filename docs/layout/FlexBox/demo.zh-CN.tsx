@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Button, Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {FlexBox} from '@unikue/ant-buddy-pro';
 
 
@@ -42,7 +42,7 @@ export default () => {
                     fieldProps={{
                         value: justifyContent,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setJustifyContent(event.target?.value);
                         }
                     }}
@@ -61,7 +61,7 @@ export default () => {
                     fieldProps={{
                         value: alignItems,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setAlignItems(event.target?.value);
                         }
                     }}
@@ -78,7 +78,7 @@ export default () => {
                     fieldProps={{
                         value: gap,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setGap(event.target?.value);
                         }
                     }}

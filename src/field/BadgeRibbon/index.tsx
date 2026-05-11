@@ -19,7 +19,7 @@ import React from 'react';
 import {Badge} from 'antd';
 import {type RibbonProps} from 'antd/es/badge/Ribbon';
 import {omit} from '@rc-component/util';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {useFieldStyle} from './style';
 
 
@@ -72,7 +72,7 @@ export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps
         const omitProps = !props? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'transparent']);
         return (
             <Badge.Ribbon
-                className={classNames(`${clazzPrefix}-content`, props?.className)}
+                className={classnames(`${clazzPrefix}-content`, props?.className)}
                 {...omitProps}
             />
         );
@@ -80,7 +80,7 @@ export const BadgeRibbon: React.FC<BadgeRibbonProps> = (props?: BadgeRibbonProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.transparent ? undefined : `${clazzPrefix}-transparent`), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!props?.transparent ? undefined : `${clazzPrefix}-transparent`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildInnerDom()}

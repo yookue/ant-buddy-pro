@@ -22,7 +22,7 @@ import {css} from '@emotion/css';
 import {type MenuInfo, type MenuMode} from '@rc-component/menu/es/interface';
 import {omit} from '@rc-component/util';
 import {useEventListener} from 'ahooks';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -284,7 +284,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
         return props?.menuProps?.items.map(item => {
             const titleDom = !tabTitleVisible ? undefined : (
                 <div
-                    className={classNames(`${clazzPrefix}-tab-title`, props?.tabTitleClazz)}
+                    className={classnames(`${clazzPrefix}-tab-title`, props?.tabTitleClazz)}
                     style={props?.tabTitleStyle}
                 >
                     {props?.tabTitleRender ? props.tabTitleRender(item?.label) : item?.label}
@@ -293,12 +293,12 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
             return (
                 <div
                     key={item?.key}
-                    className={classNames(`${clazzPrefix}-tab`, props?.tabClazz, ((activeKey !== item?.key) ? undefined : `${clazzPrefix}-tab-active`))}
+                    className={classnames(`${clazzPrefix}-tab`, props?.tabClazz, ((activeKey !== item?.key) ? undefined : `${clazzPrefix}-tab-active`))}
                     style={props?.tabStyle}
                 >
                     {titleDom}
                     <div
-                        className={classNames(`${clazzPrefix}-tab-content`, props?.tabContentClazz)}
+                        className={classnames(`${clazzPrefix}-tab-content`, props?.tabContentClazz)}
                         style={props?.tabContentStyle}
                     >
                         {item?.children}
@@ -316,15 +316,15 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <div
-                className={classNames(`${clazzPrefix}-entry`, (entryVisible ? undefined : `${clazzPrefix}-entry-hidden`), props?.entryClazz, entryWidthClazz)}
+                className={classnames(`${clazzPrefix}-entry`, (entryVisible ? undefined : `${clazzPrefix}-entry-hidden`), props?.entryClazz, entryWidthClazz)}
                 style={omitEntryStyle}
             >
                 <Menu
-                    className={classNames((!entryInkBar ? undefined : `${clazzPrefix}-ink-bar`), (!entrySelectionBold ? undefined : `${clazzPrefix}-selection-bold`))}
+                    className={classnames((!entryInkBar ? undefined : `${clazzPrefix}-ink-bar`), (!entrySelectionBold ? undefined : `${clazzPrefix}-selection-bold`))}
                     defaultSelectedKeys={props?.menuProps?.defaultActiveKey ? [props?.menuProps?.defaultActiveKey] : []}
                     items={omitMenuItems}
                     mode={menuMode}

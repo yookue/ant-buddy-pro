@@ -19,7 +19,7 @@ import React from 'react';
 import {Layout} from 'antd';
 import {CopyrightOutlined} from '@ant-design/icons';
 import {If, For} from '@unikue/react-condition';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -228,19 +228,19 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
 
     return (
         <Layout.Footer
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)}
             style={props?.containerStyle}
         >
-            <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
+            <div className={classnames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
                 <If condition={props?.links} validation={false}>
-                    <div className={classNames(`${clazzPrefix}-links`, props?.linksClazz)} style={props?.linksStyle}>
+                    <div className={classnames(`${clazzPrefix}-links`, props?.linksClazz)} style={props?.linksStyle}>
                         <For
                             of={props?.links}
                             render={(item: HyperlinkProps) => {
                                 return (
                                     <a
                                         key={item.key}
-                                        className={classNames(item.clazz, props?.linkShareClazz)}
+                                        className={classnames(item.clazz, props?.linkShareClazz)}
                                         href={item.href}
                                         title={item.title}
                                         target={item.target ?? '_blank'}
@@ -258,7 +258,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                     </div>
                 </If>
                 <If condition={props?.copyright} validation={false}>
-                    <div className={classNames(`${clazzPrefix}-copyright`, props?.copyrightClazz)} style={props?.copyrightStyle}>
+                    <div className={classnames(`${clazzPrefix}-copyright`, props?.copyrightClazz)} style={props?.copyrightStyle}>
                         <If condition={copyrightIcon} validation={false}>
                             <If.Then>
                                 <>

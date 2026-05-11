@@ -15,7 +15,7 @@
  */
 
 
-import {ProForm} from '@ant-design/pro-form';
+import {ProForm} from '@ant-design/pro-components';
 import {SegmentRadio} from '@unikue/ant-buddy-pro';
 
 

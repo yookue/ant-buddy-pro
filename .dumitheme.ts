@@ -96,15 +96,19 @@ export default defineThemeConfig({
     moreLinks: [
         {
             text: 'TsLangUtils',
-            link: 'https://github.com/unikueltd/ts-lang-utils'
+            link: 'https://unikueltd.github.io/ts-lang-utils'
         },
         {
             text: 'TsMultiMap',
-            link: 'https://github.com/unikueltd/ts-multi-map'
+            link: 'https://unikueltd.github.io/ts-multi-map'
         },
         {
             text: 'React Condition',
-            link: 'https://github.com/unikueltd/react-condition'
+            link: 'https://unikueltd.github.io/react-condition'
+        },
+        {
+            text: 'Typedoc Theme Dumi',
+            link: 'https://unikueltd.github.io/typedoc-theme-dumi'
         }
     ],
     description: {
@@ -159,7 +163,7 @@ export default defineThemeConfig({
             },
             {
                 title: '🚀 Better compilation performance',
-                details: 'By combining Umi v4, esbuild, SWC, persistent cache and other schemes, it brings faster compilation speed than 0.x',
+                details: 'By combining Umi v4, esbuild, SWC, persistent cache and other schemes, it brings faster compilation speed',
             },
             {
                 title: '🎨 Uniform style',
@@ -170,8 +174,8 @@ export default defineThemeConfig({
                 details: 'Easy access, installation and use, fully integrated into Ant Design style'
             },
             {
-                title: '✨ More coming components',
-                details: 'React components compatible with Ant Design. More components are coming soon',
+                title: '✨ Update continuously',
+                details: 'Full support for Ant Design v6 and Pro Components v3. Continuously improving',
             }
         ],
         'zh-CN': [
@@ -185,7 +189,7 @@ export default defineThemeConfig({
             },
             {
                 title: '🚀 更好的编译性能',
-                details: '通过结合使用 Umi v4、esbuild、SWC、持久缓存等方案，带来比 0.x 更快的编译速度',
+                details: '通过结合使用 Umi v4、esbuild、SWC、持久缓存等方案，带来更快的编译速度',
             },
             {
                 title: '🎨 样式风格统一',
@@ -196,8 +200,8 @@ export default defineThemeConfig({
                 details: '接入简单，安装即使用，全面融入 Ant Design 风格',
             },
             {
-                title: '✨ 丰富组件',
-                details: '不断完善的 React 组件，与 Ant Design 如出一辙',
+                title: '✨ 持续更新',
+                details: '全面支持 Ant Design v6 和 Pro Components v3，持续完善',
             }
         ],
         'zh-TW': [
@@ -211,7 +215,7 @@ export default defineThemeConfig({
             },
             {
                 title: '🚀 更好的編譯性能',
-                details: '通過結合使用 Umi v4、esbuild、SWC、持久緩存等方案，帶來比 0.x 更快的編譯速度',
+                details: '通過結合使用 Umi v4、esbuild、SWC、持久緩存等方案，帶來更快的編譯速度',
             },
             {
                 title: '🎨 樣式風格統一',
@@ -222,8 +226,8 @@ export default defineThemeConfig({
                 details: '接入簡單，安裝即使用，全面融入 Ant Design 風格',
             },
             {
-                title: '✨ 豐富組件',
-                details: '不斷完善的 React 組件，與 Ant Design 如出一轍'
+                title: '✨ 持续更新',
+                details: '全面支持 Ant Design v6 和 Pro Components v3，持續完善'
             }
         ]
     },

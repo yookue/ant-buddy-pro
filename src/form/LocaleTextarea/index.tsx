@@ -18,15 +18,14 @@
 import React from 'react';
 import {Form, Input, type TabsProps, type FormRule} from 'antd';
 import {type TextAreaProps, type TextAreaRef} from 'antd/es/input/TextArea';
-import {ProFormTextArea} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {useIntl} from '@ant-design/pro-provider';
+import {ProFormTextArea, useIntl} from '@ant-design/pro-components';
+import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import {type TabPaneProps as RcTabPaneProps} from '@rc-component/tabs/es/TabPanelList/TabPane';
 import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type ReadonlyTabsType, type RuleValidateScope} from '@/type/declaration';
 import {LabelField} from '@/field/LabelField';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
@@ -276,7 +275,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                 <ProFormTextArea
                     {...restProps}
                     fieldProps={{
-                        className: classNames(clazzPrefix, `${clazzPrefix}-pro-field`, props?.fieldProps?.className),
+                        className: classnames(clazzPrefix, `${clazzPrefix}-pro-field`, props?.fieldProps?.className),
                         ...omitFieldProps,
                         // @ts-ignore
                         'data-locale-textarea-id': fieldId,
@@ -287,7 +286,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
             const restProps = omit(omitFieldProps, ['name', 'id', 'placeholder', 'onChange']);
             return (
                 <Input.TextArea
-                    className={classNames(clazzPrefix, props?.fieldProps?.className)}
+                    className={classnames(clazzPrefix, props?.fieldProps?.className)}
                     placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                     onChange={(event: any) => {
                         if (props?.name) {
@@ -342,7 +341,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                                 name={rawName ? `${rawName}[${tag}]` : undefined}
                                 {...restProps}
                                 fieldProps={{
-                                    className: classNames(`${clazzPrefix}-item`, `${clazzPrefix}-item-pro-field`, fieldProps?.className),
+                                    className: classnames(`${clazzPrefix}-item`, `${clazzPrefix}-item-pro-field`, fieldProps?.className),
                                     placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     rows: fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined),
                                     allowClear: fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
@@ -363,7 +362,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                         </If.Then>
                         <If.Else>
                             <Input.TextArea
-                                className={classNames(`${clazzPrefix}-item`, fieldProps?.className)}
+                                className={classnames(`${clazzPrefix}-item`, fieldProps?.className)}
                                 placeholder={StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined)}
                                 rows={fieldProps?.rows || props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined)}
                                 allowClear={fieldProps?.allowClear || props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined)}
@@ -402,7 +401,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                             <ProFormTextArea
                                 name={rawName ? `${rawName}[${tag}]` : undefined}
                                 fieldProps={{
-                                    className: classNames(`${clazzPrefix}-item`, `${clazzPrefix}-item-pro-field`),
+                                    className: classnames(`${clazzPrefix}-item`, `${clazzPrefix}-item-pro-field`),
                                     placeholder: props?.switchShareProps?.placeholder || (switchCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                                     rows: props?.switchShareProps?.rows || (switchCloneProps.rows ? props?.fieldProps?.rows : undefined),
                                     allowClear: props?.switchShareProps?.allowClear || (switchCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
@@ -456,7 +455,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
 
     const fieldDom = (
         <div
-            className={classNames(`${clazzPrefix}-container`, fieldStyle.hashId, (!entryImmutable ? undefined : `${clazzPrefix}-immutable`), props?.containerClazz)}
+            className={classnames(`${clazzPrefix}-container`, fieldStyle.hashId, (!entryImmutable ? undefined : `${clazzPrefix}-immutable`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <CardTabs

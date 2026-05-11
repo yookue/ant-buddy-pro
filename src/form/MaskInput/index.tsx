@@ -17,11 +17,11 @@
 
 import React from 'react';
 import {Form, Input, type InputProps, type InputRef} from 'antd';
-import {ProFormText} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {ProFormText} from '@ant-design/pro-components';
+import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
 import {omit} from '@rc-component/util';
 import {ElementUtils, NanoidUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 
 
@@ -120,7 +120,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
             <ProFormText
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, props?.fieldProps?.className),
+                    className: classnames(clazzPrefix, props?.fieldProps?.className),
                     onChange: handleChange,
                     onCompositionStart: handleCompositionStart,
                     onCompositionEnd: handleCompositionEnd,
@@ -132,7 +132,7 @@ export const MaskInput: React.FC<MaskInputProps> = (props?: MaskInputProps) => {
     } else {
         return (
             <Input
-                className={classNames(clazzPrefix, props?.fieldProps?.className)}
+                className={classnames(clazzPrefix, props?.fieldProps?.className)}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 onChange={handleChange}
                 onCompositionStart={handleCompositionStart}

@@ -21,15 +21,14 @@ import {type LabeledValue} from 'antd/es/select';
 import Wave from 'antd/es/_util/wave';
 import {default as Icon} from '@ant-design/icons';
 import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/es/types';
-import {ProFormSelect} from '@ant-design/pro-form';
-import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {useIntl} from '@ant-design/pro-provider';
+import {ProFormSelect, useIntl} from '@ant-design/pro-components';
+import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import {omit} from '@rc-component/util';
 import {If, For, MapIterator} from '@unikue/react-condition';
 import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import {useEventListener} from 'ahooks';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {Scrollbars} from 'react-custom-scrollbars-4';
 import {allIconTypes, type IconSceneType} from '@/type/design-icon';
 import {type ReadonlyTabsType} from '@/type/declaration';
@@ -550,13 +549,13 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     const content = (
                         <div
                             key={key}
-                            className={classNames(`${clazzPrefix}-icon-wrapper`, props?.optionWrapperClazz, (selected ? `${clazzPrefix}-icon-selected` : undefined))}
+                            className={classnames(`${clazzPrefix}-icon-wrapper`, props?.optionWrapperClazz, (selected ? `${clazzPrefix}-icon-selected` : undefined))}
                             style={props?.optionWrapperStyle}
                             data-icon-select-option={key}
                         >
                             <Wave>
                                 <div
-                                    className={classNames(`${clazzPrefix}-icon-option`, props?.optionIconClazz)}
+                                    className={classnames(`${clazzPrefix}-icon-option`, props?.optionIconClazz)}
                                     title={!tooltipCtrl ? key : undefined}
                                     style={props?.optionIconStyle}
                                     onClick={() => handleIconClick(key)}
@@ -702,7 +701,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                     event.preventDefault();
                     event.stopPropagation();
                 }}
-                onClick={!searchBox ? undefined : (event) => {
+                onClick={!searchBox ? undefined : (event: any) => {
                     if (event.target !== searchRef.current?.input && searchRef.current?.input === document.activeElement) {
                         // Disabled and re-enable the search box to restore non-focus state
                         setSearchDisabled(true);
@@ -712,7 +711,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 data-icon-select-popup-wrapper={fieldId}
             >
                 <CardTabs
-                    className={classNames(`${clazzPrefix}-popup-tabs`, props?.tabsProps?.className)}
+                    className={classnames(`${clazzPrefix}-popup-tabs`, props?.tabsProps?.className)}
                     defaultActiveKey={defaultThemeType}
                     items={themeItems}
                     inkBar={themeInkBar}
@@ -776,9 +775,9 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 fieldProps={{
                     classNames: {
                         // @ts-ignore
-                        root: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
+                        root: classnames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
                         popup: {
-                            root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
+                            root: classnames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
                         }
                     },
                     disabled: entryImmutable,
@@ -802,9 +801,9 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
             <Select
                 classNames={{
                     // @ts-ignore
-                    root: classNames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
+                    root: classnames(clazzPrefix, `${clazzPrefix}-entry-${fieldId}`, props?.fieldProps?.classNames?.root),
                     popup: {
-                        root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
+                        root: classnames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, props?.fieldProps?.classNames?.popup?.root),
                     }
                 }}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}

@@ -15,7 +15,7 @@
  */
 
 
-import {ProForm} from '@ant-design/pro-form';
+import {ProForm} from '@ant-design/pro-components';
 import {MathInput} from '@unikue/ant-buddy-pro';
 
 

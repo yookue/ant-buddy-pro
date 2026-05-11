@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button, Divider} from 'antd';
 import {FireOutlined, ClearOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
 import {TagInput, ConsoleUtils, type TagInputRef} from '@unikue/ant-buddy-pro';
 
 

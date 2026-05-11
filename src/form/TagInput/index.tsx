@@ -18,15 +18,13 @@
 import React from 'react';
 import {ConfigProvider, Form, Flex, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
-import {ProFormText} from '@ant-design/pro-form';
-import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
-import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {useIntl} from '@ant-design/pro-provider';
-import {useDebounceFn} from '@ant-design/pro-utils';
+import {ProFormText, useIntl, useDebounceFn} from '@ant-design/pro-components';
+import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-components/es/form/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import {warpField} from '@ant-design/pro-components/es/form/components/FormItem/warpField';
 import {omit} from '@rc-component/util';
 import {ArrayUtils, NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import objectHash from 'object-hash';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -314,7 +312,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                 return (
                     <span key={`${index}_${objectHash(content)}`} className={`${clazzPrefix}-fulfil-span`}>
                         <Tag
-                            className={classNames(`${clazzPrefix}-fulfil-tag`, props?.fulfilTagProps?.className)}
+                            className={classnames(`${clazzPrefix}-fulfil-tag`, props?.fulfilTagProps?.className)}
                             onClose={event => {
                                 props?.fulfilTagProps?.onClose?.(event);
                                 if (!event.isDefaultPrevented()) {
@@ -333,7 +331,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             return (
                 <span key={`${index}_${objectHash(content)}`} className={`${clazzPrefix}-fulfil-span`}>
                     <Tag
-                        className={classNames(`${clazzPrefix}-fulfil-tag`, origin.className, props?.fulfilTagProps?.className)}
+                        className={classnames(`${clazzPrefix}-fulfil-tag`, origin.className, props?.fulfilTagProps?.className)}
                         onClose={event => {
                             origin?.onClose?.(event);
                             props?.fulfilTagProps?.onClose?.(event);
@@ -349,7 +347,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             );
         });
         return (
-            <Flex gap='small' className={classNames(`${clazzPrefix}-fulfil`, (!addable ? undefined : `${clazzPrefix}-fulfil-addable`))}>
+            <Flex gap='small' className={classnames(`${clazzPrefix}-fulfil`, (!addable ? undefined : `${clazzPrefix}-fulfil-addable`))}>
                 {tagsDom}
             </Flex>
         );
@@ -398,29 +396,29 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                             {...restProps}
                             fieldProps={{
                                 ref: (input) => input?.focus(),
-                                className: classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className),
+                                className: classnames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className),
                                 type: 'text',
                                 size: props?.addingInputProps?.fieldProps?.size ?? 'small',
-                                onChange: (event) => {
+                                onChange: (event: any) => {
                                     props?.addingInputProps?.fieldProps?.onChange?.(event);
                                     if (!event.isDefaultPrevented()) {
                                         inputValueRef.current = event.target.value;
                                     }
                                 },
-                                onKeyDown: (event) => {
+                                onKeyDown: (event: any) => {
                                     props?.addingInputProps?.fieldProps?.onKeyDown?.(event);
                                     if (!event.isDefaultPrevented() && event.key === 'Escape') {
                                         inputValueRef.current = null;
                                         setInputVisible(false);
                                     }
                                 },
-                                onPressEnter: (event) => {
+                                onPressEnter: (event: any) => {
                                     props?.addingInputProps?.fieldProps?.onPressEnter?.(event);
                                     if (!event.isDefaultPrevented()) {
                                         handleInputConfirm().then();
                                     }
                                 },
-                                onBlur: (event) => {
+                                onBlur: (event: any) => {
                                     props?.addingInputProps?.fieldProps?.onBlur?.(event);
                                     if (!event.isDefaultPrevented()) {
                                         handleInputConfirm().then();
@@ -452,7 +450,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                     <div className={`${clazzPrefix}-action`}>
                         <Input
                             ref={(input) => input?.focus()}
-                            className={classNames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className)}
+                            className={classnames(`${clazzPrefix}-action-input`, props?.addingInputProps?.fieldProps?.className)}
                             type='text'
                             placeholder={StringUtils.join(props?.addingInputProps?.placeholder) ?? props?.addingInputProps?.fieldProps?.placeholder}
                             {...restProps}
@@ -463,7 +461,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                                     inputValueRef.current = event.target.value;
                                 }
                             }}
-                            onKeyDown={(event) => {
+                            onKeyDown={(event: any) => {
                                 props?.addingInputProps?.fieldProps?.onKeyDown?.(event);
                                 if (!event.isDefaultPrevented() && event.key === 'Escape') {
                                     inputValueRef.current = null;
@@ -491,7 +489,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             return (
                 <div className={`${clazzPrefix}-action`}>
                     <Tag
-                        className={classNames(`${clazzPrefix}-action-tag`, props?.addingTagProps?.className)}
+                        className={classnames(`${clazzPrefix}-action-tag`, props?.addingTagProps?.className)}
                         {...omitTagProps}
                         onClick={event => {
                             props?.addingTagProps?.onClick?.(event);
@@ -512,7 +510,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
             {messageContext}
             <div
                 ref={fieldRef}
-                className={classNames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
+                className={classnames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), props?.containerClazz)}
                 style={props?.containerStyle}
             >
                 {buildFulfilDom()}
@@ -524,4 +522,4 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
 
 
 // @ts-ignore
-export const TagInput = createField(TagInputField) as typeof TagInputField;
+export const TagInput = warpField(TagInputField) as typeof TagInputField;

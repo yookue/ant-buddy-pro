@@ -17,7 +17,7 @@
 
 import {Avatar, message as messageApi} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
-import {ProFormTextArea} from '@ant-design/pro-form';
+import {ProFormTextArea} from '@ant-design/pro-components';
 import {CollapseForm, CommentCard} from '@unikue/ant-buddy-pro';
 import {RandomUtils} from '@unikue/ts-lang-utils';
 

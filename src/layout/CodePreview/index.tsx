@@ -20,7 +20,7 @@ import {Typography} from 'antd';
 import {type TitleProps} from 'antd/es/typography/Title';
 import {type TextProps} from 'antd/es/typography/Text';
 import {If} from '@unikue/react-condition';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -175,14 +175,14 @@ export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.boundShadow ? undefined : `${clazzPrefix}-bound-shadow`), (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.boundShadow ? undefined : `${clazzPrefix}-bound-shadow`), (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)}
             style={props?.containerStyle}
         >
-            <pre className={classNames(`${clazzPrefix}-pre`, props?.preClazz)} style={props?.preStyle}>
-                <code className={classNames(`${clazzPrefix}-code`, props?.codeClazz)} style={props?.codeStyle}>
+            <pre className={classnames(`${clazzPrefix}-pre`, props?.preClazz)} style={props?.preStyle}>
+                <code className={classnames(`${clazzPrefix}-code`, props?.codeClazz)} style={props?.codeStyle}>
                     <If condition={props?.titleContent} validation={false}>
                         <Typography.Title
-                            className={classNames(`${clazzPrefix}-title`, props?.titleClazz)}
+                            className={classnames(`${clazzPrefix}-title`, props?.titleClazz)}
                             style={props?.titleStyle}
                             {...props?.titleProps}
                         >
@@ -191,7 +191,7 @@ export const CodePreview: React.FC<CodePreviewProps> = (props?: CodePreviewProps
                     </If>
                     <If condition={props?.textContent} validation={false}>
                         <Typography.Text
-                            className={classNames(`${clazzPrefix}-text`, props?.textClazz)}
+                            className={classnames(`${clazzPrefix}-text`, props?.textClazz)}
                             style={props?.textStyle}
                             {...props?.textProps}
                         >

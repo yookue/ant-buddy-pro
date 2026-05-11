@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormSelect, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSelect, ProFormSwitch} from '@ant-design/pro-components';
 import {MenuTabs, type PaddingSpaceType} from '@unikue/ant-buddy-pro';
 
 

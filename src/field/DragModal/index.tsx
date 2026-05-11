@@ -21,7 +21,7 @@ import {DndContext, useDraggable} from '@dnd-kit/core';
 import {restrictToWindowEdges} from '@dnd-kit/modifiers';
 import {omit} from '@rc-component/util';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 
 export type DragModalProps = ModalProps & {
@@ -120,7 +120,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
         return (
             <div
                 ref={setNodeRef}
-                className={classNames(`${clazzPrefix}-draggable`, `${clazzPrefix}-draggable-${fieldId}`)}
+                className={classnames(`${clazzPrefix}-draggable`, `${clazzPrefix}-draggable-${fieldId}`)}
                 style={styles}
             >
                 {children}
@@ -137,7 +137,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
 
         return (
             <div
-                className={classNames(`${clazzPrefix}-draggable-title`, `${clazzPrefix}-draggable-title-${fieldId}`)}
+                className={classnames(`${clazzPrefix}-draggable-title`, `${clazzPrefix}-draggable-title-${fieldId}`)}
                 {...listeners}
                 {...attributes}
                 style={{cursor: draggable ? 'move' : 'default'}}
@@ -154,8 +154,8 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
             onDragEnd={handleDragEnd}
         >
             <Modal
-                className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
-                wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
+                className={classnames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
+                wrapClassName={classnames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
                 title={props?.modalRender ? props?.title : <DraggableTitle/>}
                 modalRender={props?.modalRender ?? ((dom: React.ReactNode) => {
                     return (
@@ -169,8 +169,8 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
         </DndContext>
     ) : (
         <Modal
-            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
-            wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
+            className={classnames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
+            wrapClassName={classnames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
             title={props?.title}
             {...omitProps}
         />

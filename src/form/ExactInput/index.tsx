@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Checkbox, Form, type CheckboxProps, type TooltipProps} from 'antd';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';

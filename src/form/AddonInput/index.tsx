@@ -17,12 +17,12 @@
 
 import React from 'react';
 import {Form, Input, Space, type InputProps, type InputRef} from 'antd';
-import {ProForm} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {ProForm} from '@ant-design/pro-components';
+import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import {omit} from '@rc-component/util';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {PropUtils} from '@/util/PropUtils';
 import {useFieldStyle} from './style';
 
@@ -146,7 +146,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     if (proField) {
         const restProps = !props ? {} : omit(props, ['className', 'name', 'allowClear', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'cursorBefore', 'cursorAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
         return (
-            <div className={classNames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
+            <div className={classnames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
                 <ProForm.Item name={fieldName} {...restProps}>
                     <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                         {!!addonBeforeDom && (
@@ -155,6 +155,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                             </Space.Addon>
                         )}
                         <Input
+                            key={`${fieldName}-${entryImmutable}`}
                             className={`${clazzPrefix}-input`}
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                             name={fieldName}
@@ -182,7 +183,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
         );
     } else {
         return (
-            <div className={classNames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
+            <div className={classnames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
                 <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                     {!!addonBeforeDom && (
                         <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
@@ -190,6 +191,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         </Space.Addon>
                     )}
                     <Input
+                        key={`${fieldName}-${entryImmutable}`}
                         className={`${clazzPrefix}-input`}
                         name={props?.name ?? props?.fieldProps?.name}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}

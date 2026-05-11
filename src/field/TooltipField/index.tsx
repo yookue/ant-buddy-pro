@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {type TooltipProps} from 'antd';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {TooltipRender} from '@/render/TooltipRender';
 
 
@@ -127,7 +127,7 @@ export const TooltipField: React.FC<TooltipFieldProps> = (props?: TooltipFieldPr
     }
 
     return (
-        <div className={classNames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classnames(clazzPrefix, props?.containerClazz)} style={props?.containerStyle}>
             {fieldDom}
         </div>
     );

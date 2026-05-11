@@ -18,7 +18,7 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio} from '@ant-design/pro-components';
 import {StretchInput} from '@unikue/ant-buddy-pro';
 
 
@@ -39,7 +39,7 @@ export default () => {
                     fieldProps={{
                         value: miniatureType,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setMiniatureType(event.target?.value);
                         }
                     }}

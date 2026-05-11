@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio} from '@ant-design/pro-components';
 import {DivideSelect, type LabelMixinType} from '@unikue/ant-buddy-pro';
 import {type DividePresetStyle} from '@unikue/ant-buddy-pro/form/DivideSelect';
 
@@ -42,7 +42,7 @@ export default () => {
                     fieldProps={{
                         value: optionLabel,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setOptionLabel(event.target?.value);
                         }
                     }}
@@ -58,7 +58,7 @@ export default () => {
                     fieldProps={{
                         value: optionBeforeContent,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setOptionBeforeContent(event.target?.value);
                         }
                     }}
@@ -75,7 +75,7 @@ export default () => {
                     fieldProps={{
                         value: optionAfterContent,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setOptionAfterContent(event.target?.value);
                         }
                     }}
@@ -92,7 +92,7 @@ export default () => {
                     fieldProps={{
                         value: presetStyle,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setPresetStyle(event.target?.value);
                         }
                     }}

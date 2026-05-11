@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button, Divider} from 'antd';
 import {PlusOutlined, MinusOutlined, FireOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {ThumbToggle, ConsoleUtils, type ThumbToggleRef} from '@unikue/ant-buddy-pro';
 import {type ThumbActionType} from '@unikue/ant-buddy-pro/field/ThumbToggle';
 
@@ -44,7 +44,7 @@ export default () => {
                     fieldProps={{
                         value: actionType,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setActionType(event.target?.value);
                         }
                     }}

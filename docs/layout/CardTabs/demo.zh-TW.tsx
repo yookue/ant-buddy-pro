@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch} from '@ant-design/pro-components';
 import {CardTabs, type PaddingSpaceType} from '@unikue/ant-buddy-pro';
 import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
 
@@ -44,7 +44,7 @@ export default () => {
                     fieldProps={{
                         value: tabPlacement,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setTabPlacement(event.target?.value);
                         }
                     }}

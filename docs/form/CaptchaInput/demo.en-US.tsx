@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button, Divider, message as messageApi} from 'antd';
 import {MobileOutlined, SafetyCertificateOutlined, FireOutlined, StopOutlined} from '@ant-design/icons';
-import {ProForm, ProFormText} from '@ant-design/pro-form';
+import {ProForm, ProFormText} from '@ant-design/pro-components';
 import {CaptchaInput, ConsoleUtils, type CaptchaInputRef} from '@unikue/ant-buddy-pro';
 
 

@@ -20,7 +20,7 @@ import {Modal, type ModalProps, type ModalFuncProps} from 'antd';
 import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
 import {omit} from '@rc-component/util';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 
 
@@ -280,8 +280,8 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
         }
         const omitProps = !props?.modalFunProps ? {} : omit(props.modalFunProps, ['className', 'wrapClassName', 'afterClose', 'preprocess']);
         const fullProps: ModalFuncProps = {
-            className: classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalFunProps?.className),
-            wrapClassName: classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalFunProps?.wrapClassName),
+            className: classnames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalFunProps?.className),
+            wrapClassName: classnames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalFunProps?.wrapClassName),
             afterClose: () => {
                 modalFuncOpeningRef.current = false;
                 setModalFuncOpening(false);
@@ -329,8 +329,8 @@ export const DelayModal: React.ForwardRefExoticComponent<DelayModalProps & React
 
     return (
         <Modal
-            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalProps?.className)}
-            wrapClassName={classNames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalProps?.wrapClassName)}
+            className={classnames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.modalProps?.className)}
+            wrapClassName={classnames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.modalProps?.wrapClassName)}
             open={modalOpening}
             onOk={(event: any) => {
                 setModalOpening(false);

@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button, Divider} from 'antd';
 import {LikeOutlined, DislikeOutlined} from '@ant-design/icons';
-import {ProForm} from '@ant-design/pro-form';
+import {ProForm} from '@ant-design/pro-components';
 import {ThumbTuple, type ThumbTupleRef} from '@unikue/ant-buddy-pro';
 
 

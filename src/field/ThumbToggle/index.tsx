@@ -18,9 +18,9 @@
 import React from 'react';
 import {type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
 import {LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, StarOutlined, StarFilled} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type AxisDirectionType} from '@/type/declaration';
 import {CountField, type CountFieldRef} from '@/field/CountField';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
@@ -311,7 +311,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
             return undefined;
         }
         return React.createElement(icon, {
-            className: classNames(`${clazzPrefix}-icon`, (checked ? props?.checkedClazz : props?.uncheckedClazz)),
+            className: classnames(`${clazzPrefix}-icon`, (checked ? props?.checkedClazz : props?.uncheckedClazz)),
             style: checked ? props?.checkedStyle : props?.uncheckedStyle,
             onClick: !checkable ? undefined : async () => handleToggle(),
         });
@@ -333,7 +333,7 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!checkable ? undefined : `${clazzPrefix}-checkable`), `${clazzPrefix}-${checked ? 'checked' : 'unchecked'}`, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!checkable ? undefined : `${clazzPrefix}-checkable`), `${clazzPrefix}-${checked ? 'checked' : 'unchecked'}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <CountField

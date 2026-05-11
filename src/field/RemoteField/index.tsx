@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Spin} from 'antd';
-import {type ProFormFieldRemoteProps} from '@ant-design/pro-form/es/typing';
-import {useDebounceFn} from '@ant-design/pro-utils';
+import {useDebounceFn} from '@ant-design/pro-components';
+import {type ProFormFieldRemoteProps} from '@ant-design/pro-components/es/form/typing';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 
 export type RemoteFieldRef = {
@@ -137,7 +137,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, props?.containerClazz)}
+            className={classnames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <React.Suspense fallback={(typeof fallback === 'function') ? fallback() : fallback}>

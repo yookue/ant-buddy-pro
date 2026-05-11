@@ -20,7 +20,7 @@ import {Tabs, type TabsProps} from 'antd';
 import {type SizeType} from 'antd/es/config-provider/SizeContext';
 import {type TabPlacement as RcTabPlacement} from 'antd/es/tabs';
 import {omit} from '@rc-component/util';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -142,9 +142,9 @@ export const CardTabs: React.FC<CardTabsProps> = (props?: CardTabsProps) => {
     const restTabsProps = !props ? {} : omit(props, ['className', 'clazzPrefix', 'containerClazz', 'containerStyle', 'tabBorder', 'tabPlacement', 'contentBorder', 'inkBar', 'presetStyle', 'type', 'size']);
 
     return (
-        <div className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${size}`, `${clazzPrefix}-${tabPlacement}`, (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classnames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${size}`, `${clazzPrefix}-${tabPlacement}`, (!presetStyle ? undefined : `${clazzPrefix}-${presetStyle}`), props?.containerClazz)} style={props?.containerStyle}>
             <Tabs
-                className={classNames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (!contentBorder ? undefined : `${clazzPrefix}-content-border`), (!inkBar ? undefined : `${clazzPrefix}-ink-bar`))}
+                className={classnames(props?.className, `${clazzPrefix}-tab-border${tabBorder ? '' : '-off'}`, (!contentBorder ? undefined : `${clazzPrefix}-content-border`), (!inkBar ? undefined : `${clazzPrefix}-ink-bar`))}
                 type={props?.type ?? 'card'}
                 size={detectTabSize()}
                 // @ts-ignore

@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider, message as messageApi} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio} from '@ant-design/pro-components';
 import {LocaleTextarea} from '@unikue/ant-buddy-pro';
 import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
 
@@ -49,7 +49,7 @@ export default () => {
                     fieldProps={{
                         value: tabPlacement,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setTabPlacement(event.target?.value);
                         }
                     }}

@@ -15,7 +15,7 @@
  */
 
 
-import {PageLoading} from '@ant-design/pro-layout/es/components/PageLoading';
+import {PageLoading} from '@ant-design/pro-components/es/layout/components/PageLoading';
 
 
 // export {default} from 'dumi-theme-antd/dist/common/Loading';

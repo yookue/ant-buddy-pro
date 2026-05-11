@@ -18,7 +18,7 @@
 import React from 'react';
 import {Button} from 'antd';
 import {FireOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
 import {DragModal} from '@unikue/ant-buddy-pro';
 import {RandomUtils} from '@unikue/ts-lang-utils';
 

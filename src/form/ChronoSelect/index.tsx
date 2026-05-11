@@ -18,12 +18,11 @@
 import React from 'react';
 import {Form, Select} from 'antd';
 import {type LabeledValue} from 'antd/es/select';
-import {ProFormSelect} from '@ant-design/pro-form';
-import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
-import {useIntl} from '@ant-design/pro-provider';
+import {ProFormSelect, useIntl} from '@ant-design/pro-components';
+import {type ProFormSelectProps} from '@ant-design/pro-components/es/form/components/Select';
 import {omit} from '@rc-component/util';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -185,7 +184,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
             <ProFormSelect
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, fieldStyle.hashId, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className),
+                    className: classnames(clazzPrefix, fieldStyle.hashId, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className),
                     ...omitFieldProps,
                     options: props?.fieldProps?.options ?? optionItems,
                 }}
@@ -195,7 +194,7 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
         const restProps = omit(omitFieldProps, ['id', 'placeholder', 'onChange']);
         return (
             <Select
-                className={classNames(clazzPrefix, fieldStyle.hashId, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className)}
+                className={classnames(clazzPrefix, fieldStyle.hashId, (props?.presetStyle ? `${clazzPrefix}-${props?.presetStyle}` : undefined), props?.fieldProps?.className)}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 options={props?.fieldProps?.options ?? optionItems}
                 onChange={(event: any) => {

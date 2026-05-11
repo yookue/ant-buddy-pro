@@ -15,7 +15,7 @@
  */
 
 
-import {useStyle, type UseStyleResult, type GenerateStyle} from '@ant-design/pro-provider';
+import {useStyle, type UseStyleResult, type GenerateStyle} from '@ant-design/pro-components';
 import {type ExtraProAliasToken} from '@/type/design-token';
 import {PackageConst} from '@/constant/PackageConst';
 
@@ -36,13 +36,19 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 width: '100%',
                 fontSize: 18,
                 minHeight: token.controlHeight,
+
                 [`&:focus-within`]: {
                     borderColor: token.colorPrimaryBorderHover,
                     cursor: 'text',
                     outline: 'none',
                 },
+
                 [`&::part(virtual-keyboard-toggle), &::part(menu-toggle)`]: {
-                    color: token.blue4,
+                    color: token.colorTextTertiary,
+
+                    '&:hover': {
+                        color: token.colorInfoTextHover,
+                    }
                 }
             }
         }

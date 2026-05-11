@@ -15,7 +15,7 @@
  */
 
 
-import {type ActionType} from '@ant-design/pro-table';
+import {type ActionType} from '@ant-design/pro-components';
 
 
 /**

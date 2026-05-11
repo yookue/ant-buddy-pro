@@ -19,7 +19,7 @@ import React from 'react';
 import {Space, Tooltip} from 'antd';
 import {FormContext} from 'antd/es/form/context';
 import {type SpaceSize} from 'antd/es/space';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {type WithFalse, type AxisDirectionType} from '@/type/declaration';
 import {useFieldStyle} from './style';
@@ -195,7 +195,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
         const tooltipDom = (typeof props?.tooltip === 'function') ? props.tooltip() : props?.tooltip;
         return (
             <div
-                className={classNames(`${clazzPrefix}-label`, props?.labelClazz)}
+                className={classnames(`${clazzPrefix}-label`, props?.labelClazz)}
                 style={props?.labelStyle}
             >
                 {income}
@@ -216,7 +216,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
         }
         return (
             <div
-                className={classNames(`${clazzPrefix}-field`, props?.fieldClazz)}
+                className={classnames(`${clazzPrefix}-field`, props?.fieldClazz)}
                 style={props?.fieldStyle}
             >
                 {income}
@@ -226,7 +226,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, ((formContext?.requiredMark !== false && props?.required) ? `${clazzPrefix}-required` : undefined), (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, ((formContext?.requiredMark !== false && props?.required) ? `${clazzPrefix}-required` : undefined), (props?.widthBlock ? `${clazzPrefix}-width-block` : undefined), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space className={`${clazzPrefix}-space-${layout}`} orientation={layout} size={props?.spaceSize}>

@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {useFieldStyle} from './style';
 
 
@@ -154,15 +154,15 @@ export const LoginPortal: React.FC<LoginPortalProps> = (props?: LoginPortalProps
     const fieldStyle = useFieldStyle(clazzPrefix);
 
     return (
-        <div className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             {props?.containerHeader}
-            <div className={classNames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
-                <div className={classNames(`${clazzPrefix}-introduction`, props?.introductionClazz)} style={props?.introductionStyle}>
+            <div className={classnames(`${clazzPrefix}-vessel`, props?.vesselClazz)} style={props?.vesselStyle}>
+                <div className={classnames(`${clazzPrefix}-introduction`, props?.introductionClazz)} style={props?.introductionStyle}>
                     {props?.introductionContent}
                 </div>
-                <div className={classNames(`${clazzPrefix}-interaction`, props?.interactionClazz)} style={props?.interactionStyle}>
+                <div className={classnames(`${clazzPrefix}-interaction`, props?.interactionClazz)} style={props?.interactionStyle}>
                     {props?.interactionHeader}
-                    <div className={classNames(`${clazzPrefix}-interchange`, props?.interchangeClazz)} style={props?.interchangeStyle}>
+                    <div className={classnames(`${clazzPrefix}-interchange`, props?.interchangeClazz)} style={props?.interchangeStyle}>
                         {props?.interactionContent}
                     </div>
                     {props?.interactionFooter}

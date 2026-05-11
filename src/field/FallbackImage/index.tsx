@@ -19,7 +19,7 @@ import React from 'react';
 import {Image, type ImageProps} from 'antd';
 import {omit} from '@rc-component/util';
 import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 
 export type FallbackImageProps = Omit<ImageProps, 'src' | 'fallback'> & {
@@ -79,7 +79,7 @@ export const FallbackImage: React.FC<FallbackImageProps> = (props?: FallbackImag
 
     return (
         <Image
-            className={classNames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
+            className={classnames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
             src={imageSrc}
             fallback={imageFallback}
             {...omitProps}

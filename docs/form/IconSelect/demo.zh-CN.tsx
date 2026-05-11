@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider, Empty} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {IconSelect, ConsoleUtils} from '@unikue/ant-buddy-pro';
 import {IconOptionMode} from '@unikue/ant-buddy-pro/form/IconSelect';
 import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
@@ -46,7 +46,7 @@ export default () => {
                         fieldProps={{
                             value: optionMode,
                             buttonStyle: 'solid',
-                            onChange: (event) => {
+                            onChange: (event: any) => {
                                 setOptionMode(event.target?.value);
                             }
                         }}
@@ -63,7 +63,7 @@ export default () => {
                         value: tabPlacement,
                         buttonStyle: 'solid',
                         disabled: optionMode === 'text',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setTabPlacement(event.target?.value);
                         }
                     }}

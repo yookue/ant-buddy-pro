@@ -17,10 +17,10 @@
 
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -237,7 +237,7 @@ export const HourPanel: React.ForwardRefExoticComponent<HourPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}

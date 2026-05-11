@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider, message as messageApi} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {CronInput, ConsoleUtils} from '@unikue/ant-buddy-pro';
 
 
@@ -44,7 +44,7 @@ export default () => {
                     fieldProps={{
                         value: tabPos,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setTabPos(event.target?.value);
                         }
                     }}

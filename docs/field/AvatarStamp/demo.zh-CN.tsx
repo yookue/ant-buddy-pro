@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio} from '@ant-design/pro-components';
 import {AvatarStamp, type RectZenithPlace} from '@unikue/ant-buddy-pro';
 
 
@@ -38,7 +38,7 @@ export default () => {
                     fieldProps={{
                         value: placement,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setPlacement(event.target?.value);
                         }
                     }}

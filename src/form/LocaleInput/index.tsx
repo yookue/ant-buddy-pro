@@ -18,15 +18,15 @@
 import React from 'react';
 import {ConfigProvider, Form, List, Popconfirm, Space, Tooltip, type InputProps, type FormRule} from 'antd';
 import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import Trigger, {type TriggerProps} from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
 import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {BooleanUtils, ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import {useEventListener, useMutationObserver} from 'ahooks';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
 import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
 import {DesignUtils} from '@/util/DesignUtils';
@@ -354,7 +354,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     // noinspection DuplicatedCode
     const renderEntryReadonly = (dom: React.ReactNode) => (
-        <div className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-entry-readonly`, (addonPos ? `${clazzPrefix}-entry-readonly-${addonPos}` : undefined))}>
+        <div className={classnames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-entry-readonly`, (addonPos ? `${clazzPrefix}-entry-readonly-${addonPos}` : undefined))}>
             <If condition={addonPos === 'before'} validation={false}>
                 <span className={`${clazzPrefix}-entry-readonly-addon`}>
                     {addonEntryDom}
@@ -383,7 +383,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         cursorBefore={addonPos === 'before' ? 'pointer' : undefined}
                         cursorAfter={addonPos === 'after' ? 'pointer' : undefined}
                         fieldProps={{
-                            className: classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className),
+                            className: classnames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className),
                             allowClear: props?.allowClear || props?.fieldProps?.allowClear,
                             ...omitFieldProps,
                             'data-locale-input-id': fieldId,
@@ -402,7 +402,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
             return (
                 <div className={clazzPrefix}>
                     <AddonInput
-                        className={classNames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className)}
+                        className={classnames(`${clazzPrefix}-entry-${fieldId}`, props?.className ?? props?.fieldProps?.className)}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                         addonBefore={buildEntryAddonDom(true)}
                         addonAfter={buildEntryAddonDom(false)}
@@ -454,7 +454,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         }
 
         const tagDom = ((before && popupTagPos === 'before') || (!before && popupTagPos === 'after')) ? (
-            <span className={classNames(`${clazzPrefix}-locale-tag`, `${clazzPrefix}-locale-tag-${popupTagPos}`)}>
+            <span className={classnames(`${clazzPrefix}-locale-tag`, `${clazzPrefix}-locale-tag-${popupTagPos}`)}>
                 {tag}
             </span>
         ) : undefined;
@@ -471,7 +471,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         onOpenChange={setConfirmOpen}
                     >
                         <span
-                            className={classNames(`${clazzPrefix}-locale-action`, `${clazzPrefix}-locale-action-${popupAddonPos}`)}
+                            className={classnames(`${clazzPrefix}-locale-action`, `${clazzPrefix}-locale-action-${popupAddonPos}`)}
                             style={{
                                 cursor: entryImmutable ? 'default' : 'pointer',
                             }}
@@ -482,7 +482,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 </If.Then>
                 <If.Else>
                     <span
-                        className={classNames(`${clazzPrefix}-locale-action`, `${clazzPrefix}-locale-action-${popupAddonPos}`)}
+                        className={classnames(`${clazzPrefix}-locale-action`, `${clazzPrefix}-locale-action-${popupAddonPos}`)}
                         style={{
                             cursor: entryImmutable ? 'default' : 'pointer',
                         }}
@@ -545,7 +545,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         addonAfter={afterDom}
                         {...restProps}
                         fieldProps={{
-                            className: classNames(`${clazzPrefix}-locale-item`, fieldProps?.className),
+                            className: classnames(`${clazzPrefix}-locale-item`, fieldProps?.className),
                             placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                             autoComplete: 'off',
                             allowClear: fieldProps?.allowClear || props?.popupShareProps?.allowClear || (popupCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
@@ -679,7 +679,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 points: ['tl', 'bl'],
                 offset: [0, triggerOffset],
             }}
-            popupClassName={classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
+            popupClassName={classnames(`${clazzPrefix}-popup`, fieldStyle.hashId, `${clazzPrefix}-popup-${fieldId}`, (!entryImmutable ? undefined : `${clazzPrefix}-popup-immutable`), (popupProField ? `${clazzPrefix}-popup-pro-field` : undefined), props?.triggerProps?.popupClassName)}
             popupVisible={triggerOpen}
             stretch={props?.triggerProps?.stretch ?? 'width'}
             onOpenChange={(open: boolean) => {

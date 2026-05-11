@@ -20,12 +20,12 @@ import {Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type Dropdo
 import {ListItemMetaProps} from 'antd/es/list/Item';
 import {type TabPlacement} from 'antd/es/tabs';
 import {BellOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {type Tab as RcTab} from '@rc-component/tabs/es/interface';
 import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {ArrayUtils, BooleanUtils, ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type ReadonlyTabsType} from '@/type/declaration';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -307,7 +307,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
 
     const hyperlinkDom = !props?.hyperlinkProps ? badgeDom : (
         <a
-            className={classNames(`${clazzPrefix}-entry-link`, props.hyperlinkProps.clazz)}
+            className={classnames(`${clazzPrefix}-entry-link`, props.hyperlinkProps.clazz)}
             {...omit(props?.hyperlinkProps, ['clazz'])}
         >
             {badgeDom}
@@ -351,7 +351,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
         return (
             <List.Item
                 key={item.key || item.id || index}
-                className={classNames(`${clazzPrefix}-list-item`, `${clazzPrefix}-list-item-${item.read ? 'read' : 'unread'}`)}
+                className={classnames(`${clazzPrefix}-list-item`, `${clazzPrefix}-list-item-${item.read ? 'read' : 'unread'}`)}
                 onClick={event => tab.onClick?.(event, item.key || item.id || index)}
             >
                 <List.Item.Meta
@@ -426,7 +426,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
             const placeholder = tab.listPlaceholder ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>;
             const content = empty ? placeholder : (
                 <List
-                    className={classNames(`${clazzPrefix}-tab-list`, tab.listProps?.className)}
+                    className={classnames(`${clazzPrefix}-tab-list`, tab.listProps?.className)}
                     {...(!tab?.listProps ? {} : omit(tab.listProps, ['className', 'footer', 'renderItem']))}
                     footer={renderListFooter(tab)}
                     renderItem={(item: any, index: number) => {
@@ -450,7 +450,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
         key: 'tabs',
         label: (
             <Tabs
-                className={classNames(`${clazzPrefix}-tabs`, props?.tabsProps?.className)}
+                className={classnames(`${clazzPrefix}-tabs`, props?.tabsProps?.className)}
                 items={buildTabDom()}
                 {...(!props?.tabsProps ? {} : omit(props.tabsProps, ['className', 'items']))}
             />
@@ -462,7 +462,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
             menu={{items: menuItems}}
             classNames={{
                 // @ts-ignore
-                root: classNames(`${clazzPrefix}-trigger`, `${clazzPrefix}-popup`, fieldStyle.hashId, props?.dropdownProps?.classNames?.root)
+                root: classnames(`${clazzPrefix}-trigger`, `${clazzPrefix}-popup`, fieldStyle.hashId, props?.dropdownProps?.classNames?.root)
             }}
             {...(!props?.dropdownProps ? {} : omit(props?.dropdownProps, ['className', 'classNames']))}
         >

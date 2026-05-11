@@ -17,8 +17,7 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormText, ProFormSwitch} from '@ant-design/pro-form';
-import {ProCard} from '@ant-design/pro-card';
+import {ProForm, ProFormText, ProFormSwitch, ProCard} from '@ant-design/pro-components';
 import {SortableList} from '@unikue/ant-buddy-pro';
 
 
@@ -83,7 +82,7 @@ export default () => {
                         return (
                             <ProCard
                                 title='Demo Card'
-                                bordered={true}
+                                variant='outlined'
                                 extra={action}
                                 style={{
                                     marginBlockEnd: '24px',

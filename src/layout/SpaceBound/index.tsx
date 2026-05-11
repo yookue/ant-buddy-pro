@@ -20,7 +20,7 @@ import {Space, type SpaceProps} from 'antd';
 import {type SpaceSize} from 'antd/es/space';
 import {css} from '@emotion/css';
 import {omit} from '@rc-component/util';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {useFieldStyle} from './style';
 
 
@@ -122,7 +122,7 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!props?.boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), buildPadCss(), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!props?.boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), buildPadCss(), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space {...restProps}>

@@ -17,11 +17,11 @@
 
 import React from 'react';
 import {Form, Input, type InputProps, type InputRef} from 'antd';
-import {ProFormText} from '@ant-design/pro-form';
-import {type ProFormFieldItemProps} from '@ant-design/pro-form/es/typing';
+import {ProFormText} from '@ant-design/pro-components';
+import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
 import {omit} from '@rc-component/util';
 import {NanoidUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type ClickHoverType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -153,7 +153,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
             <ProFormText
                 {...restProps}
                 fieldProps={{
-                    className: classNames(clazzPrefix, fieldStyle.hashId, (stretch ? props?.stretchClazz : props?.fieldProps?.className)),
+                    className: classnames(clazzPrefix, fieldStyle.hashId, (stretch ? props?.stretchClazz : props?.fieldProps?.className)),
                     onFocus: handleFocus,
                     onBlur: handleBlur,
                     style: stretch ? props?.stretchStyle : props?.fieldProps?.style,
@@ -166,7 +166,7 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         const restProps = omit(omitFieldProps, ['placeholder', 'onChange']);
         return (
             <Input
-                className={classNames(clazzPrefix, fieldStyle.hashId, (stretch ? props?.stretchClazz : props?.fieldProps?.className))}
+                className={classnames(clazzPrefix, fieldStyle.hashId, (stretch ? props?.stretchClazz : props?.fieldProps?.className))}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                 onChange={(event: any) => {
                     if (props?.name) {

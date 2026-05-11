@@ -18,7 +18,7 @@
 import React from 'react';
 import {Row, Col, Divider} from 'antd';
 import datePickerLocale from 'antd/es/date-picker/locale/en_US';
-import {ProForm, ProFormDatePicker, ProFormRadio, ProFormSwitch, ProFormDependency} from '@ant-design/pro-form';
+import {ProForm, ProFormDatePicker, ProFormRadio, ProFormSwitch, ProFormDependency} from '@ant-design/pro-components';
 import {CompactTuple, type BeforeAfterType} from '@unikue/ant-buddy-pro';
 import {type TuplePresetStyle} from '@unikue/ant-buddy-pro/field/CompactTuple';
 import dayjs from 'dayjs';
@@ -66,7 +66,7 @@ export default () => {
                         value: addonPos,
                         buttonStyle: 'solid',
                         disabled: formReadonly,
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setAddonPos(event.target?.value);
                         }
                     }}
@@ -83,7 +83,7 @@ export default () => {
                         value: presetStyle,
                         buttonStyle: 'solid',
                         disabled: formReadonly,
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setPresetStyle(event.target?.value);
                         }
                     }}

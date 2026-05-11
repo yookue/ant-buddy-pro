@@ -18,13 +18,12 @@
 import React from 'react';
 import {Form, Input, Button} from 'antd';
 import {type NamePath} from 'antd/es/form/interface';
-import {type ProFormCaptchaProps} from '@ant-design/pro-form/es/components/Captcha';
-import {ProForm} from '@ant-design/pro-form';
-import {createField} from '@ant-design/pro-form/es/BaseForm/createField';
-import {useIntl} from '@ant-design/pro-provider';
+import {ProForm, useIntl} from '@ant-design/pro-components';
+import {type ProFormCaptchaProps} from '@ant-design/pro-components/es/form/components/Captcha';
+import {warpField} from '@ant-design/pro-components/es/form/components/FormItem/warpField';
 import {omit} from '@rc-component/util';
 import {ArrayUtils, ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -316,17 +315,17 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
     return (
         <div
             ref={fieldRef}
-            className={classNames(`${clazzPrefix}-container`, fieldStyle.hashId, props?.containerClazz)}
+            className={classnames(`${clazzPrefix}-container`, fieldStyle.hashId, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Input
-                className={classNames(clazzPrefix, props?.className)}
+                className={classnames(clazzPrefix, props?.className)}
                 value={ObjectUtils.firstNotNil(props?.initialValue, props?.value, props?.fieldProps?.value)}
                 onChange={props?.onChange ?? props?.fieldProps?.onChange}
                 {...omitFieldProps}
             />
             <Button
-                className={classNames(`${clazzPrefix}-action`, props?.captchaProps?.className)}
+                className={classnames(`${clazzPrefix}-action`, props?.captchaProps?.className)}
                 disabled={timing || !submittable || props?.captchaProps?.disabled}
                 loading={loading || props?.captchaProps?.loading}
                 {...omitCaptchaProps}
@@ -340,4 +339,4 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
 
 
 // @ts-ignore
-export const CaptchaInput = createField(CaptchaInputField) as typeof CaptchaInputField;
+export const CaptchaInput = warpField(CaptchaInputField) as typeof CaptchaInputField;

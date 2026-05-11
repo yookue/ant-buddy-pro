@@ -18,7 +18,7 @@
 import React from 'react';
 import {Empty, Divider} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {FoldSection, type BeforeAfterType} from '@unikue/ant-buddy-pro';
 import {type SectionPresetStyle} from '@unikue/ant-buddy-pro/layout/FoldSection';
 
@@ -53,7 +53,7 @@ export default () => {
                     fieldProps={{
                         value: ornamentPos,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setOrnamentPos(event.target?.value);
                         }
                     }}
@@ -69,7 +69,7 @@ export default () => {
                     fieldProps={{
                         value: collapsePos,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setCollapsePos(event.target?.value);
                         }
                     }}
@@ -85,7 +85,7 @@ export default () => {
                     fieldProps={{
                         value: presetStyle,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setPresetStyle(event.target?.value);
                         }
                     }}

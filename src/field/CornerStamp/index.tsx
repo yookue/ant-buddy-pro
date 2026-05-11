@@ -21,7 +21,7 @@ import {isPresetColor} from 'antd/es/_util/colors';
 import {presetPrimaryColors} from '@ant-design/colors';
 import {css} from '@emotion/css';
 import {StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type RectZenithPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {useFieldStyle} from './style';
@@ -220,7 +220,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
 
     const buildFieldDom = () => {
         return (
-            <div className={classNames(`${clazzPrefix}-field`, buildCornerCss(), props?.fieldClazz)} style={props?.fieldStyle}>
+            <div className={classnames(`${clazzPrefix}-field`, buildCornerCss(), props?.fieldClazz)} style={props?.fieldStyle}>
                 {!props?.field ? props?.children : (typeof props.field === 'function' ? props.field() : props.field)}
             </div>
         );
@@ -323,7 +323,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
         }
         const extraClazz = rotateAddon ? buildAddonRotateCss() : buildAddonRectCss();
         return (
-            <div className={classNames(`${clazzPrefix}-addon`, (!rotateAddon ? undefined : `${clazzPrefix}-addon-rotate`), extraClazz, props?.addonClazz)} style={props?.addonStyle}>
+            <div className={classnames(`${clazzPrefix}-addon`, (!rotateAddon ? undefined : `${clazzPrefix}-addon-rotate`), extraClazz, props?.addonClazz)} style={props?.addonStyle}>
                 {(typeof props.addon === 'function') ? props.addon() : props.addon}
             </div>
         );
@@ -331,7 +331,7 @@ export const CornerStamp: React.FC<CornerStampProps> = (props?: CornerStampProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {buildFieldDom()}

@@ -18,7 +18,7 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {LockOutlined} from '@ant-design/icons';
-import {ProForm, ProFormText, ProFormRadio, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormText, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {CipherStrength, type BeforeAfterType} from '@unikue/ant-buddy-pro';
 
 
@@ -49,7 +49,7 @@ export default () => {
                     fieldProps={{
                         value: captionPos,
                         buttonStyle: 'solid',
-                        onChange: (event) => {
+                        onChange: (event: any) => {
                             setCaptionPos(event.target?.value);
                         }
                     }}

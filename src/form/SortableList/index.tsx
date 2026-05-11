@@ -19,11 +19,11 @@ import React from 'react';
 import {Space, Tooltip} from 'antd';
 import {type FormListFieldData, type FormListOperation} from 'antd/es/form/FormList';
 import {VerticalAlignTopOutlined, VerticalAlignBottomOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
-import {ProFormList, type ProFormListProps} from '@ant-design/pro-form';
-import {useIntl} from '@ant-design/pro-provider';
+import {ProFormList, type ProFormListProps} from '@ant-design/pro-components';
+import {useIntl} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
 
@@ -141,7 +141,7 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
                     title={ObjectUtils.firstNotNil(props?.localeProps?.moveToTop, intlLocales.get([locale, 'moveToTop']), intlLocales.get(['en_US', 'moveToTop']))}
                 >
                     <VerticalAlignTopOutlined
-                        className={classNames(`${clazzPrefix}-action`, `${clazzPrefix}-action-top`, (field.name > 0) ? undefined : `${clazzPrefix}-action-disabled`)}
+                        className={classnames(`${clazzPrefix}-action`, `${clazzPrefix}-action-top`, (field.name > 0) ? undefined : `${clazzPrefix}-action-disabled`)}
                         onClick={() => {
                             if (field.name > 0) {
                                 action.move(field.name, 0);
@@ -154,7 +154,7 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
                     title={ObjectUtils.firstNotNil(props?.localeProps?.moveToBottom, intlLocales.get([locale, 'moveToBottom']), intlLocales.get(['en_US', 'moveToBottom']))}
                 >
                     <VerticalAlignBottomOutlined
-                        className={classNames(`${clazzPrefix}-action`, `${clazzPrefix}-action-bottom`, (field.name < count - 1) ? undefined : `${clazzPrefix}-action-disabled`)}
+                        className={classnames(`${clazzPrefix}-action`, `${clazzPrefix}-action-bottom`, (field.name < count - 1) ? undefined : `${clazzPrefix}-action-disabled`)}
                         onClick={() => {
                             if (field.name < count - 1) {
                                 action.move(field.name, count - 1);
@@ -171,7 +171,7 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
                     title={ObjectUtils.firstNotNil(props?.localeProps?.moveUp, intlLocales.get([locale, 'moveUp']), intlLocales.get(['en_US', 'moveUp']))}
                 >
                     <ArrowUpOutlined
-                        className={classNames(`${clazzPrefix}-action`, `${clazzPrefix}-action-up`, (field.name > 0) ? undefined : `${clazzPrefix}-action-disabled`)}
+                        className={classnames(`${clazzPrefix}-action`, `${clazzPrefix}-action-up`, (field.name > 0) ? undefined : `${clazzPrefix}-action-disabled`)}
                         onClick={() => {
                             if (field.name > 0) {
                                 action.move(field.name, field.name - 1);
@@ -184,7 +184,7 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
                     title={ObjectUtils.firstNotNil(props?.localeProps?.moveDown, intlLocales.get([locale, 'moveDown']), intlLocales.get(['en_US', 'moveDown']))}
                 >
                     <ArrowDownOutlined
-                        className={classNames(`${clazzPrefix}-action`, `${clazzPrefix}-action-down`, (field.name < count - 1) ? undefined : `${clazzPrefix}-action-disabled`)}
+                        className={classnames(`${clazzPrefix}-action`, `${clazzPrefix}-action-down`, (field.name < count - 1) ? undefined : `${clazzPrefix}-action-disabled`)}
                         onClick={() => {
                             if (field.name < count - 1) {
                                 action.move(field.name, field.name + 1);
@@ -201,7 +201,7 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
 
     return (
         <ProFormList
-            className={classNames(clazzPrefix, fieldStyle.hashId, props?.className)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.className)}
             name={props?.name ?? 'formList'}
             actionRender={renderActionDom}
             {...restProps}

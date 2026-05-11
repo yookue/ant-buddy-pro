@@ -17,14 +17,11 @@
 
 import React from 'react';
 import {Form, Select} from 'antd';
-import {ProFormSelect} from '@ant-design/pro-form';
-import {type ProFormSelectProps} from '@ant-design/pro-form/es/components/Select';
-import {type RequestOptionsType} from '@ant-design/pro-utils';
-import {useDebounceFn} from '@ant-design/pro-utils';
+import {ProFormSelect, type ProFormSelectProps, type RequestOptionsType, useDebounceFn} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import {If} from '@unikue/react-condition';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type LabelMixinType, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
 import {useFieldStyle} from './style';
@@ -239,14 +236,14 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
 
     const renderOption = (item: any, key?: string) => {
         return !item ? undefined : (
-            <div key={key ?? item?.data?.value} className={classNames(`${clazzPrefix}-option`, props?.optionClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))} style={props?.optionStyle}>
+            <div key={key ?? item?.data?.value} className={classnames(`${clazzPrefix}-option`, props?.optionClazz, (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined))} style={props?.optionStyle}>
                 <If condition={optionBeforeContent} validation={false}>
-                    <span key={`${key ?? item?.data?.value}-before`} className={classNames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
+                    <span key={`${key ?? item?.data?.value}-before`} className={classnames(`${clazzPrefix}-option-before`, props?.optionBeforeClazz)} style={props?.optionBeforeStyle}>
                         {renderContent(item, true)}
                     </span>
                 </If>
                 <If condition={optionAfterContent} validation={false}>
-                    <span key={`${key ?? item?.data?.value}-after`} className={classNames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
+                    <span key={`${key ?? item?.data?.value}-after`} className={classnames(`${clazzPrefix}-option-after`, props?.optionAfterClazz)} style={props?.optionAfterStyle}>
                         {renderContent(item, false)}
                     </span>
                 </If>
@@ -263,9 +260,9 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                 fieldProps={{
                     classNames: {
                         // @ts-ignore
-                        root: classNames(clazzPrefix, props?.fieldProps?.classNames?.root),
+                        root: classnames(clazzPrefix, props?.fieldProps?.classNames?.root),
                         popup: {
-                            root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
+                            root: classnames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
                         }
                     },
                     options: optionItems,
@@ -329,9 +326,9 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
             <Select
                 classNames={{
                     // @ts-ignore
-                    root: classNames(clazzPrefix, props?.fieldProps?.classNames?.root),
+                    root: classnames(clazzPrefix, props?.fieldProps?.classNames?.root),
                     popup: {
-                        root: classNames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
+                        root: classnames(`${clazzPrefix}-popup`, fieldStyle.hashId, props?.fieldProps?.classNames?.popup?.root),
                     }
                 }}
                 placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}

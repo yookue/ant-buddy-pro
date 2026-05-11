@@ -18,7 +18,7 @@
 import React from 'react';
 import {Space, type SpaceProps} from 'antd';
 import {omit} from '@rc-component/util';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from '@/field/ThumbToggle';
 import {useFieldStyle} from './style';
 
@@ -107,7 +107,7 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
     return (
         <div
             ref={fieldRef}
-            className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space

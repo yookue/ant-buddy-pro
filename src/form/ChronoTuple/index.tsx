@@ -18,11 +18,11 @@
 import React from 'react';
 import {Space, InputNumber} from 'antd';
 import {FormContext} from 'antd/es/form/context';
-import {ProFormDigit} from '@ant-design/pro-form';
-import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
+import {ProFormDigit} from '@ant-design/pro-components';
+import {type ProFormDigitProps} from '@ant-design/pro-components/es/form/components/Digit';
 import {omit} from '@rc-component/util';
 import {StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {ChronoSelect, type ChronoSelectProps} from '@/form/ChronoSelect';
 import {useFieldStyle} from './style';
 
@@ -106,7 +106,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
         const restProps = !props?.digitProps?.fieldProps ? {} : omit(props.digitProps.fieldProps, ['className', 'name', 'id', 'placeholder', 'onChange']);
         return (
             <InputNumber
-                className={classNames(`${clazzPrefix}-digit`, props?.digitProps?.fieldProps?.className)}
+                className={classnames(`${clazzPrefix}-digit`, props?.digitProps?.fieldProps?.className)}
                 placeholder={StringUtils.join(props?.digitProps?.placeholder) ?? props?.digitProps?.fieldProps?.placeholder}
                 onChange={(value: any) => {
                     if (props?.digitProps?.name) {
@@ -123,13 +123,13 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, (!widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, (!widthBlock ? undefined : `${clazzPrefix}-width-block`), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact>
                 {buildDigitNode()}
                 <ChronoSelect
-                    className={classNames(`${clazzPrefix}-select`, props?.selectProps?.fieldProps?.className)}
+                    className={classnames(`${clazzPrefix}-select`, props?.selectProps?.fieldProps?.className)}
                     label={props?.selectProps?.label ?? (formContext?.layout === 'vertical' ? ' ' : '')}
                     {...omitProps}
                     proField={proField}

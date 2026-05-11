@@ -18,10 +18,10 @@
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Switch, Tooltip, Space, type RadioChangeEvent} from 'antd';
 import {type LabeledValue} from 'antd/es/select';
-import {useIntl} from '@ant-design/pro-provider';
+import {useIntl} from '@ant-design/pro-components';
 import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
 import {intlLocales} from './intl-locales';
@@ -439,7 +439,7 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classNames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div ref={fieldRef} className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
             <BadgeRibbon
                 text={!allowAlias ? undefined : (
                     <Switch

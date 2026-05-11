@@ -18,13 +18,11 @@
 import React from 'react';
 import {Space, InputNumber} from 'antd';
 import {FormContext} from 'antd/es/form/context';
-import {ProFormDigit} from '@ant-design/pro-form';
-import {EditOrReadOnlyContext} from '@ant-design/pro-form/es/BaseForm/EditOrReadOnlyContext';
-import {type ProFormDigitProps} from '@ant-design/pro-form/es/components/Digit';
-import {useIntl} from '@ant-design/pro-provider';
+import {ProFormDigit, type ProFormDigitProps, useIntl} from '@ant-design/pro-components';
+import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {intlLocales} from './intl-locales';
 import {useFieldStyle} from './style';
@@ -213,7 +211,7 @@ export const ServerTuple: React.FC<ServerTupleProps> = (props?: ServerTupleProps
 
     return (
         <div
-            className={classNames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), (widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, ((proField && !entryImmutable) ? `${clazzPrefix}-pro-field` : undefined), (widthBlock ? `${clazzPrefix}-width-block` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             <Space.Compact>

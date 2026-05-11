@@ -18,7 +18,7 @@
 import React from 'react';
 import {Divider} from 'antd';
 import {GithubOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
 import {TooltipField} from '@unikue/ant-buddy-pro';
 
 

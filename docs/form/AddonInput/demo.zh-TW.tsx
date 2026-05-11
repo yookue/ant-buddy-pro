@@ -18,7 +18,7 @@
 import React from 'react';
 import {Divider, Button, Space} from 'antd';
 import {LinkOutlined, SearchOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-form';
+import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
 import {AddonInput} from '@unikue/ant-buddy-pro';
 
 

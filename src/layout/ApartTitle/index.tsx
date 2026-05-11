@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {useFieldStyle} from './style';
 
@@ -145,7 +145,7 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
         }
         return (
             <span
-                className={classNames(`${clazzPrefix}-ornament`, `${clazzPrefix}-ornament-${before ? 'before' : 'after'}`, props?.ornamentClazz)}
+                className={classnames(`${clazzPrefix}-ornament`, `${clazzPrefix}-ornament-${before ? 'before' : 'after'}`, props?.ornamentClazz)}
                 style={props?.ornamentStyle}
             >
                 {props?.ornament}
@@ -155,11 +155,11 @@ export const ApartTitle: React.FC<ApartTitleProps> = (props?: ApartTitleProps) =
 
     return (
         <div
-            className={classNames(`${clazzPrefix}`, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
+            className={classnames(`${clazzPrefix}`, fieldStyle.hashId, (!boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.widthBlock ? undefined : `${clazzPrefix}-width-block`), (presetStyle ? `${clazzPrefix}-${presetStyle}` : undefined), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {ornamentPos === 'before' && buildOrnamentDom(true)}
-            <span className={classNames(`${clazzPrefix}-content`, props?.contentClazz)} style={props?.contentStyle}>
+            <span className={classnames(`${clazzPrefix}-content`, props?.contentClazz)} style={props?.contentStyle}>
                 {props?.content}
             </span>
             {ornamentPos === 'after' && buildOrnamentDom(false)}
