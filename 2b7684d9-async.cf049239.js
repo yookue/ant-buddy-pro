@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@unikue/ant-buddy-pro"]||[]).push([["2b7684d9"],{"2b7684d9":function(e,r,a){"use strict";var n,d;n=a("da502f38"),d=a("4a949bfa"),r.version=n.version,r.renderToString=n.renderToString,r.renderToStaticMarkup=n.renderToStaticMarkup,r.renderToReadableStream=d.renderToReadableStream,r.resume=d.resume;}}]);
+//# sourceMappingURL=2b7684d9-async.cf049239.js.map
