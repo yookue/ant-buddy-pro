@@ -17,9 +17,8 @@
 
 import React from 'react';
 import {Avatar, Button, Divider, Space, Tooltip} from 'antd';
-import {Comment} from '@ant-design/compatible';
 import {FieldStringOutlined, RedoOutlined} from '@ant-design/icons';
-import {RemoteField, ConsoleUtils, type RemoteFieldRef} from '@unikue/ant-buddy-pro';
+import {RemoteField, CommentCard, ConsoleUtils, type RemoteFieldRef} from '@unikue/ant-buddy-pro';
 import {RandomUtils} from '@unikue/ts-lang-utils';
 
 
@@ -72,7 +71,7 @@ export default () => {
                         return undefined;
                     }
                     return (
-                        <Comment
+                        <CommentCard
                             avatar={(
                                 <Avatar src={outcome?.data?.avatar}/>
                             )}

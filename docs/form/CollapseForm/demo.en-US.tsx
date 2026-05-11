@@ -16,10 +16,9 @@
 
 
 import {Avatar, message as messageApi} from 'antd';
-import {Comment} from '@ant-design/compatible';
 import {UserOutlined} from '@ant-design/icons';
 import {ProFormTextArea} from '@ant-design/pro-form';
-import {CollapseForm} from '@unikue/ant-buddy-pro';
+import {CollapseForm, CommentCard} from '@unikue/ant-buddy-pro';
 import {RandomUtils} from '@unikue/ts-lang-utils';
 
 
@@ -28,7 +27,7 @@ export default () => {
     return (
         <>
             {messageContext}
-            <Comment
+            <CommentCard
                 avatar={(
                     <Avatar src='https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png' size='small'/>
                 )}
@@ -57,7 +56,7 @@ export default () => {
                             }
                         }}
                     >
-                        <Comment
+                        <CommentCard
                             avatar={(
                                 <Avatar icon={<UserOutlined/>} size='small'/>
                             )}

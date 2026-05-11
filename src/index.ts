@@ -17,6 +17,7 @@
 
 export {AvatarStamp, type AvatarStampProps} from './field/AvatarStamp';
 export {BadgeRibbon, type BadgeRibbonProps} from './field/BadgeRibbon';
+export {CommentCard, type CommentCardProps} from './field/CommentCard';
 export {CompactTuple, type CompactTupleProps} from './field/CompactTuple';
 export {CornerStamp, type CornerStampProps} from './field/CornerStamp';
 export {CountField, type CountFieldProps, type CountFieldRef} from './field/CountField';

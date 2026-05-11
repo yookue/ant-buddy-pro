@@ -43,7 +43,6 @@
         "prepare": "dumi setup"
     },
     "dependencies": {
-        "@ant-design/compatible": "^5.1.4",
         "@ant-design/pro-card": "^2.10.0",
         "@ant-design/pro-components": "^3.1.12-0",
         "@ant-design/pro-field": "^3.1.0",
@@ -52,10 +51,6 @@
         "@ant-design/pro-provider": "^2.16.2",
         "@ant-design/pro-table": "^3.21.0",
         "@ant-design/pro-utils": "^2.18.0",
-        "@babel/runtime": "^7.29.2",
-        "@emotion/css": "^11.13.5",
-        "@rc-component/image": "^1.9.0",
-        "@rc-component/trigger": "^3.9.0",
         "@unikue/react-condition": "^2.0.0",
         "@unikue/ts-lang-utils": "^1.2.0",
         "@unikue/ts-multi-map": "^1.1.0",
