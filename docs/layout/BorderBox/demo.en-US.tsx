@@ -25,6 +25,7 @@ import {type BoundShapeType} from '@unikue/ant-buddy-pro/layout/BorderBox';
 
 export default () => {
     const [boundShape, setBoundShape] = React.useState<BoundShapeType>('rect');
+    const [borderAll, setBorderAll] = React.useState<boolean>(false);
     const [borderTop, setBorderTop] = React.useState<boolean>(true);
     const [borderRight, setBorderRight] = React.useState<boolean>(true);
     const [borderBottom, setBorderBottom] = React.useState<boolean>(true);
@@ -55,12 +56,12 @@ export default () => {
                     ]}
                 />
                 <ProFormSwitch
-                    label='Bound Shadow'
+                    label='Border All'
                     checkedChildren='True'
                     unCheckedChildren='False'
                     fieldProps={{
-                        checked: boundShadow,
-                        onChange: setBoundShadow,
+                        checked: borderAll,
+                        onChange: setBorderAll,
                     }}
                 />
                 <ProForm.Group>
@@ -70,7 +71,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: borderTop,
-                            disabled: boundShape === 'circle',
+                            disabled: borderAll || boundShape === 'circle',
                             onChange: setBorderTop,
                         }}
                     />
@@ -80,7 +81,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: borderBottom,
-                            disabled: boundShape === 'circle',
+                            disabled: borderAll || boundShape === 'circle',
                             onChange: setBorderBottom,
                         }}
                     />
@@ -90,7 +91,7 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: borderLeft,
-                            disabled: boundShape === 'circle',
+                            disabled: borderAll || boundShape === 'circle',
                             onChange: setBorderLeft,
                         }}
                     />
@@ -100,20 +101,30 @@ export default () => {
                         unCheckedChildren='False'
                         fieldProps={{
                             checked: borderRight,
-                            disabled: boundShape === 'circle',
+                            disabled: borderAll || boundShape === 'circle',
                             onChange: setBorderRight,
                         }}
                     />
                 </ProForm.Group>
+                <ProFormSwitch
+                    label='Bound Shadow'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: boundShadow,
+                        onChange: setBoundShadow,
+                    }}
+                />
             </ProForm>
             <Divider/>
             <BorderBox
                 boundShape={boundShape}
+                boundShadow={boundShadow}
+                borderAll={borderAll}
                 borderTop={borderTop}
-                borderRight={borderRight}
                 borderBottom={borderBottom}
                 borderLeft={borderLeft}
-                boundShadow={boundShadow}
+                borderRight={borderRight}
                 containerStyle={{padding: '12px'}}
             >
                 {(boundShape === 'circle') ? <CoffeeOutlined style={{fontSize: 22}}/> : 'The quick brown fox jumps over a lazy dog.'}

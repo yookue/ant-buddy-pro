@@ -62,6 +62,13 @@ export type BorderBoxProps = React.PropsWithChildren<{
     boundShadow?: boolean;
 
     /**
+     * @description Whether to border all
+     * @description.zh-CN 是否全部都有边框
+     * @description.zh-TW 是否全部都有邊框
+     */
+    borderAll?: boolean;
+
+    /**
      * @description Whether to border top or not
      * @description.zh-CN 顶部是否有边框
      * @description.zh-TW 頂部是否有邊框
@@ -107,6 +114,7 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
     const {
         boundShape = 'rect',
         boundShadow = false,
+        borderAll = false,
         borderTop = true,
         borderBottom = true,
         borderLeft = true,
@@ -122,18 +130,20 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
             setBoxClazz(classnames({
                 [`${clazzPrefix}-bound-rect`]: true,
                 [`${clazzPrefix}-bound-shadow`]: boundShadow,
-                [`${clazzPrefix}-border-top`]: borderTop,
-                [`${clazzPrefix}-border-bottom`]: borderBottom,
-                [`${clazzPrefix}-border-left`]: borderLeft,
-                [`${clazzPrefix}-border-right`]: borderRight,
+                [`${clazzPrefix}-border-all`]: borderAll,
+                [`${clazzPrefix}-border-top`]: !borderAll && borderTop,
+                [`${clazzPrefix}-border-bottom`]: !borderAll && borderBottom,
+                [`${clazzPrefix}-border-left`]: !borderAll && borderLeft,
+                [`${clazzPrefix}-border-right`]: !borderAll && borderRight,
             }));
         } else if (boundShape === 'circle') {
             setBoxClazz(classnames({
                 [`${clazzPrefix}-bound-circle`]: true,
                 [`${clazzPrefix}-bound-shadow`]: boundShadow,
+                [`${clazzPrefix}-border-all`]: borderAll,
             }));
         }
-    }, [clazzPrefix, boundShape, boundShadow, borderTop, borderBottom, borderLeft, borderRight]);
+    }, [clazzPrefix, boundShape, boundShadow, borderAll, borderTop, borderBottom, borderLeft, borderRight]);
 
     return (
         <div

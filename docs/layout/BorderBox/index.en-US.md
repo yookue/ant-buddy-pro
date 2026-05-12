@@ -27,6 +27,7 @@ import {BorderBox} from '@unikue/ant-buddy-pro';
 | containerStyle | The CSS style of the container div             | `React.CSSProperties` | -                   |
 | boundShape     | The bound shape                                | `'rect' \| 'circle'`  | `'rect'`            |
 | boundShadow    | Whether to show the bound shadow or not        | `boolean`             | -                   |
+| borderAll      | Whether to border all or not                   | `boolean`             | -                   |
 | borderTop      | Whether to border top or not                   | `boolean`             | `true`              |
 | borderBottom   | Whether to border bottom or not                | `boolean`             | `true`              |
 | borderLeft     | Whether to border left or not                  | `boolean`             | `true`              |

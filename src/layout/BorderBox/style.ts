@@ -30,12 +30,15 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 borderRadius: '50%',
             },
 
             [`&&-bound-shadow`]: {
                 boxShadow: token.boxShadow,
+            },
+
+            [`&&-border-all`]: {
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
 
             [`&&-border-top`]: {

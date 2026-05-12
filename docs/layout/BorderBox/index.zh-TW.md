@@ -27,6 +27,7 @@ import {BorderBox} from '@unikue/ant-buddy-pro';
 | containerStyle | 容器 div 的 CSS 樣式 | `React.CSSProperties` | -                  |
 | boundShape     | 邊框形狀            | `'rect' \| 'circle'`  | `'rect'`           |
 | boundShadow    | 是否顯示邊框陰影        | `boolean`             | -                  |
+| borderAll      | 是否全部都有邊框        | `boolean`             | -                  |
 | borderTop      | 頂部是否有邊框         | `boolean`             | `true`             |
 | borderBottom   | 底部是否有邊框         | `boolean`             | `true`             |
 | borderLeft     | 左側是否有邊框         | `boolean`             | `true`             |
