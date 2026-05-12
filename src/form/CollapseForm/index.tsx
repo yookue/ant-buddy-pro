@@ -20,6 +20,7 @@ import {Form, type FormProps, type FormInstance} from 'antd';
 import {ProForm, type ProFormProps, type ProFormInstance} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import {NanoidUtils} from '@unikue/ts-lang-utils';
+import {useEventListener} from 'ahooks';
 import classnames from 'classnames';
 import {type ClickHoverType} from '@/type/declaration';
 import {useFieldStyle} from './style';
@@ -204,17 +205,6 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
         }
     }));
 
-    if (closeOnBlur) {
-        React.useLayoutEffect(() => {
-            document.addEventListener('keydown', restoreLayout);
-            document.addEventListener('mousedown', restoreLayout);
-            return () => {
-                document.removeEventListener('keydown', restoreLayout);
-                document.removeEventListener('mousedown', restoreLayout);
-            }
-        }, []);
-    }
-
     const restoreLayout = (event: any) => {
         const inspect = document.querySelector<HTMLDivElement>(`[data-collapse-form-entry='${fieldId}']`);
         const sponsor = document.querySelector<HTMLDivElement>(`[data-collapse-form-content='${fieldId}']`);
@@ -222,6 +212,10 @@ export const CollapseForm: React.ForwardRefExoticComponent<CollapseFormProps & R
             setFormOpen(false);
         }
     };
+
+    if (closeOnBlur) {
+        useEventListener(['keydown', 'mousedown'], restoreLayout);
+    }
 
     const buildEntryDom = () => {
         if (formOpen) {
