@@ -16,6 +16,8 @@
 
 
 import React from 'react';
+import {ProFormTreeSelect, type ProFormTreeSelectProps} from '@ant-design/pro-components';
+import {Form, TreeSelect} from 'antd';
 import {omit} from '@rc-component/util';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
@@ -28,6 +30,9 @@ export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'plac
 export type OmitMaskInputProps = Omit<MaskInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
 export type OmitDivideSelectProps = Omit<DivideSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'>;
 export type OmitIconSelectProps = Omit<IconSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;
+export type OmitTreeSelectProps = Omit<ProFormTreeSelectProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies' | 'debounceTime' | 'params' | 'request' | 'valueEnum'> & {
+    proField?: boolean;
+};
 
 
 // noinspection DuplicatedCode
@@ -56,17 +61,14 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
-        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
-        const extCheckProps = !props?.checkProps ? {} : omit(props.checkProps, ['name', 'value', 'onChange']);
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue']);
+        const extCheckProps = !props?.checkProps ? {} : omit(props.checkProps, ['name', 'value']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <ExactInput
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
-                    onChange: (event: any) => {
-                        schema.fieldProps?.onChange?.(event);
-                    },
                     ...rawFieldProps,
                 }}
                 checkProps={extCheckProps}
@@ -91,16 +93,13 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
-        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <MaskInput
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
-                    onChange: (event: any) => {
-                        schema.fieldProps?.onChange?.(event);
-                    },
                     ...rawFieldProps,
                 }}
                 proField={props?.proField ?? false}
@@ -124,16 +123,13 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
-        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <DivideSelect
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
-                    onChange: (event: any) => {
-                        schema.fieldProps?.onChange?.(event);
-                    },
                     ...rawFieldProps,
                 }}
                 proField={props?.proField ?? false}
@@ -161,16 +157,13 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
-        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'onChange']);
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
         return (
             <IconSelect
                 name={fieldName}
                 fieldProps={{
                     defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
-                    onChange: (event: any) => {
-                        schema.fieldProps?.onChange?.(event);
-                    },
                     ...rawFieldProps,
                 }}
                 proField={props?.proField ?? false}
@@ -221,5 +214,49 @@ export abstract class SchemaRender {
                 {...omitRestProps}
             />
         );
+    }
+
+    /**
+     * Returns the rendered `TreeSelect` DOM for the given schema form column
+     *
+     * @param schema the column item of `ProSchema` to render
+     * @param props the `ProFormTreeSelectProps` to inspect
+     *
+     * @returns the rendered `TreeSelect` DOM for the given schema form column
+     */
+    public static renderTreeSelect = (schema: any, props?: OmitTreeSelectProps): React.ReactNode => {
+        if (!schema || schema.ignoreFormItem || !schema.dataIndex) {
+            return undefined;
+        }
+        const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue']);
+        const extRestProps = !props ? {} : omit(props, ['proField']);
+        if (props?.proField) {
+            return (
+                <ProFormTreeSelect
+                    name={fieldName}
+                    fieldProps={{
+                        defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
+                        ...rawFieldProps,
+                    }}
+                    proFieldProps={schema.proFieldProps}
+                    dependencies={schema.dependencies}
+                    valueEnum={schema.valueEnum}
+                    debounceTime={schema.debounceTime}
+                    params={schema.params}
+                    request={schema.request}
+                    {...extRestProps}
+                />
+            );
+        } else {
+            return (
+                <Form.Item name={fieldName} noStyle={true}>
+                    <TreeSelect
+                        defaultValue={schema.initialValue ?? schema.fieldProps?.defaultValue}
+                        {...rawFieldProps}
+                    />
+                </Form.Item>
+            );
+        }
     }
 }
