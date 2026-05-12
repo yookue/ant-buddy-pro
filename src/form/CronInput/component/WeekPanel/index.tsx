@@ -17,7 +17,6 @@
 
 import React from 'react';
 import {Form, Checkbox, InputNumber, Radio, Switch, Tooltip, Space, type RadioChangeEvent} from 'antd';
-import {type LabeledValue} from 'antd/es/select';
 import {useIntl} from '@ant-design/pro-components';
 import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
@@ -427,14 +426,10 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
     ]);
 
     const buildWeekOptions = () => {
-        const result: LabeledValue[] = [];
-        weekSemantics.forEach((v, k) => {
-            result.push({
-                label: v,
-                value: k,
-            });
-        });
-        return result;
+        return Array.from(weekSemantics.entries()).map(([k, v]) => ({
+            label: v,
+            value: k,
+        }));
     };
 
     // noinspection DuplicatedCode

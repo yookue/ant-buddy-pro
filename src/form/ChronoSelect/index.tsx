@@ -17,7 +17,6 @@
 
 import React from 'react';
 import {Form, Select} from 'antd';
-import {type LabeledValue} from 'antd/es/select';
 import {ProFormSelect, useIntl} from '@ant-design/pro-components';
 import {type ProFormSelectProps} from '@ant-design/pro-components/es/form/components/Select';
 import {omit} from '@rc-component/util';
@@ -167,15 +166,10 @@ export const ChronoSelect: React.FC<ChronoSelectProps> = (props?: ChronoSelectPr
 
     const fieldStyle = useFieldStyle(clazzPrefix);
 
-    const optionItems: LabeledValue[] = [];
-    if (unitTypes) {
-        unitTypes.forEach(item => {
-            optionItems.push({
-                label: ObjectUtils.firstNotNil(ObjectUtils.getProp(props?.localeProps, item), intlLocales.get([locale, item]), intlLocales.get(['en_US', item])),
-                value: item,
-            });
-        });
-    }
+    const optionItems = unitTypes.map(item => ({
+        label: ObjectUtils.firstNotNil(ObjectUtils.getProp(props?.localeProps, item), intlLocales.get([locale, item]), intlLocales.get(['en_US', item])),
+        value: item,
+    }));
 
     const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'options']);
     if (proField) {
