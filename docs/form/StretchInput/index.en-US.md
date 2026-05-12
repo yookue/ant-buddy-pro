@@ -25,6 +25,8 @@ import {StretchInput} from '@unikue/ant-buddy-pro';
 | Property        | Description                                                  | Type                          | Default               |
 |-----------------|--------------------------------------------------------------|-------------------------------|-----------------------|
 | clazzPrefix     | The CSS class prefix of the component                        | `string`                      | `'abp-stretch-input'` |
+| containerClazz  | The CSS class name of the container div                      | `string`                      | -                     |
+| containerStyle  | The CSS style of the container div                           | `React.CSSProperties`         | -                     |
 | miniature       | The instead DOM when the input box is collapsed (lost focus) | `React.ReactNode`             | -                     |
 | stretchClazz    | The CSS class name when stretched                            | `string`                      | -                     |
 | stretchStyle    | The CSS style when stretched                                 | `React.CSSProperties`         | -                     |

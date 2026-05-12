@@ -21,6 +21,7 @@ import {ProFormText} from '@ant-design/pro-components';
 import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
 import {omit} from '@rc-component/util';
 import {NanoidUtils, StringUtils} from '@unikue/ts-lang-utils';
+import {useEventListener} from 'ahooks';
 import classnames from 'classnames';
 import {type ClickHoverType} from '@/type/declaration';
 import {useFieldStyle} from './style';
@@ -34,6 +35,20 @@ export type StretchInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>
      * @default 'abp-stretch-input'
      */
     clazzPrefix?: string;
+
+    /**
+     * @description The CSS class name of the container div
+     * @description.zh-CN 容器 div 的 CSS 类名
+     * @description.zh-TW 容器 div 的 CSS 類名
+     */
+    containerClazz?: string;
+
+    /**
+     * @description The CSS style of the container div
+     * @description.zh-CN 容器 div 的 CSS 样式
+     * @description.zh-TW 容器 div 的 CSS 樣式
+     */
+    containerStyle?: React.CSSProperties;
 
     /**
      * @description The instead DOM when the input box is collapsed (lost focus)
@@ -94,92 +109,92 @@ export const StretchInput: React.FC<StretchInputProps> = (props?: StretchInputPr
         triggerType = 'click',
     } = props ?? {};
 
+    const [stretched, setStretched] = React.useState<boolean>(false);
+
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
-    const [stretch, setStretch] = React.useState<boolean>(false);
     const fieldStyle = useFieldStyle(clazzPrefix);
 
-    React.useLayoutEffect(() => {
-        document.addEventListener('keydown', restoreLayout);
-        document.addEventListener('mousedown', restoreLayout);
-        return () => {
-            document.removeEventListener('keydown', restoreLayout);
-            document.removeEventListener('mousedown', restoreLayout);
-        }
-    }, []);
-
-    React.useEffect(() => {
-        if (stretch && props?.miniature) {
-            document.querySelector<HTMLInputElement>(`[data-stretch-input-id='${fieldId}']`)?.focus();
-        }
-        props?.onStretchChange?.(stretch);
-    }, [stretch]);
-
     const restoreLayout = (event: any) => {
-        if (!props?.miniature || !stretch) {
+        if (!props?.miniature || !stretched) {
             return;
         }
         const inspect = document.querySelector<HTMLInputElement>(`[data-stretch-input-id='${fieldId}']`);
         if (!inspect?.contains(event.target)) {
-            setStretch(false);
+            setStretched(false);
         }
     };
 
-    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-        setStretch(true);
+    useEventListener(['keydown', 'mousedown'], restoreLayout);
+
+    const handleInputFocus = (event: any) => {
+        setStretched(true);
         props?.fieldProps?.onFocus?.(event);
     };
 
-    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        setStretch(false);
+    const handleInputBlur = (event: any) => {
+        setStretched(false);
         props?.fieldProps?.onBlur?.(event);
     };
 
-    if (props?.miniature && !stretch) {
-        return (
-            <span
-                className={`${clazzPrefix}-miniature`}
-                onClick={triggerType !== 'click' ? undefined : () => setStretch(true)}
-                onMouseOver={triggerType !== 'hover' ? undefined : () => setStretch(true)}
-            >
-                {props.miniature}
-            </span>
-        );
-    }
+    const buildInnerDom = () => {
+        if (!stretched && props?.miniature) {
+            return (
+                <span
+                    className={`${clazzPrefix}-miniature`}
+                    onClick={triggerType !== 'click' ? undefined : () => setStretched(true)}
+                    onMouseOver={triggerType !== 'hover' ? undefined : () => setStretched(true)}
+                >
+                    {props.miniature}
+                </span>
+            );
+        }
 
-    const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'style', 'onFocus', 'onBlur']);
-    if (props?.proField) {
-        const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'miniature', 'stretchClazz', 'stretchStyle', 'triggerType', 'proField']);
-        return (
-            <ProFormText
-                {...restProps}
-                fieldProps={{
-                    className: classnames(clazzPrefix, fieldStyle.hashId, (stretch ? props?.stretchClazz : props?.fieldProps?.className)),
-                    onFocus: handleFocus,
-                    onBlur: handleBlur,
-                    style: stretch ? props?.stretchStyle : props?.fieldProps?.style,
-                    ...omitFieldProps,
-                    'data-stretch-input-id': fieldId,
-                }}
-            />
-        );
-    } else {
-        const restProps = omit(omitFieldProps, ['placeholder', 'onChange']);
-        return (
-            <Input
-                className={classnames(clazzPrefix, fieldStyle.hashId, (stretch ? props?.stretchClazz : props?.fieldProps?.className))}
-                placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
-                onChange={(event: any) => {
-                    if (props?.name) {
-                        form?.setFieldValue(props.name, event.target.value);
-                    }
-                    props?.fieldProps?.onChange?.(event);
-                }}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                style={stretch ? props?.stretchStyle : props?.fieldProps?.style}
-                {...restProps}
-                data-stretch-input-id={fieldId}
-            />
-        );
-    }
+        const omitFieldProps = !props?.fieldProps ? {} : omit(props?.fieldProps, ['className', 'style', 'onFocus', 'onBlur']);
+        if (props?.proField) {
+            const restProps = !props ? {} : omit(props, ['fieldProps', 'clazzPrefix', 'miniature', 'stretchClazz', 'stretchStyle', 'triggerType', 'proField']);
+            return (
+                <ProFormText
+                    {...restProps}
+                    fieldProps={{
+                        className: classnames(props?.className ?? props?.fieldProps?.className, !stretched ? undefined : props?.stretchClazz),
+                        style: stretched ? props?.stretchStyle : props?.fieldProps?.style,
+                        onFocus: handleInputFocus,
+                        onBlur: handleInputBlur,
+                        ...omitFieldProps,
+                        'data-stretch-input-id': fieldId,
+                    }}
+                />
+            );
+        } else {
+            const restProps = omit(omitFieldProps, ['placeholder', 'onChange']);
+            return (
+                <Input
+                    className={classnames(props?.className ?? props?.fieldProps?.className, !stretched ? undefined : props?.stretchClazz)}
+                    placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                    style={stretched ? props?.stretchStyle : props?.fieldProps?.style}
+                    onChange={(event: any) => {
+                        if (props?.name) {
+                            form?.setFieldValue(props.name, event.target.value);
+                        }
+                        props?.fieldProps?.onChange?.(event);
+                    }}
+                    {...restProps}
+                    data-stretch-input-id={fieldId}
+                />
+            );
+        }
+    };
+
+    const innerDom = buildInnerDom();
+
+    return (
+        <div
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
+            {innerDom}
+        </div>
+    );
 };

@@ -19,7 +19,7 @@ import React from 'react';
 import {Divider} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
 import {ProForm, ProFormRadio} from '@ant-design/pro-components';
-import {StretchInput} from '@unikue/ant-buddy-pro';
+import {BorderBox, StretchInput} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -62,12 +62,9 @@ export default () => {
                         }
                     }}
                     miniature={miniatureType !== 'custom' ? undefined : (
-                        <SearchOutlined
-                            style={{
-                                width: '32px',
-                                height: '32px',
-                            }}
-                        />
+                        <BorderBox boundShape='circle' borderAll={true} containerStyle={{padding: 8}}>
+                            <SearchOutlined/>
+                        </BorderBox>
                     )}
                     stretchStyle={{
                         borderRadius: '16px',

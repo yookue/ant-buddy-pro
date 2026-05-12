@@ -25,6 +25,8 @@ import {StretchInput} from '@unikue/ant-buddy-pro';
 | 属性              | 说明                   | 类型                            | 默认值                   |
 |-----------------|----------------------|-------------------------------|-----------------------|
 | clazzPrefix     | 组件的 CSS 类名前缀         | `string`                      | `'abp-stretch-input'` |
+| containerClazz  | 容器 div 的 CSS 类名      | `string`                      | -                     |
+| containerStyle  | 容器 div 的 CSS 样式      | `React.CSSProperties`         | -                     |
 | miniature       | 文本框折叠（失去焦点）时的替代节点内容  | `React.ReactNode`             | -                     |
 | stretchClazz    | 拉伸状态时的 CSS 类名        | `string`                      | -                     |
 | stretchStyle    | 拉伸状态时的 CSS 样式        | `React.CSSProperties`         | -                     |
