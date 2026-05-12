@@ -125,7 +125,7 @@ export default () => {
                 borderBottom={borderBottom}
                 borderLeft={borderLeft}
                 borderRight={borderRight}
-                containerStyle={{padding: '12px'}}
+                containerStyle={{padding: 12}}
             >
                 {(boundShape === 'circle') ? <CoffeeOutlined style={{fontSize: 22}}/> : 'The quick brown fox jumps over a lazy dog.'}
             </BorderBox>
