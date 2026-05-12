@@ -25,20 +25,33 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             borderRadius: token.borderRadius,
+
+            [`&&-bound-circle`]: {
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+                borderRadius: '50%',
+            },
+
+            [`&&-bound-shadow`]: {
+                boxShadow: token.boxShadow,
+            },
+
             [`&&-border-top`]: {
                 borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
+
             [`&&-border-right`]: {
                 borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
+
             [`&&-border-bottom`]: {
                 borderBottom: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
+
             [`&&-border-left`]: {
                 borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
-            },
-            [`&&-bound-shadow`]: {
-                boxShadow: token.boxShadow,
             }
         }
     };

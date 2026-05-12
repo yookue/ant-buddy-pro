@@ -20,6 +20,9 @@ import classnames from 'classnames';
 import {useFieldStyle} from './style';
 
 
+export type BoundShapeType = 'rect' | 'circle';
+
+
 export type BorderBoxProps = React.PropsWithChildren<{
     /**
      * @description The CSS class prefix of the component
@@ -44,20 +47,27 @@ export type BorderBoxProps = React.PropsWithChildren<{
     containerStyle?: React.CSSProperties;
 
     /**
+     * @description The bound shape
+     * @description.zh-CN 边框形状
+     * @description.zh-TW 邊框形狀
+     * @default 'rect'
+     */
+    boundShape?: BoundShapeType;
+
+    /**
+     * @description Whether to show the bound shadow or not
+     * @description.zh-CN 是否显示边框阴影
+     * @description.zh-TW 是否顯示邊框陰影
+     */
+    boundShadow?: boolean;
+
+    /**
      * @description Whether to border top or not
      * @description.zh-CN 顶部是否有边框
      * @description.zh-TW 頂部是否有邊框
      * @default true
      */
     borderTop?: boolean;
-
-    /**
-     * @description Whether to border right or not
-     * @description.zh-CN 右侧是否有边框
-     * @description.zh-TW 右側是否有邊框
-     * @default true
-     */
-    borderRight?: boolean;
 
     /**
      * @description Whether to border bottom or not
@@ -76,11 +86,12 @@ export type BorderBoxProps = React.PropsWithChildren<{
     borderLeft?: boolean;
 
     /**
-     * @description Whether to show the bound shadow or not
-     * @description.zh-CN 是否显示边框阴影
-     * @description.zh-TW 是否顯示邊框陰影
+     * @description Whether to border right or not
+     * @description.zh-CN 右侧是否有边框
+     * @description.zh-TW 右側是否有邊框
+     * @default true
      */
-    boundShadow?: boolean;
+    borderRight?: boolean;
 }>;
 
 
@@ -94,25 +105,39 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
 
     // Initialize the default props
     const {
+        boundShape = 'rect',
+        boundShadow = false,
         borderTop = true,
-        borderRight = true,
         borderBottom = true,
         borderLeft = true,
+        borderRight = true,
     } = props ?? {};
+
+    const [boxClazz, setBoxClazz] = React.useState<string>();
 
     const fieldStyle = useFieldStyle(clazzPrefix);
 
-    const sideClazz = classnames({
-        [`${clazzPrefix}-border-top`]: borderTop,
-        [`${clazzPrefix}-border-right`]: borderRight,
-        [`${clazzPrefix}-border-bottom`]: borderBottom,
-        [`${clazzPrefix}-border-left`]: borderLeft,
-        [`${clazzPrefix}-bound-shadow`]: props?.boundShadow,
-    });
+    React.useEffect(() => {
+        if (boundShape === 'rect') {
+            setBoxClazz(classnames({
+                [`${clazzPrefix}-bound-rect`]: true,
+                [`${clazzPrefix}-bound-shadow`]: boundShadow,
+                [`${clazzPrefix}-border-top`]: borderTop,
+                [`${clazzPrefix}-border-bottom`]: borderBottom,
+                [`${clazzPrefix}-border-left`]: borderLeft,
+                [`${clazzPrefix}-border-right`]: borderRight,
+            }));
+        } else if (boundShape === 'circle') {
+            setBoxClazz(classnames({
+                [`${clazzPrefix}-bound-circle`]: true,
+                [`${clazzPrefix}-bound-shadow`]: boundShadow,
+            }));
+        }
+    }, [clazzPrefix, boundShape, boundShadow, borderTop, borderBottom, borderLeft, borderRight]);
 
     return (
         <div
-            className={classnames(clazzPrefix, fieldStyle.hashId, sideClazz, props?.containerClazz)}
+            className={classnames(clazzPrefix, fieldStyle.hashId, boxClazz, props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}

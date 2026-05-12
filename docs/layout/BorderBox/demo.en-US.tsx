@@ -17,11 +17,14 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
+import {CoffeeOutlined} from '@ant-design/icons';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {BorderBox} from '@unikue/ant-buddy-pro';
+import {type BoundShapeType} from '@unikue/ant-buddy-pro/layout/BorderBox';
 
 
 export default () => {
+    const [boundShape, setBoundShape] = React.useState<BoundShapeType>('rect');
     const [borderTop, setBorderTop] = React.useState<boolean>(true);
     const [borderRight, setBorderRight] = React.useState<boolean>(true);
     const [borderBottom, setBorderBottom] = React.useState<boolean>(true);
@@ -36,44 +39,21 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProForm.Group>
-                    <ProFormSwitch
-                        label='Border Top'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: borderTop,
-                            onChange: setBorderTop,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='Border Right'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: borderRight,
-                            onChange: setBorderRight,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='Border Bottom'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: borderBottom,
-                            onChange: setBorderBottom,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='Border Left'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
-                        fieldProps={{
-                            checked: borderLeft,
-                            onChange: setBorderLeft,
-                        }}
-                    />
-                </ProForm.Group>
+                <ProFormRadio.Group
+                    label='Bound Shape'
+                    radioType='button'
+                    fieldProps={{
+                        value: boundShape,
+                        buttonStyle: 'solid',
+                        onChange: (event: any) => {
+                            setBoundShape(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: 'Rect', value: 'rect'},
+                        {label: 'Circle', value: 'circle'},
+                    ]}
+                />
                 <ProFormSwitch
                     label='Bound Shadow'
                     checkedChildren='True'
@@ -83,9 +63,52 @@ export default () => {
                         onChange: setBoundShadow,
                     }}
                 />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='Border Top'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: borderTop,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderTop,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Border Bottom'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: borderBottom,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderBottom,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Border Left'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: borderLeft,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderLeft,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='Border Right'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: borderRight,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderRight,
+                        }}
+                    />
+                </ProForm.Group>
             </ProForm>
             <Divider/>
             <BorderBox
+                boundShape={boundShape}
                 borderTop={borderTop}
                 borderRight={borderRight}
                 borderBottom={borderBottom}
@@ -93,7 +116,7 @@ export default () => {
                 boundShadow={boundShadow}
                 containerStyle={{padding: '12px'}}
             >
-                The quick brown fox jumps over a lazy dog.
+                {(boundShape === 'circle') ? <CoffeeOutlined style={{fontSize: 22}}/> : 'The quick brown fox jumps over a lazy dog.'}
             </BorderBox>
         </>
     );

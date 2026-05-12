@@ -17,11 +17,14 @@
 
 import React from 'react';
 import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
+import {CoffeeOutlined} from '@ant-design/icons';
+import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
 import {BorderBox} from '@unikue/ant-buddy-pro';
+import {type BoundShapeType} from '@unikue/ant-buddy-pro/layout/BorderBox';
 
 
 export default () => {
+    const [boundShape, setBoundShape] = React.useState<BoundShapeType>('rect');
     const [borderTop, setBorderTop] = React.useState<boolean>(true);
     const [borderRight, setBorderRight] = React.useState<boolean>(true);
     const [borderBottom, setBorderBottom] = React.useState<boolean>(true);
@@ -36,44 +39,21 @@ export default () => {
                 autoFocusFirstInput={false}
                 submitter={false}
             >
-                <ProForm.Group>
-                    <ProFormSwitch
-                        label='頂部邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderTop,
-                            onChange: setBorderTop,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='右側邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderRight,
-                            onChange: setBorderRight,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='底部邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderBottom,
-                            onChange: setBorderBottom,
-                        }}
-                    />
-                    <ProFormSwitch
-                        label='左側邊框'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
-                        fieldProps={{
-                            checked: borderLeft,
-                            onChange: setBorderLeft,
-                        }}
-                    />
-                </ProForm.Group>
+                <ProFormRadio.Group
+                    label='邊框形狀'
+                    radioType='button'
+                    fieldProps={{
+                        value: boundShape,
+                        buttonStyle: 'solid',
+                        onChange: (event: any) => {
+                            setBoundShape(event.target?.value);
+                        }
+                    }}
+                    options={[
+                        {label: '矩形', value: 'rect'},
+                        {label: '圓形', value: 'circle'},
+                    ]}
+                />
                 <ProFormSwitch
                     label='邊框陰影'
                     checkedChildren='是'
@@ -83,9 +63,52 @@ export default () => {
                         onChange: setBoundShadow,
                     }}
                 />
+                <ProForm.Group>
+                    <ProFormSwitch
+                        label='頂部邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderTop,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderTop,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='底部邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderBottom,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderBottom,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='左側邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderLeft,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderLeft,
+                        }}
+                    />
+                    <ProFormSwitch
+                        label='右側邊框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        fieldProps={{
+                            checked: borderRight,
+                            disabled: boundShape === 'circle',
+                            onChange: setBorderRight,
+                        }}
+                    />
+                </ProForm.Group>
             </ProForm>
             <Divider/>
             <BorderBox
+                boundShape={boundShape}
                 borderTop={borderTop}
                 borderRight={borderRight}
                 borderBottom={borderBottom}
@@ -93,7 +116,7 @@ export default () => {
                 boundShadow={boundShadow}
                 containerStyle={{padding: '12px'}}
             >
-                壹只棕色敏捷的狐貍跳過了壹只懶洋洋的狗。
+                {(boundShape === 'circle') ? <CoffeeOutlined style={{fontSize: 22}}/> : '壹只棕色敏捷的狐貍跳過了壹只懶洋洋的狗。'}
             </BorderBox>
         </>
     );
