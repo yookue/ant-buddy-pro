@@ -22,7 +22,7 @@ import {type SpaceSize} from 'antd/es/space';
 import classnames from 'classnames';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {type WithFalse, type AxisDirectionType} from '@/type/declaration';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type LabelPresetStyle = WithFalse<'label-prior' | 'field-prior'>;

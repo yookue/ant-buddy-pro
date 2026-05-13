@@ -24,8 +24,8 @@ import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type HostInputProps = Omit<MaskInputProps, 'proField' | 'label'> & {

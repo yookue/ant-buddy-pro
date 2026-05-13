@@ -24,7 +24,7 @@ import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {type WithFalse, type LabelMixinType, type RequestOptionPlace} from '@/type/declaration';
 import {FieldUtils} from '@/util/FieldUtils';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type DividePresetStyle = WithFalse<'before-prior' | 'after-prior'>;

@@ -21,7 +21,7 @@ import {SkinOutlined} from '@ant-design/icons';
 import {SettingDrawer as ProSettingDrawer, type SettingDrawerProps as ProSettingDrawerProps} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import classnames from 'classnames';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type SettingDrawerRef = {

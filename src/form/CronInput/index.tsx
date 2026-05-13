@@ -44,8 +44,8 @@ import {DayPanel, type DayPanelProps, type DayPanelRef} from './component/DayPan
 import {MonthPanel, type MonthPanelProps, type MonthPanelRef} from './component/MonthPanel';
 import {WeekPanel, type WeekPanelProps, type WeekPanelRef} from './component/WeekPanel';
 import {YearPanel, type YearPanelProps, type YearPanelRef} from './component/YearPanel';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type CronInputRef = {

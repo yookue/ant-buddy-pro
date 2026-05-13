@@ -22,8 +22,8 @@ import {type ValueType as RcValueType} from '@rc-component/input-number';
 import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {CronInputContext} from '@/form/CronInput/context';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type MinutePanelRef = {

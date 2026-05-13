@@ -23,7 +23,7 @@ import {ObjectUtils} from '@unikue/ts-lang-utils';
 import {useFullscreen} from 'ahooks';
 import classnames from 'classnames';
 import {TooltipRender} from '@/render/TooltipRender';
-import {intlLocales} from './intl-locales';
+import {intlLocales} from './locales';
 
 
 export type FullscreenRef = {

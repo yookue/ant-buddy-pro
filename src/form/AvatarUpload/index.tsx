@@ -29,8 +29,8 @@ import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
 import classnames from 'classnames';
 import {type CircleSquareShape, type FileSizeUint} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type AvatarUploadRef = {

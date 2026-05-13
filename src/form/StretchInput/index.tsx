@@ -24,7 +24,7 @@ import {NanoidUtils, StringUtils} from '@unikue/ts-lang-utils';
 import {useEventListener} from 'ahooks';
 import classnames from 'classnames';
 import {type ClickHoverType} from '@/type/declaration';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type StretchInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {

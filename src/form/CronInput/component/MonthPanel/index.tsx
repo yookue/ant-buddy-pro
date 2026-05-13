@@ -23,8 +23,8 @@ import {MapUtils, NanoidUtils, NumberUtils, ObjectUtils, RegexUtils, StringUtils
 import classnames from 'classnames';
 import {BadgeRibbon} from '@/field/BadgeRibbon';
 import {CronInputContext} from '@/form/CronInput/context';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type MonthPanelRef = {

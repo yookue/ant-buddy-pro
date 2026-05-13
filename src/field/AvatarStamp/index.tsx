@@ -22,7 +22,7 @@ import {omit} from '@rc-component/util';
 import {StringUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {type RectZenithPlace} from '@/type/declaration';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type AvatarStampProps = AvatarProps & {

@@ -32,8 +32,8 @@ import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
 import {DesignUtils} from '@/util/DesignUtils';
 import {StyleUtils} from '@/util/StyleUtils';
 import {TriggerUtils} from '@/util/TriggerUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type PopupInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore' | 'addonAfter' | 'cursorBefore' | 'cursorAfter' | 'paddingBefore' | 'paddingAfter'> & {

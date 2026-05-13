@@ -27,8 +27,8 @@ import {If} from '@unikue/react-condition';
 import {ArrayUtils, BooleanUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {type WithFalse, type ReadonlyTabsType} from '@/type/declaration';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type NotifyPresetStyle = WithFalse<'notice' | 'task'>;

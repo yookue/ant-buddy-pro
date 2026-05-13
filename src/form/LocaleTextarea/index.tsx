@@ -29,8 +29,8 @@ import classnames from 'classnames';
 import {type WithFalse, type ReadonlyTabsType, type RuleValidateScope} from '@/type/declaration';
 import {LabelField} from '@/field/LabelField';
 import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type MixinTabsProps = Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'> & {

@@ -23,8 +23,8 @@ import classnames from 'classnames';
 import zxcvbn from 'zxcvbn';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type IntlLocaleProps = {

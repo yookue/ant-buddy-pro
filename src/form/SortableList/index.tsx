@@ -24,8 +24,8 @@ import {useIntl} from '@ant-design/pro-components';
 import {omit} from '@rc-component/util';
 import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type IntlLocaleProps = {

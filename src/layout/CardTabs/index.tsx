@@ -22,7 +22,7 @@ import {type TabPlacement as RcTabPlacement} from 'antd/es/tabs';
 import {omit} from '@rc-component/util';
 import classnames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type TabPlacement = RcTabPlacement | 'top-end' | 'bottom-end';

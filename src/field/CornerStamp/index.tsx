@@ -24,7 +24,7 @@ import {StringUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {type RectZenithPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type CornerStampProps = React.PropsWithChildren<{

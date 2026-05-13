@@ -28,8 +28,8 @@ import classnames from 'classnames';
 import objectHash from 'object-hash';
 import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type TagInputRef = {

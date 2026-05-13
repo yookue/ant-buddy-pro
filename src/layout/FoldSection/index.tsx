@@ -24,8 +24,8 @@ import {ObjectUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type SectionPresetStyle = WithFalse<'default' | 'success' | 'info' | 'warn' | 'error' | 'classic'>;

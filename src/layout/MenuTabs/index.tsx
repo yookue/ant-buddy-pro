@@ -24,7 +24,7 @@ import {omit} from '@rc-component/util';
 import {useEventListener} from 'ahooks';
 import classnames from 'classnames';
 import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type MixinMenuProps = Omit<MenuProps, 'children' | 'activeKey' | 'defaultSelectedKeys' | 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'onDeselect'> & {

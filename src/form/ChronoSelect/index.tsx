@@ -23,8 +23,8 @@ import {omit} from '@rc-component/util';
 import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {type WithFalse} from '@/type/declaration';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type ChronoUintType = 'millis' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years' | 'forever';

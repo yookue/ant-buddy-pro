@@ -23,7 +23,7 @@ import classnames from 'classnames';
 import {type AxisDirectionType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type CountFieldRef = {

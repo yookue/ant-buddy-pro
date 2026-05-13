@@ -25,8 +25,8 @@ import {omit} from '@rc-component/util';
 import {ArrayUtils, ObjectUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type CaptchaInputRef = {

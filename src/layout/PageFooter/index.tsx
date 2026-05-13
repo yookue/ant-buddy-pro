@@ -21,7 +21,7 @@ import {CopyrightOutlined} from '@ant-design/icons';
 import {If, For} from '@unikue/react-condition';
 import classnames from 'classnames';
 import {type WithFalse} from '@/type/declaration';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type FooterPresetStyle = WithFalse<'default' | 'half'>;

@@ -24,8 +24,8 @@ import classnames from 'classnames';
 import {type AxisDirectionType} from '@/type/declaration';
 import {CountField, type CountFieldRef} from '@/field/CountField';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type ThumbActionType = 'like' | 'dislike' | 'favorite';

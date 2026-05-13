@@ -23,7 +23,7 @@ import {ObjectUtils} from '@unikue/ts-lang-utils';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
 import {TooltipRender} from '@/render/TooltipRender';
 import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
-import {intlLocales} from './intl-locales';
+import {intlLocales} from './locales';
 
 
 export type AddonCheckProps = CheckboxProps & React.PropsWithChildren<{

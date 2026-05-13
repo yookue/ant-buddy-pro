@@ -23,8 +23,8 @@ import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lan
 import classnames from 'classnames';
 import {CronInputContext} from '@/form/CronInput/context';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type YearPanelRef = {

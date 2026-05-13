@@ -26,8 +26,8 @@ import classnames from 'classnames';
 import 'mathlive';
 import 'mathlive/fonts.css';
 import {PropUtils} from '@/util/PropUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 type MathfieldOptions = {

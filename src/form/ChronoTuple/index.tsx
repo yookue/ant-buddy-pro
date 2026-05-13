@@ -24,7 +24,7 @@ import {omit} from '@rc-component/util';
 import {StringUtils} from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import {ChronoSelect, type ChronoSelectProps} from '@/form/ChronoSelect';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type ChronoTupleProps = {

@@ -20,7 +20,7 @@ import {Space, type SpaceProps} from 'antd';
 import {omit} from '@rc-component/util';
 import classnames from 'classnames';
 import {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from '@/field/ThumbToggle';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type ThumbTupleRef = {

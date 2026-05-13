@@ -21,7 +21,7 @@ import {type SpaceSize} from 'antd/es/space';
 import {css} from '@emotion/css';
 import {omit} from '@rc-component/util';
 import classnames from 'classnames';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type SpaceBoundProps = SpaceProps & {

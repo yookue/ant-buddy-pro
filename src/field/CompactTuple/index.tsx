@@ -22,7 +22,7 @@ import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm
 import {css} from '@emotion/css';
 import classnames from 'classnames';
 import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {useFieldStyle} from './style';
+import {useFieldStyle} from './styles';
 
 
 export type TuplePresetStyle = WithFalse<'field-prior' | 'addon-prior'>;

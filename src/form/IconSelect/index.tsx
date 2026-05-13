@@ -36,8 +36,8 @@ import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
 import {MenuTabs} from '@/layout/MenuTabs';
 import {ConsoleUtils} from '@/util/ConsoleUtils';
 import {StyleUtils} from '@/util/StyleUtils';
-import {intlLocales} from './intl-locales';
-import {useFieldStyle} from './style';
+import {intlLocales} from './locales';
+import {useFieldStyle} from './styles';
 
 
 export type IconOptionMode = 'icon' | 'text';

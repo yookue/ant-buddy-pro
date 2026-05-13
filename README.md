@@ -21,7 +21,7 @@
 
 🎮 Easy access, installation and use, fully integrated into Ant Design style
 
-✨ React components compatible with Ant Design. More components are coming soon
+✨ Full support for Ant Design v6 and Pro Components v3. Continuously improving
 
 ## Quickstart
 
