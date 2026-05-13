@@ -30,6 +30,7 @@ export {NotifyBadge, type NotifyBadgeProps, type NotifyDataItem} from './field/N
 export {PreviewImage, type PreviewImageProps} from './field/PreviewImage';
 export {RefreshImage, type RefreshImageProps, type RefreshImageRef} from './field/RefreshImage';
 export {RemoteField, type RemoteFieldProps, type RemoteFieldRef} from './field/RemoteField';
+export {SettingDrawer, type SettingDrawerProps, type SettingDrawerRef} from './field/SettingDrawer';
 export {ThumbToggle, type ThumbToggleProps, type ThumbToggleRef} from './field/ThumbToggle';
 export {ThumbTuple, type ThumbTupleProps, type ThumbTupleRef} from './field/ThumbTuple';
 export {TooltipField, type TooltipFieldProps} from './field/TooltipField';
