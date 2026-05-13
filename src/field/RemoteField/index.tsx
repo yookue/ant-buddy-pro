@@ -120,6 +120,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
 
     if (props?.request) {
         const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+
         React.useEffect(() => {
             if (autoStart) {
                 run(props?.params).then((data: any) => {
@@ -127,6 +128,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
                 }).catch(() => {});
             }
         }, []);
+
         React.useEffect(() => {
             run(props?.params).then((data: any) => {
                 setOutcome(data);

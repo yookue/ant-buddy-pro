@@ -16,9 +16,10 @@
 
 
 import React from 'react';
+import {TreeSelect} from 'antd';
 import {ProFormTreeSelect, type ProFormTreeSelectProps} from '@ant-design/pro-components';
-import {Form, TreeSelect} from 'antd';
 import {omit} from '@rc-component/util';
+import {RemoteField} from '@/field/RemoteField';
 import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
 import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
 import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
@@ -229,34 +230,43 @@ export abstract class SchemaRender {
             return undefined;
         }
         const fieldName = Array.isArray(schema.dataIndex) ? schema.dataIndex.join('.') : schema.dataIndex;
-        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue']);
+        const rawFieldProps = !schema.fieldProps ? {} : omit(schema.fieldProps , ['defaultValue', 'treeData']);
         const extRestProps = !props ? {} : omit(props, ['proField']);
-        if (props?.proField) {
-            return (
-                <ProFormTreeSelect
-                    name={fieldName}
-                    fieldProps={{
-                        defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
-                        ...rawFieldProps,
-                    }}
-                    proFieldProps={schema.proFieldProps}
-                    dependencies={schema.dependencies}
-                    valueEnum={schema.valueEnum}
-                    debounceTime={schema.debounceTime}
-                    params={schema.params}
-                    request={schema.request}
-                    {...extRestProps}
-                />
-            );
-        } else {
-            return (
-                <Form.Item name={fieldName} noStyle={true}>
-                    <TreeSelect
-                        defaultValue={schema.initialValue ?? schema.fieldProps?.defaultValue}
-                        {...rawFieldProps}
-                    />
-                </Form.Item>
-            );
-        }
+        return (
+            <RemoteField
+                request={schema.request}
+                params={schema.params}
+                debounceTime={schema.debounceTime}
+                render={(outcome: any) => {
+                    if (props?.proField) {
+                        return (
+                            <ProFormTreeSelect
+                                name={fieldName}
+                                fieldProps={{
+                                    defaultValue: schema.initialValue ?? schema.fieldProps?.defaultValue,
+                                    treeData: outcome,
+                                    ...rawFieldProps,
+                                }}
+                                proFieldProps={schema.proFieldProps}
+                                dependencies={schema.dependencies}
+                                valueEnum={schema.valueEnum}
+                                request={schema.request}
+                                debounceTime={schema.debounceTime}
+                                params={schema.params}
+                                {...extRestProps}
+                            />
+                        );
+                    } else {
+                        return (
+                            <TreeSelect
+                                defaultValue={schema.initialValue ?? schema.fieldProps?.defaultValue}
+                                treeData={outcome}
+                                {...rawFieldProps}
+                            />
+                        );
+                    }
+                }}
+            />
+        );
     }
 }
