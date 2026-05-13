@@ -15,9 +15,6 @@
  */
 
 
-import {omit} from '@rc-component/util';
-
-
 /**
  * Utilities for Ant Design datasets
  *
@@ -26,46 +23,17 @@ import {omit} from '@rc-component/util';
 // noinspection JSUnusedGlobalSymbols
 export abstract class DatasetUtils {
     /**
-     * Returns the data for ProComponents `ProDescriptions`
-     *
-     * @param income the income data (especially server response)
-     */
-    public static echoProDescriptions(income?: Record<string, any>): Record<string, any> {
-        const restProps = !income ? {} : omit(income, ['success', 'data']);
-        return {
-            success: income?.success || (income?.status === 200),
-            data: income?.data || {},
-            ...restProps,
-        };
-    }
-
-    /**
-     * Returns the data for ProComponents `ProList`
-     *
-     * @param income the income data (especially server response)
-     */
-    public static echoProList(income?: Record<string, any>): Record<string, any> {
-        const restProps = !income ? {} : omit(income, ['success', 'data', 'total']);
-        return {
-            success: income?.success || (income?.status === 200),
-            data: income?.data?.recordsDetails || [],
-            total: income?.data?.recordsTotal || 0,
-            ...restProps,
-        };
-    }
-
-    /**
      * Returns the data for ProComponents `ProTable`
      *
      * @param income the income data (especially server response)
+     *
+     * @reference "https://pro-components.antdigital.dev/components/table#request"
      */
     public static echoProTable(income?: Record<string, any>): Record<string, any> {
-        const restProps = !income ? {} : omit(income, ['success', 'data', 'total']);
         return {
-            success: income?.success || (income?.status === 200),
-            data: income?.data?.recordsDetails || [],
-            total: income?.data?.recordsTotal || 0,
-            ...restProps,
+            success: income?.data?.success || income?.success || (income?.status === 200),
+            data: income?.data?.data,
+            total: income?.data?.total,
         };
     }
 }
