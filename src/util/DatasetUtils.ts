@@ -23,6 +23,31 @@
 // noinspection JSUnusedGlobalSymbols
 export abstract class DatasetUtils {
     /**
+     * Returns the data for ProComponents `ProDescriptions`
+     *
+     * @param income the income data (especially server response)
+     *
+     * @reference "https://pro-components.antdigital.dev/components/descriptions#api"
+     */
+    public static echoProDescriptions(income?: Record<string, any>): Record<string, any> {
+        return {
+            success: income?.data?.success || income?.success || (income?.status === 200),
+            data: income?.data ?? {}
+        };
+    }
+
+    /**
+     * Returns the data for ProComponents `ProList`
+     *
+     * @param income the income data (especially server response)
+     *
+     * @reference "https://pro-components.antdigital.dev/components/list#api"
+     */
+    public static echoProList(income?: Record<string, any>): Record<string, any> {
+        return DatasetUtils.echoProTable(income);
+    }
+
+    /**
      * Returns the data for ProComponents `ProTable`
      *
      * @param income the income data (especially server response)
@@ -32,7 +57,7 @@ export abstract class DatasetUtils {
     public static echoProTable(income?: Record<string, any>): Record<string, any> {
         return {
             success: income?.data?.success || income?.success || (income?.status === 200),
-            data: income?.data?.data,
+            data: income?.data?.data ?? [],
             total: income?.data?.total,
         };
     }
