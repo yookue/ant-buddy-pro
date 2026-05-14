@@ -147,7 +147,6 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
 
     ConsoleUtils.warn(count >= 0, true, 'CountField', `Prop 'count' must be equal or greater than 0`);
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const [counting, setCounting] = React.useState<number>(count);
     const fieldStyle = useFieldStyle(clazzPrefix, configContext.iconPrefixCls);
 
@@ -196,7 +195,6 @@ export const CountField: React.ForwardRefExoticComponent<CountFieldProps & React
 
     return (
         <div
-            ref={fieldRef}
             className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
             style={props?.containerStyle}
         >

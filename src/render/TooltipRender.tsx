@@ -39,25 +39,17 @@ export abstract class TooltipRender {
      * @returns the rendered tooltip for the given children
      */
     public static renderTooltip = (tooltipCtrl?: boolean, tooltipProps?: TooltipProps, children?: React.ReactNode, wrapperClazz?: string, wrapperStyle?: React.CSSProperties): React.ReactNode => {
+        const innerDom = (
+            <span className={wrapperClazz} style={wrapperStyle} title={tooltipCtrl ? undefined : NodeUtils.toString(tooltipProps?.title)}>
+                {children}
+            </span>
+        );
         if (!tooltipCtrl) {
-            return (
-                <span className={wrapperClazz} style={wrapperStyle} title={NodeUtils.toString(tooltipProps?.title)}>
-                    {children}
-                </span>
-            );
-        }
-        if (!wrapperClazz && !wrapperStyle) {
-            return (
-                <Tooltip {...tooltipProps}>
-                    {children}
-                </Tooltip>
-            );
+            return innerDom;
         }
         return (
             <Tooltip {...tooltipProps}>
-                <span className={wrapperClazz} style={wrapperStyle}>
-                    {children}
-                </span>
+                {innerDom}
             </Tooltip>
         );
     }

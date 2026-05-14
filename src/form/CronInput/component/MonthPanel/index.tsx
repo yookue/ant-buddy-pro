@@ -202,7 +202,6 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
         locale = intlType.locale,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
     const [showAlias, setShowAlias] = React.useState<boolean>(props?.defaultShowAlias ?? false);
     // noinspection DuplicatedCode
@@ -299,7 +298,10 @@ export const MonthPanel: React.ForwardRefExoticComponent<MonthPanelProps & React
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             <BadgeRibbon
                 text={!allowAlias ? undefined : (
                     <Switch

@@ -293,7 +293,6 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
         locale = intlType.locale,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
     const [showAlias, setShowAlias] = React.useState<boolean>(defaultShowAlias);
     // noinspection DuplicatedCode
@@ -434,7 +433,10 @@ export const WeekPanel: React.ForwardRefExoticComponent<WeekPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             <BadgeRibbon
                 text={!allowAlias ? undefined : (
                     <Switch

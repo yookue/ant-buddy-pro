@@ -10,7 +10,6 @@ SettingDrawer is a component that wraps pro-components SettingDrawer with a cust
 
 **Core Design Principles**:
 - ✅ **Full Reuse** - Inherits all properties and features from pro-components SettingDrawer
-- ✅ **Minimal Extension** - Only adds 2 new properties: `clazzPrefix` and `triggerDom`
 - ✅ **Hide Default Button** - Automatically hides the default settings button from pro-components
 - ✅ **Complete Features** - All native features remain intact: theme configuration, layout switching, dark mode, etc.
 
@@ -26,12 +25,18 @@ import {SettingDrawer} from '@unikue/ant-buddy-pro';
 
 ## Properties
 
-SettingDrawer inherits all properties from pro-components SettingDrawer and adds 2 new properties:
+SettingDrawer inherits all properties from pro-components SettingDrawer and adds these new properties:
 
-| Property    | Description                       | Type              | Default                                   |
-|-------------|-----------------------------------|-------------------|-------------------------------------------|
-| clazzPrefix | CSS class prefix of the component | `string`          | `'abp-setting-drawer'`                    |
-| triggerDom  | Custom trigger DOM element        | `React.ReactNode` | `<SkinOutlined style={{fontSize: 16}} />` |
+| Property       | Description                               | Type                          | Default                                   |
+|----------------|-------------------------------------------|-------------------------------|-------------------------------------------|
+| clazzPrefix    | CSS class prefix of the component         | `string`                      | `'abp-setting-drawer'`                    |
+| containerClazz | The CSS class name of the container span  | `string`                      | -                                         |
+| containerStyle | The CSS style of the container span       | `React.CSSProperties`         | -                                         |
+| triggerDom     | Custom trigger DOM element                | `React.ReactNode`             | `<SkinOutlined style={{fontSize: 16}} />` |
+| tooltipCtrl    | Whether to use Tooltip                    | `boolean`                     | -                                         |
+| tooltipProps   | The props of Antd Tooltip                 | `Omit<TooltipProps, 'title'>` | -                                         |
+| locale         | The locale of the component, e.g. 'en_US' | `string`                      | -                                         |
+| localeProps    | The props of locale                       | `IntlLocaleProps`             | -                                         |
 
 In addition, it supports all other properties of pro-components SettingDrawer, such as:
 - `settings` - Current settings

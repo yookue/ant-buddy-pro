@@ -85,7 +85,6 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
 
     const clazzPrefix = props?.clazzPrefix ?? 'abp-thumb-tuple';
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const thumbLikeRef = React.useRef<ThumbToggleRef>(null);
     const thumbDislikeRef = React.useRef<ThumbToggleRef>(null);
     const fieldStyle = useFieldStyle(clazzPrefix);
@@ -106,7 +105,6 @@ export const ThumbTuple: React.ForwardRefExoticComponent<ThumbTupleProps & React
 
     return (
         <div
-            ref={fieldRef}
             className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
             style={props?.containerStyle}
         >

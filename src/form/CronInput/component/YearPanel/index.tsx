@@ -182,7 +182,6 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
     ConsoleUtils.warn(rangeFrom <= rangeTo, true, 'YearPanel', `Prop 'rangeFrom' must be less than prop 'rangeTo'`);
 
     // noinspection DuplicatedCode
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const compositionRef = React.useRef<boolean>(false);
     const [entryChoice, setEntryChoice] = React.useState<EntryChoiceType>();
     const [fromToStart, setFromToStart] = React.useState<RcValueType | null>();
@@ -257,7 +256,10 @@ export const YearPanel: React.ForwardRefExoticComponent<YearPanelProps & React.R
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}

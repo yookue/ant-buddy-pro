@@ -163,7 +163,7 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
         locale = intlType.locale,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
+    // noinspection DuplicatedCode
     const compositionRef = React.useRef<boolean>(false);
     const [entryChoice, setEntryChoice] = React.useState<EntryChoiceType>();
     const [fromToStart, setFromToStart] = React.useState<RcValueType | null>();
@@ -238,7 +238,10 @@ export const SecondPanel: React.ForwardRefExoticComponent<SecondPanelProps & Rea
 
     // noinspection DuplicatedCode
     return (
-        <div ref={fieldRef} className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)} style={props?.containerStyle}>
+        <div
+            className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
+            style={props?.containerStyle}
+        >
             <Form
                 name={`${clazzPrefix}-${entryContext?.fieldId ?? NanoidUtils.getPopularId()}`}
                 disabled={props?.disabled}

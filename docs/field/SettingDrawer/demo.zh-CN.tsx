@@ -16,11 +16,15 @@
 
 
 import React from 'react';
+import {Divider, Switch} from 'antd';
+import {SkinOutlined} from '@ant-design/icons';
 import {type ProSettings} from '@ant-design/pro-components';
-import {SettingDrawer, BorderBox} from '@unikue/ant-buddy-pro';
+import {SettingDrawer, BorderBox, LabelField} from '@unikue/ant-buddy-pro';
 
 
 export default () => {
+    const [tooltipCtrl, setTooltipCtrl] = React.useState<boolean>(false);
+
     const [settings, setSettings] = React.useState<ProSettings>({
         colorPrimary: '#1677ff',
         layout: 'side',
@@ -30,11 +34,31 @@ export default () => {
     });
 
     return (
-        <BorderBox boundShape='circle' borderAll={true} containerStyle={{padding: 8}}>
+        <>
+            <LabelField
+                label='Tooltip 控件'
+                field={(
+                    <Switch
+                        checkedChildren='是'
+                        unCheckedChildren='否'
+                        checked={tooltipCtrl}
+                        onChange={setTooltipCtrl}
+                    />
+                )}
+                layout='horizontal'
+            />
+            <Divider/>
             <SettingDrawer
+                triggerDom={(
+                    <BorderBox boundShape='circle' borderAll={true} containerStyle={{padding: 8}}>
+                        <SkinOutlined style={{fontSize: 16}}/>
+                    </BorderBox>
+                )}
                 settings={settings}
                 onSettingChange={setSettings}
+                tooltipCtrl={tooltipCtrl}
+                locale='zh_CN'
             />
-        </BorderBox>
+        </>
     );
 }

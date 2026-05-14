@@ -135,9 +135,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
         locale = intlType.locale,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const triggerForRef = React.useRef<Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : null) ?? document.documentElement);
-
     const [fullscreen, {enterFullscreen, exitFullscreen, toggleFullscreen}] = useFullscreen(triggerForRef.current);
 
     // noinspection JSUnusedGlobalSymbols
@@ -174,7 +172,6 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
 
     return (
         <div
-            ref={fieldRef}
             className={classnames(clazzPrefix, props?.containerClazz)}
             style={props?.containerStyle}
         >

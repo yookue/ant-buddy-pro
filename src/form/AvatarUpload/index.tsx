@@ -278,7 +278,6 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         locale = intlType.locale,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [imageSrc, setImageSrc] = React.useState<string | undefined>(props?.imageSrc);
     const [fallbackSrc, setFallbackSrc] = React.useState<string | undefined>(props?.fallbackSrc);
@@ -460,7 +459,6 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
 
     return (
         <div
-            ref={fieldRef}
             className={classnames(clazzPrefix, fieldStyle.hashId, props?.containerClazz)}
             style={props?.containerStyle}
         >

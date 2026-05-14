@@ -232,7 +232,6 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
 
     ConsoleUtils.warn(count >= 0, true, 'ThumbToggle', `Prop 'count' must be equal or greater than 0`);
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const countFieldRef = React.useRef<CountFieldRef>(null);
     const [checkable, setCheckable] = React.useState<boolean>(props?.checkable || false);
     const [checked, setChecked] = React.useState<boolean>(props?.checked || props?.defaultChecked || false);
@@ -332,7 +331,6 @@ export const ThumbToggle: React.ForwardRefExoticComponent<ThumbToggleProps & Rea
 
     return (
         <div
-            ref={fieldRef}
             className={classnames(clazzPrefix, fieldStyle.hashId, (!checkable ? undefined : `${clazzPrefix}-checkable`), `${clazzPrefix}-${checked ? 'checked' : 'unchecked'}`, props?.containerClazz)}
             style={props?.containerStyle}
         >

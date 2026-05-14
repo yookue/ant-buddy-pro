@@ -125,7 +125,6 @@ export const RefreshImage: React.ForwardRefExoticComponent<RefreshImageProps & R
         locale = intlType.locale,
     } = props ?? {};
 
-    const fieldRef = React.useRef<HTMLDivElement>(null);
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const [imageSrc, setImageSrc] = React.useState<string>();
     const [imageFallback, setImageFallback] = React.useState<string>();
@@ -156,7 +155,6 @@ export const RefreshImage: React.ForwardRefExoticComponent<RefreshImageProps & R
 
     return (
         <div
-            ref={fieldRef}
             className={classnames(clazzPrefix, fieldStyle.hashId, (!handCursor ? undefined : `${clazzPrefix}-hand-cursor`), props?.containerClazz)}
             style={props?.containerStyle}
         >
