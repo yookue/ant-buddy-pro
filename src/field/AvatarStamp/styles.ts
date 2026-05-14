@@ -26,6 +26,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             display: 'inline-block',
             position: 'relative',
             overflow: 'hidden',
+
             [`&-addon`]: {
                 display: 'inline-block',
                 position: 'absolute',

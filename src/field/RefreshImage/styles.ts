@@ -24,6 +24,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             display: 'inline-block',
+
             [`&&-hand-cursor`]: {
                 cursor: 'pointer',
             }

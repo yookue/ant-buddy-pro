@@ -25,8 +25,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
         [`${token.componentCls}`]: {
             position: 'relative',
             overflow: 'hidden',
+
             [`&-field`]: {
                 overflow: 'hidden',
+
                 [`&::before`]: {
                     borderRadius: token.borderRadius,
                     borderStyle: 'solid',
@@ -36,6 +38,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     height: 0,
                 }
             },
+
             [`&-addon`]: {
                 display: 'flex',
                 position: 'absolute',

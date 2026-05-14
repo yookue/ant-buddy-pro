@@ -27,15 +27,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             flexFlow: 'column wrap',
             height: '100vh',
             overflow: 'auto',
+
             [`&-vessel`]: {
                 display: 'flex',
                 flexFlow: 'row wrap',
                 height: '100vh',
             },
+
             [`&-introduction`]: {
                 display: 'flex',
                 flex: 1,
             },
+
             [`&-interaction`]: {
                 display: 'flex',
                 flex: 1,
@@ -43,6 +46,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 maxWidth: 520,
                 backgroundColor: token.colorBgContainer,
             },
+
             [`&&-interchange`]: {
                 display: 'flex',
                 flex: 1,

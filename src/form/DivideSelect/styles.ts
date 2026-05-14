@@ -27,26 +27,31 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 display: 'flex',
                 flexFlow: 'row nowrap',
             },
+
             [`${token.componentCls}-before-prior`]: {
                 [`${token.componentCls}-option-before`]: {
                     flex: 1,
                     paddingRight: token.paddingXXS,
                 },
+
                 [`${token.componentCls}-option-after`]: {
                     flex: 'none',
                     width: 'fit-content',
                 }
             },
+
             [`${token.componentCls}-after-prior`]: {
                 [`${token.componentCls}-option-before`]: {
                     flex: 'none',
                     width: 'fit-content',
                 },
+
                 [`${token.componentCls}-option-after`]: {
                     flex: 1,
                     paddingLeft: token.paddingXXS,
                 }
             },
+
             [`${token.antCls}-select-item-option-selected ${token.componentCls}-option span:last-of-type`]: {
                 paddingRight: token.paddingXXS,
             }

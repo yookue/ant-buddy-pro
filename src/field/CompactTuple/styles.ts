@@ -27,62 +27,78 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&&-width-block`]: {
                 width: '100%',
             },
+
             [`&:not(&-readonly-borderless)`]: {
                 [`${token.componentCls}-field-border ${token.antCls}-form-item ${token.antCls}-form-item-control, ${token.componentCls}-addon-border ${token.antCls}-form-item ${token.antCls}-form-item-control`]: {
                     border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
+
                     [`&:hover`]: {
                         border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorPrimary}`,
                     },
+
                     [`&:focus`]: {
                         boxShadow: token.boxShadow,
                         outline: 'none',
                     }
                 }
             },
+
             [`&&-field-prior ${token.antCls}-space-compact`]: {
                 display: 'flex',
+
                 [`${token.componentCls}-field`]: {
                     display: 'flex',
                     flex: 1,
                 },
+
                 [`${token.componentCls}-addon`]: {
                     display: 'flex',
                     flex: 'none',
                     width: 'fit-content',
                 }
             },
+
             [`&&-addon-prior ${token.antCls}-space-compact`]: {
                 display: 'flex',
+
                 [`${token.componentCls}-field`]: {
                     display: 'flex',
                     flex: 'none',
                     width: 'fit-content',
                 },
+
                 [`${token.componentCls}-addon`]: {
                     display: 'flex',
                     flex: 1,
                 }
             },
+
             [`&&-addon-after &-addon`]: {
                 marginLeft: -1,
+
                 [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
                     borderTopRightRadius: token.borderRadius,
                     borderBottomRightRadius: token.borderRadius,
+
                     [`&:hover`]: {
                         zIndex: token.zIndexBase + 10,
                     }
                 }
             },
+
             [`&&-addon-before &-addon`]: {
                 marginRight: -1,
+
                 [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control`]: {
                     borderTopLeftRadius: token.borderRadius,
                     borderBottomLeftRadius: token.borderRadius,
+
                     [`&:hover`]: {
                         zIndex: token.zIndexBase + 10,
                     }
                 }
             },
+
             [`&&-field-prior, &&-addon-prior`]: {
                 [`${token.componentCls}-field, ${token.componentCls}-addon`]: {
                     [`> ${token.antCls}-form-item`]: {
@@ -90,6 +106,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     }
                 }
             },
+
             [`&-field, &-addon`]: {
                 [`> ${token.antCls}-form-item > ${token.antCls}-form-item-row > ${token.antCls}-form-item-control > ${token.antCls}-form-item-control-input`]: {
                     minHeight: 30,

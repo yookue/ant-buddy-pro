@@ -27,14 +27,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             borderRadius: token.borderRadiusLG,
             boxShadow: token.boxShadow,
             zIndex: token.zIndexPopupBase,
+
             [`${token.antCls}-form ${token.antCls}-space-item`]: {
                 fontSize: token.fontSize - 1,
+
                 [`label`]: {
                     fontSize: token.fontSize - 1,
                 }
             },
+
             [`${token.componentCls}-tabs-extra`]: {
                 margin: `${token.marginXXS}px ${token.marginXS}px`,
+
                 [`${token.componentCls}-ok-echo`]: {
                     marginTop: token.marginXXS,
                     minWidth: 44,
@@ -42,31 +46,38 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     fontSize: token.fontSizeSM,
                 }
             },
+
             [`> ${token.subComponentCls}`]: {
                 [`&${token.subComponentCls}-top > ${token.subComponentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
                     borderTopColor: `${token.colorSplit} !important`,
                     borderTopRightRadius: '0 !important',
                 },
+
                 [`&${token.subComponentCls}-bottom > ${token.subComponentCls}-content-border > ${token.antCls}-tabs-content-holder`]: {
                     borderBottomColor: `${token.colorSplit} !important`,
                     borderBottomRightRadius: '0 !important',
                 }
             }
         },
+
         [`${token.componentCls}-entry-readonly`]: {
             display: 'flex',
             flexFlow: 'row nowrap',
             alignItems: 'center',
+
             [`&-before ${token.componentCls}-entry-readonly-content`]: {
                 paddingLeft: token.paddingXS,
             },
+
             [`&-after ${token.componentCls}-entry-readonly-content`]: {
                 paddingRight: token.paddingXS,
             },
+
             [`&-content`]: {
                 display: 'flex',
                 flexGrow: 1,
             },
+
             [`&-addon`]: {
                 flex: 'none',
                 width: 'fit-content',

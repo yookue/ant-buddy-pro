@@ -26,10 +26,12 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&-action`]: {
                 [`&:not(&-disabled)`]: {
                     cursor: 'pointer',
+
                     [`&:hover`]: {
                         color: token.colorPrimary,
                     }
                 },
+
                 [`&&-disabled`]: {
                     pointerEvents: 'none',
                     color: token.colorTextDisabled,

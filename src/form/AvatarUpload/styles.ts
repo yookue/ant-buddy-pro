@@ -26,12 +26,14 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&-action-circle ${token.antCls}-upload-select`]: {
                 borderRadius: '50% !important',
                 overflow: 'hidden',
+
                 [`${token.componentCls}-upload-space`]: {
                     width: '100%',
                     height: '100%',
                     justifyContent: 'center',
                 }
             },
+
             [`${token.antCls}-image`]: {
                 display: 'block',
             }

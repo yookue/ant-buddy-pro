@@ -28,12 +28,15 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             flexFlow: 'row nowrap',
             alignItems: 'center',
             borderRadius: token.borderRadius,
+
             [`&&-bound-border`]: {
                 border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
+
             [`&&-width-block`]: {
                 width: '100%',
             },
+
             [`&-ornament`]: {
                 display: 'flex',
                 flex: 'none',
@@ -41,68 +44,86 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 alignItems: 'center',
                 justifyContent: 'center',
             },
+
             [`&-ornament-before &-ornament`]: {
                 marginRight: token.marginXXS,
                 borderTopLeftRadius: token.borderRadius,
                 borderBottomLeftRadius: token.borderRadius,
             },
+
             [`&-ornament-after &-ornament`]: {
                 marginLeft: token.marginXXS,
                 borderTopRightRadius: token.borderRadius,
                 borderBottomRightRadius: token.borderRadius,
             },
+
             [`&-content`]: {
                 flex: 1,
                 textOverflow: 'ellipsis',
             },
+
             [`&&-default, &&-success, &&-info, &&-warn, &&-error, &&-classic`]: {
                 [`${token.componentCls}-ornament`]: {
                     fontWeight: 300,
                     fontSize: token.fontSize + 1,
                     padding: `${token.paddingXXS}px ${token.paddingMD}px`,
                 },
+
                 [`&${token.componentCls}-ornament-before ${token.componentCls}-content, &${token.componentCls}-ornament-after ${token.componentCls}-content`]: {
                     alignItems: 'center',
                     padding: `0 ${token.paddingSM}px`,
                 },
+
                 [`&:not(${token.componentCls}-ornament-before):not(${token.componentCls}-ornament-after) ${token.componentCls}-content`]: {
                     padding: `5px ${token.paddingSM}px`,
                 }
             },
+
             [`&&-default`]: {
                 backgroundColor: token.colorFillAlter,
+
                 [`${token.componentCls}-ornament`]: {
                     backgroundColor: token.colorBgContainerDisabled,
                 }
             },
+
             [`&&-success`]: {
                 backgroundColor: token.colorSuccessBg,
+
                 [`${token.componentCls}-ornament`]: {
                     backgroundColor: token.green2,
                 }
             },
+
             [`&&-info`]: {
                 backgroundColor: token.colorInfoBg,
+
                 [`${token.componentCls}-ornament`]: {
                     backgroundColor: token.blue2,
                 }
             },
+
             [`&&-warn`]: {
                 backgroundColor: token.colorWarningBg,
+
                 [`${token.componentCls}-ornament`]: {
                     backgroundColor: token.orange2,
                 }
             },
+
             [`&&-error`]: {
                 backgroundColor: token.colorErrorBg,
+
                 [`${token.componentCls}-ornament`]: {
                     backgroundColor: token.red2,
                 }
             },
+
             [`&&-classic`]: {
                 [`&${token.componentCls}-ornament-before ${token.componentCls}-ornament`]: {
                     borderRight: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 },
+
                 [`&${token.componentCls}-ornament-after ${token.componentCls}-ornament`]: {
                     borderLeft: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 }

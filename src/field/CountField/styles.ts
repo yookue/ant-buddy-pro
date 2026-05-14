@@ -29,6 +29,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 minHeight: 15,
                 verticalAlign: 'middle',
             },
+
             [`${token.antCls}-badge ${token.antCls}-badge-count`]: {
                 background: 'inherit',
                 boxShadow: 'inherit',

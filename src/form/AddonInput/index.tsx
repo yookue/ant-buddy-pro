@@ -146,7 +146,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     if (proField) {
         const restProps = !props ? {} : omit(props, ['className', 'name', 'allowClear', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'cursorBefore', 'cursorAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
         return (
-            <div className={classnames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
+            <div className={classnames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz)}>
                 <ProForm.Item name={fieldName} {...restProps}>
                     <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                         {!!addonBeforeDom && (
@@ -156,7 +156,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         )}
                         <Input
                             key={`${fieldName}-${entryImmutable}`}
-                            className={`${clazzPrefix}-input`}
+                            className={classnames (`${clazzPrefix}-input`, props?.fieldProps?.className)}
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                             name={fieldName}
                             value={entryReadMode ? (inputValue || props?.proFieldProps?.emptyText || '-') :inputValue}
@@ -192,7 +192,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                     )}
                     <Input
                         key={`${fieldName}-${entryImmutable}`}
-                        className={`${clazzPrefix}-input`}
+                        className={classnames (`${clazzPrefix}-input`, props?.fieldProps?.className)}
                         name={props?.name ?? props?.fieldProps?.name}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
                         value={entryReadMode ? (inputValue || props?.proFieldProps?.emptyText || '-') :inputValue}

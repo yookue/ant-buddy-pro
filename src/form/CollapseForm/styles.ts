@@ -25,14 +25,17 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
         [`${token.componentCls}`]: {
             [`&-entry`]: {
                 display: 'inline-block',
+
                 [`&&-cursor`]: {
                     cursor: 'pointer',
                 }
             },
+
             [`&-content`]: {
                 [`&&-open`]: {
                     display: 'block',
                 },
+
                 [`&:not(&-open)`]: {
                     display: 'none',
                 }

@@ -29,47 +29,59 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             borderRadius: token.borderRadius,
             padding: `${token.paddingXS}px ${token.paddingMD}px`,
             alignItems: 'center',
+
             [`&&-bound-border`]: {
                 border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
+
             [`&&-width-block`]: {
                 width: '100%',
             },
+
             [`&-ornament`]: {
                 display: 'flex',
                 flex: 'none',
                 width: 22,
                 height: 22,
             },
+
             [`&-ornament-before`]: {
                 marginRight: token.paddingXXS,
                 justifyContent: 'left',
             },
+
             [`&-ornament-after`]: {
                 marginLeft: token.paddingXXS,
                 justifyContent: 'right',
             },
+
             [`&-content`]: {
                 flex: 1,
                 textOverflow: 'ellipsis',
             },
+
             [`&&-default, &&-success, &&-info, &&-warn, &&-error, &&-classic`]: {
                 [`${token.componentCls}-content`]: {
                     fontWeight: 500,
                 }
             },
+
             [`&&-default`]: {
                 backgroundColor: token.colorFillAlter,
             },
+
             [`&&-success`]: {
                 backgroundColor: token.colorSuccessBg,
             },
+
             [`&&-info`]: {
                 backgroundColor: token.colorInfoBg,
             },
+
             [`&&-warn`]: {
                 backgroundColor: token.colorWarningBg,
             },
+
             [`&&-error`]: {
                 backgroundColor: token.colorErrorBg,
             }

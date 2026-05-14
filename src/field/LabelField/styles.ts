@@ -26,47 +26,58 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&&-width-block > ${token.antCls}-space`]: {
                 width: '100%',
             },
+
             [`&&-required &-label::before`]: {
                 display: 'inline-block',
                 marginRight: token.marginXXS,
                 color: token.colorErrorText,
                 content: '"*"',
             },
+
             [`&&-label-prior &-space-horizontal`]: {
                 display: 'flex',
+
                 [`${token.antCls}-space-item:first-of-type`]: {
                     display: 'flex',
                     flex: 1,
+
                     [`${token.componentCls}-label`]: {
                         display: 'flex',
                         flex: 1,
                     }
                 },
+
                 [`${token.antCls}-space-item:last-of-type`]: {
                     display: 'flex',
                     flex: 'none',
                     width: 'fit-content',
                 }
             },
+
             [`&&-field-prior &-space-horizontal`]: {
                 display: 'flex',
+
                 [`${token.antCls}-space-item:first-of-type`]: {
                     display: 'flex',
                     flex: 'none',
                     width: 'fit-content',
                 },
+
                 [`${token.antCls}-space-item:last-of-type`]: {
                     display: 'flex',
                     flex: 1,
+
                     [`${token.componentCls}-field`]: {
                         display: 'flex',
                         flex: 1,
                     }
                 }
             },
+
             [`&-space-vertical`]: {
                 display: 'flex',
                 flex: 1,
+
                 [`${token.antCls}-space-item`]: {
                     [`${token.componentCls}-label, ${token.componentCls}-field`]: {
                         display: 'flex',
@@ -74,6 +85,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     }
                 }
             },
+
             [`&-tooltip`]: {
                 marginLeft: token.marginXXS,
                 color: token.colorTextTertiary,

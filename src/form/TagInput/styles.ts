@@ -24,30 +24,38 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}`]: {
             display: 'flex',
+
             [`&-fulfil-addable`]: {
                 marginRight: token.marginXS,
             },
+
             [`&-fulfil-span`]: {
                 display: 'inline-block',
             },
+
             [`&-action`]: {
                 [`${token.componentCls}-action-input`]: {
                     height: 20,
                     marginTop: 1,
                 },
+
                 [`${token.componentCls}-action-tag`]: {
                     cursor: 'pointer',
                 }
             },
+
             [`&&-pro-field`]: {
                 minHeight: 46,
+
                 [`${token.antCls}-form-item-control-input`]: {
                     alignItems: 'unset !important',
+
                     [`${token.antCls}-input-affix-wrapper-sm ${token.antCls}-input-sm`]: {
                         fontSize: token.fontSizeSM,
                     }
                 }
             },
+
             [`&:not(&-pro-field)`]: {
                 [`${token.anrCls}-input-sm`]: {
                     fontSize: token.fontSizeSM,
@@ -55,6 +63,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 }
             }
         },
+
         [`${token.componentCls}-compact-margin`]: {
             marginBottom: 0,
         }

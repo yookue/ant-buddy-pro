@@ -25,11 +25,13 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
         [`${token.componentCls}-container`]: {
             display: 'flex',
             alignItems: 'center',
+
             [`${token.componentCls}`]: {
                 flex: 1,
                 transition: 'width .3s',
                 marginRight: token.marginXS,
             },
+
             [`${token.componentCls}-action`]: {
                 display: 'block',
             }

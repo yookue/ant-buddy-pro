@@ -25,14 +25,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
     return {
         [`${token.componentCls}-popup`]: {
             padding: 0,
+
             [`&-tabs`]: {
                 [`> ${token.antCls}-tabs-nav > ${token.antCls}-tabs-extra-content`]: {
                     maxWidth: 200,
                     margin: token.marginXXS,
+
                     [`> ${token.antCls}-input-search > ${token.antCls}-input-wrapper > ${token.antCls}-input-affix-wrapper`]: {
                         height: 24,
+
                         [`&${token.antCls}-input-affix-wrapper-status-error`]: {
                             borderColor: `${token.colorBorder} !important`,
+
                             [`&:not(${token.antCls}-input-affix-wrapper-focused):hover`]: {
                                 borderColor: `${token.colorPrimaryBorderHover} !important`,
                             }
@@ -40,18 +44,22 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     }
                 }
             },
+
             [`${token.componentCls}-scene-tab`]: {
                 padding: '6px 0 6px 8px',
+
                 [`&-content`]: {
                     [`${token.componentCls}-scroll-area`]: {
                         width: '100%',
                         minHeight: '48px !important',
                     },
+
                     [`${token.componentCls}-search-mismatch`]: {
                         width: '100%',
                     }
                 }
             },
+
             [`${token.componentCls}-icon-wrapper`]: {
                 position: 'relative',
                 border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
@@ -59,15 +67,18 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 cursor: 'pointer',
                 margin: 6,
                 transition: 'transform 0.3s ease',
+
                 [`&:hover`]: {
                     border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorPrimaryBorderHover}`,
                     backgroundColor: token.controlItemBgActive,
                     transition: 'transform 0.8s ease',
                 }
             },
+
             [`${token.componentCls}-icon-selected`]: {
                 border: `${unit(token.lineWidth)} ${token.lineType} ${token.blue4}`,
                 backgroundColor: token.controlItemBgActive,
+
                 [`&::before`]: {
                     content: '""',
                     position: 'absolute',
@@ -79,6 +90,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     borderLeft: `16px ${token.lineType} transparent`,
                     borderRadius: token.borderRadiusSM,
                 },
+
                 [`&::after`]: {
                     content: '""',
                     position: 'absolute',
@@ -91,26 +103,32 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     transform: 'rotate(45deg)',
                 }
             },
+
             [`${token.componentCls}-icon-option`]: {
                 width: 48,
                 height: 48,
                 fontSize: token.fontSizeLG + 1,
                 display: 'flex',
                 justifyContent: 'center',
+
                 [`&:hover`]: {
                     transform: 'scale(1.2)',
                 }
             },
+
             [`${token.subComponentCls}`]: {
                 [`&${token.subComponentCls}-top > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
                     borderTopRightRadius: '0 !important',
                 },
+
                 [`&${token.subComponentCls}-top-end > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
                     borderTopLeftRadius: '0 !important',
                 },
+
                 [`&${token.subComponentCls}-bottom > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
                     borderBottomRightRadius: '0 !important',
                 },
+
                 [`&${token.subComponentCls}-bottom-end > ${token.antCls}-tabs > ${token.antCls}-tabs-content-holder`]: {
                     borderBottomLeftRadius: '0 !important',
                 }

@@ -545,7 +545,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         addonAfter={afterDom}
                         {...restProps}
                         fieldProps={{
-                            className: classnames(`${clazzPrefix}-locale-item`, fieldProps?.className),
+                            className: classnames(`${clazzPrefix}-locale-input`, fieldProps?.className),
                             placeholder: StringUtils.join(itemProp?.placeholder) || fieldProps?.placeholder || props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                             autoComplete: 'off',
                             allowClear: fieldProps?.allowClear || props?.popupShareProps?.allowClear || (popupCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),
@@ -597,7 +597,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                         addonBefore={beforeDom}
                         addonAfter={afterDom}
                         fieldProps={{
-                            className: `${clazzPrefix}-locale-item`,
+                            className: `${clazzPrefix}-locale-input`,
                             placeholder: props?.popupShareProps?.placeholder || (popupCloneProps.placeholder ? (StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder) : undefined),
                             autoComplete: 'off',
                             allowClear: props?.popupShareProps?.allowClear || (popupCloneProps.allowClear ? props?.fieldProps?.allowClear : undefined),

@@ -26,8 +26,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&-content > ${token.antCls}-ribbon-text`]: {
                 fontSize: token.fontSizeSM,
             },
+
             [`&&-transparent > ${token.antCls}-ribbon-wrapper > &-content`]: {
                 background: 'transparent',
+
                 [`${token.antCls}-ribbon-corner`]: {
                     borderColor: 'transparent',
                 }

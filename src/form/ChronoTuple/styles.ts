@@ -27,22 +27,27 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 width: '100%',
                 display: 'inline-block',
                 flexFlow: 'row nowrap',
+
                 [`${token.antCls}-space-compact`]: {
                     display: 'flex',
+
                     [`${token.antCls}-form-item:first-of-type`]: {
                         flex: 1,
                     },
+
                     [`${token.antCls}-form-item:last-of-type`]: {
                         flex: 'none',
                         width: 'fit-content',
                     }
                 }
             },
+
             [`> ${token.antCls}-space-compact`]: {
                 [`${token.antCls}-form-item:first-of-type`]: {
                     marginRight: -1,
                 }
             },
+
             [`${token.subComponentCls}`]: {
                 [`&${token.antCls}-select:not(${token.antCls}-select-customize-input) ${token.antCls}-select-selector`]: {
                     color: token.colorTextSecondary,

@@ -28,22 +28,26 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             borderRadius: token.borderRadiusLG,
             boxShadow: token.boxShadow,
             zIndex: token.zIndexPopupBase,
+
             [`${token.componentCls}-popup-list`]: {
                 [`${token.componentCls}-popup-list-item`]: {
                     [`&:hover`]: {
                         backgroundColor: token.controlItemBgHover,
                     },
+
                     [`> ${token.antCls}-form-item`]: {
                         width: '100%',
                     },
+
                     [`${token.componentCls}-locale-tag`]: {
                         color: token.colorTextSecondary,
                         fontSize: token.fontSize - 1,
                     }
                 }
             },
-            [`&${token.componentCls}-popup-immutable ${token.componentCls}-popup-list ${token.componentCls}-popup-list-item ${token.componentCls}-pro-field > ${token.antCls}-form-item`]: {
-                marginBottom: 0,
+
+            [`&${token.componentCls}-popup-immutable ${token.componentCls}-popup-list ${token.componentCls}-popup-list-item ${token.antCls}-form-item`]: {
+                marginBottom: `0 !important`,
 
                 [`${token.componentCls}-locale-tag`]: {
                     backgroundColor: token.controlItemBgHover,
@@ -53,27 +57,32 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     padding: `${token.paddingXXS}px ${token.paddingXS}px`,
                 },
 
-                [`${token.componentCls}-input`]: {
-                    cursor: 'default',
+                [`${token.componentCls}-locale-input`]: {
+                    cursor: 'default !important',
                 },
 
                 [`${token.componentCls}-locale-action`]: {
                     display: 'none'
                 }
             },
+
             [`${token.componentCls}-locale-item-readonly`]: {
                 display: 'flex',
                 flexFlow: 'row nowrap',
                 alignItems: 'center',
+
                 [`&-before ${token.componentCls}-locale-item-readonly-content`]: {
                     paddingLeft: token.paddingXS,
                 },
+
                 [`&-after ${token.componentCls}-locale-item-readonly-content`]: {
                     paddingRight: token.paddingXS,
                 },
+
                 [`&-content`]: {
                     flex: 1,
                 },
+
                 [`&-tag`]: {
                     flex: 'none',
                     width: 'fit-content',
@@ -85,31 +94,38 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     fontSize: token.fontSizeSM,
                 }
             },
+
             [`&${token.componentCls}-popup-pro-field:not(${token.componentCls}-popup-immutable)`]: {
                 [`${token.componentCls}-popup-list ${token.componentCls}-popup-list-item:first-of-type`]: {
                     paddingTop: token.paddingMD,
                 }
             },
+
             [`&:not(${token.componentCls}-popup-pro-field)`]: {
                 [`${token.componentCls}-popup-list ${token.componentCls}-popup-list-item:first-of-type`]: {
                     paddingTop: token.paddingXS,
                 }
             }
         },
+
         [`${token.componentCls}-entry-readonly`]: {
             display: 'flex',
             flexFlow: 'row nowrap',
             alignItems: 'center',
+
             [`&-before ${token.componentCls}-entry-readonly-content`]: {
                 paddingLeft: token.paddingXS,
             },
+
             [`&-after ${token.componentCls}-entry-readonly-content`]: {
                 paddingRight: token.paddingXS,
             },
+
             [`&-content`]: {
                 display: 'flex',
                 flexGrow: 1,
             },
+
             [`&-addon`]: {
                 flex: 'none',
                 width: 'fit-content',

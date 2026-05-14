@@ -26,6 +26,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&&-width-block`]: {
                 width: '100%',
             },
+
             [`&-progress`]: {
                 width: '100%',
                 textAlign: 'center',
@@ -38,8 +39,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     }
                 }
             },
+
             [`&-caption`]: {
                 width: '100%',
+
                 [`${token.antCls}-col`]: {
                     fontSize: token.fontSize - 1,
                     textAlign: 'center',

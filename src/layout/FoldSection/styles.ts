@@ -27,9 +27,11 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             display: 'flex',
             flexDirection: 'column',
             borderRadius: token.borderRadius,
+
             [`&&-bound-border`]: {
                 border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
             },
+
             [`&-header`]: {
                 display: 'flex',
                 flexFlow: 'row nowrap',
@@ -37,20 +39,24 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 borderTopLeftRadius: token.borderRadius,
                 borderTopRightRadius: token.borderRadius,
                 padding: `${token.paddingXS}px ${token.padding}px`,
+
                 [`&-ornament-before, &-ornament-after`]: {
                     display: 'flex',
                     flex: 'none',
                     width: 22,
                     height: 22,
                 },
+
                 [`&-ornament-before`]: {
                     marginRight: token.paddingXXS,
                     justifyContent: 'left',
                 },
+
                 [`&-ornament-after`]: {
                     marginLeft: token.marginXXS,
                     justifyContent: 'right',
                 },
+
                 [`&-collapse`]: {
                     display: 'flex',
                     flex: 'none',
@@ -58,6 +64,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                     width: 28,
                     height: 28,
                     justifyContent: 'center',
+
                     [`&:hover`]: {
                         backgroundColor: token.controlItemBgHover,
                         cursor: 'pointer',
@@ -65,54 +72,67 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                         transition: 'all 0.3s',
                     }
                 },
+
                 [`&-collapse-before`]: {
                     marginRight: token.marginXXS,
                 },
+
                 [`&-collapse-after`]: {
                     marginLeft: token.marginXXS,
                 },
+
                 [`&-content`]: {
                     flex: 1,
                     textOverflow: 'ellipsis',
                 }
             },
+
             [`&-panel`]: {
                 padding: token.paddingMD,
             },
+
             [`&-open &-panel`]: {
                 display: 'block',
             },
+
             [`&-close &-panel`]: {
                 display: 'none',
             },
+
             [`&&-default, &&-success, &&-info, &&-warn, &&-error, &&-classic`]: {
                 [`${token.componentCls}-header`]: {
                     fontWeight: 500,
                 },
+
                 [`${token.componentCls}-panel`]: {
                     borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
                 }
             },
+
             [`&&-default`]: {
                 [`${token.componentCls}-header`]: {
                     backgroundColor: token.colorFillAlter,
                 }
             },
+
             [`&&-success`]: {
                 [`${token.componentCls}-header`]: {
                     backgroundColor: token.colorSuccessBg,
                 }
             },
+
             [`&&-info`]: {
                 [`${token.componentCls}-header`]: {
                     backgroundColor: token.colorInfoBg,
                 }
             },
+
             [`&&-warn`]: {
                 [`${token.componentCls}-header`]: {
                     backgroundColor: token.colorWarningBg,
                 }
             },
+
             [`&&-error`]: {
                 [`${token.componentCls}-header`]: {
                     backgroundColor: token.colorErrorBg,

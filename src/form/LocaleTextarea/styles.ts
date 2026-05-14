@@ -57,6 +57,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
 
                 [`&${token.subComponentCls}-left ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     paddingLeft: 1,
+
                     [`${token.componentCls}, ${token.componentCls}-item`]: {
                         borderTopLeftRadius: 0,
                         borderBottomLeftRadius: 0,
@@ -65,6 +66,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
 
                 [`&${token.subComponentCls}-right ${token.antCls}-tabs-content > ${token.antCls}-tabs-tabpane`]: {
                     paddingRight: 1,
+
                     [`${token.componentCls}, ${token.componentCls}-item`]: {
                         borderTopRightRadius: 0,
                         borderBottomRightRadius: 0,

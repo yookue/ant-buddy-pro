@@ -26,6 +26,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
             [`&-checkable &-icon`]: {
                 cursor: 'pointer',
             },
+
             [`&:not(&-checkable) &-icon`]: {
                 cursor: 'not-allowed',
             }
