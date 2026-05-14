@@ -35,3 +35,11 @@ import {RefreshImage} from '@unikue/ant-buddy-pro';
 | localeProps    | 多語言屬性              | `IntlLocaleProps`                                                                                       | -                     |
 
 > 註：其他屬性繼承自 Ant Design 的 <a href="https://ant.design/components/image" target="_blank">Image</a> 組件。
+
+## 組件方法
+
+通過 `ref` 可以訪問以下方法：
+
+| 方法名     | 參數 | 描述    |
+|---------|----|-------|
+| refresh | 無  | 刷新圖片源 |

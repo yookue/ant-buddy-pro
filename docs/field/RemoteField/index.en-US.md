@@ -33,3 +33,13 @@ import {RemoteField} from '@unikue/ant-buddy-pro';
 | autoStart      | Whether auto start the fetching request          | `boolean`                                                              | `true`               |
 
 > Note: Other properties are inherited from Pro Components' ProFormFieldRemoteProps.
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method      | Parameters | Description                 |
+|-------------|------------|-----------------------------|
+| getOutcome  | None       | Get remote request outcome  |
+| isAutoStart | None       | Check if auto start enabled |
+| refresh     | None       | Refresh remote data         |

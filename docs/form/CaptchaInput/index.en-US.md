@@ -45,3 +45,14 @@ import {CaptchaInput} from '@unikue/ant-buddy-pro';
 | localeProps    | The props of locale                               | `IntlLocaleProps`                                                  | -                     |
 
 > Note: Other properties are inherited from ProFormCaptcha component.
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method     | Parameters | Description              |
+|------------|------------|--------------------------|
+| isLoading  | None       | Check if loading         |
+| isTiming   | None       | Check if timer running   |
+| startTimer | None       | Start the timer          |
+| stopTimer  | None       | Stop the timer           |

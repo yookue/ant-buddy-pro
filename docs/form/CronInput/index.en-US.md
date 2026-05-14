@@ -47,3 +47,14 @@ import {CronInput} from '@unikue/ant-buddy-pro';
 | allowOkEcho       | Whether to allow OK button to echo value               | `boolean`                                                         | -                      |
 
 > Note: Other properties are inherited from AddonInput component.
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method        | Parameters      | Description                    |
+|---------------|-----------------|--------------------------------|
+| isShowSecond  | None            | Check if second tab is shown   |
+| isShowYear    | None            | Check if year tab is shown     |
+| setShowSecond | show: boolean   | Set second tab visibility      |
+| setShowYear   | show: boolean   | Set year tab visibility        |

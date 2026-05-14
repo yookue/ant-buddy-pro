@@ -30,3 +30,12 @@ import {ThumbTuple} from '@unikue/ant-buddy-pro';
 | spaceProps        | The props of the space                  | `SpaceProps`                                    | -                   |
 | thumbLikeProps    | The props of liking                     | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                   |
 | thumbDislikeProps | The props of disliking                  | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                   |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method             | Parameters | Description                          |
+|--------------------|------------|--------------------------------------|
+| getThumbLikeRef    | None       | Get ref of like thumb component      |
+| getThumbDislikeRef | None       | Get ref of dislike thumb component   |

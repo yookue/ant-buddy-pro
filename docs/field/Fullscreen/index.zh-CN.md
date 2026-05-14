@@ -41,3 +41,14 @@ import {Fullscreen} from '@unikue/ant-buddy-pro';
 | tooltipProps   | Tooltip 属性          | `Omit<TooltipProps, 'title'>`                             | -                          |
 | locale         | 组件的语言, e.g. 'zh_CN' | `string`                                                  | -                          |
 | localeProps    | 多语言属性               | `IntlLocaleProps`                                         | -                          |
+
+## 组件方法
+
+通过 `ref` 可以访问以下方法：
+
+| 方法名            | 参数   | 描述      |
+|---------------|------|---------|
+| isFullscreen  | 无    | 检查是否处于全屏状态 |
+| enterFullscreen | 无  | 进入全屏    |
+| exitFullscreen | 无   | 退出全屏    |
+| toggleFullscreen | 无 | 切换全屏状态  |

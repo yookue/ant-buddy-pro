@@ -41,3 +41,14 @@ import {Fullscreen} from '@unikue/ant-buddy-pro';
 | tooltipProps   | The props of Antd Tooltip                         | `Omit<TooltipProps, 'title'>`                             | -                          |
 | locale         | The locale of the component, e.g. 'en_US'         | `string`                                                  | -                          |
 | localeProps    | The props of locale                               | `IntlLocaleProps`                                         | -                          |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method           | Parameters | Description              |
+|------------------|------------|--------------------------|
+| isFullscreen     | None       | Check if in fullscreen   |
+| enterFullscreen  | None       | Enter fullscreen mode    |
+| exitFullscreen   | None       | Exit fullscreen mode     |
+| toggleFullscreen | None       | Toggle fullscreen state  |

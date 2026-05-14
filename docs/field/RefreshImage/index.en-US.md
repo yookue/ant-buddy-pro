@@ -35,3 +35,11 @@ import {RefreshImage} from '@unikue/ant-buddy-pro';
 | localeProps    | The props of locale                               | `IntlLocaleProps`                                                                                       | -                     |
 
 > Note: Other properties are inherited from Ant Design's <a href="https://ant.design/components/image" target="_blank">Image</a> component.
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method  | Parameters | Description       |
+|---------|------------|-------------------|
+| refresh | None       | Refresh image src |

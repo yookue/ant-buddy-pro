@@ -41,3 +41,15 @@ import {AvatarUpload} from '@unikue/ant-buddy-pro';
 | onFallbackSrcChange | The callback function when fallback image changed | `(src?: string) => void`                                                                             | -                     |
 | locale              | The locale of the component                       | `string`                                                                                             | -                     |
 | localeProps         | The props of locale                               | `IntlLocaleProps`                                                                                    | -                     |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method         | Parameters       | Description              |
+|----------------|------------------|--------------------------|
+| isLoading      | None             | Check if loading         |
+| getImageSrc    | None             | Get image source URL     |
+| setImageSrc    | src?: string     | Set image source URL     |
+| getFallbackSrc | None             | Get fallback source URL  |
+| setFallbackSrc | src?: string     | Set fallback source URL  |

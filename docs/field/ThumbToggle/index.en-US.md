@@ -44,3 +44,19 @@ import {ThumbToggle} from '@unikue/ant-buddy-pro';
 | checked        | Whether the icon is checked                                   | `boolean`                                                                                                | -                    |
 | defaultChecked | The default checked state                                     | `boolean`                                                                                                | -                    |
 | showZero       | Whether to show zero count                                    | `boolean`                                                                                                | `true`               |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method        | Parameters         | Description            |
+|---------------|--------------------|------------------------|
+| isCheckable   | None               | Check if checkable     |
+| isChecked     | None               | Check if checked       |
+| getCount      | None               | Get current count      |
+| setCheckable  | checkable: boolean | Set checkable state    |
+| setChecked    | checked: boolean   | Set checked state      |
+| setCount      | count: number      | Set count value        |
+| increaseCount | None               | Increase count (+1)    |
+| decreaseCount | None               | Decrease count (-1)    |
+| toggleChecked | None               | Toggle checked (async) |

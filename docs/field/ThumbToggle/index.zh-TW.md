@@ -44,3 +44,19 @@ import {ThumbToggle} from '@unikue/ant-buddy-pro';
 | checked        | 圖標是否選中             | `boolean`                                                                                                | -                    |
 | defaultChecked | 默認選中狀態             | `boolean`                                                                                                | -                    |
 | showZero       | 是否顯示零計數            | `boolean`                                                                                                | `true`               |
+
+## 組件方法
+
+通過 `ref` 可以訪問以下方法：
+
+| 方法名           | 參數                 | 描述         |
+|---------------|--------------------|------------|
+| isCheckable   | 無                  | 檢查是否可選中    |
+| isChecked     | 無                  | 檢查是否已選中    |
+| getCount      | 無                  | 獲取當前計數值    |
+| setCheckable  | checkable: boolean | 設置是否可選中    |
+| setChecked    | checked: boolean   | 設置選中狀態     |
+| setCount      | count: number      | 設置計數值      |
+| increaseCount | 無                  | 增加計數值（+1）  |
+| decreaseCount | 無                  | 減少計數值（-1）  |
+| toggleChecked | 無                  | 切換選中狀態（異步） |

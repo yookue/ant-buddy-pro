@@ -45,3 +45,14 @@ import {TagInput} from '@unikue/ant-buddy-pro';
 | onTagContentsChange | The callback function when tag contents changed | `(contents?: (string \| number)[]) => void`                                                                    | -                 |
 | locale              | The locale of the component                     | `string`                                                                                                       | -                 |
 | localeProps         | The props of locale                             | `IntlLocaleProps`                                                                                              | -                 |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method           | Parameters                              | Description              |
+|------------------|-----------------------------------------|--------------------------|
+| getTagContents   | None                                    | Get tag contents list    |
+| setTagContents   | contents?: (string \| number)[] \| null | Set tag contents list    |
+| addTagContent    | content?: string \| number \| null      | Add a single tag content |
+| removeTagContent | content?: string \| number \| null      | Remove a single tag      |

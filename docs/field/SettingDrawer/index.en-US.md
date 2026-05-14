@@ -44,3 +44,11 @@ In addition, it supports all other properties of pro-components SettingDrawer, s
 - `hideHintAlert` - Hide hint button
 - `hideCopyButton` - Hide copy button
 - And more...
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method | Parameters | Description                                     |
+|--------|------------|-------------------------------------------------|
+| open   | None       | Programmatically open the settings drawer panel |

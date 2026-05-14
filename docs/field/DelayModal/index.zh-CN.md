@@ -36,3 +36,18 @@ import {DelayModal} from '@unikue/ant-buddy-pro';
 | skipCondition | 跳过单次计时器的条件        | `boolean \| (() => boolean \| undefined)`                                         | -                                    |
 | stopCondition | 停止计时器的条件          | `boolean \| (() => boolean \| undefined)`                                         | -                                    |
 | onOpenChange  | 显示状态变化时的回调函数      | `(open: boolean) => void`                                                         | -                                    |
+
+## 组件方法
+
+通过 `ref` 可以访问以下方法：
+
+| 方法名            | 参数 | 描述           |
+|----------------|----|--------------|
+| isOpening      | 无  | 检查模态框是否正在打开  |
+| isTiming       | 无  | 检查计时器是否正在运行  |
+| hasOpened      | 无  | 检查模态框是否已经打开过 |
+| startTimer     | 无  | 启动计时器        |
+| stopTimer      | 无  | 停止计时器        |
+| resetTimer     | 无  | 重置计时器        |
+| addListener    | 无  | 添加事件监听器      |
+| removeListener | 无  | 移除事件监听器      |

@@ -41,3 +41,15 @@ import {CollapseForm} from '@unikue/ant-buddy-pro';
 | defaultOpen      | 是否默认展开表单                | `boolean`                                                  | -                     |
 | triggerType      | 展开表单的触发方式               | `'click' \| 'hover'`                                       | `'click'`             |
 | proField         | 是否使用 ProFormField 控件    | `boolean`                                                  | `true`                |
+
+## 组件方法
+
+通过 `ref` 可以访问以下方法：
+
+| 方法名        | 参数 | 描述          |
+|------------|----|-------------|
+| getForm    | 无  | 获取表单实例      |
+| getFormRef | 无  | 获取表单 ref 引用 |
+| isFormOpen | 无  | 检查表单是否展开    |
+| openForm   | 无  | 展开表单        |
+| closeForm  | 无  | 关闭表单        |

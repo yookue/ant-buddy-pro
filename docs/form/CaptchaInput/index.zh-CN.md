@@ -45,3 +45,14 @@ import {CaptchaInput} from '@unikue/ant-buddy-pro';
 | localeProps    | 多语言属性                         | `IntlLocaleProps`                                                  | -                     |
 
 > 注意: 其他属性继承自 ProFormCaptcha 组件。
+
+## 组件方法
+
+通过 `ref` 可以访问以下方法：
+
+| 方法名        | 参数 | 描述        |
+|------------|----|-----------|
+| isLoading  | 无  | 检查是否正在加载  |
+| isTiming   | 无  | 检查计时器是否运行 |
+| startTimer | 无  | 启动计时器     |
+| stopTimer  | 无  | 停止计时器     |

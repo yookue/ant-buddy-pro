@@ -30,3 +30,12 @@ import {ThumbTuple} from '@unikue/ant-buddy-pro';
 | spaceProps        | 間距的屬性               | `SpaceProps`                                    | -                    |
 | thumbLikeProps    | 喜歡的屬性               | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                    |
 | thumbDislikeProps | 不喜歡的屬性              | `Omit<ThumbToggleProps, 'ref' \| 'actionType'>` | -                    |
+
+## 組件方法
+
+通過 `ref` 可以訪問以下方法：
+
+| 方法名                | 參數 | 描述             |
+|--------------------|----|----------------|
+| getThumbLikeRef    | 無  | 獲取喜歡拇指組件的 ref  |
+| getThumbDislikeRef | 無  | 獲得不喜歡拇指組件的 ref |

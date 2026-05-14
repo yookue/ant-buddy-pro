@@ -41,3 +41,15 @@ import {AvatarUpload} from '@unikue/ant-buddy-pro';
 | onFallbackSrcChange | 備用圖片源變化時的回調函數       | `(src?: string) => void`                                                                             | -                     |
 | locale              | 組件的語言, e.g. 'zh_TW' | `string`                                                                                             | -                     |
 | localeProps         | 多語言屬性               | `IntlLocaleProps`                                                                                    | -                     |
+
+## 組件方法
+
+通過 `ref` 可以訪問以下方法：
+
+| 方法名            | 參數           | 描述        |
+|----------------|--------------|-----------|
+| isLoading      | 無            | 檢查是否正在加載  |
+| getImageSrc    | 無            | 獲取圖片源地址   |
+| setImageSrc    | src?: string | 設置圖片源地址   |
+| getFallbackSrc | 無            | 獲取備用圖片源地址 |
+| setFallbackSrc | src?: string | 設置備用圖片源地址 |

@@ -44,3 +44,11 @@ SettingDrawer 继承了 pro-components SettingDrawer 的所有属性，并新增
 - `hideHintAlert` - 隐藏提示按钮
 - `hideCopyButton` - 隐藏复制按钮
 - 等等...
+
+## 组件方法
+
+通过 `ref` 可以访问以下方法：
+
+| 方法名  | 参数 | 描述            |
+|------|----|---------------|
+| open | 无  | 以编程方式打开设置抽屉面板 |

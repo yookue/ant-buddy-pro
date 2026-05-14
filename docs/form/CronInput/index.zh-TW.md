@@ -47,3 +47,14 @@ import {CronInput} from '@unikue/ant-buddy-pro';
 | allowOkEcho       | 是否允許確定按鈕回顯值         | `boolean`                                                         | -                      |
 
 > 注意: 其他屬性繼承自 AddonInput 組件。
+
+## 組件方法
+
+通過 `ref` 可以訪問以下方法：
+
+| 方法名           | 參數            | 描述         |
+|---------------|---------------|------------|
+| isShowSecond  | 無             | 檢查是否顯示秒標簽頁 |
+| isShowYear    | 無             | 檢查是否顯示年標簽頁 |
+| setShowSecond | show: boolean | 設置是否顯示秒標簽頁 |
+| setShowYear   | show: boolean | 設置是否顯示年標簽頁 |

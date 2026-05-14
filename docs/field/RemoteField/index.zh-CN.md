@@ -33,3 +33,13 @@ import {RemoteField} from '@unikue/ant-buddy-pro';
 | autoStart      | 是否自动开始获取远程数据    | `boolean`                                                              | `true`               |
 
 > 注：其他属性继承自 Pro Components 的 ProFormFieldRemoteProps。
+
+## 组件方法
+
+通过 `ref` 可以访问以下方法：
+
+| 方法名         | 参数 | 描述          |
+|-------------|----|-------------|
+| getOutcome  | 无  | 获取远程请求的结果数据 |
+| isAutoStart | 无  | 检查是否自动启动    |
+| refresh     | 无  | 刷新远程数据      |

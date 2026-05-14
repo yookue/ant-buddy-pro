@@ -45,3 +45,14 @@ import {TagInput} from '@unikue/ant-buddy-pro';
 | onTagContentsChange | 標簽内容變化時的回調函數           | `(contents?: (string \| number)[]) => void`                                                                    | -                 |
 | locale              | 組件的語言, e.g. 'zh_TW'    | `string`                                                                                                       | -                 |
 | localeProps         | 多語言屬性                  | `IntlLocaleProps`                                                                                              | -                 |
+
+## 組件方法
+
+通過 `ref` 可以訪問以下方法：
+
+| 方法名              | 參數                                      | 描述       |
+|------------------|-----------------------------------------|----------|
+| getTagContents   | 無                                       | 獲取標簽内容列表 |
+| setTagContents   | contents?: (string \| number)[] \| null | 設置標簽内容列表 |
+| addTagContent    | content?: string \| number \| null      | 添加單個標簽内容 |
+| removeTagContent | content?: string \| number \| null      | 移除單個標簽内容 |

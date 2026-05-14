@@ -41,3 +41,15 @@ import {CollapseForm} from '@unikue/ant-buddy-pro';
 | defaultOpen      | Whether the form is default open or not                      | `boolean`                                                  | -                     |
 | triggerType      | The trigger type when open the form                          | `'click' \| 'hover'`                                       | `'click'`             |
 | proField         | Whether to use ProFormField instead of Antd                  | `boolean`                                                  | `true`                |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method     | Parameters | Description              |
+|------------|------------|--------------------------|
+| getForm    | None       | Get form instance        |
+| getFormRef | None       | Get form ref reference   |
+| isFormOpen | None       | Check if form is open    |
+| openForm   | None       | Open the form            |
+| closeForm  | None       | Close the form           |

@@ -35,3 +35,14 @@ import {CountField} from '@unikue/ant-buddy-pro';
 | tooltipProps   | Tooltip 屬性      | `TooltipProps`                                                                                              | -                   |
 | onChange       | 計數更改後的回調函數      | `(count?: number) => void`                                                                                  | -                   |
 | showZero       | 是否顯示零計數         | `boolean`                                                                                                   | `true`              |
+
+## 組件方法
+
+通過 `ref` 可以訪問以下方法：
+
+| 方法名           | 參數            | 描述        |
+|---------------|---------------|-----------|
+| getCount      | 無             | 獲取當前計數值   |
+| setCount      | count: number | 設置計數值     |
+| increaseCount | 無             | 增加計數值（+1） |
+| decreaseCount | 無             | 減少計數值（-1） |

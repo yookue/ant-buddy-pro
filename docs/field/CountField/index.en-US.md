@@ -35,3 +35,14 @@ import {CountField} from '@unikue/ant-buddy-pro';
 | tooltipProps   | The props of Antd Tooltip                    | `TooltipProps`                                                                                              | -                   |
 | onChange       | The callback function when the count changed | `(count?: number) => void`                                                                                  | -                   |
 | showZero       | Whether to show zero count                   | `boolean`                                                                                                   | `true`              |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method        | Parameters    | Description          |
+|---------------|---------------|----------------------|
+| getCount      | None          | Get current count    |
+| setCount      | count: number | Set count value      |
+| increaseCount | None          | Increase count (+1)  |
+| decreaseCount | None          | Decrease count (-1)  |

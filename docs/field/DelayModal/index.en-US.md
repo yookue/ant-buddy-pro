@@ -36,3 +36,18 @@ import {DelayModal} from '@unikue/ant-buddy-pro';
 | skipCondition | The condition for skipping timer once                    | `boolean \| (() => boolean \| undefined)`                                         | -                                    |
 | stopCondition | The condition for stopping the timer                     | `boolean \| (() => boolean \| undefined)`                                         | -                                    |
 | onOpenChange  | The callback function when the opening state changed     | `(open: boolean) => void`                                                         | -                                    |
+
+## Methods
+
+The following methods can be accessed via `ref`:
+
+| Method         | Parameters | Description                        |
+|----------------|------------|------------------------------------|
+| isOpening      | None       | Check if modal is opening          |
+| isTiming       | None       | Check if timer is running          |
+| hasOpened      | None       | Check if modal has been opened     |
+| startTimer     | None       | Start the timer                    |
+| stopTimer      | None       | Stop the timer                     |
+| resetTimer     | None       | Reset the timer                    |
+| addListener    | None       | Add event listeners                |
+| removeListener | None       | Remove event listeners             |
