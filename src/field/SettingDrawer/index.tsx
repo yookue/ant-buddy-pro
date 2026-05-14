@@ -135,7 +135,8 @@ export const SettingDrawer: React.ForwardRefExoticComponent<SettingDrawerProps &
         }
     }));
 
-    const omitProps = !props ? {} : omit(props, ['getContainer', 'onCollapseChange', 'clazzPrefix', 'containerClazz', 'containerStyle', 'triggerDom', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
+    const omitProps = !props ? {} : omit(props, ['drawerProps', 'onCollapseChange', 'clazzPrefix', 'containerClazz', 'containerStyle', 'triggerDom', 'tooltipCtrl', 'tooltipProps', 'locale', 'localeProps']);
+    const omitDrawerProps = !props?.drawerProps ? {} : omit(props?.drawerProps, ['rootClassName', 'maskClassName']);
 
     return (
         <div
@@ -155,7 +156,11 @@ export const SettingDrawer: React.ForwardRefExoticComponent<SettingDrawerProps &
             </div>
             <ProSettingDrawer
                 {...omitProps}
-                getContainer={props?.getContainer ?? `.${clazzPrefix}`}
+                drawerProps={{
+                    ...omitDrawerProps,
+                    rootClassName: classnames(props?.drawerProps?.rootClassName, `${clazzPrefix}-popup`),
+                    maskClassName: classnames(props?.drawerProps?.maskClassName, `${clazzPrefix}-mask`),
+                }}
                 onCollapseChange={(open: boolean) => {
                     if (!open) {
                         // Delay 200ms to blur document after drawer closes

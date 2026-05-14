@@ -36,12 +36,12 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
                 '&:focus': {
                     outline: 'none',
                 }
-            },
-
-            // Hide the default settings button from pro-components
-            [`${token.antCls}-pro-setting-drawer-handle`]: {
-                display: 'none !important',
             }
+        },
+
+        // Hide the default settings button from pro-components
+        [`${token.antCls}-pro-setting-drawer-handle`]: {
+            display: 'none !important',
         }
     };
 }
