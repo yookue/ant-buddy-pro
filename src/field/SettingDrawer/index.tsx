@@ -110,7 +110,6 @@ export type SettingDrawerProps = ProSettingDrawerProps & {
  * It hides the default settings button and uses a custom trigger DOM instead.
  *
  * @author David Hsing
- * @reference Ant Design ProComponents SettingDrawer
  */
 export const SettingDrawer: React.ForwardRefExoticComponent<SettingDrawerProps & React.RefAttributes<SettingDrawerRef>> = React.forwardRef((props?: SettingDrawerProps, ref?: any) => {
     SettingDrawer.displayName = 'SettingDrawer';

@@ -85,7 +85,6 @@ export type CommentCardProps = React.PropsWithChildren<{
  * Component for displaying a comment card with avatar, author, content, actions and nested comments
  *
  * @author David Hsing
- * @reference Ant Design Compatible Comment
  */
 export const CommentCard: React.FC<CommentCardProps> = (props?: CommentCardProps) => {
     const clazzPrefix = props?.clazzPrefix ?? 'abp-comment-card';
