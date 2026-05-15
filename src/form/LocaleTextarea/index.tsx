@@ -451,7 +451,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
     };
 
     const entryImmutable = editContext.mode === 'read' || props?.disabled || props?.fieldProps?.disabled || props?.fieldProps?.readOnly || props?.proFieldProps?.mode === 'read' || props?.readonly || props?.proFieldProps?.readonly;
-    const omitTabsProps = !props?.tabsProps ? {} : omit(props.tabsProps, ['contentBorder', 'size', 'presetStyle']);
+    const omitTabsProps = !props?.tabsProps ? {} : omit(props.tabsProps, ['size', 'tabBorder', 'contentBorder', 'presetStyle']);
 
     const fieldDom = (
         <div
@@ -468,6 +468,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                     ...buildSwitchItems(),
                 ]}
                 size={props?.tabsProps?.size ?? 'small'}
+                tabBorder={props?.tabsProps?.tabBorder ?? false}
                 contentBorder={props?.tabsProps?.contentBorder ?? false}
                 presetStyle={props?.tabsProps?.presetStyle ?? 'padding-0'}
                 {...omitTabsProps}
