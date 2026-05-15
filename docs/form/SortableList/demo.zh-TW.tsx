@@ -85,7 +85,7 @@ export default () => {
                                 variant='outlined'
                                 extra={action}
                                 style={{
-                                    marginBlockEnd: '24px',
+                                    marginBlockEnd: 24,
                                 }}
                             >
                                 {listDom}
