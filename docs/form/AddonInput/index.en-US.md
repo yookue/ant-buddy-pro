@@ -20,7 +20,13 @@ import {AddonInput} from '@unikue/ant-buddy-pro';
 
 ## Example
 
-<code src="./demo.en-US.tsx"></code>
+### Simple Usage
+
+<code src="./demo-1.en-US.tsx"></code>
+
+### Advanced Usage
+
+<code src="./demo-2.en-US.tsx"></code>
 
 ## Properties
 

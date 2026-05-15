@@ -29,25 +29,25 @@ export default () => {
     return (
         <>
             <ProForm
-                name='AddonInput_demo.zh-CN'
+                name='AddonInput_demo_1.en-US'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='表单只读'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
+                        label='Form Readonly'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
                         fieldProps={{
                             checked: readonly,
                             onChange: setReadonly,
                         }}
                     />
                     <ProFormSwitch
-                        label='使用 ProField'
-                        checkedChildren='是'
-                        unCheckedChildren='否'
+                        label='Use ProField'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
                         fieldProps={{
                             checked: proField,
                             onChange: setProField,
@@ -57,7 +57,7 @@ export default () => {
             </ProForm>
             <Divider/>
             <ProForm
-                name='AddonInput_demo.zh-CN.Test'
+                name='AddonInput_demo_1.en-US.Test'
                 layout='vertical'
                 autoFocusFirstInput={false}
                 readonly={readonly}
@@ -66,34 +66,34 @@ export default () => {
                 <Space orientation='vertical' size='middle' style={{width: '100%'}}>
                     <AddonInput
                         name='website'
-                        label='网站地址'
-                        placeholder='请输入网址'
+                        label='Website'
+                        placeholder='Please enter URL'
                         addonBefore='https://'
                         addonAfter={<LinkOutlined/>}
                         proField={proField}
-                        tooltip='用于显示的网站 URL'
+                        tooltip='Website URL for display'
                         rules={[
                             {
                                 required: true,
-                                message: '请输入网站 URL',
+                                message: 'Please enter website URL',
                             },
                             {
                                 pattern: /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$/,
-                                message: '域名格式不正确',
+                                message: 'Invalid domain name format',
                             },
                         ]}
                     />
                     <AddonInput
                         name='search'
-                        label='搜索'
-                        placeholder='请输入搜索内容'
+                        label='Search'
+                        placeholder='Please enter search content'
                         addonAfter={(
                             <Button
                                 type='primary'
                                 icon={<SearchOutlined/>}
                                 disabled={readonly}
                             >
-                                搜索
+                                Search
                             </Button>
                         )}
                         paddingAfter={0}
@@ -101,10 +101,10 @@ export default () => {
                     />
                     <AddonInput
                         name='price'
-                        label='价格'
-                        placeholder='请输入价格'
-                        addonBefore='¥'
-                        addonAfter='元'
+                        label='Price'
+                        placeholder='Please enter price'
+                        addonBefore='$'
+                        addonAfter='USD'
                         proField={proField}
                     />
                 </Space>

@@ -20,7 +20,13 @@ import {AddonInput} from '@unikue/ant-buddy-pro';
 
 ## 使用示例
 
-<code src="./demo.zh-CN.tsx"></code>
+### 基本使用
+
+<code src="./demo-1.zh-CN.tsx"></code>
+
+### 高级使用
+
+<code src="./demo-2.zh-CN.tsx"></code>
 
 ## 组件属性
 

@@ -17,7 +17,7 @@
 
 import React from 'react';
 import {Form, Input, Space, type InputProps, type InputRef} from 'antd';
-import {ProForm} from '@ant-design/pro-components';
+import {ProForm, FormListContext} from '@ant-design/pro-components';
 import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
 import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
 import {omit} from '@rc-component/util';
@@ -104,6 +104,7 @@ export type AddonInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 
  */
 export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) => {
     const form = Form.useFormInstance();
+    const formListContext = React.useContext(FormListContext);
     const editContext = React.useContext(EditOrReadOnlyContext);
     const clazzPrefix = props?.clazzPrefix ?? 'abp-addon-input';
 
@@ -128,9 +129,9 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
         paddingInline: ObjectUtils.isNil(props?.paddingAfter) ? undefined : props?.paddingAfter,
     };
 
-    const fieldName = props?.name ?? props?.fieldProps?.name;
-    const watchedValue = Form.useWatch(fieldName as string, form);
-    const inputValue = !fieldName ? props?.fieldProps?.value : watchedValue;
+    const simpleName = props?.name ?? props?.fieldProps?.name;
+    const fieldName = !simpleName ? undefined : (formListContext?.listName ? [...formListContext.listName, simpleName] : simpleName);
+    const fieldValue = (simpleName && form) ? Form.useWatch(fieldName, form) : props?.fieldProps?.value;
     const inputWidth = !widthBlock ? undefined : (PropUtils.calculateWidth(props?.width ?? (typeof props?.fieldProps?.style?.width === 'string' ? props.fieldProps.style.width : undefined)));
 
     const entryReadMode = editContext.mode === 'read' || props?.proFieldProps?.mode === 'read';
@@ -147,7 +148,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
         const restProps = !props ? {} : omit(props, ['className', 'name', 'allowClear', 'fieldProps', 'proFieldProps', 'clazzPrefix', 'addonBefore', 'addonAfter', 'cursorBefore', 'cursorAfter', 'paddingBefore', 'paddingAfter', 'widthBlock', 'proField']);
         return (
             <div className={classnames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz)}>
-                <ProForm.Item name={fieldName} {...restProps}>
+                <ProForm.Item name={simpleName} {...restProps}>
                     <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
                         {!!addonBeforeDom && (
                             <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
@@ -155,18 +156,17 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                             </Space.Addon>
                         )}
                         <Input
-                            key={`${fieldName}-${entryImmutable}`}
                             className={classnames (`${clazzPrefix}-input`, props?.fieldProps?.className)}
                             placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
-                            name={fieldName}
-                            value={entryReadMode ? (inputValue || props?.proFieldProps?.emptyText || '-') :inputValue}
+                            name={simpleName}
+                            value={entryReadMode ? (fieldValue || props?.proFieldProps?.emptyText || '-') :fieldValue}
                             allowClear={!entryImmutable && props?.allowClear !== false && props?.fieldProps?.allowClear !== false}
                             readOnly={entryReadMode || entryReadonly}
                             disabled={entryDisabled}
                             style={!inputWidth ? undefined : {width: inputWidth}}
                             onChange={(event: any) => {
-                                if (fieldName) {
-                                    form?.setFieldValue(fieldName, event.target.value);
+                                if (simpleName) {
+                                    form?.setFieldValue(simpleName, event.target.value);
                                 }
                                 props?.fieldProps?.onChange?.(event);
                             }}
@@ -191,11 +191,10 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         </Space.Addon>
                     )}
                     <Input
-                        key={`${fieldName}-${entryImmutable}`}
                         className={classnames (`${clazzPrefix}-input`, props?.fieldProps?.className)}
-                        name={props?.name ?? props?.fieldProps?.name}
+                        name={simpleName}
                         placeholder={StringUtils.join(props?.placeholder) ?? props?.fieldProps?.placeholder}
-                        value={entryReadMode ? (inputValue || props?.proFieldProps?.emptyText || '-') :inputValue}
+                        value={entryReadMode ? (fieldValue || props?.proFieldProps?.emptyText || '-') :fieldValue}
                         readOnly={entryReadMode || entryReadonly}
                         disabled={entryDisabled}
                         style={!inputWidth ? undefined : {width: inputWidth}}

@@ -29,14 +29,14 @@ export default () => {
     return (
         <>
             <ProForm
-                name='AddonInput_demo.zh-TW'
+                name='AddonInput_demo_1.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='表單只讀'
+                        label='表单只读'
                         checkedChildren='是'
                         unCheckedChildren='否'
                         fieldProps={{
@@ -57,7 +57,7 @@ export default () => {
             </ProForm>
             <Divider/>
             <ProForm
-                name='AddonInput_demo.zh-TW.Test'
+                name='AddonInput_demo_1.zh-CN.Test'
                 layout='vertical'
                 autoFocusFirstInput={false}
                 readonly={readonly}
@@ -66,27 +66,27 @@ export default () => {
                 <Space orientation='vertical' size='middle' style={{width: '100%'}}>
                     <AddonInput
                         name='website'
-                        label='網站地址'
-                        placeholder='請輸入網址'
+                        label='网站地址'
+                        placeholder='请输入网址'
                         addonBefore='https://'
                         addonAfter={<LinkOutlined/>}
                         proField={proField}
-                        tooltip='用於顯示的網站 URL'
+                        tooltip='用于显示的网站 URL'
                         rules={[
                             {
                                 required: true,
-                                message: '請輸入網站 URL',
+                                message: '请输入网站 URL',
                             },
                             {
                                 pattern: /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$/,
-                                message: '域名格式不正確',
+                                message: '域名格式不正确',
                             },
                         ]}
                     />
                     <AddonInput
                         name='search'
                         label='搜索'
-                        placeholder='請輸入搜索內容'
+                        placeholder='请输入搜索内容'
                         addonAfter={(
                             <Button
                                 type='primary'
@@ -101,8 +101,8 @@ export default () => {
                     />
                     <AddonInput
                         name='price'
-                        label='價格'
-                        placeholder='請輸入價格'
+                        label='价格'
+                        placeholder='请输入价格'
                         addonBefore='¥'
                         addonAfter='元'
                         proField={proField}
