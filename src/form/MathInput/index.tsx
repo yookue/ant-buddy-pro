@@ -141,22 +141,10 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const fieldName = !props?.name ? undefined : [...(formListContext?.listName ?? []), props.name];
-    const incomeValue = (props?.name && form) ? Form.useWatch(fieldName, form) : props?.value;
+    const fieldValue = (props?.name && form) ? Form.useWatch(fieldName, form) : props?.value;
     const containerRef = React.useRef<HTMLDivElement>(null);
     const fieldRef = React.useRef<any>(null);
     const fieldStyle = useFieldStyle(clazzPrefix);
-
-    // const loadMathLiveStyles = async () => {
-    //     try {
-    //         await import('mathlive/mathlive-fonts.css');
-    //     } catch (error) {
-    //         console.warn('Failed to load mathlive styles:', error);
-    //     }
-    // };
-
-    // React.useEffect(() => {
-    //     loadMathLiveStyles().then();
-    // }, []);
 
     const entryImmutable = editContext.mode === 'read' || props?.proFieldProps?.mode === 'read' || props?.proFieldProps?.readonly;
 
@@ -194,8 +182,8 @@ export const MathInput: React.FC<MathInputProps> = (props?: MathInputProps) => {
         }
         if (fieldRef.current) {
             try {
-                if (incomeValue) {
-                    fieldRef.current.value = incomeValue ?? '';
+                if (fieldValue) {
+                    fieldRef.current.value = fieldValue ?? '';
                 } else {
                     if (fieldName) {
                         fieldRef.current.value = form?.getFieldValue(fieldName) ?? '';
