@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {SectionTitle, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type TitlePresetStyle} from '@/layout/SectionTitle';
+import { Divider } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { SectionTitle, type BeforeAfterType } from '@unikue/ant-buddy-pro';
+import { type TitlePresetStyle } from '@/layout/SectionTitle';
 
 
 export default () => {
@@ -55,9 +55,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Before', value: 'before'},
-                        {label: 'After', value: 'after'},
-                        {label: 'False', value: false},
+                        { label: 'Before', value: 'before' },
+                        { label: 'After', value: 'after' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -71,17 +71,17 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Default', value: 'default'},
-                        {label: 'Success', value: 'success'},
-                        {label: 'Info', value: 'info'},
-                        {label: 'Warn', value: 'warn'},
-                        {label: 'Error', value: 'error'},
-                        {label: 'Classic', value: 'classic'},
-                        {label: 'False', value: false},
+                        { label: 'Default', value: 'default' },
+                        { label: 'Success', value: 'success' },
+                        { label: 'Info', value: 'info' },
+                        { label: 'Warn', value: 'warn' },
+                        { label: 'Error', value: 'error' },
+                        { label: 'Classic', value: 'classic' },
+                        { label: 'False', value: false },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <SectionTitle
                 boundBorder={boundBorder}
                 ornament='Ant Buddy'

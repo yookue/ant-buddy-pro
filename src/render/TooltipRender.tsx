@@ -16,8 +16,8 @@
 
 
 import React from 'react';
-import {Tooltip, type TooltipProps} from 'antd';
-import {NodeUtils} from '@/util/NodeUtils';
+import { Tooltip, type TooltipProps } from 'antd';
+import { NodeUtils } from '@/util/NodeUtils';
 
 
 /**

@@ -16,16 +16,16 @@
 
 
 import React from 'react';
-import {Empty, type TooltipProps} from 'antd';
-import {DownOutlined, UpOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-components';
+import { Empty, type TooltipProps } from 'antd';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { useIntl } from '@ant-design/pro-components';
 import CssMotion from '@rc-component/motion';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {TooltipRender} from '@/render/TooltipRender';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type BeforeAfterType } from '@/type/declaration';
+import { TooltipRender } from '@/render/TooltipRender';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type SectionPresetStyle = WithFalse<'default' | 'success' | 'info' | 'warn' | 'error' | 'classic'>;
@@ -119,7 +119,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description The DOM of collapse span that under the header div when expanded
      * @description.zh-CN 头部折叠 span 的节点内容(面板展开时)
      * @description.zh-TW 頭部折叠 span 的節點內容(面板展開時)
-     * @default <DownOutlined/>
+     * @default <DownOutlined />
      */
     headerCollapse?: React.ReactNode;
 
@@ -135,7 +135,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description The DOM of collapse that under the header div when collapsed
      * @description.zh-CN 头部折叠 span 的节点内容(面板折叠时)
      * @description.zh-TW 頭部折叠 span 的節點內容(面板摺叠時)
-     * @default <UpOutlined/>
+     * @default <UpOutlined />
      */
     headerExpand?: React.ReactNode;
 
@@ -194,7 +194,7 @@ export type FoldSectionProps = React.PropsWithChildren<{
      * @description The DOM of placeholder for the panel div
      * @description.zh-CN 面板 div 的占位符
      * @description.zh-TW 面板 div 的佔位符
-     * @default <Empty/>
+     * @default <Empty />
      */
     panelPlaceholder?: React.ReactNode;
 
@@ -250,9 +250,9 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
     const {
         boundBorder = true,
         headerOrnamentPos = 'before',
-        headerCollapse = <DownOutlined/>,
+        headerCollapse = <DownOutlined />,
         headerCollapsePos = 'after',
-        headerExpand = <UpOutlined/>,
+        headerExpand = <UpOutlined />,
         defaultOpen = true,
         panelForceRender = false,
         panelDestroyOnClose = false,

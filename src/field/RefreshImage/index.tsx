@@ -16,13 +16,13 @@
 
 
 import React from 'react';
-import {Image, type ImageProps} from 'antd';
-import {useIntl} from '@ant-design/pro-components';
-import {omit} from '@rc-component/util';
-import {ImageUtils, NanoidUtils, ObjectUtils} from '@unikue/ts-lang-utils';
+import { Image, type ImageProps } from 'antd';
+import { useIntl } from '@ant-design/pro-components';
+import { omit } from '@rc-component/util';
+import { ImageUtils, NanoidUtils, ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type RefreshImageRef = {

@@ -16,16 +16,16 @@
 
 
 import React from 'react';
-import {Space, Tooltip} from 'antd';
-import {type FormListFieldData, type FormListOperation} from 'antd/es/form/FormList';
-import {VerticalAlignTopOutlined, VerticalAlignBottomOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
-import {ProFormList, type ProFormListProps} from '@ant-design/pro-components';
-import {useIntl} from '@ant-design/pro-components';
-import {omit} from '@rc-component/util';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
+import { Space, Tooltip } from 'antd';
+import { type FormListFieldData, type FormListOperation } from 'antd/es/form/FormList';
+import { VerticalAlignTopOutlined, VerticalAlignBottomOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { ProFormList, type ProFormListProps } from '@ant-design/pro-components';
+import { useIntl } from '@ant-design/pro-components';
+import { omit } from '@rc-component/util';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type IntlLocaleProps = {
@@ -135,7 +135,7 @@ export const SortableList: React.FC<SortableListProps<any>> = (props?: SortableL
             return props.actionRender(field, action, defaultActionDom, count);
         }
         const topBottomDom: React.ReactNode = !allowTopBottom ? undefined : (
-            <Space key='top-bottom' style={!allowUpDown ? undefined : {marginRight: 8}}>
+            <Space key='top-bottom' style={!allowUpDown ? undefined : { marginRight: 8 }}>
                 <Tooltip
                     key='top'
                     title={ObjectUtils.firstNotNil(props?.localeProps?.moveToTop, intlLocales.get([locale, 'moveToTop']), intlLocales.get(['en_US', 'moveToTop']))}

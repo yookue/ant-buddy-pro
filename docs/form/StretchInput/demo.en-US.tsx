@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {SearchOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio} from '@ant-design/pro-components';
-import {StretchInput, BorderBox} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio } from '@ant-design/pro-components';
+import { StretchInput, BorderBox } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -44,26 +44,26 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Default', value: 'default'},
-                        {label: 'Custom', value: 'custom'},
+                        { label: 'Default', value: 'default' },
+                        { label: 'Custom', value: 'custom' },
                     ]}
                 />
             </ProForm>
-            <Divider/>
-            <div style={{textAlign: 'right'}}>
+            <Divider />
+            <div style={{ textAlign: 'right' }}>
                 <StretchInput
                     name='foobar'
                     placeholder='Please click this field'
                     fieldProps={{
-                        prefix: <SearchOutlined style={{cursor: 'pointer'}}/>,
+                        prefix: <SearchOutlined style={{ cursor: 'pointer' }}/>,
                         style: {
                             borderRadius: '16px',
                             width: '50%',
                         }
                     }}
                     miniature={miniatureType !== 'custom' ? undefined : (
-                        <BorderBox boundShape='circle' borderAll={true} containerStyle={{padding: 8}}>
-                            <SearchOutlined/>
+                        <BorderBox boundShape='circle' borderAll={true} containerStyle={{ padding: 8 }}>
+                            <SearchOutlined />
                         </BorderBox>
                     )}
                     stretchStyle={{

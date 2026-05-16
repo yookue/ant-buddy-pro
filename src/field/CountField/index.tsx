@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {ConfigProvider, Badge, Space, type BadgeProps, type TooltipProps} from 'antd';
-import {type SpaceSize} from 'antd/es/space';
-import {omit} from '@rc-component/util';
+import { ConfigProvider, Badge, Space, type BadgeProps, type TooltipProps } from 'antd';
+import { type SpaceSize } from 'antd/es/space';
+import { omit } from '@rc-component/util';
 import classnames from 'classnames';
-import {type AxisDirectionType} from '@/type/declaration';
-import {TooltipRender} from '@/render/TooltipRender';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {useFieldStyle} from './styles';
+import { type AxisDirectionType } from '@/type/declaration';
+import { TooltipRender } from '@/render/TooltipRender';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { useFieldStyle } from './styles';
 
 
 export type CountFieldRef = {

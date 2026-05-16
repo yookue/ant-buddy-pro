@@ -15,14 +15,14 @@
  */
 
 
-import {Avatar, Space} from 'antd';
-import {LikeOutlined, MessageOutlined, StarOutlined} from '@ant-design/icons';
-import {CommentCard} from '@unikue/ant-buddy-pro';
+import { Avatar, Space } from 'antd';
+import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { CommentCard } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
     return (
-        <Space orientation='vertical' style={{width: '100%'}} size='large'>
+        <Space orientation='vertical' style={{ width: '100%' }} size='large'>
             <CommentCard
                 avatar={<Avatar src='https://api.dicebear.com/7.x/miniavs/svg?seed=1' alt='Han Solo'/>}
                 author='Han Solo'
@@ -30,10 +30,10 @@ export default () => {
                 content='Ant Design 組件庫非常棒，使用起來非常方便！'
                 actions={[
                     <span key='like'>
-                        <LikeOutlined/> 點讚
+                        <LikeOutlined /> 點讚
                     </span>,
                     <span key='reply'>
-                        <MessageOutlined/> 回覆
+                        <MessageOutlined /> 回覆
                     </span>,
                 ]}
             >
@@ -44,10 +44,10 @@ export default () => {
                     content='同意！特別是 ProComponents 系列，大大提高了開發效率。'
                     actions={[
                         <span key='like'>
-                            <LikeOutlined/> 點讚
+                            <LikeOutlined /> 點讚
                         </span>,
                         <span key='reply'>
-                            <MessageOutlined/> 回覆
+                            <MessageOutlined /> 回覆
                         </span>,
                     ]}
                 />
@@ -65,13 +65,13 @@ export default () => {
                 }
                 actions={[
                     <span key='like'>
-                        <LikeOutlined/> 12
+                        <LikeOutlined /> 12
                     </span>,
                     <span key='star'>
-                        <StarOutlined/> 收藏
+                        <StarOutlined /> 收藏
                     </span>,
                     <span key='reply'>
-                        <MessageOutlined/> 回覆
+                        <MessageOutlined /> 回覆
                     </span>,
                 ]}
             />

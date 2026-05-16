@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {PlusOutlined, MinusOutlined, FireOutlined, MessageOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
-import {CountField, ConsoleUtils, type CountFieldRef} from '@unikue/ant-buddy-pro';
+import { Button, Divider } from 'antd';
+import { PlusOutlined, MinusOutlined, FireOutlined, MessageOutlined } from '@ant-design/icons';
+import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
+import { CountField, ConsoleUtils, type CountFieldRef } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -68,29 +68,29 @@ export default () => {
                 </ProForm.Group>
                 <ProForm.Group>
                     <Button
-                        icon={<PlusOutlined/>}
+                        icon={<PlusOutlined />}
                         onClick={() => countFieldRef.current?.increaseCount()}
                     >
                         Increase
                     </Button>
                     <Button
-                        icon={<MinusOutlined/>}
+                        icon={<MinusOutlined />}
                         onClick={() => countFieldRef.current?.decreaseCount()}
                     >
                         Decrease
                     </Button>
                     <Button
-                        icon={<FireOutlined/>}
+                        icon={<FireOutlined />}
                         onClick={() => countFieldRef.current?.setCount(99)}
                     >
                         Set
                     </Button>
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <CountField
                 ref={countFieldRef}
-                field={<MessageOutlined/>}
+                field={<MessageOutlined />}
                 showCount={showCount}
                 showZero={showZero}
                 tooltipCtrl={tooltipCtrl}

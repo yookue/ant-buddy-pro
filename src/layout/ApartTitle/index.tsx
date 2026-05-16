@@ -17,8 +17,8 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type BeforeAfterType } from '@/type/declaration';
+import { useFieldStyle } from './styles';
 
 
 export type ApartPresetStyle = WithFalse<'default' | 'success' | 'info' | 'warn' | 'error' | 'classic'>;

@@ -16,28 +16,28 @@
 
 
 import React from 'react';
-import {ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps, Form} from 'antd';
-import {type LabeledValue} from 'antd/es/select';
+import { ConfigProvider, Input, Select, Empty, Space, Tooltip, type InputRef, type SelectProps, type RefSelectProps, type TooltipProps, Form } from 'antd';
+import { type LabeledValue } from 'antd/es/select';
 import Wave from 'antd/es/_util/wave';
-import {default as Icon} from '@ant-design/icons';
-import {type ThemeType as IconThemeType} from '@ant-design/icons-svg/es/types';
-import {ProFormSelect, useIntl} from '@ant-design/pro-components';
-import {type FieldProps, type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {omit} from '@rc-component/util';
-import {If, For, MapIterator} from '@unikue/react-condition';
-import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import {useEventListener} from 'ahooks';
+import { default as Icon } from '@ant-design/icons';
+import { type ThemeType as IconThemeType } from '@ant-design/icons-svg/es/types';
+import { ProFormSelect, useIntl } from '@ant-design/pro-components';
+import { type FieldProps, type ProFormFieldItemProps } from '@ant-design/pro-components/es/form/typing';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { omit } from '@rc-component/util';
+import { If, For, MapIterator } from '@unikue/react-condition';
+import { NanoidUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
+import { useEventListener } from 'ahooks';
 import classnames from 'classnames';
-import {Scrollbars} from 'react-custom-scrollbars-4';
-import {allIconTypes, type IconSceneType} from '@/type/design-icon';
-import {type ReadonlyTabsType} from '@/type/declaration';
-import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
-import {MenuTabs} from '@/layout/MenuTabs';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {StyleUtils} from '@/util/StyleUtils';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { Scrollbars } from 'react-custom-scrollbars-4';
+import { allIconTypes, type IconSceneType } from '@/type/design-icon';
+import { type ReadonlyTabsType } from '@/type/declaration';
+import { CardTabs, type CardTabsProps } from '@/layout/CardTabs';
+import { MenuTabs } from '@/layout/MenuTabs';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { StyleUtils } from '@/util/StyleUtils';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type IconOptionMode = 'icon' | 'text';
@@ -606,7 +606,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 }}
                 renderTrackHorizontal={props => {
                     return (
-                        <div className={props?.className} style={{display: 'none'}}></div>
+                        <div className={props?.className} style={{ display: 'none' }}></div>
                     );
                 }}
                 onScroll={event => {

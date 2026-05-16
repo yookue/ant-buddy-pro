@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {Form, type FormProps, type FormInstance} from 'antd';
-import {ProForm, type ProFormProps, type ProFormInstance} from '@ant-design/pro-components';
-import {omit} from '@rc-component/util';
-import {NanoidUtils} from '@unikue/ts-lang-utils';
-import {useEventListener} from 'ahooks';
+import { Form, type FormProps, type FormInstance } from 'antd';
+import { ProForm, type ProFormProps, type ProFormInstance } from '@ant-design/pro-components';
+import { omit } from '@rc-component/util';
+import { NanoidUtils } from '@unikue/ts-lang-utils';
+import { useEventListener } from 'ahooks';
 import classnames from 'classnames';
-import {type ClickHoverType} from '@/type/declaration';
-import {useFieldStyle} from './styles';
+import { type ClickHoverType } from '@/type/declaration';
+import { useFieldStyle } from './styles';
 
 
 export type CollapseFormRef = {

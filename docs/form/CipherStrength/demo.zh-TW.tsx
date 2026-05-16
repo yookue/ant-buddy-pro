@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {LockOutlined} from '@ant-design/icons';
-import {ProForm, ProFormText, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {CipherStrength, type BeforeAfterType} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { LockOutlined } from '@ant-design/icons';
+import { ProForm, ProFormText, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { CipherStrength, type BeforeAfterType } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -54,12 +54,12 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '前', value: 'before'},
-                        {label: '後', value: 'after'},
-                        {label: '無', value: false},
+                        { label: '前', value: 'before' },
+                        { label: '後', value: 'after' },
+                        { label: '無', value: false },
                     ]}
                 />
-                <Divider/>
+                <Divider />
                 <ProFormText.Password
                     name='password'
                     label='密碼'
@@ -67,7 +67,7 @@ export default () => {
                     fieldProps={{
                         allowClear: true,
                         autoComplete: 'new-password',
-                        prefix: <LockOutlined/>
+                        prefix: <LockOutlined />
                     }}
                 />
                 <CipherStrength

@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {type TooltipProps} from 'antd';
-import {FullscreenOutlined, FullscreenExitOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-components';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
-import {useFullscreen} from 'ahooks';
+import { type TooltipProps } from 'antd';
+import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
+import { useIntl } from '@ant-design/pro-components';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
+import { useFullscreen } from 'ahooks';
 import classnames from 'classnames';
-import {TooltipRender} from '@/render/TooltipRender';
-import {intlLocales} from './locales';
+import { TooltipRender } from '@/render/TooltipRender';
+import { intlLocales } from './locales';
 
 
 export type FullscreenRef = {
@@ -136,7 +136,7 @@ export const Fullscreen: React.ForwardRefExoticComponent<FullscreenProps & React
     } = props ?? {};
 
     const triggerForRef = React.useRef<Element>((typeof props?.triggerFor === 'function' ? props.triggerFor() : null) ?? document.documentElement);
-    const [fullscreen, {enterFullscreen, exitFullscreen, toggleFullscreen}] = useFullscreen(triggerForRef.current);
+    const [fullscreen, { enterFullscreen, exitFullscreen, toggleFullscreen }] = useFullscreen(triggerForRef.current);
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({

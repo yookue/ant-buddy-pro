@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Space} from 'antd';
+import { Space } from 'antd';
 import classnames from 'classnames';
-import {useFieldStyle} from './styles';
+import { useFieldStyle } from './styles';
 
 
 export type CommentCardProps = React.PropsWithChildren<{

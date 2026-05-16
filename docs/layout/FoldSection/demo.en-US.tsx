@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Empty, Divider} from 'antd';
-import {AppstoreOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {FoldSection, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type SectionPresetStyle} from '@unikue/ant-buddy-pro/layout/FoldSection';
+import { Empty, Divider } from 'antd';
+import { AppstoreOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { FoldSection, type BeforeAfterType } from '@unikue/ant-buddy-pro';
+import { type SectionPresetStyle } from '@unikue/ant-buddy-pro/layout/FoldSection';
 
 
 export default () => {
@@ -58,9 +58,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Before', value: 'before'},
-                        {label: 'After', value: 'after'},
-                        {label: 'False', value: false},
+                        { label: 'Before', value: 'before' },
+                        { label: 'After', value: 'after' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -74,9 +74,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Before', value: 'before'},
-                        {label: 'After', value: 'after'},
-                        {label: 'False', value: false},
+                        { label: 'Before', value: 'before' },
+                        { label: 'After', value: 'after' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -90,13 +90,13 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Default', value: 'default'},
-                        {label: 'Success', value: 'success'},
-                        {label: 'Info', value: 'info'},
-                        {label: 'Warn', value: 'warn'},
-                        {label: 'Error', value: 'error'},
-                        {label: 'Classic', value: 'classic'},
-                        {label: 'False', value: false},
+                        { label: 'Default', value: 'default' },
+                        { label: 'Success', value: 'success' },
+                        { label: 'Info', value: 'info' },
+                        { label: 'Warn', value: 'warn' },
+                        { label: 'Error', value: 'error' },
+                        { label: 'Classic', value: 'classic' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormSwitch
@@ -109,10 +109,10 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <FoldSection
                 boundBorder={boundBorder}
-                headerOrnament={<AppstoreOutlined/>}
+                headerOrnament={<AppstoreOutlined />}
                 headerOrnamentPos={ornamentPos}
                 headerContent='FoldSection header caption'
                 headerCollapsePos={collapsePos}

@@ -17,7 +17,7 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import {useFieldStyle} from './styles';
+import { useFieldStyle } from './styles';
 
 
 export type LoginPortalProps = {

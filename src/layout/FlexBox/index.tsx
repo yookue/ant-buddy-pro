@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {css} from '@emotion/css';
-import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { css } from '@emotion/css';
+import { ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {useFieldStyle} from './styles';
+import { useFieldStyle } from './styles';
 
 
 export type BoxGapSize = 'small' | 'middle' | 'large' | React.CSSProperties['gap'];

@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {Form, Input, Space, type InputProps, type InputRef} from 'antd';
-import {ProForm, FormListContext} from '@ant-design/pro-components';
-import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {omit} from '@rc-component/util';
-import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { Form, Input, Space, type InputProps, type InputRef } from 'antd';
+import { ProForm, FormListContext } from '@ant-design/pro-components';
+import { type ProFormFieldItemProps } from '@ant-design/pro-components/es/form/typing';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { omit } from '@rc-component/util';
+import { ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {PropUtils} from '@/util/PropUtils';
-import {useFieldStyle} from './styles';
+import { PropUtils } from '@/util/PropUtils';
+import { useFieldStyle } from './styles';
 
 
 export type AddonInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {
@@ -149,7 +149,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
         return (
             <div className={classnames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz)}>
                 <ProForm.Item name={simpleName} {...restProps}>
-                    <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
+                    <Space.Compact className={`${clazzPrefix}-space`} style={{ width: '100%' }}>
                         {!!addonBeforeDom && (
                             <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
                                 {addonBeforeDom}
@@ -163,7 +163,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                             allowClear={!entryImmutable && props?.allowClear !== false && props?.fieldProps?.allowClear !== false}
                             readOnly={entryReadMode || entryReadonly}
                             disabled={entryDisabled}
-                            style={!inputWidth ? undefined : {width: inputWidth}}
+                            style={!inputWidth ? undefined : { width: inputWidth }}
                             onChange={(event: any) => {
                                 if (simpleName) {
                                     form?.setFieldValue(simpleName, event.target.value);
@@ -184,7 +184,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
     } else {
         return (
             <div className={classnames(clazzPrefix, fieldStyle.hashId, proFieldClazz, widthBlockClazz, entryReadModeClazz, entryImmutableClazz, props?.className ?? props?.fieldProps?.className)}>
-                <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
+                <Space.Compact className={`${clazzPrefix}-space`} style={{ width: '100%' }}>
                     {!!addonBeforeDom && (
                         <Space.Addon className={`${clazzPrefix}-compact-before`} style={addonBeforeStyle}>
                             {addonBeforeDom}
@@ -197,7 +197,7 @@ export const AddonInput: React.FC<AddonInputProps> = (props?: AddonInputProps) =
                         value={entryReadMode ? (fieldValue || props?.proFieldProps?.emptyText || '-') :fieldValue}
                         readOnly={entryReadMode || entryReadonly}
                         disabled={entryDisabled}
-                        style={!inputWidth ? undefined : {width: inputWidth}}
+                        style={!inputWidth ? undefined : { width: inputWidth }}
                         onChange={(event: any) => {
                             if (props?.name) {
                                 form?.setFieldValue(props.name, event.target.value);

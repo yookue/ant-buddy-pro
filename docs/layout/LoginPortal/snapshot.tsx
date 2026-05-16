@@ -15,12 +15,12 @@
  */
 
 
-const {APP_ENV = 'dev'} = process.env;
+const { APP_ENV = 'dev' } = process.env;
 const ROOT_CONTEXT: string = (APP_ENV === 'dev') ? '' : '/ant-buddy-pro';
 
 
 export default () => {
     return (
-        <img src={`${ROOT_CONTEXT}/assets/img/snap/login-portal-1.jpg`} alt='' style={{width:'100%'}}/>
+        <img src={`${ROOT_CONTEXT}/assets/img/snap/login-portal-1.jpg`} alt='' style={{ width:'100%' }}/>
     );
 }

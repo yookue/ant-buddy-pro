@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider, Button, Space} from 'antd';
-import {LinkOutlined, SearchOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
-import {AddonInput} from '@unikue/ant-buddy-pro';
+import { Divider, Button, Space } from 'antd';
+import { LinkOutlined, SearchOutlined } from '@ant-design/icons';
+import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
+import { AddonInput } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -55,7 +55,7 @@ export default () => {
                     />
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <ProForm
                 name='AddonInput_demo_1.zh-CN.Test'
                 layout='vertical'
@@ -63,13 +63,13 @@ export default () => {
                 readonly={readonly}
                 submitter={false}
             >
-                <Space orientation='vertical' size='middle' style={{width: '100%'}}>
+                <Space orientation='vertical' size='middle' style={{ width: '100%' }}>
                     <AddonInput
                         name='website'
                         label='网站地址'
                         placeholder='请输入网址'
                         addonBefore='https://'
-                        addonAfter={<LinkOutlined/>}
+                        addonAfter={<LinkOutlined />}
                         proField={proField}
                         tooltip='用于显示的网站 URL'
                         rules={[
@@ -90,7 +90,7 @@ export default () => {
                         addonAfter={(
                             <Button
                                 type='primary'
-                                icon={<SearchOutlined/>}
+                                icon={<SearchOutlined />}
                                 disabled={readonly}
                             >
                                 搜索

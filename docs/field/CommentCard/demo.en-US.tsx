@@ -15,14 +15,14 @@
  */
 
 
-import {Avatar, Space} from 'antd';
-import {LikeOutlined, MessageOutlined, StarOutlined} from '@ant-design/icons';
-import {CommentCard} from '@unikue/ant-buddy-pro';
+import { Avatar, Space } from 'antd';
+import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { CommentCard } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
     return (
-        <Space orientation='vertical' style={{width: '100%'}} size='large'>
+        <Space orientation='vertical' style={{ width: '100%' }} size='large'>
             <CommentCard
                 avatar={<Avatar src='https://api.dicebear.com/7.x/miniavs/svg?seed=1' alt='Han Solo'/>}
                 author='Han Solo'
@@ -30,10 +30,10 @@ export default () => {
                 content='Ant Design component library is awesome and very convenient to use!'
                 actions={[
                     <span key='like'>
-                        <LikeOutlined/> Like
+                        <LikeOutlined /> Like
                     </span>,
                     <span key='reply'>
-                        <MessageOutlined/> Reply
+                        <MessageOutlined /> Reply
                     </span>,
                 ]}
             >
@@ -44,10 +44,10 @@ export default () => {
                     content='Agreed! Especially the ProComponents series, which greatly improves development efficiency.'
                     actions={[
                         <span key='like'>
-                            <LikeOutlined/> Like
+                            <LikeOutlined /> Like
                         </span>,
                         <span key='reply'>
-                            <MessageOutlined/> Reply
+                            <MessageOutlined /> Reply
                         </span>,
                     ]}
                 />
@@ -65,13 +65,13 @@ export default () => {
                 }
                 actions={[
                     <span key='like'>
-                        <LikeOutlined/> 12
+                        <LikeOutlined /> 12
                     </span>,
                     <span key='star'>
-                        <StarOutlined/> Star
+                        <StarOutlined /> Star
                     </span>,
                     <span key='reply'>
-                        <MessageOutlined/> Reply
+                        <MessageOutlined /> Reply
                     </span>,
                 ]}
             />

@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider, message as messageApi} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-components';
-import {LocaleTextarea} from '@unikue/ant-buddy-pro';
-import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import { Divider, message as messageApi } from 'antd';
+import { ProForm, ProFormRadio } from '@ant-design/pro-components';
+import { LocaleTextarea } from '@unikue/ant-buddy-pro';
+import { type TabPlacement } from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
@@ -54,15 +54,15 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Top', value: 'top'},
-                        {label: 'Bottom', value: 'bottom'},
-                        {label: 'Left', value: 'start'},
-                        {label: 'Right', value: 'end'},
-                        {label: 'Top-End', value: 'top-end'},
-                        {label: 'Bottom-End', value: 'bottom-end'},
+                        { label: 'Top', value: 'top' },
+                        { label: 'Bottom', value: 'bottom' },
+                        { label: 'Left', value: 'start' },
+                        { label: 'Right', value: 'end' },
+                        { label: 'Top-End', value: 'top-end' },
+                        { label: 'Bottom-End', value: 'bottom-end' },
                     ]}
                 />
-                <Divider/>
+                <Divider />
                 <LocaleTextarea
                     name='foobar'
                     label='Demo Field Label'

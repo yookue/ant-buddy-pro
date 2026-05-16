@@ -15,11 +15,11 @@
  */
 
 
-import {Avatar, message as messageApi} from 'antd';
-import {UserOutlined} from '@ant-design/icons';
-import {ProFormTextArea} from '@ant-design/pro-components';
-import {CollapseForm, CommentCard} from '@unikue/ant-buddy-pro';
-import {RandomUtils} from '@unikue/ts-lang-utils';
+import { Avatar, message as messageApi } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { ProFormTextArea } from '@ant-design/pro-components';
+import { CollapseForm, CommentCard } from '@unikue/ant-buddy-pro';
+import { RandomUtils } from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -58,7 +58,7 @@ export default () => {
                     >
                         <CommentCard
                             avatar={(
-                                <Avatar icon={<UserOutlined/>} size='small'/>
+                                <Avatar icon={<UserOutlined />} size='small'/>
                             )}
                             content={(
                                 <ProFormTextArea

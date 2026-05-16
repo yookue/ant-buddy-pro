@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSelect, ProFormSwitch} from '@ant-design/pro-components';
-import {CardTabs, type PaddingSpaceType} from '@unikue/ant-buddy-pro';
-import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import { Divider } from 'antd';
+import { ProForm, ProFormRadio, ProFormSelect, ProFormSwitch } from '@ant-design/pro-components';
+import { CardTabs, type PaddingSpaceType } from '@unikue/ant-buddy-pro';
+import { type TabPlacement } from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
@@ -49,12 +49,12 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Top', value: 'top'},
-                        {label: 'Bottom', value: 'bottom'},
-                        {label: 'Left', value: 'start'},
-                        {label: 'Right', value: 'end'},
-                        {label: 'Top-End', value: 'top-end'},
-                        {label: 'Bottom-End', value: 'bottom-end'},
+                        { label: 'Top', value: 'top' },
+                        { label: 'Bottom', value: 'bottom' },
+                        { label: 'Left', value: 'start' },
+                        { label: 'Right', value: 'end' },
+                        { label: 'Top-End', value: 'top-end' },
+                        { label: 'Bottom-End', value: 'bottom-end' },
                     ]}
                 />
                 <ProForm.Group>
@@ -94,25 +94,25 @@ export default () => {
                         allowClear: true,
                         value: presetStyle,
                         options: [
-                            {label: 'padding-0', value: 'padding-0'},
-                            {label: 'padding-xxs', value: 'padding-xxs'},
-                            {label: 'padding-xs', value: 'padding-xs'},
-                            {label: 'padding-sm', value: 'padding-sm'},
-                            {label: 'padding-md', value: 'padding-md'},
-                            {label: 'padding-lg', value: 'padding-lg'},
-                            {label: 'padding-x-0', value: 'padding-x-0'},
-                            {label: 'padding-x-xxs', value: 'padding-x-xxs'},
-                            {label: 'padding-x-xs', value: 'padding-x-xs'},
-                            {label: 'padding-x-sm', value: 'padding-x-sm'},
-                            {label: 'padding-x-md', value: 'padding-x-md'},
-                            {label: 'padding-x-lg', value: 'padding-x-lg'},
-                            {label: 'padding-y-0', value: 'padding-y-0'},
-                            {label: 'padding-y-xxs', value: 'padding-y-xxs'},
-                            {label: 'padding-y-xs', value: 'padding-y-xs'},
-                            {label: 'padding-y-sm', value: 'padding-y-sm'},
-                            {label: 'padding-y-md', value: 'padding-y-md'},
-                            {label: 'padding-y-lg', value: 'padding-y-lg'},
-                            {label: 'False', value: undefined},
+                            { label: 'padding-0', value: 'padding-0' },
+                            { label: 'padding-xxs', value: 'padding-xxs' },
+                            { label: 'padding-xs', value: 'padding-xs' },
+                            { label: 'padding-sm', value: 'padding-sm' },
+                            { label: 'padding-md', value: 'padding-md' },
+                            { label: 'padding-lg', value: 'padding-lg' },
+                            { label: 'padding-x-0', value: 'padding-x-0' },
+                            { label: 'padding-x-xxs', value: 'padding-x-xxs' },
+                            { label: 'padding-x-xs', value: 'padding-x-xs' },
+                            { label: 'padding-x-sm', value: 'padding-x-sm' },
+                            { label: 'padding-x-md', value: 'padding-x-md' },
+                            { label: 'padding-x-lg', value: 'padding-x-lg' },
+                            { label: 'padding-y-0', value: 'padding-y-0' },
+                            { label: 'padding-y-xxs', value: 'padding-y-xxs' },
+                            { label: 'padding-y-xs', value: 'padding-y-xs' },
+                            { label: 'padding-y-sm', value: 'padding-y-sm' },
+                            { label: 'padding-y-md', value: 'padding-y-md' },
+                            { label: 'padding-y-lg', value: 'padding-y-lg' },
+                            { label: 'False', value: undefined },
                         ],
                         onChange: (value) => {
                             setPresetStyle(value);
@@ -120,7 +120,7 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <CardTabs
                 tabPlacement={tabPlacement}
                 tabBorder={tabBorder}
@@ -135,9 +135,9 @@ export default () => {
                         children: (
                             <>
                                 <span>Content of Tab Pane {id}</span>
-                                <br/><br/>
+                                <br /><br />
                                 <span>Content of Tab Pane {id}</span>
-                                <br/><br/>
+                                <br /><br />
                                 <span>Content of Tab Pane {id}</span>
                             </>
                         ),

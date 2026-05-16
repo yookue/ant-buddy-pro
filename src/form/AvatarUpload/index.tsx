@@ -16,21 +16,21 @@
 
 
 import React from 'react';
-import {App, Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps} from 'antd';
-import {type RcFile} from 'antd/es/upload/interface';
-import {UserOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-components';
-import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {warpField} from '@ant-design/pro-components/es/form/components/FormItem/warpField';
-import {omit} from '@rc-component/util';
-import {FileUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import ImgCrop, {type ImgCropProps} from 'antd-img-crop';
+import { App, Avatar, Image, Space, Upload, type AvatarProps, type ImageProps, type TooltipProps, type UploadProps } from 'antd';
+import { type RcFile } from 'antd/es/upload/interface';
+import { UserOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { useIntl } from '@ant-design/pro-components';
+import { type ProFormFieldItemProps } from '@ant-design/pro-components/es/form/typing';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { warpField } from '@ant-design/pro-components/es/form/components/FormItem/warpField';
+import { omit } from '@rc-component/util';
+import { FileUtils, NumberUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
+import ImgCrop, { type ImgCropProps } from 'antd-img-crop';
 import classnames from 'classnames';
-import {type CircleSquareShape, type FileSizeUint} from '@/type/declaration';
-import {TooltipRender} from '@/render/TooltipRender';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type CircleSquareShape, type FileSizeUint } from '@/type/declaration';
+import { TooltipRender } from '@/render/TooltipRender';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type AvatarUploadRef = {
@@ -282,7 +282,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
     const [imageSrc, setImageSrc] = React.useState<string | undefined>(props?.imageSrc);
     const [fallbackSrc, setFallbackSrc] = React.useState<string | undefined>(props?.fallbackSrc);
     const fieldStyle = useFieldStyle(clazzPrefix);
-    const {message: messageApi} = App.useApp();
+    const { message: messageApi } = App.useApp();
 
     // noinspection JSUnusedGlobalSymbols
     React.useImperativeHandle(ref, () => ({
@@ -389,7 +389,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         }
         const innerDom = (
             <div className={`${clazzPrefix}-avatar-placeholder`}>
-                <UserOutlined/>
+                <UserOutlined />
             </div>
         );
         return TooltipRender.renderTooltip(props?.tooltipCtrl, props?.tooltipProps, innerDom);
@@ -404,7 +404,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
         }
         const innerDom = (
             <Space className={`${clazzPrefix}-upload-space`} size={4}>
-                {loading ? <LoadingOutlined/> : <PlusOutlined/>}
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
                 {ObjectUtils.firstNotNil(props?.localeProps?.upload, intlLocales.get([locale, 'upload']), intlLocales.get(['en_US', 'upload']))}
             </Space>
         );
@@ -418,7 +418,7 @@ const AvatarUploadField: React.ForwardRefExoticComponent<AvatarUploadProps & Rea
                 <Avatar
                     className={classnames(`${clazzPrefix}-avatar`, props?.avatarProps?.className)}
                     shape={shape}
-                    size={props?.avatarProps?.size ?? {xs: 24, sm: 32, md: 48, lg: 64, xl: 104, xxl: 128}}
+                    size={props?.avatarProps?.size ?? { xs: 24, sm: 32, md: 48, lg: 64, xl: 104, xxl: 128 }}
                     icon={buildAvatarPlaceholder()}
                     src={buildImageDom()}
                     {...omitAvatarProps}

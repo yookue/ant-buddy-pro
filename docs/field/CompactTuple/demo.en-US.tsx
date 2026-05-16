@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Row, Col, Divider} from 'antd';
+import { Row, Col, Divider } from 'antd';
 import datePickerLocale from 'antd/es/date-picker/locale/en_US';
-import {ProForm, ProFormDatePicker, ProFormRadio, ProFormSwitch, ProFormDependency} from '@ant-design/pro-components';
-import {CompactTuple, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type TuplePresetStyle} from '@unikue/ant-buddy-pro/field/CompactTuple';
+import { ProForm, ProFormDatePicker, ProFormRadio, ProFormSwitch, ProFormDependency } from '@ant-design/pro-components';
+import { CompactTuple, type BeforeAfterType } from '@unikue/ant-buddy-pro';
+import { type TuplePresetStyle } from '@unikue/ant-buddy-pro/field/CompactTuple';
 import dayjs from 'dayjs';
 
 
@@ -71,9 +71,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Before', value: 'before'},
-                        {label: 'After', value: 'after'},
-                        {label: 'False', value: false},
+                        { label: 'Before', value: 'before' },
+                        { label: 'After', value: 'after' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -88,13 +88,13 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Field-Prior', value: 'field-prior'},
-                        {label: 'Addon-Prior', value: 'addon-prior'},
-                        {label: 'False', value: false},
+                        { label: 'Field-Prior', value: 'field-prior' },
+                        { label: 'Addon-Prior', value: 'addon-prior' },
+                        { label: 'False', value: false },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <ProForm
                 name='CompactTuple_test'
                 layout='vertical'
@@ -109,7 +109,7 @@ export default () => {
                             label='Start Date'
                             placeholder='Start Date'
                             fieldProps={{
-                                style: {width: '100%'},
+                                style: { width: '100%' },
                                 locale: datePickerLocale,
                             }}
                         />
@@ -118,7 +118,7 @@ export default () => {
                         <CompactTuple
                             field={(
                                 <ProFormDependency name={['identityStart', 'identityInfinite']} shouldUpdate={true}>
-                                    {({identityStart, identityInfinite}) => {
+                                    {({ identityStart, identityInfinite }) => {
                                         return (
                                             <ProFormDatePicker
                                                 name='identityEnd'
@@ -127,7 +127,7 @@ export default () => {
                                                 fieldProps={{
                                                     disabled: identityInfinite,
                                                     disabledDate: (date: any) => date < dayjs(identityStart),
-                                                    style: {width: '100%'},
+                                                    style: { width: '100%' },
                                                     locale: datePickerLocale,
                                                 }}
                                             />

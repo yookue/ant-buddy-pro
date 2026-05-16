@@ -15,9 +15,9 @@
  */
 
 
-import {Divider, message as messageApi} from 'antd';
-import {ProForm} from '@ant-design/pro-components';
-import {LocaleTextarea} from '@unikue/ant-buddy-pro';
+import { Divider, message as messageApi } from 'antd';
+import { ProForm } from '@ant-design/pro-components';
+import { LocaleTextarea } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -57,7 +57,7 @@ export default () => {
                         placeholder: 'Please input this field',
                     }}
                 />
-                <Divider/>
+                <Divider />
             </ProForm>
         </>
     );

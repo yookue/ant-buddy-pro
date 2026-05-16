@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Row, Col, Divider} from 'antd';
+import { Row, Col, Divider } from 'antd';
 import datePickerLocale from 'antd/es/date-picker/locale/zh_TW';
-import {ProForm, ProFormDatePicker, ProFormRadio, ProFormSwitch, ProFormDependency} from '@ant-design/pro-components';
-import {CompactTuple, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type TuplePresetStyle} from '@unikue/ant-buddy-pro/field/CompactTuple';
+import { ProForm, ProFormDatePicker, ProFormRadio, ProFormSwitch, ProFormDependency } from '@ant-design/pro-components';
+import { CompactTuple, type BeforeAfterType } from '@unikue/ant-buddy-pro';
+import { type TuplePresetStyle } from '@unikue/ant-buddy-pro/field/CompactTuple';
 import dayjs from 'dayjs';
 
 
@@ -71,9 +71,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '前', value: 'before'},
-                        {label: '後', value: 'after'},
-                        {label: '無', value: false},
+                        { label: '前', value: 'before' },
+                        { label: '後', value: 'after' },
+                        { label: '無', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -88,13 +88,13 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '字段優先', value: 'field-prior'},
-                        {label: '附加物優先', value: 'addon-prior'},
-                        {label: '無', value: false},
+                        { label: '字段優先', value: 'field-prior' },
+                        { label: '附加物優先', value: 'addon-prior' },
+                        { label: '無', value: false },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <ProForm
                 name='CompactTuple_test'
                 layout='vertical'
@@ -109,7 +109,7 @@ export default () => {
                             label='開始日期'
                             placeholder='開始日期'
                             fieldProps={{
-                                style: {width: '100%'},
+                                style: { width: '100%' },
                                 locale: datePickerLocale,
                             }}
                         />
@@ -118,7 +118,7 @@ export default () => {
                         <CompactTuple
                             field={(
                                 <ProFormDependency name={['identityStart', 'identityInfinite']} shouldUpdate={true}>
-                                    {({identityStart, identityInfinite}) => {
+                                    {({ identityStart, identityInfinite }) => {
                                         return (
                                             <ProFormDatePicker
                                                 name='identityEnd'
@@ -127,7 +127,7 @@ export default () => {
                                                 fieldProps={{
                                                     disabled: identityInfinite,
                                                     disabledDate: (date: any) => date < dayjs(identityStart),
-                                                    style: {width: '100%'},
+                                                    style: { width: '100%' },
                                                     locale: datePickerLocale,
                                                 }}
                                             />

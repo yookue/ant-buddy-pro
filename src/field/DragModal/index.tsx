@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Modal, type ModalProps} from 'antd';
-import {DndContext, useDraggable} from '@dnd-kit/core';
-import {restrictToWindowEdges} from '@dnd-kit/modifiers';
-import {omit} from '@rc-component/util';
-import {NanoidUtils} from '@unikue/ts-lang-utils';
+import { Modal, type ModalProps } from 'antd';
+import { DndContext, useDraggable } from '@dnd-kit/core';
+import { restrictToWindowEdges } from '@dnd-kit/modifiers';
+import { omit } from '@rc-component/util';
+import { NanoidUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 
 
@@ -58,7 +58,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
 
     const [fieldId] = React.useState<string>(NanoidUtils.getPopularId());
     const dragId = React.useMemo(() => `drag-modal-${fieldId}`, [fieldId]);
-    const [offset, setOffset] = React.useState<{ x: number; y: number }>({x: 0, y: 0});
+    const [offset, setOffset] = React.useState<{ x: number; y: number }>({ x: 0, y: 0 });
     const [opening, setOpening] = React.useState<boolean>(false);
 
     const omitProps = !props ? {} : omit(props, ['className', 'wrapClassName', 'modalRender', 'title', 'clazzPrefix', 'draggable']);
@@ -77,7 +77,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
     // Reset offset when modal closes
     React.useEffect(() => {
         if (!props?.open && opening) {
-            setOffset({x: 0, y: 0});
+            setOffset({ x: 0, y: 0 });
             setOpening(false);
         } else if (props?.open && !opening) {
             setOpening(true);
@@ -97,7 +97,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
         // Lock body scroll to prevent mask scrollbar flickering
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
-        document.addEventListener('touchmove', handleTouchMove, {passive: false});
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
         return () => {
             document.body.style.overflow = '';
@@ -107,8 +107,8 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
     }, [draggable, props?.open]);
 
     // Draggable content component - always defined to maintain hook order
-    const DraggableContent: React.FC<{children: React.ReactNode}> = React.useCallback(({children}) => {
-        const {setNodeRef, transform} = useDraggable({
+    const DraggableContent: React.FC<{children: React.ReactNode}> = React.useCallback(({ children }) => {
+        const { setNodeRef, transform } = useDraggable({
             id: dragId,
             disabled: !draggable,
         });
@@ -130,7 +130,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
 
     // Title component with drag handle - always defined to maintain hook order
     const DraggableTitle: React.FC = React.useCallback(() => {
-        const {listeners, attributes} = useDraggable({
+        const { listeners, attributes } = useDraggable({
             id: dragId,
             disabled: !draggable,
         });
@@ -140,7 +140,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
                 className={classnames(`${clazzPrefix}-draggable-title`, `${clazzPrefix}-draggable-title-${fieldId}`)}
                 {...listeners}
                 {...attributes}
-                style={{cursor: draggable ? 'move' : 'default'}}
+                style={{ cursor: draggable ? 'move' : 'default' }}
             >
                 {props?.title}
             </div>
@@ -156,7 +156,7 @@ export const DragModal: React.FC<DragModalProps> = (props?: DragModalProps) => {
             <Modal
                 className={classnames(clazzPrefix, `${clazzPrefix}-${fieldId}`, props?.className)}
                 wrapClassName={classnames(`${clazzPrefix}-wrapper`, `${clazzPrefix}-wrapper-${fieldId}`, props?.wrapClassName)}
-                title={props?.modalRender ? props?.title : <DraggableTitle/>}
+                title={props?.modalRender ? props?.title : <DraggableTitle />}
                 modalRender={props?.modalRender ?? ((dom: React.ReactNode) => {
                     return (
                         <DraggableContent>

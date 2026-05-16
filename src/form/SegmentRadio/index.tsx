@@ -15,17 +15,17 @@
  */
 
 import React from 'react';
-import {Form, Segmented, type SegmentedProps} from 'antd';
-import {type SegmentedLabeledOption} from 'antd/es/segmented';
-import {ProForm, useDebounceFn} from '@ant-design/pro-components';
-import {type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-components/es/form/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {pickProFormItemProps} from '@ant-design/pro-components/es/utils/pickProFormItemProps';
-import {type SegmentedRawOption} from '@rc-component/segmented';
-import {omit} from '@rc-component/util';
+import { Form, Segmented, type SegmentedProps } from 'antd';
+import { type SegmentedLabeledOption } from 'antd/es/segmented';
+import { ProForm, useDebounceFn } from '@ant-design/pro-components';
+import { type ProFormFieldItemProps, type ProFormFieldRemoteProps } from '@ant-design/pro-components/es/form/typing';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { pickProFormItemProps } from '@ant-design/pro-components/es/utils/pickProFormItemProps';
+import { type SegmentedRawOption } from '@rc-component/segmented';
+import { omit } from '@rc-component/util';
 import classnames from 'classnames';
-import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
-import {FieldUtils} from '@/util/FieldUtils';
+import { type WithFalse, type RequestOptionPlace } from '@/type/declaration';
+import { FieldUtils } from '@/util/FieldUtils';
 
 
 export type SegmentRadioProps = Omit<ProFormFieldItemProps<SegmentedProps>, 'children' | 'placeholder' | 'readonly'> & Omit<ProFormFieldRemoteProps, 'request'> & {
@@ -106,7 +106,7 @@ export const SegmentRadio: React.FC<SegmentRadioProps> = (props?: SegmentRadioPr
     });
 
     if (props?.request && props?.requestOptionPlace !== false) {
-        const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        const { run } = useDebounceFn(props.request, props?.debounceTime ?? 0);
         React.useEffect(() => {
             run(props?.params).then((values?: (SegmentedRawOption | SegmentedLabeledOption)[]) => {
                 // noinspection DuplicatedCode

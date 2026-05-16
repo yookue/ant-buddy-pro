@@ -16,18 +16,18 @@
 
 
 import React from 'react';
-import {Form, type InputProps} from 'antd';
-import {ProForm, FormListContext, useIntl} from '@ant-design/pro-components';
-import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {omit} from '@rc-component/util';
-import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { Form, type InputProps } from 'antd';
+import { ProForm, FormListContext, useIntl } from '@ant-design/pro-components';
+import { type ProFormFieldItemProps } from '@ant-design/pro-components/es/form/typing';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { omit } from '@rc-component/util';
+import { NanoidUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import 'mathlive';
 import 'mathlive/fonts.css';
-import {PropUtils} from '@/util/PropUtils';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { PropUtils } from '@/util/PropUtils';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 type MathfieldOptions = {

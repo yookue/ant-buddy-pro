@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {AppstoreOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {ApartTitle, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type ApartPresetStyle} from '@unikue/ant-buddy-pro/layout/ApartTitle';
+import { Divider } from 'antd';
+import { AppstoreOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { ApartTitle, type BeforeAfterType } from '@unikue/ant-buddy-pro';
+import { type ApartPresetStyle } from '@unikue/ant-buddy-pro/layout/ApartTitle';
 
 
 export default () => {
@@ -56,9 +56,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Before', value: 'before'},
-                        {label: 'After', value: 'after'},
-                        {label: 'False', value: false},
+                        { label: 'Before', value: 'before' },
+                        { label: 'After', value: 'after' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -72,20 +72,20 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Default', value: 'default'},
-                        {label: 'Success', value: 'success'},
-                        {label: 'Info', value: 'info'},
-                        {label: 'Warn', value: 'warn'},
-                        {label: 'Error', value: 'error'},
-                        {label: 'Classic', value: 'classic'},
-                        {label: 'False', value: false},
+                        { label: 'Default', value: 'default' },
+                        { label: 'Success', value: 'success' },
+                        { label: 'Info', value: 'info' },
+                        { label: 'Warn', value: 'warn' },
+                        { label: 'Error', value: 'error' },
+                        { label: 'Classic', value: 'classic' },
+                        { label: 'False', value: false },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <ApartTitle
                 boundBorder={boundBorder}
-                ornament={<AppstoreOutlined/>}
+                ornament={<AppstoreOutlined />}
                 ornamentPos={ornamentPos}
                 content='ApartTitle header content'
                 presetStyle={presetStyle}

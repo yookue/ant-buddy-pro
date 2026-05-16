@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {type BadgeProps} from 'antd';
-import {isPresetColor} from 'antd/es/_util/colors';
-import {presetPrimaryColors} from '@ant-design/colors';
-import {css} from '@emotion/css';
-import {StringUtils} from '@unikue/ts-lang-utils';
+import { type BadgeProps } from 'antd';
+import { isPresetColor } from 'antd/es/_util/colors';
+import { presetPrimaryColors } from '@ant-design/colors';
+import { css } from '@emotion/css';
+import { StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {type RectZenithPlace} from '@/type/declaration';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {useFieldStyle} from './styles';
+import { type RectZenithPlace } from '@/type/declaration';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { useFieldStyle } from './styles';
 
 
 export type CornerStampProps = React.PropsWithChildren<{

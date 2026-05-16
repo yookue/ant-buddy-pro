@@ -16,12 +16,12 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {FireOutlined, StopOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {DelayModal, ConsoleUtils, type DelayModalRef} from '@unikue/ant-buddy-pro';
-import {type ModalActionType} from '@unikue/ant-buddy-pro/field/DelayModal';
-import {RandomUtils} from '@unikue/ts-lang-utils';
+import { Button, Divider } from 'antd';
+import { FireOutlined, StopOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { DelayModal, ConsoleUtils, type DelayModalRef } from '@unikue/ant-buddy-pro';
+import { type ModalActionType } from '@unikue/ant-buddy-pro/field/DelayModal';
+import { RandomUtils } from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -80,17 +80,17 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '确认', value: 'confirm'},
-                        {label: '信息', value: 'info'},
-                        {label: '警告', value: 'warn'},
-                        {label: '成功', value: 'success'},
-                        {label: '错误', value: 'error'},
-                        {label: '自定义', value: 'custom'},
+                        { label: '确认', value: 'confirm' },
+                        { label: '信息', value: 'info' },
+                        { label: '警告', value: 'warn' },
+                        { label: '成功', value: 'success' },
+                        { label: '错误', value: 'error' },
+                        { label: '自定义', value: 'custom' },
                     ]}
                 />
                 <ProForm.Group>
                     <Button
-                        icon={<FireOutlined/>}
+                        icon={<FireOutlined />}
                         disabled={autoStart || timing}
                         onClick={() => {
                             delayModalRef.current?.startTimer();
@@ -100,7 +100,7 @@ export default () => {
                         手动开始
                     </Button>
                     <Button
-                        icon={<StopOutlined/>}
+                        icon={<StopOutlined />}
                         disabled={autoStart || !timing}
                         onClick={() => {
                             delayModalRef.current?.stopTimer();
@@ -111,7 +111,7 @@ export default () => {
                     </Button>
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <span>
                 空闲（鼠标键盘无动作）10 秒钟后弹出。
             </span>
@@ -125,7 +125,7 @@ export default () => {
                     title: 'DelayModal',
                     children: `咦，这是一条来自 modalProps 的消息。${RandomUtils.randomString(6)}`,
                     closable: false,
-                    mask: {closable: false},
+                    mask: { closable: false },
                     okText: '确定',
                     cancelText: '取消',
                 }}
@@ -133,7 +133,7 @@ export default () => {
                     title: 'DelayModal',
                     content: `咦，这是一条来自 modalFunProps 的消息。${RandomUtils.randomString(6)}`,
                     closable: false,
-                    mask: {closable: false},
+                    mask: { closable: false },
                     okText: '确定',
                     cancelText: '取消',
                 }}

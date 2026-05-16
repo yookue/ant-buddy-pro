@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-components';
-import {DivideSelect, type LabelMixinType} from '@unikue/ant-buddy-pro';
-import {type DividePresetStyle} from '@unikue/ant-buddy-pro/form/DivideSelect';
+import { Divider } from 'antd';
+import { ProForm, ProFormRadio } from '@ant-design/pro-components';
+import { DivideSelect, type LabelMixinType } from '@unikue/ant-buddy-pro';
+import { type DividePresetStyle } from '@unikue/ant-buddy-pro/form/DivideSelect';
 
 
 export default () => {
@@ -47,9 +47,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Label', value: 'label'},
-                        {label: 'Value', value: 'value'},
-                        {label: 'Code', value: 'code'},
+                        { label: 'Label', value: 'label' },
+                        { label: 'Value', value: 'value' },
+                        { label: 'Code', value: 'code' },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -63,10 +63,10 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Label', value: 'label'},
-                        {label: 'Value', value: 'value'},
-                        {label: 'Code', value: 'code'},
-                        {label: 'False', value: false},
+                        { label: 'Label', value: 'label' },
+                        { label: 'Value', value: 'value' },
+                        { label: 'Code', value: 'code' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -80,10 +80,10 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Label', value: 'label'},
-                        {label: 'Value', value: 'value'},
-                        {label: 'Code', value: 'code'},
-                        {label: 'False', value: false},
+                        { label: 'Label', value: 'label' },
+                        { label: 'Value', value: 'value' },
+                        { label: 'Code', value: 'code' },
+                        { label: 'False', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -97,12 +97,12 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Before-Prior', value: 'before-prior'},
-                        {label: 'After-Prior', value: 'after-prior'},
-                        {label: 'False', value: false},
+                        { label: 'Before-Prior', value: 'before-prior' },
+                        { label: 'After-Prior', value: 'after-prior' },
+                        { label: 'False', value: false },
                     ]}
                 />
-                <Divider/>
+                <Divider />
                 <DivideSelect
                     name='foo'
                     placeholder='Please select this field'
@@ -114,7 +114,7 @@ export default () => {
                                 value: 'optGroup-asia',
                                 optionType: 'optGroup',
                                 children: [
-                                    {label: 'China', value: '+86', code: 'CN'},
+                                    { label: 'China', value: '+86', code: 'CN' },
                                 ]
                             },
                             {
@@ -122,7 +122,7 @@ export default () => {
                                 value: 'optGroup-america',
                                 optionType: 'optGroup',
                                 children: [
-                                    {label: 'United States', value: '+1', code: 'US'},
+                                    { label: 'United States', value: '+1', code: 'US' },
                                 ]
                             }
                         ]

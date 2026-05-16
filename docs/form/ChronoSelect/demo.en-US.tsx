@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-components';
-import {ChronoSelect, type AxisDirectionType} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { ProForm, ProFormRadio } from '@ant-design/pro-components';
+import { ChronoSelect, type AxisDirectionType } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -43,12 +43,12 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Horizontal', value: 'horizontal'},
-                        {label: 'Vertical', value: 'vertical'},
+                        { label: 'Horizontal', value: 'horizontal' },
+                        { label: 'Vertical', value: 'vertical' },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <ProForm
                 name='ChronoSelect_demo.en-US.Test'
                 layout={layout}

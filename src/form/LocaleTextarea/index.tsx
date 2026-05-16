@@ -16,21 +16,21 @@
 
 
 import React from 'react';
-import {Form, Input, type TabsProps, type FormRule} from 'antd';
-import {type TextAreaProps, type TextAreaRef} from 'antd/es/input/TextArea';
-import {ProFormTextArea, useIntl} from '@ant-design/pro-components';
-import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {type TabPaneProps as RcTabPaneProps} from '@rc-component/tabs/es/TabPanelList/TabPane';
-import {omit} from '@rc-component/util';
-import {If} from '@unikue/react-condition';
-import {NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { Form, Input, type TabsProps, type FormRule } from 'antd';
+import { type TextAreaProps, type TextAreaRef } from 'antd/es/input/TextArea';
+import { ProFormTextArea, useIntl } from '@ant-design/pro-components';
+import { type ProFormFieldItemProps } from '@ant-design/pro-components/es/form/typing';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { type TabPaneProps as RcTabPaneProps } from '@rc-component/tabs/es/TabPanelList/TabPane';
+import { omit } from '@rc-component/util';
+import { If } from '@unikue/react-condition';
+import { NanoidUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {type WithFalse, type ReadonlyTabsType, type RuleValidateScope} from '@/type/declaration';
-import {LabelField} from '@/field/LabelField';
-import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type ReadonlyTabsType, type RuleValidateScope } from '@/type/declaration';
+import { LabelField } from '@/field/LabelField';
+import { CardTabs, type CardTabsProps } from '@/layout/CardTabs';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type MixinTabsProps = Omit<CardTabsProps, 'activeKey' | 'addIcon' | 'defaultActiveKey' | 'hideAdd' | 'items' | 'onEdit' | 'children'> & {
@@ -330,7 +330,7 @@ export const LocaleTextarea: React.FC<LocaleTextareaProps> = (props?: LocaleText
                 if (!itemProp || !itemProp?.tag) {
                     continue;
                 }
-                const {tag, fieldProps, rules} = itemProp;
+                const { tag, fieldProps, rules } = itemProp;
                 const restProps = omit(itemProp, ['tag', 'name', 'fieldProps', 'rules']);
                 const omitFieldProps = !fieldProps ? {} : omit(fieldProps, ['className', 'name', 'id', 'placeholder', 'allowClear', 'autoSize', 'variant', 'maxLength', 'showCount', 'disabled', 'readOnly']);
                 const pureRestFieldProps = omit(omitFieldProps, ['onChange']);

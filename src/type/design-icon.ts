@@ -17,7 +17,7 @@
 
 import React from 'react';
 import * as icons from '@ant-design/icons';
-import {ReadonlyMultiKeyMap} from '@unikue/ts-multi-map';
+import { ReadonlyMultiKeyMap } from '@unikue/ts-multi-map';
 
 
 /**

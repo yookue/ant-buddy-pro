@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Button, Divider, message as messageApi} from 'antd';
-import {RedoOutlined} from '@ant-design/icons';
-import {RefreshImage, type RefreshImageRef} from '@unikue/ant-buddy-pro';
-import {RandomUtils} from '@unikue/ts-lang-utils';
+import { Button, Divider, message as messageApi } from 'antd';
+import { RedoOutlined } from '@ant-design/icons';
+import { RefreshImage, type RefreshImageRef } from '@unikue/ant-buddy-pro';
+import { RandomUtils } from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -30,14 +30,14 @@ export default () => {
         <>
             {messageContext}
             <Button
-                icon={<RedoOutlined/>}
+                icon={<RedoOutlined />}
                 onClick={() => {
                     refreshImageRef.current?.refresh();
                 }}
             >
                 刷新图片
             </Button>
-            <Divider/>
+            <Divider />
             <RefreshImage
                 ref={refreshImageRef}
                 width={120}

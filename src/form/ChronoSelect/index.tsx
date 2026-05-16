@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {Form, Select} from 'antd';
-import {ProFormSelect, useIntl} from '@ant-design/pro-components';
-import {type ProFormSelectProps} from '@ant-design/pro-components/es/form/components/Select';
-import {omit} from '@rc-component/util';
-import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { Form, Select } from 'antd';
+import { ProFormSelect, useIntl } from '@ant-design/pro-components';
+import { type ProFormSelectProps } from '@ant-design/pro-components/es/form/components/Select';
+import { omit } from '@rc-component/util';
+import { ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {type WithFalse} from '@/type/declaration';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse } from '@/type/declaration';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type ChronoUintType = 'millis' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'years' | 'forever';

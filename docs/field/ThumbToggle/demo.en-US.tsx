@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {PlusOutlined, MinusOutlined, FireOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {ThumbToggle, ConsoleUtils, type ThumbToggleRef} from '@unikue/ant-buddy-pro';
-import {type ThumbActionType} from '@unikue/ant-buddy-pro/field/ThumbToggle';
+import { Button, Divider } from 'antd';
+import { PlusOutlined, MinusOutlined, FireOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { ThumbToggle, ConsoleUtils, type ThumbToggleRef } from '@unikue/ant-buddy-pro';
+import { type ThumbActionType } from '@unikue/ant-buddy-pro/field/ThumbToggle';
 
 
 export default () => {
@@ -49,9 +49,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Like', value: 'like'},
-                        {label: 'Dislike', value: 'dislike'},
-                        {label: 'Favorite', value: 'favorite'},
+                        { label: 'Like', value: 'like' },
+                        { label: 'Dislike', value: 'dislike' },
+                        { label: 'Favorite', value: 'favorite' },
                     ]}
                 />
                 <ProForm.Group>
@@ -86,26 +86,26 @@ export default () => {
                 </ProForm.Group>
                 <ProForm.Group>
                     <Button
-                        icon={<PlusOutlined/>}
+                        icon={<PlusOutlined />}
                         onClick={() => thumbToggleRef.current?.increaseCount()}
                     >
                         Increase
                     </Button>
                     <Button
-                        icon={<MinusOutlined/>}
+                        icon={<MinusOutlined />}
                         onClick={() => thumbToggleRef.current?.decreaseCount()}
                     >
                         Decrease
                     </Button>
                     <Button
-                        icon={<FireOutlined/>}
+                        icon={<FireOutlined />}
                         onClick={() => thumbToggleRef.current?.toggleChecked()}
                     >
                         Toggle
                     </Button>
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <ThumbToggle
                 ref={thumbToggleRef}
                 actionType={actionType}

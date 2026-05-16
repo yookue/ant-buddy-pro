@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Button} from 'antd';
-import {FireOutlined} from '@ant-design/icons';
-import {PreviewImage} from '@unikue/ant-buddy-pro';
+import { Button } from 'antd';
+import { FireOutlined } from '@ant-design/icons';
+import { PreviewImage } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -27,7 +27,7 @@ export default () => {
     return (
         <>
             <Button
-                icon={<FireOutlined/>}
+                icon={<FireOutlined />}
                 disabled={open}
                 onClick={() => setOpen(true)}
             >

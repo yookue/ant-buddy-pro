@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider, message as messageApi} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-components';
-import {LocaleTextarea} from '@unikue/ant-buddy-pro';
-import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import { Divider, message as messageApi } from 'antd';
+import { ProForm, ProFormRadio } from '@ant-design/pro-components';
+import { LocaleTextarea } from '@unikue/ant-buddy-pro';
+import { type TabPlacement } from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
@@ -54,15 +54,15 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '上', value: 'top'},
-                        {label: '下', value: 'bottom'},
-                        {label: '左', value: 'start'},
-                        {label: '右', value: 'end'},
-                        {label: '上-末尾', value: 'top-end'},
-                        {label: '下-末尾', value: 'bottom-end'},
+                        { label: '上', value: 'top' },
+                        { label: '下', value: 'bottom' },
+                        { label: '左', value: 'start' },
+                        { label: '右', value: 'end' },
+                        { label: '上-末尾', value: 'top-end' },
+                        { label: '下-末尾', value: 'bottom-end' },
                     ]}
                 />
-                <Divider/>
+                <Divider />
                 <LocaleTextarea
                     name='foobar'
                     placeholder='示例字段-無校驗'
@@ -96,7 +96,7 @@ export default () => {
                     ]}
                     switchProField={false}
                 />
-                <Divider/>
+                <Divider />
             </ProForm>
         </>
     );

@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Badge} from 'antd';
-import {type RibbonProps} from 'antd/es/badge/Ribbon';
-import {omit} from '@rc-component/util';
+import { Badge } from 'antd';
+import { type RibbonProps } from 'antd/es/badge/Ribbon';
+import { omit } from '@rc-component/util';
 import classnames from 'classnames';
-import {useFieldStyle} from './styles';
+import { useFieldStyle } from './styles';
 
 
 export type BadgeRibbonProps = RibbonProps & {

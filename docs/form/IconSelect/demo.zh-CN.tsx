@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Divider, Empty} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {IconSelect, ConsoleUtils} from '@unikue/ant-buddy-pro';
-import {IconOptionMode} from '@unikue/ant-buddy-pro/form/IconSelect';
-import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import { Divider, Empty } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { IconSelect, ConsoleUtils } from '@unikue/ant-buddy-pro';
+import { IconOptionMode } from '@unikue/ant-buddy-pro/form/IconSelect';
+import { type TabPlacement } from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
@@ -51,8 +51,8 @@ export default () => {
                             }
                         }}
                         options={[
-                            {label: '图标', value: 'icon'},
-                            {label: '文本', value: 'text'},
+                            { label: '图标', value: 'icon' },
+                            { label: '文本', value: 'text' },
                         ]}
                     />
                 </ProForm.Group>
@@ -68,12 +68,12 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '上', value: 'top'},
-                        {label: '下', value: 'bottom'},
-                        {label: '左', value: 'start'},
-                        {label: '右', value: 'end'},
-                        {label: '上-末尾', value: 'top-end'},
-                        {label: '下-末尾', value: 'bottom-end'},
+                        { label: '上', value: 'top' },
+                        { label: '下', value: 'bottom' },
+                        { label: '左', value: 'start' },
+                        { label: '右', value: 'end' },
+                        { label: '上-末尾', value: 'top-end' },
+                        { label: '下-末尾', value: 'bottom-end' },
                     ]}
                 />
                 <ProForm.Group>
@@ -118,7 +118,7 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+                <Divider />
                 <IconSelect
                     name='demoIcon'
                     placeholder='请选择图标'

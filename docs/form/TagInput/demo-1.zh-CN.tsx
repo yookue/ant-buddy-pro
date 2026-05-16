@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {FireOutlined, ClearOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
-import {TagInput, ConsoleUtils, type TagInputRef} from '@unikue/ant-buddy-pro';
+import { Button, Divider } from 'antd';
+import { FireOutlined, ClearOutlined } from '@ant-design/icons';
+import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
+import { TagInput, ConsoleUtils, type TagInputRef } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -57,19 +57,19 @@ export default () => {
                 </ProForm.Group>
                 <ProForm.Group>
                     <Button
-                        icon={<FireOutlined/>}
+                        icon={<FireOutlined />}
                         onClick={() => tagInputRef.current?.setTagContents(['foo', 'bar'])}
                     >
                         设定
                     </Button>
                     <Button
-                        icon={<ClearOutlined/>}
+                        icon={<ClearOutlined />}
                         onClick={() => tagInputRef.current?.setTagContents(undefined)}
                     >
                         清空
                     </Button>
                 </ProForm.Group>
-                <Divider/>
+                <Divider />
                 <TagInput
                     fieldRef={tagInputRef}
                     name='foobar'

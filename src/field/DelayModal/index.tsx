@@ -16,12 +16,12 @@
 
 
 import React from 'react';
-import {Modal, type ModalProps, type ModalFuncProps} from 'antd';
-import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
-import {omit} from '@rc-component/util';
-import {NanoidUtils} from '@unikue/ts-lang-utils';
+import { Modal, type ModalProps, type ModalFuncProps } from 'antd';
+import { withConfirm, withInfo, withWarn, withSuccess, withError } from 'antd/es/modal/confirm';
+import { omit } from '@rc-component/util';
+import { NanoidUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
 
 
 export type DelayModalRef = {

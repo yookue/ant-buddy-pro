@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {type LabeledValue} from 'antd/es/select';
+import { type LabeledValue } from 'antd/es/select';
 
 
 /**
@@ -35,11 +35,11 @@ export abstract class SelectRender {
      */
     public static renderLabelPriorAfter = (item: LabeledValue): React.ReactNode => {
         return (
-            <div key={item?.value} style={{display: 'flex', flexFlow: 'row nowrap'}}>
-                <span style={{flex: 'none', width: 'fit-content'}}>
+            <div key={item?.value} style={{ display: 'flex', flexFlow: 'row nowrap' }}>
+                <span style={{ flex: 'none', width: 'fit-content' }}>
                     {item?.value}
                 </span>
-                <span style={{flex: 1, paddingLeft: 4, textAlign: 'right'}}>
+                <span style={{ flex: 1, paddingLeft: 4, textAlign: 'right' }}>
                     {item?.label}
                 </span>
             </div>
@@ -55,11 +55,11 @@ export abstract class SelectRender {
      */
     public static renderLabelPriorBefore = (item: LabeledValue): React.ReactNode => {
         return (
-            <div key={item?.value} style={{display: 'flex', flexFlow: 'row nowrap'}}>
-                <span style={{flex: 1, paddingRight: 4}}>
+            <div key={item?.value} style={{ display: 'flex', flexFlow: 'row nowrap' }}>
+                <span style={{ flex: 1, paddingRight: 4 }}>
                     {item?.label}
                 </span>
-                <span style={{flex: 'none', width: 'fit-content'}}>
+                <span style={{ flex: 'none', width: 'fit-content' }}>
                     {item?.value}
                 </span>
             </div>

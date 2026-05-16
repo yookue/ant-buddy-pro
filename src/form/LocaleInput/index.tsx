@@ -16,24 +16,24 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, List, Popconfirm, Space, Tooltip, type InputProps, type FormRule} from 'antd';
-import {TranslationOutlined, SelectOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-components';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import Trigger, {type TriggerProps} from '@rc-component/trigger';
+import { ConfigProvider, Form, List, Popconfirm, Space, Tooltip, type InputProps, type FormRule } from 'antd';
+import { TranslationOutlined, SelectOutlined } from '@ant-design/icons';
+import { useIntl } from '@ant-design/pro-components';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import Trigger, { type TriggerProps } from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
-import {omit} from '@rc-component/util';
-import {If} from '@unikue/react-condition';
-import {BooleanUtils, ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import {useEventListener, useMutationObserver} from 'ahooks';
+import { omit } from '@rc-component/util';
+import { If } from '@unikue/react-condition';
+import { BooleanUtils, ElementUtils, NanoidUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
+import { useEventListener, useMutationObserver } from 'ahooks';
 import classnames from 'classnames';
-import {type WithFalse, type BeforeAfterType, type RuleValidateScope} from '@/type/declaration';
-import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
-import {DesignUtils} from '@/util/DesignUtils';
-import {StyleUtils} from '@/util/StyleUtils';
-import {TriggerUtils} from '@/util/TriggerUtils';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type BeforeAfterType, type RuleValidateScope } from '@/type/declaration';
+import { AddonInput, type AddonInputProps } from '@/form/AddonInput';
+import { DesignUtils } from '@/util/DesignUtils';
+import { StyleUtils } from '@/util/StyleUtils';
+import { TriggerUtils } from '@/util/TriggerUtils';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type PopupInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore' | 'addonAfter' | 'cursorBefore' | 'cursorAfter' | 'paddingBefore' | 'paddingAfter'> & {
@@ -160,7 +160,7 @@ export type LocaleInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefor
      * @description The DOM of the addon for the entry field
      * @description.zh-CN 默认文本框的附属节点内容
      * @description.zh-TW 默認文本框的標簽節點內容
-     * @default <TranslationOutlined/>
+     * @default <TranslationOutlined />
      */
     addon?: React.ReactNode | (() => React.ReactNode | undefined);
 
@@ -227,7 +227,7 @@ export type LocaleInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefor
      * @description The DOM of language addon for the locale items
      * @description.zh-CN 语言输入项的附属节点内容
      * @description.zh-TW 語言輸入項的附屬節點內容
-     * @default <SelectOutlined/>
+     * @default <SelectOutlined />
      */
     popupAddon?: React.ReactNode | (() => React.ReactNode | undefined);
 
@@ -284,12 +284,12 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
 
     // Initialize the default props
     const {
-        addon = <TranslationOutlined/>,
+        addon = <TranslationOutlined />,
         addonPos = 'after',
         multilingual = true,
         proField = true,
         popupTagPos = 'before',
-        popupAddon = <SelectOutlined/>,
+        popupAddon = <SelectOutlined />,
         popupAddonPos = 'after',
         popupCloneProps = {
             placeholder: true,
@@ -325,7 +325,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
         const additionalHeight = DesignUtils.getFormAdditionalHeight(entryElementRef.current, prefixCls);
         setTriggerOffset(4 - additionalHeight);
     }, []);
-    useMutationObserver(updateTriggerOffset, entryElementRef, {childList: true, subtree: true});
+    useMutationObserver(updateTriggerOffset, entryElementRef, { childList: true, subtree: true });
 
     React.useEffect(() => {
         const element = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
@@ -531,7 +531,7 @@ export const LocaleInput: React.FC<LocaleInputProps> = (props?: LocaleInputProps
                 if (!itemProp || !itemProp?.tag) {
                     continue;
                 }
-                const {tag, fieldProps, rules} = itemProp;
+                const { tag, fieldProps, rules } = itemProp;
                 const restProps = omit(itemProp, ['tag', 'name', 'fieldProps', 'proFieldProps', 'rules']);
                 const omitFieldProps = !fieldProps ? {} : omit(fieldProps, ['className', 'name', 'id', 'placeholder', 'autoComplete', 'addonBefore', 'addonAfter', 'allowClear', 'variant', 'maxLength', 'showCount', 'size', 'disabled', 'readOnly', 'onCompositionStart', 'onCompositionEnd']);
                 const tagId = NanoidUtils.getPopularId();

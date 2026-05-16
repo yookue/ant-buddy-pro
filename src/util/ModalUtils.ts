@@ -15,8 +15,8 @@
  */
 
 
-import {Modal, type ModalFuncProps} from 'antd';
-import {withConfirm, withInfo, withWarn, withSuccess, withError} from 'antd/es/modal/confirm';
+import { Modal, type ModalFuncProps } from 'antd';
+import { withConfirm, withInfo, withWarn, withSuccess, withError } from 'antd/es/modal/confirm';
 
 
 /**

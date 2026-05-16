@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {TreeSelect} from 'antd';
-import {ProFormTreeSelect, type ProFormTreeSelectProps} from '@ant-design/pro-components';
-import {omit} from '@rc-component/util';
-import {RemoteField} from '@/field/RemoteField';
-import {ExactInput, type ExactInputProps} from '@/form/ExactInput';
-import {MaskInput, type MaskInputProps} from '@/form/MaskInput';
-import {DivideSelect, type DivideSelectProps} from '@/form/DivideSelect';
-import {IconSelect, type IconSelectProps} from '@/form/IconSelect';
-import {ServerTuple, type ServerTupleProps} from '@/form/ServerTuple';
+import { TreeSelect } from 'antd';
+import { ProFormTreeSelect, type ProFormTreeSelectProps } from '@ant-design/pro-components';
+import { omit } from '@rc-component/util';
+import { RemoteField } from '@/field/RemoteField';
+import { ExactInput, type ExactInputProps } from '@/form/ExactInput';
+import { MaskInput, type MaskInputProps } from '@/form/MaskInput';
+import { DivideSelect, type DivideSelectProps } from '@/form/DivideSelect';
+import { IconSelect, type IconSelectProps } from '@/form/IconSelect';
+import { ServerTuple, type ServerTupleProps } from '@/form/ServerTuple';
 
 
 export type OmitExactInputProps = Omit<ExactInputProps, 'name' | 'label' | 'placeholder' | 'initialValue' | 'fieldProps' | 'proFieldProps' | 'tooltip' | 'dependencies'>;

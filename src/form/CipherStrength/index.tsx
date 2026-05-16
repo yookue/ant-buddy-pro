@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {Row, Col, Form, Progress, theme} from 'antd';
-import {useIntl} from '@ant-design/pro-components';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
+import { Row, Col, Form, Progress, theme } from 'antd';
+import { useIntl } from '@ant-design/pro-components';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import zxcvbn from 'zxcvbn';
-import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type BeforeAfterType } from '@/type/declaration';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type IntlLocaleProps = {
@@ -227,7 +227,7 @@ export const CipherStrength: React.FC<CipherStrengthProps> = (props?: CipherStre
         locale = intlType.locale,
     } = props ?? {};
 
-    const {token} = theme.useToken();
+    const { token } = theme.useToken();
     const watchValue = Form.useWatch(watchField, form);
     const fieldStyle = useFieldStyle(clazzPrefix);
 

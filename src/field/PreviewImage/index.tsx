@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Image} from 'antd';
-import {ImagePreviewType} from 'antd/es/image';
-import {omit} from '@rc-component/util';
-import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
+import { Image } from 'antd';
+import { ImagePreviewType } from 'antd/es/image';
+import { omit } from '@rc-component/util';
+import { ImageUtils, NanoidUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 
 

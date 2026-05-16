@@ -16,20 +16,20 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Flex, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi} from 'antd';
-import {PlusOutlined} from '@ant-design/icons';
-import {ProFormText, useIntl, useDebounceFn} from '@ant-design/pro-components';
-import {type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps} from '@ant-design/pro-components/es/form/typing';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {warpField} from '@ant-design/pro-components/es/form/components/FormItem/warpField';
-import {omit} from '@rc-component/util';
-import {ArrayUtils, NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { ConfigProvider, Form, Flex, Input, Tag, type InputProps, type InputRef, type TagProps, message as messageApi } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { ProFormText, useIntl, useDebounceFn } from '@ant-design/pro-components';
+import { type FieldProps, type ProFormFieldItemProps, type ProFormFieldRemoteProps } from '@ant-design/pro-components/es/form/typing';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { warpField } from '@ant-design/pro-components/es/form/components/FormItem/warpField';
+import { omit } from '@rc-component/util';
+import { ArrayUtils, NanoidUtils, NumberUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 import objectHash from 'object-hash';
-import {type WithFalse, type RequestOptionPlace} from '@/type/declaration';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type RequestOptionPlace } from '@/type/declaration';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type TagInputRef = {
@@ -256,7 +256,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
     }
 
     if (props?.request && props?.requestOptionPlace !== false) {
-        const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        const { run } = useDebounceFn(props.request, props?.debounceTime ?? 0);
         React.useEffect(() => {
             run(props?.params).then((values?: (string | number | TextTagProps)[]) => {
                 if (!values) {
@@ -498,7 +498,7 @@ const TagInputField: React.ForwardRefExoticComponent<TagInputProps & React.RefAt
                             }
                         }}
                     >
-                        {props?.addingTagProps?.children ?? <PlusOutlined/>}
+                        {props?.addingTagProps?.children ?? <PlusOutlined />}
                     </Tag>
                 </div>
             );

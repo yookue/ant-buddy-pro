@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {ConfigProvider, type TooltipProps} from 'antd';
-import {SkinOutlined} from '@ant-design/icons';
-import {SettingDrawer as ProSettingDrawer, type SettingDrawerProps as ProSettingDrawerProps, useIntl} from '@ant-design/pro-components';
-import {omit} from '@rc-component/util';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
+import { ConfigProvider, type TooltipProps } from 'antd';
+import { SkinOutlined } from '@ant-design/icons';
+import { SettingDrawer as ProSettingDrawer, type SettingDrawerProps as ProSettingDrawerProps, useIntl } from '@ant-design/pro-components';
+import { omit } from '@rc-component/util';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {TooltipRender} from '@/render/TooltipRender';
-import {useFieldStyle} from './styles';
-import {intlLocales} from './locales';
+import { TooltipRender } from '@/render/TooltipRender';
+import { useFieldStyle } from './styles';
+import { intlLocales } from './locales';
 
 
 export type SettingDrawerRef = {
@@ -120,7 +120,7 @@ export const SettingDrawer: React.ForwardRefExoticComponent<SettingDrawerProps &
 
     // Initialize the default props
     const {
-        triggerDom = <SkinOutlined style={{fontSize: 16}}/>,
+        triggerDom = <SkinOutlined style={{ fontSize: 16 }}/>,
         locale = intlType.locale,
     } = props ?? {};
 

@@ -27,7 +27,7 @@ const IndexLayout: React.FC = () => {
             <Helmet>
                 <title>{dumiTheme.title as string}</title>
             </Helmet>
-            <HomeBaseLayout/>
+            <HomeBaseLayout />
         </>
     );
 };

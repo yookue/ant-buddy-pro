@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormText, ProFormSwitch, ProCard} from '@ant-design/pro-components';
-import {SortableList} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { ProForm, ProFormText, ProFormSwitch, ProCard } from '@ant-design/pro-components';
+import { SortableList } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -63,7 +63,7 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+                <Divider />
                 <SortableList
                     name='demoList'
                     allowTopBottom={allowTopBottom}
@@ -78,7 +78,7 @@ export default () => {
                     deleteIconProps={{
                         tooltipText: '删除该组数据',
                     }}
-                    itemRender={({listDom, action}) => {
+                    itemRender={({ listDom, action }) => {
                         return (
                             <ProCard
                                 title='Demo Card'

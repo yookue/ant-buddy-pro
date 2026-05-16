@@ -15,8 +15,8 @@
  */
 
 
-import {Empty, Tag, message as messageApi} from 'antd';
-import {NotifyBadge, ConsoleUtils} from '@unikue/ant-buddy-pro';
+import { Empty, Tag, message as messageApi } from 'antd';
+import { NotifyBadge, ConsoleUtils } from '@unikue/ant-buddy-pro';
 
 
 export default () => {

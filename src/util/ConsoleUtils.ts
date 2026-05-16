@@ -15,10 +15,10 @@
  */
 
 
-import {noteOnce as rcNote, warning as rcWarning} from '@rc-component/util';
+import { noteOnce as rcNote, warning as rcWarning } from '@rc-component/util';
 import dayjs from 'dayjs';
 import objectHash from 'object-hash';
-import {PackageConst} from '@/constant/PackageConst';
+import { PackageConst } from '@/constant/PackageConst';
 
 
 const loggedHashes: string[] = [];
@@ -66,7 +66,7 @@ export abstract class ConsoleUtils {
             return;
         }
         const prefix = component ? `[${product ?? PackageConst.PACKAGE_NAME}: ${component}] - ` : '';
-        const hash = objectHash({prefix, message});
+        const hash = objectHash({ prefix, message });
         if (once && loggedHashes.includes(hash)) {
             return;
         }
@@ -108,7 +108,7 @@ export abstract class ConsoleUtils {
         }
         const prefix = component ? `[${product ?? PackageConst.PACKAGE_NAME}: ${component}]` : '';
         const timestamp = `[${dayjs().format(timeFormat)}]`;
-        const hash = objectHash({prefix, message});
+        const hash = objectHash({ prefix, message });
         if (once && loggedHashes.includes(hash)) {
             return;
         }

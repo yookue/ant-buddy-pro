@@ -16,17 +16,17 @@
 
 
 import React from 'react';
-import {Form, Input, Button} from 'antd';
-import {type NamePath} from 'antd/es/form/interface';
-import {ProForm, useIntl} from '@ant-design/pro-components';
-import {type ProFormCaptchaProps} from '@ant-design/pro-components/es/form/components/Captcha';
-import {warpField} from '@ant-design/pro-components/es/form/components/FormItem/warpField';
-import {omit} from '@rc-component/util';
-import {ArrayUtils, ObjectUtils} from '@unikue/ts-lang-utils';
+import { Form, Input, Button } from 'antd';
+import { type NamePath } from 'antd/es/form/interface';
+import { ProForm, useIntl } from '@ant-design/pro-components';
+import { type ProFormCaptchaProps } from '@ant-design/pro-components/es/form/components/Captcha';
+import { warpField } from '@ant-design/pro-components/es/form/components/FormItem/warpField';
+import { omit } from '@rc-component/util';
+import { ArrayUtils, ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type CaptchaInputRef = {
@@ -252,7 +252,7 @@ const CaptchaInputField: React.ForwardRefExoticComponent<CaptchaInputProps & Rea
         return [props?.phoneName, props?.dependName].flat().filter((item: any) => !!item);
     }, [props?.phoneName, props?.dependName]);
 
-    const watchValues = !props?.autoValidate ? [] : ProForm.useWatch([], {form, preserve: true});
+    const watchValues = !props?.autoValidate ? [] : ProForm.useWatch([], { form, preserve: true });
 
     const checkSubmittable = () => {
         if (ArrayUtils.isNotEmpty(watchFields)) {

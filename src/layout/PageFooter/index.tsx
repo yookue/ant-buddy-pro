@@ -16,12 +16,12 @@
 
 
 import React from 'react';
-import {Layout} from 'antd';
-import {CopyrightOutlined} from '@ant-design/icons';
-import {If, For} from '@unikue/react-condition';
+import { Layout } from 'antd';
+import { CopyrightOutlined } from '@ant-design/icons';
+import { If, For } from '@unikue/react-condition';
 import classnames from 'classnames';
-import {type WithFalse} from '@/type/declaration';
-import {useFieldStyle} from './styles';
+import { type WithFalse } from '@/type/declaration';
+import { useFieldStyle } from './styles';
 
 
 export type FooterPresetStyle = WithFalse<'default' | 'half'>;
@@ -262,7 +262,7 @@ export const PageFooter: React.FC<PageFooterProps> = (props?: PageFooterProps) =
                         <If condition={copyrightIcon} validation={false}>
                             <If.Then>
                                 <>
-                                    <CopyrightOutlined/> {props?.copyright}
+                                    <CopyrightOutlined /> {props?.copyright}
                                 </>
                             </If.Then>
                             <If.Else>

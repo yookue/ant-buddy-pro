@@ -15,8 +15,8 @@
  */
 
 
-import {ProForm, ProCard} from '@ant-design/pro-components';
-import {AddonInput, SortableList} from '@unikue/ant-buddy-pro';
+import { ProForm, ProCard } from '@ant-design/pro-components';
+import { AddonInput, SortableList } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -45,7 +45,7 @@ export default () => {
                     creatorButtonProps={false}
                     copyIconProps={false}
                     deleteIconProps={false}
-                    itemRender={({listDom, action}) => {
+                    itemRender={({ listDom, action }) => {
                         return (
                             <ProCard
                                 title='Demo Item'

@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Card, Divider} from 'antd';
-import {SmileOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch, ProFormSlider} from '@ant-design/pro-components';
-import {CornerStamp, type RectZenithPlace} from '@unikue/ant-buddy-pro';
+import { Card, Divider } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch, ProFormSlider } from '@ant-design/pro-components';
+import { CornerStamp, type RectZenithPlace } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -47,10 +47,10 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '左上角', value: 'topLeft'},
-                        {label: '右上角', value: 'topRight'},
-                        {label: '左下角', value: 'bottomLeft'},
-                        {label: '右下角', value: 'bottomRight'},
+                        { label: '左上角', value: 'topLeft' },
+                        { label: '右上角', value: 'topRight' },
+                        { label: '左下角', value: 'bottomLeft' },
+                        { label: '右下角', value: 'bottomRight' },
                     ]}
                 />
                 <ProForm.Group>
@@ -96,12 +96,12 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <CornerStamp
                 placement={placement}
                 size={size}
                 addon={!showAddon ? undefined : (
-                    <SmileOutlined style={{color: 'white', fontSize: 8 + size / 5}}/>
+                    <SmileOutlined style={{ color: 'white', fontSize: 8 + size / 5 }}/>
                 )}
                 rotateAddon={rotateAddon}
             >
@@ -117,7 +117,7 @@ export default () => {
                     }}
                 >
                     一只棕色敏捷的狐狸跳过了一只懒洋洋的狗。
-                    <Divider/>
+                    <Divider />
                     I'LL BE BACK
                 </Card>
             </CornerStamp>

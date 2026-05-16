@@ -16,7 +16,7 @@
 
 
 import React from 'react';
-import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 
 
 /**

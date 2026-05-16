@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio} from '@ant-design/pro-components';
-import {AvatarStamp, type RectZenithPlace} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { ProForm, ProFormRadio } from '@ant-design/pro-components';
+import { AvatarStamp, type RectZenithPlace } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -43,14 +43,14 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '左上角', value: 'topLeft'},
-                        {label: '右上角', value: 'topRight'},
-                        {label: '左下角', value: 'bottomLeft'},
-                        {label: '右下角', value: 'bottomRight'},
+                        { label: '左上角', value: 'topLeft' },
+                        { label: '右上角', value: 'topRight' },
+                        { label: '左下角', value: 'bottomLeft' },
+                        { label: '右下角', value: 'bottomRight' },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <AvatarStamp
                 src='https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
                 placement={placement}

@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {CoffeeOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {BorderBox} from '@unikue/ant-buddy-pro';
-import {type BoundShapeType} from '@unikue/ant-buddy-pro/layout/BorderBox';
+import { Divider } from 'antd';
+import { CoffeeOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { BorderBox } from '@unikue/ant-buddy-pro';
+import { type BoundShapeType } from '@unikue/ant-buddy-pro/layout/BorderBox';
 
 
 export default () => {
@@ -51,8 +51,8 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '矩形', value: 'rect'},
-                        {label: '圓形', value: 'circle'},
+                        { label: '矩形', value: 'rect' },
+                        { label: '圓形', value: 'circle' },
                     ]}
                 />
                 <ProFormSwitch
@@ -116,7 +116,7 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <BorderBox
                 boundShape={boundShape}
                 boundShadow={boundShadow}
@@ -125,9 +125,9 @@ export default () => {
                 borderBottom={borderBottom}
                 borderLeft={borderLeft}
                 borderRight={borderRight}
-                containerStyle={{padding: 12}}
+                containerStyle={{ padding: 12 }}
             >
-                {(boundShape === 'circle') ? <CoffeeOutlined style={{fontSize: 22}}/> : '壹只棕色敏捷的狐貍跳過了壹只懶洋洋的狗。'}
+                {(boundShape === 'circle') ? <CoffeeOutlined style={{ fontSize: 22 }}/> : '壹只棕色敏捷的狐貍跳過了壹只懶洋洋的狗。'}
             </BorderBox>
         </>
     );

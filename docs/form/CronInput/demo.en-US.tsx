@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider, message as messageApi} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {CronInput, ConsoleUtils} from '@unikue/ant-buddy-pro';
+import { Divider, message as messageApi } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { CronInput, ConsoleUtils } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -49,8 +49,8 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Top', value: 'top'},
-                        {label: 'Bottom', value: 'bottom'},
+                        { label: 'Top', value: 'top' },
+                        { label: 'Bottom', value: 'bottom' },
                     ]}
                 />
                 <ProForm.Group>
@@ -92,7 +92,7 @@ export default () => {
                     />
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <ProForm
                 name='CronInput_demo.en-US.Test'
                 layout='vertical'

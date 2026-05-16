@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider, Switch} from 'antd';
-import {SkinOutlined} from '@ant-design/icons';
-import {type ProSettings} from '@ant-design/pro-components';
-import {SettingDrawer, BorderBox, LabelField} from '@unikue/ant-buddy-pro';
+import { Divider, Switch } from 'antd';
+import { SkinOutlined } from '@ant-design/icons';
+import { type ProSettings } from '@ant-design/pro-components';
+import { SettingDrawer, BorderBox, LabelField } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -47,11 +47,11 @@ export default () => {
                 )}
                 layout='horizontal'
             />
-            <Divider/>
+            <Divider />
             <SettingDrawer
                 triggerDom={(
-                    <BorderBox boundShape='circle' borderAll={true} containerStyle={{padding: 8}}>
-                        <SkinOutlined style={{fontSize: 16}}/>
+                    <BorderBox boundShape='circle' borderAll={true} containerStyle={{ padding: 8 }}>
+                        <SkinOutlined style={{ fontSize: 16 }}/>
                     </BorderBox>
                 )}
                 settings={settings}

@@ -16,13 +16,13 @@
 
 
 import React from 'react';
-import {Space} from 'antd';
-import {SpaceCompactProps} from 'antd/es/space/Compact';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import {css} from '@emotion/css';
+import { Space } from 'antd';
+import { SpaceCompactProps } from 'antd/es/space/Compact';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import { css } from '@emotion/css';
 import classnames from 'classnames';
-import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type BeforeAfterType } from '@/type/declaration';
+import { useFieldStyle } from './styles';
 
 
 export type TuplePresetStyle = WithFalse<'field-prior' | 'addon-prior'>;
@@ -174,7 +174,7 @@ export const CompactTuple: React.FC<CompactTupleProps> = (props?: CompactTuplePr
 
     // Initialize the default props
     const {
-        spaceCompactProps = {block: true},
+        spaceCompactProps = { block: true },
         addonPos = 'after',
         readonlyBorder = false,
         presetStyle = 'field-prior',

@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Divider, Empty} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {IconSelect, ConsoleUtils} from '@unikue/ant-buddy-pro';
-import {IconOptionMode} from '@unikue/ant-buddy-pro/form/IconSelect';
-import {type TabPlacement} from '@unikue/ant-buddy-pro/layout/CardTabs';
+import { Divider, Empty } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { IconSelect, ConsoleUtils } from '@unikue/ant-buddy-pro';
+import { IconOptionMode } from '@unikue/ant-buddy-pro/form/IconSelect';
+import { type TabPlacement } from '@unikue/ant-buddy-pro/layout/CardTabs';
 
 
 export default () => {
@@ -51,8 +51,8 @@ export default () => {
                             }
                         }}
                         options={[
-                            {label: 'Icon', value: 'icon'},
-                            {label: 'Text', value: 'text'},
+                            { label: 'Icon', value: 'icon' },
+                            { label: 'Text', value: 'text' },
                         ]}
                     />
                 </ProForm.Group>
@@ -68,12 +68,12 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Top', value: 'top'},
-                        {label: 'Bottom', value: 'bottom'},
-                        {label: 'Left', value: 'start'},
-                        {label: 'Right', value: 'end'},
-                        {label: 'Top-End', value: 'top-end'},
-                        {label: 'Bottom-End', value: 'bottom-end'},
+                        { label: 'Top', value: 'top' },
+                        { label: 'Bottom', value: 'bottom' },
+                        { label: 'Left', value: 'start' },
+                        { label: 'Right', value: 'end' },
+                        { label: 'Top-End', value: 'top-end' },
+                        { label: 'Bottom-End', value: 'bottom-end' },
                     ]}
                 />
                 <ProForm.Group>
@@ -118,7 +118,7 @@ export default () => {
                         }}
                     />
                 </ProForm.Group>
-                <Divider/>
+                <Divider />
                 <IconSelect
                     name='demoIcon'
                     placeholder='Please select an icon'

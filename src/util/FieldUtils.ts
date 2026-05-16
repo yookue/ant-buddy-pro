@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {type DefaultOptionType} from 'antd/es/select';
-import {type SegmentedLabeledOption} from 'antd/es/segmented';
-import {type ProSchemaValueEnumType, type ProSchemaValueEnumObj, type ProSchemaValueEnumMap} from '@ant-design/pro-components';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
+import { type DefaultOptionType } from 'antd/es/select';
+import { type SegmentedLabeledOption } from 'antd/es/segmented';
+import { type ProSchemaValueEnumType, type ProSchemaValueEnumObj, type ProSchemaValueEnumMap } from '@ant-design/pro-components';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
 
 
 /**

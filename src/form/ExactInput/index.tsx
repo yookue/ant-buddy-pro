@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {Checkbox, Form, type CheckboxProps, type TooltipProps} from 'antd';
-import {useIntl} from '@ant-design/pro-components';
-import {omit} from '@rc-component/util';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
-import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {TooltipRender} from '@/render/TooltipRender';
-import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
-import {intlLocales} from './locales';
+import { Checkbox, Form, type CheckboxProps, type TooltipProps } from 'antd';
+import { useIntl } from '@ant-design/pro-components';
+import { omit } from '@rc-component/util';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
+import { type WithFalse, type BeforeAfterType } from '@/type/declaration';
+import { TooltipRender } from '@/render/TooltipRender';
+import { AddonInput, type AddonInputProps } from '@/form/AddonInput';
+import { intlLocales } from './locales';
 
 
 export type AddonCheckProps = CheckboxProps & React.PropsWithChildren<{

@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {LikeOutlined, DislikeOutlined} from '@ant-design/icons';
-import {ProForm} from '@ant-design/pro-components';
-import {ThumbTuple, type ThumbTupleRef} from '@unikue/ant-buddy-pro';
+import { Button, Divider } from 'antd';
+import { LikeOutlined, DislikeOutlined } from '@ant-design/icons';
+import { ProForm } from '@ant-design/pro-components';
+import { ThumbTuple, type ThumbTupleRef } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -35,20 +35,20 @@ export default () => {
             >
                 <ProForm.Group>
                     <Button
-                        icon={<LikeOutlined/>}
+                        icon={<LikeOutlined />}
                         onClick={() => thumbTupleRef.current?.getThumbLikeRef()?.current?.toggleChecked()}
                     >
                         切換喜歡
                     </Button>
                     <Button
-                        icon={<DislikeOutlined/>}
+                        icon={<DislikeOutlined />}
                         onClick={() => thumbTupleRef.current?.getThumbDislikeRef()?.current?.toggleChecked()}
                     >
                         切換不喜歡
                     </Button>
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <ThumbTuple
                 ref={thumbTupleRef}
                 thumbLikeProps={{

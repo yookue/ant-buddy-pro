@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Button, Divider, message as messageApi} from 'antd';
-import {MobileOutlined, SafetyCertificateOutlined, FireOutlined, StopOutlined} from '@ant-design/icons';
-import {ProForm, ProFormText} from '@ant-design/pro-components';
-import {CaptchaInput, ConsoleUtils, type CaptchaInputRef} from '@unikue/ant-buddy-pro';
+import { Button, Divider, message as messageApi } from 'antd';
+import { MobileOutlined, SafetyCertificateOutlined, FireOutlined, StopOutlined } from '@ant-design/icons';
+import { ProForm, ProFormText } from '@ant-design/pro-components';
+import { CaptchaInput, ConsoleUtils, type CaptchaInputRef } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -40,7 +40,7 @@ export default () => {
                     name='mobile'
                     placeholder='Mobile Number'
                     fieldProps={{
-                        prefix: <MobileOutlined/>
+                        prefix: <MobileOutlined />
                     }}
                     rules={[
                         {
@@ -55,7 +55,7 @@ export default () => {
                     fieldRef={captchaInputRef}
                     fieldProps={{
                         maxLength: 6,
-                        prefix: <SafetyCertificateOutlined/>
+                        prefix: <SafetyCertificateOutlined />
                     }}
                     phoneName='mobile'
                     countDown={29}
@@ -69,10 +69,10 @@ export default () => {
                     onTimerEnd={() => setTiming(false)}
                     locale='en_US'
                 />
-                <Divider/>
+                <Divider />
                 <ProForm.Group>
                     <Button
-                        icon={<FireOutlined/>}
+                        icon={<FireOutlined />}
                         disabled={timing}
                         onClick={() => {
                             if (!captchaInputRef.current?.isTiming()) {
@@ -83,7 +83,7 @@ export default () => {
                         Manual Start
                     </Button>
                     <Button
-                        icon={<StopOutlined/>}
+                        icon={<StopOutlined />}
                         disabled={!timing}
                         onClick={() => {
                             captchaInputRef.current?.stopTimer();

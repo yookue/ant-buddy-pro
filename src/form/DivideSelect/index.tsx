@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {Form, Select} from 'antd';
-import {ProFormSelect, type ProFormSelectProps, type RequestOptionsType, useDebounceFn} from '@ant-design/pro-components';
-import {omit} from '@rc-component/util';
-import {If} from '@unikue/react-condition';
-import {ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { Form, Select } from 'antd';
+import { ProFormSelect, type ProFormSelectProps, type RequestOptionsType, useDebounceFn } from '@ant-design/pro-components';
+import { omit } from '@rc-component/util';
+import { If } from '@unikue/react-condition';
+import { ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {type WithFalse, type LabelMixinType, type RequestOptionPlace} from '@/type/declaration';
-import {FieldUtils} from '@/util/FieldUtils';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type LabelMixinType, type RequestOptionPlace } from '@/type/declaration';
+import { FieldUtils } from '@/util/FieldUtils';
+import { useFieldStyle } from './styles';
 
 
 export type DividePresetStyle = WithFalse<'before-prior' | 'after-prior'>;
@@ -163,7 +163,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
     });
 
     if (props?.request && props?.requestOptionPlace !== false) {
-        const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        const { run } = useDebounceFn(props.request, props?.debounceTime ?? 0);
         React.useEffect(() => {
             run(props?.params).then((values?: RequestOptionsType[]) => {
                 // noinspection DuplicatedCode
@@ -275,7 +275,7 @@ export const DivideSelect: React.FC<DivideSelectProps> = (props?: DivideSelectPr
                         render: props?.proFieldProps?.render ?? ((dom: any) => {
                             return (<>{dom || props?.proFieldProps?.emptyText || '-'}</>);
                         })
-                    } : (!props?.proFieldProps?.render ? {} : {render: props?.proFieldProps?.render})),
+                    } : (!props?.proFieldProps?.render ? {} : { render: props?.proFieldProps?.render })),
                     ...(!props?.proFieldProps ? {} : omit(props?.proFieldProps, ['render'])),
                 }}
             />

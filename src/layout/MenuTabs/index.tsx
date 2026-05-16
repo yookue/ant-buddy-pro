@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {Menu, type MenuProps} from 'antd';
-import {type MenuItemType} from 'antd/es/menu/interface';
-import {css} from '@emotion/css';
-import {type MenuInfo, type MenuMode} from '@rc-component/menu/es/interface';
-import {omit} from '@rc-component/util';
-import {useEventListener} from 'ahooks';
+import { Menu, type MenuProps } from 'antd';
+import { type MenuItemType } from 'antd/es/menu/interface';
+import { css } from '@emotion/css';
+import { type MenuInfo, type MenuMode } from '@rc-component/menu/es/interface';
+import { omit } from '@rc-component/util';
+import { useEventListener } from 'ahooks';
 import classnames from 'classnames';
-import {type WithFalse, type PaddingSpaceType} from '@/type/declaration';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type PaddingSpaceType } from '@/type/declaration';
+import { useFieldStyle } from './styles';
 
 
 export type MixinMenuProps = Omit<MenuProps, 'children' | 'activeKey' | 'defaultSelectedKeys' | 'items' | 'mode' | 'multiple' | 'selectable' | 'selectedKeys' | 'onDeselect'> & {
@@ -264,7 +264,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
                     return;
                 }
                 let shouldMode: MenuMode = 'inline';
-                const {offsetWidth} = fieldRef.current;
+                const { offsetWidth } = fieldRef.current;
                 if (offsetWidth > (adjustLayoutProps?.minOffsetWidth ?? 400) && fieldRef.current?.offsetWidth < (adjustLayoutProps?.maxOffsetWidth ?? 640)) {
                     shouldMode = 'horizontal';
                 }
@@ -310,7 +310,7 @@ export const MenuTabs: React.FC<MenuTabsProps> = (props?: MenuTabsProps) => {
 
     const omitMenuItems = props?.menuProps?.items ? props?.menuProps?.items?.map(item => omit(item, ['children']) as MenuItemType) : [];
     const restMenuProps = !props?.menuProps ? {} : omit(props?.menuProps, ['defaultActiveKey', 'items', 'onClick']);
-    const entryWidthClazz = entryWidth ? css({width: entryWidth}) : (props?.entryStyle?.width ? css({width: props?.entryStyle?.width}) : undefined);
+    const entryWidthClazz = entryWidth ? css({ width: entryWidth }) : (props?.entryStyle?.width ? css({ width: props?.entryStyle?.width }) : undefined);
     const omitEntryStyle = props?.entryStyle ? omit(props?.entryStyle, ['width']) : undefined;
 
     return (

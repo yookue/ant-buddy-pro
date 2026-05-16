@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {ClearOutlined, PictureOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {AvatarUpload, ConsoleUtils, type AvatarUploadRef, type CircleSquareShape} from '@unikue/ant-buddy-pro';
+import { Button, Divider } from 'antd';
+import { ClearOutlined, PictureOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { AvatarUpload, ConsoleUtils, type AvatarUploadRef, type CircleSquareShape } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -52,8 +52,8 @@ export default () => {
                             }
                         }}
                         options={[
-                            {label: 'Circle', value: 'circle'},
-                            {label: 'Square', value: 'square'},
+                            { label: 'Circle', value: 'circle' },
+                            { label: 'Square', value: 'square' },
                         ]}
                     />
                 </ProForm.Group>
@@ -89,19 +89,19 @@ export default () => {
                 </ProForm.Group>
                 <ProForm.Group>
                     <Button
-                        icon={<PictureOutlined/>}
+                        icon={<PictureOutlined />}
                         onClick={() => avatarUploadRef.current?.setImageSrc('https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png')}
                     >
                         Set
                     </Button>
                     <Button
-                        icon={<ClearOutlined/>}
+                        icon={<ClearOutlined />}
                         onClick={() => avatarUploadRef.current?.setImageSrc(undefined)}
                     >
                         Clear
                     </Button>
                 </ProForm.Group>
-                <Divider/>
+                <Divider />
                 <AvatarUpload
                     fieldRef={avatarUploadRef}
                     name='avatar'

@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSelect, ProFormSwitch} from '@ant-design/pro-components';
-import {CodePreview, type PaddingSpaceType} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { ProForm, ProFormSelect, ProFormSwitch } from '@ant-design/pro-components';
+import { CodePreview, type PaddingSpaceType } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -63,25 +63,25 @@ export default () => {
                         allowClear: true,
                         value: presetStyle,
                         options: [
-                            {label: 'padding-0', value: 'padding-0'},
-                            {label: 'padding-xxs', value: 'padding-xxs'},
-                            {label: 'padding-xs', value: 'padding-xs'},
-                            {label: 'padding-sm', value: 'padding-sm'},
-                            {label: 'padding-md', value: 'padding-md'},
-                            {label: 'padding-lg', value: 'padding-lg'},
-                            {label: 'padding-x-0', value: 'padding-x-0'},
-                            {label: 'padding-x-xxs', value: 'padding-x-xxs'},
-                            {label: 'padding-x-xs', value: 'padding-x-xs'},
-                            {label: 'padding-x-sm', value: 'padding-x-sm'},
-                            {label: 'padding-x-md', value: 'padding-x-md'},
-                            {label: 'padding-x-lg', value: 'padding-x-lg'},
-                            {label: 'padding-y-0', value: 'padding-y-0'},
-                            {label: 'padding-y-xxs', value: 'padding-y-xxs'},
-                            {label: 'padding-y-xs', value: 'padding-y-xs'},
-                            {label: 'padding-y-sm', value: 'padding-y-sm'},
-                            {label: 'padding-y-md', value: 'padding-y-md'},
-                            {label: 'padding-y-lg', value: 'padding-y-lg'},
-                            {label: 'False', value: false},
+                            { label: 'padding-0', value: 'padding-0' },
+                            { label: 'padding-xxs', value: 'padding-xxs' },
+                            { label: 'padding-xs', value: 'padding-xs' },
+                            { label: 'padding-sm', value: 'padding-sm' },
+                            { label: 'padding-md', value: 'padding-md' },
+                            { label: 'padding-lg', value: 'padding-lg' },
+                            { label: 'padding-x-0', value: 'padding-x-0' },
+                            { label: 'padding-x-xxs', value: 'padding-x-xxs' },
+                            { label: 'padding-x-xs', value: 'padding-x-xs' },
+                            { label: 'padding-x-sm', value: 'padding-x-sm' },
+                            { label: 'padding-x-md', value: 'padding-x-md' },
+                            { label: 'padding-x-lg', value: 'padding-x-lg' },
+                            { label: 'padding-y-0', value: 'padding-y-0' },
+                            { label: 'padding-y-xxs', value: 'padding-y-xxs' },
+                            { label: 'padding-y-xs', value: 'padding-y-xs' },
+                            { label: 'padding-y-sm', value: 'padding-y-sm' },
+                            { label: 'padding-y-md', value: 'padding-y-md' },
+                            { label: 'padding-y-lg', value: 'padding-y-lg' },
+                            { label: 'False', value: false },
                         ],
                         onChange: (value) => {
                             setPresetStyle(value);
@@ -89,7 +89,7 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <CodePreview
                 titleContent='How to install this package?'
                 textContent='npm install @unikue/ant-buddy-pro -S'

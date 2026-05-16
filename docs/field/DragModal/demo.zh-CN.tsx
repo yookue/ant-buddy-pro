@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Button} from 'antd';
-import {FireOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
-import {DragModal} from '@unikue/ant-buddy-pro';
-import {RandomUtils} from '@unikue/ts-lang-utils';
+import { Button } from 'antd';
+import { FireOutlined } from '@ant-design/icons';
+import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
+import { DragModal } from '@unikue/ant-buddy-pro';
+import { RandomUtils } from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -49,7 +49,7 @@ export default () => {
                 </ProForm.Group>
                 <ProForm.Group>
                     <Button
-                        icon={<FireOutlined/>}
+                        icon={<FireOutlined />}
                         disabled={open}
                         onClick={() => setOpen(true)}
                     >
@@ -60,7 +60,7 @@ export default () => {
             <DragModal
                 draggable={draggable}
                 title='DragModal'
-                mask={{closable: false}}
+                mask={{ closable: false }}
                 open={open}
                 okText='确定'
                 cancelText='取消'

@@ -21,6 +21,6 @@ import {PageLoading} from '@ant-design/pro-components/es/layout/components/PageL
 // export {default} from 'dumi-theme-antd/dist/common/Loading';
 export default () => {
     return (
-        <PageLoading/>
+        <PageLoading />
     );
 };

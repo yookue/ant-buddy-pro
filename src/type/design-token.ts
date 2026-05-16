@@ -15,8 +15,8 @@
  */
 
 
-import {type TokenWithCommonCls} from '@ant-design/cssinjs-utils';
-import {type ProAliasToken} from '@ant-design/pro-components';
+import { type TokenWithCommonCls } from '@ant-design/cssinjs-utils';
+import { type ProAliasToken } from '@ant-design/pro-components';
 
 
 export type ExtraProAliasToken = ProAliasToken & Partial<Pick<TokenWithCommonCls<ProAliasToken>, 'componentCls' | 'prefixCls' | 'iconCls'>> & {

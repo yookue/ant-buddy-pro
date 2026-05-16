@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {Space, InputNumber} from 'antd';
-import {FormContext} from 'antd/es/form/context';
-import {ProFormDigit} from '@ant-design/pro-components';
-import {type ProFormDigitProps} from '@ant-design/pro-components/es/form/components/Digit';
-import {omit} from '@rc-component/util';
-import {StringUtils} from '@unikue/ts-lang-utils';
+import { Space, InputNumber } from 'antd';
+import { FormContext } from 'antd/es/form/context';
+import { ProFormDigit } from '@ant-design/pro-components';
+import { type ProFormDigitProps } from '@ant-design/pro-components/es/form/components/Digit';
+import { omit } from '@rc-component/util';
+import { StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {ChronoSelect, type ChronoSelectProps} from '@/form/ChronoSelect';
-import {useFieldStyle} from './styles';
+import { ChronoSelect, type ChronoSelectProps } from '@/form/ChronoSelect';
+import { useFieldStyle } from './styles';
 
 
 export type ChronoTupleProps = {

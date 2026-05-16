@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Empty, Divider} from 'antd';
-import {AppstoreOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {FoldSection, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type SectionPresetStyle} from '@unikue/ant-buddy-pro/layout/FoldSection';
+import { Empty, Divider } from 'antd';
+import { AppstoreOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { FoldSection, type BeforeAfterType } from '@unikue/ant-buddy-pro';
+import { type SectionPresetStyle } from '@unikue/ant-buddy-pro/layout/FoldSection';
 
 
 export default () => {
@@ -58,9 +58,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '前', value: 'before'},
-                        {label: '后', value: 'after'},
-                        {label: '無', value: false},
+                        { label: '前', value: 'before' },
+                        { label: '后', value: 'after' },
+                        { label: '無', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -74,9 +74,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '前', value: 'before'},
-                        {label: '后', value: 'after'},
-                        {label: '無', value: false},
+                        { label: '前', value: 'before' },
+                        { label: '后', value: 'after' },
+                        { label: '無', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -90,13 +90,13 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '默認', value: 'default'},
-                        {label: '成功', value: 'success'},
-                        {label: '信息', value: 'info'},
-                        {label: '警告', value: 'warn'},
-                        {label: '錯誤', value: 'error'},
-                        {label: '經典', value: 'classic'},
-                        {label: '無', value: false},
+                        { label: '默認', value: 'default' },
+                        { label: '成功', value: 'success' },
+                        { label: '信息', value: 'info' },
+                        { label: '警告', value: 'warn' },
+                        { label: '錯誤', value: 'error' },
+                        { label: '經典', value: 'classic' },
+                        { label: '無', value: false },
                     ]}
                 />
                 <ProFormSwitch
@@ -109,10 +109,10 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <FoldSection
                 boundBorder={boundBorder}
-                headerOrnament={<AppstoreOutlined/>}
+                headerOrnament={<AppstoreOutlined />}
                 headerOrnamentPos={ornamentPos}
                 headerContent='FoldSection 頭部標題'
                 headerCollapsePos={collapsePos}

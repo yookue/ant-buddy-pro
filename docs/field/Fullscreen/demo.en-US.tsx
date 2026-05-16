@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
-import {Fullscreen} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
+import { Fullscreen } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -42,7 +42,7 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <Fullscreen
                 tooltipCtrl={tooltipCtrl}
                 locale='en_US'

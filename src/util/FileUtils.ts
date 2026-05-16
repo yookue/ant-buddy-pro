@@ -15,7 +15,7 @@
  */
 
 
-import {type RcFile} from 'antd/es/upload/interface';
+import { type RcFile } from 'antd/es/upload/interface';
 
 
 /**

@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {type TooltipProps} from 'antd';
+import { type TooltipProps } from 'antd';
 import classnames from 'classnames';
-import {TooltipRender} from '@/render/TooltipRender';
+import { TooltipRender } from '@/render/TooltipRender';
 
 
 export type TooltipFieldProps = React.PropsWithChildren<{

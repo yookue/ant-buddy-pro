@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Card, Divider} from 'antd';
-import {SmileOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch, ProFormSlider} from '@ant-design/pro-components';
-import {CornerStamp, type RectZenithPlace} from '@unikue/ant-buddy-pro';
+import { Card, Divider } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch, ProFormSlider } from '@ant-design/pro-components';
+import { CornerStamp, type RectZenithPlace } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -47,10 +47,10 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Top-Left', value: 'topLeft'},
-                        {label: 'Top-Right', value: 'topRight'},
-                        {label: 'Bottom-Left', value: 'bottomLeft'},
-                        {label: 'Bottom-Right', value: 'bottomRight'},
+                        { label: 'Top-Left', value: 'topLeft' },
+                        { label: 'Top-Right', value: 'topRight' },
+                        { label: 'Bottom-Left', value: 'bottomLeft' },
+                        { label: 'Bottom-Right', value: 'bottomRight' },
                     ]}
                 />
                 <ProForm.Group>
@@ -96,12 +96,12 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <CornerStamp
                 placement={placement}
                 size={size}
                 addon={!showAddon ? undefined : (
-                    <SmileOutlined style={{color: 'white', fontSize: 8 + size / 5}}/>
+                    <SmileOutlined style={{ color: 'white', fontSize: 8 + size / 5 }}/>
                 )}
                 rotateAddon={rotateAddon}
             >
@@ -117,7 +117,7 @@ export default () => {
                     }}
                 >
                     The quick brown fox jumps over a lazy dog.
-                    <Divider/>
+                    <Divider />
                     I'LL BE BACK
                 </Card>
             </CornerStamp>

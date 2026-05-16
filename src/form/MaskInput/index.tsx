@@ -16,13 +16,13 @@
 
 
 import React from 'react';
-import {Form, Input, type InputProps, type InputRef} from 'antd';
-import {ProFormText} from '@ant-design/pro-components';
-import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
-import {omit} from '@rc-component/util';
-import {ElementUtils, NanoidUtils, RegexUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { Form, Input, type InputProps, type InputRef } from 'antd';
+import { ProFormText } from '@ant-design/pro-components';
+import { type ProFormFieldItemProps } from '@ant-design/pro-components/es/form/typing';
+import { omit } from '@rc-component/util';
+import { ElementUtils, NanoidUtils, RegexUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
 
 
 export type MaskInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {

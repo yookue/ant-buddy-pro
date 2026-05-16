@@ -15,7 +15,7 @@
  */
 
 
-import {FallbackImage} from '@unikue/ant-buddy-pro';
+import { FallbackImage } from '@unikue/ant-buddy-pro';
 
 
 export default () => {

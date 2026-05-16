@@ -15,7 +15,7 @@
  */
 
 
-import {type ActionType} from '@ant-design/pro-components';
+import { type ActionType } from '@ant-design/pro-components';
 
 
 /**
@@ -51,7 +51,7 @@ export abstract class PaginationUtils {
             actionRef.current.reload();
             return;
         }
-        const {current, pageSize, total} = pageInfo;
+        const { current, pageSize, total } = pageInfo;
         const newTotal = Math.max(0, total - deletedCount);
         if (current > 1 && newTotal > 0 && newTotal <= (current - 1) * pageSize) {
             actionRef.current.setPageInfo?.({

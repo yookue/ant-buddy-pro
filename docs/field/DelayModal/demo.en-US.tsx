@@ -16,12 +16,12 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {FireOutlined, StopOutlined} from '@ant-design/icons';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {DelayModal, ConsoleUtils, type DelayModalRef} from '@unikue/ant-buddy-pro';
-import {type ModalActionType} from '@unikue/ant-buddy-pro/field/DelayModal';
-import {RandomUtils} from '@unikue/ts-lang-utils';
+import { Button, Divider } from 'antd';
+import { FireOutlined, StopOutlined } from '@ant-design/icons';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { DelayModal, ConsoleUtils, type DelayModalRef } from '@unikue/ant-buddy-pro';
+import { type ModalActionType } from '@unikue/ant-buddy-pro/field/DelayModal';
+import { RandomUtils } from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -80,17 +80,17 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Confirm', value: 'confirm'},
-                        {label: 'Info', value: 'info'},
-                        {label: 'Warn', value: 'warn'},
-                        {label: 'Success', value: 'success'},
-                        {label: 'Error', value: 'error'},
-                        {label: 'Custom', value: 'custom'},
+                        { label: 'Confirm', value: 'confirm' },
+                        { label: 'Info', value: 'info' },
+                        { label: 'Warn', value: 'warn' },
+                        { label: 'Success', value: 'success' },
+                        { label: 'Error', value: 'error' },
+                        { label: 'Custom', value: 'custom' },
                     ]}
                 />
                 <ProForm.Group>
                     <Button
-                        icon={<FireOutlined/>}
+                        icon={<FireOutlined />}
                         disabled={autoStart || timing}
                         onClick={() => {
                             delayModalRef.current?.startTimer();
@@ -100,7 +100,7 @@ export default () => {
                         Manual Start
                     </Button>
                     <Button
-                        icon={<StopOutlined/>}
+                        icon={<StopOutlined />}
                         disabled={autoStart || !timing}
                         onClick={() => {
                             delayModalRef.current?.stopTimer();
@@ -111,7 +111,7 @@ export default () => {
                     </Button>
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <span>
                 Popup a modal dialog after idle 10 seconds.
             </span>
@@ -125,7 +125,7 @@ export default () => {
                     title: 'DelayModal',
                     children: `Oops! This is a message from modalProps. ${RandomUtils.randomString(6)}`,
                     closable: false,
-                    mask: {closable: false},
+                    mask: { closable: false },
                     okText: 'OK',
                     cancelText: 'Cancel',
                 }}
@@ -133,7 +133,7 @@ export default () => {
                     title: 'DelayModal',
                     content: `Oops! This is a message from modalFunProps. ${RandomUtils.randomString(6)}`,
                     closable: false,
-                    mask: {closable: false},
+                    mask: { closable: false },
                     okText: 'OK',
                     cancelText: 'Cancel',
                 }}

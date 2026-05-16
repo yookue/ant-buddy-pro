@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Avatar, Button, Divider, Space, Tooltip} from 'antd';
-import {FieldStringOutlined, RedoOutlined} from '@ant-design/icons';
-import {RemoteField, CommentCard, ConsoleUtils, type RemoteFieldRef} from '@unikue/ant-buddy-pro';
-import {RandomUtils} from '@unikue/ts-lang-utils';
+import { Avatar, Button, Divider, Space, Tooltip } from 'antd';
+import { FieldStringOutlined, RedoOutlined } from '@ant-design/icons';
+import { RemoteField, CommentCard, ConsoleUtils, type RemoteFieldRef } from '@unikue/ant-buddy-pro';
+import { RandomUtils } from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -35,7 +35,7 @@ export default () => {
         <>
             <Space size='middle'>
                 <Button
-                    icon={<FieldStringOutlined/>}
+                    icon={<FieldStringOutlined />}
                     onClick={() => {
                         ConsoleUtils.logTimestamp(false, false, 'RemoteField', 'outcome = ' + JSON.stringify(remoteFieldRef.current?.getOutcome()));
                     }}
@@ -43,7 +43,7 @@ export default () => {
                     Logging
                 </Button>
                 <Button
-                    icon={<RedoOutlined/>}
+                    icon={<RedoOutlined />}
                     onClick={() => {
                         remoteFieldRef.current?.refresh();
                     }}
@@ -51,7 +51,7 @@ export default () => {
                     Refresh
                 </Button>
             </Space>
-            <Divider/>
+            <Divider />
             <RemoteField
                 ref={remoteFieldRef}
                 request={async () => {

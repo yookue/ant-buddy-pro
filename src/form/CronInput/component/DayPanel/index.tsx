@@ -16,14 +16,14 @@
 
 
 import React from 'react';
-import {Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType} from 'antd';
-import {useIntl} from '@ant-design/pro-components';
-import {type ValueType as RcValueType} from '@rc-component/input-number';
-import {NanoidUtils, NumberUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
+import { Form, Checkbox, InputNumber, Radio, Space, type RadioChangeEvent, type CheckboxOptionType } from 'antd';
+import { useIntl } from '@ant-design/pro-components';
+import { type ValueType as RcValueType } from '@rc-component/input-number';
+import { NanoidUtils, NumberUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {CronInputContext} from '@/form/CronInput/context';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { CronInputContext } from '@/form/CronInput/context';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type DayPanelRef = {

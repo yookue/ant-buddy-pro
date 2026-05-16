@@ -16,11 +16,11 @@
 
 
 import React from 'react';
-import {Divider, ColorPicker} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {PageFooter} from '@unikue/ant-buddy-pro';
-import {type FooterPresetStyle} from '@unikue/ant-buddy-pro/layout/PageFooter';
-import {ColorUtils} from '@unikue/ts-lang-utils';
+import { Divider, ColorPicker } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { PageFooter } from '@unikue/ant-buddy-pro';
+import { type FooterPresetStyle } from '@unikue/ant-buddy-pro/layout/PageFooter';
+import { ColorUtils } from '@unikue/ts-lang-utils';
 
 
 export default () => {
@@ -69,13 +69,13 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '默认', value: 'default'},
-                        {label: '一半', value: 'half'},
-                        {label: '无', value: false},
+                        { label: '默认', value: 'default' },
+                        { label: '一半', value: 'half' },
+                        { label: '无', value: false },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <PageFooter
                 links={[
                     {

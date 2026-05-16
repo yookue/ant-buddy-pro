@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {ServerTuple, ConsoleUtils, type AxisDirectionType} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { ServerTuple, ConsoleUtils, type AxisDirectionType } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -45,8 +45,8 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '水平', value: 'horizontal'},
-                        {label: '垂直', value: 'vertical'},
+                        { label: '水平', value: 'horizontal' },
+                        { label: '垂直', value: 'vertical' },
                     ]}
                 />
                 <ProFormSwitch
@@ -59,7 +59,7 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <ProForm
                 form={form}
                 name='ServerTuple_demo.zh-TW.Test'

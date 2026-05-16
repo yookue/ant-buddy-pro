@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {GithubOutlined} from '@ant-design/icons';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
-import {TooltipField} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { GithubOutlined } from '@ant-design/icons';
+import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
+import { TooltipField } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -43,15 +43,15 @@ export default () => {
                     }}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <TooltipField
                 tooltipCtrl={tooltipCtrl}
                 tooltipProps={{
                     title: 'Github',
                 }}
             >
-                <a href='https://github.com/unikueltd/ant-buddy-pro' target='_blank' style={{color: 'inherit'}}>
-                    <GithubOutlined style={{fontSize: '24px'}}/>
+                <a href='https://github.com/unikueltd/ant-buddy-pro' target='_blank' style={{ color: 'inherit' }}>
+                    <GithubOutlined style={{ fontSize: '24px' }}/>
                 </a>
             </TooltipField>
         </>

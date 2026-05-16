@@ -16,15 +16,15 @@
 
 
 import React from 'react';
-import {Form, Input, type InputProps, type InputRef} from 'antd';
-import {ProFormText} from '@ant-design/pro-components';
-import {type ProFormFieldItemProps} from '@ant-design/pro-components/es/form/typing';
-import {omit} from '@rc-component/util';
-import {NanoidUtils, StringUtils} from '@unikue/ts-lang-utils';
-import {useEventListener} from 'ahooks';
+import { Form, Input, type InputProps, type InputRef } from 'antd';
+import { ProFormText } from '@ant-design/pro-components';
+import { type ProFormFieldItemProps } from '@ant-design/pro-components/es/form/typing';
+import { omit } from '@rc-component/util';
+import { NanoidUtils, StringUtils } from '@unikue/ts-lang-utils';
+import { useEventListener } from 'ahooks';
 import classnames from 'classnames';
-import {type ClickHoverType} from '@/type/declaration';
-import {useFieldStyle} from './styles';
+import { type ClickHoverType } from '@/type/declaration';
+import { useFieldStyle } from './styles';
 
 
 export type StretchInputProps = Omit<ProFormFieldItemProps<InputProps, InputRef>, 'children'> & {

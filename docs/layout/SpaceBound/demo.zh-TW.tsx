@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormSwitch} from '@ant-design/pro-components';
-import {SpaceBound} from '@unikue/ant-buddy-pro';
+import { Divider } from 'antd';
+import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
+import { SpaceBound } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -54,7 +54,7 @@ export default () => {
                     />
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <SpaceBound
                 size='middle'
                 boundBorder={boundBorder}

@@ -16,19 +16,19 @@
 
 
 import React from 'react';
-import {Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type DropdownProps, type ListProps, type MenuProps, type TabsProps} from 'antd';
-import {ListItemMetaProps} from 'antd/es/list/Item';
-import {type TabPlacement} from 'antd/es/tabs';
-import {BellOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-components';
-import {type Tab as RcTab} from '@rc-component/tabs/es/interface';
-import {omit} from '@rc-component/util';
-import {If} from '@unikue/react-condition';
-import {ArrayUtils, BooleanUtils, ObjectUtils} from '@unikue/ts-lang-utils';
+import { Avatar, Badge, Dropdown, Empty, List, Tabs, type BadgeProps, type DropdownProps, type ListProps, type MenuProps, type TabsProps } from 'antd';
+import { ListItemMetaProps } from 'antd/es/list/Item';
+import { type TabPlacement } from 'antd/es/tabs';
+import { BellOutlined } from '@ant-design/icons';
+import { useIntl } from '@ant-design/pro-components';
+import { type Tab as RcTab } from '@rc-component/tabs/es/interface';
+import { omit } from '@rc-component/util';
+import { If } from '@unikue/react-condition';
+import { ArrayUtils, BooleanUtils, ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {type WithFalse, type ReadonlyTabsType} from '@/type/declaration';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type ReadonlyTabsType } from '@/type/declaration';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type NotifyPresetStyle = WithFalse<'notice' | 'task'>;
@@ -292,7 +292,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
 
     // Initialize the default props
     const {
-        badgeContent = <BellOutlined style={{cursor: 'pointer'}}/>,
+        badgeContent = <BellOutlined style={{ cursor: 'pointer' }}/>,
         dropdownEnabled = true,
         locale = intlType.locale,
     } = props ?? {};
@@ -459,7 +459,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
 
     return !dropdownEnabled ? hyperlinkDom : (
         <Dropdown
-            menu={{items: menuItems}}
+            menu={{ items: menuItems }}
             classNames={{
                 // @ts-ignore
                 root: classnames(`${clazzPrefix}-trigger`, `${clazzPrefix}-popup`, fieldStyle.hashId, props?.dropdownProps?.classNames?.root)

@@ -16,16 +16,16 @@
 
 
 import React from 'react';
-import {type BadgeProps, type CheckboxProps, type TooltipProps} from 'antd';
-import {LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, StarOutlined, StarFilled} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-components';
-import {ObjectUtils} from '@unikue/ts-lang-utils';
+import { type BadgeProps, type CheckboxProps, type TooltipProps } from 'antd';
+import { LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled, StarOutlined, StarFilled } from '@ant-design/icons';
+import { useIntl } from '@ant-design/pro-components';
+import { ObjectUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
-import {type AxisDirectionType} from '@/type/declaration';
-import {CountField, type CountFieldRef} from '@/field/CountField';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type AxisDirectionType } from '@/type/declaration';
+import { CountField, type CountFieldRef } from '@/field/CountField';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type ThumbActionType = 'like' | 'dislike' | 'favorite';

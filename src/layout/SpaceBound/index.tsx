@@ -16,12 +16,12 @@
 
 
 import React from 'react';
-import {Space, type SpaceProps} from 'antd';
-import {type SpaceSize} from 'antd/es/space';
-import {css} from '@emotion/css';
-import {omit} from '@rc-component/util';
+import { Space, type SpaceProps } from 'antd';
+import { type SpaceSize } from 'antd/es/space';
+import { css } from '@emotion/css';
+import { omit } from '@rc-component/util';
 import classnames from 'classnames';
-import {useFieldStyle} from './styles';
+import { useFieldStyle } from './styles';
 
 
 export type SpaceBoundProps = SpaceProps & {

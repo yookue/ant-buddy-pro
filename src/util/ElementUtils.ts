@@ -85,7 +85,7 @@ export abstract class ElementUtils {
         }
         const previous = descriptor.get?.call(element) || '';
         descriptor.set?.call(element, value || '');
-        element?.dispatchEvent(new Event('change', {bubbles: true}));
+        element?.dispatchEvent(new Event('change', { bubbles: true }));
         if (callback) {
             callback(previous);
         }

@@ -15,9 +15,9 @@
  */
 
 
-import {message as messageApi} from 'antd';
-import {ProForm} from '@ant-design/pro-components';
-import {LocaleInput} from '@unikue/ant-buddy-pro';
+import { message as messageApi } from 'antd';
+import { ProForm } from '@ant-design/pro-components';
+import { LocaleInput } from '@unikue/ant-buddy-pro';
 
 
 export default () => {

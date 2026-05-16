@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Button, Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {FlexBox} from '@unikue/ant-buddy-pro';
+import { Button, Divider } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { FlexBox } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -47,12 +47,12 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Start', value: 'start'},
-                        {label: 'Center', value: 'center'},
-                        {label: 'End', value: 'end'},
-                        {label: 'Space-Between', value: 'space-between'},
-                        {label: 'Space-Around', value: 'space-around'},
-                        {label: 'Space-Evenly', value: 'space-evenly'},
+                        { label: 'Start', value: 'start' },
+                        { label: 'Center', value: 'center' },
+                        { label: 'End', value: 'end' },
+                        { label: 'Space-Between', value: 'space-between' },
+                        { label: 'Space-Around', value: 'space-around' },
+                        { label: 'Space-Evenly', value: 'space-evenly' },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -66,10 +66,10 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Start', value: 'start'},
-                        {label: 'Center', value: 'center'},
-                        {label: 'End', value: 'end'},
-                        {label: 'Stretch', value: 'stretch'},
+                        { label: 'Start', value: 'start' },
+                        { label: 'Center', value: 'center' },
+                        { label: 'End', value: 'end' },
+                        { label: 'Stretch', value: 'stretch' },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -83,10 +83,10 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Large', value: 'large'},
-                        {label: 'Middle', value: 'middle'},
-                        {label: 'Small', value: 'small'},
-                        {label: 'Customize', value: '48px'},
+                        { label: 'Large', value: 'large' },
+                        { label: 'Middle', value: 'middle' },
+                        { label: 'Small', value: 'small' },
+                        { label: 'Customize', value: '48px' },
                     ]}
                 />
                 <ProForm.Group>
@@ -110,7 +110,7 @@ export default () => {
                     />
                 </ProForm.Group>
             </ProForm>
-            <Divider/>
+            <Divider />
             <FlexBox
                 justifyContent={justifyContent}
                 alignItems={alignItems}

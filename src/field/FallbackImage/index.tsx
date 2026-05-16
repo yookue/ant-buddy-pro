@@ -16,9 +16,9 @@
 
 
 import React from 'react';
-import {Image, type ImageProps} from 'antd';
-import {omit} from '@rc-component/util';
-import {ImageUtils, NanoidUtils} from '@unikue/ts-lang-utils';
+import { Image, type ImageProps } from 'antd';
+import { omit } from '@rc-component/util';
+import { ImageUtils, NanoidUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 
 

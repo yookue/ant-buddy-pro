@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Input, Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {LabelField, type AxisDirectionType} from '@unikue/ant-buddy-pro';
-import {type LabelPresetStyle} from '@unikue/ant-buddy-pro/field/LabelField';
+import { Input, Divider } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { LabelField, type AxisDirectionType } from '@unikue/ant-buddy-pro';
+import { type LabelPresetStyle } from '@unikue/ant-buddy-pro/field/LabelField';
 
 
 export default () => {
@@ -46,8 +46,8 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Horizontal', value: 'horizontal'},
-                        {label: 'Vertical', value: 'vertical'},
+                        { label: 'Horizontal', value: 'horizontal' },
+                        { label: 'Vertical', value: 'vertical' },
                     ]}
                 />
                 <ProFormSwitch
@@ -71,13 +71,13 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: 'Label-Prior', value: 'label-prior'},
-                        {label: 'Field-Prior', value: 'field-prior'},
-                        {label: 'False', value: false},
+                        { label: 'Label-Prior', value: 'label-prior' },
+                        { label: 'Field-Prior', value: 'field-prior' },
+                        { label: 'False', value: false },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <ProForm
                 name='LabelField_demo.en-US.Test'
                 layout={layout}

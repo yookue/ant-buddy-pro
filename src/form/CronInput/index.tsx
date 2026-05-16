@@ -16,36 +16,36 @@
 
 
 import React from 'react';
-import {ConfigProvider, Form, Button, Switch, Space, Input, message as messageApi} from 'antd';
-import {type TabPosition} from 'antd/es/tabs';
-import {FieldTimeOutlined} from '@ant-design/icons';
-import {useIntl} from '@ant-design/pro-components';
-import {EditOrReadOnlyContext} from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
-import Trigger, {type TriggerProps} from '@rc-component/trigger';
+import { ConfigProvider, Form, Button, Switch, Space, Input, message as messageApi } from 'antd';
+import { type TabPosition } from 'antd/es/tabs';
+import { FieldTimeOutlined } from '@ant-design/icons';
+import { useIntl } from '@ant-design/pro-components';
+import { EditOrReadOnlyContext } from '@ant-design/pro-components/es/form/BaseForm/EditOrReadOnlyContext';
+import Trigger, { type TriggerProps } from '@rc-component/trigger';
 import '@rc-component/trigger/assets/index.less';
-import {omit} from '@rc-component/util';
-import {If} from '@unikue/react-condition';
-import {ElementUtils, NanoidUtils, ObjectUtils, StringUtils} from '@unikue/ts-lang-utils';
-import {useEventListener, useMutationObserver} from 'ahooks';
+import { omit } from '@rc-component/util';
+import { If } from '@unikue/react-condition';
+import { ElementUtils, NanoidUtils, ObjectUtils, StringUtils } from '@unikue/ts-lang-utils';
+import { useEventListener, useMutationObserver } from 'ahooks';
 import classnames from 'classnames';
 import cronValidate from 'cron-validate';
-import {type WithFalse, type BeforeAfterType} from '@/type/declaration';
-import {CardTabs, type CardTabsProps} from '@/layout/CardTabs';
-import {AddonInput, type AddonInputProps} from '@/form/AddonInput';
-import {ConsoleUtils} from '@/util/ConsoleUtils';
-import {DesignUtils} from '@/util/DesignUtils';
-import {StyleUtils} from '@/util/StyleUtils';
-import {TriggerUtils} from '@/util/TriggerUtils';
-import {CronInputContext, type CronInputContextProps} from './context';
-import {SecondPanel, type SecondPanelProps, type SecondPanelRef} from './component/SecondPanel';
-import {MinutePanel, type MinutePanelProps, type MinutePanelRef} from './component/MinutePanel';
-import {HourPanel, type HourPanelProps, type HourPanelRef} from './component/HourPanel';
-import {DayPanel, type DayPanelProps, type DayPanelRef} from './component/DayPanel';
-import {MonthPanel, type MonthPanelProps, type MonthPanelRef} from './component/MonthPanel';
-import {WeekPanel, type WeekPanelProps, type WeekPanelRef} from './component/WeekPanel';
-import {YearPanel, type YearPanelProps, type YearPanelRef} from './component/YearPanel';
-import {intlLocales} from './locales';
-import {useFieldStyle} from './styles';
+import { type WithFalse, type BeforeAfterType } from '@/type/declaration';
+import { CardTabs, type CardTabsProps } from '@/layout/CardTabs';
+import { AddonInput, type AddonInputProps } from '@/form/AddonInput';
+import { ConsoleUtils } from '@/util/ConsoleUtils';
+import { DesignUtils } from '@/util/DesignUtils';
+import { StyleUtils } from '@/util/StyleUtils';
+import { TriggerUtils } from '@/util/TriggerUtils';
+import { CronInputContext, type CronInputContextProps } from './context';
+import { SecondPanel, type SecondPanelProps, type SecondPanelRef } from './component/SecondPanel';
+import { MinutePanel, type MinutePanelProps, type MinutePanelRef } from './component/MinutePanel';
+import { HourPanel, type HourPanelProps, type HourPanelRef } from './component/HourPanel';
+import { DayPanel, type DayPanelProps, type DayPanelRef } from './component/DayPanel';
+import { MonthPanel, type MonthPanelProps, type MonthPanelRef } from './component/MonthPanel';
+import { WeekPanel, type WeekPanelProps, type WeekPanelRef } from './component/WeekPanel';
+import { YearPanel, type YearPanelProps, type YearPanelRef } from './component/YearPanel';
+import { intlLocales } from './locales';
+import { useFieldStyle } from './styles';
 
 
 export type CronInputRef = {
@@ -147,7 +147,7 @@ export type CronInputProps = Omit<AddonInputProps, 'clazzPrefix' | 'addonBefore'
      * @description The DOM of the addon for the entry field
      * @description.zh-CN 默认文本框的附属节点内容
      * @description.zh-TW 默認文本框的標簽節點內容
-     * @default <FieldTimeOutlined/>
+     * @default <FieldTimeOutlined />
      */
     addon?: React.ReactNode | (() => React.ReactNode | undefined);
 
@@ -316,7 +316,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
 
     // Initialize the default props
     const {
-        addon = <FieldTimeOutlined/>,
+        addon = <FieldTimeOutlined />,
         addonPos = 'after',
         allowSecond = true,
         allowYear = true,
@@ -404,7 +404,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
         const additionalHeight = DesignUtils.getFormAdditionalHeight(entryElementRef.current, prefixCls);
         setTriggerOffset(4 - additionalHeight);
     }, []);
-    useMutationObserver(updateTriggerOffset, entryElementRef, {childList: true, subtree: true});
+    useMutationObserver(updateTriggerOffset, entryElementRef, { childList: true, subtree: true });
 
     React.useEffect(() => {
         const element = document.querySelector<HTMLDivElement>(`.${clazzPrefix}-entry-${fieldId}`);
@@ -526,9 +526,9 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
             const restProps = omit(omitFieldProps, ['placeholder']);
             return (
                 <div className={clazzPrefix}>
-                    <Space.Compact className={`${clazzPrefix}-space`} style={{width: '100%'}}>
+                    <Space.Compact className={`${clazzPrefix}-space`} style={{ width: '100%' }}>
                         {addonPos === 'before' && (
-                            <Space.Addon className={`${clazzPrefix}-compact-before`} style={{cursor: 'pointer'}}>
+                            <Space.Addon className={`${clazzPrefix}-compact-before`} style={{ cursor: 'pointer' }}>
                                 {buildEntryAddonDom(true)}
                             </Space.Addon>
                         )}
@@ -553,7 +553,7 @@ export const CronInput: React.ForwardRefExoticComponent<CronInputProps & React.R
                             {...omitFieldProps}
                         />
                         {addonPos === 'after' && (
-                            <Space.Addon className={`${clazzPrefix}-compact-after`} style={{cursor: 'pointer'}}>
+                            <Space.Addon className={`${clazzPrefix}-compact-after`} style={{ cursor: 'pointer' }}>
                                 {buildEntryAddonDom(false)}
                             </Space.Addon>
                         )}

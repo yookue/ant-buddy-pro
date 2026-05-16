@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Divider} from 'antd';
-import {ProForm, ProFormRadio, ProFormSwitch} from '@ant-design/pro-components';
-import {SectionTitle, type BeforeAfterType} from '@unikue/ant-buddy-pro';
-import {type TitlePresetStyle} from '@/layout/SectionTitle';
+import { Divider } from 'antd';
+import { ProForm, ProFormRadio, ProFormSwitch } from '@ant-design/pro-components';
+import { SectionTitle, type BeforeAfterType } from '@unikue/ant-buddy-pro';
+import { type TitlePresetStyle } from '@/layout/SectionTitle';
 
 
 export default () => {
@@ -55,9 +55,9 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '前', value: 'before'},
-                        {label: '后', value: 'after'},
-                        {label: '无', value: false},
+                        { label: '前', value: 'before' },
+                        { label: '后', value: 'after' },
+                        { label: '无', value: false },
                     ]}
                 />
                 <ProFormRadio.Group
@@ -71,17 +71,17 @@ export default () => {
                         }
                     }}
                     options={[
-                        {label: '默认', value: 'default'},
-                        {label: '成功', value: 'success'},
-                        {label: '信息', value: 'info'},
-                        {label: '警告', value: 'warn'},
-                        {label: '错误', value: 'error'},
-                        {label: '经典', value: 'classic'},
-                        {label: '无', value: false},
+                        { label: '默认', value: 'default' },
+                        { label: '成功', value: 'success' },
+                        { label: '信息', value: 'info' },
+                        { label: '警告', value: 'warn' },
+                        { label: '错误', value: 'error' },
+                        { label: '经典', value: 'classic' },
+                        { label: '无', value: false },
                     ]}
                 />
             </ProForm>
-            <Divider/>
+            <Divider />
             <SectionTitle
                 boundBorder={boundBorder}
                 ornament='Ant Buddy'

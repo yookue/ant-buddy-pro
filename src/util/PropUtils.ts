@@ -15,8 +15,8 @@
  */
 
 
-import {omit} from '@rc-component/util';
-import {DesignConst} from '@/constant/DesignConst';
+import { omit } from '@rc-component/util';
+import { DesignConst } from '@/constant/DesignConst';
 
 
 /**

@@ -16,10 +16,10 @@
 
 
 import React from 'react';
-import {Spin} from 'antd';
-import {useDebounceFn} from '@ant-design/pro-components';
-import {type ProFormFieldRemoteProps} from '@ant-design/pro-components/es/form/typing';
-import {NanoidUtils} from '@unikue/ts-lang-utils';
+import { Spin } from 'antd';
+import { useDebounceFn } from '@ant-design/pro-components';
+import { type ProFormFieldRemoteProps } from '@ant-design/pro-components/es/form/typing';
+import { NanoidUtils } from '@unikue/ts-lang-utils';
 import classnames from 'classnames';
 
 
@@ -71,7 +71,7 @@ export type RemoteFieldProps = Omit<ProFormFieldRemoteProps, 'request' | 'valueE
      * @description The fallback of the component
      * @description.zh-CN 组件的占位符
      * @description.zh-TW 組件的占位符
-     * @default <Spin/>
+     * @default <Spin />
      */
     fallback?: React.ReactNode | (() => React.ReactNode | undefined);
 
@@ -97,7 +97,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
 
     // Initialize the default props
     const {
-        fallback = <Spin/>,
+        fallback = <Spin />,
         autoStart = true,
     } = props ?? {};
 
@@ -118,7 +118,7 @@ export const RemoteField: React.ForwardRefExoticComponent<RemoteFieldProps & Rea
     }));
 
     if (props?.request) {
-        const {run} = useDebounceFn(props.request, props?.debounceTime ?? 0);
+        const { run } = useDebounceFn(props.request, props?.debounceTime ?? 0);
 
         React.useEffect(() => {
             if (autoStart) {
