@@ -152,7 +152,7 @@ export const AvatarStamp: React.FC<AvatarStampProps> = (props?: AvatarStampProps
             className={classnames(clazzPrefix, fieldStyle.hashId, `${clazzPrefix}-${StringUtils.toKebabCase(placement)}`, props?.containerClazz)}
             style={props?.containerStyle}
         >
-            <Avatar {...omitAvatarProps}/>
+            <Avatar {...omitAvatarProps} />
             {buildAddonDom()}
         </div>
     );

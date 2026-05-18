@@ -292,7 +292,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
 
     // Initialize the default props
     const {
-        badgeContent = <BellOutlined style={{ cursor: 'pointer' }}/>,
+        badgeContent = <BellOutlined style={{ cursor: 'pointer' }} />,
         dropdownEnabled = true,
         locale = intlType.locale,
     } = props ?? {};
@@ -340,7 +340,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
             <>
                 <If condition={typeof item.avatar === 'string'} validation={false}>
                     <If.Then>
-                        <Avatar className={`${clazzPrefix}-list-item-avatar`} src={item.avatar}/>
+                        <Avatar className={`${clazzPrefix}-list-item-avatar`} src={item.avatar} />
                     </If.Then>
                     <If.Else>
                         <span className={`${clazzPrefix}-list-item-icon`}>{item.avatar}</span>
@@ -423,7 +423,7 @@ export const NotifyBadge: React.FC<NotifyBadgeProps> = (props?: NotifyBadgeProps
         }
         return props.tabsProps.items.map((tab: MixinTabProps) => {
             const empty = !tab.listProps?.dataSource || (Array.isArray(tab.listProps.dataSource) && !tab.listProps.dataSource.length);
-            const placeholder = tab.listPlaceholder ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>;
+            const placeholder = tab.listPlaceholder ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
             const content = empty ? placeholder : (
                 <List
                     className={classnames(`${clazzPrefix}-tab-list`, tab.listProps?.className)}

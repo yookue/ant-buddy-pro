@@ -55,7 +55,7 @@ export default () => {
                     name='foobar'
                     placeholder='请点击此项'
                     fieldProps={{
-                        prefix: <SearchOutlined style={{ cursor: 'pointer' }}/>,
+                        prefix: <SearchOutlined style={{ cursor: 'pointer' }} />,
                         style: {
                             borderRadius: '16px',
                             width: '50%',

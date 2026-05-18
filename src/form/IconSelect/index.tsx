@@ -359,7 +359,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                         const optItem = {};
                         const content = (
                             <Space>
-                                <Icon component={value}/>
+                                <Icon component={value} />
                                 <span>{key}</span>
                             </Space>
                         );
@@ -560,7 +560,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                                     style={props?.optionIconStyle}
                                     onClick={() => handleIconClick(key)}
                                 >
-                                    <Icon component={value}/>
+                                    <Icon component={value} />
                                 </div>
                             </Wave>
                         </div>
@@ -579,7 +579,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
         if (!content) {
             return (
                 <div className={`${clazzPrefix}-search-mismatch`}>
-                    {props?.fieldProps?.notFoundContent ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+                    {props?.fieldProps?.notFoundContent ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
                 </div>
             );
         }
@@ -637,7 +637,7 @@ export const IconSelect: React.FC<IconSelectProps> = (props?: IconSelectProps) =
                 key: `${themeType}-all`,
                 children: (
                     <div className={`${clazzPrefix}-search-mismatch`}>
-                        {props?.fieldProps?.notFoundContent ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+                        {props?.fieldProps?.notFoundContent ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
                     </div>
                 ),
             }];

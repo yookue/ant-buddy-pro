@@ -127,7 +127,7 @@ export default () => {
                 borderRight={borderRight}
                 containerStyle={{ padding: 12 }}
             >
-                {(boundShape === 'circle') ? <CoffeeOutlined style={{ fontSize: 22 }}/> : '一只棕色敏捷的狐狸跳过了一只懒洋洋的狗。'}
+                {(boundShape === 'circle') ? <CoffeeOutlined style={{ fontSize: 22 }} /> : '一只棕色敏捷的狐狸跳过了一只懒洋洋的狗。'}
             </BorderBox>
         </>
     );

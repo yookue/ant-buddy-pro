@@ -202,7 +202,7 @@ export const LabelField: React.FC<LabelFieldProps> = (props?: LabelFieldProps) =
                 {labelColon ? colon : undefined}
                 {!!tooltipDom && (
                     <Tooltip title={tooltipDom}>
-                        <QuestionCircleOutlined className={`${clazzPrefix}-tooltip`}/>
+                        <QuestionCircleOutlined className={`${clazzPrefix}-tooltip`} />
                     </Tooltip>
                 )}
             </div>

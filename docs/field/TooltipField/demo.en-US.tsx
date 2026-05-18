@@ -51,7 +51,7 @@ export default () => {
                 }}
             >
                 <a href='https://github.com/unikueltd/ant-buddy-pro' target='_blank' style={{ color: 'inherit' }}>
-                    <GithubOutlined style={{ fontSize: '24px' }}/>
+                    <GithubOutlined style={{ fontSize: '24px' }} />
                 </a>
             </TooltipField>
         </>);

@@ -256,7 +256,7 @@ export const FoldSection: React.FC<FoldSectionProps> = (props?: FoldSectionProps
         defaultOpen = true,
         panelForceRender = false,
         panelDestroyOnClose = false,
-        panelPlaceholder = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>,
+        panelPlaceholder = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />,
         presetStyle = 'default',
         locale = intlType.locale,
     } = props ?? {};

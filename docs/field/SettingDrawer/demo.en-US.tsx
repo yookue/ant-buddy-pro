@@ -51,7 +51,7 @@ export default () => {
             <SettingDrawer
                 triggerDom={(
                     <BorderBox boundShape='circle' borderAll={true} containerStyle={{ padding: 8 }}>
-                        <SkinOutlined style={{ fontSize: 16 }}/>
+                        <SkinOutlined style={{ fontSize: 16 }} />
                     </BorderBox>
                 )}
                 settings={settings}

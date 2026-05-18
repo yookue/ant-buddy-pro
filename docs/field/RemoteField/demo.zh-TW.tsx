@@ -73,7 +73,7 @@ export default () => {
                     return (
                         <CommentCard
                             avatar={(
-                                <Avatar src={outcome?.data?.avatar}/>
+                                <Avatar src={outcome?.data?.avatar} />
                             )}
                             author={outcome?.data?.author}
                             content={outcome?.data?.content}

@@ -101,7 +101,7 @@ export default () => {
                 placement={placement}
                 size={size}
                 addon={!showAddon ? undefined : (
-                    <SmileOutlined style={{ color: 'white', fontSize: 8 + size / 5 }}/>
+                    <SmileOutlined style={{ color: 'white', fontSize: 8 + size / 5 }} />
                 )}
                 rotateAddon={rotateAddon}
             >

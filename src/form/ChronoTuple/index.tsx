@@ -101,7 +101,7 @@ export const ChronoTuple: React.FC<ChronoTupleProps> = (props?: ChronoTupleProps
 
     const buildDigitNode = () => {
         if (proField) {
-            return <ProFormDigit {...props?.digitProps}/>;
+            return <ProFormDigit {...props?.digitProps} />;
         }
         const restProps = !props?.digitProps?.fieldProps ? {} : omit(props.digitProps.fieldProps, ['className', 'name', 'id', 'placeholder', 'onChange']);
         return (

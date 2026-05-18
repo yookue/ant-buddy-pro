@@ -120,7 +120,7 @@ export const SettingDrawer: React.ForwardRefExoticComponent<SettingDrawerProps &
 
     // Initialize the default props
     const {
-        triggerDom = <SkinOutlined style={{ fontSize: 16 }}/>,
+        triggerDom = <SkinOutlined style={{ fontSize: 16 }} />,
         locale = intlType.locale,
     } = props ?? {};
 
