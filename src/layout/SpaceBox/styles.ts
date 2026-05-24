@@ -44,7 +44,7 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
 
 
 export function useFieldStyle(prefixCls: string): UseStyleResult {
-    return useStyle(`${PackageConst.PACKAGE_NAME}:SpaceBound`, (token) => {
+    return useStyle(`${PackageConst.PACKAGE_NAME}:SpaceBox`, (token) => {
         const mesh: ExtraProAliasToken = {
             prefixCls,
             componentCls: `.${prefixCls}`,

@@ -163,7 +163,7 @@ toc: false
     - 增加 `form/DivideSelect`
 
   - **v0.1.20** [2023-11-24]
-    - 增加 `layout/SpaceBound`
+    - 增加 `layout/SpaceBox`
     - 增加 `util/ChildUtils`
 
   - **v0.1.16** [2023-11-11]

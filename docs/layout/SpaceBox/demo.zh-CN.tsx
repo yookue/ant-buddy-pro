@@ -18,7 +18,7 @@
 import React from 'react';
 import { Divider } from 'antd';
 import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
-import { SpaceBound } from '@unikue/ant-buddy-pro';
+import { SpaceBox } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -28,25 +28,25 @@ export default () => {
     return (
         <>
             <ProForm
-                name='SpaceBound_demo.en-US'
+                name='SpaceBox_demo.zh-CN'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
             >
                 <ProForm.Group>
                     <ProFormSwitch
-                        label='Bound Border'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
+                        label='外边框'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
                         fieldProps={{
                             checked: boundBorder,
                             onChange: setBoundBorder,
                         }}
                     />
                     <ProFormSwitch
-                        label='Width Block'
-                        checkedChildren='True'
-                        unCheckedChildren='False'
+                        label='匹配宽度'
+                        checkedChildren='是'
+                        unCheckedChildren='否'
                         fieldProps={{
                             checked: widthBlock,
                             onChange: setWidthBlock,
@@ -55,14 +55,14 @@ export default () => {
                 </ProForm.Group>
             </ProForm>
             <Divider />
-            <SpaceBound
+            <SpaceBox
                 size='middle'
                 boundBorder={boundBorder}
                 widthBlock={widthBlock}
             >
-                <span>Here is the first child content.</span>
-                <span>Here is the second child content.</span>
-            </SpaceBound>
+                <span>这是第一个子节点。</span>
+                <span>这是第二个子节点。</span>
+            </SpaceBox>
         </>
     );
 }

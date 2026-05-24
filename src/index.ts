@@ -64,7 +64,7 @@ export { LoginPortal, type LoginPortalProps } from './layout/LoginPortal';
 export { MenuTabs, type MenuTabsProps } from './layout/MenuTabs';
 export { PageFooter, type PageFooterProps } from './layout/PageFooter';
 export { SectionTitle, type SectionTitleProps } from './layout/SectionTitle';
-export { SpaceBound, type SpaceBoundProps } from './layout/SpaceBound';
+export { SpaceBox, type SpaceBoxProps } from './layout/SpaceBox';
 export { SchemaRender } from './render/SchemaRender';
 export { SelectRender } from './render/SelectRender';
 export { TooltipRender } from './render/TooltipRender';

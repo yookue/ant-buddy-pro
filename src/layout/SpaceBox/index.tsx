@@ -24,12 +24,12 @@ import classnames from 'classnames';
 import { useFieldStyle } from './styles';
 
 
-export type SpaceBoundProps = SpaceProps & {
+export type SpaceBoxProps = SpaceProps & {
     /**
      * @description The CSS class prefix of the component
      * @description.zh-CN 组件的 CSS 类名前缀
      * @description.zh-TW 組件的 CSS 類名前綴
-     * @default 'abp-space-bound'
+     * @default 'abp-space-box'
      */
     clazzPrefix?: string;
 
@@ -60,7 +60,7 @@ export type SpaceBoundProps = SpaceProps & {
      * @description.zh-TW 外邊框是否填充內邊距
      * @default true
      */
-    boundPad?: boolean;
+    boundPadding?: boolean;
 
     /**
      * @description Whether to match the width of parent element or not
@@ -76,13 +76,13 @@ export type SpaceBoundProps = SpaceProps & {
  *
  * @author David Hsing
  */
-export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) => {
-    const clazzPrefix = props?.clazzPrefix ?? 'abp-space-bound';
+export const SpaceBox: React.FC<SpaceBoxProps> = (props?: SpaceBoxProps) => {
+    const clazzPrefix = props?.clazzPrefix ?? 'abp-space-box';
 
     // Initialize the default props
     const {
         size = 'small',
-        boundPad = true,
+        boundPadding = true,
     } = props ?? {};
 
     const fieldStyle = useFieldStyle(clazzPrefix);
@@ -113,12 +113,12 @@ export const SpaceBound: React.FC<SpaceBoundProps> = (props?: SpaceBoundProps) =
     }, [size]);
 
     const buildPadCss = () => {
-        return !boundPad ? undefined : css({
+        return !boundPadding ? undefined : css({
             padding: `${verticalSize}px ${horizontalSize}px`,
         });
     };
 
-    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'boundBorder', 'boundPad', 'widthBlock']);
+    const restProps = !props ? {} : omit(props, ['clazzPrefix', 'containerClazz', 'containerStyle', 'boundBorder', 'boundPadding', 'widthBlock']);
 
     return (
         <div

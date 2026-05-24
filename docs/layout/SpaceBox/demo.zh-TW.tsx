@@ -18,7 +18,7 @@
 import React from 'react';
 import { Divider } from 'antd';
 import { ProForm, ProFormSwitch } from '@ant-design/pro-components';
-import { SpaceBound } from '@unikue/ant-buddy-pro';
+import { SpaceBox } from '@unikue/ant-buddy-pro';
 
 
 export default () => {
@@ -28,7 +28,7 @@ export default () => {
     return (
         <>
             <ProForm
-                name='SpaceBound_demo.zh-TW'
+                name='SpaceBox_demo.zh-TW'
                 layout='horizontal'
                 autoFocusFirstInput={false}
                 submitter={false}
@@ -55,14 +55,14 @@ export default () => {
                 </ProForm.Group>
             </ProForm>
             <Divider />
-            <SpaceBound
+            <SpaceBox
                 size='middle'
                 boundBorder={boundBorder}
                 widthBlock={widthBlock}
             >
                 <span>這是第一個子節點。</span>
                 <span>這是第二個子節點。</span>
-            </SpaceBound>
+            </SpaceBox>
         </>
     );
 }
