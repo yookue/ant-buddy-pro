@@ -39,3 +39,4 @@ import {FlexBox} from '@unikue/ant-buddy-pro';
 | gap            | 行與列之間的間隙                            | `'small' \| 'middle' \| 'large' \| React.CSSProperties['gap']` | -                |
 | boundBorder    | 是否顯示邊框                              | `boolean`                                                      | -                |
 | boundShadow    | 是否顯示邊框陰影                            | `boolean`                                                      | -                |
+| tokenBg        | 是否使用 token 的背景色                     | `boolean`                                                      | -                |

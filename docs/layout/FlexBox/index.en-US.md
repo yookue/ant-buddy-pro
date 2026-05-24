@@ -39,3 +39,4 @@ import {FlexBox} from '@unikue/ant-buddy-pro';
 | gap            | The gaps between rows and columns                                      | `'small' \| 'middle' \| 'large' \| React.CSSProperties['gap']` | -                |
 | boundBorder    | Whether to show the bound border or not                                | `boolean`                                                      | -                |
 | boundShadow    | Whether to show the bound shadow or not                                | `boolean`                                                      | -                |
+| tokenBg        | Whether to use the background color of token                           | `boolean`                                                      | -                |

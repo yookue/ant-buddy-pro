@@ -32,6 +32,10 @@ const buildFieldStyle: GenerateStyle<ExtraProAliasToken> = (token) => {
 
             [`&&-bound-shadow`]: {
                 boxShadow: token.boxShadow,
+            },
+
+            [`&&-token-bg`]: {
+                backgroundColor: token.colorBgContainer,
             }
         }
     };

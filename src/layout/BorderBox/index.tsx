@@ -99,6 +99,13 @@ export type BorderBoxProps = React.PropsWithChildren<{
      * @default true
      */
     borderRight?: boolean;
+
+    /**
+     * @description Whether to use the background color of token
+     * @description.zh-CN 是否使用 token 的背景色
+     * @description.zh-TW 是否使用 token 的背景色
+     */
+    tokenBg?: boolean;
 }>;
 
 
@@ -119,6 +126,7 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
         borderBottom = true,
         borderLeft = true,
         borderRight = true,
+        tokenBg = false,
     } = props ?? {};
 
     const [boxClazz, setBoxClazz] = React.useState<string>();
@@ -135,15 +143,17 @@ export const BorderBox: React.FC<BorderBoxProps> = (props?: BorderBoxProps) => {
                 [`${clazzPrefix}-border-bottom`]: !borderAll && borderBottom,
                 [`${clazzPrefix}-border-left`]: !borderAll && borderLeft,
                 [`${clazzPrefix}-border-right`]: !borderAll && borderRight,
+                [`${clazzPrefix}-token-bg`]: tokenBg,
             }));
         } else if (boundShape === 'circle') {
             setBoxClazz(classnames({
                 [`${clazzPrefix}-bound-circle`]: true,
                 [`${clazzPrefix}-bound-shadow`]: boundShadow,
                 [`${clazzPrefix}-border-all`]: borderAll,
+                [`${clazzPrefix}-token-bg`]: tokenBg,
             }));
         }
-    }, [clazzPrefix, boundShape, boundShadow, borderAll, borderTop, borderBottom, borderLeft, borderRight]);
+    }, [clazzPrefix, boundShape, boundShadow, borderAll, borderTop, borderBottom, borderLeft, borderRight, tokenBg]);
 
     return (
         <div

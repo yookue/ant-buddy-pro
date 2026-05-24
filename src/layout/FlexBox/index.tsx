@@ -157,6 +157,13 @@ export type FlexBoxProps = React.PropsWithChildren<{
      * @description.zh-TW 是否顯示邊框陰影
      */
     boundShadow?: boolean;
+
+    /**
+     * @description Whether to use the background color of token
+     * @description.zh-CN 是否使用 token 的背景色
+     * @description.zh-TW 是否使用 token 的背景色
+     */
+    tokenBg?: boolean;
 }>;
 
 
@@ -168,7 +175,24 @@ export type FlexBoxProps = React.PropsWithChildren<{
 export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
     const clazzPrefix = props?.clazzPrefix ?? 'abp-flex-box';
 
+    // Initialize the default props
+    const {
+        boundBorder = false,
+        boundShadow = false,
+        tokenBg = false,
+    } = props ?? {};
+
+    const [boxClazz, setBoxClazz] = React.useState<string>();
+
     const fieldStyle = useFieldStyle(clazzPrefix);
+
+    React.useEffect(() => {
+        setBoxClazz(classnames({
+            [`${clazzPrefix}-bound-border`]: boundBorder,
+            [`${clazzPrefix}-bound-shadow`]: boundShadow,
+            [`${clazzPrefix}-token-bg`]: tokenBg,
+        }));
+    }, [clazzPrefix, boundBorder, boundShadow, tokenBg]);
 
     const buildContainerCss = () => {
         if (!props) {
@@ -200,7 +224,7 @@ export const FlexBox: React.FC<FlexBoxProps> = (props?: FlexBoxProps) => {
 
     return (
         <div
-            className={classnames(`${clazzPrefix}`, fieldStyle.hashId, (!props?.boundBorder ? undefined : `${clazzPrefix}-bound-border`), (!props?.boundShadow ? undefined : `${clazzPrefix}-bound-shadow`), buildContainerCss(), props?.containerClazz)}
+            className={classnames(`${clazzPrefix}`, fieldStyle.hashId, boxClazz, buildContainerCss(), props?.containerClazz)}
             style={props?.containerStyle}
         >
             {props?.children}

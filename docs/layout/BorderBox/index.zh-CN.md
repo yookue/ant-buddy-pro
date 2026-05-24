@@ -32,3 +32,4 @@ import {BorderBox} from '@unikue/ant-buddy-pro';
 | borderBottom   | 底部是否有边框         | `boolean`             | `true`             |
 | borderLeft     | 左侧是否有边框         | `boolean`             | `true`             |
 | borderRight    | 右侧是否有边框         | `boolean`             | `true`             |
+| tokenBg        | 是否使用 token 的背景色 | `boolean`             | -                  |

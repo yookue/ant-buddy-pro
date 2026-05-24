@@ -24,6 +24,7 @@ import { type BoundShapeType } from '@unikue/ant-buddy-pro/layout/BorderBox';
 
 
 export default () => {
+    // noinspection DuplicatedCode
     const [boundShape, setBoundShape] = React.useState<BoundShapeType>('rect');
     const [borderAll, setBorderAll] = React.useState<boolean>(false);
     const [borderTop, setBorderTop] = React.useState<boolean>(true);
@@ -31,6 +32,7 @@ export default () => {
     const [borderBottom, setBorderBottom] = React.useState<boolean>(true);
     const [borderLeft, setBorderLeft] = React.useState<boolean>(true);
     const [boundShadow, setBoundShadow] = React.useState<boolean>(false);
+    const [tokenBg, setTokenBg] = React.useState<boolean>(false);
 
     return (
         <>
@@ -115,6 +117,15 @@ export default () => {
                         onChange: setBoundShadow,
                     }}
                 />
+                <ProFormSwitch
+                    label='Token Background'
+                    checkedChildren='True'
+                    unCheckedChildren='False'
+                    fieldProps={{
+                        checked: tokenBg,
+                        onChange: setTokenBg,
+                    }}
+                />
             </ProForm>
             <Divider />
             <BorderBox
@@ -125,6 +136,7 @@ export default () => {
                 borderBottom={borderBottom}
                 borderLeft={borderLeft}
                 borderRight={borderRight}
+                tokenBg={tokenBg}
                 containerStyle={{ padding: 12 }}
             >
                 {(boundShape === 'circle') ? <CoffeeOutlined style={{ fontSize: 22 }} /> : 'The quick brown fox jumps over a lazy dog.'}

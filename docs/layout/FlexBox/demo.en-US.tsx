@@ -27,6 +27,7 @@ export default () => {
     const [gap, setGap] = React.useState<string>('middle');
     const [boundBorder, setBoundBorder] = React.useState<boolean>(false);
     const [boundShadow, setBoundShadow] = React.useState<boolean>(false);
+    const [tokenBg, setTokenBg] = React.useState<boolean>(false);
 
     return (
         <>
@@ -108,6 +109,15 @@ export default () => {
                             onChange: setBoundShadow,
                         }}
                     />
+                    <ProFormSwitch
+                        label='Token Background'
+                        checkedChildren='True'
+                        unCheckedChildren='False'
+                        fieldProps={{
+                            checked: tokenBg,
+                            onChange: setTokenBg,
+                        }}
+                    />
                 </ProForm.Group>
             </ProForm>
             <Divider />
@@ -117,6 +127,7 @@ export default () => {
                 gap={gap}
                 boundBorder={boundBorder}
                 boundShadow={boundShadow}
+                tokenBg={tokenBg}
                 containerStyle={{
                     height: '160px',
                 }}
