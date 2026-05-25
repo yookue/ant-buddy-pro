@@ -81,7 +81,7 @@ export default () => {
                             { label: 'padding-y-sm', value: 'padding-y-sm' },
                             { label: 'padding-y-md', value: 'padding-y-md' },
                             { label: 'padding-y-lg', value: 'padding-y-lg' },
-                            { label: 'False', value: false },
+                            { label: 'False', value: undefined },
                         ],
                         onChange: (value) => {
                             setPresetStyle(value);

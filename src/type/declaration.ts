@@ -19,7 +19,8 @@ import { type TabsType } from 'antd/es/tabs';
 import { type Placement as RcPlacement } from '@rc-component/select/es/BaseSelect';
 
 
-export type WithFalse<T> = T | false;
+// noinspection JSUnusedGlobalSymbols
+export type ActionStyleType = 'success' | 'info' | 'warning' | 'error';
 
 export type AxisDirectionType = 'horizontal' | 'vertical';
 
@@ -44,3 +45,5 @@ export type RectZenithPlace = RcPlacement;
 export type RequestOptionPlace = BeforeAfterType | 'override';
 
 export type RuleValidateScope = 'all' | 'required' | 'optional';
+
+export type WithFalse<T> = T | false;
