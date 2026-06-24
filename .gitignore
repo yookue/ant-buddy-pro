@@ -6,6 +6,7 @@ node_modules
 coverage
 dist
 docs-dist
+.codebuddy
 .dumi/tmp*
 .idea
 .vscode
